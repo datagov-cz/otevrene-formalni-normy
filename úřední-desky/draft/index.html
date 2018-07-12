@@ -55,40 +55,40 @@
     </head>
     <body>
         <section id="abstract" class="introductory">
-			<h2>Abstrakt</h2>
+            <h2>Abstrakt</h2>
             <p>
                 Tento dokument obsahuje datový standard pro zveřejňování informací o oznámeních z úředních desek jako otevřená data.
-			    Ukazuje, jak reprezentovat informace o oznámeních, vystavených dokumentech, publikujících organizacích a další.
-				Jsou zde uvedeny příklady dat z úředních desek ve formátech CSV, JSON a XML.
+                Ukazuje, jak reprezentovat informace o oznámeních, vystavených dokumentech, publikujících organizacích a další.
+                Jsou zde uvedeny příklady dat z úředních desek ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
             </p>
         </section>
-		
+        
         <section id="přehled">
 
             <h2>Přehled</h2>
-			<p>
-			    Data z úředních desek lze publikovat v různých úrovních detailu, podle toho co umožňují systémy poskytovatele obsahující zdrojová data.
-				Aby ovšem byla publikovaná data alespoň nějak použitelná, je třeba je publikovat alespoň v minimálním rozsahu.
-				Ten zahrnuje identifikátor oznámení, jeho url, název, datum zveřejnění a sejmutí a IČO organizace, která oznámení publikuje.
-				Minimální rozsah je graficky znázorněn v následujícím diagramu.
-			</p>
+            <p>
+                Data z úředních desek lze publikovat v různých úrovních detailu, podle toho co umožňují systémy poskytovatele obsahující zdrojová data.
+                Aby ovšem byla publikovaná data alespoň nějak použitelná, je třeba je publikovat alespoň v minimálním rozsahu.
+                Ten zahrnuje identifikátor oznámení, jeho url, název, datum zveřejnění a sejmutí a IČO organizace, která oznámení publikuje.
+                Minimální rozsah je graficky znázorněn v následujícím diagramu.
+            </p>
 
-            <figure><img alt="Diagram minimalistického datového schématu" src="obrázky/gazette_20180615_simple.png">
+            <figure id="diagram-minimalistický"><img alt="Diagram minimalistického datového schématu" src="obrázky/gazette_20180615_simple.png">
                 <figcaption>
                     Diagram minimalistického datového schématu oznámení na úřední desce.
                 </figcaption>
             </figure>
-			
-			<p>
-			    
-			</p>
+            
+            <p>
+                
+            </p>
 
-            <figure><img alt="Diagram komplexního datového schématu" src="obrázky/gazette_20180615_full.png">
+            <figure id="diagram-komplexní"><img alt="Diagram komplexního datového schématu" src="obrázky/gazette_20180615_full.png">
                 <figcaption>
                     Diagram komplexního datového schématu oznámení na úřední desce.
                 </figcaption>
             </figure>
-			
+            
         </section>
 
         <section id="specifikace">
@@ -2350,67 +2350,34 @@
 
         </section>
 
-        <section id="reprezentace">
-
-            <h2>Reprezentace v otevřených formátech</h2>
-
-            <p>
-                Soubory s datovými schématy si můžete stáhnout, zahrnout do svých publikačních plánů a upravit dle vlastních potřeb.
-            </p>
-
-            <section id="reprezentace-json">
-                <h3>JSON</h3>
-
-                <p>
-                    <a href="schémata/uredni-deska-20180615.json">Schéma pro formát JSON (JSON Schema)</a>
-                </p>
-
-            </section>
-
-            <section id="reprezentace-xml">
-                <h3>XML</h3>
-
-                <p>
-                    <a href="schémata/uredni-deska-20180615.xsd">Schéma pro formát XML (XSD, XML Schema)</a>
-                </p>
-
-            </section>
-
-            <section id="reprezentace-csv">
-                <h3>CSV</h3>
-
-                <p>
-                    Je také možné použít zjednodušený zápis v CSV. Ten má ale jistá omezení. Nelze jej použít na prvky, které jsou poli. Např. pomocí formátu CSV nelze zapsat, že oznámení spadá pod několik <code>agend</code>, má více <code>dokumentů</code> (příloh) nebo se týká více <code>subjektů</code>.
-                </p>
-                <p>
-                    Soubor v CSV je vhodné doplnit metadaty dle specifikace CSV on the Web [[tabular-data-primer]].
-                </p>
-
-                <p class="note">
-                    Jména sloupců se tvoří z atributů, zanořování se řeší spojením názvů pomocí "_". Např. <code>organizace_ico</code>.
-                </p>
-
-            </section>
-
-        </section>
-
         <section id="příklady">
             <h2>Příklady</h2>
+            
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace oznámení na úřední desce v různých formátech a v různých úrovních detailu.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
+                Doporučenými formáty pro publikaci dat z úředních desek jsou JSON a XML, pro která jsou k dispozici příslušná schémata, tedy <a href="schémata/uredni-deska-20180615.json">Schéma pro formát JSON v jazyce JSON Schema</a> a <a href="schémata/uredni-deska-20180615.xsd">Schéma pro formát XML v jazyce XML Schema</a>.
+            </p>
 
             <p>
-                Příklady jsou zde uvedené nejprve zapsané v JSON. Dále potom <a href="#zápis-v-xml">ekvivaletně v XML</a> a ukázáno, jak některé zapsat v CSV.
+                Pro jednoduchá oznámení lze také použít zápis v CSV, ovšem s jistými omezeními.
+                V CSV nelze reprezentovat více hodnot jedné vlastnosti.
+                Nelze například zapsat, že oznámení spadá pod několik <code>agend</code>, má více <code>dokumentů</code> (příloh) nebo se týká více <code>subjektů</code>.
+                Pokud je třeba taková data reprezentovat, musí být zvolen formát JSON nebo XML.
+                Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[tabular-data-primer]].
+            </p>
+            
+            <p class="note">
+                Jména sloupců v CSV tabulce jsou tvořena názvy atributů.
+                Jejich zanořování je řešeno spojením názvu entity a jejího atributu pomocí znaku podtržítka <code>_</code>, například <code>organizace_ico</code>.
             </p>
 
             <section id="příklady-jednoduché-oznámení">
                 <h3>Jednoduché oznámení</h3>
 
                 <p>
-                    Všechny atributy schématu jsou nepovinné.
-                    Nicméně bez některých základních atributů publikace prakticky ztrácí smysl.
-                </p>
-
-                <p>
-                    Příklad minimalistického oznámení zveřejněného na úřední desce, odpovídá <a href="#přehled">prvnímu diagramu</a>:
+                    V prvním příkladu je ukázáno oznámení na úřední desce v minimálním rozsahu, což odpovídá <a href="#diagram-minimalistický">úvodnímu diagramu</a>.
+					Ačkoliv jsou všechny atributy nepovinné, bez těchto základních atributů publikace dat prakticky ztrácí smysl, jelikož by je nebylo jak použít.
                 </p>
                 <p>
                     Zápis v JSON:
@@ -2450,14 +2417,15 @@
                     &lt;/uredni_deska&gt;
                 </pre>
                 <p>
-                    Zápis v CSV, zanořování se řeší pomocí <code>_</code> (např. <code>organizace_ico</code>):
+                    Zápis v CSV:
                 </p>
                 <pre class="example csv">
-                    id,identifikator,organizace_ico,url,nazev,zverejneno,sejmuto
-                1024,2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20
+id,identifikator,organizace_ico,url,nazev,zverejneno,sejmuto
+1024,2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20
                 </pre>
                 <p>
-                    K souboru CSV je vhodné připojit i metadata dle standardu CSV on the Web [[tabular-data-primer]]. Např. pokud se předchozí soubor s daty v CSV jmenuje <code>uredni-deska.csv</code>, můžeme definovat tento soubor <code>uredni-deska.csv-metadata.json</code>:
+                    K souboru CSV je třeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
+					Například pokud se CSV soubor CSV jmenuje <code>uredni-deska.csv</code>, je s ním publikován i metadatový soubor <code>uredni-deska.csv-metadata.json</code>:
                 </p>
                 <pre class="example json">
                     {
@@ -2505,14 +2473,11 @@
             </section>
 
             <section id="příklady-jednoduché-oznámení-vlastní-atributy">
-                <h3>Jednoduché oznámení s vlastními atributy</h3>
+                <h3>Jednoduché oznámení s přidanými vlastními atributy</h3>
 
                 <p>
-                    Do schématu si lze přidávat libovolně další vlastní atributy.
-                </p>
-
-                <p>
-                    Příklad přidání vlastních atributů nad rámec standardu (zde <code>zverejnil</code> a <code>odbor</code>):
+                    Do schémat si lze v případě potřeby přidávat další atributy.
+                    V následujících příkladech jsou nad rámec standardu přidány atributy <code>zverejnil</code> a <code>odbor</code>.
                 </p>
                 <p>
                     Zápis v JSON:
@@ -2536,7 +2501,8 @@
                     ]
                 </pre>
                 <p>
-                    Zápis v XML, vlastní atributy se přidávají na závěr oznámení. Je také třeba nadefinovat vlastní <code>namespace</code>.
+                    V XML se vlastní atributy přidávají na závěr oznámení, do vlastního XML jmenného prostoru (XML namespace [[xml-names]]).
+					V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
                 </p>
                 <pre class="example xml">
                     &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
@@ -2557,15 +2523,14 @@
                     &lt;/uredni_deska&gt;
                 </pre>
                 <p>
-                    Zápis v CSV, zanořování se řeší pomocí <code>_</code> (např. <code>organizace_ico</code>):
+                    Zápis v CSV:
                 </p>
                 <pre class="example csv">
-                    id,identifikator,organizace_ico,url,nazev,zverejneno,sejmuto,zverejnil,odbor
-                    1025,2018-14,00258245,https://example.com/uredni_deska/2018-3,Podpora spolkového života ve městě II,2018-01-20,2018-02-20,Mirek Dušín,VD
+id,identifikator,organizace_ico,url,nazev,zverejneno,sejmuto,zverejnil,odbor
+1025,2018-14,00258245,https://example.com/uredni_deska/2018-3,Podpora spolkového života ve městě II,2018-01-20,2018-02-20,Mirek Dušín,VD
                 </pre>
                 <p>
-                    K souboru CSV je vhodné připojit i metadata dle standardu CSV on the Web [[tabular-data-primer]]. 
-					Např. pokud se předchozí soubor s daty v CSV jmenuje <code>uredni-deska.csv</code>, můžeme definovat tento soubor <code>uredni-deska.csv-metadata.json</code>:
+                    K souboru CSV je opět potřeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]]:
                 </p>
                 <pre class="example json">
                     {
@@ -2625,8 +2590,8 @@
                 <h3>Více oznámení - úřední deska</h3>
 
                 <p>
-                    Úřední deska bude nejčastěji obsahovat více oznámení.
-                    Ty jsou potom jednotlivými prvky pole.
+                    V minulých příkladech bylo vždy ukázáno jedno oznámení na úřední desce.
+					Typicky bude ale úřední deska obsahovat více oznámení.
                 </p>
 
                 <p>
@@ -2694,17 +2659,16 @@
                     &lt;/uredni_deska&gt;
                 </pre>
                 <p>
-                    Zápis v CSV, zanořování se řeší pomocí <code>_</code> (např. <code>organizace_ico</code>):
+                    Zápis v CSV:
                 </p>
                 <pre class="example csv">
-                    id,identifikator,organizace_ico,url,nazev,zverejneno,sejmuto,zverejnil,odbor
-                    1024,2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20,,
-                    1025,2018-14,00258245,https://example.com/uredni_deska/2018-3,Podpora spolkového života ve městě II,2018-01-20,2018-02-20,Mirek Dušín,VD
+id,identifikator,organizace_ico,url,nazev,zverejneno,sejmuto,zverejnil,odbor
+1024,2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20,,
+1025,2018-14,00258245,https://example.com/uredni_deska/2018-3,Podpora spolkového života ve městě II,2018-01-20,2018-02-20,Mirek Dušín,VD
                 </pre>
                 <p>
-                    K souboru CSV je vhodné připojit i metadata dle standardu CSV on the Web [[tabular-data-primer]]. 
-					Např. pokud se předchozí soubor s daty v CSV jmenuje <code>uredni-deska.csv</code>, můžeme definovat tento soubor <code>uredni-deska.csv-metadata.json</code>.
-                    (Pozn.: Tento příklad je shodný s předchozím u <a href="#příklady-jednoduché-oznámení-vlastní-atributy")>jednoduchého oznámení s vlastními atributy</a>.)
+                    K souboru CSV je opět potřeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
+                    Tento příklad je shodný <a href="#příklady-jednoduché-oznámení-vlastní-atributy")>předchozím</a>, jelikož popis struktury je nezávislý na počtu záznamů.
                 </p>
                 <pre class="example json">
                     {
@@ -2764,8 +2728,8 @@
                 <h3>Komplexní oznámení</h3>
 
                 <p>
-                    Oznámení na jedné úřední desce mohou obsahovat různé množství informací.
-                    Některá mohou být jednoduchá, ale některá oznámení mohou obsahovat velké množství informací, např. o původním autorovi oznámení nebo o místě, kterého se oznámení týká.
+                    Různá oznámení na jedné úřední desce mohou obsahovat různé množství informací.
+                    Některá mohou být jednoduchá a některá mohou obsahovat velké množství informací, např. o původním autorovi oznámení nebo o místě, kterého se oznámení týká.
                 </p>
 
                 <p>
@@ -2907,7 +2871,7 @@
                     ]
                 </pre>
                 <p>
-                    Odpovídající příklad jednoduchého a komplexního oznámení na jedné úřední desce zapsaného jako pole v XML, vlastní atributy (zde <code>zverejnil</code> a <code>odbor</code>) potřebují vlastní <code>namespace</code>:
+                    Odpovídající příklad jednoduchého a komplexního oznámení na jedné úřední desce v XML:
                 </p>
                 <pre class="example xml">
                     &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
@@ -3039,7 +3003,7 @@
                     &lt;/uredni_deska&gt;
                 </pre>
                 <p>
-                    Takovýto komplexní případ nelze zapsat v CSV stejným způsobem jako přechozí příklady (tj. zanořovanání řešit znakem <code>_</code>), protože některé atributy jsou pole, zde <code>agenda</code> nebo <code>dokument</code>.
+                    Tento příklad je již příliš komplexní pro zápis ve formátu CSV, který doporučujeme pouze pro nejjednodušší případy.
                 </p>
             </section>
         </section>
