@@ -42,7 +42,7 @@
                 }],
                 inlineCSS: "true",
                 github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
-                lint: "false",
+                lint: "true",
                 otherLinks: [{
                     key: "Odkazy",
                     data: [{
@@ -1342,27 +1342,32 @@
                     V prvním příkladu je ukázáno oznámení na úřední desce v minimálním rozsahu, což odpovídá <a href="#diagram-minimalistický">úvodnímu diagramu</a>.
                     Ačkoliv jsou všechny atributy nepovinné, bez těchto základních atributů publikace dat prakticky ztrácí smysl, jelikož by je nebylo jak použít.
                 </p>
-                <p>
-                    Zápis v <a href="příklady/1.json">JSON</a>:
-                </p>
-                <pre class="example json">
-                    [
-                        {
-                            "identifikátor": "2018-13",
-                            "organizace": {
-                                "ičo": "00258245"
-                            },
-                            "url": "https://example.com/uredni_deska/2018-2",
-                            "název": "Podpora spolkového života ve městě",
-                            "zveřejněno": "2018-01-20",
-                            "sejmuto": "2018-02-20"
-                        }
-                    ]
-                </pre>
-                <p>
-                    Zápis v <a href="příklady/1.xml">XML</a>:
-                </p>
-                <pre class="example xml">
+
+                <aside class="example" title="Jednoduché oznámení v JSON">
+                    <p>
+                        <a href="příklady/1.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+[
+    {
+        "identifikátor": "2018-13",
+        "organizace": {
+            "ičo": "00258245"
+        },
+        "url": "https://example.com/uredni_deska/2018-2",
+        "název": "Podpora spolkového života ve městě",
+        "zveřejněno": "2018-01-20",
+        "sejmuto": "2018-02-20"
+    }
+]
+                    </pre>
+                </aside>
+
+                <aside class="example" title="Jednoduché oznámení v XML">
+                    <p>
+                        <a href="příklady/1.xml">Stáhnout XML</a>:
+                    </p>
+                    <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;deska:úřední_deska
     xmlns="http://opendata.gov.cz/schema/xsd/typy/"
@@ -1382,19 +1387,30 @@
         &lt;deska:sejmuto&gt;2018-02-20&lt;/deska:sejmuto&gt;
     &lt;/deska:oznámení&gt;
 &lt;/deska:úřední_deska&gt;
-                </pre>
-                <p>
-                    Zápis v <a href="příklady/1.csv">CSV</a>:
-                </p>
-                <pre class="example csv">
+                    </pre>
+                </aside>
+                
+                <aside class="example" title="Jednoduché oznámení v CSV">
+                    <p>
+                        <a href="příklady/1.csv">Stáhnout CSV</a>:
+                    </p>
+                    <pre class="csv">
 identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto
 2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20
-                </pre>
+                    </pre>
+                </aside>
+
                 <p>
                     K souboru CSV je třeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
                     Například pokud se CSV soubor jmenuje <code>úřední-deska.csv</code>, je s ním publikován i <a href="příklady/1-metadata.json">metadatový soubor</a> <code>úřední-deska.csv-metadata.json</code>:
                 </p>
-                <pre class="example json">
+
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                        <a href="příklady/1-metadata.json">Stáhnout deskriptor</a>:
+                    </p>
+
+                    <pre class="json">
 {
     "@context": [
         "http://www.w3.org/ns/csvw",
@@ -1431,7 +1447,8 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto
             }
         ]
     }
-}                </pre>
+}</pre>
+                </aside>
             </section>
 
             <section id="příklady-jednoduché-oznámení-vlastní-atributy">
@@ -1441,32 +1458,40 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto
                     Do schémat si lze v případě potřeby přidávat další atributy.
                     V následujících příkladech jsou nad rámec normy přidány atributy <code>zveřejnil</code> a <code>odbor</code>.
                 </p>
-                <p>
-                    Zápis v <a href="příklady/2.json">JSON</a>:
-                </p>
 
-                <pre class="example json">
-                    [
-                        {
-                            "identifikátor": "2018-14",
-                            "organizace": {
-                                "ičo": "00258245"
-                            },
-                            "url": "https://example.com/uredni_deska/2018-3",
-                            "název": "Podpora spolkového života ve městě II",
-                            "zveřejněno": "2018-01-20",
-                            "sejmuto": "2018-02-20",
-                            "zveřejnil": "Mirek Dušín",
-                            "odbor": "VD"
-                        }
-                    ]
-                </pre>
+                <aside class="example" title="Jednoduché oznámení s vlastními atributy v JSON">
+                    <p>
+                        <a href="příklady/2.json">Stáhnout JSON</a>:
+                    </p>
+
+                    <pre class="json">
+[
+    {
+        "identifikátor": "2018-14",
+        "organizace": {
+            "ičo": "00258245"
+        },
+        "url": "https://example.com/uredni_deska/2018-3",
+        "název": "Podpora spolkového života ve městě II",
+        "zveřejněno": "2018-01-20",
+        "sejmuto": "2018-02-20",
+        "zveřejnil": "Mirek Dušín",
+        "odbor": "VD"
+    }
+]
+                    </pre>
+                </aside>
                 <p>
                     V XML se vlastní atributy přidávají na závěr oznámení, do vlastního XML jmenného prostoru (XML namespace [[xml-names]]).
                     V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
-					Zápis v <a href="příklady/2.xml">XML</a>:
                 </p>
-                <pre class="example xml">
+                
+                <aside class="example" title="Jednoduché oznámení s vlastními atributy v XML">
+                    <p>
+                        <a href="příklady/2.xml">Stáhnout XML</a>:
+                    </p>
+                
+                    <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;deska:úřední_deska
     xmlns="http://opendata.gov.cz/schema/xsd/typy/"
@@ -1488,22 +1513,31 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto
         &lt;x:zveřejnil&gt;Mirek Dušín&lt;/x:zveřejnil&gt;
         &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
     &lt;/deska:oznámení&gt;
-&lt;/deska:úřední_deska&gt;
-                </pre>
+&lt;/deska:úřední_deska&gt;</pre>
+                </aside>
+                
                 <p>
-                    Alternativně je možné si nadefinovat nové XML schéma vycházející ze zde uvedeného <a href="schémata/úřední-deska.xsd">XML schématu</a>.
+                    Alternativně je možné nadefinovat nové XML schéma vycházející ze zde uvedeného <a href="schémata/úřední-deska.xsd">XML schématu</a>.
                 </p>
-                <p>
-                    Zápis v <a href="příklady/2.csv">CSV</a>:
-                </p>
-                <pre class="example csv">
+                
+                <aside class="example" title="Jednoduché oznámení s vlastními atributy v CSV">
+                    <p>
+                       <a href="příklady/2.csv">Stáhnout CSV</a>
+                    </p>
+                    <pre class="csv">
 identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
-2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20,Mirek Dušín,VD
-                </pre>
+2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20,Mirek Dušín,VD</pre>
+                </aside>
+                
                 <p>
-                    K souboru CSV je opět potřeba připojit <a href="příklady/2-metadata.csv">metadata dle standardu CSV on the Web</a> [[tabular-data-primer]]:
+                    K souboru CSV je opět potřeba připojit <a href="příklady/2-metadata.json">metadata dle standardu CSV on the Web</a> [[tabular-data-primer]]:
                 </p>
-                <pre class="example json">
+
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/2-metadata.json">Stáhnout deskriptor</a>
+                    </p>
+                    <pre class="json">
 {
     "@context": [
         "http://www.w3.org/ns/csvw",
@@ -1548,8 +1582,8 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
             }
         ]
     }
-}
-                </pre>
+}</pre>
+                </aside>
             </section>
 
             <section id="příklady-více-oznámení">
@@ -1560,11 +1594,12 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
                     Typicky bude ale úřední deska obsahovat více oznámení.
                 </p>
 
-                <p>
-                    Příklad více oznámení v <a href="příklady/3.json">JSON</a>:
-                </p>
+                <aside class="example" title="Více oznámení v JSON">
+                    <p>
+                        <a href="příklady/3.json">Stáhnout JSON</a>
+                    </p>
 
-                <pre class="example json">
+                    <pre class="json">
 [
     {
         "identifikátor": "2018-13",
@@ -1588,12 +1623,14 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
         "zveřejnil": "Mirek Dušín",
         "odbor": "VD"
     }
-]
-                </pre>
-                <p>
-                    Odpovídající příklad více oznámení v <a href="příklady/3.xml">XML</a>:
-                </p>
-                <pre class="example xml">
+]</pre>
+                </aside>
+                
+                <aside class="example" title="Více oznámení v XML">
+                    <p>
+                        <a href="příklady/3.xml">Stáhnout XML</a>
+                    </p>
+                    <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;deska:úřední_deska
     xmlns="http://opendata.gov.cz/schema/xsd/typy/"
@@ -1625,16 +1662,19 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
         &lt;x:zveřejnil&gt;Mirek Dušín&lt;/x:zveřejnil&gt;
         &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
     &lt;/deska:oznámení&gt;
-&lt;/deska:úřední_deska&gt;
-                </pre>
-                <p>
-                    Zápis v <a href="příklady/3.csv">CSV</a>:
-                </p>
-                <pre class="example csv">
+&lt;/deska:úřední_deska&gt;</pre>
+                </aside>
+                
+                <aside class="example" title="Více oznámení v CSV">
+                    <p>
+                        <a href="příklady/3.csv">Stáhnout CSV</a>
+                    </p>
+                    <pre class="csv">
 identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
 2018-13,00258245,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20,,
-2018-14,00258245,https://example.com/uredni_deska/2018-3,Podpora spolkového života ve městě II,2018-03-20,2018-04-20,Mirek Dušín,VD
-                </pre>
+2018-14,00258245,https://example.com/uredni_deska/2018-3,Podpora spolkového života ve městě II,2018-03-20,2018-04-20,Mirek Dušín,VD</pre>
+                </aside>
+                
                 <p>
                     K souboru CSV je opět potřeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
                     Tento příklad má shodné schéma jako <a href="#příklady-jednoduché-oznámení-vlastní-atributy">předchozí</a> příklad, jelikož popis struktury je nezávislý na počtu záznamů.
@@ -1649,11 +1689,12 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
                     Některá mohou být jednoduchá a některá mohou obsahovat velké množství informací, např. o původním autorovi oznámení nebo o místě, kterého se oznámení týká.
                 </p>
 
-                <p>
-                    Příklad jednoduchého a komplexního oznámení na jedné úřední desce v <a href="příklady/4.json">JSON</a>:
-                </p>
+                <aside class="example" title="Jednoduché a komplexní oznámení v JSON">
+                    <p>
+                        <a href="příklady/4.json">Stáhnout JSON</a>
+                    </p>
 
-                <pre class="example json">
+                    <pre class="json">
 [
     {
         "identifikátor": "2018-13",
@@ -1784,12 +1825,15 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
         "zveřejnil": "Mirek Dušín",
         "odbor": "VD"
     }
-]
-                </pre>
-                <p>
-                    Odpovídající příklad jednoduchého a komplexního oznámení na jedné úřední desce v <a href="příklady/4.xml">XML</a>:
-                </p>
-                <pre class="example xml">
+]</pre>
+                </aside>
+                
+                <aside class="example" title="Jednoduché a komplexní oznámení v XML">
+                    <p>
+                        <a href="příklady/4.xml">Stáhnout XML</a>
+                    </p>
+                
+                    <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;deska:úřední_deska
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -1922,8 +1966,9 @@ identifikátor,organizace_ičo,url,název,zveřejněno,sejmuto,zveřejnil,odbor
         &lt;x:zverejnil&gt;Mirek Dušín&lt;/x:zverejnil&gt;
         &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
     &lt;/deska:oznámení&gt;
-&lt;/deska:úřední_deska&gt;
-                </pre>
+&lt;/deska:úřední_deska&gt;</pre>
+                </aside>
+                
                 <p>
                     Tento příklad je již příliš komplexní pro zápis ve formátu CSV, který doporučujeme pouze pro nejjednodušší případy.
                 </p>
