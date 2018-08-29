@@ -1379,6 +1379,107 @@ ruian:početPodlaží a rdf:Property;
 		<section id="pro-zadavatele">
 			<h2>Doporučení pro zadavatele systémů podporujících publikaci dat v podobě propojených dat</h2>
 		
+			<p>
+				Relevantní specifikace a zdroje informací pro každého dodavatele jsou tato otevřená formální norma a všechny její normativní reference.
+			</p>
+			
+			<section id="pro-zadavatele-vzory-IRI">
+				<h3>Vzory pro tvorbu IRI</h3>
+				<p>
+					Nedílnou součástí návrhu reprezentace 5* otevřených dat jsou pravidla pro tvorbu IRI RDF zdrojů.
+					Měla by zahrnovat zejména doménu, na které budou data v RDF podobě dostupná a dále pravidla pro tvorbu dalších částí IRI.
+					Ty obsahují zejména informaci zda se používá angličtina, nebo čeština, jak se rozliší zdroje od definic tříd a vlastností ve slovnících, jak se vytváří části IRI tvořené více slovy, např. pomocí kebap-case, apod.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně vzorů pro tvorbu IRI">
+					<p>
+						Nedílnou součástí návrhu 5* podoby propojených dat je soubor pravidel pro tvorbu IRI RDF zdrojů.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-slovníky">
+				<h3>Použití slovníků dle Linked Open Vocabularies</h3>
+				<p>
+					Při návrhu 5* reprezentace otevřených dat je třeba pečlivě zvažovat, jakými třídami a vlastnostmi budou data modelována.
+					Speciálně platí pravidlo, že pokud už někdo nějakou třídu či vlastnost definoval a používá, a tato významem sedí na publikovaná data, je vhodné ji použít a nikoliv definovat vlastní.
+					Tím se zvyšuje použitelnost této části publikovaných dat.
+					Takto tvořené slovníky jsou zpravidla registrovány na serveru Linked Open Vocabularies, ty nejpoužívanější jsou pak publikovány konsorciem W3C.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně slovníků">
+					<p>
+						Návrh struktury 5* dat bude přednostně používat významově vyhovující existující slovníky definované konsorciem W3C či slovníky registrované na serveru Linked Open Vocabularies (LOV - https://lov.linkeddata.es/dataset/lov/).
+						Teprve v případě nenalezení vhodné vlastnosti či třídy bude definována nová vlastnost či třída.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-vlastní-slovníky">
+				<h3>Publikace a dostupnost vlastnoručně definovaných vlastností a tříd</h3>
+				<p>
+					Pokud se při návrhu 5* reprezentace otevřených dat definují nové vlastnosti a nové třídy, je třeba je řádně popsat pomocí slovníku RDFS či OWL a tento popis taktéž vystavit v podobě 5* otevřených dat.
+					Pokud jsou tyto třídy a vlastnosti takové povahy, že by je mohl použít i někdo jiný, je vhodné je také opatřit metadaty a zaregistrovat na serveru Linked Open Vocabularies (LOV).
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně vlastních slovníků">
+					<p>
+						Veškeré nově definované vlastnosti a třídy musí být popsány slovníkem RDFS či OWL a jejich definice taktéž publikovány jako 5* otevřená data.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-soubory-ke-stažení">
+				<h3>Dostupnost souborů ke stažení</h3>
+				<p>
+					Základním způsobem zveřejňování 5* otevřených dat je jejich poskytnutí ve formě RDF dumpu, tj. souboru ke stažení v jedné ze standardních RDF serializací, tj. Turtle, TriG či JSON-LD.
+					Volitelně může být použita komprese gzip.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně souborů ke stažení">
+					<p>
+						Otevřená data v 5* reprezentaci musí být dostupná jako soubor ke stažení v jedné z těchto RDF serializací: Turtle, TriG, JSON-LD.
+						Volitelně mohou být tyto soubory komprimovány metodou gzip.
+						Hlavička Content-Type v HTTP odpovědi na požadavek HTTP HEAD a HTTP GET na stažení tohoto souboru musí odpovídat použité serializaci.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-SPARQL-endpoint">
+				<h3>Dostupnost SPARQL endpointu</h3>
+				<p>
+					Publikace 5* otevřených dat v podobě veřejného SPARQL endpointu může být velmi náročná na hardwarové prostředky, a není bezpodmínečně nutná, uživatelé 5* otevřených dat si mohou stáhnout RDF dump a použít pro dotazování vlastní SPARQL endpoint.
+					Pokud bude SPARQL endpoint vyžadován, pak lze použít tento text.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně dostupnosti SPARQL endpointu">
+					<p>
+						Otevřená data v 5* reprezentaci musí být dostupná ve veřejně přístupném SPARQL endpointu vyhovujícím specifikaci SPARQL 1.1.
+						Jediným přípustným omezením dotazování na tomto endpointu je nastavení časového limitu na vyhodnocení dotazu uživatele.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-dereference">
+				<h3>Dereferencovatelnost IRI RDF zdrojů</h3>
+				<p>
+					Při přístupu na IRI RDF zdroje si klient znalý 5* reprezentace otevřených dat říká i o RDF serializaci, ve které si přeje data dostat, a to pomocí hlavičky Accept protokolu HTTP, ve které uvede požadovaný Media type (MIME Type), např. text/turtle.
+					Stejného principu lze použít i pro prezentaci 5* dat v lidsky čitelné HTML podobě, kdy při přístupu na IRI RDF zdroje uvede webový prohlížeč v Accept hlavičce HTML Media Type, tj. text/html.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně dereferencovatelnosti IRI RDF zdrojů">
+					<p>
+						Při přístupu na IRI RDF zdroje v 5* reprezentaci otevřených dat musí být poskytnuta RDF reprezentace tohoto zdroje v požadované RDF serializaci dle principů HTTP Content Negotiation dle Media typu.
+					</p>
+				</aside>
+			
+			</section>
+
 		</section>
 					
     </body>
