@@ -9,11 +9,11 @@
   "use strict";
   var ESCAPEKEY = 27;
   var collapseSidebarText = '<span aria-hidden="true">←</span> '
-                          + '<span>Zasunout postranní lištu</span>';
+                          + '<span>Collapse Sidebar</span>';
   var expandSidebarText   = '<span aria-hidden="true">→</span> '
-                          + '<span>Vysunout postranní lištu</span>';
+                          + '<span>Pop Out Sidebar</span>';
   var tocJumpText         = '<span aria-hidden="true">↑</span> '
-                          + '<span>Na obsah</span>';
+                          + '<span>Jump to Table of Contents</span>';
 
   var sidebarMedia = window.matchMedia('screen and (min-width: 78em)');
   var autoToggle   = function(e){ toggleSidebar(e.matches) };
@@ -116,8 +116,15 @@
        (window too small for the MQ to add the margin to body),
        then auto-close the sidebar once you click on something in there. */
     toc.addEventListener('click', function(e) {
-      if(e.target.tagName.toLowerCase() == "a" && document.body.classList.contains('toc-sidebar') && !sidebarMedia.matches) {
-        toggleSidebar(false);
+      if(document.body.classList.contains('toc-sidebar') && !sidebarMedia.matches) {
+        var el = e.target;
+        while (el != toc) { // find closest <a>
+          if (el.tagName.toLowerCase() == "a") {
+            toggleSidebar(false);
+            return;
+          }
+          el = el.parentElement;
+        }
       }
     }, false);
   }
