@@ -88,7 +88,9 @@
 
         <section id="geometrické-objekty">
             <h2>Geometrické objekty</h2>
-            Geometrické objekty jsou abstraktním zobrazením jevu reálného světa určeného polohou.
+            <p>
+				Geometrické objekty jsou abstraktním zobrazením jevu reálného světa určeného polohou.
+			</p>
             <section id="standardy">
                 <h3>Standardy pro vyjádření geometrických objektů</h3>
                 <p>
@@ -143,11 +145,11 @@
                         Reprezentace v GML
                       </p>
                       <pre class="xml">
-&lt;gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2"&gt;
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
     &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
 &lt;/gml:Point&gt;</pre>
 					  <pre class="xml">
-&lt;gml:MultiPoint srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2"&gt;
+&lt;gml:MultiPoint srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
     &lt;gml:PointMemeber&gt;
 &lt;gml:Point srsName="urn:ogc:def:crs:EPSG::4326" srsDimension="2"&gt;
     &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
@@ -181,7 +183,7 @@
                             Reprezentace v GML
                         </p>
                         <pre class="xml">
-&lt;gml:Curve srsName="urn:ogc:def:crs:EPSG::5514" srsDimension="2"&gt;
+&lt;gml:Curve srsName="http://opengis.net/def/crs/EPSG/0/5514" srsDimension="2"&gt;
     &lt;gml:segments&gt;
       &lt;gml:LineStringSegment&gt;
         &lt;gml:posList&gt;-641126.76 -1093821.18 -641119.35 -1093831.05 -641109.75 -1093844.44&lt;/gml:posList&gt;
@@ -195,7 +197,7 @@
                             Alternativní reprezentace lomené čáry v GML
                         </p>
                         <pre class="xml">
-&lt;gml:Curve srsName="urn:ogc:def:crs:EPSG::5514" srsDimension="2"&gt;
+&lt;gml:Curve srsName="http://opengis.net/def/crs/EPSG/0/5514" srsDimension="2"&gt;
     &lt;gml:segments&gt;
       &lt;gml:LineStringSegment&gt;
         &lt;gml:coordinates&gt;-641126.76, -1093821.18 -641119.35, -1093831.05 -641109.75, -1093844.44&lt;/gml:coordinates&gt;
@@ -224,7 +226,7 @@
                             Reprezentace v GML
                         </p>
                         <pre class="xml">
-&lt;gml:Polygon gml:id="CPX.2384051101" srsName="EPSG:4326" srsDimension="2"&gt;
+&lt;gml:Polygon gml:id="CPX.2384051101" srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
     &lt;gml:exterior&gt;
         &lt;gml:LinearRing&gt;
             &lt;gml:posList&gt;14.402751 50.088131 14.402749 50.088105 14.402738 50.088104 14.402742 50.088099 14.402746 50.088089 14.402751 50.088082 14.402744 50.088079 14.40275 50.088075 14.402748 50.088053 14.402742 50.088053 14.402748 50.088044 14.402744 50.088041 14.402739 50.08804 14.402732 50.088033 14.402739 50.088032 14.402733 50.088021 14.402728 50.08801 14.402746 50.088002 14.402749 50.087994 14.402751 50.08799 14.402746 50.087988 14.402752 50.087984 14.402749 50.087954 14.402754 50.087951 14.40275 50.087945 14.402743 50.087943&lt;/gml:posList&gt;
@@ -252,9 +254,11 @@
                 <h3>Systém jednotné trigonometrické sítě katastrální (S-JTSK)</h3>
                 
                 <p>
-                    Systém jednotné trigonometrické sítě katastrální (S-JTSK) -- používaný např. v katastru nemovitostí.
-                    Pro využití v GIS je využíváno EPSG kódu <code>5514</code>, který otáčí osy systému a souřadnice nabývají negativních hodnot (jsou uvozeny znaménkem minus).
+                    Systém jednotné trigonometrické sítě katastrální (S-JTSK) -- používaný např. v katastru nemovitostí. Pro využití v GIS je využíváno EPSG kódu <code>5514</code>, který otáčí osy systému a souřadnice nabývají negativních hodnot (jsou uvozeny znaménkem minus). Souřadnice jsou uváděny v metrech na osách X a Y jako vzdálenost od počátku systému, kterým je vrchol kuželu.  
                 </p>
+				<pre>POINT(-904325.25 -1076279.09)</pre>
+				<p>Příklad zobrazení dat v souřadnicovém referenčním systému S-JTSK v GML je vidět v příkladu zápisu polygonu.</p>
+
             </section>
 
             <section id="souřadnicové-referenční-systémy-wgs84">
@@ -265,7 +269,13 @@
                     Souřadnice bývají uvedeny ve stupních s několika desetinnými místy.
                     Některé publikační formáty (např. GPX nebo KML) počítají přímo s tím, že data jsou uložena v tomto souřadnicovém systému.
                     V registru EPSG je souřadnicový systém označen kódem <code>4326</code>.
+                    Souřadnice jsou uváděny ve stupních jako zeměpisná šířka a délka, při zkráceném zápisu kódu souřadnicového referenčního systému jsou zapisovány v opačném pořadí (X, Y).
                 </p>
+				<pre>POINT(50.056 14.434)</pre>
+				<pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
                 
             </section>
             
@@ -276,7 +286,13 @@
                     Web (nebo též Google) Mercator -- je systém používaný na většině globálních webových aplikací.
                     Jeho nevýhodou je mimo jiné zkreslení významné velikosti ploch směrem k pólům.
                     Je označen kódem <code>3857</code>.
+                    Souřadnice jsou uváděny v metrech jako vzdálenost na osách X a Y od počátku, kterým je průsečík rovníku a nultého poledníku.
                 </p>
+				<pre>POINT(162413.977 6447616.209)</pre>
+				<pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/3857" srsDimension="2"&gt;
+    &lt;gml:pos&gt;162413.977 6447616.209&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
                 
             </section>
 
@@ -286,9 +302,14 @@
                 <p>
                     European Terrestrial Reference System -- je systém zpřesňující WGS pro území Evropy.
                     Zápis je stejný jako u WGS, souřadnice se liší v rámci milimetrů až centimetrů.
-                    Je označen kódem <code>4258</code>.
-                </p>
-                
+                    Je označen kódem <code>4258</code>. 
+				    Souřadnice jsou uváděny ve stupních jako zeměpisná šířka a délka, při zkráceném zápisu kódu souřadnicového referenčního systému jsou zapisovány v opačném pořadí (X, Y).
+				</p>
+				<pre>POINT(50.056 14.434)</pre>
+				<pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4258" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
             </section>
             <p>
 				Další souřadnicové referenční systémy lze dohledat např. <a href="http://epsg.io">zde</a>.
