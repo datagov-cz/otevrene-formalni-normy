@@ -1,39 +1,39 @@
-<xs:schema 
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	xmlns:deska="https://data.gov.cz/otevřené-formální-normy/úřední-desky/" 
-	xmlns:adresa="https://data.gov.cz/otevřené-formální-normy/adresy/" 
-	targetNamespace="https://data.gov.cz/otevřené-formální-normy/úřední-desky/" 
-	elementFormDefault="qualified" 
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:deska="https://data.gov.cz/otevřené-formální-normy/úřední-desky/"
+	xmlns:adresa="https://data.gov.cz/otevřené-formální-normy/adresy/"
+	targetNamespace="https://data.gov.cz/otevřené-formální-normy/úřední-desky/"
+	elementFormDefault="qualified"
 	attributeFormDefault="unqualified">
 
-	<xs:import 
-		namespace="https://data.gov.cz/otevřené-formální-normy/adresy/" 
+	<xs:import
+		namespace="https://data.gov.cz/otevřené-formální-normy/adresy/"
 		schemaLocation="https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.xsd"/>
-		
+
 	<xs:complexType name="úřední_deska">
 		<xs:sequence maxOccurs="unbounded">
+            <xs:element name="url" type="xs:string" minOccurs="0"/>
+            <xs:element name="organizace" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="název" type="xs:string" minOccurs="0"/>
+                        <xs:element name="ičo" type="xs:string" minOccurs="0"/>
+                        <xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
 			<xs:element name="oznámení" type="deska:oznámení"/>
+            <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="oznámení">
 		<xs:sequence>
 			<xs:element name="identifikátor" type="xs:string" minOccurs="0"/>
-			<xs:element name="organizace" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:element name="ičo" type="xs:string" minOccurs="0"/>
-						<xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
 			<xs:element name="autor" minOccurs="0">
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:element name="ičo" type="xs:int" minOccurs="0"/>
-						<xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 				</xs:complexType>
@@ -50,7 +50,13 @@
 			<xs:element name="značka" type="xs:string" minOccurs="0"/>
 			<xs:element name="číslo_jednací" type="xs:string" minOccurs="0"/>
 			<xs:element name="revize" type="xs:string" minOccurs="0"/>
-			<xs:element name="agenda" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="agenda" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence maxOccurs="unbounded">
+                        <xs:element name="název" type="xs:string" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
 			<xs:element name="dokument" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
 					<xs:sequence minOccurs="0">
@@ -64,9 +70,6 @@
 				<xs:complexType>
 					<xs:sequence minOccurs="0">
 						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:element name="ičo" type="xs:string" minOccurs="0"/>
-						<xs:element name="zeměpisná_šířka" type="xs:double" minOccurs="0"/>
-						<xs:element name="zeměpisná_délka" type="xs:double" minOccurs="0"/>
 						<xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
