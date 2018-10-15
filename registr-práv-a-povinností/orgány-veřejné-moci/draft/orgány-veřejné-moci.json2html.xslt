@@ -34,9 +34,10 @@
     <script class="remove" src="orgány-veřejné-moci.config.js" />
   </head>
   <body>
-    <xsl:apply-templates />
+    <xsl:apply-templates mode="abstrakt" />
     <xsl:sequence select="gen:generujPřehled('../registr-práv-a-povinností/orgány-veřejné-moci/draft/orgány-veřejné-moci.schema.json')"/>
     <xsl:sequence select="gen:generujSpecifikaci('../registr-práv-a-povinností/orgány-veřejné-moci/draft/orgány-veřejné-moci.schema.json')"/>
+    <xsl:apply-templates mode="příklady" />
   </body>
 </html>
   </xsl:template>

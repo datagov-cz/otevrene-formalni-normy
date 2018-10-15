@@ -17,36 +17,33 @@
         "properties": {
           "type": {
             "type": "string",
-            "title": "IRI třídy orgánů veřejné moci",
-            "description": "Unikátní IRI třídy orgánů veřejné moci použité v RDF reprezentaci orgánů veřejné moci vedených v Registru práv a povinností",
+            "title": "Identifikátor třídy orgánů veřejné moci",
+            "description": "Identifikátor třídy orgánů veřejné moci použité v RDF reprezentaci orgánů veřejné moci vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
             "default": "orgán-veřejné-moci",
             "pattern": "^orgán-veřejné-moci$"
           },
           "id": {
             "type": "string",
             "title": "IRI orgánu veřejné moci",
-            "description": "Unikátní IRI orgánu veřejné moci vedeného v Registru práv a povinností použité pro odkazování na orgán veřejné moci v JSON reprezentaci i v RDF reprezentaci",
+            "description": "Unikátní IRI orgánu veřejné moci vedeného v Registru práv a povinností použité pro odkazování na orgán veřejné moci v JSON reprezentaci i v RDF reprezentaci. V IRI je využit identifikátor orgánu veřejné moci. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
             "examples": [
               "orgán-veřejné-moci/12345678-1"
             ],
-            "pattern": "^orgán-veřejné-moci/[0-9]+-[0-9]+$"
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
           },
-          "kód": {
+          "identifikátor": {
             "type": "string",
-            "title": "Kód",
-            "description": "Unikátní kód orgánu veřejné moci",
+            "title": "Identifikátor orgánu veřejné moci",
+            "description": "Unikátní identifikátor orgánu veřejné moci, který se stává z IČ orgánu veřejné moci a dopňujícího identifikátoru uvedeného za znakem '-', který odlišuje různé orgány veřejné moci sdílejícím jedno IČ.",
             "examples": [
               "12345678-1"
             ],
-            "pattern": "^[0-9]+-[0-9]+$"
+            "pattern": "^[0-9]{8}-[0-9]+$"
           },
           "název": {
             "type": "object",
             "title": "Název v různých jazycích",
-            "description": "Název orgánu veřejné moci vyjádřený v různých jazycích",
-            "required": [
-              "cs"
-            ],
+            "description": "Název orgánu veřejné moci vyjádřený v různých jazycích.",
             "properties": {
               "cs": {
                 "type": "string",
@@ -61,7 +58,7 @@
           "vnitřní-organizační-jednotka": {
             "type": "boolean",
             "title": "Příznak vnitřní organizační jednotky",
-            "description": "Příznak, zda je orgán veřejné moci vnitřní organizační jednotkou jiného orgánu veřejné moci"
+            "description": "Příznak, zda je orgán veřejné moci vnitřní organizační jednotkou jiného orgánu veřejné moci. Pokud je vnitřní organizační jednotkou, je uvedena hodnota true, jinak false."
           },
           "ičo": {
             "type": "string",
@@ -75,7 +72,7 @@
           "datové-schránky": {
             "type": "array",
             "title": "Datové schránky",
-            "description": "Seznam datových schránek orgánu veřejné moci",
+            "description": "Seznam datových schránek orgánu veřejné moci. Každý orgán veřejné moci má alespoň jednu datovou schránku.",
             "items": {
               "type": "object",
               "title": "Datová schránka",
@@ -83,15 +80,15 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "title": "IRI třídy datových schránek",
-                  "description": "Unikátní IRI třídy datových schránek použitá v RDF reprezentaci datových schránek vedených v Registru práv a povinností",
+                  "title": "Identifikátor třídy datových schránek",
+                  "description": "Identifikátor třídy datových schránek použité v RDF reprezentaci datových schránek vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
                   "default": "datová-schránka",
                   "pattern": "^datová-schránka$"
                 },
                 "id": {
                   "type": "string",
                   "title": "IRI datové schránky",
-                  "description": "Unikátní IRI datové schránky vedené v Registru práv a povinností použité pro odkazování na datovou schránku v JSON reprezentaci i v RDF reprezentaci",
+                  "description": "Unikátní IRI datové schránky vedené v Registru práv a povinností použité pro odkazování na datovou schránku v JSON reprezentaci i v RDF reprezentaci. V IRI je využit identifikátor datové schránky. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
                   "examples": [
                     "datová-schránka/0abcdef"
                   ],
@@ -99,8 +96,8 @@
                 },
                 "typ-ds": {
                   "type": "string",
-                  "title": "Typ datové schránky",
-                  "description": "Odkaz na typ datové schránky do číselníku typů datových schránek",
+                  "title": "Odkaz na typ datové schránky",
+                  "description": "Odkaz na typ datové schránky do Číselníku typů datových schránek, který je zveřejněn jako samostatná datová sada z Registru práv a povinností.",
                   "examples": [
                     "typ-datové-schránky/OVM"
                   ],
@@ -108,36 +105,44 @@
                 },
                 "identifikátor-ds": {
                   "type": "string",
-                  "title": "Identifikátor",
-                  "description": "Unikátní identifikátor datové schránky",
+                  "title": "Identifikátor datové schránky",
+                  "description": "Unikátní identifikátor datové schránky.",
                   "examples": [
                     "0abcdef"
                   ],
                   "pattern": "^[0-9a-z]{7}$"
                 }
-              }
+              },
+			  "examples": [
+                {
+				  "type": "datová-schránka",
+				  "id": "datová-schránka/0abcdef",
+	     		  "typ-ds": "typ-datové-schránky/OVM",
+				  "identifikátor-ds": "0abcdef"
+			    }
+			  ]
             }
           },
           "ustanovení": {
             "type": "array",
-            "title": "Seznam ustanovení",
+            "title": "Seznam ustanovení právních předpisů",
             "description": "Seznam ustanovení právních předpisů, na jejichž základě orgán veřejné moci vykonává svoji působnost",
             "items": {
               "type": "object",
-              "title": "Ustanovení",
+              "title": "Ustanovení právního předpisu",
               "description": "Ustanovení právního předpisu, na jehož základě orgán veřejné moci vykonává svoji působnost",
               "properties": {
                 "type": {
                   "type": "string",
-                  "title": "IRI třídy ustanovení",
-                  "description": "Unikátní IRI třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení právních předpisů v Registru práv a povinností",
+                  "title": "Identifikátor třídy ustanovení právního předpisu",
+                  "description": "Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
                   "default": "ustanovení-právního-předpisu",
                   "pattern": "^ustanovení-právního-předpisu$"
                 },
                 "označení": {
                   "type": "string",
                   "title": "Označení",
-                  "description": "Označení ustanovení právního předpisu bez definované vnitřní struktury",
+                  "description": "Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom dále nestrukturovaném řetězci.",
                   "examples": [
                     "§ 1 zákona č. 1/1000 Sb."
                   ]
@@ -148,7 +153,7 @@
           "seznam-kategorií": {
             "type": "array",
             "title": "Zařazení do kategorií",
-            "description": "Seznam jednotlivých zařazení orgánu veřejné moci do kategorií",
+            "description": "Seznam jednotlivých zařazení orgánu veřejné moci do kategorií. Orgán veřejné moci je zařazen do alespoň jedné kategorie.",
             "items": {
               "type": "object",
               "title": "Zařazení do kategorie",
@@ -156,8 +161,8 @@
               "properties": {
                 "kategorie": {
                   "type": "string",
-                  "title": "Kategorie",
-                  "description": "Odkaz na kategorii orgánu veřejné moci do datové sady kategorií orgánů veřejné moci",
+                  "title": "Odkaz na kategorii",
+                  "description": "Odkaz na kategorii orgánu veřejné moci do samostatné datové sady Kategorie orgánů veřejné moci.",
                   "examples": [
                     "kategorie-ovm/KO107"
                   ],
@@ -180,36 +185,30 @@
             }
           },
           "adresa-místa-pobytu": {
-            "type": "string",
+            "type": "object",
             "title": "Adresa místa pobytu z RÚIAN",
-            "description": "Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu místa pobytu orgánu veřejné moci, pokud má adresu místa pobytu přiřazenu.",
-            "examples": [
-              "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
-            ],
-            "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+            "description": "Adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu místa pobytu orgánu veřejné moci, pokud má adresu místa pobytu přiřazenu. Adresní místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a katastrálního.",
+            "$ref": "#/definitions/adresní-místo-rúian"
           },
           "adresa-sídla": {
-            "type": "string",
+            "type": "object",
             "title": "Adresa sídla pobytu z RÚIAN",
-            "description": "Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu sídla orgánu veřejné moci, pokud má adresu sídla přiřazenu.",
-            "examples": [
-              "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
-            ],
-            "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+            "description": "Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu sídla orgánu veřejné moci, pokud má adresu sídla přiřazenu. Adresní místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a katastrálního.",
+            "$ref": "#/definitions/adresní-místo-rúian"
           },
           "osoba-v-čele": {
             "type": "array",
             "title": "Osoby v čele",
-            "description": "Seznam osob stojících v čele orgánu veřejné moci, pokud je pro daný orgán veřejné moci možné osobu stojící v čele zveřejnit",
+            "description": "Seznam osob stojících v čele orgánu veřejné moci, pokud je pro daný orgán veřejné moci možné osobu stojící v čele zveřejnit.",
             "items": {
               "type": "object",
               "title": "Osoba v čele",
-              "description": "Osoba stojící v čele orgánu veřjné moci",
+              "description": "Osoba stojící v čele orgánu veřejné moci",
               "properties": {
                 "type": {
                   "type": "string",
-                  "title": "IRI třídy osob",
-                  "description": "Unikátní IRI třídy osob použité v RDF reprezentaci osob vedených v Registru obyvatel",
+                  "title": "Identifikátor třídy osob",
+                  "description": "Identifikátor třídy osob použité v RDF reprezentaci osob vedených v Registru obyvatel. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
                   "default": "osoba",
                   "pattern": "^osoba$"
                 },
@@ -238,13 +237,13 @@
           "pozastavení-od": {
             "type": "string",
             "title": "Datum pozastavení výkonu působnosti od",
-            "description": "Datum, od kterého má orgán veřejné moci pozastaven výkonu působnosti",
+            "description": "Datum, od kterého má orgán veřejné moci pozastaven výkon působnosti",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           },
           "pozastavení-do": {
             "type": "string",
             "title": "Datum pozastavení výkonu působnosti do",
-            "description": "Datum, do kterého má orgán veřejné moci pozastaven výkonu působnosti",
+            "description": "Datum, do kterého má orgán veřejné moci pozastaven výkon působnosti",
             "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
           },
           "přerušení-od": {
@@ -270,38 +269,35 @@
               "properties": {
                 "type": {
                   "type": "string",
-                  "title": "IRI třídy pracovišť",
-                  "description": "Unikátní IRI třídy pracovišť orgánů veřejné moci použité v RDF reprezentaci pracovišť vedených v Registru práv a povinností",
+                  "title": "Identifikátor třídy pracovišť",
+                  "description": "Identifikátor třídy pracovišť orgánů veřejné moci použité v RDF reprezentaci pracovišť vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
                   "default": "pracoviště",
                   "pattern": "^pracoviště$"
                 },
                 "id": {
                   "type": "string",
                   "title": "IRI pracoviště",
-                  "description": "Unikátní IRI pracoviště orgánu veřejné moci vedeného v Registru práv a povinností použité pro odkazování na pracoviště v JSON reprezentaci i v RDF reprezentaci",
+                  "description": "Unikátní IRI pracoviště orgánu veřejné moci vedeného v Registru práv a povinností použité pro odkazování na pracoviště v JSON reprezentaci i v RDF reprezentaci. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
                   "examples": [
                     "pracoviště/1"
                   ],
                   "pattern": "^pracoviště/[0-9]+$"
                 },
                 "adresa-pr": {
-                  "type": "string",
+                  "type": "object",
                   "title": "Adresa pracoviště v RÚIAN",
-                  "description": "Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu pracoviště",
-                  "examples": [
-                    "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
-                  ],
-                  "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+                  "description": "Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu pracoviště. Adresní místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a katastrálního.",
+                  "$ref": "#/definitions/adresní-místo-rúian"
                 },
                 "adresa-pr-txt": {
                   "type": "string",
                   "title": "Adresa pracoviště textem",
-                  "description": "Adresa pracoviště vyjádřená jako dále nestrukturovaný text v případě, že neexistuje odpovídající adresní místo v Registru územní identifikace, adres a nemovitostí"
+                  "description": "Adresa pracoviště vyjádřená jako dále nestrukturovaný text v případě, že neexistuje odpovídající adresní místo v Registru územní identifikace, adres a nemovitostí."
                 },
                 "stát-pr": {
                   "type": "string",
-                  "title": "Stát pracoviště",
-                  "description": "Odkaz na stát pracoviště do datové sady s číselníkem států z Registru práv a povinností",
+                  "title": "Odkaz na stát pracoviště",
+                  "description": "Odkaz na stát pracoviště do Číselníku států, který je zveřejňován jako samostatná datová sada z Registru práv a povinností.",
                   "examples": [
                     "stát/1"
                   ],
@@ -310,13 +306,13 @@
                 "otevření": {
                   "type": "string",
                   "title": "Datum otevření",
-                  "description": "Datum otevření pracoviště",
+                  "description": "Datum otevření pracoviště.",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                 },
                 "uzavření": {
                   "type": "string",
                   "title": "Datum uzavření",
-                  "description": "Datum uzavření pracoviště",
+                  "description": "Datum uzavření pracoviště.",
                   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
                 }
               }
@@ -324,22 +320,49 @@
           },
           "nadřízený-ovm": {
             "type": "string",
-            "title": "Nadřízený orgán veřejné moci",
-            "description": "Odkaz na nadřízený orgán veřejné moci",
+            "title": "Odkaz na nadřízený orgán veřejné moci",
+            "description": "Odkaz na nadřízený orgán veřejné moci.",
             "examples": [
               "orgán-veřejné-moci/00000001-1"
             ],
-            "pattern": "^orgán-veřejné-moci/[0-9]{8}$"
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
           },
           "právní-forma": {
             "type": "string",
             "title": "Právní forma",
-            "description": "Odkaz na právní formu v číselníku právních forem z Registru práv a povinností",
+            "description": "Odkaz na právní formu do Číselníku právních forem, který je zveřejněn jako samostatná datová sada z Registru práv a povinností",
             "examples": [
               "právní-forma/1"
             ],
             "pattern": "^právní-forma/[0-9]$"
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "adresní-místo-rúian": {
+      "type": "object",
+      "title": "Adresní místo z RÚIAN",
+      "description": "Adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu místa pobytu orgánu veřejné moci. Odpovídá otevřené formální normě pro zveřejňování adres (viz https://data.gov.cz/otevřené-formální-normy/adresy/).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Odkaz na adresní místo",
+          "description": "Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí.",
+          "examples": [
+            "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
+          ],
+          "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+        },
+        "kód": {
+          "type": "string",
+          "title": "Kód adresního místa",
+          "description": "Unikátní kód adresního místa v Registru územní identifikace, adres a nemovitostí.",
+          "examples": [
+            "22305190"
+          ],
+          "pattern": "^[0-9]{8}$"
         }
       }
     }
