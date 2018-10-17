@@ -123,7 +123,7 @@
     </xsl:for-each>
   </xsl:template>
   
-  <xsl:function name="gen:generujVlastnostiProSpecifikaci" as="element()">
+  <xsl:function name="gen:generujVlastnostiProSpecifikaci" as="element()*">
     <xsl:param name="item" as="element()" />
 	<section>
 		<xsl:attribute name="id" select="$item/fn:string[@key='title']/text()" />
@@ -176,7 +176,64 @@
 			  </xsl:for-each>
 		  </dd>
 		</dl>
-	  </section>
+	</section>
+	<xsl:if test="$item/fn:map[@key='items'][fn:string[@key='type']!='object']">
+	  <xsl:for-each select="$item/fn:map[@key='items'][fn:string[@key='type']='string']">
+	    <xsl:variable name="subitem" select="." />
+	<section>
+		<xsl:attribute name="id" select="$subitem/fn:string[@key='title']/text()" />
+		<h4>
+		  <xsl:choose>
+			<xsl:when test="$subitem/fn:string[@key='type'] = 'object'">
+			  <xsl:value-of select="$subitem/fn:string[@key='title']/text()" />
+			</xsl:when>
+			<xsl:otherwise>
+			  <dfn><xsl:value-of select="$subitem/fn:string[@key='title']/text()" /></dfn>
+			</xsl:otherwise>
+		  </xsl:choose>
+		</h4>
+		<dl>
+		  <dt>
+			  Vlastnost
+		  </dt>
+		  <dd>
+			  <code><xsl:value-of select="$subitem/@key" /></code>
+		  </dd>
+		  <dt>
+			  Typ
+		  </dt>
+		  <dd>
+			  <xsl:if test="$subitem/fn:string[@key='type'] = 'string'"><a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a></xsl:if>
+			  <xsl:if test="$subitem/fn:string[@key='type'] = 'boolean'"><a href="https://opendata.gov.cz/datovy-typ:anone">Boolean</a></xsl:if>
+			  <xsl:if test="$subitem/fn:string[@key='type'] = 'integer'"><a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a></xsl:if>
+			  <xsl:if test="$subitem/fn:string[@key='type'] = 'object'"><a><xsl:value-of select="$subitem/fn:string[@key='title']" /></a></xsl:if>
+			  <xsl:if test="$subitem/fn:string[@key='type'] = 'array'"> Pole typu <a><xsl:value-of select="$subitem/fn:map/fn:string[@key='title']/text()" /></a></xsl:if>
+			  <xsl:if test="$subitem/fn:string[@key='pattern']"> dle vzoru <code><xsl:value-of select="$subitem/fn:string[@key='pattern']" /></code></xsl:if>
+		  </dd>
+		  <dt>
+			  Jméno
+		  </dt>
+		  <dd>
+			  <xsl:value-of select="$subitem/fn:string[@key='title']/text()" />
+		  </dd>
+		  <dt>
+			  Popis
+		  </dt>
+		  <dd>
+			  <xsl:value-of select="$subitem/fn:string[@key='description']/text()" />
+		  </dd>
+		  <dt>
+			  Příklad
+		  </dt>
+		  <dd>
+			  <xsl:for-each select="$subitem/fn:array[@key='examples']/fn:map">
+				<code><xsl:value-of select="fn:xml-to-json(.)" /></code>
+			  </xsl:for-each>
+		  </dd>
+		</dl>
+	</section>
+	  </xsl:for-each>
+	</xsl:if>
   </xsl:function>
 
 </xsl:stylesheet>
