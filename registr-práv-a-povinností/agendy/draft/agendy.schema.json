@@ -1,0 +1,272 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendy.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "title": "Seznam agend",
+      "description": "Seznam existujících i zaniklých, platných i neplatných agend, které jsou evidované v Registru práv a povinností. Pro každou agendu je publikován poslední platný stav jejích údajů.",
+      "items": {
+        "type": "object",
+        "title": "Agenda",
+        "description": "Agenda evidovaná v Registru práv a povinností.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Identifikátor třídy agend",
+            "description": "Identifikátor třídy agend použité v RDF reprezentaci agend vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+            "default": "agenda",
+            "pattern": "^agenda$"
+          },
+          "id": {
+            "type": "string",
+            "title": "IRI agendy",
+            "description": "Unikátní IRI agendy vedené v Registru práv a povinností použité pro odkazování na agendu v JSON reprezentaci i v RDF reprezentaci. V IRI je využit kód agendy. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
+            "examples": [
+              "agenda/A1046"
+            ],
+            "pattern": "^agenda/A[0-9]+$"
+          },
+          "název": {
+            "type": "object",
+            "title": "Název agendy v různých jazycích",
+            "description": "Název agendy vyjádřený v různých jazycích.",
+            "properties": {
+              "cs": {
+                "type": "string",
+                "title": "Název agendy v češtině",
+                "description": "Název agendy v češtině.",
+                "examples": [
+                  "Agenda řidičů"
+                ]
+              }
+            }
+          },
+          "kód": {
+            "type": "string",
+            "title": "Kód agendy",
+            "description": "Unikátní identifikátor agendy.",
+            "examples": [
+              "A1046"
+            ],
+            "pattern": "^A[0-9]+$"
+          },
+          "ustanovení": {
+            "type": "array",
+            "title": "Seznam ustanovení právních předpisů",
+            "description": "Seznam ustanovení právních předpisů, na jejichž základě je agenda vykonávána. Pro každou agendu může být specifikováno jedno či více ustanovení. Jedno ustanovení může zakládat výkon více různých agend.",
+            "items": {
+              "type": "object",
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu, na jehož základě je agenda vykonávána",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "title": "Identifikátor třídy ustanovení právního předpisu",
+                  "description": "Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+                  "default": "ustanovení-právního-předpisu",
+                  "pattern": "^ustanovení-právního-předpisu$"
+                },
+                "označení": {
+                  "type": "string",
+                  "title": "Označení",
+                  "description": "Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom dále nestrukturovaném řetězci.",
+                  "examples": [
+                    "§ 1 zákona č. 1/1000 Sb."
+                  ]
+                }
+              }
+            }
+          },
+          "činnosti": {
+            "type": "array",
+            "title": "Seznam činností",
+            "description": "Seznam platných i neplatných činností vykonávaných v rámci agendy. Pro každou činnost jsou zveřejněny poslední platné údaje. V rámci agendy může být vykonáváno jedna či více různých činností. Každá činnost je vykonávána v právě jedné agendě.",
+            "items": {
+              "type": "object",
+              "title": "Činnost",
+              "description": "Činnost vykonávaná v rámci agendy.",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "title": "Identifikátor třídy činností",
+                  "description": "Identifikátor třídy činností použité v RDF reprezentaci činností vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+                  "default": "činnost",
+                  "pattern": "^činnost$"
+                },
+                "id": {
+                  "type": "string",
+                  "title": "IRI činnosti",
+                  "description": "Unikátní IRI činnosti vedené v Registru práv a povinností použité pro odkazování na činnost v JSON reprezentaci i v RDF reprezentaci. V IRI je využit kód činnosti a kód agendy, do které činnost patří. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
+                  "examples": [
+                    "činnost/A1046/CR6072"
+                  ],
+                  "pattern": "^činnost/A[0-9]+/CR[0-9]+$"
+                },
+                "kód-činnosti": {
+                  "type": "string",
+                  "title": "Kód činnosti",
+                  "description": "Unikátní identifikátor činnosti.",
+                  "examples": [
+                    "CR6072"
+                  ],
+                  "pattern": "^CR[0-9]+$"
+                },
+                "název-činnosti": {
+                  "type": "object",
+                  "title": "Název činnosti v různých jazycích",
+                  "description": "Název činnosti vyjádřený v různých jazycích.",
+                  "properties": {
+                    "cs": {
+                      "type": "string",
+                      "title": "Název činnosti v češtině",
+                      "description": "Název činnosti v češtině",
+                      "examples": [
+                        "Vedení centrálního registru řidičů"
+                      ]
+                    }
+                  }
+                },
+                "popis-činnosti": {
+                  "type": "object",
+                  "title": "Popis činnosti v různých jazycích",
+                  "description": "Popis činnosti vyjádřený v různých jazycích.",
+                  "properties": {
+                    "cs": {
+                      "type": "string",
+                      "title": "Popis činnosti v češtině",
+                      "description": "Popis činnosti v češtině.",
+                      "examples": [
+                        "361/2000 124-2e"
+                      ]
+                    }
+                  }
+                },
+                "typ-činnosti": {
+                  "type": "string",
+                  "title": "Typ činnosti",
+                  "description": "Odkaz na typ činosti do Číselníku typů činností, který je zveřejněn jako samostatná datová sada z Registru práv a povinností.",
+                  "examples": [
+                    "typ-činnosti/1"
+                  ],
+                  "pattern": "^typ-činosti/[0-9]+$"
+                },
+                "platnost-činnosti-od": {
+                  "type": "string",
+                  "title": "Platnost činnosti od",
+                  "description": "Datum, od kterého je činnost platná.",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                },
+                "platnost-činnosti-do": {
+                  "type": "string",
+                  "title": "Platnost činnosti do",
+                  "description": "Datum, do kterého je činnost platná.",
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                }
+              }
+            }
+          },
+          "vykonávající-ovm": {
+            "type": "array",
+            "title": "Seznam vykonávajících orgánů veřejné moci",
+            "description": "Seznam orgánů veřejné moci, které vykonávají agendu. Agendu může vykonávat libovolné množství orgánů veřejné moci nebo ji nemusí vykonávat žádný orgán veřejné moci.",
+            "items": {
+              "type": "string",
+              "title": "Odkaz na vykonávající orgán veřejné moci",
+              "description": "Odkaz na orgán veřejné moci, který vykonává agendu.",
+              "examples": [
+                "orgán-veřejné-moci/12345678-1"
+              ],
+              "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
+            }
+          },
+          "vykonávající-kategorie-ovm": {
+            "type": "array",
+            "title": "Seznam vykonávajících kategorií orgánů veřejné moci",
+            "description": "Seznam kategorií orgánů veřejné moci, které vykonávají agendu. Agendu může vykonávat libovolné množství kategorií nebo ji nemusí vykonávat žádná kategorie.",
+            "items": {
+              "type": "string",
+              "title": "Odkaz na kategorii orgánů veřejné moci vykonávajících agendu",
+              "description": "Odkaz na kategorii orgánů veřejné moci, které vykonávají agendu.",
+              "examples": [
+                "kategorie-ovm/KO11"
+              ],
+              "pattern": "^kategorie-ovm/KO[0-9]+$"
+            }
+          },
+          "vykonávající-spuú": {
+            "type": "array",
+            "title": "Seznam vykonávajících soukromoporávních uživatelů údajů",
+            "description": "Seznam soukromoporávních uživatelů údajů, které vykonávají agendu. Agendu může vykonávat libovolné množství soukromoporávních uživatelů údajů nebo ji nemusí vykonávat žádný soukromoporávní uživatel údajů.",
+            "items": {
+              "type": "string",
+              "title": "Odkaz na vykonávajícího soukromoporávního uživatele údajů",
+              "description": "Odkaz na soukromoporávního uživatele údajů, který vykonává agendu.",
+              "examples": [
+                "soukromoprávní-uživatel-údajů/12345678-1"
+              ],
+              "pattern": "^soukromoprávní-uživatel-údajů/[0-9]{8}-[0-9]+$"
+            }
+          },
+          "vykonávající-kategorie-spuú": {
+            "type": "array",
+            "title": "Seznam vykonávajících kategorií soukromoporávních uživatelů údajů",
+            "description": "Seznam kategorií soukromoporávních uživatelů údajů, kteří vykonávají agendu. Agendu může vykonávat libovolné množství kategorií nebo ji nemusí vykonávat žádná kategorie.",
+            "items": {
+              "type": "string",
+              "title": "Odkaz na kategorii soukromoporávních uživatelů údajů vykonávajících agendu",
+              "description": "Odkaz na kategorii soukromoporávních uživatelů údajů, kteří vykonávají agendu.",
+              "examples": [
+                "kategorie-spuú/KS11"
+              ],
+              "pattern": "^kategorie-spuú/KS[0-9]+$"
+            }
+          },
+          "ohlašovatel": {
+            "type": "string",
+            "title": "Odkaz na ohlašovatele",
+            "description": "Odkaz na orgán veřejné moci, který ohlašuje agendu. Každá agenda má právě jednoho ohlašovatele.",
+            "examples": [
+              "orgán-veřejné-moci/00000001-1"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
+          },
+          "vznik": {
+            "type": "string",
+            "title": "Datum vzniku",
+            "description": "Datum vzniku agendy.",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "zánik": {
+            "type": "string",
+            "title": "Datum zániku",
+            "description": "Datum zániku agendy.",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "platnost-od": {
+            "type": "string",
+            "title": "Platnost agendy od",
+            "description": "Datum, od kterého je agenda platná.",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "platnost-do": {
+            "type": "string",
+            "title": "Platnost agendy do",
+            "description": "Datum, do kterého je agenda platná.",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "poslední-změna": {
+            "type": "string",
+            "title": "Poslední změna agendy",
+            "description": "Datum, kdy došlo k poslední změně agendy.",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          }
+        }
+      }
+    }
+  }
+}

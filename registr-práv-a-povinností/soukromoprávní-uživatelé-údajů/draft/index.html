@@ -1,0 +1,912 @@
+<html xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" lang="cs">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Registr práv a povinností - soukromoprávní uživatelé údajů</title>
+      <meta content="width=device-width,initial-scale=1" name="viewport">
+      <meta name="theme-color" content="#057fa5">
+      <meta name="msapplication-TileColor" content="#057fa5">
+      <meta name="msapplication-TileImage" content="../../../static/favicons/ms-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="57x57" href="../../../static/favicons/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="../../../static/favicons/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="../../../static/favicons/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="../../../static/favicons/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="../../../static/favicons/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="../../../static/favicons/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="../../../static/favicons/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="../../../static/favicons/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../static/favicons/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../static/favicons/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png">
+      <link rel="manifest" href="../../../static/favicons/manifest.json"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel%C3%A9-%C3%BAdaj%C5%AF.config.js"></script></head>
+   <body>
+      <section id="abstract" class="introductory">
+         <h2>Abstrakt</h2>
+         <p>
+            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o soukromoprávních uživatelích údajů z Registru práv
+            a povinností ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Norma specifikuje způsob publikace na stupni otevřenosti
+            <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">3*</a> a <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">5*</a> ve formátu <a xmlns="http://docbook.org/ns/docbook" href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.
+            	</p>
+      </section>
+      <section id="přehled">
+         <h2>Přehled</h2>
+         Datová sada je tvořena seznamem instancí typu <a>Soukromoprávní uživatel údajů</a> uvedených v poli <code>položky</code>.
+         
+         <ul>
+            <li><a>Soukromoprávní uživatel údajů</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy soukromoprávních uživatelů údajů</a></li>
+                  <li><code>id</code> : <a>IRI soukromoprávního uživatele údajů</a></li>
+                  <li><code>identifikátor</code> : <a>Identifikátor soukromoprávního uživatele údajů</a></li>
+                  <li><code>název</code> : <a>Název v různých jazycích</a></li>
+                  <li><code>ičo</code> : <a>IČO</a></li>
+                  <li><code>datové-schránky</code> : <a>Datové schránky</a>
+                     	    (seznam instancí typu <a>Datová schránka</a>)
+                     	  </li>
+                  <li><code>ustanovení</code> : <a>Seznam ustanovení právních předpisů</a>
+                     	    (seznam instancí typu <a>Ustanovení právního předpisu</a>)
+                     	  </li>
+                  <li><code>seznam-kategorií</code> : <a>Zařazení do kategorií</a>
+                     	    (seznam instancí typu <a>Zařazení do kategorie</a>)
+                     	  </li>
+                  <li><code>adresa-sídla</code> : <a>Adresa sídla z RÚIAN</a></li>
+                  <li><code>adresa-místa-podnikání</code> : <a>Adresa místa podnikání z RÚIAN</a></li>
+                  <li><code>vznik</code> : <a>Datum vzniku</a></li>
+                  <li><code>zánik</code> : <a>Datum zániku</a></li>
+                  <li><code>pozastavení-od</code> : <a>Datum pozastavení výkonu působnosti od</a></li>
+                  <li><code>pozastavení-do</code> : <a>Datum pozastavení výkonu působnosti do</a></li>
+                  <li><code>přerušení-od</code> : <a>Datum přerušení výkonu působnosti od</a></li>
+                  <li><code>přerušení-do</code> : <a>Datum přerušení výkonu působnosti do</a></li>
+               </ul>
+            </li>
+            <li><a>Název v různých jazycích</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>cs</code> : <a>Název v češtině</a></li>
+               </ul>
+            </li>
+            <li><a>Datová schránka</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy datových schránek</a></li>
+                  <li><code>id</code> : <a>IRI datové schránky</a></li>
+                  <li><code>typ-ds</code> : <a>Odkaz na typ datové schránky</a></li>
+                  <li><code>identifikátor-ds</code> : <a>Identifikátor datové schránky</a></li>
+               </ul>
+            </li>
+            <li><a>Ustanovení právního předpisu</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy ustanovení právního předpisu</a></li>
+                  <li><code>označení</code> : <a>Označení</a></li>
+               </ul>
+            </li>
+            <li><a>Zařazení do kategorie</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>kategorie</code> : <a>Odkaz na kategorii</a></li>
+                  <li><code>zařazení-od</code> : <a>Datum zařazení od</a></li>
+                  <li><code>zařazení-do</code> : <a>Datum zařazení do</a></li>
+               </ul>
+            </li>
+            <li><a>Adresa sídla z RÚIAN</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  			  viz <a>Adresní místo z RÚIAN</a></ul>
+            </li>
+            <li><a>Adresa místa podnikání z RÚIAN</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  			  viz <a>Adresní místo z RÚIAN</a></ul>
+            </li>
+            <li><a>Adresní místo z RÚIAN</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>id</code> : <a>Odkaz na adresní místo</a></li>
+                  <li><code>kód</code> : <a>Kód adresního místa</a></li>
+               </ul>
+            </li>
+         </ul>
+      </section>
+      <section id="specifikace">
+         <h2>Specifikace</h2>
+         V této části jsou definovány jednotlivé typy objektů a jejich vlastnosti.
+         Pro každou vlastnost je uveden její klíč používaný v JSON reprezentaci, její název,
+         datový typ, popis a příklad.
+         
+         <section id="Soukromoprávní uživatel údajů">
+            <h3><dfn>Soukromoprávní uživatel údajů</dfn></h3>
+            <p>Soukromoprávní uživatel údajů evidovaný v Registru práv a povinností.</p>
+            <section id="Identifikátor třídy soukromoprávních uživatelů údajů">
+               <h4><dfn>Identifikátor třídy soukromoprávních uživatelů údajů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^soukromoprávní-uživatel-údajů$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy soukromoprávních uživatelů údajů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy soukromoprávních uživatelů údajů použité v RDF reprezentaci soukromoprávních
+                     uživatelů údajů vedených v Registru práv a povinností. Jedná se o lokální identifikátor
+                     třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru
+                     (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="IRI soukromoprávního uživatele údajů">
+               <h4><dfn>IRI soukromoprávního uživatele údajů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^soukromoprávní-uživatel-údajů/[0-9]{8}-[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IRI soukromoprávního uživatele údajů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní IRI soukromoprávního uživatele údajů vedeného v Registru práv a povinností
+                     použité pro odkazování na soukromoprávního uživatele údajů v JSON reprezentaci i v
+                     RDF reprezentaci. V IRI je využit identifikátor soukromoprávního uživatele údajů.
+                     IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru
+                     (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Identifikátor soukromoprávního uživatele údajů">
+               <h4><dfn>Identifikátor soukromoprávního uživatele údajů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>identifikátor</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{8}-[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor soukromoprávního uživatele údajů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní identifikátor soukromoprávního uživatele údajů, který se stává z IČ soukromoprávního
+                     uživatele údajů a dopňujícího identifikátoru uvedeného za znakem '-', který odlišuje
+                     různé soukromoprávní uživatele údajů sdílejícím jedno IČ.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Název v různých jazycích">
+               <h4>Název v různých jazycích</h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>název</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a>Název v různých jazycích</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Název v různých jazycích</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Název soukromoprávního uživatele údajů vyjádřený v různých jazycích.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="IČO">
+               <h4><dfn>IČO</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>ičo</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{8}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IČO</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikační číslo soukromoprávního uživatele údajů dle registru osob</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datové schránky">
+               <h4><dfn>Datové schránky</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>datové-schránky</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd> Pole typu <a>Datová schránka</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datové schránky</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Seznam datových schránek soukromoprávního uživatele údajů. Každý soukromoprávní uživatel
+                     údajů má alespoň jednu datovou schránku.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Seznam ustanovení právních předpisů">
+               <h4><dfn>Seznam ustanovení právních předpisů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>ustanovení</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd> Pole typu <a>Ustanovení právního předpisu</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Seznam ustanovení právních předpisů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Seznam ustanovení právních předpisů, na jejichž základě soukromoprávní uživatel údajů
+                     vykonává svoji působnost</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Zařazení do kategorií">
+               <h4><dfn>Zařazení do kategorií</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>seznam-kategorií</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd> Pole typu <a>Zařazení do kategorie</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Zařazení do kategorií</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Seznam jednotlivých zařazení soukromoprávního uživatele údajů do kategorií. soukromoprávní
+                     uživatel údajů je zařazen do alespoň jedné kategorie.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Adresa sídla z RÚIAN">
+               <h4>Adresa sídla z RÚIAN</h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>adresa-sídla</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a>Adresa sídla z RÚIAN</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Adresa sídla z RÚIAN</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující
+                     adresu sídla soukromoprávního uživatele údajů, pokud má adresu sídla přiřazenu. Adresní
+                     místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a katastrálního.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Adresa místa podnikání z RÚIAN">
+               <h4>Adresa místa podnikání z RÚIAN</h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>adresa-místa-podnikání</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a>Adresa místa podnikání z RÚIAN</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Adresa místa podnikání z RÚIAN</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující
+                     adresu místa podnikání soukromoprávního uživatele údajů, pokud má adresu sídla přiřazenu.
+                     Adresní místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a
+                     katastrálního.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum vzniku">
+               <h4><dfn>Datum vzniku</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>vznik</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum vzniku</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum vzniku soukromoprávního uživatele údajů</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum zániku">
+               <h4><dfn>Datum zániku</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>zánik</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum zániku</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum zániku soukromoprávního uživatele údajů</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum pozastavení výkonu působnosti od">
+               <h4><dfn>Datum pozastavení výkonu působnosti od</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>pozastavení-od</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum pozastavení výkonu působnosti od</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum, od kterého má soukromoprávní uživatel údajů pozastaven výkon působnosti</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum pozastavení výkonu působnosti do">
+               <h4><dfn>Datum pozastavení výkonu působnosti do</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>pozastavení-do</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum pozastavení výkonu působnosti do</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum, do kterého má soukromoprávní uživatel údajů pozastaven výkon působnosti</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum přerušení výkonu působnosti od">
+               <h4><dfn>Datum přerušení výkonu působnosti od</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>přerušení-od</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum přerušení výkonu působnosti od</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum, od kterého má soukromoprávní uživatel údajů přerušen výkon působnosti</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum přerušení výkonu působnosti do">
+               <h4><dfn>Datum přerušení výkonu působnosti do</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>přerušení-do</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum přerušení výkonu působnosti do</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum, do kterého má soukromoprávní uživatel údajů přerušen výkon působnosti</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+         </section>
+         <section id="Název v různých jazycích">
+            <h3><dfn>Název v různých jazycích</dfn></h3>
+            <p>Název soukromoprávního uživatele údajů vyjádřený v různých jazycích.</p>
+            <section id="Název v češtině">
+               <h4><dfn>Název v češtině</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>cs</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Název v češtině</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Název soukromoprávního uživatele údajů v češtině</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+         </section>
+         <section id="Datová schránka">
+            <h3><dfn>Datová schránka</dfn></h3>
+            <p>Datová schránka soukromoprávního uživatele údajů</p>
+            <section id="Identifikátor třídy datových schránek">
+               <h4><dfn>Identifikátor třídy datových schránek</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^datová-schránka$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy datových schránek</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy datových schránek použité v RDF reprezentaci datových schránek
+                     vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci
+                     JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="IRI datové schránky">
+               <h4><dfn>IRI datové schránky</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^datová-schránka/[0-9a-z]{7}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IRI datové schránky</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní IRI datové schránky vedené v Registru práv a povinností použité pro odkazování
+                     na datovou schránku v JSON reprezentaci i v RDF reprezentaci. V IRI je využit identifikátor
+                     datové schránky. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu
+                     JSON-LD souboru (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Odkaz na typ datové schránky">
+               <h4><dfn>Odkaz na typ datové schránky</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>typ-ds</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^typ-datové-schránky/[A-Z]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na typ datové schránky</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na typ datové schránky do Číselníku typů datových schránek, který je zveřejněn
+                     jako samostatná datová sada z Registru práv a povinností.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Identifikátor datové schránky">
+               <h4><dfn>Identifikátor datové schránky</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>identifikátor-ds</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9a-z]{7}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor datové schránky</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní identifikátor datové schránky.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+         </section>
+         <section id="Ustanovení právního předpisu">
+            <h3><dfn>Ustanovení právního předpisu</dfn></h3>
+            <p>Ustanovení právního předpisu, na jehož základě soukromoprávní uživatel údajů vykonává
+               svoji působnost</p>
+            <section id="Identifikátor třídy ustanovení právního předpisu">
+               <h4><dfn>Identifikátor třídy ustanovení právního předpisu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^ustanovení-právního-předpisu$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy ustanovení právního předpisu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení
+                     právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy
+                     v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč
+                     @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Označení">
+               <h4><dfn>Označení</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>označení</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Označení</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom
+                     dále nestrukturovaném řetězci.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+         </section>
+         <section id="Zařazení do kategorie">
+            <h3><dfn>Zařazení do kategorie</dfn></h3>
+            <p>Zařazení soukromoprávního uživatele údajů do kategorie</p>
+            <section id="Odkaz na kategorii">
+               <h4><dfn>Odkaz na kategorii</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>kategorie</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^kategorie-spuú/KS[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na kategorii</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na kategorii soukromoprávního uživatele údajů do samostatné datové sady Kategorie
+                     soukromoprávních uživatelů údajů.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum zařazení od">
+               <h4><dfn>Datum zařazení od</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>zařazení-od</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum zařazení od</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum, od kterého je soukromoprávní uživatel údajů do kategorie zařazen</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Datum zařazení do">
+               <h4><dfn>Datum zařazení do</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>zařazení-do</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Datum zařazení do</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Datum, do kterého je soukromoprávní uživatel údajů do kategorie zařazen</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+         </section>
+         <section id="Adresa sídla z RÚIAN">
+            <h3><dfn>Adresa sídla z RÚIAN</dfn></h3>
+            <p>Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující
+               adresu sídla soukromoprávního uživatele údajů, pokud má adresu sídla přiřazenu. Adresní
+               místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a katastrálního.</p>
+            		  viz <a>Adresní místo z RÚIAN</a></section>
+         <section id="Adresa místa podnikání z RÚIAN">
+            <h3><dfn>Adresa místa podnikání z RÚIAN</dfn></h3>
+            <p>Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující
+               adresu místa podnikání soukromoprávního uživatele údajů, pokud má adresu sídla přiřazenu.
+               Adresní místa jsou zveřejňována v otevřených datech Českého úřadu zeměměřičského a
+               katastrálního.</p>
+            		  viz <a>Adresní místo z RÚIAN</a></section>
+         <section id="Adresní místo z RÚIAN">
+            <h3><dfn>Adresní místo z RÚIAN</dfn></h3>
+            <p>Adresní místo z Registru územní identifikace, adres a nemovitostí reprezentující adresu
+               místa pobytu orgánu veřejné moci. 
+               			  Odpovídá
+               		      <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/adresy/">
+                  				otevřené formální normě pro 
+                  				zveřejňování adres</a>.
+               		    </p>
+            <section id="Odkaz na adresní místo">
+               <h4><dfn>Odkaz na adresní místo</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na adresní místo</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na adresní místo z Registru územní identifikace, adres a nemovitostí.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+            <section id="Kód adresního místa">
+               <h4><dfn>Kód adresního místa</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     		  </dt>
+                  <dd><code>kód</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{8}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Kód adresního místa</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní kód adresního místa v Registru územní identifikace, adres a nemovitostí.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd></dd>
+               </dl>
+            </section>
+         </section>
+      </section>
+      <section id="priklady">
+         <h2>Příklady</h2>
+         <section>
+            <h3>Základní identifikační údaje o soukromoprávním uživateli údajů</h3>
+            <p>Následující příklad demonstruje reprezentaci základních identifikačních údajů soukromoprávního
+               uživatele údajů - id, identifikátor, název a IČ. Rozdíl mezi id a identifikátorem
+               není v kontextu Registru práv a povinností žádný. Identifikátor je prostý řetězec,
+               který je založen na IČ soukromoprávního uživatele údajů a je jeho unikátním identifikátorem
+               v Registru práv a povinností. Atribut id však může být ve spojení s base IRI uvedeným
+               v kontextu JSON-LD dokumentu jako absolutní globálně unikátní IRI, které jednoznačně
+               identifikuje soukromoprávního uživatele údajů napříč všemi datovými sadami. Hodnota
+               atributu id je použita pro odkazování na soukromoprávního uživatele údajů v rámci
+               otevřených dat Registru práv a povinností a je doporučeno jej používat též pro odkazování
+               na soukromoprávního uživatele údajů ze všech datových sad veřejné správy ČR.</p>
+            <aside class="example" title="Základní identifikační údaje o soukromoprávním uživateli údajů">
+               <pre class="json"></pre>
+            </aside>
+         </section>
+      </section>
+   </body>
+</html>
