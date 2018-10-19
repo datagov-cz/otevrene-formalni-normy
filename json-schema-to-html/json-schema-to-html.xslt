@@ -171,8 +171,8 @@
 			  Příklad
 		  </dt>
 		  <dd>
-			  <xsl:for-each select="$item/fn:array[@key='examples']/fn:map">
-				<code><xsl:value-of select="fn:xml-to-json(.)" /></code>
+			  <xsl:for-each select="$item/fn:array[@key='examples']/fn:*">
+				<code><xsl:value-of select="." /></code>
 			  </xsl:for-each>
 		  </dd>
 		</dl>
