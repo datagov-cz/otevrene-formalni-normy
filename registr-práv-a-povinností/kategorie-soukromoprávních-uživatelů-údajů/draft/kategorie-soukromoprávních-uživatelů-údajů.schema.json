@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "title": "Seznam kategorií soukromoprávních uživatelů údajů",
+      "description": "Seznam platných kategorií soukromoprávních uživatelů údajů, které jsou evidované v Registru práv a povinností. Pro každou kategorii je publikován poslední platný stav jejích údajů.",
+      "items": {
+        "type": "object",
+        "title": "Kategorie soukromoprávních uživatelů údajů",
+        "description": "Kategorie soukromoprávních uživatelů údajů evidovaná v Registru práv a povinností.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Identifikátor třídy kategorií soukromoprávních uživatelů údajů",
+            "description": "Identifikátor třídy kategorií soukromoprávních uživatelů údajů použité v RDF reprezentaci kategorií soukromoprávních uživatelů údajů vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+            "default": "kategorie-spuú",
+            "pattern": "^kategorie-spuú$"
+          },
+          "id": {
+            "type": "string",
+            "title": "IRI kategorie soukromoprávních uživatelů údajů",
+            "description": "Unikátní IRI kategorie soukromoprávních uživatelů údajů vedené v Registru práv a povinností použité pro odkazování na kategorii v JSON reprezentaci i v RDF reprezentaci. V IRI je využit identifikátor kategorie. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
+            "examples": [
+              "kategorie-spuú/KS11"
+            ],
+            "pattern": "^kategorie-spuú/KS[0-9]+$"
+          },
+          "název": {
+            "type": "object",
+            "title": "Název kategorie soukromoprávních uživatelů údajů v různých jazycích",
+            "description": "Název kategorie soukromoprávních uživatelů údajů vyjádřený v různých jazycích.",
+            "properties": {
+              "cs": {
+                "type": "string",
+                "title": "Název kategorie soukromoprávních uživatelů údajů v češtině",
+                "description": "Název kategorie soukromoprávních uživatelů údajů v češtině.",
+                "examples": [
+                  "Testovací kategorie SPUÚ"
+                ]
+              }
+            }
+          },
+          "identifikátor": {
+            "type": "string",
+            "title": "Identifikátor kategorie soukromoprávních uživatelů údajů",
+            "description": "Unikátní identifikátor kategorie soukromoprávních uživatelů údajů.",
+            "examples": [
+              "KS11"
+            ],
+            "pattern": "^KS[0-9]+$"
+          },
+          "ustanovení": {
+            "type": "array",
+            "title": "Seznam ustanovení právních předpisů",
+            "description": "Seznam ustanovení právních předpisů, které kategorii soukromoprávních uživatelů údajů vymezují. Kategorie může být vymezena jedním či více ustanoveními. Jedno ustanovení může vymezovat více kategorií.",
+            "items": {
+              "type": "object",
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu, které vymezuje kategorii soukromoprávních uživatelů údajů.",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "title": "Identifikátor třídy ustanovení právního předpisu",
+                  "description": "Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+                  "default": "ustanovení-právního-předpisu",
+                  "pattern": "^ustanovení-právního-předpisu$"
+                },
+                "označení": {
+                  "type": "string",
+                  "title": "Označení",
+                  "description": "Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom dále nestrukturovaném řetězci.",
+                  "examples": [
+                    "§ 1 zákona č. 1/1000 Sb."
+                  ]
+                }
+              }
+            }
+          },
+          "ohlašovatel": {
+            "type": "string",
+            "title": "Odkaz na ohlašovatele",
+            "description": "Odkaz na orgán veřejné moci, který ohlašuje kategorii. Každá kategorie má právě jednoho ohlašovatele. Orgán veřejné moci může být ohlašovatelem více agend.",
+            "examples": [
+              "orgán-veřejné-moci/00000001-1"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
+          }
+        }
+      }
+    }
+  }
+}

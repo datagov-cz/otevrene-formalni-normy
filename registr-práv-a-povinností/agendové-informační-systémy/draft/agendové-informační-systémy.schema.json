@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendového informačního systému.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "title": "Seznam agendových informačních systémů",
+      "description": "Seznam platných agendových informačních systémů, které jsou evidované v Registru práv a povinností. Pro každý agendový informační systém je publikován poslední platný stav jeho údajů.",
+      "items": {
+        "type": "object",
+        "title": "Agendový informační systém",
+        "description": "Agendový informační systém evidovaný v Registru práv a povinností.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Identifikátor třídy agendových informačních systémů",
+            "description": "Identifikátor třídy agendových informačních systémů použité v RDF reprezentaci agendových informačních systémů vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+            "default": "agendový-informační-systém",
+            "pattern": "^agendový-informační-systém$"
+          },
+          "id": {
+            "type": "string",
+            "title": "IRI agendového informačního systému",
+            "description": "Unikátní IRI agendového informačního systému vedeného v Registru práv a povinností použité pro odkazování na agendový informační systém v JSON reprezentaci i v RDF reprezentaci. V IRI je využit kód agendového informačního systému. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
+            "examples": [
+              "agendový-informační-systém/6500"
+            ],
+            "pattern": "^agendový-informační-systém/6500+$"
+          },
+          "název": {
+            "type": "object",
+            "title": "Název agendového informačního systému v různých jazycích",
+            "description": "Název agendového informačního systému vyjádřený v různých jazycích.",
+            "properties": {
+              "cs": {
+                "type": "string",
+                "title": "Název agendového informačního systému v češtině",
+                "description": "Název agendového informačního systému v češtině.",
+                "examples": [
+                  "Agendový informační systém evidence obyvatel"
+                ]
+              }
+            }
+          },
+          "kód": {
+            "type": "string",
+            "title": "Kód agendového informačního systému",
+            "description": "Unikátní identifikátor agendového informačního systému.",
+            "examples": [
+              "6100"
+            ],
+            "pattern": "^6100+$"
+          },
+          "ohlašovatel": {
+            "type": "string",
+            "title": "Odkaz na správce",
+            "description": "Odkaz na orgán veřejné moci, který spravuje agendový informační systém, do datové sady orgánů veřejné moci z Registru práv a povinností. Každá agendový informační systém má právě jednoho správce.",
+            "examples": [
+              "orgán-veřejné-moci/12345678-1"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
+          },
+          "agendy": {
+            "type": "array",
+            "title": "Agendy vykonávané agendovým informačním systémem",
+            "description": "Seznam odkazů na agendy, které jsou vykonávány pomocí agendového informačního systému. Jeden agendový informační systém může být využit pro výkon více agend. Jedna agenda může být vykonávána více agendovými informačnímy systémy.",
+            "items": {
+              "type": "string",
+              "title": "Odkaz na agendu vykonávanou agendovým informačním systémem",
+              "description": "Odkaz na agendu, která je vykonávána pomocí agendového informačního systému, do datové sady agend z Registru práv a povinností.",
+              "default": "",
+              "examples": [
+                 "agenda/1046"
+              ],
+              "pattern": "^(.*)$"
+            }
+          },
+          "objekty-subjekty": {
+            "type": "array",
+            "title": "Objekty a subjekty údajů spravované v agendovém informačním systému",
+            "description": "Seznam odkazů na objekty a subjekty údajů (resp. jejich typy) o nichž jsou v agendovém informačním systému vedeny údaje. Jeden agendový informační systém může vést údaje o více typech objektů a subjektů údajů. Jeden typ objektů či subjektů údajů má vedeny údaje v právě jednom agendovém informačním systému.",
+            "items": {
+              "type": "string",
+              "title": "Odkaz na objekt či subjekt údajů spravovaný v agendovém informačním systému",
+              "description": "Odkaz na objekt či subjekt údajů (resp. jeho typ), o němž jsou v agendovém informačním systému vedeny údaje, do datové sady s objekty a subjekty údajů z Registru práv a povinností.",
+              "default": "",
+              "examples": [
+                 "agenda/1046"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

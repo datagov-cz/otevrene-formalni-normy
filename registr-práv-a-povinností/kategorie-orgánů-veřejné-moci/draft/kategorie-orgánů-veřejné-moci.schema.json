@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/kategorie-orgánů-veřejné-moci.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "title": "Seznam kategorií orgánů veřejné moci",
+      "description": "Seznam platných kategorií orgánů veřejné moci, které jsou evidované v Registru práv a povinností. Pro každou kategorii je publikován poslední platný stav jejích údajů.",
+      "items": {
+        "type": "object",
+        "title": "Kategorie orgánů veřejné moci",
+        "description": "Kategorie orgánů veřejné moci evidovaná v Registru práv a povinností.",
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Identifikátor třídy kategorií orgánů veřejné moci",
+            "description": "Identifikátor třídy kategorií orgánů veřejné moci použité v RDF reprezentaci kategorií orgánů veřejné moci vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+            "default": "kategorie-ovm",
+            "pattern": "^kategorie-ovm$"
+          },
+          "id": {
+            "type": "string",
+            "title": "IRI kategorie orgánů veřejné moci",
+            "description": "Unikátní IRI kategorie orgánů veřejné moci vedené v Registru práv a povinností použité pro odkazování na kategorii v JSON reprezentaci i v RDF reprezentaci. V IRI je využit identifikátor kategorie. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
+            "examples": [
+              "kategorie-ovm/KO11"
+            ],
+            "pattern": "^kategorie-ovm/KO[0-9]+$"
+          },
+          "název": {
+            "type": "object",
+            "title": "Název kategorie orgánů veřejné moci v různých jazycích",
+            "description": "Název kategorie orgánů veřejné moci vyjádřený v různých jazycích.",
+            "properties": {
+              "cs": {
+                "type": "string",
+                "title": "Název kategorie orgánů veřejné moci v češtině",
+                "description": "Název kategorie orgánů veřejné moci v češtině.",
+                "examples": [
+                  "Obce s rozšířenou působností"
+                ]
+              }
+            }
+          },
+          "identifikátor": {
+            "type": "string",
+            "title": "Identifikátor kategorie orgánů veřejné moci",
+            "description": "Unikátní identifikátor kategorie orgánů veřejné moci.",
+            "examples": [
+              "KO11"
+            ],
+            "pattern": "^KO[0-9]+$"
+          },
+          "ustanovení": {
+            "type": "array",
+            "title": "Seznam ustanovení právních předpisů",
+            "description": "Seznam ustanovení právních předpisů, které kategorii orgánů veřejné moci vymezují. Kategorie může být vymezena jedním či více ustanoveními. Jedno ustanovení může vymezovat více kategorií.",
+            "items": {
+              "type": "object",
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu, které vymezuje kategorii orgánů veřejné moci.",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "title": "Identifikátor třídy ustanovení právního předpisu",
+                  "description": "Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
+                  "default": "ustanovení-právního-předpisu",
+                  "pattern": "^ustanovení-právního-předpisu$"
+                },
+                "označení": {
+                  "type": "string",
+                  "title": "Označení",
+                  "description": "Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom dále nestrukturovaném řetězci.",
+                  "examples": [
+                    "§ 1 zákona č. 1/1000 Sb."
+                  ]
+                }
+              }
+            }
+          },
+          "ohlašovatel": {
+            "type": "string",
+            "title": "Odkaz na ohlašovatele",
+            "description": "Odkaz na orgán veřejné moci, který ohlašuje kategorii. Každá kategorie má právě jednoho ohlašovatele. Orgán veřejné moci může být ohlašovatelem více agend.",
+            "examples": [
+              "orgán-veřejné-moci/00000001-1"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
+          }
+        }
+      }
+    }
+  }
+}
