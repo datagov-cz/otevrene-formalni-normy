@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"orgány-veřejné-moci.schema.xml" -xsl:"orgány-veřejné-moci.json2html.xslt" -o:"index.html"
