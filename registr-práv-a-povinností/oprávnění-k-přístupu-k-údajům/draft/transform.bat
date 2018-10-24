@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"oprávnění-k-přístupu-k-údajům.schema.xml" -xsl:"oprávnění-k-přístupu-k-údajům.json2html.xslt" -o:"index.html"

@@ -1,0 +1,998 @@
+<html xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" lang="cs">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Registr práv a povinností - oprávnění k přístupu k údajům</title>
+      <meta content="width=device-width,initial-scale=1" name="viewport">
+      <meta name="theme-color" content="#057fa5">
+      <meta name="msapplication-TileColor" content="#057fa5">
+      <meta name="msapplication-TileImage" content="../../../static/favicons/ms-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="57x57" href="../../../static/favicons/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="../../../static/favicons/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="../../../static/favicons/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="../../../static/favicons/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="../../../static/favicons/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="../../../static/favicons/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="../../../static/favicons/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="../../../static/favicons/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../static/favicons/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../static/favicons/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png">
+      <link rel="manifest" href="../../../static/favicons/manifest.json"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm.config.js"></script></head>
+   <body>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
+         <h2>Abstrakt</h2>
+         <p>
+            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o oprávněních k přístupu k údajům z Registru práv a povinností
+            ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Norma specifikuje způsob publikace na stupni otevřenosti
+            <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">3*</a> a <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">5*</a> ve formátu <a xmlns="http://docbook.org/ns/docbook" href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.
+            	</p>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="přehled">
+         <h2>Přehled</h2>
+         Datová sada je tvořena seznamem instancí typu <a>Oprávnění</a> uvedených v poli <code>položky</code>.
+         
+         <ul>
+            <li><a>Oprávnění</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy oprávnění</a></li>
+                  <li><code>id</code> : <a>IRI oprávnění</a></li>
+                  <li><code>kód</code> : <a>Kód oprávnění</a></li>
+                  <li><code>z-agendy</code> : <a>Odkaz na předávající agendu</a></li>
+                  <li><code>do-agendy</code> : <a>Odkaz na čerpající agendu</a></li>
+                  <li><code>údaje</code> : <a>Seznam oprávnění k přístupu k údaji</a>
+                     	    (seznam instancí typu <a>Oprávnění k přístupu k údaji</a>)
+                     	  </li>
+                  <li><code>role</code> : <a>Seznam odkazů na role, které mají toto oprávnění k přístupu k údajům</a>
+                     	    (seznam instancí typu <a>Odkaz na roli</a>)
+                     	  </li>
+                  <li><code>ustanovení</code> : <a>Seznam ustanovení právních předpisů</a>
+                     	    (seznam instancí typu <a>Ustanovení právního předpisu</a>)
+                     	  </li>
+               </ul>
+            </li>
+            <li><a>Oprávnění k přístupu k údaji</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy oprávnění k přístupu k údaji</a></li>
+                  <li><code>id</code> : <a>IRI oprávnění k přístupu k údaji</a></li>
+                  <li><code>úroveň-přístupu</code> : <a>Úroveň přístupu</a></li>
+                  <li><code>údaj</code> : <a>Odkaz na údaj</a></li>
+               </ul>
+            </li>
+            <li><a>Ustanovení právního předpisu</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy ustanovení právních předpisů</a></li>
+                  <li><code>id</code> : <a>IRI ustanovení právního předpisu</a></li>
+                  <li><code>označení</code> : <a>Označení</a></li>
+                  <li><code>paragraf</code> : <a>Paragraf</a></li>
+                  <li><code>odstavec</code> : <a>odstavec</a></li>
+                  <li><code>písmeno</code> : <a>Písmeno</a></li>
+                  <li><code>předpis</code> : <a>Právní předpis</a></li>
+               </ul>
+            </li>
+            <li><a>Právní předpis</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>type</code> : <a>Identifikátor třídy právních předpisů</a></li>
+                  <li><code>id</code> : <a>IRI právního předpisu</a></li>
+                  <li><code>název-předpisu</code> : <a>Název právního předpisu v různých jazycích</a></li>
+                  <li><code>číslo-předpisu</code> : <a>Číslo právního předpisu</a></li>
+                  <li><code>rok-předpisu</code> : <a>Rok právního předpisu</a></li>
+               </ul>
+            </li>
+            <li><a>Název právního předpisu v různých jazycích</a> obsahuje následující nepovinné vlastnosti:
+               
+               <ul>
+                  <li><code>cs</code> : <a>Název právního předpisu v češtině</a></li>
+               </ul>
+            </li>
+         </ul>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="specifikace">
+         <h2>Specifikace</h2>
+         V této části jsou definovány jednotlivé typy objektů a jejich vlastnosti.
+         Pro každou vlastnost je uveden její klíč používaný v JSON reprezentaci, její název,
+         datový typ, popis a příklad.
+         
+         <section>
+            <h3><dfn>Oprávnění</dfn></h3>
+            <p>Oprávnění rolí působících v dané agendě (tzv. čerpající agenda) k přístupu k množině
+               údajů vedených v jiné agendě (tzv. poskytující agenda).</p>
+            <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+            <section>
+               <h4><dfn>Identifikátor třídy oprávnění</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^oprávnění$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy oprávnění</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy oprávnění použité v RDF reprezentaci oprávnění k přístupu k údajům
+                     vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci
+                     JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).<br><br>Hodnotou je vždy <code>oprávnění</code>. </dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek reprezentuje RDF vlastnost <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">rdf:type</a>. Neodpovídá tedy žádnému prvku v sémantickém slovníku pojmů, ale je prostředkem pro
+                        typování entit reprezentovaných v JSON-LD dokumentu.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>IRI oprávnění</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^oprávnění-k-přístupu-k-údajům/A[0-9]+-A[0-9]+-[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IRI oprávnění</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní IRI oprávnění k přístupu k údajům vedené v Registru práv a povinností použité
+                     pro odkazování na oprávnění v JSON reprezentaci i v RDF reprezentaci. V IRI je využit
+                     kód oprávnění. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu
+                     JSON-LD souboru (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"oprávnění-k-přístupu-k-údajům/A1046-A101-1"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek neodpovídá žádnému prvku v sémantickém slovníku pojmů. Slouží k uvedení
+                        unikátního IRI zdroje, kterým je daná entita reprezentována v RDF reprezentaci, mimo
+                        jiné tedy i pro reprezentaci entity na úrovni sémantického slovníku pojmů.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Kód oprávnění</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>kód</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^A[0-9]+-A[0-9]+-[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Kód oprávnění</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní identifikátor oprávnění k přístupu k údajům tvořený kódem čerpající agendy,
+                     kódem poskytující agendy a doplňujícím kódem unikátním v rámci dvojice čerpající a
+                     posyktující agendy.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"A1046-A101-1"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Má kód oprávnění k přístupu k údajům</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Odkaz na předávající agendu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>z-agendy</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^agenda/A[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na předávající agendu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na agendu, ze které jsou v rámci povolení předávány povoleným rolím povolené
+                     údaje.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"agenda/A101"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/čerpá-údaje-z-agendy. <a>CHYBA: Jméno typu se nepodařilo načíst.</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Odkaz na čerpající agendu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>do-agendy</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^agenda/A[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na čerpající agendu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na agendu, ve které jsou v rámci povolení čerpány povolenými rolemi povolené
+                     údaje.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"agenda/A1046"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/poskytuje-údaje-agendě. <a>CHYBA: Jméno typu se nepodařilo načíst.</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Seznam oprávnění k přístupu k údaji</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>údaje</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd> Pole typu <a>Oprávnění k přístupu k údaji</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Seznam oprávnění k přístupu k údaji</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Seznam oprávnění k přístupu k jednomu údaji</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/zahrnuje-oprávnění-k-přístupu-k-údaji. <a>CHYBA: Jméno typu se nepodařilo načíst.</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Seznam odkazů na role, které mají toto oprávnění k přístupu k údajům</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>role</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd> Pole typu <a>Odkaz na roli</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Seznam odkazů na role, které mají toto oprávnění k přístupu k údajům</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Seznam odkazů na role, které mohou čerpat údaje z poskytující agendy v rámci čerpající
+                     agendy definované v tomto oprávnění k přístupu k údajům na daných úrovních oprávnění.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli">Je oprávněním pro roli</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Odkaz na roli</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^role/A[0-9]+/CR[0-9]+/(([0-9]{8}-[0-9]+)|(KO[0-9]+)|(KS[0-9]+))$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na roli</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na roli, která má dané oprávnění k přístupu k údajům.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"role/A1046/CR6072/12345678-1"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek má pouze strukturální význam v JSON reprezentaci. Nemá žádný sémantický
+                        význam.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Seznam ustanovení právních předpisů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>ustanovení</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd> Pole typu <a>Ustanovení právního předpisu</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Seznam ustanovení právních předpisů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Seznam ustanovení právních předpisů, na jejichž základě je oprávnění definováno. Pro
+                     každé oprávnění může být specifikováno jedno či více ustanovení. Jedno ustanovení
+                     může zakládat více různých oprávnění.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p><a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/zpřístupňuje-údaje-na-základě-ustanovení,
+                           jehož definici se nepodařilo načíst.</a></p>
+                  </dd>
+               </dl>
+            </section>
+         </section>
+         <section>
+            <h3><dfn>Oprávnění k přístupu k údaji</dfn></h3>
+            <p>Oprávnění k přístupu k jednomu údaji s uvedením úrovně přístupu.</p>
+            <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Oprávnění k přístupu k údaji</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+            <section>
+               <h4><dfn>Identifikátor třídy oprávnění k přístupu k údaji</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^oprávnění-údaj$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy oprávnění k přístupu k údaji</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy oprávnění k přístupu k údaji použité v RDF reprezentaci přístupů
+                     k údaji vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy
+                     v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč
+                     @context).<br><br>Hodnotou je vždy <code>oprávnění-údaj</code>. </dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek reprezentuje RDF vlastnost <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">rdf:type</a>. Neodpovídá tedy žádnému prvku v sémantickém slovníku pojmů, ale je prostředkem pro
+                        typování entit reprezentovaných v JSON-LD dokumentu.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>IRI oprávnění k přístupu k údaji</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^oprávnění-k-přístupu-k-údaji/A[0-9]+-A[0-9]+-[0-9]+/[0-9]+-[0-9]+-[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IRI oprávnění k přístupu k údaji</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní IRI oprávnění k přístupu k údaji vedené v Registru práv a povinností použité
+                     pro odkazování na oprávnění k přístupu k údaji v JSON reprezentaci i v RDF reprezentaci.
+                     V IRI je využit kód nadřazeného oprávnění k přístupu k údajům a kód daného údaje,
+                     ke kterému je definováno oprávnění k přístupu. IRI je uvedeno v relativním tvaru vůči
+                     base IRI definovanému v kontextu JSON-LD souboru (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"oprávnění-k-přístupu-k-údaji/A1046-A101-1/101-1-1"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek neodpovídá žádnému prvku v sémantickém slovníku pojmů. Slouží k uvedení
+                        unikátního IRI zdroje, kterým je daná entita reprezentována v RDF reprezentaci, mimo
+                        jiné tedy i pro reprezentaci entity na úrovni sémantického slovníku pojmů.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Úroveň přístupu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>úroveň-přístupu</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(R|W|RH)$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Úroveň přístupu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Úroveň, na které mohou dané role k údaji v rámci oprávnění přistupovat. R = čtení,
+                     RH = čtení s historií, W = zápis</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"R"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-%C3%BArove%C5%88-p%C5%99%C3%ADstupu">Má úroveň přístupu</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Odkaz na údaj</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>údaj</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^údaj/[0-9]+-[0-9]+-[0-9]+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Odkaz na údaj</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Odkaz na údaj, ke kterému je povolen přístup.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"údaj/101-1-1"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/zp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaj">Zpřístupňuje údaj</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+         </section>
+         <section>
+            <h3><dfn>Ustanovení právního předpisu</dfn></h3>
+            <p>Ustanovení právního předpisu, které může být uvedeno v nestrukturované nebo strukturované
+               podobě. Nestrukturovaná podoba je uvedena v atributu označení. V případě strukturované
+               podoby je ustanovení právního předpisu specifikováno ve struktuře rozdělné na specifikaci
+               právního předpisu a paragrafu, odstavce a písmena v rámci předpisu.</p>
+            <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+            <section>
+               <h4><dfn>Identifikátor třídy ustanovení právních předpisů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^ustanovení-právního-předpisu$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy ustanovení právních předpisů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení
+                     právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy
+                     v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč
+                     @context).<br><br>Hodnotou je vždy <code>ustanovení-právního-předpisu</code>. </dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek reprezentuje RDF vlastnost <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">rdf:type</a>. Neodpovídá tedy žádnému prvku v sémantickém slovníku pojmů, ale je prostředkem pro
+                        typování entit reprezentovaných v JSON-LD dokumentu.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>IRI ustanovení právního předpisu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^právní-předpis/[0-9]{1,4}/[0-9]{4}/ustanovení(/.+)+$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IRI ustanovení právního předpisu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní IRI ustanovení právního předpisu vedené v Registru práv a povinností použité
+                     pro odkazování na ustanovení v JSON reprezentaci i v RDF reprezentaci. V IRI je využito
+                     číslo právního předpisu a identifikace ustanovení v rámci právního předpisu. IRI je
+                     uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč
+                     @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"právní-předpis/130/2000/ustanovení/11/3/a"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek neodpovídá žádnému prvku v sémantickém slovníku pojmů. Slouží k uvedení
+                        unikátního IRI zdroje, kterým je daná entita reprezentována v RDF reprezentaci, mimo
+                        jiné tedy i pro reprezentaci entity na úrovni sémantického slovníku pojmů.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Označení</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>označení</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Označení</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom
+                     dále nestrukturovaném řetězci.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"§ 1 zákona č. 1/1000 Sb."</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Paragraf</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>paragraf</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Paragraf</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Označení paragrafu ustanovení v rámci právního předpisu. Podoba označení předpisu
+                     není stanovena a je nutno očekávat lidovou tvořivost.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-paragraf-ustanoven%C3%AD">Má paragraf ustanovení</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>odstavec</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>odstavec</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>odstavec</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Označení odstavce ustanovení v rámci právního předpisu. Podoba označení odstavce není
+                     stanovena a je nutno očekávat lidovou tvořivost.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-odstavec-ustanoven%C3%AD">Má odstavec ustanovení</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Písmeno</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>písmeno</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Písmeno</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Označení písmena ustanovení v rámci právního předpisu. Podoba označení písmena není
+                     stanovena a je nutno očekávat lidovou tvořivost.</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-p%C3%ADsmeno-ustanoven%C3%AD">Má písmeno ustanovení</a> definovanému v https://slovník.gov.cz/agendový/104/glosář. <a>CHYBA: Jméno glosáře se nepodařilo načíst.</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4>Právní předpis</h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>předpis</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a>Právní předpis</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Právní předpis</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Právní předpis</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Je součástí právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+         </section>
+         <section>
+            <h3><dfn>Právní předpis</dfn></h3>
+            <p>Právní předpis</p>
+            <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/pr%C3%A1vn%C3%AD-p%C5%99edpis">Právní předpis</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+            <section>
+               <h4><dfn>Identifikátor třídy právních předpisů</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>type</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^právní-předpis$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Identifikátor třídy právních předpisů</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Identifikátor třídy předpisů použité v RDF reprezentaci právních předpisů v Registru
+                     práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru.
+                     Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).<br><br>Hodnotou je vždy <code>právní-předpis</code>. </dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek reprezentuje RDF vlastnost <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">rdf:type</a>. Neodpovídá tedy žádnému prvku v sémantickém slovníku pojmů, ale je prostředkem pro
+                        typování entit reprezentovaných v JSON-LD dokumentu.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>IRI právního předpisu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>id</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^právní-předpis/[0-9]{1,4}/[0-9]{4}$</code></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>IRI právního předpisu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Unikátní IRI právního předpisu vedené v Registru práv a povinností použité pro odkazování
+                     na předpis v JSON reprezentaci i v RDF reprezentaci. V IRI je využito číslo a rok
+                     vydání právního předpisu ve Sbírce zákonů. IRI je uvedeno v relativním tvaru vůči
+                     base IRI definovanému v kontextu JSON-LD souboru (klíč @context).</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"právní-předpis/130/2000"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek neodpovídá žádnému prvku v sémantickém slovníku pojmů. Slouží k uvedení
+                        unikátního IRI zdroje, kterým je daná entita reprezentována v RDF reprezentaci, mimo
+                        jiné tedy i pro reprezentaci entity na úrovni sémantického slovníku pojmů.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4>Název právního předpisu v různých jazycích</h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>název-předpisu</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a>Název právního předpisu v různých jazycích</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Název právního předpisu v různých jazycích</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Název právního předpisu v různých jazycích, který nemusí nutně přesně odpovídat názvu
+                     ve Sbírce zákonů</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>{"cs":"zákon o volbách do zastupitelstev krajů a o změně některých zákon"}</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má název právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Číslo právního předpisu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>číslo-předpisu</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Číslo právního předpisu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Číslo právního předpisu dle Sbírky zákonů</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"130"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C4%8D%C3%ADslo-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má číslo právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+            <section>
+               <h4><dfn>Rok právního předpisu</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>rok-předpisu</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Rok právního předpisu</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Rok právního předpisu dle Sbírky zákonů</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"2000"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-rok-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má rok právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
+                  </dd>
+               </dl>
+            </section>
+         </section>
+         <section>
+            <h3><dfn>Název právního předpisu v různých jazycích</dfn></h3>
+            <p>Název právního předpisu v různých jazycích, který nemusí nutně přesně odpovídat názvu
+               ve Sbírce zákonů</p>
+            <section>
+               <h4><dfn>Název právního předpisu v češtině</dfn></h4>
+               <dl>
+                  <dt>
+                     			  Vlastnost
+                     			</dt>
+                  <dd><code>cs</code></dd>
+                  <dt>
+                     			  Typ
+                     		  </dt>
+                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                  <dt>
+                     			  Jméno
+                     		  </dt>
+                  <dd>Název právního předpisu v češtině</dd>
+                  <dt>
+                     			  Popis
+                     		  </dt>
+                  <dd>Název právního předpisu v češtině, který nemusí nutně přesně odpovídat názvu ve Sbírce
+                     zákonů</dd>
+                  <dt>
+                     			  Příklad
+                     		  </dt>
+                  <dd><code>"zákon o volbách do zastupitelstev krajů a o změně některých zákon"</code></dd>
+                  <dt>
+                     			  Sémantický slovník pojmů
+                     		  </dt>
+                  <dd>
+                     <p>Tento prvek má pouze strukturální význam v JSON reprezentaci. Nemá žádný sémantický
+                        význam.</p>
+                  </dd>
+               </dl>
+            </section>
+         </section>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
+         <h2><dfn>Příklady</dfn></h2>
+         <section>
+            <h3></h3>
+            <p></p>
+            <aside class="example" title="">
+               <pre class="json">{
+}</pre>
+            </aside>
+         </section>
+      </section>
+   </body>
+</html>
