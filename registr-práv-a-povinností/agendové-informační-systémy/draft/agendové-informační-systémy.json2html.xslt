@@ -36,7 +36,7 @@
   <body>
     <xsl:apply-templates mode="abstrakt" />
     <xsl:sequence select="gen:generujPřehled('../registr-práv-a-povinností/agendové-informační-systémy/draft/agendové-informační-systémy.schema.json')"/>
-    <xsl:sequence select="gen:generujSpecifikaci('../registr-práv-a-povinností/agendové-informační-systémy/draft/agendové-informační-systémy.schema.json')"/>
+    <xsl:sequence select="gen:generujSpecifikaci('../registr-práv-a-povinností/agendové-informační-systémy/draft/agendové-informační-systémy.schema.json', '../registr-práv-a-povinností/agendové-informační-systémy/draft/agendové-informační-systémy.context.jsonld')"/>
     <xsl:apply-templates mode="příklady" />
   </body>
 </html>
