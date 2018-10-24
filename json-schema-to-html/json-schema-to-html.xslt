@@ -172,12 +172,14 @@
 		  </xsl:choose>
 		</h4>
 		<dl>
-		  <dt>
+  		  <xsl:if test="not($item[@key='items'])">
+			<dt>
 			  Vlastnost
-		  </dt>
-		  <dd>
+			</dt>
+			<dd>
 			  <code><xsl:value-of select="$item/@key" /></code>
-		  </dd>
+			</dd>
+		  </xsl:if>
 		  <dt>
 			  Typ
 		  </dt>
@@ -238,7 +240,7 @@
     <xsl:param name="semVocTypeAlias" as="xs:string" />
 	<xsl:param name="source" as="element()" />
 	<xsl:choose>
-		<xsl:when test="$semVocTypeAlias and $semVocTypeAlias!='cs' and $semVocTypeAlias!='type' and $semVocTypeAlias!='id'">
+		<xsl:when test="$semVocTypeAlias and $semVocTypeAlias!='cs' and $semVocTypeAlias!='type' and $semVocTypeAlias!='id' and $semVocTypeAlias!='items'">
 		  <p>
 			<xsl:variable name="semVocTypeQName" select="($source/fn:map/fn:map[@key='@context']/fn:string[@key = $semVocTypeAlias]/text(), $source/fn:map/fn:map[@key='@context']/fn:map[@key = $semVocTypeAlias]/fn:string[@key='@id' or @key='@reverse']/text())[1]" />
 			<xsl:variable name="prefix" select="fn:substring-before($semVocTypeQName, ':')" />
