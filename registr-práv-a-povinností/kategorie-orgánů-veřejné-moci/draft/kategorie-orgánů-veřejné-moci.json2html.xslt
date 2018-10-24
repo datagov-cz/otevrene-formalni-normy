@@ -36,7 +36,7 @@
   <body>
     <xsl:apply-templates mode="abstrakt" />
     <xsl:sequence select="gen:generujPřehled('../registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/draft/kategorie-orgánů-veřejné-moci.schema.json')"/>
-    <xsl:sequence select="gen:generujSpecifikaci('../registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/draft/kategorie-orgánů-veřejné-moci.schema.json')"/>
+    <xsl:sequence select="gen:generujSpecifikaci('../registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/draft/kategorie-orgánů-veřejné-moci.schema.json', '../registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/draft/kategorie-orgánů-veřejné-moci.context.jsonld')"/>
     <xsl:apply-templates mode="příklady" />
   </body>
 </html>
