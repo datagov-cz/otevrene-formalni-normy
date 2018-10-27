@@ -18,8 +18,8 @@
       <link rel="icon" type="image/png" sizes="192x192" href="../../../static/favicons/android-icon-192x192.png">
       <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png">
-      <link rel="manifest" href="../../../static/favicons/manifest.json"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="agendy.config.js"></script></head>
+      <link rel="manifest" href="../../../static/favicons/manifest.json">
+      <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="agendy.config.js"></script></head>
    <body>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
          <h2>Abstrakt</h2>
@@ -38,7 +38,7 @@
                   <ul>
                      <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^agenda$</code></li>
                      <li><code><a>id</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^agenda/A[0-9]+$</code></li>
-                     <li><code><a>název</a></code> : <a>Název agendy v různých jazycích</a></li>
+                     <li><code><a>název</a></code> : <a>Vícejazyčný řetězec</a></li>
                      <li><code><a>kód</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^A[0-9]+$</code></li>
                      <li><code><a>ustanovení</a></code> :  seznam instancí typu <a>Ustanovení právního předpisu</a></li>
                      <li><code><a>činnosti</a></code> :  seznam instancí typu <a>Činnost</a></li>
@@ -65,8 +65,8 @@
                      <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^činnost$</code></li>
                      <li><code><a>id</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^činnost/A[0-9]+/CR[0-9]+$</code></li>
                      <li><code><a>kód-činnosti</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^CR[0-9]+$</code></li>
-                     <li><code><a>název-činnosti</a></code> : <a>Název činnosti v různých jazycích</a></li>
-                     <li><code><a>popis-činnosti</a></code> : <a>Popis činnosti v různých jazycích</a></li>
+                     <li><code><a>název-činnosti</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>popis-činnosti</a></code> : <a>Vícejazyčný řetězec</a></li>
                      <li><code><a>typ-činnosti</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^typ-činosti/[0-9]+$</code></li>
                      <li><code><a>platnost-činnosti-od</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></li>
                      <li><code><a>platnost-činnosti-do</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></li>
@@ -79,12 +79,22 @@
             <section>
                <h4>Obecné prvky</h4>
                <section>
+                  <h5><dfn>Vícejazyčný řetězec</dfn></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd>
+                        <pre class="json">{"cs": "...", "en": "...", ...}</pre>
+                     </dd>
+                     <dt>Popis</dt>
+                     <dd>Vyjádření textových hodnot vlastností, jejichž hodnotou je množina řetězců, z nichž
+                        každý je vyjádřením textové hodnoty v jiném jazyku.</dd>
+                  </dl>
+               </section>
+               <section>
                   <h5>Vlastnost <code><dfn>type</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
                      <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-                     <dt>Jméno</dt>
-                     <dd>Identifikátor typu</dd>
                      <dt>Popis</dt>
                      <dd>Lokální identifikátor typu v rámci JSON souboru. Pro získání globálního unikátního
                         identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho
@@ -112,15 +122,15 @@
             <section>
                <h4><dfn>Agenda</dfn></h4>
                <p>Agenda evidovaná v Registru práv a povinností.</p>
-               <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech) Slovník zákona
-                     č. 111/2009 Sb. o základních registrech - glosář</a>.</p>
+               <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>.</p>
                <section>
                   <h5>Vlastnost <code><dfn>název</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a>Název agendy v různých jazycích</a></dd>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -130,9 +140,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-agendy">Má název agendy</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>název</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-agendy">Má název agendy</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-agendy">Má název agendy</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -152,9 +165,12 @@
                         		  </dt>
                      <dd><code>"A1046"</code></dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-k%C3%B3d-agendy">Má kód agendy</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>kód</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-k%C3%B3d-agendy">Má kód agendy</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-k%C3%B3d-agendy">Má kód agendy</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -174,9 +190,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Je vykonávána na základě ustanovení</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>ustanovení</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Je vykonávána na základě ustanovení</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Je vykonávána na základě ustanovení</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -195,9 +214,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1na-v-agend%C4%9B">Je vykonávána v agendě</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>činnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1na-v-agend%C4%9B">Je vykonávána v agendě</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1na-v-agend%C4%9B">Je vykonávána v agendě</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -217,9 +239,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>vykonávající-ovm</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -239,9 +264,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>vykonávající-kategorie-ovm</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -261,9 +289,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>vykonávající-spuú</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -283,9 +314,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>vykonávající-kategorie-spuú</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -304,9 +338,12 @@
                         		  </dt>
                      <dd><code>"orgán-veřejné-moci/00000001-1"</code></dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-agendu">Ohlašuje agendu</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>ohlašovatel</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-agendu">Ohlašuje agendu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci">Orgán veřejné moci</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-agendu">Ohlašuje agendu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -325,9 +362,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-vzniku-agendy">Má datum vzniku agendy</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>vznik</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-vzniku-agendy">Má datum vzniku agendy</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-vzniku-agendy">Má datum vzniku agendy</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -346,9 +386,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-z%C3%A1niku-agendy">Má datum zániku agendy</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>zánik</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-z%C3%A1niku-agendy">Má datum zániku agendy</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-z%C3%A1niku-agendy">Má datum zániku agendy</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -367,9 +410,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-agendy-od">Má platnost agendy od</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>platnost-od</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-agendy-od">Má platnost agendy od</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-agendy-od">Má platnost agendy od</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -389,9 +435,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-agendy-do">Má platnost agendy do</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>platnost-do</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-agendy-do">Má platnost agendy do</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-agendy-do">Má platnost agendy do</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -410,17 +459,20 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy">Má datum poslední změny agendy</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>poslední-změna</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy">Má datum poslední změny agendy</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy">Má datum poslední změny agendy</a></strong></p>
+                     </dd>
                   </dl>
                </section>
             </section>
             <section>
                <h4><dfn>Ustanovení právního předpisu</dfn></h4>
                <p>Ustanovení právního předpisu, na jehož základě je agenda vykonávána</p>
-               <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech) Slovník zákona
-                     č. 111/2009 Sb. o základních registrech - glosář</a>.</p>
+               <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>.</p>
                <section>
                   <h5>Vlastnost <code><dfn>označení</dfn></code></h5>
                   <dl>
@@ -432,25 +484,26 @@
                         			  Popis
                         		  </dt>
                      <dd>
-                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-úplné-označení-ustanovení-včetně-označení-právního-předpisu,
-                        pro nějž není hodnota vlastnosti dc:description ve slovníku uvedena.
-                        </dd>
+                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu </dd>
                      <dt>
                         			  Příklad
                         		  </dt>
                      <dd><code>"§ 1 zákona č. 1/1000 Sb."</code></dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>označení</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a></strong></p>
+                     </dd>
                   </dl>
                </section>
             </section>
             <section>
                <h4><dfn>Činnost</dfn></h4>
                <p>Činnost vykonávaná v rámci agendy.</p>
-               <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech) Slovník zákona
-                     č. 111/2009 Sb. o základních registrech - glosář</a>.</p>
+               <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a>.</p>
                <section>
                   <h5>Vlastnost <code><dfn>kód-činnosti</dfn></code></h5>
                   <dl>
@@ -468,9 +521,12 @@
                         		  </dt>
                      <dd><code>"CR6072"</code></dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-%C4%8Dinnosti">Má kód činnosti</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>kód-činnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-%C4%8Dinnosti">Má kód činnosti</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-%C4%8Dinnosti">Má kód činnosti</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -479,7 +535,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a>Název činnosti v různých jazycích</a></dd>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -489,9 +545,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C4%8Dinnosti">Má název činnosti</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>název-činnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C4%8Dinnosti">Má název činnosti</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C4%8Dinnosti">Má název činnosti</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -500,7 +559,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a>Popis činnosti v různých jazycích</a></dd>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -510,9 +569,12 @@
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C4%8Dinnosti">Má popis činnosti</a><br>typ-vlastnosti</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>popis-činnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C4%8Dinnosti">Má popis činnosti</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C4%8Dinnosti">Má popis činnosti</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -531,9 +593,12 @@
                         		  </dt>
                      <dd><code>"typ-činnosti/1"</code></dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-%C4%8Dinnosti">Má typ činnosti</a><br>typ-vztahu</dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>typ-činnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-%C4%8Dinnosti">Má typ činnosti</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-%C4%8Dinnosti">Má typ činnosti</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-%C4%8Dinnosti">Typ činnosti</a></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -546,20 +611,18 @@
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>
-                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/má-platnost-činnnosti-od,
-                        pro nějž není hodnota vlastnosti dc:description ve slovníku uvedena.
-                        </dd>
+                     <dd>Datum, od kterého je činnost v agendě platná</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a>
-                           CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/má-platnost-činnnosti-od, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena.
-                           </a><br></dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>platnost-činnosti-od</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-%C4%8Dinnosti-od">Má platnost činnosti od</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-%C4%8Dinnosti-od">Má platnost činnosti od</a></strong></p>
+                     </dd>
                   </dl>
                </section>
                <section>
@@ -572,20 +635,18 @@
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>
-                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/má-platnost-činnnosti-do,
-                        pro nějž není hodnota vlastnosti dc:description ve slovníku uvedena.
-                        </dd>
+                     <dd>Datum, do kterého je činnost v agendě platná</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
                      <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
-                        			  Sémantický slovník pojmů
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
-                     <dd><a>
-                           CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/má-platnost-činnnosti-do, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena.
-                           </a><br></dd>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>platnost-činnosti-do</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-%C4%8Dinnosti-do">Má platnost činnosti do</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-platnost-%C4%8Dinnosti-do">Má platnost činnosti do</a></strong></p>
+                     </dd>
                   </dl>
                </section>
             </section>

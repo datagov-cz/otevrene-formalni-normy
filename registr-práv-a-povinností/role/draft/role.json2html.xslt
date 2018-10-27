@@ -30,13 +30,13 @@
     <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png" />
     <link rel="manifest" href="../../../static/favicons/manifest.json" />
+    <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css" />
     <script class="remove" src="../../../static/js/respec-odcz.js" />
     <script class="remove" src="role.config.js" />
   </head>
   <body>
     <xsl:apply-templates mode="abstrakt" />
-    <xsl:sequence select="gen:generujPřehled('../registr-práv-a-povinností/role/draft/role.schema.json')"/>
-    <xsl:sequence select="gen:generujSpecifikaci('../registr-práv-a-povinností/role/draft/role.schema.json', '../registr-práv-a-povinností/role/draft/role.context.jsonld')"/>
+    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/role/draft/role.schema.json', '../registr-práv-a-povinností/role/draft/role.context.jsonld')"/>
     <xsl:apply-templates mode="příklady" />
   </body>
 </html>

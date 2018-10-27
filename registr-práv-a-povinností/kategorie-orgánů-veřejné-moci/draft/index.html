@@ -19,7 +19,8 @@
       <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
       <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png">
-      <link rel="manifest" href="../../../static/favicons/manifest.json"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="kategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci.config.js"></script></head>
+      <link rel="manifest" href="../../../static/favicons/manifest.json">
+      <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="kategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci.config.js"></script></head>
    <body>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
          <h2>Abstrakt</h2>
@@ -29,356 +30,216 @@
             <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">3*</a> a <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">5*</a> ve formátu <a xmlns="http://docbook.org/ns/docbook" href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.
             	</p>
       </section>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="přehled">
-         <h2>Přehled</h2>
-         Datová sada je tvořena seznamem instancí typu <a>Kategorie orgánů veřejné moci</a> uvedených v poli <code>položky</code>.
-         
-         <ul>
-            <li><a>Kategorie orgánů veřejné moci</a> obsahuje následující nepovinné vlastnosti:
-               
-               <ul>
-                  <li><code>type</code> : <a>Identifikátor třídy kategorií orgánů veřejné moci</a></li>
-                  <li><code>id</code> : <a>IRI kategorie orgánů veřejné moci</a></li>
-                  <li><code>název</code> : <a>Název kategorie orgánů veřejné moci v různých jazycích</a></li>
-                  <li><code>identifikátor</code> : <a>Identifikátor kategorie orgánů veřejné moci</a></li>
-                  <li><code>ustanovení</code> : <a>Seznam ustanovení právních předpisů</a>
-                     	    (seznam instancí typu <a>Ustanovení právního předpisu</a>)
-                     	  </li>
-                  <li><code>ohlašovatel</code> : <a>Odkaz na ohlašovatele</a></li>
-               </ul>
-            </li>
-            <li><a>Název kategorie orgánů veřejné moci v různých jazycích</a> obsahuje následující nepovinné vlastnosti:
-               
-               <ul>
-                  <li><code>cs</code> : <a>Název kategorie orgánů veřejné moci v češtině</a></li>
-               </ul>
-            </li>
-            <li><a>Ustanovení právního předpisu</a> obsahuje následující nepovinné vlastnosti:
-               
-               <ul>
-                  <li><code>type</code> : <a>Identifikátor třídy ustanovení právního předpisu</a></li>
-                  <li><code>označení</code> : <a>Označení</a></li>
-               </ul>
-            </li>
-         </ul>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
+         <h2><dfn>JSON struktura</dfn></h2>
+         <section id="json-přehled">
+            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem instancí typu <a>Kategorie orgánů veřejné moci</a> uvedených v poli <code>položky</code>.
+            
+            <ul>
+               <li>Instance typu <a>Kategorie orgánů veřejné moci</a> má následující nepovinné vlastnosti:
+                  <ul>
+                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^kategorie-ovm$</code></li>
+                     <li><code><a>id</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^kategorie-ovm/KO[0-9]+$</code></li>
+                     <li><code><a>název</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>identifikátor</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^KO[0-9]+$</code></li>
+                     <li><code><a>ustanovení</a></code> :  seznam instancí typu <a>Ustanovení právního předpisu</a></li>
+                     <li><code><a>ohlašovatel</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></li>
+                  </ul>
+               </li>
+               <li>Instance typu <a>Ustanovení právního předpisu</a> má následující nepovinné vlastnosti:
+                  <ul>
+                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^ustanovení-právního-předpisu$</code></li>
+                     <li><code><a>označení</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </section>
+         <section id="json-specifikace">
+            <h3>Detailní specifikace prvků JSON struktury</h3>V této části jsou specifikovány jednotlivé prvky JSON struktury.
+            <section>
+               <h4>Obecné prvky</h4>
+               <section>
+                  <h5><dfn>Vícejazyčný řetězec</dfn></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd>
+                        <pre class="json">{"cs": "...", "en": "...", ...}</pre>
+                     </dd>
+                     <dt>Popis</dt>
+                     <dd>Vyjádření textových hodnot vlastností, jejichž hodnotou je množina řetězců, z nichž
+                        každý je vyjádřením textové hodnoty v jiném jazyku.</dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>type</dfn></code></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dt>Popis</dt>
+                     <dd>Lokální identifikátor typu v rámci JSON souboru. Pro získání globálního unikátního
+                        identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho
+                        kontext (klíč @context). Tam je definováno mapování identifikátoru typu na globálně
+                        unikátní IRI typu. Toto IRI typu je použito též v LOD reprezentaci datové sady pro
+                        identifikaci typu, viz <a>LOD struktura</a>.</dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>id</dfn></code></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dt>Jméno</dt>
+                     <dd>Identifikátor instance</dd>
+                     <dt>Popis</dt>
+                     <dd>Lokální identifikátor instance v rámci kolekce datových sad z daného datového zdroje.
+                        Pro získání globálního unikátního identifikátoru je nutné interpretovat soubor jako
+                        JSON-LD soubor, tj. využít jeho kontext (klíč @context). Tam je definováno base IRI,
+                        které dohromady s identifikátorem typu tvoří IRI instance. Toto IRI je použito též
+                        v LOD reprezentaci datové sady pro identifikaci instance, viz <a>LOD struktura</a>.</dd>
+                  </dl>
+               </section>
+            </section>
+            <section>
+               <h4><dfn>Kategorie orgánů veřejné moci</dfn></h4>
+               <p>Kategorie orgánů veřejné moci evidovaná v Registru práv a povinností.</p>
+               <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/kategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci">Kategorie orgánů veřejné moci</a>.</p>
+               <section>
+                  <h5>Vlastnost <code><dfn>název</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>
+                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu </dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>název</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-kategorie">Má název kategorie</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/kategorie">Kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-kategorie">Má název kategorie</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>identifikátor</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^KO[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>
+                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu </dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"KO11"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>identifikátor</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-kategorie">Má identifikátor kategorie</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/kategorie">Kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-kategorie">Má identifikátor kategorie</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>ustanovení</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Seznam instancí typu <a>Ustanovení právního předpisu</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>
+                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu </dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>ustanovení</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vymezena-ustanoven%C3%ADm">Je vymezena ustanovením</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/kategorie">Kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vymezena-ustanoven%C3%ADm">Je vymezena ustanovením</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>ohlašovatel</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Odkaz dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>
+                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu </dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"orgán-veřejné-moci/00000001-1"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>ohlašovatel</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-kategorii">Ohlašuje kategorii</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAst%C5%99edn%C3%AD-spr%C3%A1vn%C3%AD-%C3%BA%C5%99ad">Ústřední správní úřad</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-kategorii">Ohlašuje kategorii</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/kategorie">Kategorie</a></p>
+                     </dd>
+                  </dl>
+               </section>
+            </section>
+            <section>
+               <h4><dfn>Ustanovení právního předpisu</dfn></h4>
+               <p>Ustanovení právního předpisu, které vymezuje kategorii orgánů veřejné moci.</p>
+               <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>.</p>
+               <section>
+                  <h5>Vlastnost <code><dfn>označení</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>
+                        CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu </dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"§ 1 zákona č. 1/1000 Sb."</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>označení</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+            </section>
+         </section>
       </section>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="specifikace">
-         <h2>Specifikace</h2>
-         V této části jsou definovány jednotlivé typy objektů a jejich vlastnosti.
-         Pro každou vlastnost je uveden její klíč používaný v JSON reprezentaci, její název,
-         datový typ, popis a příklad.
-         
-         <section>
-            <h3><dfn>Kategorie orgánů veřejné moci</dfn></h3>
-            <p>Kategorie orgánů veřejné moci evidovaná v Registru práv a povinností.</p>
-            <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/kategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci">Kategorie orgánů veřejné moci</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-            <section>
-               <h4><dfn>Identifikátor třídy kategorií orgánů veřejné moci</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>type</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^kategorie-ovm$</code></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Identifikátor třídy kategorií orgánů veřejné moci</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Identifikátor třídy kategorií orgánů veřejné moci použité v RDF reprezentaci kategorií
-                     orgánů veřejné moci vedených v Registru práv a povinností. Jedná se o lokální identifikátor
-                     třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru
-                     (klíč @context).<br><br>Hodnotou je vždy <code>kategorie-ovm</code>. </dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>Tento prvek reprezentuje RDF vlastnost <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">rdf:type</a>. Neodpovídá tedy žádnému prvku v sémantickém slovníku pojmů, ale je prostředkem pro
-                        typování entit reprezentovaných v JSON-LD dokumentu.</p>
-                  </dd>
-               </dl>
-            </section>
-            <section>
-               <h4><dfn>IRI kategorie orgánů veřejné moci</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>id</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^kategorie-ovm/KO[0-9]+$</code></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>IRI kategorie orgánů veřejné moci</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Unikátní IRI kategorie orgánů veřejné moci vedené v Registru práv a povinností použité
-                     pro odkazování na kategorii v JSON reprezentaci i v RDF reprezentaci. V IRI je využit
-                     identifikátor kategorie. IRI je uvedeno v relativním tvaru vůči base IRI definovanému
-                     v kontextu JSON-LD souboru (klíč @context).</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd><code>"kategorie-ovm/KO11"</code></dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>Tento prvek neodpovídá žádnému prvku v sémantickém slovníku pojmů. Slouží k uvedení
-                        unikátního IRI zdroje, kterým je daná entita reprezentována v RDF reprezentaci, mimo
-                        jiné tedy i pro reprezentaci entity na úrovni sémantického slovníku pojmů.</p>
-                  </dd>
-               </dl>
-            </section>
-            <section>
-               <h4>Název kategorie orgánů veřejné moci v různých jazycích</h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>název</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a>Název kategorie orgánů veřejné moci v různých jazycích</a></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Název kategorie orgánů veřejné moci v různých jazycích</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Název kategorie orgánů veřejné moci vyjádřený v různých jazycích.</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-n%C3%A1zev-kategorie">Má název kategorie</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-                  </dd>
-               </dl>
-            </section>
-            <section>
-               <h4><dfn>Identifikátor kategorie orgánů veřejné moci</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>identifikátor</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^KO[0-9]+$</code></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Identifikátor kategorie orgánů veřejné moci</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Unikátní identifikátor kategorie orgánů veřejné moci.</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd><code>"KO11"</code></dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-kategorie">Má identifikátor kategorie</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-                  </dd>
-               </dl>
-            </section>
-            <section>
-               <h4><dfn>Seznam ustanovení právních předpisů</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>ustanovení</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd> Pole typu <a>Ustanovení právního předpisu</a></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Seznam ustanovení právních předpisů</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Seznam ustanovení právních předpisů, které kategorii orgánů veřejné moci vymezují.
-                     Kategorie může být vymezena jedním či více ustanoveními. Jedno ustanovení může vymezovat
-                     více kategorií.</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vymezena-ustanoven%C3%ADm">Je vymezena ustanovením</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-                  </dd>
-               </dl>
-            </section>
-            <section>
-               <h4><dfn>Odkaz na ohlašovatele</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>ohlašovatel</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Odkaz na ohlašovatele</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Odkaz na orgán veřejné moci, který ohlašuje kategorii. Každá kategorie má právě jednoho
-                     ohlašovatele. Orgán veřejné moci může být ohlašovatelem více agend.</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd><code>"orgán-veřejné-moci/00000001-1"</code></dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-kategorii">Ohlašuje kategorii</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-                  </dd>
-               </dl>
-            </section>
-         </section>
-         <section>
-            <h3><dfn>Název kategorie orgánů veřejné moci v různých jazycích</dfn></h3>
-            <p>Název kategorie orgánů veřejné moci vyjádřený v různých jazycích.</p>
-            <section>
-               <h4><dfn>Název kategorie orgánů veřejné moci v češtině</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>cs</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Název kategorie orgánů veřejné moci v češtině</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Název kategorie orgánů veřejné moci v češtině.</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd><code>"Obce s rozšířenou působností"</code></dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>Tento prvek má pouze strukturální význam v JSON reprezentaci. Nemá žádný sémantický
-                        význam.</p>
-                  </dd>
-               </dl>
-            </section>
-         </section>
-         <section>
-            <h3><dfn>Ustanovení právního předpisu</dfn></h3>
-            <p>Ustanovení právního předpisu, které vymezuje kategorii orgánů veřejné moci.</p>
-            <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-            <section>
-               <h4><dfn>Identifikátor třídy ustanovení právního předpisu</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>type</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^ustanovení-právního-předpisu$</code></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Identifikátor třídy ustanovení právního předpisu</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Identifikátor třídy ustanovení právních předpisů použité v RDF reprezentaci ustanovení
-                     právních předpisů v Registru práv a povinností. Jedná se o lokální identifikátor třídy
-                     v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč
-                     @context).<br><br>Hodnotou je vždy <code>ustanovení-právního-předpisu</code>. </dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>Tento prvek reprezentuje RDF vlastnost <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">rdf:type</a>. Neodpovídá tedy žádnému prvku v sémantickém slovníku pojmů, ale je prostředkem pro
-                        typování entit reprezentovaných v JSON-LD dokumentu.</p>
-                  </dd>
-               </dl>
-            </section>
-            <section>
-               <h4><dfn>Označení</dfn></h4>
-               <dl>
-                  <dt>
-                     			  Vlastnost
-                     			</dt>
-                  <dd><code>označení</code></dd>
-                  <dt>
-                     			  Typ
-                     		  </dt>
-                  <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-                  <dt>
-                     			  Jméno
-                     		  </dt>
-                  <dd>Označení</dd>
-                  <dt>
-                     			  Popis
-                     		  </dt>
-                  <dd>Označení ustanovení právního předpisu bez definované vnitřní struktury, tj. v jednom
-                     dále nestrukturovaném řetězci.</dd>
-                  <dt>
-                     			  Příklad
-                     		  </dt>
-                  <dd><code>"§ 1 zákona č. 1/1000 Sb."</code></dd>
-                  <dt>
-                     			  Sémantický slovník pojmů
-                     		  </dt>
-                  <dd>
-                     <p>V sémantickém slovníku pojmů odpovídá prvek typu <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> definovanému v <a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/glos%C3%A1%C5%99">Glosář pojmů Zákona č. 111/2009&nbsp;Sb. (Zákon o základních registrech)</a>.</p>
-                  </dd>
-               </dl>
-            </section>
-         </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
+         <h2><dfn>LOD struktura</dfn></h2>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>

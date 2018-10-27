@@ -28,8 +28,8 @@
     <link rel="icon" type="image/png" sizes="192x192"  href="../../../static/favicons/android-icon-192x192.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png" />
     <link rel="manifest" href="../../../static/favicons/manifest.json" />
+    <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css" />
     <script class="remove" src="../../../static/js/respec-odcz.js" />
     <script class="remove" src="agendy.config.js" />
   </head>
