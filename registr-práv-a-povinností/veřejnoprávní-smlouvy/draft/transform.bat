@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"veřejnoprávní-smlouvy.schema.xml" -xsl:"veřejnoprávní-smlouvy.json2html.xslt" -o:"index.html"

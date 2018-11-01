@@ -13,7 +13,7 @@
   <xsl:template match="db:article" mode="abstrakt">
     <xsl:apply-templates select="db:info/db:abstract" />
   </xsl:template>
-  
+
   <xsl:template match="db:abstract" mode="abstrakt">
         <section id="abstract" class="introductory">
             <h2>Abstrakt</h2>
@@ -22,9 +22,9 @@
             </p>
         </section>
   </xsl:template>
-  
+
   <xsl:template match="text()" mode="abstrakt" />
-  
+
   <xsl:template match="db:section[@id='příklady']" mode="příklady">
     <section id="příklady">
 		<h2><dfn>Příklady</dfn></h2>
@@ -41,8 +41,8 @@
 		  </section>
 		</xsl:for-each>
 	</section>
-  </xsl:template>  
-  
+  </xsl:template>
+
   <xsl:template match="text()" mode="příklady" />
 
   <xsl:function name="gen:generujDokumentaciPrvků">
@@ -81,89 +81,56 @@
   </xsl:template>
 
   <xsl:template match="fn:map[fn:string[@key='$schema']]" mode="přehled">
-    <xsl:text>Datová sada je tvořena seznamem instancí typu </xsl:text>
-    <a>
-      <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])" />
-      <!--<xsl:value-of select="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object']/fn:string[@key='title']" />-->
-    </a>
-    <xsl:text> uvedených v poli </xsl:text>
-    <code>položky</code>.
-    <ul>
-      <xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en']">
-        <li>
-          <xsl:text>Instance typu </xsl:text>
-          <a>
-            <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(.)" />
-          </a>
-          <xsl:text> má následující nepovinné vlastnosti:</xsl:text>
-          <ul>
-            <xsl:for-each select="./fn:map/fn:map">
-              <xsl:sequence select="gen:generujVlastnostiProPřehled(.)" />
-            </xsl:for-each>
-      			<xsl:if test="fn:string[fn:contains(@key, 'ref')]">
-      			  <xsl:variable name="ref-item" select="fn:substring(fn:string[fn:contains(@key, 'ref')], 15)" />
-      			  viz <a><xsl:value-of select="/fn:map/fn:map[@key='definitions']/fn:map[@key=$ref-item]/fn:string[@key='title']"/></a>
-      			</xsl:if>
-          </ul>
-        </li>
-      </xsl:for-each>
-    </ul>
+    <xsl:choose>
+      <xsl:when test="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map[@key='type']]">
+        <xsl:text>Datová sada je tvořena seznamem instancí typu </xsl:text>
+        <a>
+          <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])" />
+          <!--<xsl:value-of select="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object']/fn:string[@key='title']" />-->
+        </a>
+        <xsl:text> uvedených v poli </xsl:text>
+        <code>položky</code>.
+        <ul>
+          <xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en'][fn:map[@key='properties']/fn:map[@key='type'] or ../../fn:map[@key = 'definitions']]">
+            <li>
+              <xsl:text>Instance typu </xsl:text>
+              <a>
+                <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)" />
+              </a>
+              <xsl:text> má následující nepovinné vlastnosti:</xsl:text>
+              <ul>
+                <xsl:for-each select="./fn:map/fn:map">
+                  <xsl:sequence select="gen:generujVlastnostProPřehled(.)" />
+                </xsl:for-each>
+              </ul>
+            </li>
+          </xsl:for-each>
+        </ul>
+      </xsl:when>
+      <xsl:when test="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'][not(fn:map[@key='properties']/fn:map[@key='type'])]">
+        <xsl:text>Datová sada je tvořena seznamem instancí uvedených v poli </xsl:text>
+        <code>položky</code>
+        <xsl:text>. Každá instance v poli má následující nepovinné vlastnosti:</xsl:text>
+        <ul>
+          <xsl:for-each select="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object']/fn:map/fn:map">
+            <xsl:sequence select="gen:generujVlastnostProPřehled(.)" />
+          </xsl:for-each>
+        </ul>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>CHYBA: Nepodporovaná konstrukce pro specifikaci položek.</xsl:text>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
-  
-  <xsl:function name="gen:generujVlastnostiProPřehled" as="element()">
+
+  <xsl:function name="gen:generujVlastnostProPřehled" as="element()">
     <xsl:param name="item" as="element()" />
   	<li>
       <code>
         <a><xsl:value-of select="$item/@key" /></a>
       </code>
       <xsl:text> : </xsl:text>
-    <!--
-      <xsl:choose>
-        <xsl:when test="$item/@key = 'type'">
-          <xsl:text>Identifikátor typu</xsl:text>
-        </xsl:when>
-        <xsl:when test="$item/@key = 'id'">
-          <xsl:text>Identifikátor instance</xsl:text>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů($item)" />
-        </xsl:otherwise>
-      </xsl:choose>
-      -->
-      <xsl:choose>
-    	  <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'object')">
-          <xsl:text> seznam instancí typu </xsl:text>
-          <a>
-            <!--<xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" />-->
-            <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů($item/fn:map)" />
-          </a>
-    	  </xsl:when>
-        <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'string') and (fn:matches($item/fn:map[@key='items']/fn:string[@key='pattern']/text(), '^\^[^/]+/'))">
-          <xsl:text> seznam odkazů</xsl:text>
-    	  </xsl:when>
-        <xsl:when test="$item/fn:string[@key='type'] = 'string'">
-          <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
-          <xsl:if test="$item/fn:string[@key='pattern']">
-            <xsl:text> dle vzoru </xsl:text>
-            <code><xsl:value-of select="$item/fn:string[@key='pattern']" /></code>
-          </xsl:if>
-        </xsl:when>
-			  <xsl:when test="$item/fn:string[@key='type'] = 'boolean'">
-          <a href="https://opendata.gov.cz/datovy-typ:anone">Boolean</a>
-        </xsl:when>
-			  <xsl:when test="$item/fn:string[@key='type'] = 'integer'">
-          <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
-        </xsl:when>
-        <xsl:when test="$item/fn:string[@key='type'] = 'object' and $item/fn:map[@key='properties']/fn:map[@key='cs' or @key='en']">
-          <a>Vícejazyčný řetězec</a>
-        </xsl:when>
-			  <xsl:when test="$item/fn:string[@key='type'] = 'object'">
-          <a><xsl:value-of select="$item/fn:string[@key='title']" /></a>
-        </xsl:when>
-			  <xsl:when test="$item/fn:string[@key='type'] = 'array'">
-          Pole typu <a><xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" /></a>
-        </xsl:when>
-      </xsl:choose>
+      <xsl:sequence select="gen:generujPopisTypuVlastnosti($item)" />
   	</li>
   </xsl:function>
 
@@ -176,90 +143,99 @@
   </xsl:function>
 
   <xsl:template match="fn:map[@key='@context']" mode="specifikace">
-    
+
   </xsl:template>
-  
+
   <xsl:template match="text()" mode="specifikace">
-    
+
   </xsl:template>
 
   <xsl:template match="fn:map[fn:string[@key='$schema']]" mode="specifikace">
     <xsl:text>V této části jsou specifikovány jednotlivé prvky JSON struktury.</xsl:text>
     <section>
-      <h4>Obecné prvky</h4>
-      <section>
-        <h5><dfn>Vícejazyčný řetězec</dfn></h5>
-        <dl>
-          <dt>Typ</dt>
-          <dd>
-            <pre class="json">
-              <xsl:value-of select="'{&quot;cs&quot;: &quot;...&quot;, &quot;en&quot;: &quot;...&quot;, ...}'" />
-            </pre>
-          </dd>
-          <dt>Popis</dt>
-          <dd>Vyjádření textových hodnot vlastností, jejichž hodnotou je množina řetězců, z nichž každý je vyjádřením textové hodnoty v jiném jazyku.</dd>
-        </dl>
-      </section>
-      <section>
-        <h5>Vlastnost <code><dfn>type</dfn></code></h5>
-        <dl>
-          <dt>Typ</dt>
-          <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-          <dt>Popis</dt>
-          <dd>Lokální identifikátor typu v rámci JSON souboru. Pro získání globálního unikátního identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho kontext (klíč @context). Tam je definováno mapování identifikátoru typu na globálně unikátní IRI typu. Toto IRI typu je použito též v LOD reprezentaci datové sady pro identifikaci typu, viz <a>LOD struktura</a>.</dd>
-        </dl>
-      </section>
-      <section>
-        <h5>Vlastnost <code><dfn>id</dfn></code></h5>
-        <dl>
-          <dt>Typ</dt>
-          <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-          <dt>Jméno</dt>
-          <dd>Identifikátor instance</dd>
-          <dt>Popis</dt>
-          <dd>Lokální identifikátor instance v rámci kolekce datových sad z daného datového zdroje. Pro získání globálního unikátního identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho kontext (klíč @context). Tam je definováno base IRI, které dohromady s identifikátorem typu tvoří IRI instance. Toto IRI je použito též v LOD reprezentaci datové sady pro identifikaci instance, viz <a>LOD struktura</a>.</dd>
-        </dl>
-      </section>
+      <xsl:if test=".//fn:map[@key='cs' or @key='en' or @key='type' or @key='id']">
+        <h4>Obecné prvky</h4>
+      </xsl:if>
+      <xsl:if test=".//fn:map[@key='cs' or @key='en']">
+        <section>
+          <h5><dfn>Vícejazyčný řetězec</dfn></h5>
+          <dl>
+            <dt>Typ</dt>
+            <dd>
+              <pre class="json">
+                <xsl:value-of select="'{&quot;cs&quot;: &quot;...&quot;, &quot;en&quot;: &quot;...&quot;, ...}'" />
+              </pre>
+            </dd>
+            <dt>Popis</dt>
+            <dd>Vyjádření textových hodnot vlastností, jejichž hodnotou je množina řetězců, z nichž každý je vyjádřením textové hodnoty v jiném jazyku.</dd>
+          </dl>
+        </section>
+      </xsl:if>
+      <xsl:if test=".//fn:map[@key='type']">
+        <section>
+          <h5>Vlastnost <code><dfn>type</dfn></code></h5>
+          <dl>
+            <dt>Typ</dt>
+            <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+            <dt>Popis</dt>
+            <dd>Lokální identifikátor typu v rámci JSON souboru. Pro získání globálního unikátního identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho kontext (klíč @context). Tam je definováno mapování identifikátoru typu na globálně unikátní IRI typu. Toto IRI typu je použito též v LOD reprezentaci datové sady pro identifikaci typu, viz <a>LOD struktura</a>.</dd>
+          </dl>
+        </section>
+      </xsl:if>
+      <xsl:if test=".//fn:map[@key='id']">
+        <section>
+          <h5>Vlastnost <code><dfn>id</dfn></code></h5>
+          <dl>
+            <dt>Typ</dt>
+            <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+            <dt>Jméno</dt>
+            <dd>Identifikátor instance</dd>
+            <dt>Popis</dt>
+            <dd>Lokální identifikátor instance v rámci kolekce datových sad z daného datového zdroje. Pro získání globálního unikátního identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho kontext (klíč @context). Tam je definováno base IRI, které dohromady s identifikátorem typu tvoří IRI instance. Toto IRI je použito též v LOD reprezentaci datové sady pro identifikaci instance, viz <a>LOD struktura</a>.</dd>
+          </dl>
+        </section>
+      </xsl:if>
     </section>
-    <xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en']">
+    <xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en'][fn:map[@key='properties']/fn:map[@key='type'] or ../../fn:map[@key = 'definitions']]">
       <section>
         <h4>
           <dfn>
-            <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(.)" />
+            <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)" />
           </dfn>
         </h4>
         <p>
-		  <xsl:variable name="description" select="fn:string[@key='description']" />		  
-		  <xsl:choose>
-			<xsl:when test="fn:contains($description, 'Odpovídá otevřené formální normě pro ')">
-			  <xsl:value-of select="fn:substring-before($description, 'Odpovídá otevřené formální normě pro ')" />
-			  <xsl:variable name="ofnwithlink" select="fn:substring-after($description, 'Odpovídá otevřené formální normě pro ')" />
-			  Odpovídá
-		      <a>
-			    <xsl:attribute name="href" select="fn:substring-before(fn:substring-after($ofnwithlink, ' (viz '), ')')" />
-				otevřené formální normě pro 
-				<xsl:value-of select="fn:substring-before($ofnwithlink, ' (')" />
-			  </a>.
-		    </xsl:when>
-			<xsl:otherwise>
-			  <xsl:value-of select="fn:string[@key='description']" />
-			</xsl:otherwise>
-		  </xsl:choose>
-		</p>
-    <p>
-      <xsl:text>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu </xsl:text>
-      <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)" />
-      <xsl:text>.</xsl:text>
-		</p>
-    <xsl:sequence select="gen:generujVlastnostiProSpecifikaci(.)" />
-		<xsl:if test="fn:string[fn:contains(@key, 'ref')]">
-		  <xsl:variable name="ref-item" select="fn:substring(fn:string[fn:contains(@key, 'ref')], 15)" />
-		  viz <a><xsl:value-of select="/fn:source/fn:map/fn:map[@key='definitions']/fn:map[@key=$ref-item]/fn:string[@key='title']"/></a>
-		</xsl:if>
+          <xsl:value-of select="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů(.)" />
+		    </p>
+        <p>
+          <xsl:text>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu </xsl:text>
+          <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)" />
+          <xsl:text>.</xsl:text>
+    		</p>
+        <xsl:sequence select="gen:generujOdkazyNaZakonyProLidi(.)" />
+        <xsl:sequence select="gen:generujVlastnostiProSpecifikaci(.)" />
+    		<xsl:if test="fn:string[fn:contains(@key, 'ref')]">
+    		  <xsl:variable name="ref-item" select="fn:substring(fn:string[fn:contains(@key, 'ref')], 15)" />
+    		  viz <a><xsl:value-of select="/fn:source/fn:map/fn:map[@key='definitions']/fn:map[@key=$ref-item]/fn:string[@key='title']"/></a>
+    		</xsl:if>
       </section>
     </xsl:for-each>
+    <xsl:if test="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'][not(fn:map[@key='properties']/fn:map[@key='type'])]">
+      <section>
+        <h4>Prvky</h4>
+        <xsl:sequence select="gen:generujVlastnostiProSpecifikaci(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])" />
+      </section>
+    </xsl:if>
+    <xsl:if test="/fn:source/fn:map/fn:map[@key='definitions']/fn:map[fn:string[@key='type'] != 'object' and fn:string[@key='type'] != 'array']">
+      <section>
+        <h4>Sdílené prvky</h4>
+        <xsl:for-each select="/fn:source/fn:map/fn:map[@key='definitions']/fn:map[fn:string[@key='type'] != 'object' and fn:string[@key='type'] != 'array']">
+          <xsl:sequence select="gen:generujVlastnostProSpecifikaci(.)" />
+        </xsl:for-each>
+      </section>
+    </xsl:if>
   </xsl:template>
-  
+
+
   <xsl:function name="gen:generujVlastnostiProSpecifikaci" as="element()*">
     <xsl:param name="item" as="element()" />
     <xsl:for-each select="$item/fn:map/fn:map[@key!='type' and @key!='id']">
@@ -271,181 +247,237 @@
   	  </xsl:for-each>
   	</xsl:if>
   </xsl:function>
-  
+
   <xsl:function name="gen:generujVlastnostProSpecifikaci" as="element()">
     <xsl:param name="item" as="element()" />
     <section>
-		  <h5>
-      <!--
-  		  <xsl:choose>
-    			<xsl:when test="$item/fn:string[@key='type'] = 'object'">
-    			  <xsl:value-of select="$item/fn:string[@key='title']/text()" />
-    			</xsl:when>
-    			<xsl:otherwise>
-    			  <dfn><xsl:value-of select="$item/fn:string[@key='title']/text()" /></dfn>
-    			</xsl:otherwise>
-  		  </xsl:choose>
-      -->
-        <xsl:text>Vlastnost </xsl:text>
-        <code>
-          <dfn>
-            <xsl:value-of select="$item/@key" />
-          </dfn>
-        </code>
-  		</h5>
-  		<dl>
-  		  <dt>
-  			  Typ
-  		  </dt>
-  		  <dd>
-          <xsl:choose>
-            <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'object')">
-              <xsl:text>Seznam instancí typu </xsl:text>
-              <a>
-                <!--<xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" />-->
-                <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů($item/fn:map)" />
-              </a>
-        	  </xsl:when>
-            <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'string') and (fn:matches($item/fn:map[@key='items']/fn:string[@key='pattern']/text(), '^\^[^/]+/'))">
-              <xsl:text>Seznam odkazů dle vzoru </xsl:text>
-              <code><xsl:value-of select="$item/fn:map[@key='items']/fn:string[@key='pattern']" /></code>
-        	  </xsl:when>
-            <xsl:when test="($item/fn:string[@key='type'] = 'string') and (fn:matches($item/fn:string[@key='pattern']/text(), '^\^[^/]+/'))">
-              <xsl:text>Odkaz dle vzoru </xsl:text>
-              <code><xsl:value-of select="$item/fn:string[@key='pattern']" /></code>
-            </xsl:when>
-            <xsl:when test="$item/fn:string[@key='type'] = 'string'">
-              <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
-              <xsl:if test="$item/fn:string[@key='pattern']">
-                <xsl:text> dle vzoru </xsl:text>
-                <code><xsl:value-of select="$item/fn:string[@key='pattern']" /></code>
-              </xsl:if>
-            </xsl:when>
-    			  <xsl:when test="$item/fn:string[@key='type'] = 'boolean'">
-              <a href="https://opendata.gov.cz/datovy-typ:anone">Boolean</a>
-            </xsl:when>
-    			  <xsl:when test="$item/fn:string[@key='type'] = 'integer'">
-              <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
-            </xsl:when>
-            <xsl:when test="$item/fn:string[@key='type'] = 'object' and $item/fn:map[@key='properties']/fn:map[@key='cs' or @key='en']">
-              <a>Vícejazyčný řetězec</a>
-            </xsl:when>
-    			  <xsl:when test="$item/fn:string[@key='type'] = 'object'">
-              <a><xsl:value-of select="$item/fn:string[@key='title']" /></a>
-            </xsl:when>
-    			  <xsl:when test="$item/fn:string[@key='type'] = 'array'">
-              Pole typu <a><xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" /></a>
-            </xsl:when>
-          </xsl:choose>
-  		  </dd>
-  		  <dt>
-  			  Popis
-  		  </dt>
-  		  <dd>
-          <xsl:value-of select="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů($item)" />
-  		  </dd>
-  		  <dt>
-  			  Příklad
-  		  </dt>
-  		  <dd>
-  				<xsl:choose>
-  					<xsl:when test="$item/fn:array[@key='examples']/fn:*">
-  						<xsl:for-each select="$item/fn:array[@key='examples']/fn:*">
-  							<code><xsl:value-of select="fn:replace(fn:xml-to-json(.), '\\/', '/')" /></code>
-  						</xsl:for-each>
-  					</xsl:when>
-  					<xsl:otherwise>
-  						<xsl:text>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci </xsl:text>
-  						<a>Příklady</a>
-  						<xsl:text> této otevřené formální normy.</xsl:text>
-  					</xsl:otherwise>
-  				</xsl:choose>
-  		  </dd>
-  		  <dt>
-  			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
-  		  </dt>
-  		  <dd>
-  			  <!--<xsl:sequence select="gen:generujReferenciNaPrvekVSémantickémSlovníkuPojmů($item/@key, $item/ancestor::fn:source)" />-->
-          <xsl:variable name="type" select="gen:generujTypPrvkuVSémantickémSlovníkuPojmů($item)" />
-          <xsl:choose>
-            <xsl:when test="$type = 'typ-vlastnosti'">
-              <p>
-                <xsl:text>Sémantika vlastnosti </xsl:text>
-                <code><xsl:value-of select="$item/@key" /></code>
-                <xsl:text> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti </xsl:text>
-                <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" />
-                <xsl:text> následovně:</xsl:text>
-              </p>
-              <p>
-                <xsl:for-each select="gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů($item)">
-                  <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(.)" />
-                  <xsl:text> ➡ </xsl:text>
-                  <strong><xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" /></strong>
-                </xsl:for-each>
-              </p>
-            </xsl:when>
-            <xsl:when test="$type = 'typ-vztahu'">
-              <p>
-                <xsl:text>Sémantika vlastnosti </xsl:text>
-                <code><xsl:value-of select="$item/@key" /></code>
-                <xsl:text> je v sémantickém slovníku pojmů definována sémantickým typem vztahu </xsl:text>
-                <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" />
-                <xsl:text> následovně:</xsl:text>
-              </p>
-              <p>
-                <xsl:for-each select="gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů($item)">
-                  <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(.)" />
-                  <xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
-                    <xsl:text> ➡ </xsl:text>
-                    <strong><xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" /></strong>
-                    <xsl:text> ➡ </xsl:text>
-                    <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(.)" />
-                  </xsl:for-each>
-                </xsl:for-each>
-              </p>
-            </xsl:when>
-          </xsl:choose>
-  		  </dd>
-  		</dl>
+      <xsl:choose>
+        <xsl:when test="($item/fn:string[@key='$ref']) and $item/ancestor::fn:source//fn:map[@key='definitions']/fn:map[@key=fn:substring($item/fn:string[@key='$ref'], 15)][fn:string[@key='type'] != 'object' and fn:string[@key='type'] != 'array']">
+          <h5>
+            <xsl:text>Vlastnost </xsl:text>
+            <code>
+              <xsl:value-of select="$item/@key" />
+            </code>
+      		</h5>
+          <p>
+            <xsl:text>Viz specifikace prvku </xsl:text>
+            <a>
+              <code>
+                <xsl:value-of select="$item/@key" />
+              </code>
+            </a>
+          </p>
+        </xsl:when>
+        <xsl:otherwise>
+          <h5>
+            <xsl:text>Vlastnost </xsl:text>
+            <code>
+              <dfn>
+                <xsl:value-of select="$item/@key" />
+              </dfn>
+            </code>
+      		</h5>
+      		<dl>
+      		  <dt>
+      			  Typ
+      		  </dt>
+      		  <dd>
+              <xsl:sequence select="gen:generujPopisTypuVlastnosti($item)" />
+      		  </dd>
+      		  <dt>
+      			  Popis
+      		  </dt>
+      		  <dd>
+              <xsl:value-of select="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů($item)" />
+      		  </dd>
+      		  <dt>
+      			  Příklad
+      		  </dt>
+      		  <dd>
+      				<xsl:choose>
+      					<xsl:when test="$item/fn:array[@key='examples']/fn:*">
+      						<xsl:for-each select="$item/fn:array[@key='examples']/fn:*">
+      							<code><xsl:value-of select="fn:replace(fn:xml-to-json(.), '\\/', '/')" /></code>
+      						</xsl:for-each>
+      					</xsl:when>
+      					<xsl:otherwise>
+      						<xsl:text>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci </xsl:text>
+      						<a>Příklady</a>
+      						<xsl:text> této otevřené formální normy.</xsl:text>
+      					</xsl:otherwise>
+      				</xsl:choose>
+      		  </dd>
+      		  <dt>
+      			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+      		  </dt>
+      		  <dd>
+      			  <!--<xsl:sequence select="gen:generujReferenciNaPrvekVSémantickémSlovníkuPojmů($item/@key, $item/ancestor::fn:source)" />-->
+              <xsl:variable name="type" select="gen:generujTypPrvkuVSémantickémSlovníkuPojmů($item)" />
+              <xsl:choose>
+                <xsl:when test="$type = 'typ-vlastnosti'">
+                  <p>
+                    <xsl:text>Sémantika vlastnosti </xsl:text>
+                    <code><xsl:value-of select="$item/@key" /></code>
+                    <xsl:text> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti </xsl:text>
+                    <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" />
+                    <xsl:text> následovně:</xsl:text>
+                  </p>
+                  <p>
+                    <xsl:for-each select="gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů($item)">
+                      <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(.)" />
+                      <xsl:text> ➡ </xsl:text>
+                      <strong><xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" /></strong>
+                    </xsl:for-each>
+                  </p>
+                </xsl:when>
+                <xsl:when test="$type = 'typ-vztahu'">
+                  <p>
+                    <xsl:text>Sémantika vlastnosti </xsl:text>
+                    <code><xsl:value-of select="$item/@key" /></code>
+                    <xsl:text> je v sémantickém slovníku pojmů definována sémantickým typem vztahu </xsl:text>
+                    <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" />
+                    <xsl:text> následovně:</xsl:text>
+                  </p>
+                  <p>
+                    <xsl:for-each select="gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů($item)">
+                      <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(.)" />
+                      <xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
+                        <xsl:text> ➡ </xsl:text>
+                        <strong><xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($item)" /></strong>
+                        <xsl:text> ➡ </xsl:text>
+                        <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(.)" />
+                      </xsl:for-each>
+                    </xsl:for-each>
+                  </p>
+                </xsl:when>
+              </xsl:choose>
+      		  </dd>
+      		</dl>
+          <xsl:if test="($item/fn:map[@key='items']/fn:string[@key='type'] = 'object') and not($item/fn:map[@key='items']/fn:map[@key='properties']/fn:map[@key = 'type'])">
+            <xsl:sequence select="gen:generujVlastnostiProSpecifikaci($item/fn:map[@key='items'])" />
+          </xsl:if>
+        </xsl:otherwise>
+      </xsl:choose>
   	</section>
+  </xsl:function>
+
+  <xsl:function name="gen:generujPopisTypuVlastnosti">
+    <xsl:param name="item" as="element()" />
+    <xsl:choose>
+  	  <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'object') and ($item/fn:map[@key='items']/fn:map[@key='properties']/fn:map[@key = 'type'])">
+        <xsl:text> seznam instancí typu </xsl:text>
+        <xsl:variable name="nazev" select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů($item/fn:map)" />
+        <xsl:choose>
+          <xsl:when test="fn:contains($nazev, 'CHYBA:')">
+            <xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
+              <a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)" /></a>
+            </xsl:for-each>
+          </xsl:when>
+          <xsl:otherwise>
+            <a><xsl:value-of select="$nazev" /></a>
+          </xsl:otherwise>
+        </xsl:choose>
+  	  </xsl:when>
+      <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'object') and not($item/fn:map[@key='items']/fn:map[@key='properties']/fn:map[@key = 'type'])">
+        <xsl:text> seznam instancí se strukturou:</xsl:text>
+        <ul>
+          <xsl:for-each select="$item/fn:map/fn:map/fn:map">
+            <xsl:sequence select="gen:generujVlastnostProPřehled(.)" />
+          </xsl:for-each>
+        </ul>
+  	  </xsl:when>
+      <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'string') and (fn:matches($item/fn:map[@key='items']/fn:string[@key='pattern']/text(), '^\^[^/]+/'))">
+        <xsl:text>Seznam odkazů</xsl:text>
+        <xsl:if test="$item/fn:map[@key='items']/fn:string[@key='pattern']">
+          <xsl:text> dle vzoru </xsl:text>
+          <code><xsl:value-of select="$item/fn:map[@key='items']/fn:string[@key='pattern']" /></code>
+        </xsl:if>
+  	  </xsl:when>
+      <xsl:when test="$item/fn:string[@key='type'] = 'array'">
+        Pole typu <a><xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" /></a>
+      </xsl:when>
+      <xsl:when test="($item/fn:string[@key='type'] = 'string') and (fn:matches($item/fn:string[@key='pattern']/text(), '^\^[^/]+/'))">
+        <xsl:text>Odkaz</xsl:text>
+        <xsl:if test="$item/fn:string[@key='pattern']">
+          <xsl:text> dle vzoru </xsl:text>
+          <code><xsl:value-of select="$item/fn:string[@key='pattern']" /></code>
+        </xsl:if>
+      </xsl:when>
+      <xsl:when test="$item/fn:string[@key='type'] = 'string'">
+        <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+        <xsl:if test="$item/fn:string[@key='pattern']">
+          <xsl:text> dle vzoru </xsl:text>
+          <code><xsl:value-of select="$item/fn:string[@key='pattern']" /></code>
+        </xsl:if>
+      </xsl:when>
+		  <xsl:when test="$item/fn:string[@key='type'] = 'boolean'">
+        <a href="https://opendata.gov.cz/datovy-typ:anone">Boolean</a>
+      </xsl:when>
+		  <xsl:when test="$item/fn:string[@key='type'] = 'integer'">
+        <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
+      </xsl:when>
+      <xsl:when test="$item/fn:string[@key='type'] = 'object' and $item/fn:map[@key='properties']/fn:map[@key='cs' or @key='en']">
+        <a>Vícejazyčný řetězec</a>
+      </xsl:when>
+      <xsl:when test="$item/fn:string[@key='$ref']">
+			  <xsl:variable name="ref-item-name" select="fn:substring($item/fn:string[@key='$ref'], 15)" />
+        <xsl:variable name="ref-item" select="$item/ancestor::fn:source//fn:map[@key='definitions']/fn:map[@key=$ref-item-name]" />
+        <xsl:sequence select="gen:generujPopisTypuVlastnosti($ref-item)" />
+			</xsl:when>
+		  <xsl:when test="$item/fn:string[@key='type'] = 'object'">
+        instance typu <a><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($item)" /></a>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:function>
+
+  <xsl:function name="gen:generujLegislativuPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
+    <xsl:param name="item" as="element()" />
+    <xsl:for-each select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:relation', false(), false(), false())">
+      <xsl:value-of select="." />
+    </xsl:for-each>
   </xsl:function>
 
   <xsl:function name="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů" as="xs:string">
     <xsl:param name="item" as="element()" />
-    <xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', false(), true())" />
+    <xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', false(), true(), false())" />
+  </xsl:function>
+
+  <xsl:function name="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů" as="xs:string">
+    <xsl:param name="item" as="element()" />
+    <xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', false(), true(), true())" />
   </xsl:function>
 
   <xsl:function name="gen:generujTypPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
     <xsl:param name="item" as="element()" />
     <xsl:value-of select="
-fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdf:type', false(), false())[fn:starts-with(., 'https://slovník.gov.cz/základní/pojem/')][1], 'https://slovník.gov.cz/základní/pojem/')" />
+fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdf:type', false(), false(), false())[fn:starts-with(., 'https://slovník.gov.cz/základní/pojem/')][1], 'https://slovník.gov.cz/základní/pojem/')" />
   </xsl:function>
 
   <xsl:function name="gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
     <xsl:param name="item" as="element()" />
-    <xsl:for-each select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:domain', false(), false())">
+    <xsl:for-each select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:domain', false(), false(), false())">
       <xsl:value-of select="." />
     </xsl:for-each>
   </xsl:function>
 
   <xsl:function name="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
     <xsl:param name="item" as="element()" />
-    <xsl:for-each select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:range', false(), false())">
+    <xsl:for-each select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:range', false(), false(), false())">
       <xsl:value-of select="." />
     </xsl:for-each>
   </xsl:function>
 
   <xsl:function name="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů" as="element()">
     <xsl:param name="item" as="element()" />
-    <xsl:sequence select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', true(), true())[1]" />
+    <xsl:sequence select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', true(), true(), false())[1]" />
   </xsl:function>
 
   <xsl:function name="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů" as="xs:string">
     <xsl:param name="item" as="element()" />
-    <xsl:variable name="popis" select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:definition', false(), true())[1]" />
+    <xsl:variable name="popis" select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:definition', false(), true(), false())[1]" />
     <xsl:choose>
       <xsl:when test="fn:contains($popis[1], 'CHYBA: ')">
-        <xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:description', false(), true())[1]" />
+        <xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:description', false(), true(), false())[1]" />
       </xsl:when>
       <xsl:otherwise>
         <xsl:value-of select="$popis" />
@@ -458,7 +490,8 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
     <xsl:param name="property" as="xs:string" />
     <xsl:param name="asLink" as="xs:boolean" />
     <xsl:param name="isDatatype" as="xs:boolean" />
-    <xsl:variable name="jsonAlias" select="($item/@key, $item/fn:map[@key='properties']/fn:map[@key='type']/fn:string[@key='default']/text())[. != 'items'][1]" />
+    <xsl:param name="asType" as="xs:boolean" />
+    <xsl:variable name="jsonAlias" select="($item/fn:map[$asType and @key='properties']/fn:map[@key='type']/fn:string[@key='default']/text(), $item/@key, $item/fn:map[@key='properties']/fn:map[@key='type']/fn:string[@key='default']/text())[. != 'items'][1]" />
     <xsl:variable name="context" select="$item/ancestor::fn:source/fn:map/fn:map[@key='@context']" />
   	<xsl:variable name="qName" select="($context/fn:string[@key = $jsonAlias]/text(), $context/fn:map[@key = $jsonAlias]/fn:string[@key='@id' or @key='@reverse']/text())[1]" />
   	<xsl:variable name="prefix" select="fn:substring-before($qName, ':')" />
@@ -466,7 +499,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
   	<xsl:variable name="iriPrefix" select="$context/fn:string[@key = $prefix]/text()" />
   	<xsl:variable name="iri" select="fn:concat($iriPrefix, $localName)" />
   	<xsl:try>
-  		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')" />
+  		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')" />
   		<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)" />
   		<xsl:choose>
   			<xsl:when test="$isDatatype and $semVocTypeXMLDocument//.[fn:name() = $property]">
@@ -506,26 +539,18 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
   			<xsl:otherwise>
           <xsl:choose>
             <xsl:when test="$asLink">
-              <a>
-                CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti <xsl:value-of select="$property" /> ve slovníku uvedena.
-              </a>
+              <a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti <xsl:value-of select="$property" /> ve slovníku uvedena. <xsl:value-of select="$semVocTypeXMLDocumentIRI" /></a>
             </xsl:when>
-            <xsl:otherwise>
-              CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti <xsl:value-of select="$property" /> ve slovníku uvedena.
-            </xsl:otherwise>
+            <xsl:otherwise>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti <xsl:value-of select="$property" /> ve slovníku uvedena. <xsl:value-of select="$semVocTypeXMLDocumentIRI" /></xsl:otherwise>
   				</xsl:choose>
   			</xsl:otherwise>
   		</xsl:choose>
   		<xsl:catch>
         <xsl:choose>
           <xsl:when test="$asLink">
-            <a>
-              CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.
-            </a>
+            <a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.</a>
           </xsl:when>
-          <xsl:otherwise>
-            CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.
-          </xsl:otherwise>
+          <xsl:otherwise>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.</xsl:otherwise>
   			</xsl:choose>
   		</xsl:catch>
   	</xsl:try>
@@ -534,7 +559,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
   <xsl:function name="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů" as="node()*">
     <xsl:param name="iri" as="xs:string" />
   	<xsl:try>
-  		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')" />
+  		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')" />
   		<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)" />
   		<xsl:choose>
   			<xsl:when test="$semVocTypeXMLDocument//rdfs:label">
@@ -546,18 +571,51 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
           </xsl:for-each>
   			</xsl:when>
   			<xsl:otherwise>
-          <a>
-            CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena.
-          </a>
+          <a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena.</a>
   			</xsl:otherwise>
   		</xsl:choose>
   		<xsl:catch>
-        <a>
-          CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.
-        </a>
+        <a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.</a>
   		</xsl:catch>
   	</xsl:try>
   </xsl:function>
- 
+
+  <xsl:function name="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů" as="node()*">
+    <xsl:param name="iri" as="xs:string" />
+  	<xsl:try>
+  		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')" />
+  		<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)" />
+  		<xsl:choose>
+  			<xsl:when test="$semVocTypeXMLDocument//rdfs:label">
+          <xsl:for-each select="$semVocTypeXMLDocument//rdfs:label">
+            <xsl:value-of select="text()" />
+          </xsl:for-each>
+  			</xsl:when>
+  			<xsl:otherwise>
+          <a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena.</a>
+  			</xsl:otherwise>
+  		</xsl:choose>
+  		<xsl:catch>
+        <a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu <xsl:value-of select="$iri" />, jehož definici se nepodařilo načíst.</a>
+  		</xsl:catch>
+  	</xsl:try>
+  </xsl:function>
+
+  <xsl:function name="gen:generujOdkazyNaZakonyProLidi" as="element()*">
+    <xsl:param name="item" as="element()" />
+    <xsl:variable name="legislativa" select="gen:generujLegislativuPrvkuVSémantickémSlovníkuPojmů($item)[fn:starts-with(., 'https://esbirka.opendata.cz/zdroj/předpis')]" />
+    <xsl:if test="fn:exists($legislativa)">
+      <p>
+        Prvek odpovídá následující legislativě:
+        <xsl:for-each select="$legislativa">
+          <a>
+            <xsl:attribute name="href" select="." />
+            <xsl:value-of select="." />
+          </a>
+        </xsl:for-each>
+      </p>
+    </xsl:if>
+  </xsl:function>
+
 
 </xsl:stylesheet>

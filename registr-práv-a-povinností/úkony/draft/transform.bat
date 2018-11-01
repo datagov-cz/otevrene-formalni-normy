@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"úkony.schema.xml" -xsl:"úkony.json2html.xslt" -o:"index.html"

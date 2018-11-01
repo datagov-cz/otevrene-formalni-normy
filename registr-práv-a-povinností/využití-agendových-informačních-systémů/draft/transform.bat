@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"využití-agendových-informačních-systémů.schema.xml" -xsl:"využití-agendových-informačních-systémů.json2html.xslt" -o:"index.html"

@@ -1,7 +1,7 @@
 <html xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" lang="cs">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <title>Registr práv a povinností - oprávnění k přístupu k údajům</title>
+      <title>Registr práv a povinností - údaje</title>
       <meta content="width=device-width,initial-scale=1" name="viewport">
       <meta name="theme-color" content="#057fa5">
       <meta name="msapplication-TileColor" content="#057fa5">
@@ -18,63 +18,65 @@
       <link rel="icon" type="image/png" sizes="192x192" href="../../../static/favicons/android-icon-192x192.png">
       <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
-      <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png">
       <link rel="manifest" href="../../../static/favicons/manifest.json">
-      <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm.config.js"></script></head>
+      <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="%C3%BAdaje.config.js"></script></head>
    <body>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
          <h2>Abstrakt</h2>
          <p>
-            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o oprávněních k přístupu k údajům z Registru práv a povinností
-            ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Norma specifikuje způsob publikace na stupni otevřenosti
+            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o úkonech z Registru práv a povinností ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Norma specifikuje způsob publikace na stupni otevřenosti
             <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">3*</a> a <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">5*</a> ve formátu <a xmlns="http://docbook.org/ns/docbook" href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.
             	</p>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
          <h2><dfn>JSON struktura</dfn></h2>
          <section id="json-přehled">
-            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem instancí typu <a>Oprávnění k přístupu k údajům</a> uvedených v poli <code>položky</code>.
+            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem instancí typu <a>Objekt nebo subjekt údajů</a> uvedených v poli <code>položky</code>.
             
             <ul>
-               <li>Instance typu <a>Oprávnění k přístupu k údajům</a> má následující nepovinné vlastnosti:
+               <li>Instance typu <a>Objekt nebo subjekt údajů</a> má následující nepovinné vlastnosti:
                   <ul>
-                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^oprávnění$</code></li>
-                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^oprávnění-k-přístupu-k-údajům/A[0-9]+-A[0-9]+-[0-9]+$</code></li>
-                     <li><code><a>kód</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^A[0-9]+-A[0-9]+-[0-9]+$</code></li>
-                     <li><code><a>z-agendy</a></code> : Odkaz dle vzoru <code>^agenda/A[0-9]+$</code></li>
-                     <li><code><a>do-agendy</a></code> : Odkaz dle vzoru <code>^agenda/A[0-9]+$</code></li>
-                     <li><code><a>údaje</a></code> :  seznam instancí typu <a>Oprávnění k přístupu k údaji</a></li>
-                     <li><code><a>role</a></code> : Seznam odkazů dle vzoru <code>^role/A[0-9]+/CR[0-9]+/(([0-9]{8}-[0-9]+)|(KO[0-9]+)|(KS[0-9]+))$</code></li>
-                     <li><code><a>ustanovení</a></code> :  seznam instancí typu <a>Ustanovení právního předpisu</a></li>
+                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^objekt-subjekt$</code></li>
+                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^objekt-subjekt/[0-9]+-[0-9]+$</code></li>
+                     <li><code><a>kód</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]+-[0-9]+$</code></li>
+                     <li><code><a>název</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>popis</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>ustanovení</a></code> : 
+                        instance typu <a>Ustanovení právního předpisu</a></li>
+                     <li><code><a>agenda</a></code> : Odkaz dle vzoru <code>^agenda/A[0-9]+$</code></li>
+                     <li><code><a>údaje</a></code> :  seznam instancí typu <a>Údaj</a></li>
                   </ul>
                </li>
-               <li>Instance typu <a>Oprávnění k přístupu k údaji</a> má následující nepovinné vlastnosti:
+               <li>Instance typu <a>Údaj</a> má následující nepovinné vlastnosti:
                   <ul>
-                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^oprávnění-údaj$</code></li>
-                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^oprávnění-k-přístupu-k-údaji/A[0-9]+-A[0-9]+-[0-9]+/[0-9]+-[0-9]+-[0-9]+$</code></li>
-                     <li><code><a>úroveň-přístupu</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(R|W|RH)$</code></li>
-                     <li><code><a>údaj</a></code> : Odkaz dle vzoru <code>^údaj/[0-9]+-[0-9]+-[0-9]+$</code></li>
+                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^údaj$</code></li>
+                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^údaj/[0-9]+-[0-9]+-[0-9]+$</code></li>
+                     <li><code><a>kód-údaje</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]+-[0-9]+-[0-9]+$</code></li>
+                     <li><code><a>název-údaje</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>popis-údaje</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>typ-údaje</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
+                     <li><code><a>ustanovení-údaje</a></code> : 
+                        instance typu <a>Ustanovení právního předpisu</a></li>
                   </ul>
                </li>
                <li>Instance typu <a>Ustanovení právního předpisu</a> má následující nepovinné vlastnosti:
                   <ul>
                      <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^ustanovení-právního-předpisu$</code></li>
-                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^právní-předpis/[0-9]{1,4}/[0-9]{4}/ustanovení(/.+)+$</code></li>
-                     <li><code><a>označení</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
-                     <li><code><a>paragraf</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
-                     <li><code><a>odstavec</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
-                     <li><code><a>písmeno</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
+                     <li><code><a>id</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
+                     <li><code><a>paragraf</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
+                     <li><code><a>odstavec</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
+                     <li><code><a>písmeno</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
                      <li><code><a>předpis</a></code> : 
-                        instance typu <a>Právní předpis</a></li>
+                        instance typu <a>Je součástí právního předpisu</a></li>
                   </ul>
                </li>
-               <li>Instance typu <a>Právní předpis</a> má následující nepovinné vlastnosti:
+               <li>Instance typu <a>Je součástí právního předpisu</a> má následující nepovinné vlastnosti:
                   <ul>
-                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^právní-předpis$</code></li>
-                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^právní-předpis/[0-9]{1,4}/[0-9]{4}$</code></li>
+                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
+                     <li><code><a>id</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
                      <li><code><a>název-předpisu</a></code> : <a>Vícejazyčný řetězec</a></li>
-                     <li><code><a>číslo-předpisu</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
-                     <li><code><a>rok-předpisu</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></li>
+                     <li><code><a>číslo-předpisu</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
+                     <li><code><a>rok-předpisu</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></li>
                   </ul>
                </li>
             </ul>
@@ -125,102 +127,47 @@
                </section>
             </section>
             <section>
-               <h4><dfn>Oprávnění k přístupu k údajům</dfn></h4>
-               <p>Oprávnění fyzické osoby čerpat při výkonu agendy údaje v základních registrech nebo
-                  údaje v agendových informačních systémech vedené v jiné agendě. První agendu nazýváme
-                  čerpající, druhou poskytující. Oprávnění není definováno pro konkrétní fyzickou osobu
-                  ale pro roli.</p>
+               <h4><dfn>Objekt nebo subjekt údajů</dfn></h4>
+               <p>Objekt práva nebo subjekt práva o němž jsou vedeny nebo vytvářeny údaje v rámci agendy.</p>
                <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
-                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a>.</p>
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a>.</p>
                <section>
                   <h5>Vlastnost <code><dfn>kód</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^A[0-9]+-A[0-9]+-[0-9]+$</code></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]+-[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>"Unikátní kód oprávnění k přístupu k údajům tvořený kódem čerpající agendy, kódem
-                        poskytující agendy a doplňujícím kódem unikátním v rámci dvojice čerpající a posyktující
-                        agendy."</dd>
+                     <dd>Unikátní kód objektu nebo subjektu údajů sestávající z kódu agendy, v rámci které
+                        jsou údaje o objektu nebo subjektu údajů vedeny a z unikátního čísla subjektu nebo
+                        objektu v rámci této agendy.</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>"A1046-A101-1"</code></dd>
+                     <dd><code>"1046-1"</code></dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>kód</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Má kód oprávnění k přístupu k údajům</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Má kód oprávnění k přístupu k údajům</a></strong></p>
+                        <p>Sémantika vlastnosti <code>kód</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-objektu-nebo-subjektu-%C3%BAdaj%C5%AF">Má kód objektu nebo subjektu údajů</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-objektu-nebo-subjektu-%C3%BAdaj%C5%AF">Má kód objektu nebo subjektu údajů</a></strong></p>
                      </dd>
                   </dl>
                </section>
                <section>
-                  <h5>Vlastnost <code><dfn>z-agendy</dfn></code></h5>
+                  <h5>Vlastnost <code><dfn>název</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>Odkaz dle vzoru <code>^agenda/A[0-9]+$</code></dd>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>Propojuje oprávnění s agendou poskytující údaje. Oprávnění má přiřazenu právě jednu
-                        agendu poskytující údaje. Agenda může být poskytující agendou pro více oprávnění.</dd>
-                     <dt>
-                        			  Příklad
-                        		  </dt>
-                     <dd><code>"agenda/A101"</code></dd>
-                     <dt>
-                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
-                        		  </dt>
-                     <dd>
-                        <p>Sémantika vlastnosti <code>z-agendy</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/%C4%8Derp%C3%A1-%C3%BAdaje-z-agendy">Čerpá údaje z agendy</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/%C4%8Derp%C3%A1-%C3%BAdaje-z-agendy">Čerpá údaje z agendy</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
-                     </dd>
-                  </dl>
-               </section>
-               <section>
-                  <h5>Vlastnost <code><dfn>do-agendy</dfn></code></h5>
-                  <dl>
-                     <dt>
-                        			  Typ
-                        		  </dt>
-                     <dd>Odkaz dle vzoru <code>^agenda/A[0-9]+$</code></dd>
-                     <dt>
-                        			  Popis
-                        		  </dt>
-                     <dd>Propojuje oprávnění s agendou čerpající údaje. Oprávnění má přiřazenu právě jednu
-                        agendu čerpající údaje. Agenda může být čerpající agendou pro více oprávnění.</dd>
-                     <dt>
-                        			  Příklad
-                        		  </dt>
-                     <dd><code>"agenda/A1046"</code></dd>
-                     <dt>
-                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
-                        		  </dt>
-                     <dd>
-                        <p>Sémantika vlastnosti <code>do-agendy</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/poskytuje-%C3%BAdaje-agend%C4%9B">Poskytuje údaje agendě</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/poskytuje-%C3%BAdaje-agend%C4%9B">Poskytuje údaje agendě</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
-                     </dd>
-                  </dl>
-               </section>
-               <section>
-                  <h5>Vlastnost <code><dfn>údaje</dfn></code></h5>
-                  <dl>
-                     <dt>
-                        			  Typ
-                        		  </dt>
-                     <dd> seznam instancí typu <a>Oprávnění k přístupu k údaji</a></dd>
-                     <dt>
-                        			  Popis
-                        		  </dt>
-                     <dd>Určuje údaj, který je roli zpřístupněn v rámci oprávnění, a úroveň přístupu k údaji
-                        v rámci oprávnění. V rámci oprávnění může být zpřístupněno více údajů. Jeden údaj
-                        může být zpřístupněn různými oprávněními.</dd>
+                     <dd>Pojmenování objektu nebo subjektu údajů, které je v rámci agendy používáno.</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
@@ -229,23 +176,22 @@
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/zahrnuje-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Zahrnuje oprávnění k přístupu k údaji</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/zahrnuje-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Zahrnuje oprávnění k přístupu k údaji</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Oprávnění k přístupu k údaji</a></p>
+                        <p>Sémantika vlastnosti <code>název</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-objektu-nebo-subjektu-%C3%BAdaj%C5%AF">Má název objektu nebo subjektu údajů</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-objektu-nebo-subjektu-%C3%BAdaj%C5%AF">Má název objektu nebo subjektu údajů</a></strong></p>
                      </dd>
                   </dl>
                </section>
                <section>
-                  <h5>Vlastnost <code><dfn>role</dfn></code></h5>
+                  <h5>Vlastnost <code><dfn>popis</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>Seznam odkazů dle vzoru <code>^role/A[0-9]+/CR[0-9]+/(([0-9]{8}-[0-9]+)|(KO[0-9]+)|(KS[0-9]+))$</code></dd>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>Určuje roli, pro kterou je oprávnění k přístupu k údajům definováno. Oprávnění k přístupu
-                        k údajům může být definováno pro více rolí. Jedna role může mít definováno více oprávnění.</dd>
+                     <dd>Slovní vymezení významu objektu nebo subjektu údajů.</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
@@ -254,8 +200,8 @@
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>role</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli">Je oprávněním pro roli</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli">Je oprávněním pro roli</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a></p>
+                        <p>Sémantika vlastnosti <code>popis</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-objektu-nebo-subjektu-%C3%BAdaj%C5%AF">Má popis objektu nebo subjektu údajů</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-objektu-nebo-subjektu-%C3%BAdaj%C5%AF">Má popis objektu nebo subjektu údajů</a></strong></p>
                      </dd>
                   </dl>
                </section>
@@ -265,12 +211,12 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd> seznam instancí typu <a>Ustanovení právního předpisu</a></dd>
+                     <dd>
+                        instance typu <a>Ustanovení právního předpisu</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci
-                        oprávnění k přístupu k údajům zpřístupněny.</dd>
+                     <dd>Ustanovení právního předpisu, které vymezuje objekt nebo subjekt údajů.</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
@@ -279,64 +225,191 @@
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>ustanovení</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/zp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaje-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Zpřístupňuje údaje na základě ustanovení</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm">Oprávnění k přístupu k údajům</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/zp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaje-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Zpřístupňuje údaje na základě ustanovení</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a></p>
+                        <p>Sémantika vlastnosti <code>ustanovení</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vymezen-ustanoven%C3%ADm-vymezuj%C3%ADc%C3%ADm-objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Je vymezen ustanovením vymezujícím objekt nebo subjekt údajů</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vymezen-ustanoven%C3%ADm-vymezuj%C3%ADc%C3%ADm-objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Je vymezen ustanovením vymezujícím objekt nebo subjekt údajů</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>agenda</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Odkaz dle vzoru <code>^agenda/A[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Přiřazuje subjektu nebo objektu údajů agendy v níž jsou údaje sdružené v subjektu
+                        nebo objektu údajů vedeny nebo vytvářeny.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"agenda/A1046"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>agenda</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/sdru%C5%BEuje-%C3%BAdaje-veden%C3%A9-nebo-vytv%C3%A1%C5%99en%C3%A9-v-r%C3%A1mci-agendy">Sdružuje údaje vedené nebo vytvářené v rámci agendy</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/sdru%C5%BEuje-%C3%BAdaje-veden%C3%A9-nebo-vytv%C3%A1%C5%99en%C3%A9-v-r%C3%A1mci-agendy">Sdružuje údaje vedené nebo vytvářené v rámci agendy</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>údaje</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd> seznam instancí typu <a>Údaj</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Přiřazuje údaj vedený nebo vytvářený v rámci agendy k příslušnému objektu nebo subjektu
+                        údajů, který jej sdružuje.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-%C3%BAdaj">Má údaj</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/objekt-nebo-subjekt-%C3%BAdaj%C5%AF">Objekt nebo subjekt údajů</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-%C3%BAdaj">Má údaj</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a></p>
                      </dd>
                   </dl>
                </section>
             </section>
             <section>
-               <h4><dfn>Oprávnění k přístupu k údaji</dfn></h4>
-               <p>Oprávnění k přístupu k jednomu údaji definované v rámci oprávnění role k přístupu
-                  údajům z poskytující agendy.</p>
+               <h4><dfn>Údaj</dfn></h4>
+               <p>Údaj vedený v základních registrech nebo v jiných agendových informačních systémech
+                  zpřístupněný prostřednictvím informačního systému základních registrů nebo referenčních
+                  rozhraní pro výkon agend. Nejedná se o specifikaci hodnoty konkrétního objektu či
+                  subjektu údajů, ale o specifikaci na úrovni typu údaje vedeného o objektu či subjektu
+                  údajů.</p>
                <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
-                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Oprávnění k přístupu k údaji</a>.</p>
+                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a>.</p>
                <section>
-                  <h5>Vlastnost <code><dfn>úroveň-přístupu</dfn></code></h5>
+                  <h5>Vlastnost <code><dfn>kód-údaje</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(R|W|RH)$</code></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]+-[0-9]+-[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>Úroveň, na které mohou dané role k údaji v rámci oprávnění přistupovat. R = čtení,
-                        RH = čtení s historií, W = zápis</dd>
+                     <dd>Unikátní kód údaje sestávající z kódu objektu či subjektu údajů sdružujícího údaj
+                        a unikátního čísla údaje v rámci objektu či subjektu údajů.</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>"R"</code></dd>
+                     <dd><code>"1046-1-2"</code></dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>úroveň-přístupu</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-%C3%BArove%C5%88-p%C5%99%C3%ADstupu">Má úroveň přístupu</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Oprávnění k přístupu k údaji</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-%C3%BArove%C5%88-p%C5%99%C3%ADstupu">Má úroveň přístupu</a></strong></p>
+                        <p>Sémantika vlastnosti <code>kód-údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-%C3%BAdaje">Má kód údaje</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-%C3%BAdaje">Má kód údaje</a></strong></p>
                      </dd>
                   </dl>
                </section>
                <section>
-                  <h5>Vlastnost <code><dfn>údaj</dfn></code></h5>
+                  <h5>Vlastnost <code><dfn>název-údaje</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>Odkaz dle vzoru <code>^údaj/[0-9]+-[0-9]+-[0-9]+$</code></dd>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
-                     <dd>Určuje zpřístupněný údaj v rámci oprávnění přístupu k údaji.</dd>
+                     <dd>Pojmenování údaje, které je v rámci agendy používáno.</dd>
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>"údaj/101-1-1"</code></dd>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>údaj</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/zp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaj">Zpřístupňuje údaj</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji">Oprávnění k přístupu k údaji</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/zp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaj">Zpřístupňuje údaj</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a></p>
+                        <p>Sémantika vlastnosti <code>název-údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAdaje">Má název údaje</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAdaje">Má název údaje</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>popis-údaje</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Slovní vymezení významu údaje.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>popis-údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAdaje">Má popis údaje</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAdaje">Má popis údaje</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>typ-údaje</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje, zda se jedná o referenční nebo nereferenční údaj. Referenční údaje jsou údaje
+                        vedené v základních registrech.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"Nereferenční"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>typ-údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-%C3%BAdaje">Má typ údaje</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-%C3%BAdaje">Má typ údaje</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>ustanovení-údaje</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>
+                        instance typu <a>Ustanovení právního předpisu</a></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Ustanovení právního předpisu, které vymezuje údaj.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>ustanovení-údaje</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vymezen-ustanoven%C3%ADm-vymezuj%C3%ADc%C3%ADm-%C3%BAdaj">Je vymezen ustanovením vymezujícím údaj</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAdaj">Údaj</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vymezen-ustanoven%C3%ADm-vymezuj%C3%ADc%C3%ADm-%C3%BAdaj">Je vymezen ustanovením vymezujícím údaj</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a></p>
                      </dd>
                   </dl>
                </section>
@@ -348,38 +421,12 @@
                <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
                   <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>.</p>
                <section>
-                  <h5>Vlastnost <code><dfn>označení</dfn></code></h5>
-                  <dl>
-                     <dt>
-                        			  Typ
-                        		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-                     <dt>
-                        			  Popis
-                        		  </dt>
-                     <dd>Úplné označení ustanovení je řetězec, který obsahuje označení samotného předpisu dle
-                        jeho označení ve Sbírce zákonů a dále označení samotného ustanovení v rámci předpisu.
-                        Jeho vnitřní struktura není nijak předepsána</dd>
-                     <dt>
-                        			  Příklad
-                        		  </dt>
-                     <dd><code>"§ 1 zákona č. 1/1000 Sb."</code></dd>
-                     <dt>
-                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
-                        		  </dt>
-                     <dd>
-                        <p>Sémantika vlastnosti <code>označení</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> následovně:</p>
-                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a></strong></p>
-                     </dd>
-                  </dl>
-               </section>
-               <section>
                   <h5>Vlastnost <code><dfn>paragraf</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -387,7 +434,7 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dd><code>"119"</code></dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
@@ -403,7 +450,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -411,7 +458,7 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dd><code>"2"</code></dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
@@ -427,7 +474,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -435,7 +482,7 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dd><code>"a"</code></dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
@@ -452,7 +499,7 @@
                         			  Typ
                         		  </dt>
                      <dd>
-                        instance typu <a>Právní předpis</a></dd>
+                        instance typu <a>Je součástí právního předpisu</a></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -472,7 +519,7 @@
                </section>
             </section>
             <section>
-               <h4><dfn>Právní předpis</dfn></h4>
+               <h4><dfn>Je součástí právního předpisu</dfn></h4>
                <p>Přiřazuje ustanovení do právního předpisu</p>
                <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
                   <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Je součástí právního předpisu</a>.</p>
@@ -490,7 +537,7 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>{"cs":"zákon o volbách do zastupitelstev krajů a o změně některých zákon"}</code></dd>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
@@ -506,7 +553,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -514,7 +561,7 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>"130"</code></dd>
+                     <dd><code>"361"</code></dd>
                      <dt>
                         			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
                         		  </dt>
@@ -530,7 +577,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^(.*)$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -557,9 +604,9 @@
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>
          <section>
-            <h3></h3>
+            <h3>Základní identifikační údaje o úkonu</h3>
             <p></p>
-            <aside class="example" title="">
+            <aside class="example" title="Základní identifikační údaje o úkonu">
                <pre class="json">{
 }</pre>
             </aside>
