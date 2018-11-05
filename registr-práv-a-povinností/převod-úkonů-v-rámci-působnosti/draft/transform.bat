@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"převod-úkonů-v-rámci-působnosti.schema.xml" -xsl:"převod-úkonů-v-rámci-působnosti.json2html.xslt" -o:"index.html"

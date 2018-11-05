@@ -1,0 +1,292 @@
+<html xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" lang="cs">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Registr práv a povinností - agendové informační systémy</title>
+      <meta content="width=device-width,initial-scale=1" name="viewport">
+      <meta name="theme-color" content="#057fa5">
+      <meta name="msapplication-TileColor" content="#057fa5">
+      <meta name="msapplication-TileImage" content="../../../static/favicons/ms-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="57x57" href="../../../static/favicons/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="../../../static/favicons/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="../../../static/favicons/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="../../../static/favicons/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="../../../static/favicons/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="../../../static/favicons/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="../../../static/favicons/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="../../../static/favicons/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../static/favicons/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../static/favicons/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png">
+      <link rel="manifest" href="../../../static/favicons/manifest.json">
+      <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="p%C5%99evod-%C3%BAkon%C5%AF-v-r%C3%A1mci-p%C5%AFsobnosti.config.js"></script></head>
+   <body>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
+         <h2>Abstrakt</h2>
+         <p>
+            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o převodu úkonů orgánů veřejné moci v rámci jejich působností
+            z Registru práv a povinností ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Norma specifikuje způsob publikace na stupni otevřenosti
+            <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">3*</a> a <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">5*</a> ve formátu <a xmlns="http://docbook.org/ns/docbook" href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.
+            	</p>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
+         <h2><dfn>JSON struktura</dfn></h2>
+         <section id="json-přehled">
+            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem instancí uvedených v poli <code>položky</code>. Každá instance v poli má následující nepovinné vlastnosti:
+            <ul>
+               <li><code><a>úkon</a></code> : Odkaz dle vzoru <code>^úkon/U[0-9]+$</code></li>
+               <li><code><a>z-působnosti</a></code> : Seznam odkazů dle vzoru <code>^působnost/A[0-9]+/[0-9]+-[0-9]+$</code></li>
+               <li><code><a>do-působnosti</a></code> : Odkaz dle vzoru <code>^působnost/A[0-9]+/[0-9]+-[0-9]+$</code></li>
+               <li><code><a>převádějící-ovm</a></code> : Seznam odkazů dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></li>
+               <li><code><a>přebírající-ovm</a></code> : Odkaz dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></li>
+               <li><code><a>přebírající-pracoviště</a></code> : Seznam odkazů dle vzoru <code>^pracoviště/[0-9]+$</code></li>
+               <li><code><a>od</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></li>
+               <li><code><a>do</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></li>
+               <li><code><a>vps</a></code> : Odkaz dle vzoru <code>^smlouva/.+$</code></li>
+            </ul>
+         </section>
+         <section id="json-specifikace">
+            <h3>Detailní specifikace prvků JSON struktury</h3>V této části jsou specifikovány jednotlivé prvky JSON struktury.
+            <section></section>
+            <section>
+               <h4>Prvky</h4>
+               <section>
+                  <h5>Vlastnost <code><dfn>úkon</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Odkaz dle vzoru <code>^úkon/U[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje úkon převedený z převádějícícho orgánu veřejné moci na přebírající v rámci
+                        jejich působností.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"úkon/U34567"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>úkon</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-p%C5%99eveden%C3%BD-%C3%BAkon">Má převedený úkon</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-p%C5%99eveden%C3%BD-%C3%BAkon">Má převedený úkon</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>z-působnosti</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Seznam odkazů dle vzoru <code>^působnost/A[0-9]+/[0-9]+-[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje působnost převádějícího orgánu veřejné moci, ze které je úkon převáděn. Převod
+                        se může týkat více převádějících orgánů veřejné moci a jejich působností.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>z-působnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-z-p%C5%AFsobnosti">Převádí úkon z působnosti</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-z-p%C5%AFsobnosti">Převádí úkon z působnosti</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%AFsobnost-v-agend%C4%9B">Působnost v agendě</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>do-působnosti</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Odkaz dle vzoru <code>^působnost/A[0-9]+/[0-9]+-[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje působnost přebírajícího orgánu veřejné moci, do které je úkon převáděn.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"působnost/A1046/98765432-1"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>do-působnosti</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-do-p%C5%AFsobnosti">Převádí úkon do působnosti</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-do-p%C5%AFsobnosti">Převádí úkon do působnosti</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%AFsobnost-v-agend%C4%9B">Působnost v agendě</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>převádějící-ovm</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Seznam odkazů dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje převádějící orgán veřejné moci, z jehož působnosti je úkon převáděn. Převod
+                        se může týkat více převádějících orgánů veřejné moci.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>převádějící-ovm</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-z-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci">Převádí úkon z orgánu veřejné moci</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-z-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci">Převádí úkon z orgánu veřejné moci</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci">Orgán veřejné moci</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>přebírající-ovm</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Odkaz dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje přebírající orgán veřejné moci, do jehož působnosti je úkon převáděn.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"orgán-veřejné-moci/98765432-1"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>přebírající-ovm</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-na-org%C3%A1n-ve%C5%99ejn%C3%A9-moci">Převádí úkon na orgán veřejné moci</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-na-org%C3%A1n-ve%C5%99ejn%C3%A9-moci">Převádí úkon na orgán veřejné moci</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci">Orgán veřejné moci</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>přebírající-pracoviště</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Seznam odkazů dle vzoru <code>^pracoviště/[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje pracoviště přebírajícího orgánu veřejné moci, na kterém je přebraný úkon vykonáván.
+                        Pracovišť může být více.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>přebírající-pracoviště</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-na-pracovi%C5%A1t%C4%9B">Převádí úkon na pracoviště</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99ev%C3%A1d%C3%AD-%C3%BAkon-na-pracovi%C5%A1t%C4%9B">Převádí úkon na pracoviště</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/pracovi%C5%A1t%C4%9B">Pracoviště</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>od</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Datum, od kterého je převod úkonu platný.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"2018-02-01"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>od</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-p%C5%99evodu-%C3%BAkonu-od">Má datum převodu úkonu od</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-p%C5%99evodu-%C3%BAkonu-od">Má datum převodu úkonu od</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>do</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]{4}-[0-9]{2}-[0-9]{2}$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Datum, do kterého je převod úkonu platný.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"2018-02-28"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>do</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-p%C5%99evodu-%C3%BAkonu-do">Má datum převodu úkonu do</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-datum-p%C5%99evodu-%C3%BAkonu-do">Má datum převodu úkonu do</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>vps</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  </dt>
+                     <dd>Odkaz dle vzoru <code>^smlouva/.+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  </dt>
+                     <dd>Určuje veřejnoprávní smlouvu, na jejímž základě je převod úkonu uskutečněn.</dd>
+                     <dt>
+                        			  Příklad
+                        		  </dt>
+                     <dd><code>"smlouva/ABCD1234"</code></dd>
+                     <dt>
+                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        		  </dt>
+                     <dd>
+                        <p>Sémantika vlastnosti <code>vps</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-smlouvu-pro-p%C5%99evod-%C3%BAkonu">Má smlouvu pro převod úkonu</a> následovně:</p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%99evod-%C3%BAkonu">Převod úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-smlouvu-pro-p%C5%99evod-%C3%BAkonu">Má smlouvu pro převod úkonu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/ve%C5%99ejnopr%C3%A1vn%C3%AD-smlouva-k-p%C5%99ed%C3%A1n%C3%AD-p%C5%AFsobnosti">Veřejnoprávní smlouva k předání působnosti</a></p>
+                     </dd>
+                  </dl>
+               </section>
+            </section>
+         </section>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
+         <h2><dfn>LOD struktura</dfn></h2>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
+         <h2><dfn>Příklady</dfn></h2>
+         <section>
+            <h3></h3>
+            <p></p>
+            <aside class="example" title="">
+               <pre class="json">{
+}</pre>
+            </aside>
+         </section>
+      </section>
+   </body>
+</html>
