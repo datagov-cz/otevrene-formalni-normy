@@ -1,83 +1,65 @@
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/role.schema.json",
-  "required": [
-    "položky"
-  ],
-  "type": "object",
-  "properties": {
-    "položky": {
-      "type": "array",
-      "title": "Seznam rolí",
-      "description": "Seznam platných rolí, které jsou evidované v Registru práv a povinností.",
-      "items": {
-        "type": "object",
-        "title": "Role",
-        "description": "Role evidovaná v Registru práv a povinností je dvojicí, kde jedním z prvků dvojice je činnost role a druhým prvkem dvojice je orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie, který/á činnost role vykonává.",
-        "properties": {
-          "type": {
-            "type": "string",
-            "title": "Identifikátor třídy rolí",
-            "description": "Identifikátor třídy rolí použité v RDF reprezentaci rolí vedených v Registru práv a povinností. Jedná se o lokální identifikátor třídy v rámci JSON-LD souboru. Pro samotné IRI je nutno využít kontext JSON-LD souboru (klíč @context).",
-            "default": "role",
-            "pattern": "^role$"
-          },
-          "id": {
-            "type": "string",
-            "title": "IRI role",
-            "description": "Unikátní IRI role vedené v Registru práv a povinností použité pro odkazování na roli v JSON reprezentaci i v RDF reprezentaci. V IRI je využit kód role. IRI je uvedeno v relativním tvaru vůči base IRI definovanému v kontextu JSON-LD souboru (klíč @context).",
-            "examples": [
-              "role/A1046/CR6072/12345678-1"
-            ],
-            "pattern": "^role/A[0-9]+/CR[0-9]+/(([0-9]{8}-[0-9]+)|(KO[0-9]+)|(KS[0-9]+))$"
-          },
-          "ovm": {
-            "type": "string",
-            "title": "Odkaz na orgán veřejné moci",
-            "description": "Odkaz na orgán veřejné moci, který roli vykonává. Každou roli vykonává právě jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie. Jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie může vykonávat libovolný počet rolí.",
-            "examples": [
-              "orgán-veřejné-moci/12345678-1"
-            ],
-            "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
-          },
-          "spuú": {
-            "type": "string",
-            "title": "Odkaz na soukromoprávního uživatele údajů",
-            "description": "Odkaz na soukromoprávního uživatele údajů, který roli vykonává. Každou roli vykonává právě jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie. Jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie může vykonávat libovolný počet rolí.",
-            "examples": [
-              "soukromoprávní-uživatel-údajů/12345678-1"
-            ],
-            "pattern": "^soukromoprávní-uživatel-údajů/[0-9]{8}-[0-9]+$"
-          },
-          "kategorie-ovm": {
-            "type": "string",
-            "title": "Odkaz na kategorii orgánů veřejné moci",
-            "description": "Odkaz na kategorii orgánů veřejné moci, která roli vykonává. Každou roli vykonává právě jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie. Jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie může vykonávat libovolný počet rolí.",
-            "examples": [
-              "kategorie-ovm/KO12"
-            ],
-            "pattern": "^kategorie-ovm/KO[0-9]+$"
-          },
-          "kategorie-spuú": {
-            "type": "string",
-            "title": "Odkaz na kategorii soukromoprávních uživatelů údajů",
-            "description": "Odkaz na kategorii soukromoprávních uživatelů údajů, která roli vykonává. Každou roli vykonává právě jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie. Jeden orgán veřejné moci, soukromoprávní uživatel údajů nebo jejich kategorie může vykonávat libovolný počet rolí.",
-            "examples": [
-              "kategorie-spuú/KS11"
-            ],
-            "pattern": "^kategorie-spuú/KS[0-9]+$"
-          },
-          "činnost": {
-            "type": "string",
-            "title": "Odkaz na činnost",
-            "description": "Odkaz na činnost, vykonávanou v rámci role. Jedna činnost může být vykonávána v rámci různých rolí.",
-            "examples": [
-              "činnost/A1046/CR9999"
-            ],
-            "pattern": "^činnost/A[0-9]+/CR[0-9]+$"
+  {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/role.schema.json",
+    "required": [
+      "položky"
+    ],
+    "type": "object",
+    "properties": {
+      "položky": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "default": "role",
+              "pattern": "^role$"
+            },
+            "id": {
+              "type": "string",
+              "examples": [
+                "role/A1046/CR6072/12345678-1"
+              ],
+              "pattern": "^role/A[0-9]+/CR[0-9]+/(([0-9]{8}-[0-9]+)|(KO[0-9]+)|(KS[0-9]+))$"
+            },
+            "ovm": {
+              "type": "string",
+              "examples": [
+                "orgán-veřejné-moci/12345678-1"
+              ],
+              "pattern": "^orgán-veřejné-moci/[0-9]{8}-[0-9]+$"
+            },
+            "spuú": {
+              "type": "string",
+              "examples": [
+                "soukromoprávní-uživatel-údajů/12345678-1"
+              ],
+              "pattern": "^soukromoprávní-uživatel-údajů/[0-9]{8}-[0-9]+$"
+            },
+            "kategorie-ovm": {
+              "type": "string",
+              "examples": [
+                "kategorie-ovm/KO12"
+              ],
+              "pattern": "^kategorie-ovm/KO[0-9]+$"
+            },
+            "kategorie-spuú": {
+              "type": "string",
+              "examples": [
+                "kategorie-spuú/KS11"
+              ],
+              "pattern": "^kategorie-spuú/KS[0-9]+$"
+            },
+            "činnost": {
+              "type": "string",
+              "examples": [
+                "činnost/A1046/CR9999"
+              ],
+              "pattern": "^činnost/A[0-9]+/CR[0-9]+$"
+            }
           }
         }
       }
     }
   }
-}

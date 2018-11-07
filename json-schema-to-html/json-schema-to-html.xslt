@@ -382,6 +382,22 @@
           </xsl:otherwise>
         </xsl:choose>
   	  </xsl:when>
+      <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='$ref'])">
+        <xsl:text> seznam instancí typu </xsl:text>
+        <xsl:variable name="ref-item-name" select="fn:substring($item/fn:map[@key='items']/fn:string[@key='$ref'], 15)" />
+        <xsl:variable name="ref-item" select="$item/ancestor::fn:source//fn:map[@key='definitions']/fn:map[@key=$ref-item-name]" />
+        <xsl:variable name="nazev" select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů($ref-item)" />
+        <xsl:choose>
+          <xsl:when test="fn:contains($nazev, 'CHYBA:')">
+            <xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($ref-item)">
+              <a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)" /></a>
+            </xsl:for-each>
+          </xsl:when>
+          <xsl:otherwise>
+            <a><xsl:value-of select="$nazev" /></a>
+          </xsl:otherwise>
+        </xsl:choose>
+  	  </xsl:when>
       <xsl:when test="($item/fn:string[@key='type'] = 'array') and ($item/fn:map[@key='items']/fn:string[@key='type'] = 'object') and not($item/fn:map[@key='items']/fn:map[@key='properties']/fn:map[@key = 'type'])">
         <xsl:text> seznam instancí se strukturou sestávající z následujících nepovinných prvků:</xsl:text>
         <ul>
@@ -397,7 +413,11 @@
           <code><xsl:value-of select="$item/fn:map[@key='items']/fn:string[@key='pattern']" /></code>
         </xsl:if>
   	  </xsl:when>
-      <xsl:when test="$item/fn:string[@key='type'] = 'array'">
+      <xsl:when test="$item/fn:string[@key='type'] = 'array' and $item/fn:map/fn:string[@key='title']">
+        <xsl:text> seznam instancí typu </xsl:text>
+        <a><xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" /></a>
+      </xsl:when>
+      <xsl:when test="$item/fn:string[@key='type'] = 'array' and $item/fn:map/fn:string[@key='title']">
         Pole typu <a><xsl:value-of select="$item/fn:map/fn:string[@key='title']/text()" /></a>
       </xsl:when>
       <xsl:when test="($item/fn:string[@key='type'] = 'string') and (fn:matches($item/fn:string[@key='pattern']/text(), '^\^[^/]+/'))">
@@ -430,7 +450,7 @@
 			</xsl:when>
       <xsl:when test="($item/fn:string[@key='type'] = 'object') and ($item/fn:map[@key='properties']/fn:map[@key = 'type'])">
         <xsl:text>instance typu </xsl:text>
-        <xsl:variable name="nazev" select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů($item)" />
+        <xsl:variable name="nazev" select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($item)" />
         <xsl:choose>
           <xsl:when test="fn:contains($nazev, 'CHYBA:')">
             <xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
@@ -453,6 +473,10 @@
       <xsl:when test="$item/fn:string[@key='type'] = 'object'">
         instance typu <a><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($item)" /></a>
       </xsl:when>
+      <xsl:otherwise>
+        <xsl:text>CHYBA: Neznámý typ specifikace</xsl:text>
+        <xsl:sequence select="$item" />
+      </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
 
@@ -658,6 +682,18 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
                     <xsl:attribute name="href" select="fn:replace(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([a-z]+)$', 'https://zakonyprolidi.cz/cs/$2-$1#p$3-1-$4')" />
                     <xsl:value-of select="fn:replace(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([a-z]+)$', '§ $3 písm. $4) zákona č. $1/$2 Sb.')" />
                   </xsl:when>
+                  <xsl:when test="fn:matches(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([0-9]+[a-z]*)/([a-z]+)/([0-9]+[a-z]*)$')">
+                    <xsl:attribute name="href" select="fn:replace(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([0-9]+[a-z]*)/([a-z]+)/([0-9]+[a-z]*)$', 'https://zakonyprolidi.cz/cs/$2-$1#p$3-$4-$5-$6')" />
+                    <xsl:value-of select="fn:replace(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([0-9]+[a-z]*)/([a-z]+)/([0-9]+[a-z]*)$', '§ $3 odst. $4 písm. $5) bod $6. zákona č. $1/$2 Sb.')" />
+                  </xsl:when>
+                  <xsl:when test="fn:matches(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([a-z]+)/([0-9]+[a-z]*)$')">
+                    <xsl:attribute name="href" select="fn:replace(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([a-z]+)/([0-9]+[a-z]*)$', 'https://zakonyprolidi.cz/cs/$2-$1#p$3-1-$4-$5')" />
+                    <xsl:value-of select="fn:replace(., '^https://esbirka.opendata.cz/zdroj/předpis/([0-9]+)/([0-9]+)/sekce/([0-9]+[a-z]*)/([a-z]+)/([0-9]+[a-z]*)$', '§ $3 písm. $4) bod $5. zákona č. $1/$2 Sb.')" />
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <xsl:text>CHYBA: Nerozpoznané IRI ustanovení právního předpisu </xsl:text>
+                    <xsl:value-of select="." />
+                  </xsl:otherwise>
                 </xsl:choose>
               </a>
             </li>

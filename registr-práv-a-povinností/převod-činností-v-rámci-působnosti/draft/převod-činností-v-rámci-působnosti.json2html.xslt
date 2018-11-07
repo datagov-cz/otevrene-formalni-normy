@@ -11,7 +11,7 @@
   <xsl:template match="db:article">
 <html lang="cs">
   <head>
-    <title>Registr práv a povinností - agendové informační systémy</title>
+    <title>Registr práv a povinností - převod činností v rámci působnosti</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta name="theme-color" content="#057fa5" />
     <meta name="msapplication-TileColor" content="#057fa5" />
