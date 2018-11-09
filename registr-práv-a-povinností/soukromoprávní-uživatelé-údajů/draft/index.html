@@ -831,6 +831,201 @@
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
          <h2><dfn>LOD struktura</dfn></h2>
+         <section id="ukázky-lod">
+            <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Soukromoprávní uživatel údajů</h3>
+               <aside class="example" title="Seznam instancí typu Soukromoprávní uživatel údajů">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?SoukromopravniUzivatelUdaju a l-sgov-sbírka-111-2009-pojem:soukromoprávní-uživatel-údajů .
+  OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-identifikátor-soukromoprávního-uživatele-údajů ?MaIdentifikatorSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-obchodní-firmu-nebo-název-nebo-označení-osoby-nebo-jméno-nebo--popřípadně-jména-nebo--a-příjmení-soukromoprávního-uživatele-údajů ?MaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju . FILTER (LANG(?MaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju) = "cs") }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-soukromoprávního-uživatele-údajů ?MaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-soukromoprávního-uživatele-údajů ?MaAdresuSidlaSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-adresu-místa-podnikání-soukromoprávního-uživatele-údajů ?MaAdresuMistaPodnikaniSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-datum-vzniku-soukromoprávního-uživatele-údajů ?MaDatumVznikuSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-datum-zániku-soukromoprávního-uživatele-údajů ?MaDatumZanikuSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-pozastavené-působení-soukromoprávního-uživatele-údajů-od ?MaPozastavenePusobeniSoukromopravnihoUzivateleUdajuOd . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-pozastavené-působení-soukromoprávního-uživatele-údajů-do ?MaPozastavenePusobeniSoukromopravnihoUzivateleUdajuDo . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-přerušené-působení-soukromoprávního-uživatele-údajů-od ?MaPrerusenePusobeniSoukromopravnihoUzivateleUdajuOd . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-přerušené-působení-soukromoprávního-uživatele-údajů-do ?MaPrerusenePusobeniSoukromopravnihoUzivateleUdajuDo . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FSoukromopravniUzivatelUdaju%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Asoukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF%20.%0A%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaIdentifikatorSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-obchodn%C3%AD-firmu-nebo-n%C3%A1zev-nebo-ozna%C4%8Den%C3%AD-osoby-nebo-jm%C3%A9no-nebo--pop%C5%99%C3%ADpadn%C4%9B-jm%C3%A9na-nebo--a-p%C5%99%C3%ADjmen%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju%20.%20FILTER%20%28LANG%28%3FMaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaAdresuSidlaSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-podnik%C3%A1n%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaAdresuMistaPodnikaniSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-vzniku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaDatumVznikuSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-z%C3%A1niku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaDatumZanikuSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-od%20%3FMaPozastavenePusobeniSoukromopravnihoUzivateleUdajuOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-do%20%3FMaPozastavenePusobeniSoukromopravnihoUzivateleUdajuDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-od%20%3FMaPrerusenePusobeniSoukromopravnihoUzivateleUdajuOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-do%20%3FMaPrerusenePusobeniSoukromopravnihoUzivateleUdajuDo%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Soukromoprávní uživatel údajů s danou hodnotou Má identifikátor soukromoprávního uživatele údajů">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?SoukromopravniUzivatelUdaju a l-sgov-sbírka-111-2009-pojem:soukromoprávní-uživatel-údajů .
+    OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-identifikátor-soukromoprávního-uživatele-údajů ?MaIdentifikatorSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-obchodní-firmu-nebo-název-nebo-označení-osoby-nebo-jméno-nebo--popřípadně-jména-nebo--a-příjmení-soukromoprávního-uživatele-údajů ?MaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju . FILTER (LANG(?MaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju) = "cs") }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-soukromoprávního-uživatele-údajů ?MaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-soukromoprávního-uživatele-údajů ?MaAdresuSidlaSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-adresu-místa-podnikání-soukromoprávního-uživatele-údajů ?MaAdresuMistaPodnikaniSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-datum-vzniku-soukromoprávního-uživatele-údajů ?MaDatumVznikuSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-datum-zániku-soukromoprávního-uživatele-údajů ?MaDatumZanikuSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-pozastavené-působení-soukromoprávního-uživatele-údajů-od ?MaPozastavenePusobeniSoukromopravnihoUzivateleUdajuOd . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-pozastavené-působení-soukromoprávního-uživatele-údajů-do ?MaPozastavenePusobeniSoukromopravnihoUzivateleUdajuDo . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-přerušené-působení-soukromoprávního-uživatele-údajů-od ?MaPrerusenePusobeniSoukromopravnihoUzivateleUdajuOd . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-přerušené-působení-soukromoprávního-uživatele-údajů-do ?MaPrerusenePusobeniSoukromopravnihoUzivateleUdajuDo . }
+
+  FILTER (?MaIdentifikatorSoukromopravnihoUzivateleUdaju = '12345678-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FSoukromopravniUzivatelUdaju%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Asoukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaIdentifikatorSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-obchodn%C3%AD-firmu-nebo-n%C3%A1zev-nebo-ozna%C4%8Den%C3%AD-osoby-nebo-jm%C3%A9no-nebo--pop%C5%99%C3%ADpadn%C4%9B-jm%C3%A9na-nebo--a-p%C5%99%C3%ADjmen%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju%20.%20FILTER%20%28LANG%28%3FMaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaAdresuSidlaSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-podnik%C3%A1n%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaAdresuMistaPodnikaniSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-vzniku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaDatumVznikuSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-z%C3%A1niku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaDatumZanikuSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-od%20%3FMaPozastavenePusobeniSoukromopravnihoUzivateleUdajuOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-do%20%3FMaPozastavenePusobeniSoukromopravnihoUzivateleUdajuDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-od%20%3FMaPrerusenePusobeniSoukromopravnihoUzivateleUdajuOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-do%20%3FMaPrerusenePusobeniSoukromopravnihoUzivateleUdajuDo%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaIdentifikatorSoukromopravnihoUzivateleUdaju%20%3D%20%2712345678-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Soukromoprávní uživatel údajů s danou hodnotou Má identifikační číslo osoby soukromoprávního uživatele údajů">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?SoukromopravniUzivatelUdaju a l-sgov-sbírka-111-2009-pojem:soukromoprávní-uživatel-údajů .
+    OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-identifikátor-soukromoprávního-uživatele-údajů ?MaIdentifikatorSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-obchodní-firmu-nebo-název-nebo-označení-osoby-nebo-jméno-nebo--popřípadně-jména-nebo--a-příjmení-soukromoprávního-uživatele-údajů ?MaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju . FILTER (LANG(?MaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju) = "cs") }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-soukromoprávního-uživatele-údajů ?MaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-soukromoprávního-uživatele-údajů ?MaAdresuSidlaSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-adresu-místa-podnikání-soukromoprávního-uživatele-údajů ?MaAdresuMistaPodnikaniSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-datum-vzniku-soukromoprávního-uživatele-údajů ?MaDatumVznikuSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-datum-zániku-soukromoprávního-uživatele-údajů ?MaDatumZanikuSoukromopravnihoUzivateleUdaju . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-pozastavené-působení-soukromoprávního-uživatele-údajů-od ?MaPozastavenePusobeniSoukromopravnihoUzivateleUdajuOd . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-pozastavené-působení-soukromoprávního-uživatele-údajů-do ?MaPozastavenePusobeniSoukromopravnihoUzivateleUdajuDo . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-přerušené-působení-soukromoprávního-uživatele-údajů-od ?MaPrerusenePusobeniSoukromopravnihoUzivateleUdajuOd . }
+   OPTIONAL { ?SoukromopravniUzivatelUdaju l-sgov-sbírka-111-2009-pojem:má-přerušené-působení-soukromoprávního-uživatele-údajů-do ?MaPrerusenePusobeniSoukromopravnihoUzivateleUdajuDo . }
+
+  FILTER (?MaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju = '12345678')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FSoukromopravniUzivatelUdaju%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Asoukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaIdentifikatorSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-obchodn%C3%AD-firmu-nebo-n%C3%A1zev-nebo-ozna%C4%8Den%C3%AD-osoby-nebo-jm%C3%A9no-nebo--pop%C5%99%C3%ADpadn%C4%9B-jm%C3%A9na-nebo--a-p%C5%99%C3%ADjmen%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju%20.%20FILTER%20%28LANG%28%3FMaObchodniFirmuNeboNazevNeboOznaceniOsobyNeboJmenoNeboPopripadneJmenaNeboAPrijmeniSoukromopravnihoUzivateleUdaju%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaAdresuSidlaSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-podnik%C3%A1n%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaAdresuMistaPodnikaniSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-vzniku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaDatumVznikuSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-z%C3%A1niku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FMaDatumZanikuSoukromopravnihoUzivateleUdaju%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-od%20%3FMaPozastavenePusobeniSoukromopravnihoUzivateleUdajuOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-do%20%3FMaPozastavenePusobeniSoukromopravnihoUzivateleUdajuDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-od%20%3FMaPrerusenePusobeniSoukromopravnihoUzivateleUdajuOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FSoukromopravniUzivatelUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%A9-p%C5%AFsoben%C3%AD-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF-do%20%3FMaPrerusenePusobeniSoukromopravnihoUzivateleUdajuDo%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaIdentifikacniCisloOsobySoukromopravnihoUzivateleUdaju%20%3D%20%2712345678%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Datová schránka</h3>
+               <aside class="example" title="Seznam instancí typu Datová schránka přiřazených k instanci typu Soukromoprávní uživatel údajů prostřednictvím Má datovou schránku soukromoprávního uživatele údajů">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?DatovaSchranka a l-sgov-sbírka-111-2009-pojem:datová-schránka .
+  OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-typ-datové-schránky ?MaTypDatoveSchranky . }
+   OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-identifikátor-datové-schránky ?MaIdentifikatorDatoveSchranky . }
+   ?MaDatovouSchrankuSoukromopravnihoUzivateleUdaju l-sgov-sbírka-111-2009-pojem:má-datovou-schránku-soukromoprávního-uživatele-údajů ?DatovaSchranka .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FDatovaSchranka%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Adatov%C3%A1-schr%C3%A1nka%20.%0A%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-typ-datov%C3%A9-schr%C3%A1nky%20%3FMaTypDatoveSchranky%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-datov%C3%A9-schr%C3%A1nky%20%3FMaIdentifikatorDatoveSchranky%20.%20%7D%0A%20%20%20%3FMaDatovouSchrankuSoukromopravnihoUzivateleUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datovou-schr%C3%A1nku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FDatovaSchranka%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Datová schránka s danou hodnotou Má typ datové schránky">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?DatovaSchranka a l-sgov-sbírka-111-2009-pojem:datová-schránka .
+    OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-typ-datové-schránky ?MaTypDatoveSchranky . }
+   OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-identifikátor-datové-schránky ?MaIdentifikatorDatoveSchranky . }
+   ?MaDatovouSchrankuSoukromopravnihoUzivateleUdaju l-sgov-sbírka-111-2009-pojem:má-datovou-schránku-soukromoprávního-uživatele-údajů ?DatovaSchranka .
+
+  FILTER (?MaTypDatoveSchranky = 'typ-datové-schránky/FO')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FDatovaSchranka%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Adatov%C3%A1-schr%C3%A1nka%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-typ-datov%C3%A9-schr%C3%A1nky%20%3FMaTypDatoveSchranky%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-datov%C3%A9-schr%C3%A1nky%20%3FMaIdentifikatorDatoveSchranky%20.%20%7D%0A%20%20%20%3FMaDatovouSchrankuSoukromopravnihoUzivateleUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datovou-schr%C3%A1nku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FDatovaSchranka%20.%0A%0A%20%20FILTER%20%28%3FMaTypDatoveSchranky%20%3D%20%27typ-datov%C3%A9-schr%C3%A1nky%2FFO%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Datová schránka s danou hodnotou Má identifikátor datové schránky">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?DatovaSchranka a l-sgov-sbírka-111-2009-pojem:datová-schránka .
+    OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-typ-datové-schránky ?MaTypDatoveSchranky . }
+   OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-identifikátor-datové-schránky ?MaIdentifikatorDatoveSchranky . }
+   ?MaDatovouSchrankuSoukromopravnihoUzivateleUdaju l-sgov-sbírka-111-2009-pojem:má-datovou-schránku-soukromoprávního-uživatele-údajů ?DatovaSchranka .
+
+  FILTER (?MaIdentifikatorDatoveSchranky = '0abcdef')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FDatovaSchranka%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Adatov%C3%A1-schr%C3%A1nka%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-typ-datov%C3%A9-schr%C3%A1nky%20%3FMaTypDatoveSchranky%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-datov%C3%A9-schr%C3%A1nky%20%3FMaIdentifikatorDatoveSchranky%20.%20%7D%0A%20%20%20%3FMaDatovouSchrankuSoukromopravnihoUzivateleUdaju%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datovou-schr%C3%A1nku-soukromopr%C3%A1vn%C3%ADho-u%C5%BEivatele-%C3%BAdaj%C5%AF%20%3FDatovaSchranka%20.%0A%0A%20%20FILTER%20%28%3FMaIdentifikatorDatoveSchranky%20%3D%20%270abcdef%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Ustanovení právního předpisu</h3>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu přiřazených k instanci typu Soukromoprávní uživatel údajů prostřednictvím Je oprávněn k využívání údajů ná základě ustanovení">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   ?JeOpravnenKVyuzivaniUdajuNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:je-oprávněn-k-využívání-údajů-ná-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FJeOpravnenKVyuzivaniUdajuNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-opr%C3%A1vn%C4%9Bn-k-vyu%C5%BE%C3%ADv%C3%A1n%C3%AD-%C3%BAdaj%C5%AF-n%C3%A1-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu s danou hodnotou Má úplné označení ustanovení včetně označení právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+    OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   ?JeOpravnenKVyuzivaniUdajuNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:je-oprávněn-k-využívání-údajů-ná-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+
+  FILTER (?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu = '§ 1 zákona č. 1/1000 Sb.')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FJeOpravnenKVyuzivaniUdajuNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-opr%C3%A1vn%C4%9Bn-k-vyu%C5%BE%C3%ADv%C3%A1n%C3%AD-%C3%BAdaj%C5%AF-n%C3%A1-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%27%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Adresní místo</h3>
+               <aside class="example" title="Seznam instancí typu Adresní místo">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?AdresniMisto a l-sgov-sbírka-111-2009-pojem:adresní-místo .
+  OPTIONAL { ?AdresniMisto a-sgov-104-pojem:má-kód-adresního-místa ?MaKodAdresnihoMista . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAdresniMisto%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aadresn%C3%AD-m%C3%ADsto%20.%0A%20%20OPTIONAL%20%7B%20%3FAdresniMisto%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-adresn%C3%ADho-m%C3%ADsta%20%3FMaKodAdresnihoMista%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Adresní místo s danou hodnotou CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu https://slovník.gov.cz/agendový/104/pojem/má-kód-adresního-místa, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena. https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs&amp;query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2Fm%C3%A1-k%C3%B3d-adresn%C3%ADho-m%C3%ADsta%3E&amp;output=application%2Frdf%2Bxml">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?AdresniMisto a l-sgov-sbírka-111-2009-pojem:adresní-místo .
+    OPTIONAL { ?AdresniMisto a-sgov-104-pojem:má-kód-adresního-místa ?MaKodAdresnihoMista . }
+
+  FILTER (?MaKodAdresnihoMista = '22305190')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAdresniMisto%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aadresn%C3%AD-m%C3%ADsto%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FAdresniMisto%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-adresn%C3%ADho-m%C3%ADsta%20%3FMaKodAdresnihoMista%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaKodAdresnihoMista%20%3D%20%2722305190%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+         </section>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>

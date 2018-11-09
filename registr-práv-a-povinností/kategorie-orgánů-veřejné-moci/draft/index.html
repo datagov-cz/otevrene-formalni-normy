@@ -272,6 +272,94 @@
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
          <h2><dfn>LOD struktura</dfn></h2>
+         <section id="ukázky-lod">
+            <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Kategorie orgánů veřejné moci</h3>
+               <aside class="example" title="Seznam instancí typu Kategorie orgánů veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?KategorieOrganuVerejneMoci a l-sgov-sbírka-111-2009-pojem:kategorie-orgánů-veřejné-moci .
+  OPTIONAL { ?KategorieOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-kategorie ?MaNazevKategorie . FILTER (LANG(?MaNazevKategorie) = "cs") }
+   OPTIONAL { ?KategorieOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-kategorie ?MaIdentifikatorKategorie . }
+   OPTIONAL { ?OhlasujeKategorii l-sgov-sbírka-111-2009-pojem:ohlašuje-kategorii ?KategorieOrganuVerejneMoci . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FKategorieOrganuVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Akategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20OPTIONAL%20%7B%20%3FKategorieOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-kategorie%20%3FMaNazevKategorie%20.%20FILTER%20%28LANG%28%3FMaNazevKategorie%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FKategorieOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-kategorie%20%3FMaIdentifikatorKategorie%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOhlasujeKategorii%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-kategorii%20%3FKategorieOrganuVerejneMoci%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Kategorie orgánů veřejné moci s danou hodnotou Má identifikátor kategorie">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?KategorieOrganuVerejneMoci a l-sgov-sbírka-111-2009-pojem:kategorie-orgánů-veřejné-moci .
+    OPTIONAL { ?KategorieOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-kategorie ?MaNazevKategorie . FILTER (LANG(?MaNazevKategorie) = "cs") }
+   OPTIONAL { ?KategorieOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-kategorie ?MaIdentifikatorKategorie . }
+   OPTIONAL { ?OhlasujeKategorii l-sgov-sbírka-111-2009-pojem:ohlašuje-kategorii ?KategorieOrganuVerejneMoci . }
+
+  FILTER (?MaIdentifikatorKategorie = 'KO11')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FKategorieOrganuVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Akategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FKategorieOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-kategorie%20%3FMaNazevKategorie%20.%20FILTER%20%28LANG%28%3FMaNazevKategorie%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FKategorieOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-kategorie%20%3FMaIdentifikatorKategorie%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOhlasujeKategorii%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-kategorii%20%3FKategorieOrganuVerejneMoci%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaIdentifikatorKategorie%20%3D%20%27KO11%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Kategorie orgánů veřejné moci s danou hodnotou Ohlašuje kategorii">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?KategorieOrganuVerejneMoci a l-sgov-sbírka-111-2009-pojem:kategorie-orgánů-veřejné-moci .
+    OPTIONAL { ?KategorieOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-kategorie ?MaNazevKategorie . FILTER (LANG(?MaNazevKategorie) = "cs") }
+   OPTIONAL { ?KategorieOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-kategorie ?MaIdentifikatorKategorie . }
+   OPTIONAL { ?OhlasujeKategorii l-sgov-sbírka-111-2009-pojem:ohlašuje-kategorii ?KategorieOrganuVerejneMoci . }
+
+  FILTER (?OhlasujeKategorii = 'orgán-veřejné-moci/00000001-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FKategorieOrganuVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Akategorie-org%C3%A1n%C5%AF-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FKategorieOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-kategorie%20%3FMaNazevKategorie%20.%20FILTER%20%28LANG%28%3FMaNazevKategorie%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FKategorieOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-kategorie%20%3FMaIdentifikatorKategorie%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOhlasujeKategorii%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-kategorii%20%3FKategorieOrganuVerejneMoci%20.%20%7D%0A%0A%20%20FILTER%20%28%3FOhlasujeKategorii%20%3D%20%27org%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00000001-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Ustanovení právního předpisu</h3>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu přiřazených k instanci typu Kategorie orgánů veřejné moci prostřednictvím Je vymezena ustanovením">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   ?JeVymezenaUstanovenim l-sgov-sbírka-111-2009-pojem:je-vymezena-ustanovením ?UstanoveniPravnihoPredpisu .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FJeVymezenaUstanovenim%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vymezena-ustanoven%C3%ADm%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu s danou hodnotou Má úplné označení ustanovení včetně označení právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+    OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   ?JeVymezenaUstanovenim l-sgov-sbírka-111-2009-pojem:je-vymezena-ustanovením ?UstanoveniPravnihoPredpisu .
+
+  FILTER (?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu = '§ 1 zákona č. 1/1000 Sb.')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FJeVymezenaUstanovenim%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vymezena-ustanoven%C3%ADm%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%27%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+         </section>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>

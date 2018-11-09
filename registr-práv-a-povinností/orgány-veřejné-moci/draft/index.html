@@ -1148,6 +1148,350 @@
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
          <h2><dfn>LOD struktura</dfn></h2>
+         <section id="ukázky-lod">
+            <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Orgán veřejné moci</h3>
+               <aside class="example" title="Seznam instancí typu Orgán veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OrganVerejneMoci a l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci .
+  OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-orgánu-veřejné-moci ?MaIdentifikatorOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-orgánu-veřejné-moci ?MaNazevOrganuVerejneMoci . FILTER (LANG(?MaNazevOrganuVerejneMoci) = "cs") }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-orgánu-veřejné-moci ?MaIdentifikacniCisloOsobyOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-místa-pobytu-orgánu-veřejné-moci ?MaAdresuMistaPobytuOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-orgánu-veřejné-moci ?MaAdresuSidlaOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datum-zahájení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-datum-ukončení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPozastavenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPozastavenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPrerusenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPrerusenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-nadřízený-orgán-veřejné-moci ?MaNadrizenyOrganVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-právní-formu-osoby ?MaPravniFormuOsoby . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOrganVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aorg%C3%A1n-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikatorOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaNazevOrganuVerejneMoci%20.%20FILTER%20%28LANG%28%3FMaNazevOrganuVerejneMoci%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-pobytu-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuMistaPobytuOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuSidlaOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-zah%C3%A1jen%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-datum-ukon%C4%8Den%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-nad%C5%99%C3%ADzen%C3%BD-org%C3%A1n-ve%C5%99ejn%C3%A9-moci%20%3FMaNadrizenyOrganVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pr%C3%A1vn%C3%AD-formu-osoby%20%3FMaPravniFormuOsoby%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Orgán veřejné moci s danou hodnotou Má identifikátor orgánu veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OrganVerejneMoci a l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci .
+    OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-orgánu-veřejné-moci ?MaIdentifikatorOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-orgánu-veřejné-moci ?MaNazevOrganuVerejneMoci . FILTER (LANG(?MaNazevOrganuVerejneMoci) = "cs") }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-orgánu-veřejné-moci ?MaIdentifikacniCisloOsobyOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-místa-pobytu-orgánu-veřejné-moci ?MaAdresuMistaPobytuOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-orgánu-veřejné-moci ?MaAdresuSidlaOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datum-zahájení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-datum-ukončení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPozastavenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPozastavenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPrerusenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPrerusenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-nadřízený-orgán-veřejné-moci ?MaNadrizenyOrganVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-právní-formu-osoby ?MaPravniFormuOsoby . }
+
+  FILTER (?MaIdentifikatorOrganuVerejneMoci = '12345678-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOrganVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aorg%C3%A1n-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikatorOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaNazevOrganuVerejneMoci%20.%20FILTER%20%28LANG%28%3FMaNazevOrganuVerejneMoci%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-pobytu-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuMistaPobytuOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuSidlaOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-zah%C3%A1jen%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-datum-ukon%C4%8Den%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-nad%C5%99%C3%ADzen%C3%BD-org%C3%A1n-ve%C5%99ejn%C3%A9-moci%20%3FMaNadrizenyOrganVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pr%C3%A1vn%C3%AD-formu-osoby%20%3FMaPravniFormuOsoby%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaIdentifikatorOrganuVerejneMoci%20%3D%20%2712345678-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Orgán veřejné moci s danou hodnotou Má název orgánu veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OrganVerejneMoci a l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci .
+    OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-orgánu-veřejné-moci ?MaIdentifikatorOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-orgánu-veřejné-moci ?MaNazevOrganuVerejneMoci . FILTER (LANG(?MaNazevOrganuVerejneMoci) = "cs") }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-orgánu-veřejné-moci ?MaIdentifikacniCisloOsobyOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-místa-pobytu-orgánu-veřejné-moci ?MaAdresuMistaPobytuOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-orgánu-veřejné-moci ?MaAdresuSidlaOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datum-zahájení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-datum-ukončení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPozastavenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPozastavenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPrerusenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPrerusenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-nadřízený-orgán-veřejné-moci ?MaNadrizenyOrganVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-právní-formu-osoby ?MaPravniFormuOsoby . }
+
+  FILTER (?MaNazevOrganuVerejneMoci = 'Testovací orgán veřejné moci 1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOrganVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aorg%C3%A1n-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikatorOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaNazevOrganuVerejneMoci%20.%20FILTER%20%28LANG%28%3FMaNazevOrganuVerejneMoci%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-pobytu-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuMistaPobytuOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuSidlaOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-zah%C3%A1jen%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-datum-ukon%C4%8Den%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-nad%C5%99%C3%ADzen%C3%BD-org%C3%A1n-ve%C5%99ejn%C3%A9-moci%20%3FMaNadrizenyOrganVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pr%C3%A1vn%C3%AD-formu-osoby%20%3FMaPravniFormuOsoby%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaNazevOrganuVerejneMoci%20%3D%20%27Testovac%C3%AD%20org%C3%A1n%20ve%C5%99ejn%C3%A9%20moci%201%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Orgán veřejné moci s danou hodnotou Má identifikační číslo osoby orgánu veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OrganVerejneMoci a l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci .
+    OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-orgánu-veřejné-moci ?MaIdentifikatorOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-orgánu-veřejné-moci ?MaNazevOrganuVerejneMoci . FILTER (LANG(?MaNazevOrganuVerejneMoci) = "cs") }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-orgánu-veřejné-moci ?MaIdentifikacniCisloOsobyOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-místa-pobytu-orgánu-veřejné-moci ?MaAdresuMistaPobytuOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-orgánu-veřejné-moci ?MaAdresuSidlaOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datum-zahájení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-datum-ukončení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPozastavenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPozastavenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPrerusenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPrerusenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-nadřízený-orgán-veřejné-moci ?MaNadrizenyOrganVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-právní-formu-osoby ?MaPravniFormuOsoby . }
+
+  FILTER (?MaIdentifikacniCisloOsobyOrganuVerejneMoci = '12345678')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOrganVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aorg%C3%A1n-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikatorOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaNazevOrganuVerejneMoci%20.%20FILTER%20%28LANG%28%3FMaNazevOrganuVerejneMoci%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-pobytu-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuMistaPobytuOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuSidlaOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-zah%C3%A1jen%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-datum-ukon%C4%8Den%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-nad%C5%99%C3%ADzen%C3%BD-org%C3%A1n-ve%C5%99ejn%C3%A9-moci%20%3FMaNadrizenyOrganVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pr%C3%A1vn%C3%AD-formu-osoby%20%3FMaPravniFormuOsoby%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20%3D%20%2712345678%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Orgán veřejné moci s danou hodnotou Má nadřízený orgán veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OrganVerejneMoci a l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci .
+    OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-orgánu-veřejné-moci ?MaIdentifikatorOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-orgánu-veřejné-moci ?MaNazevOrganuVerejneMoci . FILTER (LANG(?MaNazevOrganuVerejneMoci) = "cs") }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-orgánu-veřejné-moci ?MaIdentifikacniCisloOsobyOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-místa-pobytu-orgánu-veřejné-moci ?MaAdresuMistaPobytuOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-orgánu-veřejné-moci ?MaAdresuSidlaOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datum-zahájení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-datum-ukončení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPozastavenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPozastavenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPrerusenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPrerusenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-nadřízený-orgán-veřejné-moci ?MaNadrizenyOrganVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-právní-formu-osoby ?MaPravniFormuOsoby . }
+
+  FILTER (?MaNadrizenyOrganVerejneMoci = 'orgán-veřejné-moci/00000001-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOrganVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aorg%C3%A1n-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikatorOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaNazevOrganuVerejneMoci%20.%20FILTER%20%28LANG%28%3FMaNazevOrganuVerejneMoci%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-pobytu-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuMistaPobytuOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuSidlaOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-zah%C3%A1jen%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-datum-ukon%C4%8Den%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-nad%C5%99%C3%ADzen%C3%BD-org%C3%A1n-ve%C5%99ejn%C3%A9-moci%20%3FMaNadrizenyOrganVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pr%C3%A1vn%C3%AD-formu-osoby%20%3FMaPravniFormuOsoby%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaNadrizenyOrganVerejneMoci%20%3D%20%27org%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00000001-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Orgán veřejné moci s danou hodnotou Má právní formu osoby">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OrganVerejneMoci a l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci .
+    OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikátor-orgánu-veřejné-moci ?MaIdentifikatorOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-název-orgánu-veřejné-moci ?MaNazevOrganuVerejneMoci . FILTER (LANG(?MaNazevOrganuVerejneMoci) = "cs") }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-identifikační-číslo-osoby-orgánu-veřejné-moci ?MaIdentifikacniCisloOsobyOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-místa-pobytu-orgánu-veřejné-moci ?MaAdresuMistaPobytuOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-adresu-sídla-orgánu-veřejné-moci ?MaAdresuSidlaOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datum-zahájení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-datum-ukončení-výkonu-působnosti-orgánu-veřejné-moci ?MaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPozastavenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-pozastavený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPozastavenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-od ?MaPrerusenyVykonPusobnostiOrganuVerejneMociOd . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-přerušený-výkon-působnosti-orgánu-veřejné-moci-do ?MaPrerusenyVykonPusobnostiOrganuVerejneMociDo . }
+   OPTIONAL { ?OrganVerejneMoci a-sgov-104-pojem:má-nadřízený-orgán-veřejné-moci ?MaNadrizenyOrganVerejneMoci . }
+   OPTIONAL { ?OrganVerejneMoci l-sgov-sbírka-111-2009-pojem:má-právní-formu-osoby ?MaPravniFormuOsoby . }
+
+  FILTER (?MaPravniFormuOsoby = 'právní-forma/1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOrganVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aorg%C3%A1n-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikatorOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaNazevOrganuVerejneMoci%20.%20FILTER%20%28LANG%28%3FMaNazevOrganuVerejneMoci%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifika%C4%8Dn%C3%AD-%C4%8D%C3%ADslo-osoby-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaIdentifikacniCisloOsobyOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-m%C3%ADsta-pobytu-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuMistaPobytuOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-s%C3%ADdla-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaAdresuSidlaOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datum-zah%C3%A1jen%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumZahajeniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-datum-ukon%C4%8Den%C3%AD-v%C3%BDkonu-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaDatumUkonceniVykonuPusobnostiOrganuVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pozastaven%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPozastavenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-od%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-p%C5%99eru%C5%A1en%C3%BD-v%C3%BDkon-p%C5%AFsobnosti-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci-do%20%3FMaPrerusenyVykonPusobnostiOrganuVerejneMociDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20a-sgov-104-pojem%3Am%C3%A1-nad%C5%99%C3%ADzen%C3%BD-org%C3%A1n-ve%C5%99ejn%C3%A9-moci%20%3FMaNadrizenyOrganVerejneMoci%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOrganVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pr%C3%A1vn%C3%AD-formu-osoby%20%3FMaPravniFormuOsoby%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaPravniFormuOsoby%20%3D%20%27pr%C3%A1vn%C3%AD-forma%2F1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Datová schránka</h3>
+               <aside class="example" title="Seznam instancí typu Datová schránka přiřazených k instanci typu Orgán veřejné moci prostřednictvím Má datovou schránku orgánu veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?DatovaSchranka a l-sgov-sbírka-111-2009-pojem:datová-schránka .
+  OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-typ-datové-schránky ?MaTypDatoveSchranky . }
+   OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-identifikátor-datové-schránky ?MaIdentifikatorDatoveSchranky . }
+   ?MaDatovouSchrankuOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datovou-schránku-orgánu-veřejné-moci ?DatovaSchranka .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FDatovaSchranka%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Adatov%C3%A1-schr%C3%A1nka%20.%0A%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-typ-datov%C3%A9-schr%C3%A1nky%20%3FMaTypDatoveSchranky%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-datov%C3%A9-schr%C3%A1nky%20%3FMaIdentifikatorDatoveSchranky%20.%20%7D%0A%20%20%20%3FMaDatovouSchrankuOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datovou-schr%C3%A1nku-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FDatovaSchranka%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Datová schránka s danou hodnotou Má typ datové schránky">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?DatovaSchranka a l-sgov-sbírka-111-2009-pojem:datová-schránka .
+    OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-typ-datové-schránky ?MaTypDatoveSchranky . }
+   OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-identifikátor-datové-schránky ?MaIdentifikatorDatoveSchranky . }
+   ?MaDatovouSchrankuOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datovou-schránku-orgánu-veřejné-moci ?DatovaSchranka .
+
+  FILTER (?MaTypDatoveSchranky = 'typ-datové-schránky/OVM')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FDatovaSchranka%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Adatov%C3%A1-schr%C3%A1nka%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-typ-datov%C3%A9-schr%C3%A1nky%20%3FMaTypDatoveSchranky%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-datov%C3%A9-schr%C3%A1nky%20%3FMaIdentifikatorDatoveSchranky%20.%20%7D%0A%20%20%20%3FMaDatovouSchrankuOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datovou-schr%C3%A1nku-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FDatovaSchranka%20.%0A%0A%20%20FILTER%20%28%3FMaTypDatoveSchranky%20%3D%20%27typ-datov%C3%A9-schr%C3%A1nky%2FOVM%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Datová schránka s danou hodnotou Má identifikátor datové schránky">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?DatovaSchranka a l-sgov-sbírka-111-2009-pojem:datová-schránka .
+    OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-typ-datové-schránky ?MaTypDatoveSchranky . }
+   OPTIONAL { ?DatovaSchranka l-sgov-sbírka-111-2009-pojem:má-identifikátor-datové-schránky ?MaIdentifikatorDatoveSchranky . }
+   ?MaDatovouSchrankuOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-datovou-schránku-orgánu-veřejné-moci ?DatovaSchranka .
+
+  FILTER (?MaIdentifikatorDatoveSchranky = '0abcdef')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FDatovaSchranka%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Adatov%C3%A1-schr%C3%A1nka%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-typ-datov%C3%A9-schr%C3%A1nky%20%3FMaTypDatoveSchranky%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FDatovaSchranka%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-datov%C3%A9-schr%C3%A1nky%20%3FMaIdentifikatorDatoveSchranky%20.%20%7D%0A%20%20%20%3FMaDatovouSchrankuOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-datovou-schr%C3%A1nku-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FDatovaSchranka%20.%0A%0A%20%20FILTER%20%28%3FMaIdentifikatorDatoveSchranky%20%3D%20%270abcdef%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Ustanovení právního předpisu</h3>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu přiřazených k instanci typu Orgán veřejné moci prostřednictvím Vykonává působnost na základě ustanovení">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   ?VykonavaPusobnostNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:vykonává-působnost-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FVykonavaPusobnostNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-p%C5%AFsobnost-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu s danou hodnotou Má úplné označení ustanovení včetně označení právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+    OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   ?VykonavaPusobnostNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:vykonává-působnost-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+
+  FILTER (?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu = '§ 1 zákona č. 1/1000 Sb.')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FVykonavaPusobnostNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-p%C5%AFsobnost-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%27%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Osoba stojící v čele orgánu veřejné moci</h3>
+               <aside class="example" title="Seznam instancí typu Osoba stojící v čele orgánu veřejné moci přiřazených k instanci typu Orgán veřejné moci prostřednictvím Stojí v čele orgánu veřejné moci">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?OsobaStojiciVCeleOrganuVerejneMoci a l-sgov-sbírka-111-2009-pojem:osoba-stojící-v-čele-orgánu-veřejné-moci .
+  OPTIONAL { ?OsobaStojiciVCeleOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:má-jméno-a-příjmení-osoby-stojící-v-čele-orgánu-veřejné-moci ?MaJmenoAPrijmeniOsobyStojiciVCeleOrganuVerejneMoci . }
+   ?StojiVCeleOrganuVerejneMoci l-sgov-sbírka-111-2009-pojem:stojí-v-čele-orgánu-veřejné-moci ?OsobaStojiciVCeleOrganuVerejneMoci .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOsobaStojiciVCeleOrganuVerejneMoci%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aosoba-stoj%C3%ADc%C3%AD-v-%C4%8Dele-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20.%0A%20%20OPTIONAL%20%7B%20%3FOsobaStojiciVCeleOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-jm%C3%A9no-a-p%C5%99%C3%ADjmen%C3%AD-osoby-stoj%C3%ADc%C3%AD-v-%C4%8Dele-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FMaJmenoAPrijmeniOsobyStojiciVCeleOrganuVerejneMoci%20.%20%7D%0A%20%20%20%3FStojiVCeleOrganuVerejneMoci%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Astoj%C3%AD-v-%C4%8Dele-org%C3%A1nu-ve%C5%99ejn%C3%A9-moci%20%3FOsobaStojiciVCeleOrganuVerejneMoci%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Pracoviště</h3>
+               <aside class="example" title="Seznam instancí typu Pracoviště přiřazených k instanci typu Orgán veřejné moci prostřednictvím Má pracoviště vykonávající úkon">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Pracoviste a l-sgov-sbírka-111-2009-pojem:pracoviště .
+  OPTIONAL { ?Pracoviste l-sgov-sbírka-111-2009-pojem:má-adresu-pracoviště ?MaAdresuPracoviste . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-adresu-pracoviště-neevidovanou-v-rúian ?MaAdresuPracovisteNeevidovanouVRuian . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-stát-pracoviště ?MaStatPracoviste . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-datum-otevření-pracoviště ?MaDatumOtevreniPracoviste . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-datum-uzavření-pracoviště ?MaDatumUzavreniPracoviste . }
+   ?MaPracovisteVykonavajiciUkon l-sgov-sbírka-111-2009-pojem:má-pracoviště-vykonávající-úkon ?Pracoviste .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPracoviste%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Apracovi%C5%A1t%C4%9B%20.%0A%20%20OPTIONAL%20%7B%20%3FPracoviste%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-pracovi%C5%A1t%C4%9B%20%3FMaAdresuPracoviste%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-adresu-pracovi%C5%A1t%C4%9B-neevidovanou-v-r%C3%BAian%20%3FMaAdresuPracovisteNeevidovanouVRuian%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-st%C3%A1t-pracovi%C5%A1t%C4%9B%20%3FMaStatPracoviste%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-datum-otev%C5%99en%C3%AD-pracovi%C5%A1t%C4%9B%20%3FMaDatumOtevreniPracoviste%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-datum-uzav%C5%99en%C3%AD-pracovi%C5%A1t%C4%9B%20%3FMaDatumUzavreniPracoviste%20.%20%7D%0A%20%20%20%3FMaPracovisteVykonavajiciUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pracovi%C5%A1t%C4%9B-vykon%C3%A1vaj%C3%ADc%C3%AD-%C3%BAkon%20%3FPracoviste%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Pracoviště s danou hodnotou Má stát pracoviště">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Pracoviste a l-sgov-sbírka-111-2009-pojem:pracoviště .
+    OPTIONAL { ?Pracoviste l-sgov-sbírka-111-2009-pojem:má-adresu-pracoviště ?MaAdresuPracoviste . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-adresu-pracoviště-neevidovanou-v-rúian ?MaAdresuPracovisteNeevidovanouVRuian . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-stát-pracoviště ?MaStatPracoviste . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-datum-otevření-pracoviště ?MaDatumOtevreniPracoviste . }
+   OPTIONAL { ?Pracoviste a-sgov-104-pojem:má-datum-uzavření-pracoviště ?MaDatumUzavreniPracoviste . }
+   ?MaPracovisteVykonavajiciUkon l-sgov-sbírka-111-2009-pojem:má-pracoviště-vykonávající-úkon ?Pracoviste .
+
+  FILTER (?MaStatPracoviste = 'stát/1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPracoviste%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Apracovi%C5%A1t%C4%9B%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-adresu-pracovi%C5%A1t%C4%9B%20%3FMaAdresuPracoviste%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-adresu-pracovi%C5%A1t%C4%9B-neevidovanou-v-r%C3%BAian%20%3FMaAdresuPracovisteNeevidovanouVRuian%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-st%C3%A1t-pracovi%C5%A1t%C4%9B%20%3FMaStatPracoviste%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-datum-otev%C5%99en%C3%AD-pracovi%C5%A1t%C4%9B%20%3FMaDatumOtevreniPracoviste%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPracoviste%20a-sgov-104-pojem%3Am%C3%A1-datum-uzav%C5%99en%C3%AD-pracovi%C5%A1t%C4%9B%20%3FMaDatumUzavreniPracoviste%20.%20%7D%0A%20%20%20%3FMaPracovisteVykonavajiciUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-pracovi%C5%A1t%C4%9B-vykon%C3%A1vaj%C3%ADc%C3%AD-%C3%BAkon%20%3FPracoviste%20.%0A%0A%20%20FILTER%20%28%3FMaStatPracoviste%20%3D%20%27st%C3%A1t%2F1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Adresní místo</h3>
+               <aside class="example" title="Seznam instancí typu Adresní místo">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?AdresniMisto a l-sgov-sbírka-111-2009-pojem:adresní-místo .
+  OPTIONAL { ?AdresniMisto l-sgov-sbírka-111-2009-pojem:má-kód-adresního-místa ?MaKodAdresnihoMista . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAdresniMisto%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aadresn%C3%AD-m%C3%ADsto%20.%0A%20%20OPTIONAL%20%7B%20%3FAdresniMisto%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-adresn%C3%ADho-m%C3%ADsta%20%3FMaKodAdresnihoMista%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Adresní místo s danou hodnotou Má kód adresního místa">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?AdresniMisto a l-sgov-sbírka-111-2009-pojem:adresní-místo .
+    OPTIONAL { ?AdresniMisto l-sgov-sbírka-111-2009-pojem:má-kód-adresního-místa ?MaKodAdresnihoMista . }
+
+  FILTER (?MaKodAdresnihoMista = '22305190')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAdresniMisto%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aadresn%C3%AD-m%C3%ADsto%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FAdresniMisto%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-adresn%C3%ADho-m%C3%ADsta%20%3FMaKodAdresnihoMista%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaKodAdresnihoMista%20%3D%20%2722305190%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+         </section>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>

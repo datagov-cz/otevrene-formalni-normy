@@ -250,6 +250,68 @@
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
          <h2><dfn>LOD struktura</dfn></h2>
+         <section id="ukázky-lod">
+            <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Agendový informační systém</h3>
+               <aside class="example" title="Seznam instancí typu Agendový informační systém">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
+  OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") }
+   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . }
+   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
+   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:vede-údaje-o-objektu-nebo-subjektu-údajů ?VedeUdajeOObjektuNeboSubjektuUdaju . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avede-%C3%BAdaje-o-objektu-nebo-subjektu-%C3%BAdaj%C5%AF%20%3FVedeUdajeOObjektuNeboSubjektuUdaju%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Agendový informační systém s danou hodnotou Má kód agendového informačního systému">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
+    OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") }
+   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . }
+   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
+   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:vede-údaje-o-objektu-nebo-subjektu-údajů ?VedeUdajeOObjektuNeboSubjektuUdaju . }
+
+  FILTER (?MaKodAgendovehoInformacnihoSystemu = '6100')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avede-%C3%BAdaje-o-objektu-nebo-subjektu-%C3%BAdaj%C5%AF%20%3FVedeUdajeOObjektuNeboSubjektuUdaju%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaKodAgendovehoInformacnihoSystemu%20%3D%20%276100%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Agendový informační systém s danou hodnotou Má správce agendového informačního systému">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
+    OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") }
+   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . }
+   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
+   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:vede-údaje-o-objektu-nebo-subjektu-údajů ?VedeUdajeOObjektuNeboSubjektuUdaju . }
+
+  FILTER (?MaSpravceAgendovehoInformacnihoSystemu = 'orgán-veřejné-moci/12345678-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avede-%C3%BAdaje-o-objektu-nebo-subjektu-%C3%BAdaj%C5%AF%20%3FVedeUdajeOObjektuNeboSubjektuUdaju%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaSpravceAgendovehoInformacnihoSystemu%20%3D%20%27org%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F12345678-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+         </section>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>

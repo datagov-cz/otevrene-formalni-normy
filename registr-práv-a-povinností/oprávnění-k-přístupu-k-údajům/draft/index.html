@@ -588,6 +588,248 @@
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
          <h2><dfn>LOD struktura</dfn></h2>
+         <section id="ukázky-lod">
+            <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Oprávnění k přístupu k údajům</h3>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údajům">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdajum a l-sgov-sbírka-111-2009-pojem:oprávnění-k-přístupu-k-údajům .
+  OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:má-kód-oprávnění-k-přístupu-k-údajům ?MaKodOpravneniKPristupuKUdajum . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:čerpá-údaje-z-agendy ?CerpaUdajeZAgendy . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:poskytuje-údaje-agendě ?PoskytujeUdajeAgende . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum l-sgov-sbírka-111-2009-pojem:je-oprávněním-pro-roli ?JeOpravnenimProRoli . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdajum%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20.%0A%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20%3FMaKodOpravneniKPristupuKUdajum%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3A%C4%8Derp%C3%A1-%C3%BAdaje-z-agendy%20%3FCerpaUdajeZAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Aposkytuje-%C3%BAdaje-agend%C4%9B%20%3FPoskytujeUdajeAgende%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli%20%3FJeOpravnenimProRoli%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údajům s danou hodnotou Má kód oprávnění k přístupu k údajům">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdajum a l-sgov-sbírka-111-2009-pojem:oprávnění-k-přístupu-k-údajům .
+    OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:má-kód-oprávnění-k-přístupu-k-údajům ?MaKodOpravneniKPristupuKUdajum . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:čerpá-údaje-z-agendy ?CerpaUdajeZAgendy . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:poskytuje-údaje-agendě ?PoskytujeUdajeAgende . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum l-sgov-sbírka-111-2009-pojem:je-oprávněním-pro-roli ?JeOpravnenimProRoli . }
+
+  FILTER (?MaKodOpravneniKPristupuKUdajum = 'A1046-A101-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdajum%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20%3FMaKodOpravneniKPristupuKUdajum%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3A%C4%8Derp%C3%A1-%C3%BAdaje-z-agendy%20%3FCerpaUdajeZAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Aposkytuje-%C3%BAdaje-agend%C4%9B%20%3FPoskytujeUdajeAgende%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli%20%3FJeOpravnenimProRoli%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaKodOpravneniKPristupuKUdajum%20%3D%20%27A1046-A101-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údajům s danou hodnotou Čerpá údaje z agendy">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdajum a l-sgov-sbírka-111-2009-pojem:oprávnění-k-přístupu-k-údajům .
+    OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:má-kód-oprávnění-k-přístupu-k-údajům ?MaKodOpravneniKPristupuKUdajum . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:čerpá-údaje-z-agendy ?CerpaUdajeZAgendy . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:poskytuje-údaje-agendě ?PoskytujeUdajeAgende . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum l-sgov-sbírka-111-2009-pojem:je-oprávněním-pro-roli ?JeOpravnenimProRoli . }
+
+  FILTER (?CerpaUdajeZAgendy = 'agenda/A101')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdajum%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20%3FMaKodOpravneniKPristupuKUdajum%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3A%C4%8Derp%C3%A1-%C3%BAdaje-z-agendy%20%3FCerpaUdajeZAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Aposkytuje-%C3%BAdaje-agend%C4%9B%20%3FPoskytujeUdajeAgende%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli%20%3FJeOpravnenimProRoli%20.%20%7D%0A%0A%20%20FILTER%20%28%3FCerpaUdajeZAgendy%20%3D%20%27agenda%2FA101%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údajům s danou hodnotou Poskytuje údaje agendě">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX : &lt;&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdajum a l-sgov-sbírka-111-2009-pojem:oprávnění-k-přístupu-k-údajům .
+    OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:má-kód-oprávnění-k-přístupu-k-údajům ?MaKodOpravneniKPristupuKUdajum . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:čerpá-údaje-z-agendy ?CerpaUdajeZAgendy . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum a-sgov-104-pojem:poskytuje-údaje-agendě ?PoskytujeUdajeAgende . }
+   OPTIONAL { ?OpravneniKPristupuKUdajum l-sgov-sbírka-111-2009-pojem:je-oprávněním-pro-roli ?JeOpravnenimProRoli . }
+
+  FILTER (?PoskytujeUdajeAgende = 'agenda/A1046')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdajum%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaj%C5%AFm%20%3FMaKodOpravneniKPristupuKUdajum%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3A%C4%8Derp%C3%A1-%C3%BAdaje-z-agendy%20%3FCerpaUdajeZAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20a-sgov-104-pojem%3Aposkytuje-%C3%BAdaje-agend%C4%9B%20%3FPoskytujeUdajeAgende%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdajum%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-opr%C3%A1vn%C4%9Bn%C3%ADm-pro-roli%20%3FJeOpravnenimProRoli%20.%20%7D%0A%0A%20%20FILTER%20%28%3FPoskytujeUdajeAgende%20%3D%20%27agenda%2FA1046%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Oprávnění k přístupu k údaji</h3>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údaji přiřazených k instanci typu Oprávnění k přístupu k údajům prostřednictvím Zahrnuje oprávnění k přístupu k údaji">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdaji a a-sgov-104-pojem:oprávnění-k-přístupu-k-údaji .
+  OPTIONAL { ?OpravneniKPristupuKUdaji a-sgov-104-pojem:má-úroveň-přístupu ?MaUroveňPristupu . }
+   OPTIONAL { ?OpravneniKPristupuKUdaji l-sgov-sbírka-111-2009-pojem:zpřístupňuje-údaj ?ZpristupňujeUdaj . }
+   ?ZahrnujeOpravneniKPristupuKUdaji a-sgov-104-pojem:zahrnuje-oprávnění-k-přístupu-k-údaji ?OpravneniKPristupuKUdaji .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdaji%20a%20a-sgov-104-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji%20.%0A%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdaji%20a-sgov-104-pojem%3Am%C3%A1-%C3%BArove%C5%88-p%C5%99%C3%ADstupu%20%3FMaUrove%C5%88Pristupu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdaji%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Azp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaj%20%3FZpristup%C5%88ujeUdaj%20.%20%7D%0A%20%20%20%3FZahrnujeOpravneniKPristupuKUdaji%20a-sgov-104-pojem%3Azahrnuje-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji%20%3FOpravneniKPristupuKUdaji%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údaji s danou hodnotou Má úroveň přístupu">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdaji a a-sgov-104-pojem:oprávnění-k-přístupu-k-údaji .
+    OPTIONAL { ?OpravneniKPristupuKUdaji a-sgov-104-pojem:má-úroveň-přístupu ?MaUroveňPristupu . }
+   OPTIONAL { ?OpravneniKPristupuKUdaji l-sgov-sbírka-111-2009-pojem:zpřístupňuje-údaj ?ZpristupňujeUdaj . }
+   ?ZahrnujeOpravneniKPristupuKUdaji a-sgov-104-pojem:zahrnuje-oprávnění-k-přístupu-k-údaji ?OpravneniKPristupuKUdaji .
+
+  FILTER (?MaUroveňPristupu = 'R')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdaji%20a%20a-sgov-104-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdaji%20a-sgov-104-pojem%3Am%C3%A1-%C3%BArove%C5%88-p%C5%99%C3%ADstupu%20%3FMaUrove%C5%88Pristupu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdaji%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Azp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaj%20%3FZpristup%C5%88ujeUdaj%20.%20%7D%0A%20%20%20%3FZahrnujeOpravneniKPristupuKUdaji%20a-sgov-104-pojem%3Azahrnuje-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji%20%3FOpravneniKPristupuKUdaji%20.%0A%0A%20%20FILTER%20%28%3FMaUrove%C5%88Pristupu%20%3D%20%27R%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Oprávnění k přístupu k údaji s danou hodnotou Zpřístupňuje údaj">
+                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?OpravneniKPristupuKUdaji a a-sgov-104-pojem:oprávnění-k-přístupu-k-údaji .
+    OPTIONAL { ?OpravneniKPristupuKUdaji a-sgov-104-pojem:má-úroveň-přístupu ?MaUroveňPristupu . }
+   OPTIONAL { ?OpravneniKPristupuKUdaji l-sgov-sbírka-111-2009-pojem:zpřístupňuje-údaj ?ZpristupňujeUdaj . }
+   ?ZahrnujeOpravneniKPristupuKUdaji a-sgov-104-pojem:zahrnuje-oprávnění-k-přístupu-k-údaji ?OpravneniKPristupuKUdaji .
+
+  FILTER (?ZpristupňujeUdaj = 'údaj/101-1-1')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FOpravneniKPristupuKUdaji%20a%20a-sgov-104-pojem%3Aopr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdaji%20a-sgov-104-pojem%3Am%C3%A1-%C3%BArove%C5%88-p%C5%99%C3%ADstupu%20%3FMaUrove%C5%88Pristupu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOpravneniKPristupuKUdaji%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Azp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaj%20%3FZpristup%C5%88ujeUdaj%20.%20%7D%0A%20%20%20%3FZahrnujeOpravneniKPristupuKUdaji%20a-sgov-104-pojem%3Azahrnuje-opr%C3%A1vn%C4%9Bn%C3%AD-k-p%C5%99%C3%ADstupu-k-%C3%BAdaji%20%3FOpravneniKPristupuKUdaji%20.%0A%0A%20%20FILTER%20%28%3FZpristup%C5%88ujeUdaj%20%3D%20%27%C3%BAdaj%2F101-1-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Ustanovení právního předpisu</h3>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu přiřazených k instanci typu Oprávnění k přístupu k údajům prostřednictvím Zpřístupňuje údaje na základě ustanovení">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu a-sgov-104-pojem:má-paragraf-ustanovení ?MaParagrafUstanoveni . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu a-sgov-104-pojem:má-odstavec-ustanovení ?MaOdstavecUstanoveni . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu a-sgov-104-pojem:má-písmeno-ustanovení ?MaPismenoUstanoveni . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:je-součástí-právního-předpisu ?JeSoucastiPravnihoPredpisu . }
+   ?ZpristupňujeUdajeNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:zpřístupňuje-údaje-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20a-sgov-104-pojem%3Am%C3%A1-paragraf-ustanoven%C3%AD%20%3FMaParagrafUstanoveni%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20a-sgov-104-pojem%3Am%C3%A1-odstavec-ustanoven%C3%AD%20%3FMaOdstavecUstanoveni%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20a-sgov-104-pojem%3Am%C3%A1-p%C3%ADsmeno-ustanoven%C3%AD%20%3FMaPismenoUstanoveni%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FJeSoucastiPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FZpristup%C5%88ujeUdajeNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Azp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaje-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu s danou hodnotou Má úplné označení ustanovení včetně označení právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+    OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu a-sgov-104-pojem:má-paragraf-ustanovení ?MaParagrafUstanoveni . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu a-sgov-104-pojem:má-odstavec-ustanovení ?MaOdstavecUstanoveni . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu a-sgov-104-pojem:má-písmeno-ustanovení ?MaPismenoUstanoveni . }
+   OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:je-součástí-právního-předpisu ?JeSoucastiPravnihoPredpisu . }
+   ?ZpristupňujeUdajeNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:zpřístupňuje-údaje-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+
+  FILTER (?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu = '§ 1 zákona č. 1/1000 Sb.')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20a-sgov-104-pojem%3Am%C3%A1-paragraf-ustanoven%C3%AD%20%3FMaParagrafUstanoveni%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20a-sgov-104-pojem%3Am%C3%A1-odstavec-ustanoven%C3%AD%20%3FMaOdstavecUstanoveni%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20a-sgov-104-pojem%3Am%C3%A1-p%C3%ADsmeno-ustanoven%C3%AD%20%3FMaPismenoUstanoveni%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FJeSoucastiPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FZpristup%C5%88ujeUdajeNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Azp%C5%99%C3%ADstup%C5%88uje-%C3%BAdaje-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%27%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Právní předpis</h3>
+               <aside class="example" title="Seznam instancí typu Právní předpis">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?JeSoucastiPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:je-součástí-právního-předpisu .
+  OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-název-právního-předpisu ?MaNazevPravnihoPredpisu . FILTER (LANG(?MaNazevPravnihoPredpisu) = "cs") }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-číslo-právního-předpisu ?MaCisloPravnihoPredpisu . }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-rok-právního-předpisu ?MaRokPravnihoPredpisu . }
+
+}
+LIMIT 100
+          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FJeSoucastiPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaNazevPravnihoPredpisu%20.%20FILTER%20%28LANG%28%3FMaNazevPravnihoPredpisu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C4%8D%C3%ADslo-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaCisloPravnihoPredpisu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-rok-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaRokPravnihoPredpisu%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Právní předpis s danou hodnotou Má název právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?JeSoucastiPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:je-součástí-právního-předpisu .
+    OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-název-právního-předpisu ?MaNazevPravnihoPredpisu . FILTER (LANG(?MaNazevPravnihoPredpisu) = "cs") }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-číslo-právního-předpisu ?MaCisloPravnihoPredpisu . }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-rok-právního-předpisu ?MaRokPravnihoPredpisu . }
+
+  FILTER (?MaNazevPravnihoPredpisu = 'zákon o volbách do zastupitelstev krajů a o změně některých zákon')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FJeSoucastiPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaNazevPravnihoPredpisu%20.%20FILTER%20%28LANG%28%3FMaNazevPravnihoPredpisu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C4%8D%C3%ADslo-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaCisloPravnihoPredpisu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-rok-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaRokPravnihoPredpisu%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaNazevPravnihoPredpisu%20%3D%20%27z%C3%A1kon%20o%20volb%C3%A1ch%20do%20zastupitelstev%20kraj%C5%AF%20a%20o%20zm%C4%9Bn%C4%9B%20n%C4%9Bkter%C3%BDch%20z%C3%A1kon%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Právní předpis s danou hodnotou Má číslo právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?JeSoucastiPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:je-součástí-právního-předpisu .
+    OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-název-právního-předpisu ?MaNazevPravnihoPredpisu . FILTER (LANG(?MaNazevPravnihoPredpisu) = "cs") }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-číslo-právního-předpisu ?MaCisloPravnihoPredpisu . }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-rok-právního-předpisu ?MaRokPravnihoPredpisu . }
+
+  FILTER (?MaCisloPravnihoPredpisu = '130')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FJeSoucastiPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaNazevPravnihoPredpisu%20.%20FILTER%20%28LANG%28%3FMaNazevPravnihoPredpisu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C4%8D%C3%ADslo-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaCisloPravnihoPredpisu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-rok-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaRokPravnihoPredpisu%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaCisloPravnihoPredpisu%20%3D%20%27130%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+               <aside class="example" title="Seznam instancí typu Právní předpis s danou hodnotou Má rok právního předpisu">
+                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?JeSoucastiPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:je-součástí-právního-předpisu .
+    OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-název-právního-předpisu ?MaNazevPravnihoPredpisu . FILTER (LANG(?MaNazevPravnihoPredpisu) = "cs") }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-číslo-právního-předpisu ?MaCisloPravnihoPredpisu . }
+   OPTIONAL { ?JeSoucastiPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-rok-právního-předpisu ?MaRokPravnihoPredpisu . }
+
+  FILTER (?MaRokPravnihoPredpisu = '2000')
+}
+LIMIT 100
+            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FJeSoucastiPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-sou%C4%8D%C3%A1st%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaNazevPravnihoPredpisu%20.%20FILTER%20%28LANG%28%3FMaNazevPravnihoPredpisu%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C4%8D%C3%ADslo-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaCisloPravnihoPredpisu%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FJeSoucastiPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-rok-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaRokPravnihoPredpisu%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaRokPravnihoPredpisu%20%3D%20%272000%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
+                     spustit
+                     </a></aside>
+            </section>
+         </section>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
          <h2><dfn>Příklady</dfn></h2>
