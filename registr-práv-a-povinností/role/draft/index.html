@@ -252,101 +252,98 @@
             <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Role</h3>
-               <aside class="example" title="Seznam instancí typu Role">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX : &lt;&gt;
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Role">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Role a l-sgov-sbírka-111-2009-pojem:role .
-  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . }
-   OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
-
+  ?Role a l-sgov-sbírka-111-2009-pojem:role .  
+  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . } 
+  OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
 }
-LIMIT 100
-          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Role s danou hodnotou Má souhrn oprávnění definovaných rolí">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Role s danou hodnotou vlastnosti Má souhrn oprávnění definovaných rolí">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F12345678-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F12345678-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Role a l-sgov-sbírka-111-2009-pojem:role .
-    OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . }
-   OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
-
-  FILTER (?MaSouhrnOpravneniDefinovanychRoli = 'orgán-veřejné-moci/12345678-1')
+  ?Role a l-sgov-sbírka-111-2009-pojem:role .  
+  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . } 
+  OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
+  FILTER (?MaSouhrnOpravneniDefinovanychRoli = &lt;https://rpp.gov.cz/zdroj/orgán-veřejné-moci/12345678-1&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%27org%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F12345678-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Role s danou hodnotou Má souhrn oprávnění definovaných rolí">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Role s danou hodnotou vlastnosti Má souhrn oprávnění definovaných rolí">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Fsoukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF%2F12345678-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Fsoukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF%2F12345678-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Role a l-sgov-sbírka-111-2009-pojem:role .
-    OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . }
-   OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
-
-  FILTER (?MaSouhrnOpravneniDefinovanychRoli = 'soukromoprávní-uživatel-údajů/12345678-1')
+  ?Role a l-sgov-sbírka-111-2009-pojem:role .  
+  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . } 
+  OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
+  FILTER (?MaSouhrnOpravneniDefinovanychRoli = &lt;https://rpp.gov.cz/zdroj/soukromoprávní-uživatel-údajů/12345678-1&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%27soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF%2F12345678-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Role s danou hodnotou Má souhrn oprávnění definovaných rolí">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Role s danou hodnotou vlastnosti Má souhrn oprávnění definovaných rolí">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Fkategorie-ovm%2FKO12%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Fkategorie-ovm%2FKO12%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Role a l-sgov-sbírka-111-2009-pojem:role .
-    OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . }
-   OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
-
-  FILTER (?MaSouhrnOpravneniDefinovanychRoli = 'kategorie-ovm/KO12')
+  ?Role a l-sgov-sbírka-111-2009-pojem:role .  
+  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . } 
+  OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
+  FILTER (?MaSouhrnOpravneniDefinovanychRoli = &lt;https://rpp.gov.cz/zdroj/kategorie-ovm/KO12&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%27kategorie-ovm%2FKO12%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Role s danou hodnotou Má souhrn oprávnění definovaných rolí">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Role s danou hodnotou vlastnosti Má souhrn oprávnění definovaných rolí">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Fkategorie-spu%C3%BA%2FKS11%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Fkategorie-spu%C3%BA%2FKS11%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Role a l-sgov-sbírka-111-2009-pojem:role .
-    OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . }
-   OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
-
-  FILTER (?MaSouhrnOpravneniDefinovanychRoli = 'kategorie-spuú/KS11')
+  ?Role a l-sgov-sbírka-111-2009-pojem:role .  
+  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . } 
+  OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
+  FILTER (?MaSouhrnOpravneniDefinovanychRoli = &lt;https://rpp.gov.cz/zdroj/kategorie-spuú/KS11&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaSouhrnOpravneniDefinovanychRoli%20%3D%20%27kategorie-spu%C3%BA%2FKS11%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Role s danou hodnotou Vykonává činnost">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost">Vykonává činnost</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Role s danou hodnotou vlastnosti Vykonává činnost">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaCinnost%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%C4%8Dinnost%2FA1046%2FCR9999%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaCinnost%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%C4%8Dinnost%2FA1046%2FCR9999%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Role a l-sgov-sbírka-111-2009-pojem:role .
-    OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . }
-   OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
-
-  FILTER (?VykonavaCinnost = 'činnost/A1046/CR9999')
+  ?Role a l-sgov-sbírka-111-2009-pojem:role .  
+  OPTIONAL { ?MaSouhrnOpravneniDefinovanychRoli l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí ?Role . } 
+  OPTIONAL { ?Role l-sgov-sbírka-111-2009-pojem:vykonává-činnost ?VykonavaCinnost . }
+  FILTER (?VykonavaCinnost = &lt;https://rpp.gov.cz/zdroj/činnost/A1046/CR9999&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FRole%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Arole%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FMaSouhrnOpravneniDefinovanychRoli%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD%20%3FRole%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FRole%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost%20%3FVykonavaCinnost%20.%20%7D%0A%0A%20%20FILTER%20%28%3FVykonavaCinnost%20%3D%20%27%C4%8Dinnost%2FA1046%2FCR9999%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
+LIMIT 100</pre>
+               </aside>
             </section>
          </section>
       </section>

@@ -349,22 +349,40 @@
             <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Působnost v agendě</h3>
-               <aside class="example" title="Seznam instancí typu Působnost v agendě">
-                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX : &lt;&gt;
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%AFsobnost-v-agend%C4%9B">Působnost v agendě</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Působnost v agendě">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPusobnostVAgende%20a%20a-sgov-104-pojem%3Ap%C5%AFsobnost-v-agend%C4%9B%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avznikla-v-r%C3%A1mci-registrace%20%3FVzniklaVRamciRegistrace%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaCinnostVRamciPusobnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C3%BAkon-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaUkonVRamciPusobnosti%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPusobnostVAgende%20a%20a-sgov-104-pojem%3Ap%C5%AFsobnost-v-agend%C4%9B%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avznikla-v-r%C3%A1mci-registrace%20%3FVzniklaVRamciRegistrace%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaCinnostVRamciPusobnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C3%BAkon-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaUkonVRamciPusobnosti%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?PusobnostVAgende a a-sgov-104-pojem:působnost-v-agendě .
-  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vznikla-v-rámci-registrace ?VzniklaVRamciRegistrace . }
-   OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vykonává-činnost-v-rámci-působnosti ?VykonavaCinnostVRamciPusobnosti . }
-   OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vykonává-úkon-v-rámci-působnosti ?VykonavaUkonVRamciPusobnosti . }
-
+  ?PusobnostVAgende a a-sgov-104-pojem:působnost-v-agendě .  
+  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vznikla-v-rámci-registrace ?VzniklaVRamciRegistrace . } 
+  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vykonává-činnost-v-rámci-působnosti ?VykonavaCinnostVRamciPusobnosti . } 
+  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vykonává-úkon-v-rámci-působnosti ?VykonavaUkonVRamciPusobnosti . }
 }
-LIMIT 100
-          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPusobnostVAgende%20a%20a-sgov-104-pojem%3Ap%C5%AFsobnost-v-agend%C4%9B%20.%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avznikla-v-r%C3%A1mci-registrace%20%3FVzniklaVRamciRegistrace%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaCinnostVRamciPusobnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C3%BAkon-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaUkonVRamciPusobnosti%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/p%C5%AFsobnost-v-agend%C4%9B">Působnost v agendě</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost-v-r%C3%A1mci-p%C5%AFsobnosti">Vykonává činnost v rámci působnosti</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Působnost v agendě s danou hodnotou vlastnosti Vykonává činnost v rámci působnosti">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPusobnostVAgende%20a%20a-sgov-104-pojem%3Ap%C5%AFsobnost-v-agend%C4%9B%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avznikla-v-r%C3%A1mci-registrace%20%3FVzniklaVRamciRegistrace%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaCinnostVRamciPusobnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C3%BAkon-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaUkonVRamciPusobnosti%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaCinnostVRamciPusobnosti%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FPusobnostVAgende%20a%20a-sgov-104-pojem%3Ap%C5%AFsobnost-v-agend%C4%9B%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avznikla-v-r%C3%A1mci-registrace%20%3FVzniklaVRamciRegistrace%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C4%8Dinnost-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaCinnostVRamciPusobnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPusobnostVAgende%20a-sgov-104-pojem%3Avykon%C3%A1v%C3%A1-%C3%BAkon-v-r%C3%A1mci-p%C5%AFsobnosti%20%3FVykonavaUkonVRamciPusobnosti%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaCinnostVRamciPusobnosti%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?PusobnostVAgende a a-sgov-104-pojem:působnost-v-agendě .  
+  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vznikla-v-rámci-registrace ?VzniklaVRamciRegistrace . } 
+  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vykonává-činnost-v-rámci-působnosti ?VykonavaCinnostVRamciPusobnosti . } 
+  OPTIONAL { ?PusobnostVAgende a-sgov-104-pojem:vykonává-úkon-v-rámci-působnosti ?VykonavaUkonVRamciPusobnosti . }
+  FILTER (?VykonavaCinnostVRamciPusobnosti = &lt;https://rpp.gov.cz/zdroj/&gt;)
+}
+LIMIT 100</pre>
+               </aside>
             </section>
          </section>
       </section>

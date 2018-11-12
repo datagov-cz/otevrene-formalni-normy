@@ -389,58 +389,102 @@
           <xsl:text>Ukázky SPARQL dotazů nad typem </xsl:text>
           <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)" />
         </h3>
+        <p>Následující SPARQL dotaz vrací seznam všech instancí typu <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)" />. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové, atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
         <aside class="example">
   				<xsl:attribute name="title">
-            <xsl:text>Seznam instancí typu </xsl:text>
+            <xsl:text>Instance typu </xsl:text>
             <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)" />
             <xsl:if test="./parent::fn:map[fn:string[@key='type'] = 'array']/../..[@key]">
-              <xsl:text> přiřazených k instanci typu </xsl:text>
+              <xsl:text> přiřazené k instanci typu </xsl:text>
               <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(./parent::fn:map[fn:string[@key='type'] = 'array']/../..[@key])" />
               <xsl:text> prostřednictvím </xsl:text>
               <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(./parent::fn:map[fn:string[@key='type'] = 'array'])" />
             </xsl:if>
           </xsl:attribute>
-          <xsl:variable name="query">{fn:distinct-values(gen:generujPrefixyProSPARQL(.))}
+          <xsl:variable name="query">
+            <xsl:text>{fn:distinct-values(gen:generujPrefixyProSPARQL(.))}
+
 SELECT *
 WHERE {{
-  ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} a {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)} .
-{fn:distinct-values(gen:generujVlastnostiProSPARQL(., gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))))}
+  </xsl:text>
+            <xsl:text>?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} a {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)} .</xsl:text>
+            <xsl:text>{fn:distinct-values(gen:generujVlastnostiProSPARQL(., gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))))}</xsl:text>
+            <xsl:text>
 }}
-LIMIT 100
+LIMIT 100</xsl:text>
           </xsl:variable>
+          <p>
+            <a target="_blank"><xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+              <xsl:text> | </xsl:text>
+            <a target="_blank"><xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+          </p>
   				<pre class="sparql">
             <xsl:value-of select="$query" />
   				</pre>
-          <a>
-            <xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>
-            spustit
-          </a>
 			  </aside>
         <xsl:variable name="prvek" select="." />
         <xsl:for-each select="$prvek/fn:map/fn:map[@key!='type' and @key!='id' and fn:array[@key='examples']/*]">
+          <p>Následující SPARQL dotaz vrací instance typu <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($prvek)" />, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)" /> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
           <aside class="example">
     				<xsl:attribute name="title">
-              <xsl:text>Seznam instancí typu </xsl:text>
+              <xsl:text>Instance typu </xsl:text>
               <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($prvek)" />
-              <xsl:text> s danou hodnotou </xsl:text>
+              <xsl:text> s danou hodnotou vlastnosti </xsl:text>
               <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)" />
             </xsl:attribute>
-            <xsl:variable name="query">{fn:distinct-values(gen:generujPrefixyProSPARQL($prvek))}
+            <xsl:variable name="query">
+              <xsl:text>{fn:distinct-values(gen:generujPrefixyProSPARQL($prvek))}
+
 SELECT *
 WHERE {{
-  ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($prvek))} a {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů($prvek)} .
-  {fn:distinct-values(gen:generujVlastnostiProSPARQL($prvek, gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($prvek))))}
-  FILTER (?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} = '{fn:array[@key='examples'][1]}')
+  </xsl:text>
+              <xsl:text>?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($prvek))} a {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů($prvek)} .</xsl:text>
+              <xsl:text>{fn:distinct-values(gen:generujVlastnostiProSPARQL($prvek, gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($prvek))))}</xsl:text>
+              <xsl:text>
+  FILTER (?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} = {gen:generujFiltrovacíHodnotuProSPARQL(.)})
 }}
-LIMIT 100
+LIMIT 100</xsl:text>
             </xsl:variable>
+            <p>
+              <a target="_blank"><xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+                <xsl:text> | </xsl:text>
+              <a target="_blank"><xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+            </p>
     				<pre class="sparql">
               <xsl:value-of select="$query" />
     				</pre>
-            <a>
-              <xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>
-              spustit
-            </a>
+  			  </aside>
+        </xsl:for-each>
+        <xsl:for-each select="$prvek/fn:map/fn:map[@key!='type' and @key!='id' and fn:map/fn:array[@key='examples']/*]">
+          <p>Následující SPARQL dotaz vrací instance typu <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů($prvek)" />, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)" /> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+          <aside class="example">
+    				<xsl:attribute name="title">
+              <xsl:text>Instance typu </xsl:text>
+              <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($prvek)" />
+              <xsl:text> s danou hodnotou vlastnosti </xsl:text>
+              <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)" />
+            </xsl:attribute>
+            <xsl:variable name="query">
+              <xsl:text>{fn:distinct-values(gen:generujPrefixyProSPARQL($prvek))}
+
+SELECT *
+WHERE {{
+  </xsl:text>
+              <xsl:text>?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($prvek))} a {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů($prvek)} .</xsl:text>
+              <xsl:text>{fn:distinct-values(gen:generujVlastnostiProSPARQL($prvek, gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($prvek))))}</xsl:text>
+              <xsl:text>
+  FILTER (?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} = {gen:generujFiltrovacíHodnotuProSPARQL(.)})
+}}
+LIMIT 100</xsl:text>
+            </xsl:variable>
+            <p>
+              <a target="_blank"><xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+                <xsl:text> | </xsl:text>
+              <a target="_blank"><xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+            </p>
+    				<pre class="sparql">
+              <xsl:value-of select="$query" />
+    				</pre>
   			  </aside>
         </xsl:for-each>
       </section>
@@ -450,22 +494,55 @@ LIMIT 100
   <xsl:function name="gen:generujVlastnostiProSPARQL" as="xs:string*">
     <xsl:param name="item" as="element()" />
     <xsl:param name="variableName" as="xs:string" />
+    <xsl:text> </xsl:text>
     <xsl:for-each select="$item/fn:map/fn:map[@key!='type' and @key!='id']">
-      <xsl:sequence select="gen:generujVlastnostProSPARQL(., $variableName, 'normal')" />
+      <xsl:variable name="fragment" select="gen:generujVlastnostProSPARQL(., $variableName, 'normal')" />
+      <xsl:if test="fn:matches($fragment, '[^\s]')">
+        <xsl:value-of select="fn:concat('&#10;  ', $fragment)" />
+      </xsl:if>
     </xsl:for-each>
     <xsl:if test="$item/parent::fn:map[fn:string[@key='type'] = 'array']">
-      <xsl:sequence select="gen:generujVlastnostProSPARQL($item/parent::fn:map[fn:string[@key='type'] = 'array'], $variableName, 'reversed')" />
+      <xsl:variable name="fragment" select="gen:generujVlastnostProSPARQL($item/parent::fn:map[fn:string[@key='type'] = 'array'], $variableName, 'reversed')" />
+      <xsl:if test="fn:matches($fragment, '[^\s]')">
+        <xsl:value-of select="fn:concat('&#10;  ', $fragment)" />
+      </xsl:if>
     </xsl:if>
   </xsl:function>
 
   <xsl:function name="gen:generujPrefixyProSPARQL" as="xs:string*">
     <xsl:param name="item" as="element()" />
-    <xsl:for-each select="$item/fn:map/fn:map[@key!='type' and @key!='id']">
-      <xsl:sequence select="gen:generujPrefixProSPARQL(.)" />
-    </xsl:for-each>
-  	<xsl:if test="$item/parent::fn:map[fn:string[@key='type'] = 'array']">
-      <xsl:sequence select="gen:generujPrefixProSPARQL($item/parent::fn:map[fn:string[@key='type'] = 'array'])" />
+    <xsl:variable name="fragment" select="gen:generujPrefixProSPARQL($item)" />
+    <xsl:if test="fn:matches($fragment, '[^\s]')">
+      <xsl:value-of select="fn:concat('&#10;', $fragment)" />
     </xsl:if>
+    <xsl:for-each select="$item/fn:map/fn:map[@key!='type' and @key!='id']">
+      <xsl:variable name="fragment" select="gen:generujPrefixProSPARQL(.)" />
+      <xsl:if test="fn:matches($fragment, '[^\s]')">
+        <xsl:value-of select="fn:concat('&#10;', $fragment)" />
+      </xsl:if>
+    </xsl:for-each>
+  	<xsl:if test="$item/parent::fn:map[fn:string[@key='type'] = 'array']/../..[@key]">
+      <xsl:variable name="fragment" select="gen:generujPrefixProSPARQL($item/parent::fn:map[fn:string[@key='type'] = 'array'])" />
+      <xsl:if test="fn:matches($fragment, '[^\s]')">
+        <xsl:value-of select="fn:concat('&#10;', $fragment)" />
+      </xsl:if>
+    </xsl:if>
+  </xsl:function>
+
+  <xsl:function name="gen:generujFiltrovacíHodnotuProSPARQL" as="xs:string*">
+    <xsl:param name="item" as="element()" />
+    <xsl:variable name="jsonAlias" select="($item/@key, $item/fn:map[@key='properties']/fn:map[@key='type']/fn:string[@key='default']/text())[. != 'items'][1]" />
+    <xsl:variable name="context" select="$item/ancestor::fn:source/fn:map/fn:map[@key='@context']" />
+  	<xsl:variable name="contextItem" select="$context/fn:map[@key = $jsonAlias]" />
+    <xsl:choose>
+      <xsl:when test="$contextItem/fn:string[@key='@type'] = '@id'">
+        <xsl:value-of select="fn:concat('&lt;', $context/fn:string[@key='@base']/text(), $item/fn:array[@key='examples'][1], '&gt;')" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;')" />
+      </xsl:otherwise>
+    </xsl:choose>
+
   </xsl:function>
 
   <xsl:function name="gen:generujVlastnostProSPARQL" as="xs:string*">
@@ -481,42 +558,18 @@ LIMIT 100
     <xsl:choose>
       <xsl:when test="$mode = 'normal'">
         <xsl:choose>
-          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = 'xsd:string']">
-            <xsl:text>  OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}
-</xsl:text>
-          </xsl:when>
-          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@container'] = '@language']">
-            <xsl:text>  OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . FILTER (LANG(?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)}) = "cs") }}
-</xsl:text>
-          </xsl:when>
-          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = 'xsd:date']">
-            <xsl:text>  OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}
-</xsl:text>
-          </xsl:when>
-          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = 'xsd:integer']">
-            <xsl:text>  OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}
-</xsl:text>
-          </xsl:when>
-          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = '@id']">
-            <xsl:text>  OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}
-</xsl:text>
-          </xsl:when>
-          <xsl:when test="$contextItem[fn:string[@key='@reverse']][not(fn:string[@key='@container'])][fn:string[@key='@type'] = '@id']">
-            <xsl:text>  OPTIONAL {{ ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} {$qName} ?{$variableName} . }}
-</xsl:text>
-          </xsl:when>
+          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = 'xsd:string']">OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}</xsl:when>
+          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@container'] = '@language']">OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . FILTER (LANG(?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)}) = "cs") }}</xsl:when>
+          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = 'xsd:date']">OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}</xsl:when>
+          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = 'xsd:integer']">OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}</xsl:when>
+          <xsl:when test="$contextItem[not(fn:string[@key='@reverse'])][fn:string[@key='@type'] = '@id']">OPTIONAL {{ ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} . }}</xsl:when>
+          <xsl:when test="$contextItem[fn:string[@key='@reverse']][not(fn:string[@key='@container'])][fn:string[@key='@type'] = '@id']">OPTIONAL {{ ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} {$qName} ?{$variableName} . }}</xsl:when>
         </xsl:choose>
       </xsl:when>
       <xsl:when test="$mode = 'reversed'">
         <xsl:choose>
-          <xsl:when test="$contextItem[fn:string[@key='@reverse']][fn:string[@key='@container'] = '@set']">
-            <xsl:text>  ?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} .
-</xsl:text>
-          </xsl:when>
-          <xsl:when test="$contextItem[fn:string[@key='@id']][fn:string[@key='@container'] = '@set']">
-            <xsl:text>  ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} {$qName} ?{$variableName} .
-</xsl:text>
-          </xsl:when>
+          <xsl:when test="$contextItem[fn:string[@key='@reverse']][fn:string[@key='@container'] = '@set']">?{$variableName} {$qName} ?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} .</xsl:when>
+          <xsl:when test="$contextItem[fn:string[@key='@id']][fn:string[@key='@container'] = '@set']">?{gen:generujPromennouProSPARQLZLocalNamePrvkuVSémantickémSlovníkuPojmů($localName)} {$qName} ?{$variableName} .</xsl:when>
         </xsl:choose>
       </xsl:when>
     </xsl:choose>
@@ -535,8 +588,7 @@ LIMIT 100
 
   <xsl:function name="gen:generujPrefixProSPARQL" as="xs:string*">
     <xsl:param name="item" as="element()" />
-    <xsl:text>  PREFIX {gen:generujPrefixPrvkuVSémantickémSlovníkuPojmů($item)}: &lt;{gen:generujPrefixIRIPrvkuVSémantickémSlovníkuPojmů($item)}&gt;
-</xsl:text>
+    <xsl:text>PREFIX {gen:generujPrefixPrvkuVSémantickémSlovníkuPojmů($item)}: &lt;{gen:generujPrefixIRIPrvkuVSémantickémSlovníkuPojmů($item)}&gt;</xsl:text>
   </xsl:function>
 
   <xsl:function name="gen:generujPopisTypuVlastnosti">

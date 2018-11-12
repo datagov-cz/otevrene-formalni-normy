@@ -731,171 +731,265 @@
             <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Agenda</h3>
-               <aside class="example" title="Seznam instancí typu Agenda">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX : &lt;&gt;
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .
-  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") }
-   OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . }
-   OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
-
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
 }
-LIMIT 100
-          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Agenda s danou hodnotou Má kód agendy">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-k%C3%B3d-agendy">Má kód agendy</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda s danou hodnotou vlastnosti Má kód agendy">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FMaKodAgendy%20%3D%20%22A1046%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FMaKodAgendy%20%3D%20%22A1046%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .
-    OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") }
-   OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . }
-   OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
-
-  FILTER (?MaKodAgendy = 'A1046')
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
+  FILTER (?MaKodAgendy = "A1046")
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%0A%20%20FILTER%20%28%3FMaKodAgendy%20%3D%20%27A1046%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Agenda s danou hodnotou Ohlašuje agendu">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-   PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX : &lt;&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ohla%C5%A1uje-agendu">Ohlašuje agendu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda s danou hodnotou vlastnosti Ohlašuje agendu">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FOhlasujeAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00000001-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FOhlasujeAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00000001-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .
-    OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") }
-   OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . }
-   OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . }
-   OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
-
-  FILTER (?OhlasujeAgendu = 'orgán-veřejné-moci/00000001-1')
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
+  FILTER (?OhlasujeAgendu = &lt;https://rpp.gov.cz/zdroj/orgán-veřejné-moci/00000001-1&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%20%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20%3A%20%3C%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%0A%20%20FILTER%20%28%3FOhlasujeAgendu%20%3D%20%27org%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00000001-1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda s danou hodnotou vlastnosti Vykonává agendu">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
+  FILTER (?VykonavaAgendu = &lt;https://rpp.gov.cz/zdroj/&gt;)
+}
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda s danou hodnotou vlastnosti Vykonává agendu">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
+  FILTER (?VykonavaAgendu = &lt;https://rpp.gov.cz/zdroj/&gt;)
+}
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda s danou hodnotou vlastnosti Vykonává agendu">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
+  FILTER (?VykonavaAgendu = &lt;https://rpp.gov.cz/zdroj/&gt;)
+}
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-agendu">Vykonává agendu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agenda s danou hodnotou vlastnosti Vykonává agendu">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgenda%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagenda%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-n%C3%A1zev-agendy%20%3FMaNazevAgendy%20.%20FILTER%20%28LANG%28%3FMaNazevAgendy%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-k%C3%B3d-agendy%20%3FMaKodAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FOhlasujeAgendu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aohla%C5%A1uje-agendu%20%3FAgenda%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-vzniku-agendy%20%3FMaDatumVznikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-z%C3%A1niku-agendy%20%3FMaDatumZanikuAgendy%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-od%20%3FMaPlatnostAgendyOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-platnost-agendy-do%20%3FMaPlatnostAgendyDo%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgenda%20a-sgov-104-pojem%3Am%C3%A1-datum-posledn%C3%AD-zm%C4%9Bny-agendy%20%3FMaDatumPosledniZmenyAgendy%20.%20%7D%0A%20%20FILTER%20%28%3FVykonavaAgendu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2F%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Agenda a l-sgov-sbírka-111-2009-pojem:agenda .  
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-název-agendy ?MaNazevAgendy . FILTER (LANG(?MaNazevAgendy) = "cs") } 
+  OPTIONAL { ?Agenda l-sgov-sbírka-111-2009-pojem:má-kód-agendy ?MaKodAgendy . } 
+  OPTIONAL { ?OhlasujeAgendu l-sgov-sbírka-111-2009-pojem:ohlašuje-agendu ?Agenda . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-vzniku-agendy ?MaDatumVznikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-zániku-agendy ?MaDatumZanikuAgendy . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-od ?MaPlatnostAgendyOd . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-platnost-agendy-do ?MaPlatnostAgendyDo . } 
+  OPTIONAL { ?Agenda a-sgov-104-pojem:má-datum-poslední-změny-agendy ?MaDatumPosledniZmenyAgendy . }
+  FILTER (?VykonavaAgendu = &lt;https://rpp.gov.cz/zdroj/&gt;)
+}
+LIMIT 100</pre>
+               </aside>
             </section>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Ustanovení právního předpisu</h3>
-               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu přiřazených k instanci typu Agenda prostřednictvím Je vykonávána na základě ustanovení">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Ustanovení právního předpisu přiřazené k instanci typu Agenda prostřednictvím Je vykonávána na základě ustanovení">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanaNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanaNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
-  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
-   ?JeVykonavanaNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:je-vykonávána-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
-
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .  
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . } 
+  ?JeVykonavanaNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:je-vykonávána-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
 }
-LIMIT 100
-          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FJeVykonavanaNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Ustanovení právního předpisu s danou hodnotou Má úplné označení ustanovení včetně označení právního předpisu">
-                  <pre class="sparql">  PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Ustanovení právního předpisu s danou hodnotou vlastnosti Má úplné označení ustanovení včetně označení právního předpisu">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanaNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%22%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanaNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%22%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
-    OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . }
-   ?JeVykonavanaNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:je-vykonávána-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
-
-  FILTER (?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu = '§ 1 zákona č. 1/1000 Sb.')
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .  
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . } 
+  ?JeVykonavanaNaZakladeUstanoveni l-sgov-sbírka-111-2009-pojem:je-vykonávána-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+  FILTER (?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu = "§ 1 zákona č. 1/1000 Sb.")
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%0A%20%20%20%3FJeVykonavanaNaZakladeUstanoveni%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%0A%20%20FILTER%20%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20%3D%20%27%C2%A7%201%20z%C3%A1kona%20%C4%8D.%201%2F1000%20Sb.%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
+LIMIT 100</pre>
+               </aside>
             </section>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Činnost</h3>
-               <aside class="example" title="Seznam instancí typu Činnost přiřazených k instanci typu Agenda prostřednictvím Je vykonávána v agendě">
-                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Činnost přiřazené k instanci typu Agenda prostřednictvím Je vykonávána v agendě">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%20%0A%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%20%0A%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Cinnost a l-sgov-sbírka-111-2009-pojem:činnost .
-  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-kód-činnosti ?MaKodCinnosti . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-název-činnosti ?MaNazevCinnosti . FILTER (LANG(?MaNazevCinnosti) = "cs") }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-popis-činnosti ?MaPopisCinnosti . FILTER (LANG(?MaPopisCinnosti) = "cs") }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-typ-činnosti ?MaTypCinnosti . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-od ?MaPlatnostCinnostiOd . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-do ?MaPlatnostCinnostiDo . }
-   ?Cinnost l-sgov-sbírka-111-2009-pojem:je-vykonávána-v-agendě ?JeVykonavanaVAgende .
-
+  ?Cinnost a l-sgov-sbírka-111-2009-pojem:činnost .  
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-kód-činnosti ?MaKodCinnosti . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-název-činnosti ?MaNazevCinnosti . FILTER (LANG(?MaNazevCinnosti) = "cs") } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-popis-činnosti ?MaPopisCinnosti . FILTER (LANG(?MaPopisCinnosti) = "cs") } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-typ-činnosti ?MaTypCinnosti . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-od ?MaPlatnostCinnostiOd . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-do ?MaPlatnostCinnostiDo . } 
+  ?Cinnost l-sgov-sbírka-111-2009-pojem:je-vykonávána-v-agendě ?JeVykonavanaVAgende .
 }
-LIMIT 100
-          </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%0A%20%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Činnost s danou hodnotou Má kód činnosti">
-                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-%C4%8Dinnosti">Má kód činnosti</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Činnost s danou hodnotou vlastnosti Má kód činnosti">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%20%0A%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%20%20FILTER%20%28%3FMaKodCinnosti%20%3D%20%22CR6072%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%20%0A%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%20%20FILTER%20%28%3FMaKodCinnosti%20%3D%20%22CR6072%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Cinnost a l-sgov-sbírka-111-2009-pojem:činnost .
-    OPTIONAL { ?Cinnost a-sgov-104-pojem:má-kód-činnosti ?MaKodCinnosti . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-název-činnosti ?MaNazevCinnosti . FILTER (LANG(?MaNazevCinnosti) = "cs") }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-popis-činnosti ?MaPopisCinnosti . FILTER (LANG(?MaPopisCinnosti) = "cs") }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-typ-činnosti ?MaTypCinnosti . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-od ?MaPlatnostCinnostiOd . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-do ?MaPlatnostCinnostiDo . }
-   ?Cinnost l-sgov-sbírka-111-2009-pojem:je-vykonávána-v-agendě ?JeVykonavanaVAgende .
-
-  FILTER (?MaKodCinnosti = 'CR6072')
+  ?Cinnost a l-sgov-sbírka-111-2009-pojem:činnost .  
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-kód-činnosti ?MaKodCinnosti . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-název-činnosti ?MaNazevCinnosti . FILTER (LANG(?MaNazevCinnosti) = "cs") } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-popis-činnosti ?MaPopisCinnosti . FILTER (LANG(?MaPopisCinnosti) = "cs") } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-typ-činnosti ?MaTypCinnosti . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-od ?MaPlatnostCinnostiOd . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-do ?MaPlatnostCinnostiDo . } 
+  ?Cinnost l-sgov-sbírka-111-2009-pojem:je-vykonávána-v-agendě ?JeVykonavanaVAgende .
+  FILTER (?MaKodCinnosti = "CR6072")
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%0A%20%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%0A%20%20FILTER%20%28%3FMaKodCinnosti%20%3D%20%27CR6072%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
-               <aside class="example" title="Seznam instancí typu Činnost s danou hodnotou Má typ činnosti">
-                  <pre class="sparql">  PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
-   PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-%C4%8Dinnosti">Má typ činnosti</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Činnost s danou hodnotou vlastnosti Má typ činnosti">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%20%0A%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%20%20FILTER%20%28%3FMaTypCinnosti%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Ftyp-%C4%8Dinnosti%2F1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%20%0A%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%20%20FILTER%20%28%3FMaTypCinnosti%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Ftyp-%C4%8Dinnosti%2F1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?Cinnost a l-sgov-sbírka-111-2009-pojem:činnost .
-    OPTIONAL { ?Cinnost a-sgov-104-pojem:má-kód-činnosti ?MaKodCinnosti . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-název-činnosti ?MaNazevCinnosti . FILTER (LANG(?MaNazevCinnosti) = "cs") }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-popis-činnosti ?MaPopisCinnosti . FILTER (LANG(?MaPopisCinnosti) = "cs") }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-typ-činnosti ?MaTypCinnosti . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-od ?MaPlatnostCinnostiOd . }
-   OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-do ?MaPlatnostCinnostiDo . }
-   ?Cinnost l-sgov-sbírka-111-2009-pojem:je-vykonávána-v-agendě ?JeVykonavanaVAgende .
-
-  FILTER (?MaTypCinnosti = 'typ-činnosti/1')
+  ?Cinnost a l-sgov-sbírka-111-2009-pojem:činnost .  
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-kód-činnosti ?MaKodCinnosti . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-název-činnosti ?MaNazevCinnosti . FILTER (LANG(?MaNazevCinnosti) = "cs") } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-popis-činnosti ?MaPopisCinnosti . FILTER (LANG(?MaPopisCinnosti) = "cs") } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-typ-činnosti ?MaTypCinnosti . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-od ?MaPlatnostCinnostiOd . } 
+  OPTIONAL { ?Cinnost a-sgov-104-pojem:má-platnost-činnosti-do ?MaPlatnostCinnostiDo . } 
+  ?Cinnost l-sgov-sbírka-111-2009-pojem:je-vykonávána-v-agendě ?JeVykonavanaVAgende .
+  FILTER (?MaTypCinnosti = &lt;https://rpp.gov.cz/zdroj/typ-činnosti/1&gt;)
 }
-LIMIT 100
-            </pre><a href="https://rpp.opendata.cz/sparql?query=%20%20PREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%20%20%20PREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FCinnost%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C4%8Dinnost%20.%0A%20%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-%C4%8Dinnosti%20%3FMaKodCinnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C4%8Dinnosti%20%3FMaNazevCinnosti%20.%20FILTER%20%28LANG%28%3FMaNazevCinnosti%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-popis-%C4%8Dinnosti%20%3FMaPopisCinnosti%20.%20FILTER%20%28LANG%28%3FMaPopisCinnosti%29%20%3D%20%22cs%22%29%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-typ-%C4%8Dinnosti%20%3FMaTypCinnosti%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-od%20%3FMaPlatnostCinnostiOd%20.%20%7D%0A%20%20%20OPTIONAL%20%7B%20%3FCinnost%20a-sgov-104-pojem%3Am%C3%A1-platnost-%C4%8Dinnosti-do%20%3FMaPlatnostCinnostiDo%20.%20%7D%0A%20%20%20%3FCinnost%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1na-v-agend%C4%9B%20%3FJeVykonavanaVAgende%20.%0A%0A%20%20FILTER%20%28%3FMaTypCinnosti%20%3D%20%27typ-%C4%8Dinnosti%2F1%27%29%0A%7D%0ALIMIT%20100%0A%20%20%20%20%20%20%20%20%20%20%20%20&amp;format=text%2Fhtml&amp;timeout=0">
-                     spustit
-                     </a></aside>
+LIMIT 100</pre>
+               </aside>
             </section>
          </section>
       </section>
