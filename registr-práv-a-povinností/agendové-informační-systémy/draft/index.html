@@ -26,23 +26,25 @@
          <h2>Abstrakt</h2>
          <p>
             	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o agendových informační systémech z Registru práv a povinností
-            ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Norma specifikuje způsob publikace na stupni otevřenosti
-            <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">3*</a> a <a xmlns="http://docbook.org/ns/docbook" href="https://opendata.gov.cz/standardy:stupne-otevrenosti">5*</a> ve formátu <a xmlns="http://docbook.org/ns/docbook" href="https://www.w3.org/TR/json-ld/">JSON-LD</a>.
+            ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. S formátem JSON-LD lze pracovat standardními softwarovými
+            prostředky pro práci s JSON daty. Navíc umožňuje přímou interpretaci dat v podobě
+            datového modelu RDF. Tento dokument je strojově generován ze schématu JSON-LD reprezentace
+            a z dokumentace prvků v sémantickém slovníku pojmů veřejné správy ČR.
             	</p>
       </section>
       <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
          <h2><dfn>JSON struktura</dfn></h2>
          <section id="json-přehled">
-            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem instancí typu <a>Agendový informační systém</a> uvedených v poli <code>položky</code>.
+            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem prvků strukturovaných dle datové struktury <a>Složený typ Agendový informační systém</a>. Prvky jsou uvedeny v poli <code>položky</code>.
             
             <ul>
-               <li>Instance typu <a>Agendový informační systém</a> má následující nepovinné vlastnosti:
+               <li><a>Složený typ Agendový informační systém</a> sestává z následujících nepovinných vlastností:
                   <ul>
                      <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^agendový-informační-systém$</code></li>
-                     <li><code><a>id</a></code> : Odkaz dle vzoru <code>^agendový-informační-systém/[0-9]+$</code></li>
+                     <li><code><a>id</a></code> : IRI dle vzoru <code>^agendový-informační-systém/[0-9]+$</code></li>
                      <li><code><a>název</a></code> : <a>Vícejazyčný řetězec</a></li>
                      <li><code><a>kód</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^[0-9]+$</code></li>
-                     <li><code><a>správce</a></code> : Odkaz dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></li>
+                     <li><code><a>správce</a></code> : IRI dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></li>
                   </ul>
                </li>
             </ul>
@@ -50,57 +52,15 @@
          <section id="json-specifikace">
             <h3>Detailní specifikace prvků JSON struktury</h3>V této části jsou specifikovány jednotlivé prvky JSON struktury.
             <section>
-               <h4>Obecné prvky</h4>
-               <section>
-                  <h5><dfn>Vícejazyčný řetězec</dfn></h5>
-                  <dl>
-                     <dt>Typ</dt>
-                     <dd>
-                        <pre class="json">{"cs": "...", "en": "...", ...}</pre>
-                     </dd>
-                     <dt>Popis</dt>
-                     <dd>Vyjádření textových hodnot vlastností, jejichž hodnotou je množina řetězců, z nichž
-                        každý je vyjádřením textové hodnoty v jiném jazyku.</dd>
-                  </dl>
-               </section>
-               <section>
-                  <h5>Vlastnost <code><dfn>type</dfn></code></h5>
-                  <dl>
-                     <dt>Typ</dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-                     <dt>Popis</dt>
-                     <dd>Lokální identifikátor typu v rámci JSON souboru. Pro získání globálního unikátního
-                        identifikátoru je nutné interpretovat soubor jako JSON-LD soubor, tj. využít jeho
-                        kontext (klíč @context). Tam je definováno mapování identifikátoru typu na globálně
-                        unikátní IRI typu. Toto IRI typu je použito též v LOD reprezentaci datové sady pro
-                        identifikaci typu, viz <a>LOD struktura</a>.</dd>
-                  </dl>
-               </section>
-               <section>
-                  <h5>Vlastnost <code><dfn>id</dfn></code></h5>
-                  <dl>
-                     <dt>Typ</dt>
-                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
-                     <dt>Jméno</dt>
-                     <dd>Identifikátor instance</dd>
-                     <dt>Popis</dt>
-                     <dd>Lokální identifikátor instance v rámci kolekce datových sad z daného datového zdroje.
-                        Pro získání globálního unikátního identifikátoru je nutné interpretovat soubor jako
-                        JSON-LD soubor, tj. využít jeho kontext (klíč @context). Tam je definováno base IRI,
-                        které dohromady s identifikátorem typu tvoří IRI instance. Toto IRI je použito též
-                        v LOD reprezentaci datové sady pro identifikaci instance, viz <a>LOD struktura</a>.</dd>
-                  </dl>
-               </section>
-            </section>
-            <section>
-               <h4><dfn>Agendový informační systém</dfn></h4>
+               <h4><dfn>
+                     						Složený typ Agendový informační systém</dfn></h4>
                <p>Agendovým informačním systémem se rozumí informační systém veřejné správy, který slouží
-                  k výkonu agendy, využívání elektronických formulářů nebo elektronické identifikaci</p>
+                  k výkonu agendy, využívání elektronických formulářů nebo elektronické identifikaci.</p>
                <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
                   <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m">Agendový informační systém</a>.</p>
                <p>
-                  Prvek je zaveden v následujících ustanoveních právních předpisů:
-                  
+                  						Význam prvku je definován v následujících ustanoveních právních předpisů:
+                  						
                   <ul>
                      <li><a href="https://zakonyprolidi.cz/cs/2009-111#p2-1-f">§ 2 písm. f) zákona č. 111/2009 Sb.</a></li>
                   </ul>
@@ -119,9 +79,9 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd>Přímo pro tento prvek není příklad uveden. Detailní příklady lze nalézt v sekci <a>Příklady</a> této otevřené formální normy.</dd>
+                     <dd><code>{"cs":"Agendový informační systém evidence obyvatel"}</code><br></dd>
                      <dt>
-                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        			  Sémantika
                         		  </dt>
                      <dd>
                         <p>Sémantika vlastnosti <code>název</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má název agendového informačního systému</a> následovně:</p>
@@ -143,9 +103,9 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>"6100"</code></dd>
+                     <dd><code>"6500"</code><br></dd>
                      <dt>
-                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        			  Sémantika
                         		  </dt>
                      <dd>
                         <p>Sémantika vlastnosti <code>kód</code> je v sémantickém slovníku pojmů definována sémantickým typem vlastnosti <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má kód agendového informačního systému</a> následovně:</p>
@@ -159,7 +119,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>Odkaz dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
+                     <dd>IRI dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -168,106 +128,212 @@
                      <dt>
                         			  Příklad
                         		  </dt>
-                     <dd><code>"orgán-veřejné-moci/12345678-1"</code></dd>
+                     <dd><code>"orgán-veřejné-moci/00007064"</code><br></dd>
                      <dt>
-                        			  Sémantika vlastnosti definovaná sémantickým slovníkem pojmů
+                        								Definující ustanovení právních předpisů
+                        							</dt>
+                     <dd>
+                        <ul>
+                           <li><a href="https://zakonyprolidi.cz/cs/2009-111">Zákon č. 111/2009 Sb.</a></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Sémantika
                         		  </dt>
                      <dd>
                         <p>Sémantika vlastnosti <code>správce</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má správce agendového informačního systému</a> následovně:</p>
                         <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m">Agendový informační systém</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má správce agendového informačního systému</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci">Orgán veřejné moci</a></p>
-                        <p>
-                           Prvek je zaveden v následujících ustanoveních právních předpisů:
-                           
-                           <ul>
-                              <li><a href="https://zakonyprolidi.cz/cs/2009-111">Zákon č. 111/2009 Sb.</a></li>
-                           </ul>
-                        </p>
                      </dd>
+                  </dl>
+               </section>
+            </section>
+            <section>
+               <h4>Obecné prvky</h4>
+               <p>Jedná se o JSON prvky, které jsou použity na různých místech JSON reprezentace datové
+                  sady v různých situacích</p>
+               <section>
+                  <h5><dfn>Vícejazyčný řetězec</dfn></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd>
+                        <pre class="json">{"cs": "...", "en": "...", ...}</pre>
+                     </dd>
+                     <dt>Popis</dt>
+                     <dd>Typ je použit pro vlastnosti, jejichž hodnotou jsou řetězce v různých jazycích.</dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>type</dfn></code></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dt>Popis</dt>
+                     <dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci
+                        datové sady. Sémantický typ je identifikován v podobě lokálního IRI. Aby jej bylo
+                        možné využít, je nutné JSON reprezentaci interpretovat jako JSON-LD reprezentaci s
+                        pomocí kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Při této interpretaci lze získat globální IRI sémantického typu. Jeho dereferencováním
+                        lze získat úplnou definici významu.</dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>id</dfn></code></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a></dd>
+                     <dt>Jméno</dt>
+                     <dd>Identifikátor prvku</dd>
+                     <dt>Popis</dt>
+                     <dd>Vlastnost přiřazuje prvku identifikátor entity, kterou v JSON reprezentaci datové
+                        sady reprezentuje. Identifikátor entity je uveden v podobě lokálního IRI. Pro získání
+                        globálního IRI identifikujícího entitu je nutné interpretovat JSON reprezentaci jako
+                        JSON-LD reprezentaci s pomocí  kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Dereferencováním získaného globálního IRI lze získat úplnou podobu identifikované
+                        entity dostupnou v daném zdroji.</dd>
                   </dl>
                </section>
             </section>
          </section>
       </section>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="lod">
-         <h2><dfn>LOD struktura</dfn></h2>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="rddf">
+         <h2><dfn>RDF struktura</dfn></h2>
+         <section id="lod-přehled">
+            <h3>Přehled RDF struktury</h3>
+            <section id="lod-přehled-třídy">
+               <h4>RDF třídy</h4>
+               <ul>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m" class="ssplink">Agendový informační systém</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m" class="ssplink">l-sgov-sbírka-111-2009-pojem:agendový-informační-systém</a>)
+                     						
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Agendovým informačním systémem se rozumí informační systém veřejné správy, který slouží
+                           k výkonu agendy, využívání elektronických formulářů nebo elektronické identifikaci.</dd>
+                        <dt>Příklad</dt>
+                        <dd><a href="https://rpp.opendata.cz/zdroj/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m/6500">https://rpp.opendata.cz/zdroj/agendový-informační-systém/6500</a></dd>
+                     </dl>
+                  </li>
+               </ul>
+            </section>
+            <section id="lod-přehled-vlastnosti">
+               <h4>RDF vlastnosti</h4>
+               <ul>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu" class="ssplink">a-sgov-104-pojem:má-název-agendového-informačního-systému</a> (Má název agendového informačního systému)
+                     						
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Název agendového informačního systému určený jeho správcem.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m" class="ssplink">l-sgov-sbírka-111-2009-pojem:agendový-informační-systém</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="http://www.w3.org/2000/01/rdf-schema#Literal" class="ssplink">rdfs:Literal</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu" class="ssplink">a-sgov-104-pojem:má-kód-agendového-informačního-systému</a> (Má kód agendového informačního systému)
+                     						
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Jedinečný kód agendového informačního systému. Kód je referenčním údajem.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m" class="ssplink">l-sgov-sbírka-111-2009-pojem:agendový-informační-systém</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="http://www.w3.org/2000/01/rdf-schema#Literal" class="ssplink">rdfs:Literal</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému</a> (Má správce agendového informačního systému)
+                     						
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Správcem agendového informačního systému se rozumí orgán veřejné moci, který poskytuje
+                           služby informačního systému veřejné správy a za informační systém veřejné správy odpovídá.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m" class="ssplink">l-sgov-sbírka-111-2009-pojem:agendový-informační-systém</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci" class="ssplink">l-sgov-sbírka-111-2009-pojem:orgán-veřejné-moci</a></dd>
+                     </dl>
+                  </li>
+               </ul>
+            </section>
+         </section>
          <section id="ukázky-lod">
-            <h2><dfn>Ukázky práce s LOD reprezentací datové sady</dfn></h2>
+            <h2><dfn>Ukázky práce s RDF reprezentací datové sady pomocí SPARQL</dfn></h2>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Agendový informační systém</h3>
-               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m">Agendový informační systém</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
-                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
-                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu Agendový informační systém.
+                  Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové, atd.)
+                  a objektových vlastností, kde je instance v pozici subjektu či objektu a které mají
+                  horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
                   klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
                <aside class="example" title="Instance typu Agendový informační systém">
-                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
                   <pre class="sparql">
-PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
-PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
 
 SELECT *
 WHERE {
-  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .  
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") } 
   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . } 
   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
 }
 LIMIT 100</pre>
                </aside>
-               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m">Agendový informační systém</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má kód agendového informačního systému</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <p>Následující SPARQL dotaz vrací instance typu Agendový informační systém, pro které
+                  jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má název agendového informačního systému</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <aside class="example" title="Instance typu Agendový informační systém s danou hodnotou vlastnosti Má název agendového informačního systému">
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22Agendov%C3%BD%20informa%C4%8Dn%C3%AD%20syst%C3%A9m%20evidence%20obyvatel%22%29%09%09%09%09%09%09%09%09%0A%09%09%09%09%09%09%09%09%09%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22Agendov%C3%BD%20informa%C4%8Dn%C3%AD%20syst%C3%A9m%20evidence%20obyvatel%22%29%09%09%09%09%09%09%09%09%0A%09%09%09%09%09%09%09%09%09%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
+  OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") } 
+  OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . } 
+  OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
+  FILTER (STR(?MaNazevAgendovehoInformacnihoSystemu) = "Agendový informační systém evidence obyvatel")								
+									
+}
+LIMIT 100</pre>
+               </aside>
+               <p>Následující SPARQL dotaz vrací instance typu Agendový informační systém, pro které
+                  jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má kód agendového informačního systému</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
                <aside class="example" title="Instance typu Agendový informační systém s danou hodnotou vlastnosti Má kód agendového informačního systému">
-                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaKodAgendovehoInformacnihoSystemu%20%3D%20%226100%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaKodAgendovehoInformacnihoSystemu%20%3D%20%226100%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaKodAgendovehoInformacnihoSystemu%20%3D%20%226500%22%29%09%09%09%09%09%09%09%09%0A%09%09%09%09%09%09%09%09%09%09%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaKodAgendovehoInformacnihoSystemu%20%3D%20%226500%22%29%09%09%09%09%09%09%09%09%0A%09%09%09%09%09%09%09%09%09%09%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
                   <pre class="sparql">
-PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
-PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
 SELECT *
 WHERE {
-  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .  
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") } 
   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . } 
   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
-  FILTER (?MaKodAgendovehoInformacnihoSystemu = "6100")
+  FILTER (?MaKodAgendovehoInformacnihoSystemu = "6500")								
+										
 }
 LIMIT 100</pre>
                </aside>
-               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m">Agendový informační systém</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má správce agendového informačního systému</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+               <p>Následující SPARQL dotaz vrací instance typu Agendový informační systém, pro které
+                  jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu">Má správce agendového informačního systému</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
                <aside class="example" title="Instance typu Agendový informační systém s danou hodnotou vlastnosti Má správce agendového informačního systému">
-                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaSpravceAgendovehoInformacnihoSystemu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F12345678-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%20%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaSpravceAgendovehoInformacnihoSystemu%20%3D%20%3Chttps%3A%2F%2Frpp.gov.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F12345678-1%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
+                  <p><a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaSpravceAgendovehoInformacnihoSystemu%20%3D%20%3Chttps%3A%2F%2Frpp.opendata.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00007064%3E%29%09%09%09%09%09%09%09%09%0A%09%09%09%09%09%09%09%09%09%09%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="https://rpp.opendata.cz/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FAgendovyInformacniSystem%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aagendov%C3%BD-informa%C4%8Dn%C3%AD-syst%C3%A9m%20.%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaNazevAgendovehoInformacnihoSystemu%20.%20FILTER%20%28LANG%28%3FMaNazevAgendovehoInformacnihoSystemu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20a-sgov-104-pojem%3Am%C3%A1-k%C3%B3d-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaKodAgendovehoInformacnihoSystemu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FAgendovyInformacniSystem%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-spr%C3%A1vce-agendov%C3%A9ho-informa%C4%8Dn%C3%ADho-syst%C3%A9mu%20%3FMaSpravceAgendovehoInformacnihoSystemu%20.%20%7D%0A%20%20FILTER%20%28%3FMaSpravceAgendovehoInformacnihoSystemu%20%3D%20%3Chttps%3A%2F%2Frpp.opendata.cz%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00007064%3E%29%09%09%09%09%09%09%09%09%0A%09%09%09%09%09%09%09%09%09%09%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p>
                   <pre class="sparql">
-PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
-PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
-
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
 SELECT *
 WHERE {
-  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .  
+  ?AgendovyInformacniSystem a l-sgov-sbírka-111-2009-pojem:agendový-informační-systém .
   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-název-agendového-informačního-systému ?MaNazevAgendovehoInformacnihoSystemu . FILTER (LANG(?MaNazevAgendovehoInformacnihoSystemu) = "cs") } 
   OPTIONAL { ?AgendovyInformacniSystem a-sgov-104-pojem:má-kód-agendového-informačního-systému ?MaKodAgendovehoInformacnihoSystemu . } 
   OPTIONAL { ?AgendovyInformacniSystem l-sgov-sbírka-111-2009-pojem:má-správce-agendového-informačního-systému ?MaSpravceAgendovehoInformacnihoSystemu . }
-  FILTER (?MaSpravceAgendovehoInformacnihoSystemu = &lt;https://rpp.gov.cz/zdroj/orgán-veřejné-moci/12345678-1&gt;)
+  FILTER (?MaSpravceAgendovehoInformacnihoSystemu = &lt;https://rpp.opendata.cz/zdroj/orgán-veřejné-moci/00007064&gt;)								
+										
 }
 LIMIT 100</pre>
                </aside>
             </section>
-         </section>
-      </section>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="příklady">
-         <h2><dfn>Příklady</dfn></h2>
-         <section>
-            <h3>Základní identifikační údaje o agendovém informačním systému</h3>
-            <p>Následující příklad demonstruje reprezentaci základních identifikačních údajů agendového
-               informančího systému - id, název a kód. Rozdíl mezi id a kódem není v kontextu Registru
-               práv a povinností žádný. Kód je prostý řetězec, který je unikátním identifikátorem
-               agendového informačního systému v Registru práv a povinností. Atribut id však může
-               být ve spojení s base IRI uvedeným v kontextu JSON-LD dokumentu použitý jako absolutní
-               globálně unikátní IRI, které jednoznačně identifikuje agendový informační systém napříč
-               všemi datovými sadami. Hodnota atributu id je použita pro odkazování na agendový informační
-               systém v rámci otevřených dat Registru práv a povinností a je doporučeno jej používat
-               též pro odkazování na agendový informační systém ze všech datových sad veřejné správy
-               ČR.</p>
-            <aside class="example" title="Základní identifikační údaje o agendovém informačním systému">
-               <pre class="json">{
-}</pre>
-            </aside>
          </section>
       </section>
    </body>
