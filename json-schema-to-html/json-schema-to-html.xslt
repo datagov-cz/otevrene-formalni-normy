@@ -1,9 +1,9 @@
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:err="http://www.w3.org/2005/xqt-errors" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="3.0" expand-text="yes">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" version="3.0" expand-text="yes">
 	<xsl:template match="db:article" mode="abstrakt">
 		<xsl:apply-templates select="db:info/db:abstract"/>
 	</xsl:template>
 	<xsl:template match="db:abstract" mode="abstrakt">
-		<section id="abstrakt" class="introductory">
+		<section id="abstract" class="introductory">
 			<h2>Abstrakt</h2>
 			<p>
 				<xsl:copy-of select="node()"/>
@@ -1123,9 +1123,9 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 						<xsl:catch>
 							<xsl:choose>
 								<xsl:when test="$asLink">
-									<a>CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$parentiri}, jehož definici se nepodařilo načíst.</a>
+									<a><xsl:text xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$parentiri}, jehož definici se nepodařilo načíst.</xsl:text></a>
 								</xsl:when>
-								<xsl:otherwise>CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$parentiri}, jehož definici se nepodařilo načíst.</xsl:otherwise>
+								<xsl:otherwise xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$parentiri}, jehož definici se nepodařilo načíst.</xsl:otherwise>
 							</xsl:choose>
 						</xsl:catch>
 					</xsl:try>
@@ -1134,9 +1134,9 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 			<xsl:catch>
 				<xsl:choose>
 					<xsl:when test="$asLink">
-						<a>CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</a>
+						<a><xsl:text xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</xsl:text></a>
 					</xsl:when>
-					<xsl:otherwise>CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</xsl:otherwise>
+					<xsl:otherwise xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</xsl:otherwise>
 				</xsl:choose>
 			</xsl:catch>
 		</xsl:try>
@@ -1246,7 +1246,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:catch>
-				<a>CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</a>
+				<a><xsl:text xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</xsl:text></a>
 			</xsl:catch>
 		</xsl:try>
 	</xsl:function>
@@ -1333,9 +1333,9 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 			<xsl:catch>
 				<xsl:choose>
 					<xsl:when test="$asLink">
-						<a>CHYBA: {$err:description} Definici prvku {$iri} se nepodařilo načíst.</a>
+						<a><xsl:text xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} Definici prvku {$iri} se nepodařilo načíst.</xsl:text></a>
 					</xsl:when>
-					<xsl:otherwise>CHYBA: {$err:description} Definici prvku {$iri} se nepodařilo načíst.</xsl:otherwise>
+					<xsl:otherwise xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} Definici prvku {$iri} se nepodařilo načíst.</xsl:otherwise>
 				</xsl:choose>
 			</xsl:catch>
 		</xsl:try>
@@ -1419,7 +1419,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 			<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat($sparqlep, '?query=PREFIX%20skos%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2004%2F02%2Fskos%2Fcore%23%3E%0A%0ACONSTRUCT%20WHERE%20%7B%0A%20%20%3C',fn:encode-for-uri($iri), '%3E%20skos%3AprefLabel%20%3FprefLabel%20.%0A%20%20FILTER(LANG(%3FprefLabel)%20%3D%20%22cs%22)%0A%7D', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 			<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 			<xsl:value-of select="$semVocTypeXMLDocument//skos:prefLabel"/>
-			<xsl:catch>CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</xsl:catch>
+			<xsl:catch xmlns:err="http://www.w3.org/2005/xqt-errors">CHYBA: {$err:description} V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, jehož definici se nepodařilo načíst.</xsl:catch>
 		</xsl:try>
 	</xsl:function>
 </xsl:stylesheet>
