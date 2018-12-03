@@ -22,30 +22,31 @@
       <link rel="manifest" href="../../../static/favicons/manifest.json">
       <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="role.config.js"></script></head>
    <body>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
+      <section xmlns:err="http://www.w3.org/2005/xqt-errors" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstrakt" class="introductory">
          <h2>Abstrakt</h2>
          <p>
-            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o rolích z Registru práv a povinností ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. S formátem JSON-LD lze pracovat standardními softwarovými
-            prostředky pro práci s JSON daty. Navíc umožňuje přímou interpretaci dat v podobě
-            datového modelu RDF. Tento dokument je strojově generován ze schématu JSON-LD reprezentace
-            a z dokumentace prvků v sémantickém slovníku pojmů veřejné správy ČR.
+            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o rolích z Registru práv a povinností ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51-1">§ 51 odst. 1 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Otevřená data dle této otevřené formální normy jsou publikována
+            ve formátu JSON-LD, se kterým lze pracovat standardními softwarovými prostředky pro
+            práci s formátem JSON. Formát JSON-LD navíc umožňuje přímou interpretaci dat v podobě
+            datového modelu RDF.
             	</p>
       </section>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
+      <section xmlns:err="http://www.w3.org/2005/xqt-errors" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
          <h2><dfn>JSON struktura</dfn></h2>
+         <p>V této sekci je popsána struktura JSON distribuce datové sady.</p>
          <section id="json-přehled">
-            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem prvků strukturovaných dle datové struktury <a>Složený typ Role</a>. Prvky jsou uvedeny v poli <code>položky</code>.
+            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem prvků odpovídajících datové struktuře <a>Typ Role</a>. Prvky jsou uvedeny v poli <code>položky</code>.
             
             <ul>
-               <li><a>Složený typ Role</a> sestává z následujících nepovinných vlastností:
+               <li><a>Typ Role</a> sestává z následujících nepovinných vlastností:
                   <ul>
-                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle vzoru <code>^role$</code></li>
-                     <li><code><a>id</a></code> : IRI dle vzoru <code>^role/A[0-9]+/CR[0-9]+/(([0-9]{8}-[0-9]+)|(KO[0-9]+)|(KS[0-9]+))$</code></li>
-                     <li><code><a>ovm</a></code> : IRI dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></li>
-                     <li><code><a>spuú</a></code> : IRI dle vzoru <code>^soukromoprávní-uživatel-údajů/[0-9]{8}-[0-9]+$</code></li>
-                     <li><code><a>kategorie-ovm</a></code> : IRI dle vzoru <code>^kategorie-ovm/KO[0-9]+$</code></li>
-                     <li><code><a>kategorie-spuú</a></code> : IRI dle vzoru <code>^kategorie-spuú/KS[0-9]+$</code></li>
-                     <li><code><a>činnost</a></code> : IRI dle vzoru <code>^činnost/A[0-9]+/CR[0-9]+$</code></li>
+                     <li><code><a>type</a></code> : <a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a> dle regulárního výrazu <code>^role$</code></li>
+                     <li><code><a>id</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^role/A[0-9]+/CR[0-9]+/(([0-9]{8}(\.[0-9]+)?)|(KO[0-9]+)|(KU[0-9]+))$</code></li>
+                     <li><code><a>ovm</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?$</code></li>
+                     <li><code><a>spuú</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^soukromoprávní-uživatel-údajů/[0-9]{8}\.[0-9]+$</code></li>
+                     <li><code><a>kategorie-ovm</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^kategorie-ovm/KO[0-9]+$</code></li>
+                     <li><code><a>kategorie-spuú</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^kategorie-spuú/KU[0-9]+$</code></li>
+                     <li><code><a>činnost</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^činnost/A[0-9]+/CR[0-9]+$</code></li>
                   </ul>
                </li>
             </ul>
@@ -54,22 +55,21 @@
             <h3>Detailní specifikace prvků JSON struktury</h3>V této části jsou specifikovány jednotlivé prvky JSON struktury.
             <section>
                <h4><dfn>
-                     						Složený typ Role</dfn></h4>
+                     						Typ Role</dfn></h4>
                <p>Rolí se rozumí souhrn oprávnění fyzické osoby, která vykonává určitou činnost, k přístupu
                   k referenčním údajům v základních registrech nebo k údajům v agendových informačních
                   systémech. Role je definována jako vazba mezi činností a orgánem veřejné moci či soukromoprávního
                   uživatele údajů, nebo jejich kategorie. Role pak určuje jaké činnosti mohou úřední
                   osoby (jako fyzické osoby) daného orgánu veřejné moci, soukromoprávního uživatele
                   údajů či jejich kategorie vykonávat. </p>
-               <p>Sémantika prvku je v sémantickém slovníku pojmů definována sémantickým typem objektu
-                  <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>.</p>
+               <p>Význam typu je definován v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a>.</p>
                <section>
                   <h5>Vlastnost <code><dfn>ovm</dfn></code></h5>
                   <dl>
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>IRI dle vzoru <code>^orgán-veřejné-moci/[0-9]{8}-[0-9]+$</code></dd>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -88,10 +88,10 @@
                         </ul>
                      </dd>
                      <dt>
-                        			  Sémantika
+                        			  Význam
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>ovm</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
+                        <p>Vlastnost <code>ovm</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
                         <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a></p>
                      </dd>
                   </dl>
@@ -102,7 +102,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>IRI dle vzoru <code>^soukromoprávní-uživatel-údajů/[0-9]{8}-[0-9]+$</code></dd>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^soukromoprávní-uživatel-údajů/[0-9]{8}\.[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -121,10 +121,10 @@
                         </ul>
                      </dd>
                      <dt>
-                        			  Sémantika
+                        			  Význam
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>spuú</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
+                        <p>Vlastnost <code>spuú</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
                         <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a></p>
                      </dd>
                   </dl>
@@ -135,7 +135,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>IRI dle vzoru <code>^kategorie-ovm/KO[0-9]+$</code></dd>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^kategorie-ovm/KO[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -154,10 +154,10 @@
                         </ul>
                      </dd>
                      <dt>
-                        			  Sémantika
+                        			  Význam
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>kategorie-ovm</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
+                        <p>Vlastnost <code>kategorie-ovm</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
                         <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a></p>
                      </dd>
                   </dl>
@@ -168,7 +168,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>IRI dle vzoru <code>^kategorie-spuú/KS[0-9]+$</code></dd>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^kategorie-spuú/KU[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -187,10 +187,10 @@
                         </ul>
                      </dd>
                      <dt>
-                        			  Sémantika
+                        			  Význam
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>kategorie-spuú</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
+                        <p>Vlastnost <code>kategorie-spuú</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a> následovně:</p>
                         <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-soukromopr%C3%A1vn%C3%AD-u%C5%BEivatel-%C3%BAdaj%C5%AF-nebo-jejich-kategorie">Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD">Má souhrn oprávnění definovaných rolí</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a></p>
                      </dd>
                   </dl>
@@ -201,7 +201,7 @@
                      <dt>
                         			  Typ
                         		  </dt>
-                     <dd>IRI dle vzoru <code>^činnost/A[0-9]+/CR[0-9]+$</code></dd>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^činnost/A[0-9]+/CR[0-9]+$</code></dd>
                      <dt>
                         			  Popis
                         		  </dt>
@@ -211,10 +211,10 @@
                         		  </dt>
                      <dd><code>"činnost/A4293/CR49389"</code><br></dd>
                      <dt>
-                        			  Sémantika
+                        			  Význam
                         		  </dt>
                      <dd>
-                        <p>Sémantika vlastnosti <code>činnost</code> je v sémantickém slovníku pojmů definována sémantickým typem vztahu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost">Vykonává činnost</a> následovně:</p>
+                        <p>Vlastnost <code>činnost</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost">Vykonává činnost</a> následovně:</p>
                         <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role">Role</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost">Vykonává činnost</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a></p>
                      </dd>
                   </dl>
@@ -246,24 +246,25 @@
                      <dd>Identifikátor prvku</dd>
                      <dt>Popis</dt>
                      <dd>Vlastnost přiřazuje prvku identifikátor entity, kterou v JSON reprezentaci datové
-                        sady reprezentuje. Identifikátor entity je uveden v podobě lokálního IRI. Pro získání
-                        globálního IRI identifikujícího entitu je nutné interpretovat JSON reprezentaci jako
-                        JSON-LD reprezentaci s pomocí  kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Dereferencováním získaného globálního IRI lze získat úplnou podobu identifikované
-                        entity dostupnou v daném zdroji.</dd>
+                        sady reprezentuje. Identifikátor entity je uveden v podobě relativního nebo absolutního
+                        <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a>. V případě relativního <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> je pro získání absolutního <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí  kontextu uvedeného
+                        v JSON-LD reprezentaci (<code>@context</code>). Dereferencováním získaného absolutního <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> lze získat úplnou podobu identifikované entity dostupnou v daném zdroji.</dd>
                   </dl>
                </section>
             </section>
          </section>
       </section>
-      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="rddf">
+      <section xmlns:err="http://www.w3.org/2005/xqt-errors" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="rdf">
          <h2><dfn>RDF struktura</dfn></h2>
+         <p>V této sekci je popsána struktura RDF distribuce datové sady.</p>
          <section id="lod-přehled">
             <h3>Přehled RDF struktury</h3>
+            <p>V této sekci je uveden přehled struktury RDF distribuce datové sady.</p>
             <section id="lod-přehled-třídy">
                <h4>RDF třídy</h4>
                <ul>
                   <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role" class="ssplink">Role</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role" class="ssplink">l-sgov-sbírka-111-2009-pojem:role</a>)
-                     						
+                     							
                      <dl>
                         <dt>Popis</dt>
                         <dd>Rolí se rozumí souhrn oprávnění fyzické osoby, která vykonává určitou činnost, k přístupu
@@ -281,7 +282,7 @@
             <section id="lod-přehled-vlastnosti">
                <h4>RDF vlastnosti</h4>
                <ul>
-                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí</a> (Má souhrn oprávnění definovaných rolí)
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD" class="ssplink">Má souhrn oprávnění definovaných rolí</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-souhrn-opr%C3%A1vn%C4%9Bn%C3%AD-definovan%C3%BDch-rol%C3%AD" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-souhrn-oprávnění-definovaných-rolí</a>)
                      						
                      <dl>
                         <dt>Popis</dt>
@@ -293,7 +294,7 @@
                         <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/role" class="ssplink">l-sgov-sbírka-111-2009-pojem:role</a></dd>
                      </dl>
                   </li>
-                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost" class="ssplink">l-sgov-sbírka-111-2009-pojem:vykonává-činnost</a> (Vykonává činnost)
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost" class="ssplink">Vykonává činnost</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/vykon%C3%A1v%C3%A1-%C4%8Dinnost" class="ssplink">l-sgov-sbírka-111-2009-pojem:vykonává-činnost</a>)
                      						
                      <dl>
                         <dt>Popis</dt>
@@ -308,7 +309,9 @@
             </section>
          </section>
          <section id="ukázky-lod">
-            <h2><dfn>Ukázky práce s RDF reprezentací datové sady pomocí SPARQL</dfn></h2>
+            <h2><dfn>Ukázky práce s RDF distribucí</dfn></h2>
+            <p>V této sekci jsou uvedeny příklady SPARQL dotazů pro práci s RDF distribucí datové
+               sady.</p>
             <section>
                <h3>Ukázky SPARQL dotazů nad typem Role</h3>
                <p>Následující SPARQL dotaz vrací seznam všech instancí typu Role. Pro každou instanci
