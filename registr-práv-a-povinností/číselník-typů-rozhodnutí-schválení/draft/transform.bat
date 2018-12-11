@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-typů-rozhodnutí-schválení.schema.xml" -xsl:"číselník-typů-rozhodnutí-schválení.json2html.xslt" -o:"index.html"

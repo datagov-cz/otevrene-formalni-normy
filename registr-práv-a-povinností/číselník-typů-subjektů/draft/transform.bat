@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-typů-subjektů.schema.xml" -xsl:"číselník-typů-subjektů.json2html.xslt" -o:"index.html"

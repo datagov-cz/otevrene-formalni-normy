@@ -76,13 +76,13 @@
 				<xsl:text>Datová sada je tvořena seznamem položek číselníku </xsl:text>
 				<xsl:value-of select="gen:generujNázevČíselníku(.)"/>
 				<xsl:text> odpovídajících datové struktuře </xsl:text>
-				<a>Typ <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])"/></a>
+				<a><xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])"/></a>
 				<xsl:text>. Položky jsou uvedeny v poli </xsl:text>
 				<code>položky</code>.
         <ul>
 					<xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en'][fn:map[@key='properties']/fn:map[@key='type'] or ./ancestor::fn:map[@key = 'definitions']]">
 						<li>
-							<a>Typ <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/></a>
+							<a><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/></a>
 							<xsl:text> sestává z následujících nepovinných vlastností:</xsl:text>
 							<ul>
 								<xsl:for-each select="./fn:map/fn:map">
@@ -95,13 +95,13 @@
 			</xsl:when>
 			<xsl:when test="fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map[@key='type']]">
 				<xsl:text>Datová sada je tvořena seznamem prvků odpovídajících datové struktuře </xsl:text>
-				<a>Typ <xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])"/></a>
+				<a><xsl:value-of select="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů(fn:map/fn:map/fn:map[fn:string[@key='type'] = 'object'])"/></a>
 				<xsl:text>. Prvky jsou uvedeny v poli </xsl:text>
 				<code>položky</code>.
         <ul>
 					<xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en'][fn:map[@key='properties']/fn:map[@key='type'] or ./ancestor::fn:map[@key = 'definitions']]">
 						<li>
-							<a>Typ <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/></a>
+							<a><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/></a>
 							<xsl:text> sestává z následujících nepovinných vlastností:</xsl:text>
 							<ul>
 								<xsl:for-each select="./fn:map/fn:map">
@@ -158,7 +158,7 @@
 			<section>
 				<h4>
 					<dfn>
-						Typ <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/>
+						<xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/>
 					</dfn>
 				</h4>
 				<p>
@@ -321,11 +321,11 @@
 									<xsl:choose>
 										<xsl:when test="fn:contains($nazev, 'CHYBA:')">
 											<xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item/fn:map)">
-												<a>Typ <xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
+												<a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
 											</xsl:for-each>
 										</xsl:when>
 										<xsl:otherwise>
-											<a>Typ <xsl:value-of select="$nazev"/></a>
+											<a><xsl:value-of select="$nazev"/></a>
 										</xsl:otherwise>
 									</xsl:choose>
 								</xsl:when>
@@ -335,11 +335,11 @@
 									<xsl:choose>
 										<xsl:when test="fn:contains($nazev, 'CHYBA:')">
 											<xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
-												<a>Typ <xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
+												<a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
 											</xsl:for-each>
 										</xsl:when>
 										<xsl:otherwise>
-											<a>Typ <xsl:value-of select="$nazev"/></a>
+											<a><xsl:value-of select="$nazev"/></a>
 										</xsl:otherwise>
 									</xsl:choose>
 								</xsl:when>
@@ -437,11 +437,11 @@
 				<xsl:choose>
 					<xsl:when test="fn:contains($nazev, 'CHYBA:')">
 						<xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
-							<a>Typ <xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
+							<a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
 						</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<a>Typ <xsl:value-of select="$nazev"/></a>
+						<a><xsl:value-of select="$nazev"/></a>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
@@ -453,11 +453,11 @@
 				<xsl:choose>
 					<xsl:when test="fn:contains($nazev, 'CHYBA:')">
 						<xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($ref-item)">
-							<a>Typ <xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
+							<a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
 						</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<a>Typ <xsl:value-of select="$nazev"/></a>
+						<a><xsl:value-of select="$nazev"/></a>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
@@ -523,11 +523,11 @@
 				<xsl:choose>
 					<xsl:when test="fn:contains($nazev, 'CHYBA:')">
 						<xsl:for-each select="gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů($item)">
-							<a>Typ <xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
+							<a><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů(.)"/></a>
 						</xsl:for-each>
 					</xsl:when>
 					<xsl:otherwise>
-						<a>Typ <xsl:value-of select="$nazev"/></a>
+						<a><xsl:value-of select="$nazev"/></a>
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
@@ -541,7 +541,7 @@
 			</xsl:when>
 			<xsl:when test="$item/fn:string[@key='type'] = 'object'">
 				<xsl:text>prvek dle datové struktury </xsl:text>
-				<a>Typ <xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($item)"/></a>
+				<a><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů($item)"/></a>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:text>CHYBA: Neznámý typ specifikace</xsl:text>

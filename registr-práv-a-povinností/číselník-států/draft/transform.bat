@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-států.schema.xml" -xsl:"číselník-států.json2html.xslt" -o:"index.html"

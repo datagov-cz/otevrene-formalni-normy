@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-právních-forem.schema.xml" -xsl:"číselník-právních-forem.json2html.xslt" -o:"index.html"
