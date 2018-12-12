@@ -611,25 +611,32 @@
 					<li>
 						<xsl:variable name="iriZKontextu" select="fn:tokenize(., ',')[1]" />
 						<xsl:variable name="iriVSémantickémSlovníkuPojmů" select="fn:tokenize(., ',')[2]" />
-						<a href="{$iriVSémantickémSlovníkuPojmů}" class="ssplink"><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)"/></a> (<a href="{$iriZKontextu}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI($iriZKontextu, $context)"/></a>)
-						<dl>
-							<dt>Popis</dt>
-							<dd>
-								<xsl:sequence select="gen:generujPopisPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)"/>
-							</dd>
-							<dt>Doména</dt>
-							<dd>
-								<xsl:for-each select="gen:generujDoménuPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)">
-									<a href="{.}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI(., $context)"/></a>
-								</xsl:for-each>
-							</dd>
-							<dt>Obor hodnot</dt>
-							<dd>
-								<xsl:for-each select="gen:generujOborHodnotPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)">
-									<a href="{.}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI(., $context)"/></a>
-								</xsl:for-each>
-							</dd>
-						</dl>
+						<xsl:choose>
+							<xsl:when test="$iriVSémantickémSlovníkuPojmů=''">
+								<a href="{$iriZKontextu}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI($iriZKontextu, $context)"/></a>
+							</xsl:when>
+							<xsl:otherwise>
+								<a href="{$iriVSémantickémSlovníkuPojmů}" class="ssplink"><xsl:sequence select="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)"/></a> (<a href="{$iriZKontextu}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI($iriZKontextu, $context)"/></a>)
+								<dl>
+									<dt>Popis</dt>
+									<dd>
+										<xsl:sequence select="gen:generujPopisPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)"/>
+									</dd>
+									<dt>Doména</dt>
+									<dd>
+										<xsl:for-each select="gen:generujDoménuPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)">
+											<a href="{.}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI(., $context)"/></a>
+										</xsl:for-each>
+									</dd>
+									<dt>Obor hodnot</dt>
+									<dd>
+										<xsl:for-each select="gen:generujOborHodnotPrvkuSIRIVSémantickémSlovníkuPojmů($iriVSémantickémSlovníkuPojmů)">
+											<a href="{.}" class="ssplink"><xsl:sequence select="gen:generujQNameZIRI(., $context)"/></a>
+										</xsl:for-each>
+									</dd>
+								</dl>
+							</xsl:otherwise>
+						</xsl:choose>
 					</li>
 				</xsl:for-each>
 			</ul>
@@ -768,9 +775,23 @@ LIMIT 100</xsl:text>
 				<xsl:variable name="prvek" select="."/>
 				<xsl:for-each select="$prvek/fn:map/fn:map[@key!='type' and @key!='id' and (fn:array[@key='examples']/* or fn:map/fn:array[@key='examples']/*) and fn:string[@key='type']!='array']">
 					<xsl:for-each select="(.[not(fn:string[@key='type']='object') or fn:map[@key='properties']/fn:map[@key='id' or @key='cs' or @key='en']], .[fn:string[@key='type']='object' and not(fn:map[@key='properties']/fn:map[@key='id' or @key='cs' or @key='en'])]/fn:map[@key='properties']/fn:map)">
-						<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)"/> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+						<xsl:variable name="vlastnost" select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)"/>
+						<xsl:choose>
+							<xsl:when test="fn:starts-with($vlastnost, 'CHYBA')">
+								<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)} nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+							</xsl:when>
+							<xsl:otherwise>
+								<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost {$vlastnost} nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+							</xsl:otherwise>
+						</xsl:choose>
 						<aside class="example">
-							<xsl:attribute name="title"><xsl:text>Instance typu {$typeName} s danou hodnotou vlastnosti </xsl:text><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/></xsl:attribute>
+							<xsl:attribute name="title">
+								<xsl:text>Instance typu {$typeName} s danou hodnotou vlastnosti </xsl:text>
+								<xsl:choose>
+									<xsl:when test="fn:starts-with($vlastnost, 'CHYBA')">{gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)}</xsl:when>
+									<xsl:otherwise>{$vlastnost}</xsl:otherwise>
+								</xsl:choose>
+							</xsl:attribute>
 							<xsl:variable name="query">
 								<xsl:text>{fn:distinct-values(gen:generujPrefixyProSPARQL($prvek))}
 	
@@ -928,13 +949,24 @@ LIMIT 100</xsl:text>
 		<xsl:variable name="contextItem" select="$context/fn:map[@key = $jsonAlias]"/>
 		<xsl:choose>
 			<xsl:when test="$contextItem/fn:string[@key='@type'] = '@id'">
-				<xsl:value-of select="fn:concat('&lt;', $context/fn:string[@key='@base']/text(), $item/fn:array[@key='examples'][1], '&gt;')"/>
+				<xsl:variable name="iri" select="$item/fn:array[@key='examples'][1]" />
+				<xsl:choose>
+					<xsl:when test="fn:starts-with($iri, 'http')">
+						<xsl:value-of select="fn:concat('&lt;', $iri, '&gt;')"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="fn:concat('&lt;', $context/fn:string[@key='@base']/text(), $item/fn:array[@key='examples'][1], '&gt;')"/>
+					</xsl:otherwise>
+				</xsl:choose>
 			</xsl:when>
 			<xsl:when test="$contextItem/fn:string[@key='@type'] = 'xsd:date'">
 				<xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;^^xsd:date')"/>
 			</xsl:when>
 			<xsl:when test="$contextItem/fn:string[@key='@type'] = 'xsd:boolean'">
 				<xsl:value-of select="$item/fn:array[@key='examples'][1]"/>
+			</xsl:when>
+			<xsl:when test="$contextItem/fn:string[@key='@container'] = '@language'">
+				<xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1]/fn:map/fn:string[@key='cs'], '&quot;')"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;')"/>
