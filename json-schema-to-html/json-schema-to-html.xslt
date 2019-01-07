@@ -172,7 +172,7 @@
 				<xsl:variable name="legislativa" select="gen:generujOdkazyNaZakonyProLidi(.)" />
 				<xsl:if test="exists($legislativa)">
 					<p>
-						Význam typu je definován v následujících ustanoveních právních předpisů:
+						Význam typu vyplývá z následujících ustanovení právních předpisů:
 						<xsl:sequence select="$legislativa"/>
 					</p>
 				</xsl:if>
@@ -744,6 +744,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
+				<xsl:variable name="sparqlEndpointURL" select="fn:concat(fn:substring-before(./ancestor::fn:source/fn:map/fn:map[@key='@context']/fn:string[@key='@base'], 'zdroj/'), 'sparql')"/>
 				<h3>Ukázky SPARQL dotazů nad typem {$typeLink}</h3>
 				
 				<p>Následující SPARQL dotaz vrací seznam všech instancí typu {$typeLink}. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové, atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
@@ -763,10 +764,10 @@ LIMIT 100</xsl:text>
 					</xsl:variable>
 					<p>
 						<a target="_blank">
-							<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 						<xsl:text> | </xsl:text>
 						<a target="_blank">
-							<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
 					</p>
 					<pre class="sparql">
 						<xsl:value-of select="$query"/>
@@ -799,27 +800,16 @@ SELECT *
 WHERE {{</xsl:text>
 								<xsl:if test="$typeIsMaterialized=true()"><xsl:text>
   ?{$mainVariable} a {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů($prvek)} .</xsl:text></xsl:if>
-								<xsl:text>{fn:distinct-values(gen:generujVlastnostiProSPARQL($prvek, $mainVariable, 1))}</xsl:text>
-								<xsl:choose>
-									<xsl:when test="fn:map/fn:map[@key='cs' or @key='en']">
-  FILTER (STR(?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))}) = {gen:generujFiltrovacíHodnotuProSPARQL(.)})								
-									</xsl:when>
-									<xsl:otherwise>
-										<xsl:text>
-  FILTER (?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} = {gen:generujFiltrovacíHodnotuProSPARQL(.)})								
-										</xsl:text>
-									</xsl:otherwise>
-								</xsl:choose>
-								<xsl:text>
+								<xsl:text>{fn:distinct-values(gen:generujVlastnostiProSPARQL($prvek, $mainVariable, 1))}{gen:generujFiltrovacíHodnotuProSPARQL(.)}
 }}
 LIMIT 100</xsl:text>
 							</xsl:variable>
 							<p>
 								<a target="_blank">
-									<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 								<xsl:text> | </xsl:text>
 								<a target="_blank">
-									<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
 							</p>
 							<pre class="sparql">
 								<xsl:value-of select="$query"/>
@@ -850,10 +840,10 @@ LIMIT 100</xsl:text>
 								</xsl:variable>
 								<p>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 									<xsl:text> | </xsl:text>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
 								</p>
 								<pre class="sparql">
 									<xsl:value-of select="$query"/>
@@ -886,17 +876,16 @@ WHERE {{</xsl:text>
   ?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)} ?{$mainVariable} .</xsl:text>
 										</xsl:when>
 									</xsl:choose>
-									<xsl:text>
-  FILTER (?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů(.))} = {gen:generujFiltrovacíHodnotuProSPARQL(.)})								
+									<xsl:text>{gen:generujFiltrovacíHodnotuProSPARQL(.)}
 }}
 LIMIT 100</xsl:text>
 								</xsl:variable>
 								<p>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 									<xsl:text> | </xsl:text>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat('https://rpp.opendata.cz/sparql?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
 								</p>
 								<pre class="sparql">
 									<xsl:value-of select="$query"/>
@@ -952,25 +941,19 @@ LIMIT 100</xsl:text>
 				<xsl:variable name="iri" select="$item/fn:array[@key='examples'][1]" />
 				<xsl:choose>
 					<xsl:when test="fn:starts-with($iri, 'http')">
-						<xsl:value-of select="fn:concat('&lt;', $iri, '&gt;')"/>
-					</xsl:when>
+  FILTER (?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($item))} = {fn:concat('&lt;', $iri, '&gt;')})</xsl:when>
 					<xsl:otherwise>
-						<xsl:value-of select="fn:concat('&lt;', $context/fn:string[@key='@base']/text(), $item/fn:array[@key='examples'][1], '&gt;')"/>
-					</xsl:otherwise>
+  FILTER (?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($item))} = {fn:concat('&lt;', $context/fn:string[@key='@base']/text(), $item/fn:array[@key='examples'][1], '&gt;')})</xsl:otherwise>
 				</xsl:choose>
 			</xsl:when>
 			<xsl:when test="$contextItem/fn:string[@key='@type'] = 'xsd:date'">
-				<xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;^^xsd:date')"/>
-			</xsl:when>
+  FILTER (?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($item))} = {fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;^^xsd:date')})</xsl:when>
 			<xsl:when test="$contextItem/fn:string[@key='@type'] = 'xsd:boolean'">
-				<xsl:value-of select="$item/fn:array[@key='examples'][1]"/>
-			</xsl:when>
+  FILTER (?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($item))} = {$item/fn:array[@key='examples'][1]})</xsl:when>
 			<xsl:when test="$contextItem/fn:string[@key='@container'] = '@language'">
-				<xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1]/fn:map/fn:string[@key='cs'], '&quot;')"/>
-			</xsl:when>
+  FILTER (STR(?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($item))}) = {fn:concat('&quot;', $item/fn:array[@key='examples'][1]/fn:map/fn:string[@key='cs'], '&quot;')})</xsl:when>
 			<xsl:otherwise>
-				<xsl:value-of select="fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;')"/>
-			</xsl:otherwise>
+  FILTER (STR(?{gen:generujPromennouProSPARQLZLabelu(gen:generujLocalNamePrvkuVSémantickémSlovníkuPojmů($item))}) = {fn:concat('&quot;', $item/fn:array[@key='examples'][1], '&quot;')})</xsl:otherwise>
 		</xsl:choose>
 	</xsl:function>
 	<xsl:function name="gen:generujVlastnostProSPARQL" as="xs:string*">
@@ -1031,7 +1014,7 @@ LIMIT 100</xsl:text>
 	</xsl:function>
 	<xsl:function name="gen:generujLegislativuPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
 		<xsl:param name="item" as="element()"/>
-		<xsl:for-each select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:relation', false(), false(), false())">
+		<xsl:for-each select="(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:relation', false(), false(), false()),gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:source', false(), false(), false()))">
 			<xsl:value-of select="."/>
 		</xsl:for-each>
 	</xsl:function>
