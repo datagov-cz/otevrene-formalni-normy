@@ -156,26 +156,29 @@
 		<xsl:text>V této části jsou specifikovány jednotlivé prvky JSON struktury.</xsl:text>
 		<xsl:for-each select=".//fn:map[fn:string[@key='type'] = 'object'][fn:map[@key='properties']/fn:map/@key != 'cs' and fn:map[@key='properties']/fn:map/@key != 'en'][fn:map[@key='properties']/fn:map[@key='type'] or ./ancestor::fn:map[@key = 'definitions']]">
 			<section>
+				<xsl:variable name="nazevTypuPrvku" select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/>
 				<h4>
 					<dfn>
-						<xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(.)"/>
+						<xsl:value-of select="$nazevTypuPrvku"/>
 					</dfn>
 				</h4>
-				<p>
-					<xsl:value-of select="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů(.)"/>
-				</p>
-				<p>
-					<xsl:text>Význam typu je definován v sémantickém slovníku pojmů jako </xsl:text>
-					<xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)"/>
-					<xsl:text>.</xsl:text>
-				</p>
-				<xsl:variable name="legislativa" select="gen:generujOdkazyNaZakonyProLidi(.)" />
-				<xsl:if test="exists($legislativa)">
-					<p>
-						Význam typu vyplývá z následujících ustanovení právních předpisů:
-						<xsl:sequence select="$legislativa"/>
-					</p>
-				</xsl:if>
+				<dl>
+					<dt>Popis</dt>
+					<dd>
+						<xsl:value-of select="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů(.)"/>
+					</dd>
+					<xsl:variable name="legislativa" select="gen:generujOdkazyNaZakonyProLidi(.)" />
+					<xsl:if test="exists($legislativa)">
+						<dt>Definující ustanovení právních předpisů</dt>
+						<dd>
+							<xsl:sequence select="$legislativa"/>
+						</dd>
+					</xsl:if>
+					<dt>Význam</dt>
+					<dd>
+						Typ {$nazevTypuPrvku} je definován v sémantickém slovníku pojmů jako <xsl:sequence select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)" />.
+					</dd>
+				</dl>				
 				<xsl:sequence select="gen:generujVlastnostiProJSONSpecifikaci(.)"/>
 				<xsl:if test="fn:string[fn:contains(@key, 'ref')]">
 					<xsl:variable name="ref-item" select="fn:substring(fn:string[fn:contains(@key, 'ref')], 15)"/>
@@ -199,63 +202,63 @@
 				</xsl:for-each>
 			</section>
 		</xsl:if>
-		<section>
-			<xsl:if test=".//fn:map[@key='cs' or @key='en' or @key='type' or @key='id']">
+		<xsl:if test=".//fn:map[@key='cs' or @key='en' or @key='type' or @key='id']">
+			<section>
 				<h4>Obecné prvky</h4>
 				<p>Jedná se o JSON prvky, které jsou použity na různých místech JSON reprezentace datové sady v různých situacích</p>
-			</xsl:if>
-			<xsl:if test=".//fn:map[@key='cs' or @key='en']">
-				<section>
-					<h5>
-						<dfn>Vícejazyčný řetězec</dfn>
-					</h5>
-					<dl>
-						<dt>Typ</dt>
-						<dd>
-							<pre class="json">
-								<xsl:value-of select="'{&quot;cs&quot;: &quot;...&quot;, &quot;en&quot;: &quot;...&quot;, ...}'"/>
-							</pre>
-						</dd>
-						<dt>Popis</dt>
-						<dd>Typ je použit pro vlastnosti, jejichž hodnotou jsou řetězce v různých jazycích.</dd>
-					</dl>
-				</section>
-			</xsl:if>
-			<xsl:if test=".//fn:map[@key='type']">
-				<section>
-					<h5>Vlastnost <code>
-							<dfn>type</dfn>
-						</code>
-					</h5>
-					<dl>
-						<dt>Typ</dt>
-						<dd>
-							<a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a>
-						</dd>
-						<dt>Popis</dt>
-						<dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci datové sady. Sémantický typ je identifikován v podobě lokálního IRI. Aby jej bylo možné využít, je nutné JSON reprezentaci interpretovat jako JSON-LD reprezentaci s pomocí kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Při této interpretaci lze získat globální IRI sémantického typu. Jeho dereferencováním lze získat úplnou definici významu.</dd>
-					</dl>
-				</section>
-			</xsl:if>
-			<xsl:if test=".//fn:map[@key='id']">
-				<section>
-					<h5>Vlastnost <code>
-							<dfn>id</dfn>
-						</code>
-					</h5>
-					<dl>
-						<dt>Typ</dt>
-						<dd>
-							<a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a>
-						</dd>
-						<dt>Jméno</dt>
-						<dd>Identifikátor prvku</dd>
-						<dt>Popis</dt>
-						<dd>Vlastnost přiřazuje prvku identifikátor entity, kterou v JSON reprezentaci datové sady reprezentuje. Identifikátor entity je uveden v podobě relativního nebo absolutního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a>. V případě relativního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a> je pro získání absolutního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a> interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí  kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Dereferencováním získaného absolutního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a> lze získat úplnou podobu identifikované entity dostupnou v daném zdroji.</dd>
-					</dl>
-				</section>
-			</xsl:if>
-		</section>
+				<xsl:if test=".//fn:map[@key='cs' or @key='en']">
+					<section>
+						<h5>
+							<dfn>Vícejazyčný řetězec</dfn>
+						</h5>
+						<dl>
+							<dt>Typ</dt>
+							<dd>
+								<pre class="json">
+									<xsl:value-of select="'{&quot;cs&quot;: &quot;...&quot;, &quot;en&quot;: &quot;...&quot;, ...}'"/>
+								</pre>
+							</dd>
+							<dt>Popis</dt>
+							<dd>Typ je použit pro vlastnosti, jejichž hodnotou jsou řetězce v různých jazycích.</dd>
+						</dl>
+					</section>
+				</xsl:if>
+				<xsl:if test=".//fn:map[@key='type']">
+					<section>
+						<h5>Vlastnost <code>
+								<dfn>type</dfn>
+							</code>
+						</h5>
+						<dl>
+							<dt>Typ</dt>
+							<dd>
+								<a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a>
+							</dd>
+							<dt>Popis</dt>
+							<dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci datové sady. Sémantický typ je identifikován v podobě lokálního IRI. Aby jej bylo možné využít, je nutné JSON reprezentaci interpretovat jako JSON-LD reprezentaci s pomocí kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Při této interpretaci lze získat globální IRI sémantického typu. Jeho dereferencováním lze získat úplnou definici významu.</dd>
+						</dl>
+					</section>
+				</xsl:if>
+				<xsl:if test=".//fn:map[@key='id']">
+					<section>
+						<h5>Vlastnost <code>
+								<dfn>id</dfn>
+							</code>
+						</h5>
+						<dl>
+							<dt>Typ</dt>
+							<dd>
+								<a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a>
+							</dd>
+							<dt>Jméno</dt>
+							<dd>Identifikátor prvku</dd>
+							<dt>Popis</dt>
+							<dd>Vlastnost přiřazuje prvku identifikátor entity, kterou v JSON reprezentaci datové sady reprezentuje. Identifikátor entity je uveden v podobě relativního nebo absolutního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a>. V případě relativního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a> je pro získání absolutního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a> interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí  kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Dereferencováním získaného absolutního <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#IRI">IRI</a> lze získat úplnou podobu identifikované entity dostupnou v daném zdroji.</dd>
+						</dl>
+					</section>
+				</xsl:if>
+			</section>
+		</xsl:if>
 	</xsl:template>
 	<xsl:function name="gen:generujVlastnostiProJSONSpecifikaci" as="element()*">
 		<xsl:param name="item" as="element()"/>
@@ -676,18 +679,18 @@
 						<xsl:when test="fn:starts-with($materializedTypeLink, 'CHYBA')">
 							<xsl:choose>
 								<xsl:when test="not(parent::*[@key='položky']) and $isReversed=fn:false()">
-									<xsl:value-of select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů(..))"/>
+									<xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(gen:generujOborHodnotPrvkuVSémantickémSlovníkuPojmů(..))"/>
 								</xsl:when>
 								<xsl:when test="not(parent::*[@key='položky']) and $isReversed=fn:true()">
-									<xsl:value-of select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů(..))"/>
+									<xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů(..))"/>
 								</xsl:when>
 								<xsl:when test="parent::*[@key='položky']">
-									<xsl:value-of select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů(fn:map[@key='properties']/fn:map[1]))"/>
+									<xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů(gen:generujDoménuPrvkuVSémantickémSlovníkuPojmů(fn:map[@key='properties']/fn:map[1]))"/>
 								</xsl:when>
 							</xsl:choose>
 						</xsl:when>
 						<xsl:otherwise>
-							<xsl:value-of select="$materializedTypeLink" />
+							<xsl:sequence select="$materializedTypeLink" />
 						</xsl:otherwise>
 					</xsl:choose>
 				</xsl:variable>
@@ -747,7 +750,7 @@
 				<xsl:variable name="sparqlEndpointURL" select="fn:concat(fn:substring-before(./ancestor::fn:source/fn:map/fn:map[@key='@context']/fn:string[@key='@base'], 'zdroj/'), 'sparql')"/>
 				<h3>Ukázky SPARQL dotazů nad typem {$typeLink}</h3>
 				
-				<p>Následující SPARQL dotaz vrací seznam všech instancí typu {$typeLink}. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové, atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+				<p>Následující SPARQL dotaz vrací seznam všech instancí typu <xsl:sequence select="$typeLink" />. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové, atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
 				<aside class="example">
 					<xsl:attribute name="title"><xsl:text>Instance typu {$typeName}</xsl:text><xsl:if test="./parent::fn:map[fn:string[@key='type'] = 'array']/../..[@key]"><xsl:text> přiřazené k instanci typu </xsl:text><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(./parent::fn:map[fn:string[@key='type'] = 'array']/../..[@key])"/><xsl:text> prostřednictvím </xsl:text><xsl:value-of select="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů(./parent::fn:map[fn:string[@key='type'] = 'array'])"/></xsl:if></xsl:attribute>
 					<xsl:variable name="query">
@@ -779,10 +782,10 @@ LIMIT 100</xsl:text>
 						<xsl:variable name="vlastnost" select="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů(.)"/>
 						<xsl:choose>
 							<xsl:when test="fn:starts-with($vlastnost, 'CHYBA')">
-								<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)} nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+								<p>Následující SPARQL dotaz vrací instance typu <xsl:sequence select="$typeLink" />, pro které jejich vlastnost {gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)} nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
 							</xsl:when>
 							<xsl:otherwise>
-								<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost {$vlastnost} nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+								<p>Následující SPARQL dotaz vrací instance typu <xsl:sequence select="$typeLink" />, pro které jejich vlastnost <xsl:sequence select="$vlastnost" /> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
 							</xsl:otherwise>
 						</xsl:choose>
 						<aside class="example">
@@ -790,7 +793,7 @@ LIMIT 100</xsl:text>
 								<xsl:text>Instance typu {$typeName} s danou hodnotou vlastnosti </xsl:text>
 								<xsl:choose>
 									<xsl:when test="fn:starts-with($vlastnost, 'CHYBA')">{gen:generujQNamePrvkuVSémantickémSlovníkuPojmů(.)}</xsl:when>
-									<xsl:otherwise>{$vlastnost}</xsl:otherwise>
+									<xsl:otherwise><xsl:sequence select="$vlastnost" /></xsl:otherwise>
 								</xsl:choose>
 							</xsl:attribute>
 							<xsl:variable name="query">
@@ -822,7 +825,7 @@ LIMIT 100</xsl:text>
 					<xsl:variable name="domain" select="gen:generujDoménuPrvkuSIRIVSémantickémSlovníkuPojmů($iri)" />
 					<xsl:variable name="range" select="gen:generujOborHodnotPrvkuSIRIVSémantickémSlovníkuPojmů($iri)" />
 					<xsl:variable name="this" select="$prvek/.." />
-					<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů($iri)"/> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+					<p>Následující SPARQL dotaz vrací instance typu <xsl:sequence select="$typeLink" />, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů($iri)"/> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
 							<aside class="example">
 								<xsl:attribute name="title"><xsl:text>Instance typu {$typeName} s danou hodnotou vlastnosti </xsl:text><xsl:value-of select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů($iri)"/></xsl:attribute>
 								<xsl:variable name="query">
@@ -855,7 +858,7 @@ LIMIT 100</xsl:text>
 					<xsl:variable name="domain" select="gen:generujDoménuPrvkuSIRIVSémantickémSlovníkuPojmů($iri)" />
 					<xsl:variable name="range" select="gen:generujOborHodnotPrvkuSIRIVSémantickémSlovníkuPojmů($iri)" />
 					<xsl:variable name="this" select="." />
-					<p>Následující SPARQL dotaz vrací instance typu {$typeLink}, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů($iri)"/> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
+					<p>Následující SPARQL dotaz vrací instance typu <xsl:sequence select="$typeLink" />, pro které jejich vlastnost <xsl:sequence select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů($iri)"/> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.</p>
 							<aside class="example">
 								<xsl:attribute name="title"><xsl:text>Instance typu {$typeName} s danou hodnotou vlastnosti </xsl:text><xsl:value-of select="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů($iri)"/></xsl:attribute>
 								<xsl:variable name="query">
