@@ -1,0 +1,358 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/informační-systémy-veřejné-správy.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "informační-systém-veřejné-správy",
+            "pattern": "^informační-systém-veřejné-správy$"
+          },
+          "id": {
+            "type": "string",
+            "examples": [
+              "informační-systém-veřejné-správy/8005"
+            ],
+            "pattern": "^informační-systém-veřejné-správy/[0-9]+$"
+          },
+          "identifikátor": {
+            "type": "string",
+            "examples": [
+              "8005"
+            ],
+            "pattern": "^[0-9]+$"
+          },
+          "název": {
+            "type": "object",
+            "examples": [
+              {"cs" : "GINIS"}
+            ],
+            "properties": {
+              "cs": {
+                "type": "string"
+              }
+            }
+          },
+          "verze": {
+            "type": "string",
+            "examples": [
+              "1"
+            ],
+            "pattern": "^[0-9]+$"
+          },
+          "webová-aplikace": {
+            "type": "string",
+            "examples": [
+              "https://www.ginis.cz"
+            ],
+            "pattern": "^.+$"
+          },
+          "dokumentace": {
+            "type": "string",
+            "examples": [
+              "https://www.ginis.cz/dokumentace"
+            ],
+            "pattern": "^.+$"
+          },
+          "datum-vzniku": {
+            "type": "string",
+            "examples": [
+              "2018-09-24"
+            ],
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "datum-zániku": {
+            "type": "string",
+            "examples": [
+              "2020-31-12"
+            ],
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "komentář": {
+            "type": "string",
+            "examples": [
+              "zrevidovat údaje ISVS"
+            ],
+            "pattern": "^.+$"
+          },
+          "kategorie": {
+            "type": "string",
+            "examples": [
+              "kategorie-informačního-systému/KAT_98"
+            ],
+            "pattern": "^kategorie-informačního-systému/KAT_[0-9]+$"
+          },
+          "správa": {
+            "type": "object",
+            "examples": [
+              {
+                "ovm-správce": "orgán-veřejné-moci/00253936",
+                "email-správce": "sw@mufrlazne.cz"
+              }
+            ],
+            "properties": {
+              "ovm-správce": {
+                "type": "string",
+                "examples": [
+                  "orgán-veřejné-moci/00253936"
+                ],
+                "pattern": "^orgán-veřejné-moci/[0-9]{8}$"
+              },
+              "email-správce": {
+                "type": "string",
+                "examples": [
+                  "sw@mufrlazne.cz"
+                ],
+                "pattern": "^.+$"
+              }
+            }
+          },
+          "provoz": {
+            "type": "array",
+            "examples": [
+              {
+                "ovm-provozovatel": "orgán-veřejné-moci/72054506",
+                "email-provozovatele": "provozovatel@email.cz"
+              }
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "ovm-provozovatel": {
+                  "type": "string",
+                  "examples": [
+                    "orgán-veřejné-moci/72054506"
+                  ],
+                  "pattern": "^orgán-veřejné-moci/[0-9]{8}$"
+                },
+                "ros-provozovatel": {
+                  "type": "object",
+                  "examples": [
+                    {
+                      "ičo": "00234737",
+                      "název-provozovatele": "Obec Olovnice",
+                      "adresa-provozovatele": {
+                        "id": "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190",
+                        "kód": "22305190"
+                 		  },
+                      "adresa-provozovatele-txt": "Před dubem 5, Olovnice",
+                      "datové-schránky-provozovatele": [
+                        {
+                          "type": "datová-schránka",
+                          "id": "datová-schránka/0abcdef",
+                          "typ-ds": "typ-datové-schránky/OVM",
+                          "identifikátor-ds": "0abcdef"
+                        }
+                      ]
+                    }
+                  ],
+                  "properties": {
+                    "ičo": {
+                      "type": "string",
+                      "examples": [
+                        "00234737"
+                      ],
+                      "pattern": "^[0-9]{8}$"
+                    },
+                    "název-provozovatele": {
+                      "type": "object",
+                      "examples": [
+                        {
+                          "cs": "Obec Olovnice"
+                        }
+                      ],
+                      "properties": {
+                        "cs": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "adresa-provozovatele": {
+                      "$ref": "#/definitions/adresní-místo"
+                    },
+                    "adresa-provozovatele-txt": {
+                      "type": "string",
+                      "examples": [
+                        "Před dubem 5, Olovnice"
+                      ]
+                    },
+                    "datové-schránky-provozovatele": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "default": "datová-schránka",
+                            "pattern": "^datová-schránka$"
+                          },
+                          "id": {
+                            "type": "string",
+                            "examples": [
+                              "datová-schránka/6bnaawp"
+                            ],
+                            "pattern": "^datová-schránka/[0-9a-z]{7}$"
+                          },
+                          "typ-ds": {
+                            "type": "string",
+                            "examples": [
+                              "typ-datové-schránky/OVM"
+                            ],
+                            "pattern": "^typ-datové-schránky/[A-Z]+$"
+                          },
+                          "identifikátor-ds": {
+                            "type": "string",
+                            "examples": [
+                              "6bnaawp"
+                            ],
+                            "pattern": "^[0-9a-z]{7}$"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "email-provozovatele": {
+                  "type": "string",
+                  "examples": [
+                    "sw@mufrlazne.cz"
+                  ],
+                  "pattern": "^.+$"
+                }
+              }
+            }
+          },
+          "email-informace": {
+            "type": "string",
+            "examples": [
+              "informace@informace.cz"
+            ],
+            "pattern": "^.+$"
+          },
+          "celkové-náklady": {
+            "type": "string",
+            "examples": [
+              "3978000"
+            ],
+            "pattern": "^[0-9]+$"
+          },
+          "roční-náklady": {
+            "type": "string",
+            "examples": [
+              "447000"
+            ],
+            "pattern": "^[0-9]+$"
+          },
+          "poznámka-náklady": {
+            "type": "string",
+            "examples": [
+              "metoda výpočtu: abc"
+            ],
+            "pattern": "^.+$"
+          },
+          "ustanovení": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "ustanovení-právního-předpisu",
+                  "pattern": "^ustanovení-právního-předpisu$"
+                },
+                "označení": {
+                  "type": "string",
+                  "examples": [
+                    "§ 1 Odst. 1 Pism. i) zákon Zákon o základních registrech č. 111"
+                  ]
+                }
+              }
+            }
+          },
+          "seznam-certifikací": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "certifikace",
+                  "pattern": "^certifikace$"
+                },
+                "datum-certifikace": {
+                  "type": "string",
+                  "examples": [
+                    "2018-12-12"
+                  ],
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                },
+                "typ-certifikace": {
+                  "type": "string",
+                  "examples": [
+                    "typ-certifikace-informačního-systému/CERT_21"
+                  ],
+                  "pattern": "^typ-certifikace-informačního-systému/CERT_[0-9]+$"
+                }
+              }
+            }
+          },
+          "subsystémy": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "subsystém",
+                  "pattern": "^subsystém$"
+                },
+                "název-subsystému": {
+                  "type": "string",
+                  "examples": [
+                    "Správa"
+                  ],
+                  "pattern": "^.*$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "adresní-místo": {
+      "type": "object",
+      "examples": [
+        {
+          "id" : "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190",
+          "kód" : "22305190"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "examples": [
+            "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
+          ],
+          "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+        },
+        "kód": {
+          "type": "string",
+          "examples": [
+            "22305190"
+          ],
+          "pattern": "^[0-9]{8}$"
+        }
+      }
+    }
+  }
+}

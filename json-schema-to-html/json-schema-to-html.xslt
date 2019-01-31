@@ -1023,11 +1023,11 @@ LIMIT 100</xsl:text>
 	</xsl:function>
 	<xsl:function name="gen:generujNázevPrvkuVSémantickémSlovníkuPojmů" as="xs:string">
 		<xsl:param name="item" as="element()"/>
-		<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', false(), true(), false())"/>
+		<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:prefLabel', false(), true(), false())"/>
 	</xsl:function>
 	<xsl:function name="gen:generujNázevTypuPrvkuVSémantickémSlovníkuPojmů" as="xs:string">
 		<xsl:param name="item" as="element()"/>
-		<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', false(), true(), true())"/>
+		<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:prefLabel', false(), true(), true())"/>
 	</xsl:function>
 	<xsl:function name="gen:generujTypPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
 		<xsl:param name="item" as="element()"/>
@@ -1048,7 +1048,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 	</xsl:function>
 	<xsl:function name="gen:generujOdkazNaPrvekVSémantickémSlovníkuPojmů" as="node()">
 		<xsl:param name="item" as="element()"/>
-		<xsl:sequence select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'rdfs:label', true(), true(), false())[1]"/>
+		<xsl:sequence select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:prefLabel', true(), true(), false())[1]"/>
 	</xsl:function>
 	<xsl:function name="gen:generujPopisPrvkuVSémantickémSlovníkuPojmů" as="xs:string*">
 		<xsl:param name="item" as="element()"/>
@@ -1251,8 +1251,8 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 			<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 			<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 			<xsl:choose>
-				<xsl:when test="$semVocTypeXMLDocument//rdfs:label">
-					<xsl:for-each select="$semVocTypeXMLDocument//rdfs:label">
+				<xsl:when test="$semVocTypeXMLDocument//skos:prefLabel">
+					<xsl:for-each select="$semVocTypeXMLDocument//skos:prefLabel">
 						<a class="ssplink">
 							<xsl:attribute name="href" select="$iri"/>
 							<xsl:value-of select="text()"/>
@@ -1260,7 +1260,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 					</xsl:for-each>
 				</xsl:when>
 				<xsl:otherwise>
-					<a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, pro nějž není hodnota vlastnosti rdfs:label ve slovníku uvedena.</a>
+					<a>CHYBA: V sémantickém slovníku pojmů odpovídá prvek typu {$iri}, pro nějž není hodnota vlastnosti skos:prefLabel ve slovníku uvedena.</a>
 				</xsl:otherwise>
 			</xsl:choose>
 			<xsl:catch>
@@ -1270,7 +1270,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 	</xsl:function>
 	<xsl:function name="gen:generujJménoPrvkuSIRIVSémantickémSlovníkuPojmů" as="xs:string">
 		<xsl:param name="iri" as="xs:string"/>
-		<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuSIRIVSémantickémSlovníkuPojmů($iri, 'rdfs:label', false(), true())"/>
+		<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuSIRIVSémantickémSlovníkuPojmů($iri, 'skos:prefLabel', false(), true())"/>
 	</xsl:function>
 	<xsl:function name="gen:generujPopisPrvkuSIRIVSémantickémSlovníkuPojmů" as="xs:string">
 		<xsl:param name="iri" as="xs:string"/>

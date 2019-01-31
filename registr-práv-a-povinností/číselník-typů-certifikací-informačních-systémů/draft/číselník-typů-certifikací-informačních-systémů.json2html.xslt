@@ -11,7 +11,7 @@
   <xsl:template match="db:article">
 <html lang="cs">
   <head>
-    <title>Registr práv a povinností - agendové informační systémy</title>
+    <title>Registr práv a povinností - číselník typů subjektů</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta name="theme-color" content="#057fa5" />
     <meta name="msapplication-TileColor" content="#057fa5" />
@@ -28,15 +28,14 @@
     <link rel="icon" type="image/png" sizes="192x192"  href="../../../static/favicons/android-icon-192x192.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../static/favicons/favicon-16x16.png" />
     <link rel="manifest" href="../../../static/favicons/manifest.json" />
     <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css" />
     <script class="remove" src="../../../static/js/respec-odcz.js" />
-    <script class="remove" src="agendové-informační-systémy.config.js" />
+    <script class="remove" src="číselník-typů-certifikací-informačních-systémů.config.js" />
   </head>
   <body>
     <xsl:apply-templates mode="abstrakt" />
-    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/agendové-informační-systémy/draft/agendové-informační-systémy.schema.json', '../registr-práv-a-povinností/agendové-informační-systémy/draft/agendové-informační-systémy.context.jsonld')"/>
+    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/draft/číselník-typů-certifikací-informačních-systémů.schema.json', '../registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/draft/číselník-typů-certifikací-informačních-systémů.context.jsonld')"/>
     <xsl:apply-templates mode="příklady" />
   </body>
 </html>

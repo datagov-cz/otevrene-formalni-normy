@@ -1,0 +1,1 @@
+java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-kategorií-informačních-systémů.schema.xml" -xsl:"číselník-kategorií-informačních-systémů.json2html.xslt" -o:"index.html"

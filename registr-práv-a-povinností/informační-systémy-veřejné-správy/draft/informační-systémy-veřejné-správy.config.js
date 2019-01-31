@@ -1,9 +1,9 @@
 var respecConfig = {
 	specStatus: "ED",
-	shortName: "rpp-využití-agendových-informačních-systémů",
+	shortName: "rpp-informační-systémy-veřejné-správy",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/využití-agendových-informačních-systémů/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/využití-agendových-informačních-systémů/",
+	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/informační-systémy-veřejné-správy/draft/",
+	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/informační-systémy-veřejné-správy/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://www.opendata.cz/martin-nečaský",

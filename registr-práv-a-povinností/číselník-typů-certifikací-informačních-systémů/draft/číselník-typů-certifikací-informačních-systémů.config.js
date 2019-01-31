@@ -1,9 +1,9 @@
 var respecConfig = {
 	specStatus: "ED",
-	shortName: "rpp-agendové-informační-systémy",
+	shortName: "rpp-číselník-typů-certifikací-informačních-systémů",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendové-informační-systémy/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendové-informační-systémy/",
+	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/draft/",
+	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://www.opendata.cz/martin-nečaský",
