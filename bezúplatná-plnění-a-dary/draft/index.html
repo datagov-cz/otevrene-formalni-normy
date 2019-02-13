@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Bezúplatná plnění a dary</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "bezúplatná-plnění-a-dary",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:bezuplatna-plneni-a-dary",
+                thisVersion: "https://data.gov.cz/otevřené-formální-normy/bezúplatná-plnění-a-dary/draft/",
+                latestVersion: "https://data.gov.cz/otevřené-formální-normy/bezúplatná-plnění-a-dary/",
+                editors: [{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování bezúplatných plnění a darů.
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro veřejňování bezúplatných plnění a darů.
+                Norma je ilustrována příklady dat ve formátech CSV [[!rfc4180]], JSON [[!ECMA-404]] a XML [[!xml]].
+            </p>
+        </section>
+
+        <section id="Přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového bezúplatných plnění a darů" src="obrázky/bezúplatná-plnění-a-dary.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/open?id=1NnOaHhKLlqhVU1D_EulcVbtGDicednQv">Diagram datového modelu bezúplatných plnění a darů</a>
+                </figcaption>
+            </figure>
+
+            <section id="přehled-bezúplatná-plnění-a-dary">
+                <h3>Bezúplatná plnění a dary</h3>
+                <p>
+                    Bezúplatné plnění je přijato či darováno organizací publikující datovou sadu.
+					Zainteresovaná organizace či zainteresovaná fyzická osoba je cizí subjekt, který dar daruje či přijímá.
+					To, zda je dar darován či přijímán organizací je indikováno směrem plnění.
+                </p>
+                                            
+            </section>
+            
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis bezúplatných plnění a darů.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-bezúplatné-plnění">
+                <h3>Bezúplatné plnění či dar</h3>
+                <p>
+                    Tato třída reprezentuje samotné bezúplatné plnění či dar.
+                </p>
+
+                <section id="vlastnost-bezúplatné-plnění-identifikator">
+                    <h4>Identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Id
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačný identifikátor bezúplatného plnění či daru. Buď pocházející z účetního systému nebo např. UUID [[rfc4122]].
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>bc81c7e2-6971-4553-a4f8-47754eec9365</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-bezúplatné-plnění-směr">
+                    <h4>Směr plnění</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>směr</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Směr plnění
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Indikuje, zda je dar přijat či darován.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Přijaté plnění</code>, <code>Darované plnění</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-bezúplatné-plnění-typ-daru">
+                    <h4>Typ daru</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Typ daru.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>finanční částka</code>, <code>hmotná věc</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-bezúplatné-plnění-popis-daru">
+                    <h4>Popis daru</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Stručný popis hmotného daru.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Bysta pana ministra</code>
+                        </dd>
+                    </dl>
+
+                </section>
+           
+                <section id="vlastnost-bezúplatné-plnění-datum-darování">
+                    <h4>Datum darování</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>datum_darování</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum darování
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum darování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2019-01-01</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-bezúplatné-plnění-hodnota">
+                    <h4>Vazba: Hodnota</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>hodnota</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hodnota">Hodnota</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hodnota
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnota daru.
+                        </dd>
+                    </dl>
+
+                </section>  
+
+                <section id="vazba-bezúplatné-plnění-organizace">
+                    <h4>Vazba: Organizace</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>organizace</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-osoba">Osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Organizace přijímající či darující dar.
+                        </dd>
+                    </dl>
+
+                </section>  
+
+                <section id="vazba-bezúplatné-plnění-zainteresovaná-organizace">
+                    <h4>Vazba: Zainteresovaná organizace</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>zainteresovana_organizace</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zainteresovaná organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Zainteresovaná organizace přijímající či darující dar.
+                        </dd>
+                    </dl>
+
+                </section>  
+
+                <section id="vazba-bezúplatné-plnění-zainteresovaná-osoba">
+                    <h4>Vazba: Zainteresovaná osoba</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>zainteresovana_osoba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-osoba">Osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zainteresovaná fyzická osoba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Zainteresovaná fyzická osoba přijímající či darující dar.
+                        </dd>
+                    </dl>
+
+                </section>  
+			</section>
+            
+            <section id="třída-organizace">
+                <h3>Organizace</h3>
+                <p>
+                    Tato třída reprezentuje organizaci přijímající či darující dar.
+                </p>
+
+                <section id="vlastnost-organizace-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Ministerstvo zdravotnictví</code>
+                        </dd>
+                    </dl>
+
+                </section>          
+        
+                <section id="vlastnost-organizace-země">
+                    <h4>Země</h4>
+                    
+                    <p class="note">
+                        Je třeba použít <a href="https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/country">číselník zemí z EU Vocabularies</a>.
+                        Nejlépe URL, nebo alespoň ISO 3166-1 α-3
+                    </p>
+                    
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>země</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Země
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Země původu organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>CZE</code>
+                        </dd>
+                    </dl>
+
+                </section>          
+
+                <section id="vlastnost-organizace-ičo">
+                    <h4>IČO</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>ičo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            IČO
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            IČO organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>00024341</code>
+                        </dd>
+                    </dl>
+
+                </section>          
+
+            </section>
+			
+			<section id="třída-osoba">
+                <h3>Osoba</h3>
+                <p>
+                    Tato třída reprezentuje fyzickou osobu, která přijímá či daruje dar.
+                </p>
+
+                <section id="vlastnost-osoba-jméno">
+                    <h4>Jméno</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>jméno</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Jméno
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Křestní jméno osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Jakub</code>
+                        </dd>
+                    </dl>
+
+                </section>          
+        
+                <section id="vlastnost-osoba-příjmení">
+                    <h4>Příjmení</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>příjmení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Příjmení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Příjmení osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Klímek</code>
+                        </dd>
+                    </dl>
+
+                </section>        
+
+                <section id="vlastnost-osoba-tituly-před">
+                    <h4>Tituly před jménem</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>tituly_před</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Tituly před jménem
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tituly před jménem osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>RNDr.</code>
+                        </dd>
+                    </dl>
+
+                </section>   
+
+                <section id="vlastnost-osoba-tituly-za">
+                    <h4>Tituly za jménem</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>tituly_za</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Tituly za jménem
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tituly za jménem osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Ph.D.</code>
+                        </dd>
+                    </dl>
+
+                </section>   
+
+				<section id="vlastnost-osoba-text">
+                    <h4>Celé jméno osoby</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>text</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Celé jméno osoby
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Celé jméno osoby jako jeden řetězec, pokud nelze strukturovat.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>RNDr. Jakub Klímek, Ph.D.</code>
+                        </dd>
+                    </dl>
+
+                </section> 
+
+			</section>
+
+            <section id="třída-hodnota">
+                <h3>Hodnota</h3>
+                <p>
+                    Tato třída reprezentuje hodnotu daru.
+                </p>
+
+                <section id="vlastnost-hodnota-částka">
+                    <h4>Částka</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>částka</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:desetinné-císlo">Desetinné číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Částka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Částka.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>3000.50</code>
+                        </dd>
+                    </dl>
+
+                </section>          
+        
+				<section id="vlastnost-hodnota-měna">
+                    <h4>Měna</h4>
+                    <p class="note">
+                        Je třeba použít <a href="https://publications.europa.eu/en/web/eu-vocabularies/at-dataset/-/resource/dataset/currency">číselník měn z EU Vocabularies</a>.
+                        Nejlépe URL, nebo alespoň ISO 4217 [[ISO4217]].
+                    </p>
+
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>měna</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Měna hodnoty daru
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Měna částky <code>částka</code>, 3-písmenný, ISO 4217 formát [[ISO4217]].
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>CZK</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>
+       
+        </section>
+    </body>
+</html>
