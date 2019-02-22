@@ -232,7 +232,7 @@
 						<dl>
 							<dt>Typ</dt>
 							<dd>
-								<a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a>
+								<a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
 							</dd>
 							<dt>Popis</dt>
 							<dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci datové sady. Sémantický typ je identifikován v podobě lokálního IRI. Aby jej bylo možné využít, je nutné JSON reprezentaci interpretovat jako JSON-LD reprezentaci s pomocí kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Při této interpretaci lze získat globální IRI sémantického typu. Jeho dereferencováním lze získat úplnou definici významu.</dd>
@@ -248,7 +248,7 @@
 						<dl>
 							<dt>Typ</dt>
 							<dd>
-								<a href="https://opendata.gov.cz/datovy-typ:%C5%99etezec">Řetězec</a>
+								<a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
 							</dd>
 							<dt>Jméno</dt>
 							<dd>Identifikátor prvku</dd>
@@ -498,7 +498,7 @@
 				</xsl:if>
 			</xsl:when>
 			<xsl:when test="$item/fn:string[@key='type'] = 'string'">
-				<a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+				<a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
 				<xsl:if test="$item/fn:string[@key='pattern']">
 					<xsl:text> dle regulárního výrazu </xsl:text>
 					<code>
@@ -507,10 +507,10 @@
 				</xsl:if>
 			</xsl:when>
 			<xsl:when test="$item/fn:string[@key='type'] = 'boolean'">
-				<a href="https://opendata.gov.cz/datovy-typ:anone">Boolean</a>
+				<a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#boolean">Boolean</a>
 			</xsl:when>
 			<xsl:when test="$item/fn:string[@key='type'] = 'integer'">
-				<a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
+				<a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#celé-číslo">Celé číslo</a>
 			</xsl:when>
 			<xsl:when test="$item/fn:string[@key='type'] = 'object' and $item/fn:map[@key='properties']/fn:map[@key='cs' or @key='en']">
 				<a>Vícejazyčný řetězec</a>
