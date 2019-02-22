@@ -70,6 +70,11 @@
             
             <section id="jednoduché-datové-typy">
                 <h3>Jednoduché datové typy</h3>
+				
+				<p>
+					Jednoduché datové typy se už dále nedělí na jednotlivé položky.
+					Pokud jsou strukturované, je jejich struktura určena již pouze syntaxí použitého datového typu.
+				</p>
 
                 <section id="boolean">
                     <h4>Booleovská hodnota - Ano či ne</h4>
@@ -406,21 +411,88 @@ faktura:A123 faktura:název &quot;Název faktury v češtině&quot;@cs ;
             <section id="složené-datové-typy">
                 <h3>Složené datové typy</h3>
             
+				<p>
+					Složené datové typy se dále dělí na položky, které je pro úplné určení hodnoty třeba uvést.
+				</p>
+
                 <section id="množství">
                     <h4>Množství</h4>
                     <p>
                         Pro reprezentaci množství je třeba vždy uvést dvě položky - hodnotu a jednotku množství.
                     </p>
                     
-                    <p class="note">
-                        Pro specifikaci jednotky množství je třeba použít <a href="http://wiki.goodrelations-vocabulary.org/Documentation/UN/CEFACT_Common_Codes">číselník UN/CEFACT Common Codes</a>.
-                    </p>
-                    
+                    <section id="množství-hodnota">
+                        <h5>Hodnota</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>hodnota</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#desetinné-číslo">Desetinné číslo</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Hodnota množství
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>12400.21</code>
+                            </dd>
+                        </dl>
+
+                    </section>  
+
+                    <section id="množství-jednotka">
+                        <h5>Jednotka</h5>
+                        
+                        <p class="note">
+                            Pro specifikaci jednotky množství je třeba použít <a href="http://wiki.goodrelations-vocabulary.org/Documentation/UN/CEFACT_Common_Codes">číselník UN/CEFACT Common Codes</a>.
+                        </p>
+                        
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>jednotka</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#řetězec">Řetězec</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Jednotka množství
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>KGM</code>
+                            </dd>
+                        </dl>
+
+                    </section>                  
+                                        
                     <aside class="example" title="Množství v JSON">
                         <pre class="json">
 "množství": {
-	"hodnota": 23.0,
-	"jednotka": "KGM"
+    "hodnota": 23.0,
+    "jednotka": "KGM"
 }</pre>
                     </aside>
 
@@ -430,7 +502,7 @@ faktura:A123 faktura:název &quot;Název faktury v češtině&quot;@cs ;
    &lt;hodnota&gt;23.0&lt;/hodnota&gt;
    &lt;jednotka&gt;KGM&lt;/jednotka&gt;
 &lt;/množství&gt;</pre>
-					</aside>
+                    </aside>
 
                     <aside class="example" title="Množství v CSV">
                         <pre class="csv">
@@ -464,11 +536,74 @@ množství: a gr:QuantitativeValue ;
                     <p>
                         Pro reprezentaci peněžních částek je třeba vždy uvést dvě položky - výši částky a měnu částky.
                     </p>
-                    
-                    <p class="note">
-                        Pro určení měny je třeba použít kód z <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/currency/?target=Browse&">evropského číselníku měn z EU Vocabularies</a>.
-                    </p>
-                    
+
+                    <section id="částka-výše">
+                        <h5>Výše</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>výše</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#desetinné-číslo">Desetinné číslo</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Výše částky.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>12400.21</code>
+                            </dd>
+                        </dl>
+
+                    </section>  
+
+                    <section id="částka-měna">
+                        <h5>Měna</h5>
+                        
+                        <p class="note">
+                            Pro určení měny je třeba použít kód z <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/currency/?target=Browse&">evropského číselníku měn z EU Vocabularies</a>.
+                        </p>
+
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>měna</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#řetězec">Řetězec</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Měna částky
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>CZK</code>
+                            </dd>
+                        </dl>
+
+                    </section> 
+                
                     <aside class="example" title="Částka v JSON">
                         <pre class="json">
 {
@@ -486,7 +621,7 @@ množství: a gr:QuantitativeValue ;
    &lt;v&yacute;&scaron;e&gt;48151623.42&lt;/v&yacute;&scaron;e&gt;
    &lt;m&ecaron;na&gt;CZK&lt;/m&ecaron;na&gt;
 &lt;/zaplaceno&gt;</pre>
-					</aside>
+                    </aside>
 
                     <aside class="example" title="Částka v CSV">
                         <pre class="csv">
