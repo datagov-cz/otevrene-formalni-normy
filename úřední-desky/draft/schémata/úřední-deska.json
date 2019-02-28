@@ -1,41 +1,21 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://data.gov.cz/otevřené-formální-normy/úřední-desky/draft/schémata/úřední-deska.json",
     "name": "Oznámení na úřední desce",
+    "type": "object",
     "description": "Seznam všech oznámení na úřední desce (informace o platnosti, obsahu a odkazy na konkrétní dokumenty).",
     "properties": {
         "url": {
             "type": "string",
-            "format": "uri",
+            "format": "iri",
             "title": "URL úřední desky",
             "description": "URL úřední desky",
             "examples": [
                 "https://example.com/uredni_deska"
             ]
         },
-        "organizace": {
-            "type": "object",
-            "title": "Provozovatel",
-            "description": "Provozovatel úřední desky.",
-            "properties": {
-                "název": {
-                    "type": "string",
-                    "title": "Název",
-                    "description": "Provozovatel úřední desky. Název.",
-                    "examples": [
-                        "Město Horní Datová"
-                    ]
-                },
-                "ičo": {
-                    "type": "string",
-                    "title": "IČO",
-                    "description": "Provozovatel úřední desky. IČO.",
-                    "examples": [
-                        "00258245"
-                    ]
-                },
-                "adresa":  { "$ref": "https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.json" }
-            }
-        },
+        "adresa":  { "$ref": "https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.json" },
+        "provozovatel": { "$ref": "https://data.gov.cz/otevřené-formální-normy/osoby/draft/schémata/osoba.json" },
         "oznámení": {
             "type": "array",
             "name": "Oznámení",
@@ -67,7 +47,7 @@
                     },
                     "url": {
                         "type": "string",
-                        "format": "uri",
+                        "format": "iri",
                         "title": "URL oznámení",
                         "description": "URL oznámení (s lidsky čitelnou zprávou)",
                         "examples": [
@@ -207,7 +187,7 @@
                                 },
                                 "url": {
                                     "type": "string",
-                                    "format": "uri",
+                                    "format": "iri",
                                     "title": "URL",
                                     "description": "Další dokument/y. URL dokumentu.",
                                     "examples": [
