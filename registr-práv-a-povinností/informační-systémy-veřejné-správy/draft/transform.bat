@@ -1,1 +1,0 @@
-java -jar C:\SW\saxon\saxon9he.jar -s:"informační-systémy-veřejné-správy.schema.xml" -xsl:"informační-systémy-veřejné-správy.json2html.xslt" -o:"index.html"

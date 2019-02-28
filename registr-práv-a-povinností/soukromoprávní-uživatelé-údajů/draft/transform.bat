@@ -1,1 +1,0 @@
-java -jar C:\SW\saxon\saxon9he.jar -s:"soukromoprávní-uživatelé-údajů.schema.xml" -xsl:"soukromoprávní-uživatelé-údajů.json2html.xslt" -o:"index.html"

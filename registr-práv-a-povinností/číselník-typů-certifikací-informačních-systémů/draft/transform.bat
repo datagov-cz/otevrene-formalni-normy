@@ -1,1 +1,0 @@
-java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-typů-certifikací-informačních-systémů.schema.xml" -xsl:"číselník-typů-certifikací-informačních-systémů.json2html.xslt" -o:"index.html"

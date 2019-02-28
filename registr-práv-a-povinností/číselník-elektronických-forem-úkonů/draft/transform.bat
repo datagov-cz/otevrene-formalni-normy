@@ -1,1 +1,0 @@
-java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-elektronických-forem-úkonů.schema.xml" -xsl:"číselník-elektronických-forem-úkonů.json2html.xslt" -o:"index.html"

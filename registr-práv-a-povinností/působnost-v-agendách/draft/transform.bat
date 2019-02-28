@@ -1,1 +1,0 @@
-java -jar C:\SW\saxon\saxon9he.jar -s:"působnost-v-agendách.schema.xml" -xsl:"působnost-v-agendách.json2html.xslt" -o:"index.html"

@@ -11,7 +11,7 @@
   <xsl:template match="db:article">
 <html lang="cs">
   <head>
-    <title>Registr práv a povinností - typy certifikací informačních systémů</title>
+    <title>Registr práv a povinností - informační systémy veřejné správy</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta name="theme-color" content="#057fa5" />
     <meta name="msapplication-TileColor" content="#057fa5" />

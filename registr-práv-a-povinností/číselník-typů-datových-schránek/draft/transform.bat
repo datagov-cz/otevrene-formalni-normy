@@ -1,1 +1,0 @@
-java -jar C:\SW\saxon\saxon9he.jar -s:"číselník-typů-datových-schránek.schema.xml" -xsl:"číselník-typů-datových-schránek.json2html.xslt" -o:"index.html"
