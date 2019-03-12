@@ -9,11 +9,11 @@
   "use strict";
   var ESCAPEKEY = 27;
   var collapseSidebarText = '<span aria-hidden="true">←</span> '
-                          + '<span>Collapse Sidebar</span>';
+                          + '<span>Sbalit postranní nabídku</span>';
   var expandSidebarText   = '<span aria-hidden="true">→</span> '
-                          + '<span>Pop Out Sidebar</span>';
+                          + '<span>Vysunout postranní nabídku</span>';
   var tocJumpText         = '<span aria-hidden="true">↑</span> '
-                          + '<span>Jump to Table of Contents</span>';
+                          + '<span>Skočit na obsah</span>';
 
   var sidebarMedia = window.matchMedia('screen and (min-width: 78em)');
   var autoToggle   = function(e){ toggleSidebar(e.matches) };
