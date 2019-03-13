@@ -9,9 +9,9 @@
   "use strict";
   var ESCAPEKEY = 27;
   var collapseSidebarText = '<span aria-hidden="true">←</span> '
-                          + '<span>Sbalit postranní nabídku</span>';
+                          + '<span>Sbalit postranní lištu</span>';
   var expandSidebarText   = '<span aria-hidden="true">→</span> '
-                          + '<span>Vysunout postranní nabídku</span>';
+                          + '<span>Vysunout postranní lištu</span>';
   var tocJumpText         = '<span aria-hidden="true">↑</span> '
                           + '<span>Skočit na obsah</span>';
 
