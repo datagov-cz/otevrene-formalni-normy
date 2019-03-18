@@ -48,7 +48,7 @@
 			<h2>
 				<dfn>JSON struktura</dfn>
 			</h2>
-			<p>V této sekci je popsána struktura JSON distribuce datové sady.</p>
+			<p>V této sekci je popsána struktura JSON distribuce datové sady. Struktura je též popsána v <a href="{fn:replace($schema, '^.*/([^/]+)$', '$1')}">JSON schématu</a></p>
 			<xsl:sequence select="gen:generujJSONPřehled($source)"/>
 			<xsl:sequence select="gen:generujJSONSpecifikaci($source)"/>
 		</section>
