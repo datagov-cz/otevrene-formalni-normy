@@ -2,6 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-typů-rozhodnutí-založení",
 	showPreviousVersion: true,
+	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/2019-04-03/",
 	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/",
 	editors: [{

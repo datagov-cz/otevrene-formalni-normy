@@ -2,7 +2,8 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-údaje",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/draft/",
+	tpreviousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/2019-04-03/",
+	"https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/",
 	editors: [{
 	  name: "Martin Nečaský",

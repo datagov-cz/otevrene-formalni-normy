@@ -2,6 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-typů-subjektů",
 	showPreviousVersion: true,
+	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-subjektů/2019-04-03/",
 	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-subjektů/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-subjektů/",
 	editors: [{
