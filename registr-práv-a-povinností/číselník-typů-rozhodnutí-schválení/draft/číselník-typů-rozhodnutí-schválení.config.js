@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-typů-rozhodnutí-schválení",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-schválení/2019-04-03/",
+	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-schválení/2019-04-02/",
 	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-schválení/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-schválení/",
 	editors: [{

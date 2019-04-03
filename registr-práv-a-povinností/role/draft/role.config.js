@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-role",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/role/2019-04-03/",
+	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/role/2019-04-02/",
 	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/role/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/role/",
 	editors: [{

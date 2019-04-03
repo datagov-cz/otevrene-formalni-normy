@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-oprávnění-k-přístupu-k-údajům",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2019-04-03/",
+	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2019-04-02/",
 	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/",
 	editors: [{

@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-údaje",
 	showPreviousVersion: true,
-	tpreviousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/2019-04-03/",
+	tpreviousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/2019-04-02/",
 	"https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/draft/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/",
 	editors: [{
