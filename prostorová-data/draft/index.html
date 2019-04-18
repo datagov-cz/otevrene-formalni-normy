@@ -103,7 +103,11 @@
                     <p>
                         Formát byl vytvořen OGC a je specifikován ve standardech <a href="http://www.opengeospatial.org/standards/sfa">Simple Feature Access</a> a ISO 19125.
                         Je vhodný především k zápisu 2D geometrií, jako je point, multipoint, line, polyline, polygon a pod.
-                        Ve WKT je také možné definovat souřadnicové systémy a používat je pro reprezentované objekty.
+                        Ve WKT je také možné definovat souřadnicové systémy a transformovat souřadnice.
+                        Reprezentace souřadnic ve WKT je nicméně bez definovaného souřadnicového systému.
+                        Většina knihoven očekává data v souřadnicovém systému WGS 84, nicméně souřadnice můžou být v libovolném souřadnicovém referenčním systému.
+                        Použitý souřadnicový referenční systém by měl být uveden v datech.
+                        V <a href="#geosparql">GeoSPARQL</a> je souřadnicový referenční systém pro WKT uveden před objektem, je možné ho tam uvádět i ve vektorových formátech.
                     </p>
                 </section>
 
@@ -218,7 +222,7 @@
                         <p>
                             Reprezentace ve WKT
                         </p>
-                        <pre>POLYGON(14.402751 50.088131, 14.402749 50.088105, 14.402738 50.088104, 14.402742 50.088099, 14.402746 50.088089, 14.402751 50.088082, 14.402744 50.088079, 14.40275 50.088075, 14.402748 50.088053, 14.402742 50.088053, 14.402748 50.088044, 14.402744 50.088041, 14.402739 50.08804, 14.402732 50.088033, 14.402739 50.088032, 14.402733 50.088021, 14.402728 50.08801, 14.402746 50.088002, 14.402749 50.087994, 14.402751 50.08799, 14.402746 50.087988, 14.402752 50.087984, 14.402749 50.087954, 14.402754 50.087951, 14.40275 50.087945, 14.402743 50.087943)</pre>
+                        <pre>POLYGON(50.088131 14.402751,50.088105 14.402749, 50.088104 14.402738, 50.088099 14.402742, 50.088089 14.402746, 50.088082 14.402751, 50.088079 14.402744, 50.088075 14.40275, 50.088053 14.402748, 50.088053 14.402742, 50.088044 14.402748, 50.088041 14.402744, 50.08804 14.402739, 50.088033 14.402732, 50.088032 14.402739, 50.088021 14.402733, 50.08801 14.402728, 50.088002 14.402746, 50.087994 14.402749, 50.08799 14.402751, 50.087988 14.402746, 50.087984 14.402752, 50.087954 14.402749, 50.087951 14.402754, 50.087945 14.40275, 50.087943 14.402743)</pre>
                     </aside>
 
                     <aside class="example" title="GML">
@@ -229,7 +233,7 @@
 &lt;gml:Polygon gml:id="CPX.2384051101" srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
     &lt;gml:exterior&gt;
         &lt;gml:LinearRing&gt;
-            &lt;gml:posList&gt;14.402751 50.088131 14.402749 50.088105 14.402738 50.088104 14.402742 50.088099 14.402746 50.088089 14.402751 50.088082 14.402744 50.088079 14.40275 50.088075 14.402748 50.088053 14.402742 50.088053 14.402748 50.088044 14.402744 50.088041 14.402739 50.08804 14.402732 50.088033 14.402739 50.088032 14.402733 50.088021 14.402728 50.08801 14.402746 50.088002 14.402749 50.087994 14.402751 50.08799 14.402746 50.087988 14.402752 50.087984 14.402749 50.087954 14.402754 50.087951 14.40275 50.087945 14.402743 50.087943&lt;/gml:posList&gt;
+            &lt;gml:posList&gt;50.088131 14.402751,50.088105 14.402749, 50.088104 14.402738, 50.088099 14.402742, 50.088089 14.402746, 50.088082 14.402751, 50.088079 14.402744, 50.088075 14.40275, 50.088053 14.402748, 50.088053 14.402742, 50.088044 14.402748, 50.088041 14.402744, 50.08804 14.402739, 50.088033 14.402732, 50.088032 14.402739, 50.088021 14.402733, 50.08801 14.402728, 50.088002 14.402746, 50.087994 14.402749, 50.08799 14.402751, 50.087988 14.402746, 50.087984 14.402752, 50.087954 14.402749, 50.087951 14.402754, 50.087945 14.40275, 50.087943 14.402743&lt;/gml:posList&gt;
         &lt;/gml:LinearRing&gt;
     &lt;/gml:exterior&gt;
 &lt;/gml:Polygon&gt;</pre>
@@ -566,56 +570,76 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
 
             <p>
                 I prostorová data je možné publikovat podle principů propojených dat (linked data) tak, jak jsou popsána v <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojená-data/draft/">otevřené formální normě pro Propojená data</a>. K reprezentaci prostorových propojených dat slouží standard OGC GeoSPARQL [[geosparql]].
-                K reprezentaci prostorových objektů GeoSPARQL využívá <a href="standardy-wkt">WKT</a> i <a href="#standardy-gml">GML</a>. Data je možné serializovat stejnými způsoby jako v otevřené formální normě pro Propojená data. Příklady, jak publikovat prostorová propojená data jsou v této otevřené formální normě publikována v serializaci Turtle ([[turtle]]).
-                Geosparql je standard, ontologie a dotazovací jazyk. Ontologie definuje třídy SpatialObject, Feature, Geometry a její specializace a vztahy mezi nimi (viz obrázek).
             </p>
 
-            <div style="width:image width px; font-size:80%; text-align:center;"><img src="http://graphdb.ontotext.com/documentation/8.4/free/_images/GeoSPARQL-geometry.png" alt="GeoSPARQL Ontology" width="80%" height="auto" align="center"/><br/>Schéma ontologie GeoSPARQL.</div>
+            <section id="geosparql">
+              <h3>GeoSPARQL</h3>
+                <p>
+                    K reprezentaci prostorových objektů GeoSPARQL využívá <a href="standardy-wkt">WKT</a> i <a href="#standardy-gml">GML</a>. Data je možné serializovat stejnými způsoby jako v otevřené formální normě pro Propojená data. Příklady, jak publikovat prostorová propojená data jsou v této otevřené formální normě publikována v serializaci Turtle ([[turtle]]).
+                    Geosparql je standard, ontologie a dotazovací jazyk. Ontologie definuje třídy SpatialObject, Feature, Geometry a její specializace a vztahy mezi nimi (viz obrázek).
+                </p>
 
-            <p>
-                Objekt, který lze definovat v prostoru, je typu geo:Feature. Vyjádření geometrie je samostatný objekt typu geo:Geometry. Vztah mezi těmito objekty je:
-            </p>
+                <div style="width:image width px; font-size:80%; text-align:center;"><img src="http://graphdb.ontotext.com/documentation/8.4/free/_images/GeoSPARQL-geometry.png" alt="GeoSPARQL Ontology" width="80%" height="auto" align="center"/><br/>Schéma ontologie GeoSPARQL.</div>
 
-            <aside class="example" title="GeoSPARQL objekty">
-                <pre class="turtle">
- @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+                <p>
+                    Objekt, který lze definovat v prostoru, je typu geo:Feature. Vyjádření geometrie je samostatný objekt typu geo:Geometry. Vztah mezi těmito objekty je:
+                </p>
 
- geo:Feature geo:hasGeometry geo:Geometry .
-                </pre>
-            </aside>
+                <aside class="example" title="GeoSPARQL objekty">
+                    <pre class="turtle">
+     @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
 
-            <p>
-                Následující příklad představuje katastrální parcelu a její geometrii vyjádřenou jako WKT objekt:
-           </p>
-
-            <aside class="example" title="GeoSPARQL v Turtle">
-						        <pre class="turtle">
-@prefix ds-par: &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcely/&gt; .
-@prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
-@prefix par: &lt;http://onto.fel.cvut.cz/ontologies/town-plan/databaseTableParcely/&gt; .
-
-
-&lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/100&gt; a ds-par:Parcely,
-       geosparql:Feature ;
-    rdfs:label  &lt;parcelakn_dokm_p/100&gt; ;
-    par:dat_vznik "2004-01-13"^^xsd:date ;
-    par:id 2091193101 ;
-    par:id_poskyt 397 ;
-    par:katuze_kod 727164 ;
-    par:nazev_ku "Vinohrady" ;
-    par:parcela "4204" ;
-    par:poskyt "ČÚZK" ;
-    par:shape_area 1048.04744997 ;
-    par:shape_length 218.406764453 ;
-    par:vymera 1048 ;
-    geo:hasGeometry &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/geometry/100&gt; .
-
-&lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/geometry/100&gt; a geo:Geometry ;
-    rdfs:label &lt;parcelakn_dokm_p/geometry/100&gt; ;
-    geo:asWKT "MULTIPOLYGON(((-741985.27 -1045443.98,-741994.129999999 -1045444.13,-741993.23 -1045442.7,-741991.530000001 -1045440.48,-741990.989999998 -1045437.09,-741990.199999999 -1045432.24,-741994.800000001 -1045432.09,-741993.91 -1045420.49,-741990.539999999 -1045398.7,-741989.170000002 -1045386.14,-741986.629999999 -1045364.56,-741986.27 -1045360.74,-741986 -1045358.82,-741985.699999999 -1045354.77,-741984.66 -1045345.76,-741982.030000001 -1045348.86,-741973.77 -1045360.2,-741973.219999999 -1045360.86,-741974.32 -1045361.43,-741975.59 -1045372.47,-741981.100000001 -1045420.8,-741981.41 -1045423.64,-741981.84 -1045427.37,-741982.350000001 -1045431.76,-741984.34 -1045431.86,-741985.129999999 -1045436.73,-741985.199999999 -1045440.71,-741985.27 -1045443.98)))" .
+     geo:Feature geo:hasGeometry geo:Geometry .
                     </pre>
-					  </aside>
+                </aside>
 
+                <p>
+                    Následující příklad představuje katastrální parcelu a její geometrii vyjádřenou jako WKT objekt:
+               </p>
+
+                <aside class="example" title="GeoSPARQL v Turtle">
+    						        <pre class="turtle">
+    @prefix ds-par: &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcely/&gt; .
+    @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+    @prefix par: &lt;http://onto.fel.cvut.cz/ontologies/town-plan/databaseTableParcely/&gt; .
+
+
+    &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/100&gt; a ds-par:Parcely,
+           geosparql:Feature ;
+        rdfs:label  &lt;parcelakn_dokm_p/100&gt; ;
+        par:dat_vznik "2004-01-13"^^xsd:date ;
+        par:id 2091193101 ;
+        par:id_poskyt 397 ;
+        par:katuze_kod 727164 ;
+        par:nazev_ku "Vinohrady" ;
+        par:parcela "4204" ;
+        par:poskyt "ČÚZK" ;
+        par:shape_area 1048.04744997 ;
+        par:shape_length 218.406764453 ;
+        par:vymera 1048 ;
+        geo:hasGeometry &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/geometry/100&gt; .
+
+    &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/geometry/100&gt; a geo:Geometry ;
+        rdfs:label &lt;parcelakn_dokm_p/geometry/100&gt; ;
+        geo:asWKT "MULTIPOLYGON(((-741985.27 -1045443.98,-741994.129999999 -1045444.13,-741993.23 -1045442.7,-741991.530000001 -1045440.48,-741990.989999998 -1045437.09,-741990.199999999 -1045432.24,-741994.800000001 -1045432.09,-741993.91 -1045420.49,-741990.539999999 -1045398.7,-741989.170000002 -1045386.14,-741986.629999999 -1045364.56,-741986.27 -1045360.74,-741986 -1045358.82,-741985.699999999 -1045354.77,-741984.66 -1045345.76,-741982.030000001 -1045348.86,-741973.77 -1045360.2,-741973.219999999 -1045360.86,-741974.32 -1045361.43,-741975.59 -1045372.47,-741981.100000001 -1045420.8,-741981.41 -1045423.64,-741981.84 -1045427.37,-741982.350000001 -1045431.76,-741984.34 -1045431.86,-741985.129999999 -1045436.73,-741985.199999999 -1045440.71,-741985.27 -1045443.98)))" .
+                        </pre>
+    					  </aside>
+
+                <p>
+                    Následující příklad ukazuje definici souřadnicového referenčního systému jako součást řetězce WKT:
+               </p>
+
+                <aside class="example" title="GeoSPARQL s CRS">
+                        <pre class="turtle">
+    @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+
+    &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/100&gt; a ds-par:Parcely,
+           geosparql:Feature ;
+        geo:asWKT  "&lt;http://www.opengis.net/def/crs/EPSG/0/4326&gt; Point(50.95 14.38)"^^&lt;http://www.opengis.net/ont/geosparql#wktLiteral&gt; .
+                        </pre>
+                </aside>
+
+            </section>
         </section>
 
         <section id="publikace-dat">
