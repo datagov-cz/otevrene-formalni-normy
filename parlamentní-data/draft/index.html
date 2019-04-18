@@ -1,0 +1,3067 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Parlamentní data</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "parlamentní-data",
+                showPreviousVersion: false,
+                thisVersion: "https://data.gov.cz/otevřené-formální-normy/parlamentní-data/draft/",
+                latestVersion: "https://data.gov.cz/otevřené-formální-normy/parlamentní-data/",
+                editors: [{
+                  name: "Michal Škop",
+                  url: "https://skop.eu/",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+					    value: "Kontaktní e-mail",
+						href: "mailto:otevrenadata@mvcr.cz"
+					}]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <nav id="toc"></nav>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací ze zastupitelstev, parlamentu a podobných organizací.
+                Ukazuje, jak reprezentovat informace o členstvích, hlasování s dalších.
+                Vychází z mezinárodního datového standardu <a href="http://www.popoloproject.com">Popolo</a>.
+                Norma je ilustrována příklady dat ze Sněmovny a zastupitelstev ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+
+            <h2>Přehled</h2>
+            <p>
+                Data o složení zastupitelstva a podobných organizací (parlamentu, soudy, atd/) a o hlasování v nich lze publikovat v různých úrovních detailu, podle toho co umožňují systémy poskytovatele obsahující zdrojová data a jaký je cíl zveřejňování dat.
+            </p>
+            <p>
+                Jednotlivé prvky datového modelu nejsou povinné a lze je rozšiřovat o další dle konkrétní aplikace.
+            </p>
+
+            <figure id="diagram"><img alt="Diagram datového schématu" src="./obrázky/diagram.png">
+                <figcaption>
+                    <a href="./obrázky/diagram.png">Diagram datového modelu.</a>
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="specifikace">
+            <h2>Specifikace</h2>
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis parlamentních a obdobných dat.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-návrh">
+                <h3>Návrh (Motion)</h3>
+                <p>
+                    Tato třída reprezentuje jednotlivý návrh. Návrh je "formální krok, kterým se uvádí nějaký záměr pro zvážení a rozhodnutí nějakou skupinou" (viz <a href="https://en.wikipedia.org/w/index.php?title=Motion_(democracy)&oldid=807983648">Wikipedia</a>).
+                </p>
+                <p>
+                    Návrh může být komplexní (např. sněmovní tisk, o kterém může být několik hlasování) nebo jednoduchý (návrh na usnesení, o kterém je právě jedno hlasování). Záleží na organizaci a konkrétním použití, který způsob se použije.
+                </p>
+                <section id="vlastnost-návrh-identifikátor">
+                    <h4>ID návrhu (Motion ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID návrhu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačný identifikátor návrhu v rámci daného kontextu (např. v rámci organizace).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>395/0</code> (Sněmovní tisk, v rámci jednoho volebního období, může se ho týkat více hlasování),<br />
+                            <code>61212</code> (konkrétní návrh, o kterém se hlasovalo - identifikátor odvozený z čísla hlasování ve Sněmovně), <br />
+                            <code>1-13</code> (konkrétní návrh, o kterém se hlasovalo - identifikátor odvozený z čísla zasedání a pořadového čísla hlasování v rámci zasedání zastupitelstva).
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-id-organizace">
+                    <h4>ID organizace (Organization ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>organization_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačný identifikátor organizace v rámci daného kontextu (např. v rámci Sněmovny nebo zastupitelstva).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>1305</code> (Rozpočtový výbor Sněmovny 2017-),<br />
+                            <code>financni-vybor</code> (Finanční výbor zastupitelstva)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-id-zasedání">
+                    <h4>ID zasedání (Legislative Session ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>legislative_session_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID zasedání
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačné označení (často číslo) zasedání či schůze v rámci daného kontextu (např. v rámci Sněmovny).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>29</code> (29. schůze Sněmovny),<br />
+                            <code>1</code> (1. zasedání zastupitelstva)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-text">
+                    <h4>Text návrhu (Text)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>text</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Text návrhu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Text návrhu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>"Poslanecká sněmovna vyslovuje souhlas s vládním návrhem zákona, kterým se mění zákon č. 106/1999 Sb., o svobodném přístupu k informacím, ve znění pozdějších předpisů, podle sněmovního tisku 395, ve znění schváleném Poslaneckou sněmovnou."</code><br />
+                            <code>"Zastupitelstvo schvaluje měsíční odměnu pro neuvolněné členy zastupitelstva ve výši 600 Kč."</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-klasifikace">
+                    <h4>Klasifikace (Classification)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>classification</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Klasifikace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Klasifikace návrhu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Návrh zákona</code>, <code>Návrh usnesení</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-datum-návrhu">
+                    <h4>Datum návrhu (Proposal Date)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum návrhu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum, kdy byl návrh předložen.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2015-01-30</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-požadovaná-většina">
+                    <h4>Požadovaná většina (Requirement)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>requirement</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Požadovaná většina
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Požadovaná většina, aby byl návrh schválen.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Nadpoloviční většina přítomných</code>, <code>Nadpoloviční většina všech členů</code>, <code>Ústavní většina</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-výsledek">
+                    <h4>Výsledek (Result)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>result</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Výsledek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Výsledek návrhu.
+                        </dd>
+                        <dt>
+                            Seznam hodnot. <small>Lze použít i další hodnoty mimo tento seznam.</small>
+                        </dt>
+                        <dd>
+                            <code>pass</code>,<br />
+                            <code>fail</code>
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>pass</code>, <code>neusnášeníschopná organizace</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-návrh-id-hlasování">
+                    <h4>ID hlasování (Vote Events IDs)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vote_events_ids</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID hlasování (množné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID hlasování týkající se návrhu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>["61211", "61212"]</code> (návrhu se týkala 2 hlasování),<br />
+                            <code>["1-13-2"]</code> (návrhu se týkalo 1 hlasování)
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-návrh-organizace">
+                    <h4>Vazba: Organizace (Organization)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>organization</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Organizace, v které je návrh předložen.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    "id": "172",
+    "name": "Poslanecká sněmovna Parlamentu ČR"
+}
+                            </pre>
+                            <pre class="json">
+{
+    "id": "1305",
+    "parent_id": "172",
+    "name": "Rozpočtový výbor"
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-návrh-hlasování">
+                    <h4>Vazba: Hlasování (Vote Events)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vote_events</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hlasování">Hlasování</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasování (množné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlasování, která se týkají návrhu.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "identifier": "61211",
+    },
+    {
+        "identifier": "61212"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+            </section>
+            <section id="třída-hlasování">
+                <h3>Hlasování (Vote Event)</h3>
+                <p>
+                    Tato třída reprezentuje jedno hlasování v organizaci.
+                </p>
+                <section id="vlastnost-hlasování-id-hlasování">
+                    <h4>ID hlasování (Vote Event ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID hlasování
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Unikátní identifikátor hlasování v rámci kontextu, přidělený nebo vytvořený.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>61212</code> (číslo - id - hlasování ve Sněmovně),<br />
+                            <code>1-13-2</code> (vytvořený identifikátor "Zasedání 1, návrh 13, hlasování 2")
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlasování-id-organizace">
+                    <h4>ID organizace (Organization ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>organization_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID organizace, v které proběhlo hlasování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>172</code>, <code>financni-vybor</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlasování-id-návrhu">
+                    <h4>ID návrhu (Motion ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>motion_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID návrhu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID návrhu, kterého se hlasování týkalo.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>395</code>, <code>1-13</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlasování-id-zasedání">
+                    <h4>ID zasedání (Legislative Session ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>legislative_session_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID zasedání
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačné označení (často číslo) zasedání či schůze v rámci daného kontextu (např. v rámci Sněmovny), během kterého proběhlo hlasování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>29</code> (29. schůze Sněmovny),<br />
+                            <code>1</code> (1. zasedání zastupitelstva)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlasování-klasifikace">
+                    <h4>Klasifikace (Classification)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>classification</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Klasifikace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Klasifikace hlasování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>závěrečné hlasování o zákoně</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-hlasování-datum">
+                    <h4>Datum (End Date)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>end_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Date</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum hlasování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2015-08-08</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlasování-čas">
+                    <h4>Čas (Time)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>time</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#čas">Čas</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Čas
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Čas hlasování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>10:48:00</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlasování-výsledek">
+                    <h4>Výsledek (Result)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>result</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Výsledek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Výsledek hlasování.
+                        </dd>
+                        <dt>
+                            Seznam hodnot. <small>Lze použít i další hodnoty mimo tento seznam.</small>
+                        </dt>
+                        <dd>
+                            <code>pass</code>,<br />
+                            <code>fail</code>
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>pass</code>, <code>zmatečné</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-hlasování-návrh">
+                    <h4>Vazba: Návrh (Motion)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>motion</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-návrh">Návrh</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Návrh
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Návrh, kterého hlasování bylo součástí.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    "id": "395",
+    "name": "Poslanecká sněmovna Parlamentu ČR"
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-hlasování-organizace">
+                    <h4>Vazba: Organizace (Organization)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>organization</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Organizace, v které hlasování proběhlo.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    "id": "172",
+    "name": "Poslanecká sněmovna Parlamentu ČR"
+}
+                            </pre>
+                            <pre class="json">
+{
+    "id": "1305",
+    "parent_id": "172",
+    "name": "Rozpočtový výbor"
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-hlasování-počty">
+                    <h4>Vazba: Počty (Counts)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>counts</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-počet">Počet</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Počty
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Počet hlasů pro jednotlivou možnost.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    {
+        "option": "yes",
+        "value": 153
+    },
+    {
+        "option": "abstain",
+        "value": 13
+    },
+    {
+        "option": "absent",
+        "value": 34
+    }
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-hlasování-hlasy">
+                    <h4>Vazba: Hlasy (Votes)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>votes</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hlas">Hlasy</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasy
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlasy jednotlivých volitelů.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "voter_id": "467",
+        "option": "yes"
+    },
+    {
+        "voter_id": "5891",
+        "option": "abstain"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+            </section>
+
+            <section id="třída-počet">
+                <h3>Počet (Count)</h3>
+                <p>
+                    Tato třída reprezenuje počet hlasů pro jednu možnost v hlasování.
+                </p>
+                <section id="vlastnost-počet-možnost">
+                    <h4>Možnost (Option)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>option</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Možnost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Možnost v hlasování.
+                        </dd>
+                        <dt>
+                            Seznam hodnot. <small>Lze použít i další hodnoty mimo tento seznam.</small>
+                        </dt>
+                        <dd>
+                            <code>yes</code> (Ano),<br />
+                            <code>no</code> (Ne),<br />
+                            <code>abstain</code> (Zdržet se),<br />
+                            <code>absent</code> (Nepřítomen),<br />
+                            <code>not voting</code> (Nehlasoval),<br />
+                            <code>paired</code> (Vypárován)
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>yes</code>, <code>omluven</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-počet-počet">
+                    <h4>Počet (Value)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>value</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#celé-číslo">Celé číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Počet
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Počet hlasů pro danou možnost.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>153</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-počet-id-skupiny">
+                    <h4>ID skupiny (Group ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>group_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID skupiny
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID skupiny volitelů.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>6601</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-počet-skupina">
+                    <h4>Vazba: Skupina (Group)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>group</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Skupina
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Skupina volitelů.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <code>
+                                {
+                                    "name": "Poslanecký klub České pirátské strany"
+                                }
+                            </code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-hlas">
+                <h3>Hlas (Vote)</h3>
+                <p>
+                    Tato třída reprezenuje jeden hlas jednoho volitele v jednom hlasování.
+                </p>
+                <section id="vlastnost-hlas-id">
+                    <h4>ID hlasu (Vote ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Id
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačný identifikátor jednoho hlasu, přidělený nebo odvozený.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>61212-467</code> (odvozený z čísla hlasování a ID volitele)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlas-id-hlasovani">
+                    <h4>ID hlasování (Vote Event ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vote_event_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Id hlasování
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Identifikátor hlasování.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>61212</code>, <code>1-13-2</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlas-id-volitele">
+                    <h4>ID volitele (Voter's ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>voter_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Id volitele
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Identifikátor volitele.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>467</code>, <code>mirek-dusin</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlas-možnost">
+                    <h4>Možnost (Option)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>option</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Možnost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Zvolená možnost.
+                        </dd>
+                        <dt>
+                            Seznam hodnot. <small>Lze použít i další hodnoty mimo tento seznam.</small>
+                        </dt>
+                        <dd>
+                            <code>yes</code> (Ano),<br />
+                            <code>no</code> (Ne),<br />
+                            <code>abstain</code> (Zdržet se),<br />
+                            <code>absent</code> (Nepřítomen),<br />
+                            <code>not voting</code> (Nehlasoval),<br />
+                            <code>paired</code> (Vypárován)
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>yes</code>, <code>omluven</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-hlas-id-skupiny">
+                    <h4>ID skupiny (Group ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>group_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID skupiny
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID primární politické skupiny volitele (volební strana, klub).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>6601</code>, <code>nezavisli</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-hlas-hlasování">
+                    <h4>Vazba: Hlasování (Vote Event)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vote_event</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hlasování">Hlasování</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasování (jednotné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlasování, jehož součástí je daný hlas.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    "identifier": "61212"
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-hlas-volitel">
+                    <h4>Vazba: Volitel (Voter)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>voter</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-osoba">Osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Volitel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Volitel, který hlasoval tento hlas.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    "id": "467",
+    "name": "Mirek Dušín"
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-hlas-skupina">
+                    <h4>Vazba: Skupina (Group)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>group</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Skupina
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Primární skupina, jejíž členem byl volitel, který hlasoval daný hlas.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <code>
+                                {
+                                    "name": "Poslanecký klub České pirátské strany"
+                                }
+                            </code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-osoba">
+                <h3>Osoba (Person)</h3>
+                <p>
+                    Tato třída reprezentuje osobu.
+                </p>
+                <section id="vlastnost-osoba-id">
+                    <h4>ID osoby (Person's ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Id
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačný identifikátor osoby v rámci daného kontextu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>6477</code>, <code>mirek-dusin</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-jméno">
+                    <h4>Jméno (Name)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>name</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Jméno
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Celé jméno osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Mirek Dušín</code>, <code>Juliet Capulet</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-příjmení">
+                    <h4>Příjmení (Family Name)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>family_name</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Příjmení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Příjmení osoby (jedno nebo více).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Dušín</code>, <code>McMillan Astra</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-křestní-jméno">
+                    <h4>Křestní jméno (Given Name)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>given_nmae</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Křestní jméno
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Křestní jméno (jedno nebo více).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Mirek</code>, <code>Tricia Marie</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-titul-před-jménem">
+                    <h4>Titul před jménem (Honorific Prefix)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>honorific_prefix</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Titul před jménem
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Titul před jménem (jeden nebo více).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Mgr.</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-titul-za-jménem">
+                    <h4>Titul za jménem (Honorific Suffix)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>honorific_suffix</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Titul za jménem
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Titul za jménem (jeden nebo více).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Ph.D.</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-pohlaví">
+                    <h4>Pohlaví (Gender)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>gender</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Pohlaví
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Pohlaví osoby.
+                        </dd>
+                        <dt>
+                            Seznam hodnot. <small>Lze použít i další hodnoty mimo tento seznam.</small>
+                        </dt>
+                        <dd>
+                            <code>female</code>,<br />
+                            <code>male</code>
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>male</code>, <code>jiné</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-datum-narození">
+                    <h4>Datum narození (Date of Birth)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>birth_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum narození
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum narození osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>1976-02-20</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-datum-úmrtí">
+                    <h4>Datum úmrtí (Date of Death)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>death_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum úmrtí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum úmrtí osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>1994-03-03</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-osoba-image">
+                    <h4>Fotografie (Image)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>image</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Fotografie
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Fotografie osoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>http://www.example.com/i6477.jpg</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-osoba-členství">
+                    <h4>Vazba: Členství (Membership)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>memberships</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-členství">Členství</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Členství (množné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Členství osoby.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "id": "5501-172",
+        "organization_id": "172",
+        "name": "Poslanecká sněmovna Parlamentu ČR",
+        "role": "Člen"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-osoba-návrhy">
+                    <h4>Vazba: Návrhy (Motions)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>motions</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-návrh">Návrhy</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Návrhy
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Návrhy, které osoba předložila v rámci daného kontextu.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "id": "395/0"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-osoba-hlasy">
+                    <h4>Vazba: Hlasy (Votes)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>votes</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hlas">Hlasy</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasy
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlasy, jak osoba hlasovala v rámci daného kontextu (např. ve Sněmovně).
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "vote_event_id": "61212",
+        "option": "yes"
+    },
+    {
+        "vote_event_id": "61211",
+        "option": "no"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+
+            <section id="třída-organizace">
+                <h3>Organizace (Organization)</h3>
+                <p>
+                    Tato třída reprezentuje organizaci nebo skupinu osob.
+                </p>
+                <section id="vlastnost-organizace-id">
+                    <h4>ID organizace (Organization ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Id
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Jednoznačný identifikátor organizace v rámci daného kontextu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>172</code> (Sněmovna 2017-),<br />
+                            <code>1305</code> (Rozpočtový výbor Sněmovny 2017-),<br />
+                            <code>financni-vybor</code> (Finanční výbor zastupitelstva)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-organizace-jméno">
+                    <h4>Jméno (Name)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>name</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Jméno
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlavní (preferované) jméno organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Poslanecká sněmovna Parlamentu ČR</code>, <code>Rozpočtový výbor</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-organizace-klasifikace">
+                    <h4>Klasifikace (Classification)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>classification</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Klasifikace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Klasifikace organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Poslanecký klub</code>, <code>Výbor zastupitelstva</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-organizace-klasifikace">
+                    <h4>ID nadřízené organizace (Parent ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>parent_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID nadřízené organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID nadřízené organizace, jejíž je tato součástí.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>172</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-organizace-datum-založení">
+                    <h4>Datum založení (Founding Date)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>founding_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum založení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum založení organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2017-10-22</code> (Ustanovení poslaneckého klubu)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-organizace-datum-ukončení-činnosti">
+                    <h4>Datum ukončení činnosti (Dissolution Date)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dissolution_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datum ukončení činnosti
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum ukončení činnosti organizace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2013-08-28</code> (Konec funkčního období poslaneckého klubu)
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-organizace-nadřízená-organizace">
+                    <h4>Vazba: Nadřízená organizace (Parent)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>parent</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Nadřízená organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Nadřízená organizace, jejíž je tato součástí.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "id": "172",
+        "name": "Poslanecká sněmovna Parlamentu ČR"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-organizace-členství">
+                    <h4>Vazba: Členství (Membership)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>memberships</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-členství">Členství</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Členství (množné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Členství v rámci organizace.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "id": "5501-172",
+        "person_id": "5501",
+        "role": "Člen"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-organizace-návrhy">
+                    <h4>Vazba: Návrhy (Motions)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>motions</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-návrh">Návrhy</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Návrhy
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Návrhy, které byly v organizaci.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "id": "395/0"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-organizace-hlasování">
+                    <h4>Vazba: Hlasování (Vote Events)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vote_events</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hlasování">Hlasování</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasování (množné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlasování, která proběhla v organizaci.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "identifier": "61211",
+    },
+    {
+        "identifier": "61212"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-organizace-hlasy">
+                    <h4>Vazba: Hlasy (Votes)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>votes</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-hlas">Hlasy</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasy
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hlasy, které byly zaznamenány v organizaci.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "vote_event_id": "61212",
+        "voter_id": "467",
+        "option": "yes"
+    },
+    {
+        "vote_event_id": "61211",
+        "voter_id": "467",
+        "option": "no"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-organizace-suborganizace">
+                    <h4>Vazba: Suborganizace (Children)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>children</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Suborganizace (množné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Sub-organizace, které jsou součástí dané organizace.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+[
+    {
+        "id": "1305",
+        "name": "Rozpočtový výbor"
+    }
+]
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-členství">
+                <h3>Členství (Membership)</h3>
+                <p>
+                    Tato třída reprezenuje členství osoby v organizaci.
+                </p>
+                <p>
+                    V některých případech tato třída není nutná a lze použít přímo propojení mezi organizací a osobami (všechny osoby jsou jednoduše členy dané organizace). Tato třída se použije v případě složitější struktury, kdy je snaha zachytit např. více rolí (předseda, řadový člen), data členství (od - do), apod.
+                </p>
+                <section id="vlastnost-členství-id">
+                    <h4>ID členství (Membership ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID členství
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Unikátní ID členství, přidělené nebo odvozené.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>5501-172</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-členství-popis">
+                    <h4>Popis (Label)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>label</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis členství osoby v organizaci.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Člen Poslanecké sněmovny Parlamentu ČR</code>, <code>Zastupitel obce</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-členství-role">
+                    <h4>Role (Role)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>role</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Role
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Role v organizaci.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>člen</code>, <code>předseda</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-členství-id-osoby">
+                    <h4>ID osoby (Person ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>person_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID osoby
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID osoby, jíž se týká dané členství.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>5501</code>, <code>mirek-dusin</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-členství-id-organizace">
+                    <h4>ID organizace (Organization ID)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>organization_id</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID organizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID organizace, které se týká dané členství.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>172</code>, <code>financni-vybor</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-členství-počátek">
+                    <h4>Počátek (Start Date)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>start_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Počátek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Počátek daného členství.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2017-10-22</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vlastnost-členství-počátek">
+                    <h4>Konec (End Date)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>end_date</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Konec
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Konec daného členství.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2013-08-28</code>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-členství-osoba">
+                    <h4>Vazba: Osoba (Person)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>person</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-osoba">Osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Osoba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Osoba, jíž se týká dané členství.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <pre class="json">
+{
+    "id": "467",
+    "name": "Mirek Dušín"
+}
+                            </pre>
+                        </dd>
+                    </dl>
+                </section>
+                <section id="vazba-členství-organizace">
+                    <h4>Vazba: Organizace (Organization)</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>organization</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-organizace">Organizace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Organizace (jednotné číslo)
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Organizace, které se týká dané členství.
+                        </dd>
+                        <dt>
+                            Příklad <small>reprezentovaný v JSON</small>
+                        </dt>
+                        <dd>
+                            <code>
+                                {
+                                    "name": "Poslanecký klub České pirátské strany"
+                                }
+                            </code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+        </section>
+
+        <section id="příklady">
+            <h2>Příklady</h2>
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace jednotlivých datových struktur.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
+                Doporučenými formáty pro publikaci dat z úředních desek jsou JSON a XML. Pro formát JSON jsou k dispozici příslušná schémata v jazyce JSON Schema [[!json-schema]]:
+                <ul>
+                    <li>
+                        <a href="schémata/motion.json">Schéma pro Návrh (Motion)</a>
+                    </li>
+                    <li>
+                        <a href="schémata/vote_event.json">Schéma pro Hlasování (Vote Event)</a>
+                    </li>
+                    <li>
+                        <a href="schémata/count.json">Schéma pro Počet (Count)</a>
+                    </li>
+                    <li>
+                        <a href="schémata/vote.json">Schéma pro Hlas (Vote)</a>
+                    </li>
+                    <li>
+                        <a href="schémata/organization.json">Schéma pro Organizaci (Organization)</a>
+                    </li>
+                    <li>
+                        <a href="schémata/count.json">Schéma pro Členství (Membership)</a>
+                    </li>
+                </ul>
+            </p>
+
+            <section id="příklady-jednoduchý-návrh">
+                <h3>Jednoduchý návrh</h3>
+                <p>
+                    Velice jednoduše zapsaný návrh, kde jsou jen základní informace.
+                    Ačkoliv všechny atributy jsou nepovinné, bez těchto základních atributů publikace dat pomalu ztrácí smysl, jelikož by je nebylo jak použít.
+                </p>
+                <aside class="example" title="Jednoduchý návrh v JSON">
+                    <p>
+                        <a href="příklady/návrh-jednoduchý.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+{
+    "id": "1-13",
+    "text": "Zastupitelstvo schvaluje měsíční odměnu pro neuvolněné členy zastupitelstva ve výši 600 Kč.",
+    "date": "2018-10-30",
+    "result": "pass",
+    "vote_events_ids": ["1-13-1"]
+}
+                    </pre>
+                </aside>
+            </section>
+
+            <section id="příklady-návrh">
+                <h3>Složitější návrh s přidanými vlastními atributy</h3>
+                <p>
+                    Do schémat si lze v případě potřeby přidávat další atributy. V následujícím příkladě jsou nad rámec normy přidány atributy <code>eurovoc</code> (deskriptory EUROVOCu) a <code>zákon</code> (číslo zákona, pod kterým byl schálený návrh nakonec zveřejněn).
+                </p>
+                <p>
+                    V tomto případu je použit způsob, kdy jeden návrh může mít zahrnovat hlasování.
+                </p>
+                <aside class="example" title="Složitější návrh s přidanými vlastními atributy v JSON">
+                    <p>
+                        <a href="příklady/návrh.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+{
+    "id": "395",
+    "organization_id": "171",
+    "legislative_session_id": "29",
+    "text": "Poslanecká sněmovna vyslovuje souhlas s vládním návrhem zákona, kterým se mění zákon č. 106/1999 Sb., o svobodném přístupu k informacím, ve znění pozdějších předpisů, podle sněmovního tisku 395, ve znění schváleném Poslaneckou sněmovnou.",
+    "classification": "Návrh zákona",
+    "date": "2015-01-30",
+    "requirement": "Nadpoloviční většina přítomných",
+    "result": "pass",
+    "vote_events_ids": ["61211", "61212"],
+    "eurovoc": ["Česká republika", "informační politika", "právo na informace", "přibližování legislativy", "veřejná služba", "veřejná správa", "veřejný sektor", "zpřístupňování informací"],
+    "zakon": "222/2015"
+}
+                    </pre>
+                </aside>
+            </section>
+            <section id="příklady-jednoduché-hlasování">
+                <h3>Jednoduché hlasování</h3>
+                <p>
+                    Velice jednoduché hlasování může obsahovat třeba jen označení (id) hlasování a výsledek.
+                </p>
+                <aside class="example" title="Jednoduché hlasování v JSON">
+                    <p>
+                        <a href="příklady/hlasování-jednoduché.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+{
+    "id": "61212",
+    "result": "pass"
+}
+                    </pre>
+                </aside>
+            </section>
+            <section id="příklady-hlasování">
+                <h3>Komplexní hlasování</h3>
+                <p>
+                    Komplexní výsledek hlasování může obsahovat velký počet informací, některé i nad rámec tohoto standardu.
+                </p>
+                <p>
+                    Tento příklad ukazuje, jak lze zapsat hlasování ze Sněmovny (jde o toto konkrétní <a href="http://www.psp.cz/sqw/hlasy.sqw?G=61212">hlasování o novele zákona o svobodném přístupu k informacím</a>). Pro jednoduchost, aby příklad nebyl moc dlouhý, je zde pouze naznačeno, jak lze přidat všechny počty za jednotlivé strany nebo všechny individuální hlasy poslanců (nejsou tam všechny počty za jednotlivé strany ani všechny hlasy poslanců - vždy jen 1 na ukázku).
+                </p>
+                <p>
+                    Nad rámec tohoto dokumentu jsou v příkladě přidány atributy <code>present</code> (počet přítomných poslanců), <code>needed</code> (počet potřebných hlasů ke schválení), <code>requirement</code> (obdobně jako u <code>Návrhu (Motion)</code>), <code>sources</code> (zdroje informací) a <code>motion:name</code> (název návrhu).
+                </p>
+                <aside class="example" title="Jednoduché hlasování v JSON">
+                    <p>
+                        <a href="příklady/hlasování-jednoduché.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+{
+    "id": "61212",
+    "result": "pass",
+    "motion_id": "395",
+    "legislative_session_id": "29",
+    "classification": "Závěrečné hlasování",
+    "end_date": "2015-07-08",
+    "time": "10:48",
+    "motion": {
+        "name": "Novela z. o svobodném přístupu k informacím - EU"
+    },
+    "counts": [
+        {
+            "option": "yes",
+            "value": 153
+        },
+        {
+            "option": "no",
+            "value": 0
+        },
+        {
+            "option": "abstain",
+            "value": 13
+        },
+        {
+            "option": "absent",
+            "value": 17
+        },
+        {
+            "option": "omluven",
+            "value": 17
+        },
+        {
+            "option": "yes",
+            "value": "41",
+            "group": {
+                "name": "Poslanecký klub České strany sociálně demokratické",
+                "abbreviation": "ČSSD",
+                "id": "5201"
+            }
+        }
+    ],
+    "votes": [
+        {
+            "voter_id": "467",
+            "option": "yes",
+            "group_id": "5201",
+            "voter": {
+                "name": "František Adámek"
+            }
+        }
+    ],
+    "present": 166,
+    "needed": 84,
+    "requirement": "Nadpoloviční většina přítomných",
+    "sources": [
+        "http://www.psp.cz/sqw/hlasy.sqw?G=61212"
+    ]
+}
+                    </pre>
+                </aside>
+            </section>
+
+            <section id="příklady-osoba">
+                <h3>Osoba a členství</h3>
+                <p>
+                    Příklad zápisu osoby a jejích členství v organizacích. Tento příklad je zjednodušený (pro jednoduchost vynechává některé informace) zápis <a href="http://www.psp.cz/sqw/detail.sqw?id=253&o=2">těchto dat ze Sněmovny</a>
+                </p>
+                <aside class="example" title="Návrh v JSON">
+                    <p>
+                        <a href="příklady/osoba.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+{
+    "id": "253",
+    "name": "Miloš Zeman",
+    "family_name": "Zeman",
+    "given_name": "Miloš",
+    "honorific_prefix": "Ing.",
+    "gender": "male",
+    "birth_date": "1944-09-28",
+    "image": "http://www.psp.cz/eknih/cdrom/1996ps/eknih/1996ps/poslanci/i253.jpg",
+    "memberships": [
+        {
+            "role": "člen",
+            "organization": {
+                "id": "40",
+                "name": "Poslanecký klub České strany sociálně demokratické",
+                "start_date": "1996-06-12",
+                "end_date": "1998-06-19",
+                "classification": "poslanecký klub"
+            }
+        },
+        {
+            "role": "předseda",
+            "organzation": {
+                "id": "71",
+                "name": "Organizační výbor",
+                "start_date": "1996-07-02",
+                "end_date": "1998-06-19",
+                "classification": "výbor"
+            }
+        },
+        {
+            "role": "člen",
+            "organzation": {
+                "id": "71",
+                "name": "Organizační výbor",
+                "start_date": "1996-07-02",
+                "end_date": "1998-06-19",
+                "classification": "výbor"
+            }
+        }
+    ]
+}
+                    </pre>
+                </aside>
+            </section>
+            <section id="příklady-organizace">
+                <h3>Organizace a členství</h3>
+                <p>
+                    Příklad zápisu organizace a jejích členů. Tento příklad pro jednoduchost uvádí jen jednoho člena (namísto reálných 15)
+                </p>
+                <p>
+                    Zároveň tento příklad ukazuje možnosti vnořování o další úrovně, zde je postupně vnořováno <code>organization</code> (zastupitelstvo) -> <code>membership</code> -> <code>person</code> (členové zastupitelstva) -> <code>membership</code> -> <code>organization</code> (volební strana).
+                </p>
+                <aside class="example" title="Návrh v JSON">
+                    <p>
+                        <a href="příklady/organizace.json">Stáhnout JSON</a>
+                    </p>
+                    <pre class="json">
+{
+    "name": "Zastupitelstvo Plasy",
+    "classification": "obecní zastupitelstvo",
+    "founding_date": "2018-10-06",
+    "memberships": [
+        {
+            "person": {
+                "name": "Michal Škop",
+                "memberships": [
+                    {
+                        "organization": {
+                            "name": "Nezávislí pro Plasko"
+                        },
+                        "start_date": "2018-10-06"
+                    }
+                ]
+            }
+        }
+    ]
+}
+                    </pre>
+                </aside>
+            </section>
+
+
+        </section>
+
+    </body>
+</html>

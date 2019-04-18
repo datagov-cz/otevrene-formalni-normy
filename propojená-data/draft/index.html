@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Propojená data</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "propojená-data",               
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/standardy:technicke-standardy-pro-datove-sady-na-stupni-5",
+                thisVersion: "https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/",
+                latestVersion: "https://data.gov.cz/otevřené-formální-normy/propojená-data/",
+                editors: [{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+					    value: "Kontaktní e-mail",
+						href: "mailto:otevrenadata@mvcr.cz"
+					}]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Cílem tohoto dokumentu je stanovit konvence, jejichž dodržování usnadní vybudování ekosystému propojených otevřených dat v rámci veřejné správy České republiky.
+				Propojená data představují nejvyšší standard publikace dat na webu a jeho dosažení odstraní řadu překážek ve využívání dat veřejné správy.
+			</p>
+			
+			<p>
+				Dokument začíná principy propojených dat, dále stanovuje pravidla, jak mají v rámci České republiky vypadat identifikátory IRI jednak obecně, a jednak pro vybrané referenční entity.
+				Dále je popsán datový model RDF a jeho serializace a pravidla pro přenos RDF dat pomocí protokolu HTTP(S) přes Internet.
+				Diskutovány jsou vhodné slovníky pro vybrané typy dat a následně také pravidla pro metadata propojených dat.
+				Na závěr doporučujeme formulace do smluv s dodavateli systémů pracujících s propojenými daty.
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+			<p>
+				Propojená data jsou ideální způsob publikace dat na webu.
+				Jsou inspirována způsobem fungování dnešního webu složeného z webových stránek a jsou také podepřena řadou doporučení konsorcia W3C, které v této formě vydává webové de facto standardy.
+				Cílem publikace dat jako propojených dat je odstraňovat překážky mezi publikací a užitím dat. Je toho dosahováno několika základními způsoby:
+            </p>
+			<dl>
+				<dt>
+					Globální identifikace a lokalizace datových entit
+				</dt>
+				<dd>
+					Žádný jiný způsob publikace dat na webu neumožňuje globální a jednoznačnou identifikaci a lokalizaci jednotlivých datových položek.
+				</dd>
+				<dt>
+					Sémantický popis dat
+				</dt>
+				<dd>
+					Žádný jiný způsob publikace dat nedosahuje takové úrovně popisu významu dat jako propojená data.
+				</dd>
+				<dt>
+					Jednotný formát
+				</dt>
+				<dd>
+					Propojená data používají jednotný formát reprezentace dat, což velmi usnadňuje práci s nimi.
+				</dd>
+				<dt>
+					Integrace
+				</dt>
+				<dd>
+					Propojená data jsou na web vystavována již integrována s jinými datovými zdroji pomocí linků. Toto přesouvá integrační zátěž od konzumenta dat k poskytovateli, který má pro integraci lepší znalosti a zdroje.
+				</dd>
+			</dl>
+			<p>
+				Aby bylo možno na tyto výhody dosáhnout, je třeba dodržovat základní sadu konvencí pro propojená data, které jsou popsány v tomto dokumentu.
+				<a href="https://www.gs1.org/standards/Digital-Link/1-0">Podobný dokument</a> pro svá propojená data vydala například <a href="https://www.gs1.org/">standardizační organizace GS1</a>.
+			</p>
+        </section>
+
+        <section id="principy-propojených-dat">
+            <h2>Principy propojených dat</h2>
+			
+			<p>
+				Propojená data (angl. Linked Data) je sada principů, které umožňují publikovat data na webu tak, že se mohou odkazovat na jiná data publikovaná tímto způsobem, a to jednotným způsobem, bez ohledu na zdroj ze kterého data pochází.
+				Tuto sadu principů formuloval Tim Berners-Lee, vynálezce sítě WWW.
+				Principy odpovídají tomu, jak funguje dnešní web dokumentů - webových stránek.
+				Jsou 4 a zní takto:
+			</p>
+			<ol>
+				<li>
+					Všechny entity se pojmenovávají pomocí IRI.
+				</li>
+				<li>
+					Používejte HTTP(S) IRI, aby mohli lidé a aplikace přistupovat k informacím o entitách pomocí stávajícího protokolu HTTP(S).
+				</li>
+				<li>
+					Když někdo na takové IRI přistoupí, poskytněte data o entitě v RDF.
+				</li>
+				<li>
+					Přidejte do dat odkazy na jiná, související data, aby se uživatelé mohli dozvědět více.
+				</li>
+			</ol>
+                                
+        </section>
+		
+		<section id="pravidla-pro-tvorbu-IRI">
+			<h2>Pravidla pro tvorbu IRI</h2>
+
+			<p>
+				Identifikátor IRI je strukturovaný.
+				V této sekci je jeho struktura popsána, spolu s pravidly pro jednotlivé části IRI, a to jak na obecné úrovni, tak konkrétně pro vybrané referenční datové sady.
+				Sekce začíná vymezením pojmů URI, IRI a URL.
+			</p>
+			
+			<section id="URI-IRI-URL">
+				<h3>URI, IRI, URL</h3>
+				<p>
+					Tato část slouží k vyjasnění zkratek URI, IRI a URL. 
+				</p>
+				
+				<section id="URI">
+					<h4>URI - Uniform Resource Identifier</h4>
+					
+					<p>
+						URI označuje typ identifikátoru, který je definovaný dokumentem RFC 3986 [[!rfc3986]].
+						Omezením tohoto typu identifikátoru je použitá znaková sada ASCII [[!rfc0020]], která umožňuje použití pouze znaků anglické abecedy.
+						Byl používán, mimo jiné, v datovém modelu RDF verze 1.0, a je stále používán na nejnižší úrovni komunikace protokolem HTTP [[!rfc7540]].
+					</p>
+					
+				</section>
+				
+				<section id="IRI">
+					<h4>IRI - Internationalized Resource Identifier</h4>
+					
+					<p>
+						Identifikátor typu IRI definovaného v dokumentu RFC 3987 [[!rfc3987]] na rozdíl od URI umožňuje použití znaků kódování UTF-8, což umožňuje, aby součástí IRI byly např. znaky české abecedy.
+						Je použit ve standardu RDF verze 1.1 používaném k publikaci propojených otevřených dat.
+						Pro použití v protokolu HTTP jako URI se Unicode znaky kódují pomocí procentového kódování.
+					</p>
+					
+				</section>
+
+				<section id="URL">
+					<h4>URL - Uniform Resource Locator</h4>
+					
+					<p>
+						URL označuje URI nebo IRI použitelné nejen k identifikaci objektů, ale i k určení jejich umístění a způsobu přístupu k nim v rámci sítě Internet.
+						Jedná se tedy zejména o funkční rozdíl, syntaxe je stejná.
+						Definován je v nyní již zastaralém dokumentu RFC 1738 [[rfc1738]].
+						Aktuálně probíhá standardizace sjednocující pojmy URI, IRI a URL [[!URL]].
+					</p>
+					
+				</section>
+				
+				<p class="note">
+					V příkladech uvedených v této specifikaci používáme IRI.
+					Není zde tedy předpoklad, že by tato IRI fungovala jako URL a umožňovala dereferenci.
+				</p>
+
+			</section>
+		
+			<section id="obecná-pravidla-pro-tvorbu-IRI">
+				<h3>Obecná pravidla pro tvorbu IRI</h3>
+				
+				<p>
+					Obecnou strukturu IRI ilustruje tento řetězec: <code>schéma://doména/cesta/identifikátor</code>.
+				</p>
+				
+				<section id="schéma-IRI">
+					<h4>Schéma IRI</h4>
+					
+					<ul>
+						<li>
+							Používá se HTTPS s výjimkou již existujících slovníků používajících HTTP.
+						</li>
+						<li>
+							Pro zajištění přístupu k reprezentaci zdroje identifikovaného pomocí HTTPS IRI je třeba mít TLS certifikát pro použití na webovém serveru.
+							Lze využít vlastní SSL/TLS certifikáty (např. pro EV), nebo lze zdarma využít službu <a href="https://letsencrypt.org/">Let’s Encrypt</a>.
+						</li>
+					</ul>
+				</section>
+				
+				<section id="doménové-jméno-v-IRI">
+					<h4>Doménové jméno v IRI</h4>
+					
+					<ul>
+						<li>
+							Využije se nějaké, které má instituce pod kontrolou a tedy může zajistit přístup k reprezentaci zdroje identifikovaného IRI. 
+							Například tedy <code>data.cssz.cz</code>.
+						</li>
+						<li>
+							Vhodné subdomény jsou zejména <code>lod</code>, <code>data</code>, <code>linked</code> apod.
+						</li>
+						<li>
+							V současné době není možné využívat v doménových jménech pod doménou .cz diakritiku.
+							Jedinou výjimkou je web, který se problematikou diakritiky v doménových jménech zabývá, <a href="https://www.háčkyčárky.cz">https://www.háčkyčárky.cz</a>.
+							V jiných top level doménách diakritiku použít lze v rámci standardu <a href="https://unicode.org/cldr/utility/idna.jsp">IDN - Internationalized Domain Name</a> a kódování Punycode [[rfc3492]].
+						</li>
+						<li>
+							V následujícím textu bude zvolenou doménu označovat <code>&lt;doména&gt;</code>.
+						</li>
+					</ul>
+				</section>
+
+				<section id="jazyková-pravidla-v-cestě-IRI">
+					<h4>Jazyková pravidla v cestě IRI</h4>
+					
+					<p>
+						IRI by mělo sloužit jen jako rozlišující identifikátor zdrojů.
+						Jako takový by se koncovým uživatelům nemělo zobrazovat.
+						Místo něj se obvykle zobrazují lidsky čitelné názvy zaznamenané v datech daného zdroje.
+						Z tohoto pohledu je jeho tvar irelevantní.
+						Nicméně pro snadnější orientaci zejména vývojářů aplikací a datových analytiků je dobré být v tvorbě IRI konzistentní.
+						Poskytovatele tedy čekají rozhodnutí popsaná v následujících částech, dále označovaná jako <dfn>systém pojmenovávání</dfn>.
+					</p>
+					
+					<section id="iri-jazyk-a-diakritika">
+						<h5>Jazyk a diakritika</h5>
+						
+						<p>
+							V cestě v IRI lze použít 4 varianty pojmenovávání.
+							Jsou uvedeny v pořadí od nejvhodnějšího po nejméně vhodné.
+						<p>
+						
+						<section id="iri-jazyk-diakritika-české-s-diakritikou">
+							<h6>České s diakritikou</h6>
+							
+							<aside class="example" title="Příklad IRI v češtině s diakritikou">
+							  <pre>https://&lt;doména&gt;/zdroj/datová-sada/moje-nová-datová-sada</pre>
+							</aside>
+							
+							<p>
+								Standard pro IRI je z roku 2004, IRI se jako identifikátor zdrojů v RDF používá od verze RDF 1.1 z roku 2014.
+								Všechny moderní nástroje pro práci s RDF již s IRI počítají, a tedy není třeba se obávat použití diakritiky v cestě IRI.
+								Pokud by nějaký nástroj s diakritikou v IRI pracovat neuměl, není možné ho považovat za vhodný, a tento nedostatek by měl být nahlášen tvůrcům nástroje k řešení.
+							</p>
+							
+							<p>
+								Použití češtiny v cestě IRI má několik výhod, a to zejména menší počet nutných transformací pro jeho tvorbu, lepší čitelnost a zabránění duplicit vzniklých vynecháním diakritiky.
+								Zejména pro klíčové datové sady infrastruktury propojených dat veřejné správy je tato varianta nejvhodnější.
+							</p>
+							
+						</section>
+					
+						<section id="iri-jazyk-diakritika-anglické">
+							<h6>Anglické</h6>
+							
+							<aside class="example" title="Příklad IRI v angličtině">
+							  <pre>https://&lt;doména&gt;/resource/dataset/my-new-dataset</pre>
+							</aside>
+							
+							<p>
+								Pro datové sady, u nichž se počítá s tím, že s nimi v hojné míře budou pracovat zahraniční vývojáři aplikací, lze použít v cestě IRI anglické ekvivalenty. Zábranou zde může být absence dostupného kvalifikovaného překladu do angličtiny.
+							</p>
+							
+						</section>
+
+						<section id="iri-jazyk-diakritika-české-bez-diakritiky">
+							<h6>České bez diakritiky</h6>
+							
+							<aside class="example" title="Příklad IRI v češtině bez diakritiky">
+							  <pre>https://&lt;doména&gt;/zdroj/datova-sada/moje-nova-datova-sada</pre>
+							</aside>
+							
+							<p>
+								Tuto variantu použijte jen v případě nutnosti.
+								Všechny relevantní nástroje by měly být schopny pracovat s kódováním UTF-8 v IRI.
+								Pokud potřebujete pracovat s nástrojem, který toto neumí, je třeba se v první řadě pokusit nástroj opravit, chybu v něm nahlásit, a až v pokud není zbytí, podřídit pravidla tvorby IRI a zvolit pro ně češtinu bez diakritiky.
+							</p>
+							
+						</section>
+
+						<section id="iri-jazyk-diakritika-kombinované">
+							<h6>Kombinované</h6>
+							
+							<aside class="example" title="Příklady IRI s kombinací jazyků">
+							  <pre>https://&lt;doména&gt;/resource/datova-sada/moje-nova-datova-sada</pre>
+							  <pre>https://&lt;doména&gt;/resource/datová-sada/moje-nová-datová-sada</pre>
+							</aside>
+							
+							<p>
+								Tuto variantu použijte jen v případě nutnosti.
+								Všechny relevantní nástroje by měly být schopny pracovat s kódováním UTF-8 v IRI.
+								Pokud potřebujete pracovat s nástrojem, který toto neumí, je třeba se v první řadě pokusit nástroj opravit, chybu v něm nahlásit, a až v pokud není zbytí, podřídit pravidla tvorby IRI a zvolit pro ně češtinu bez diakritiky.
+							</p>
+							
+						</section>
+
+					</section>
+					
+					<section id="iri-jednotné-a-množné-číslo">
+						<h5>Jednotné a množné číslo</h5>
+						
+						<p>
+							Další rozhodnutí se bude týkat toho, zda se v cestě IRI bude používat pro druh či seznam entit množné či jednotné číslo. Varianty:
+						</p>
+						
+						<ul>
+							<li><code>https://&lt;doména&gt;/zdroj/datové-sady/1</code></li>
+							<li><code>https://&lt;doména&gt;/zdroj/datová-sada/1</code></li>
+							<li><code>https://&lt;doména&gt;/resource/dataset/1</code></li>
+							<li><code>https://&lt;doména&gt;/resource/datasets/1</code></li>
+						</ul>
+						
+						<p>
+							Varianta v množném čísle je vhodnější vzhledem ke kompatibilitě s principy <a href="https://restfulapi.net/">REST</a> API, které se uplatňují u systémů postavených nad specifikací Linked Data Platform [[LDP]].
+							Tam se používá IRI kontejneru <code>https://&lt;doména&gt;/zdroj/datové-sady</code> pro získání seznamu jeho členů, např <code>https://&lt;doména&gt;/zdroj/datové-sady/1</code>.
+						</p>
+					</section>
+					
+					<section id="iri-styl-nahrazování-mezer">
+						<h5>Styl nahrazování mezer</h5>
+						
+						<p>
+							Mezera není povolený znak v IRI.
+							Pro víceslovné názvy věcí je tedy nutné zvolit systém pro jejich reprezentaci, přičemž lze zvolit různý styl pro různé příležitosti.
+							Vybrat lze z následujících stylů:
+						</p>
+						
+						<ul>
+							<li><code>UpperCamelCase</code></li>
+							<li><code>lowerCamelCase</code></li>
+							<li><code>train-case</code>, <code>kebap-case</code></li>
+							<li><code>snake_case</code></li>
+						</ul>
+						
+						<p>
+							Umístění, pro která je třeba jeden ze stylů zvolit, jsou:
+						</p>
+						
+						<ul>
+							<li>
+								Část IRI reprezentující množinu věcí
+								<ul>
+									<li><code>https://&lt;doména&gt;/zdroj/DatovéSady/1</code></li>
+									<li><code>https://&lt;doména&gt;/zdroj/datovéSady/1</code></li>
+									<li><code>https://&lt;doména&gt;/zdroj/datové-sady/1</code></li>
+								</ul>
+							</li>
+							<li>
+								Část IRI reprezentující třídu
+								<ul>
+									<li><code>https://&lt;doména&gt;/slovník/DatováSada</code></li>
+									<li><code>https://&lt;doména&gt;/slovník/Datová-sada</code></li>
+								</ul>
+							</li>
+							<li>
+								Část IRI reprezentující vlastnost
+								<ul>
+									<li><code>https://&lt;doména&gt;/slovník/id-transakce</code></li>
+									<li><code>https://&lt;doména&gt;/slovník/IdTransakce</code></li>
+								</ul>
+							</li>
+							<li>
+								Část IRI reprezentující pojmenovanou věc
+								<ul>
+									<li><code>https://&lt;doména&gt;/zdroj/MojeDatováSada</code></li>
+									<li><code>https://&lt;doména&gt;/zdroj/Moje-datová-sada</code></li>
+									<li><code>https://&lt;doména&gt;/zdroj/moje-datová-sada</code></li>
+								</ul>
+							</li>
+						</ul>
+						
+					</section>
+
+				</section>
+				
+				<section id="část-cesty-IRI-první-úrovně">
+					<h4>Část cesty IRI první úrovně</h4>
+				
+					<p>
+						V části cesty IRI první úrovně se rozlišují identifikátory následujících typů RDF zdrojů:
+					</p>
+					
+					<ul>
+						<li>slovníky,</li>
+						<li>datové instance,</li>
+						<li>další...</li>
+					</ul>
+					
+					<section id="základ-IRI-pro-RDF-zdroje-popisující-prvky-slovníků">
+						<h5>Základ IRI pro RDF zdroje popisující prvky slovníků</h5>
+						
+						<p>
+							Všechna IRI RDF zdrojů popisující prvky slovníků začínají:
+						</p>
+						
+						<ul>
+							<li><code>https://&lt;doména&gt;/slovník/</code> při použití češtiny</li>
+							<li><code>https://&lt;doména&gt;/ontology/</code> při použití angličtiny</li>
+						</ul>
+						
+						<aside class="example" title="Příklad IRI pro prvek slovníku v angličtině">
+						  <pre>https://data.cssz.cz/ontology/age/AgeScheme</pre>
+						</aside>
+
+					</section>
+					
+					<section id="základ-IRI-pro-RDF-zdroje-popisující-datové-instance">
+						<h5>Základ IRI pro RDF zdroje popisující datové instance</h5>
+						
+						<p>
+							Všechna IRI RDF zdrojů popisujících datové instance začínají:
+						</p>
+						
+						<ul>
+							<li><code>https://&lt;doména&gt;/zdroj/</code> při použití češtiny</li>
+							<li><code>https://&lt;doména&gt;/resource/</code> při použití angličtiny</li>
+						</ul>
+						
+						<aside class="example" title="Příklad IRI datové instance">
+						  <pre>https://data.cssz.cz/resource/observation/prum-vek-u-nove-priznanych-duchodu-dle-druhu/2013/pk_sr/t</pre>
+						</aside>
+
+					</section>
+					
+				</section>
+				
+				<section id="část-cesty-IRI-druhé-úrovně">
+					<h4>Část cesty druhé úrovně v IRI</h4>
+				
+					<p>
+						V části cesty IRI druhé úrovně se nachází IRI slug názvu typu datové entity vytvořený dle zvoleného systému pojmenovávání.
+					</p>
+					
+					<aside class="example" title="Příklad IRI pro typ Pozorování (Observation)">
+					  <pre>https://data.cssz.cz/resource/observation/prum-vek-u-nove-priznanych-duchodu-dle-druhu/2011/pk_d/t</pre>
+					</aside>
+
+					<aside class="example" title="Příklad pro typ Datová sada">
+					  <pre>https://data.gov.cz/zdroj/datová-sada/3757779</pre>
+					</aside>
+
+				</section>
+
+				<section id="část-cesty-IRI-dalších-úrovní">
+					<h4>Části cesty dalších úrovní v IRI</h4>
+				
+					<p>
+						Další části cesty v IRI odpovídají principům hierarchického IRI, nebo jeho zkrácené verzi.
+					</p>
+					
+					<aside class="example" title="Příklad hierarchického IRI">
+					  <pre>https://data.cssz.cz/resource/observation/prum-vek-u-nove-priznanych-duchodu-dle-druhu/2015/pk_pensions_t1/t</pre>
+					</aside>
+
+				</section>
+
+				<section id="zkracování-cesty-v-IRI">
+					<h4>Zkracování cesty v IRI</h4>
+				
+					<p>
+						Pro některé typy hierarchických struktur lze v cestě IRI použít zkratku, pokud nezpůsobí kolizi IRI pro různé entity.
+					</p>
+					
+					<aside class="example" title="Příklad zkrácení IRI">
+						<p>
+							Příklad pro položku číselníku &quot;Číselník typů posudku LPS&quot;:
+						</p>
+						<pre>https://data.cssz.cz/resource/code-list/ciselnik-typy-posudku-lps/concepts/davky-statni-socialni-podpory</pre>
+						<p>
+							což by odpovídalo hierarchickému IRI, se na tomto místě použije IRI s vynecháním &quot;code-lists&quot; a &quot;concepts&quot;:
+						</p>
+						<pre>https://data.cssz.cz/resource/ciselnik-typy-posudku-lps/davky-statni-socialni-podpory</pre>
+					</aside>
+
+				</section>
+
+				<section id="tvorba-části-identifikátoru-v-IRI">
+					<h4>Pravidla pro tvorbu části identifikátoru v IRI</h4>
+				
+					<p>
+						Poslední část IRI je identifikátor dané entity, který jí odliší od ostatních entit daného typu, se stejnou cestou IRI.
+						Příkladem pro datovou sadu může být identifikátor <code>3757779</code>, ze kterého pak vznikne IRI konkrétní datové sady: <code>https://data.gov.cz/zdroj/datová-sada/3757779</code>.
+					</p>
+					
+					<p>
+						Existují 3 typy identifikátorů, které lze na tomto místě použít, přičemž platí, že čím stálejší a ze znalosti identifikované entity odvoditelnější, tím lepší.
+					</p>
+					
+					<section id="umělý-identifikátor-v-IRI">
+							<h5>Umělý identifikátor</h5>
+							
+							<p>
+								Zdrojová data o entitách často již obsahují nějaké umělé identifikátory entit - identifikátory, které nijak nesouvisí s vlastnostmi entity v reálném světě a vznikají zanesením záznamu o entitě například do databáze.
+								Pokud jsou tyto identifikátory dostatečně neměnné, lze je použít pro tvorbu IRI.
+							</p>
+						
+							<aside class="example" title="Příklad umělého identifikátoru v IRI">
+								<pre>https://data.gov.cz/zdroj/datová-sada/3757779</pre>
+							</aside>
+					
+					</section>
+
+					<section id="identifikátor-v-IRI-vytvořený-z-dat">
+							<h5>Identifikátor vytvořený z dat</h5>
+							
+							<p>
+								Pokud není k dispozici žádný umělý identifikátor entity, je třeba vytvořit unikátní IRI z dat, které jsou k dispozici.
+								Příkladem může být IRI pro pozorování, jehož identifikátor <code>prum-vek-u-nove-priznanych-duchodu-dle-druhu/2015/pk_pensions_t1/t</code> vznikl spojením IRI slugu názvu datové kostky a IRI slugů hodnot na dimenzích, které ho identifikují: <code>https://data.cssz.cz/resource/observation/prum-vek-u-nove-priznanych-duchodu-dle-druhu/2015/pk_pensions_t1/t</code>.
+							</p>
+							<p>
+								Pokud je potřeba tvořit IRI slug z volného textu, je třeba dbát na to, že například mezera není povolený znak v IRI.
+								Hodit se může <a data-cite="sparql11-query#func-encode">funkce jazyka SPARQL</a> <code>ENCODE_FOR_URI</code>, která z volného textu dělá text použitelný v IRI.
+								Identifikátor lze vytvořit také například z pořadí elementu ve zdrojových XML datech nebo z pořadí řádku ve zdrojové tabulce.
+							</p>
+						
+					</section>
+
+					<section id="náhodný-identifikátor-v-IRI">
+							<h5>Náhodný identifikátor</h5>
+							
+							<p>
+								Pokud žádná z výše uvedených možností není proveditelná, poslední a nejhorší možností je použití náhodného identifikátoru.
+								Ten od sebe sice rozliší entity, ale je nestabilní, tj. při každém generování dat se pro jednu entitu vytvoří jiný identifikátor.
+								Pro generování náhodných identifikátorů se hodí GUID/UUID, například <code>12793f14-57a6-4077-aba6-2558114b3da2</code>, který pak lze použít v IRI entity: <code>https://data.gov.cz/zdroj/datová-sada/12793f14-57a6-4077-aba6-2558114b3da2</code>.
+							</p>
+							<p>
+								Pro generování náhodného identifikátoru v jazyce SPARQL lze využít <a data-cite="sparql11-query#func-struuid">funkci STRUUID</a>.
+							</p>
+						
+					</section>
+
+				</section>
+
+				<section id="IRI-pro-přístup-k-datům">
+					<h3>Pravidla pro tvorbu IRI vybraných objektů pro přístup k datům</h3>
+					
+					<p>
+						Kromě pravidel pro IRI datových entit je dobré mít i pravidla pro URL pro přístup k datům.
+					</p>
+					
+					<section id="IRI-SPARQL-Endpointu">
+						<h4>IRI SPARQL endpointu</h4>
+					
+						<p>
+							Doporučeným URL pro SPARQL endpoint je <code>https://&lt;doména&gt;/sparql</code>.
+						</p>
+						
+						<aside class="example" title="Příklady URL SPARQL Endpointu">
+							<ul>
+								<li><code>https://data.gov.cz/sparql</code></li>
+								<li><code>https://slovník.gov.cz/sparql</code></li>
+								<li><code>https://data.cssz.cz/sparql</code></li>
+							</ul>
+						</aside>
+						
+					</section>
+					
+					<section id="datová-sada-ke-stažení">
+						<h4>Datová sada ke stažení</h4>
+						
+						<p>
+							Pro danou datovou sadu ke stažení jsou doporučená URL: 
+						</p>
+						
+						<ul>
+							<li><code>https://&lt;doména&gt;/soubor/&lt;id-datové-sady&gt;.&lt;přípony&gt;</code></li>
+							<li><code>https://&lt;doména&gt;/dump/&lt;id-datové-sady&gt;.&lt;přípony&gt;</code></li>
+						</ul>
+					
+						<p>
+							Kde přípona se volí dle zvolené RDF serializace:
+						</p>
+
+						<ul>
+							<li><code>.ttl</code> pro Turtle [[!turtle]]</li>
+							<li><code>.trig</code> pro TriG [[!trig]]</li>
+							<li><code>.jsonld</code> pro JSON-LD [[!json-ld]]</li>
+							<li><code>.nt</code> pro N-Triples [[!n-triples]]</li>
+							<li><code>.nq</code> pro N-Quads [[!n-quads]]</li>
+							<li><code>.rdf</code> pro RDF/XML [[!rdf-syntax-grammar]]</li>
+						</ul>
+						
+						<p>
+							Volitelně lze soubory ke stažení komprimovat pomocí Gzip, což přidává druhou příponu <code>.gz</code>.
+						</p>
+						
+						<aside class="example" title="Příklady přípon souborů ke stažení">
+							<ul>
+								<li><code>https://data.cssz.cz/dump/ciselnik-druhu-pracovnich-cinnosti.trig</code></li>
+								<li><code>https://data.gov.cz/soubor/nkod.trig.gz</code></li>
+							</ul>
+						</aside>
+
+					</section>
+
+				</section>
+				
+			</section>
+		
+		</section>
+			
+		<section id="IRI-zdrojů-v-referenčních-datových-sadách">
+			<h2>IRI zdrojů v referenčních datových sadách</h2>
+			
+			<p>
+				V této sekci definujeme pravidla pro tvorbu IRI entit ve vybraných referenčních datových sadách.
+				Tato IRI jsou jednoznačným, globálním identifikátorem těchto entit a je třeba je používat ve všech otevřených datech, která se na ně jakkoliv odkazují - propojených i nepropojených.
+			</p>
+			
+			<section id="RÚIAN">
+				<h3>Registr územní identifikace, adres a nemovitostí (RÚIAN)</h3>
+				
+				<p>
+					Pro Registr územní identifikace, adres a nemovitostí (RÚIAN) jsou stanovena <a href="https://geoportal.gov.cz/c/document_library/get_file?p_l_id=38571&groupId=10138&folderId=47260&name=DLFE-1801.pdf">Metadatovým profilem ČR verze 4.0</a> pravidla tvorby IRI pro jednotlivé typy prvků.
+					Datové sady v podobě propojených dat se na objekty RÚIAN odkazují výhradně pomocí těchto IRI.
+					Tato pravidla jsou následující:
+				</p>
+				
+				<ol>
+					<li>Šablonou IRI je: <code>https://linked.cuzk.cz/resource/ruian/&lt;zkratka&gt;/&lt;kód&gt;</code></li>
+					<li><code>&lt;zkratka&gt;</code> je část cesty IRI pro typ prvku RÚIAN</li>
+					<li><code>&lt;kod&gt;</code> je část cesty IRI pro kód prvku RÚIAN</li>
+				</ol>
+				
+				<p>
+					Prvky RÚIAN s přiřazenými IRI jsou následující:
+				</p>
+				
+				<dl>
+					<dt>Adresní místo</dt>
+					<dd>Zkratka: <code>adresni-misto</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code></dd>
+					
+					
+					<dt>Část obce</dt>
+					<dd>Zkratka: <code>cast-obce</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/cast-obce/40151</code></dd>
+					
+					
+					<dt>Katastrální území</dt>
+					<dd>Zkratka: <code>katastralni-uzemi</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/katastralni-uzemi/539643</code></dd>
+					
+					
+					<dt>Kraj (1960)</dt>
+					<dd>Zkratka: <code>kraj-1960</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/kraj-1960/31</code></dd>
+					
+					
+					<dt>Městská část/obvod</dt>
+					<dd>Zkratka: <code>momc</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/momc/501298</code></dd>
+					
+					
+					<dt>Městský obvod Prahy</dt>
+					<dd>Zkratka: <code>mop</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/mop/108</code></dd>
+					
+					
+					<dt>Obec, vojenský újezd</dt>
+					<dd>Zkratka: <code>obec</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/obec/502235</code></dd>
+					
+					
+					<dt>Okres</dt>
+					<dd>Zkratka: <code>okres</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/okres/3209</code></dd>
+					
+					
+					<dt>Správní obvod obce s rozšířenou působností</dt>
+					<dd>Zkratka: <code>orp</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/orp/19</code></dd>
+					
+					
+					<dt>Parcela</dt>
+					<dd>parcela</dt>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/parcela/17099648010</code></dd>
+					
+					
+					<dt>Správní obvod obce s pověřeným obecním úřadem</dt>
+					<dd>pou</dt>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/pou/3727</code></dd>
+					
+					
+					<dt>Region soudržnosti</dt>
+					<dd>Zkratka: <code>region-soudrznosti</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/region-soudrznosti/19</code></dd>
+					
+					
+					<dt>Základní sídelní jednotka</dt>
+					<dd>Zkratka: <code>zsj</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/zsj/40151</code></dd>
+					
+					
+					<dt>Správní obvod Prahy</dt>
+					<dd>Zkratka: <code>spravni-obvod</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/spravni-obvod/108</code></dd>
+					
+					
+					<dt>Stát</dt>
+					<dd>Zkratka: <code>stat</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/stat/1</code></dd>
+					
+					
+					<dt>Stavební objekt</dt>
+					<dd>Zkratka: <code>stavebni-objekt</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/stavebni-objekt/16016696</code></dd>
+					
+					
+					<dt>Ulice</dt>
+					<dd>Zkratka: <code>ulice</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/ulice/425320</code></dd>
+					
+					
+					<dt>Volební okrsek</dt>
+					<dd>Zkratka: <code>volebni-okrsek</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/volebni-okrsek/26651</code></dd>
+					
+					
+					<dt>Kraj (VÚSC)</dt>
+					<dd>Zkratka: <code>vusc</code></dd>
+					<dd>Příklad IRI: <code>https://linked.cuzk.cz/resource/ruian/vusc/108</code></dd>
+				</dl>
+				
+			</section>
+
+			<section id="RPP">
+				<h3>Registr práv a povinností (RPP)</h3>
+				
+				<p>
+					IRI pro entity z registru práv a povinností nejsou v době psaní tohoto výstupu fixovány.
+					Nicméně je třeba počítat při tvorbě propojených dat s tím, že fixovány budou a tento vývoj sledovat.
+				</p>
+
+			</section>
+			
+			<section id="ROS">
+				<h3>Registr osob (ROS)</h3>
+				
+				<p>
+					IRI pro entity z registru osob nejsou v době psaní tohoto výstupu fixovány.
+					Nicméně je třeba počítat při tvorbě propojených dat s tím, že fixovány budou a tento vývoj sledovat.
+				</p>
+
+			</section>
+			
+			<section id="EU-Vocabularies">
+				<h3>Číselníky z Evropských slovníků (EU Vocabularies)</h3>
+				
+				<p>
+					Web <a href="https://publications.europa.eu/cs/web/eu-vocabularies">EU Vocabularies</a> (evropské slovníky) zastřešuje sadu řízených číselníků a tezaurus EuroVoc.
+					Položky z těchto číselníků je třeba používat všude kde to dává smysl, tedy všude, kde data obsahují koncept pokrytý daným číselníkem.
+					Aktuálně existující číselníky zahrnují následující témata (anglické názvy):
+				</p>
+				
+				<ul>
+					<li>Access right</li>
+					<li>Address type</li>
+					<li>Administrative territorial unit</li>
+					<li>Administrative territorial unit type</li>
+					<li>Capital classification</li>
+					<li>Case report</li>
+					<li>Case status</li>
+					<li>Concept status</li>
+					<li>Continent</li>
+					<li>Corporate body</li>
+					<li>Corporate body classification</li>
+					<li>Correction status</li>
+					<li>Country</li>
+					<li>Court type</li>
+					<li>Currency</li>
+					<li>Data theme</li>
+					<li>Dataset status</li>
+					<li>Dataset type</li>
+					<li>Directory of EU legal acts</li>
+					<li>Distribution type</li>
+					<li>Documentation type</li>
+					<li>EU budget amount status</li>
+					<li>EU budget stage</li>
+					<li>EU budget status</li>
+					<li>EU programme</li>
+					<li>Event</li>
+					<li>File type</li>
+					<li>Formation of the Court</li>
+					<li>Frequency</li>
+					<li>Grammatical alternation</li>
+					<li>Grammatical consciousness</li>
+					<li>Grammatical gender</li>
+					<li>Grammatical number</li>
+					<li>Honorific</li>
+					<li>Human sex</li>
+					<li>Interinstitutional procedure</li>
+					<li>Internal procedure</li>
+					<li>Label type</li>
+					<li>Language</li>
+					<li>Legal proceeding</li>
+					<li>Legal proceeding result</li>
+					<li>Legal proceeding type</li>
+					<li>Licence</li>
+					<li>Licence domain</li>
+					<li>Membership classification</li>
+					<li>Modification type</li>
+					<li>Multilingual</li>
+					<li>Notation type</li>
+					<li>Number</li>
+					<li>Number type</li>
+					<li>Organization type</li>
+					<li>Place</li>
+					<li>Position grade</li>
+					<li>Position status</li>
+					<li>Position type</li>
+					<li>Procedure nature</li>
+					<li>Product form</li>
+					<li>Publication theme</li>
+					<li>Resource type</li>
+					<li>Role</li>
+					<li>Role nature</li>
+					<li>Role qualifier</li>
+					<li>Script</li>
+					<li>Site</li>
+					<li>Subdivision</li>
+					<li>Subdivision position</li>
+					<li>Subject matter</li>
+					<li>Summaries of EU legislation classification</li>
+					<li>Target audience</li>
+					<li>Time period</li>
+					<li>Treaty</li>
+					<li>Treaty classification</li>
+					<li>Use context</li>
+					<li>Writing system</li>
+				</ul>				
+
+			</section>
+			
+		</section>
+		
+		<section id="RDF">
+			<h2>Datový model RDF pro reprezentaci propojených dat</h2>
+			
+			<p>
+				Pro reprezentaci propojených dat se používá datový model RDF - Resource Desrciption Framework [[!rdf11-concepts]].
+				Aktuální verze 1.1 byla vydána konsorciem W3C v roce 2014.
+				Jedná se o grafový datový model, tj. data jsou reprezentována jako uzly a hrany v grafu, kde uzly reprezentují entity a datové hodnoty, a hrany reprezentují jejich propojení.
+				Takový graf se dá popsat pomocí množiny trojic <code>&lt;uzel 1, hrana, uzel 2&gt;</code>, které říkají, že existuje entita <code>uzel 1</code>, existuje entita <code>uzel 2</code> a jsou propojeny hranou <code>hrana</code>.
+				V RDF se jednotlivým částem každé trojice říká <dfn>subjekt</dfn>, <dfn>predikát</dfn> a <dfn>objekt</dfn>, a trojice říká, že <code>objekt</code> je hodnotou vlastnosti <code>predikát</code> nějaké entity <code>subjekt</code>.
+				Objektem může být primitivní hodnota (řetězec, datum, číslo, …) nazývaná <dfn>literál</dfn>, nebo jiná entita.
+				Subjektem je vždy entita.
+				Entity a predikáty identifikujeme pomocí jejich IRI.
+			</p>
+			
+			<aside class="example" title="Trojice v RDF">
+				<p>
+					Alice je identifikována jako <code>https://příklad.cz/lidé/Alice</code> a Bob je identifikován jako <code>https://sociálnísíť.cz/uživatelé/Bob</code>.
+					Predikát říkající, že jeden člověk zná jiného má IRI <code>http://xmlns.com/foaf/0.1/knows</code>.
+					Trojice, která říká, že Alice zná Boba tedy vypadá takto:
+				</p>
+				<pre>
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/knows&gt; 
+&lt;https://sociálnísíť.cz/uživatelé/Bob&gt; .</pre>
+			</aside>		
+			
+			<p>
+				Tímto způsobem lze reprezentovat jakákoliv data v RDF.
+			</p>
+			
+			<section id="serializace-RDF">
+				<h3>Serializace RDF</h3>
+				
+				<p>
+					Popsaný datový model je třeba umět serializovat, tj. zapsat například do souboru, nebo v nějaké formě přenést přes Internet.
+					Standardních serializací RDF je 7 a v této sekci jsou stručně představeny.
+					Jejich plná dokumentace je dána jejich specifikací.
+				</p>
+				
+				<section id="serializace-RDF-N-Triples">
+					<h4>N-Triples</h4>
+					
+					<p>
+						Serializace N-Triples [[!n-triples]] je doporučení konsorcia W3C z roku 2014.
+						Jedná se o nejpřímočařejší RDF serializaci, která je již ukázána na příkladu v minulé sekci.
+						IRI jednotlivých částí trojice se uzavřou do ostrých závorek <code>&lt;</code> a <code>&gt;</code> a trojice se ukončí tečkou.
+						Pokud je objektem literál, uzavře se jeho hodnota do uvozovek <code>&quot;</code>.
+						IRI datového typu literálu se připojuje za znaky <code>^^</code>.
+						Tedy:
+					</p>
+					
+					<aside class="example" title="Serializace N-Triples">
+						<pre class="ntriples">
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/knows&gt; 
+&lt;https://sociálnísíť.cz/uživatelé/Bob&gt; .
+
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/name&gt; 
+&quot;Alice&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt; .</pre>
+					</aside>		
+					
+					<p>
+						Soubor s RDF serializací N-Triples má příponu <code>.nt</code>.
+						Tato serializace se hodí tam, kde záleží na jednoduchosti a rychlosti zpracování a nezáleží tolik na lidské čitelnosti a na velikosti dat.
+					</p>
+					
+				</section>
+				
+				<section id="serializace-RDF-Turtle">
+					<h4>Turtle</h4>
+					
+					<p>
+						Serializace Turtle [[!turtle]] je doporučení konsorcia W3C z roku 2014.
+						V serializaci N-Triples se řada IRI nebo jejich částí neustále opakuje, navíc tato serializace není příliš čitelná pro lidi.
+						Serializace Turtle tedy přidává optimalizace vedoucí k lepší lidské čitelnosti a úspoře počtu znaků.
+						Znak středník <code>;</code> říká, že následující trojice má stejný subjekt jako aktuální, a tedy stačí specifikovat pouze nový predikát a objekt.
+					</p>
+					
+					<aside class="example" title="Středník v Turtle">
+						<pre class="turtle">
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/knows&gt; &lt;https://sociálnísíť.cz/uživatelé/Bob&gt; ;
+&lt;http://xmlns.com/foaf/0.1/name&gt; &quot;Alice&quot; .</pre>
+					</aside>		
+					
+					<p>
+						Znak čárka <code>,</code> říká, že následující trojice má stejný jak subjekt, tak predikát a tedy stačí specifikovat pouze nový objekt.
+					</p>
+					
+					<aside class="example" title="Čárka v Turtle">
+						<pre class="turtle">
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/knows&gt; 
+&lt;https://sociálnísíť.cz/uživatelé/Bob&gt; , &lt;https://sociálnísíť.cz/uživatelé/Charlie&gt; .</pre>
+					</aside>
+					
+					<p>
+						Dále se stále opakují některé části IRI, například ty, které identifikují predikáty z jednoho slovníku, nebo entity patřící do stejného nadřazeného prvku.
+						Pro tyto případy serializace Turtle zavádí tzv. <dfn>prefix</dfn> - krátce pojmenovaná část IRI, kterou lze použít pro zkrácený zápis IRI v dokumentu.
+					</p>
+
+					<aside class="example" title="Prefix v Turtle">
+						<pre class="turtle">
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+
+@prefix lidé: &lt;https://příklad.cz/lidé/&gt; .
+@prefix ss: &lt;https://sociálnísíť.cz/uživatelé/&gt; .
+
+lidé:Alice foaf:knows ss:Bob, ss:Charlie ;
+           foaf:name &quot;Alice&quot;.</pre>
+					</aside>
+					
+					<p>
+						Soubor s RDF serializací Turtle má příponu <code>.ttl</code>.
+					</p>
+
+				</section>
+				
+				<section id="serializace-RDF-N-Quads">
+					<h4>N-Quads</h4>
+					
+					<p>
+						Serializace N-Quads [[!n-quads]] je doporučení konsorcia W3C z roku 2014 a rozšiřuje serializaci N-Triples o čtvrtou složku, IRI pojmenovaného grafu, do kterého daná trojice patří.
+						V následujícím příkladu obě trojice patří do stejného pojmenovaného grafu s IRI <code>&lt;https://sociálnísíť.cz/uživatelé&gt;</code> .
+					</p>
+					
+					<aside class="example" title="Serializace N-Quads">
+						<pre class="nquads">
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/knows&gt; 
+&lt;https://sociálnísíť.cz/uživatelé/Bob&gt;
+&lt;https://sociálnísíť.cz/uživatelé&gt; .
+
+&lt;https://příklad.cz/lidé/Alice&gt; 
+&lt;http://xmlns.com/foaf/0.1/name&gt; 
+&quot;Alice&quot;^^&lt;http://www.w3.org/2001/XMLSchema#string&gt;
+&lt;https://sociálnísíť.cz/uživatelé&gt; .</pre>
+					</aside>		
+					
+					<p>
+						Soubor s RDF serializací N-Quads má příponu <code>.nq</code>.
+					</p>									
+					
+				</section>
+				
+				<section id="serializace-RDF-TriG">
+					<h4>TriG</h4>
+					
+					<p>
+						Serializace TriG [[!trig]] je doporučení konsorcia W3C z roku 2014. 
+						Stejně jako serializace Turtle zavádí zkratky do serializace N-Triples, serializace TriG stejným způsobem rozšiřuje serializaci N-Quads.
+						Jedná se tedy zároveň o rozšíření serializace Turtle o podporu pojmenovaných grafů.
+					</p>
+					
+					<aside class="example" title="Serializace TriG">
+						<pre class="trig">
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+
+@prefix lidé: &lt;https://příklad.cz/lidé/&gt; .
+@prefix ss: &lt;https://sociálnísíť.cz/uživatelé/&gt; .
+
+GRAPH &lt;https://sociálnísíť.cz/uživatelé&gt; {
+    lidé:Alice foaf:knows ss:Bob, ss:Charlie ;
+           foaf:name &quot;Alice&quot;.</pre>
+					</aside>		
+					
+					<p>
+						Soubor s RDF serializací TriG má příponu <code>.trig</code>.
+					</p>									
+					
+				</section>
+
+				<section id="serializace-JSON-LD">
+					<h4>JSON-LD</h4>
+					
+					<p>
+						Serializace JSON-LD [[json-ld]] je doporučení konsorcia W3C z roku 2014.
+						Jedná se o serializaci RDF v syntaxi JavaScript Object Notation (JSON) [[!ECMA-404]], která je již známa velkému počtu stávajících vývojářů webových aplikací. Hlavní motivací pro tuto serializaci je tedy možnost poskytovat jedním způsobem propojená data jak vývojářům, kteří znají pouze JSON, tak vývojářům znalým technologií propojených dat.
+						Mapování hodnot z JSON do RDF je specifikováno v klíči <code>@context</code>, který mohou JSON vývojáři ignorovat.
+					</p>
+					
+					<aside class="example" title="Serializace JSON-LD">
+						<pre class="json">
+{
+  "@context": { 
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "knows": "foaf:knows",
+    "name": "foaf:name"
+  },
+  "@id": "https://příklad.cz/lidé/Alice",
+  "name": "Alice",
+  "knows": [{
+    "@id": "https://sociálnísíť.cz/uživatelé/Bob"
+  }, { 
+    "@id": "https://sociálnísíť.cz/uživatelé/Charlie"
+  }]
+}</pre>
+					</aside>		
+					
+					<p>
+						Soubor s RDF serializací JSON-LD má příponu <code>.jsonld</code>.
+					</p>									
+					
+				</section>
+
+				<section id="serializace-RDF-XML">
+					<h4>RDF/XML</h4>
+					
+					<p>
+						Serializace RDF/XML [[!rdf-syntax-grammar]] je doporučení konsorcia W3C z roku 2014 a specifikuje, jak zapsat datový model RDF do XML dokumentů.
+						Historicky se jedná o první RDF serializaci, nicméně v dnešní době ztrácí na významu, jelikož je lidsky poměrně nečitelná, přidává složitost pravidel pro XML dokumenty a zpracování softwarem, který rozumí XML ale nerozumí RDF se již nepředpokládá.
+					</p>
+					
+					<aside class="example" title="Serializace RDF/XML popisující 3 RDF trojice">
+						<pre class="xml">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;rdf:RDF xmlns:rdf=&quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot;
+         xmlns:foaf=&quot;http://xmlns.com/foaf/0.1/&quot;&gt;
+
+  &lt;rdf:Description rdf:about=&quot;https://příklad.cz/lidé/Alice&quot;&gt;
+    &lt;foaf:knows rdf:resource=&quot;https://sociálnísíť.cz/uživatelé/Bob&quot;/&gt;
+    &lt;foaf:knows rdf:resource=&quot;https://sociálnísíť.cz/uživatelé/Charlie&quot;/&gt;
+    &lt;foaf:name&gt;Alice&lt;/foaf:name&gt;
+  &lt;/rdf:Description&gt;
+
+&lt;/rdf:RDF&gt;</pre>
+					</aside>		
+					
+					<p>
+						Soubor s RDF serializací RDF/XML má příponu <code>.rdf</code>.
+					</p>									
+					
+				</section>
+
+				<section id="serializace-RDFa">
+					<h4>RDFa</h4>
+					
+					<p>
+						Serializace RDFa [[!rdfa-core]] je doporučení konsorcia W3C z roku 2015 a specifikuje, jak lze datový model RDF zapsat do atributů běžných HTML dokumentů [[html53]].
+						To nalezne uplatnění tam kde je požadováno, aby lidsky čitelný zápis v HTML byl doplněn o strojově čitelné informace ve stejném dokumentu, s minimalizací opakování stejných dat pro obě reprezentace.
+						Následuje příklad úryvku HTML dokumentu anotovaného pomocí RDFa.
+					</p>
+					
+					<aside class="example" title="Serializace RDFa popisující 3 RDF trojice">
+						<pre class="html">
+&lt;div xmlns=&quot;http://www.w3.org/1999/xhtml&quot;
+  prefix=&quot;
+    foaf: http://xmlns.com/foaf/0.1/
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#&quot;
+  &gt;
+  &lt;div typeof=&quot;rdfs:Resource&quot; about=&quot;https://příklad.cz/lidé/Alice&quot;&gt;
+    &lt;div rel=&quot;foaf:knows&quot; resource=&quot;https://sociálnísíť.cz/uživatelé/Charlie&quot;&gt;&lt;/div&gt;
+    &lt;div property=&quot;foaf:name&quot; content=&quot;Alice&quot;&gt;&lt;/div&gt;
+    &lt;div rel=&quot;foaf:knows&quot; resource=&quot;https://sociálnísíť.cz/uživatelé/Bob&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+					</aside>		
+					
+				</section>
+
+			</section>
+			
+		</section>
+		
+		<section id="pravidla-pro-přenos-propojených-dat-po-Internetu">
+			<h2>Pravidla pro přenos propojených dat po Internetu</h2>
+			
+			<p>
+				Propojená data staví na existujících principech uplatňovaných na dnešním webu lidsky čitelných dokumentů - webových stránek.
+				Pro přenos dat je tedy používán protokol HTTP [[rfc7540]], avšak v řadě případů je jeho použití nedostatečné, či dokonce chybné.
+				Jedná se zejména o správný obsah HTTP hlavičky <code>Content-Type</code>, který musí odpovídat formátu přenášených dat.
+				Při přenosu RDF dat se tedy uplatňují následující hodnoty, dle použité RDF serializace:
+			</p>
+			
+			<ul>
+				<li><code>application/n-triples</code></li>
+				<li><code>text/turtle</code></li>
+				<li><code>application/n-quads</code></li>
+				<li><code>application/trig</code></li>
+				<li><code>application/ld+json</code></li>
+				<li><code>application/rdf+xml</code></li>
+			</ul>
+			
+			<p>
+				Dále by měla hlavička <code>Content-Type</code> obsahovat explicitní specifikaci použitého UTF-8 kódování.
+				Celá tedy pak vypadá například takto: <code>text/turtle;charset=utf-8</code>.
+			</p>
+			
+			<p>
+				Vzhledem k tomu, že RDF serializace jsou textové dokumenty, je vhodné používat při jejich přenosu kompresi, například gzip [[rfc1952]].
+				Komprimovaný obsah pak doprovází hlavička <code>Content-Encoding</code> s hodnotou <code>gzip</code>.
+			</p>
+			
+			<p>
+				V rámci protokolu HTTP může klient požadovat data v konkrétní RDF serializaci, například pokud jde o SPARQL dotaz zaslaný na SPARQL endpoint či webový server zprostředkovávající dereferenci IRI zdroje - poskytnutí RDF dat při přístupu na dané IRI.
+				Ten by měl rozumět HTTP hlavičce <code>Accept</code> s hodnotou specifikující MIME typ požadované serializace.
+			</p>
+		
+		</section>
+		
+		<section id="pravidla-pro-výběr-slovníků-pro-vybrané-typy-dat">
+			<h2>Pravidla pro výběr slovníků pro vybrané typy dat</h2>
+			
+			<p>
+				V minulých sekcích tohoto dokumentu je popsán datový model RDF, jeho serializace a způsob přenosu takových dat po Internetu.
+				Nedílnou součástí propojených dat je ale i standardizace jejich obsahu pomocí tzv. <dfn>slovníků</dfn> - popisů významu jednotlivých tříd a predikátů pro daný typ dat.
+			</p>
+			
+			<p>
+				Obecným pravidlem pro tvorbu reprezentace propojených dat je, že je třeba se snažit data pokrývat především již existujícími slovníky.
+				Teprve v případě, že ještě neexistuje vhodný slovník pro popis nějaké části publikovaných dat, je možné si dodefinovat svůj slovník, který je ovšem třeba opět řádně publikovat, aby ho mohli použít ostatní.
+				Pro vyhledání existujících slovníků existuje registr <a href="https://lov.linkeddata.es/dataset/lov/">Linked Open Vocabularies (LOV)</a>.
+				Nejvíce používané typy dat a slovníky pro jejich reprezentaci jsou ilustrovány v následujících kapitolách.
+				Závazné jsou však jejich originální specifikace.
+			</p>
+			
+			<section id="slovníky-SKOS">
+				<h3>Číselníky - Simple Knowledge Organization System (SKOS)</h3>
+				
+				<p>
+					Číselníkem je typicky plochý seznam položek, kde každá má minimálně kód a název.
+					Číselníky se mohou používat například jako seznam možných hodnot pro různé vlastnosti datových entit, což lze využít pro formuláře pro zadávání dat, aplikace vizualizující data apod.
+					Pro reprezentaci číselníků v propojených datech se používá slovník <dfn>SKOS</dfn>.
+				</p>
+				
+				<p>
+					Simple Knowledge Organization System (SKOS) [[!skos-reference]] je doporučení W3C z roku 2009.
+					Základním stavebním kamenem je třída <code>skos:Concept</code>, která reprezentuje obecnou myšlenku.
+					V kontextu číselníků reprezentuje jednu položku číselníku.
+					Třída <code>skos:ConceptScheme</code> pak reprezentuje číselník jako celek, a jednotlivé položky jsou do něj přiřazeny pomocí predikátu <code>skos:inScheme</code>. 
+					Každá položka číselníku má svůj kód (<code>skos:notation</code>), který se typicky používá i pro poslední část jejího IRI, a sadu názvů:
+				</p>
+				
+				<ul>
+					<li>preferovaný název (<code>skos:prefLabel</code>)</li>
+					<li>alternativní názvy (<code>skos:altLabel</code>)</li>
+					<li>skryté názvy (<code>skos:hiddenLabel</code>)</li>
+				</ul>
+				
+				<aside class="example" title="Slovník SKOS - jednoduchý příklad">
+					<pre class="turtle">
+@prefix rdfs:       &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix skos:       &lt;http://www.w3.org/2004/02/skos/core#&gt; . 
+@prefix cs:         &lt;https://linked.cuzk.cz/ontology/ruian/stavebni-objekty/PripojeniKanalizace#&gt; .
+
+cs:ConceptScheme a skos:ConceptScheme ;
+	rdfs:label &quot;Připojení stavebního objektu ke kanalizaci&quot;@cs ;
+	.
+
+cs:1 a skos:Concept ;
+	skos:inScheme cs:ConceptScheme ;
+	skos:notation &quot;1&quot; ;
+	skos:prefLabel &quot;Přípoj na kanalizační síť&quot;@cs ;
+	skos:altLabel &quot;Přípoj kan.síť&quot;@cs ;
+	skos:note &quot;Přípoj na kanalizační síť&quot;@cs ;
+	.
+
+cs:2 a skos:Concept ;
+	skos:inScheme cs:ConceptScheme ;
+	skos:notation &quot;2&quot; ;
+	skos:prefLabel &quot;Vlastní čistička odpadních vod&quot;@cs ;
+	skos:altLabel &quot;Vlastní čist.&quot;@cs ;
+	skos:note &quot;Vlastní čistička odpadních vod&quot;@cs ;
+	.</pre>
+				</aside>		
+				
+				<p>
+					Pomocí slovníku SKOS lze zachytit kromě plochých seznamů i hierarchie.
+					Položky se do hierarchie seskupují pomocí následujících predikátů:
+				</p>
+				
+				<ul>
+					<li><code>&lt;p1&gt; skos:narrower &lt;p2&gt;</code> - položka <code>p2</code> je významově užší než položka <code>p1</code></li>
+					<li><code>skos:narrowerTransitive</code> - jako <code>skos:narrower</code>, ale platí tranzitivně</li>
+					<li><code>&lt;p1&gt; skos:broader &lt;p2&gt;</code> - položka <code>p2</code> je významově širší než položka <code>p1</code></li>
+					<li><code>skos:broaderTransitive</code> - jako <code>skos:broader</code>, ale platí tranzitivně</li>
+				</ul>
+				
+				<aside class="example" title="Slovník SKOS - hierarchický příklad">
+					<pre class="turtle">
+@prefix skos:    &lt;http://www.w3.org/2004/02/skos/core#&gt; . 
+@prefix c:       &lt;http://linked.opendata.cz/resource/cpv-2008/concept/&gt; .
+@prefix scheme:  &lt;http://linked.opendata.cz/resource/concept-scheme/cpv-2008&gt; .
+
+c:24613200
+    a skos:Concept ;
+    skos:broaderTransitive c:24613000 ;
+    skos:inScheme scheme:cpv-2008 ;
+    skos:notation &quot;24613200&quot; ;
+    skos:prefLabel &quot;Fireworks&quot;@en, &quot;Ohňostroje&quot;@cs .
+
+c:24613000
+    a skos:Concept ;
+    skos:broaderTransitive c:24610000 ;
+    skos:inScheme scheme:cpv-2008 ;
+    skos:narrowerTransitive c:24613100, c:24613200 ;
+    skos:notation &quot;24613000&quot; ;
+    skos:prefLabel &quot;Signalizační světlice, dešťové rakety, mlhové signály a ostatní pyrotechnické výrobky&quot;@cs, &quot;Signalling flares, rain rockets, fog signals and pyrotechnic articles&quot;@en .</pre>
+				</aside>
+				
+			</section>
+			
+			<section id="slovníky-DCV">
+				<h3>Statistická data - The RDF Data Cube Vocabulary</h3>
+				
+				<p>
+					The RDF Data Cube Vocabulary (DCV) [[!vocab-data-cube]] je doporučení W3C z roku 2014 pro reprezentaci datových kostek v datovém modelu RDF.
+					Datový model DCV je kompatibilní s datovým modelem <a href="https://sdmx.org/">SDMX</a>.
+					Základním stavebním kamenem je třída <code>qb:Observation</code> reprezentující pozorování.
+					Pozorování je identifikováno pomocí hodnot na dimenzích (<code>qb:DimensionProperty</code>) datové kostky.
+					Naměřené hodnoty jsou k pozorování připojeny pomocí měr (<code>qb:MeasureProperty</code>), a každá hodnota pozorování může být dále specifikována pomocí atributů (<code>qb:AttributeProperty</code>).
+					Množina pozorování se stejnými dimenzemi, mírami a atributy tvoří datovou kostku.
+					Specifikace datové struktury (<code>qb:DataStructureDefinition</code>) kostky říká, jaké dimenze, míry a atributy datová kostka používá.
+				</p>
+				
+				<aside class="example" title="Slovník DCV - příklad pozorování v Turtle">
+					<pre class="turtle">
+eg:o3 a qb:Observation;
+    qb:dataSet                 eg:dataset-le1 ;
+    eg:refArea                 ex-geo:monmouthshire_00pp ;                  
+    eg:refPeriod
+&lt;http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y&gt; ;
+    sdmx-dimension:sex         sdmx-code:sex-M ;
+    sdmx-attribute:unitMeasure &lt;http://dbpedia.org/resource/Year&gt; ;
+    eg:lifeExpectancy          76.6 ;
+    .</pre>
+				</aside>
+				
+				<p>
+					V příkladu je uvedeno jedno pozorování <code>eg:o3</code> patřící do datové kostky <code>eg:dataset-le1</code>.
+					Jedná se o očekávanou dobu dožití <code>eg:lifeExpectancy</code> pro muže (hodnota <code>sdmx-code:sex-M</code> dimenze <code>sdmx-dimension:sex</code>), v kraji Monmouthshire (hodnota <code>ex-geo:monmouthshire_00pp</code> dimenze <code>eg:refPeriod</code>) mezi roky 2004 a 2007 (hodnota <code>http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y</code> dimenze <code>eg:refPeriod</code>).
+				</p>
+
+			</section>
+			
+			<section id="slovníky-metadata">
+				<h3>Metadata</h3>
+			
+				<p>
+					Stejně důležitý jako samotný obsah datových sad je jejich správný metadatový popis.
+				</p>
+				
+				<section id="slovníky-metadata-DCAT">
+					<h4>DCAT, DCAT-AP</h4>
+					
+					<p>
+						Data Catalog Vocabulary (DCAT) [[!vocab-dcat]] je doporučení W3C z roku 2014.
+					</p>
+				
+					<p>
+						Evropská unie si doporučení DCAT přizpůsobila tzv. aplikačním profilem DCAT-AP v1.2 [[!dcat-ap]], který blíže specifikuje jednak to, které číselníky se mají používat pro které vlastnosti, a také to, které vlastnosti jsou povinné, doporučené a volitelné.
+						Česká republika se řídí tímto standardem, a pro publikaci propojených dat se tedy doporučuje tato data popisovat pomocí DCAT-AP v1.2.
+						Národní katalog otevřených dat (NKOD) používá tento standard pro reprezentaci metadat o datových sadách.
+						Pro příklad popisu datové sady dle DCAT-AP v1.2 slouží právě NKOD.
+					</p>
+
+				</section>
+				
+				<section id="slovníky-metadata-VoID">
+					<h4>VoID</h4>
+					
+					<p>
+						VoID je poznámka zájmové skupiny [[!void]] v rámci W3C z roku 2011.
+						Datové sady propojených dat se krom DCAT a DCAT-AP v1.2 dále popisují dle slovníku VoID, který poskytuje detailnější vlastnosti pro popis propojených dat.
+						Zejména umožňuje popsat přístup k datům přes SPARQL endpoint, ukázat na vzorovou entitu v datové sadě a případně také zaznamenat statistky o datové sadě, jako jsou počty trojic, počty tříd, počty vlastností apod.
+					</p>
+					
+					<p>
+						Obvykle se IRI RDF distribuce popsané DCAT-AP použije i jako IRI datové sady popsané slovníkem VoID z praktických důvodů i přesto, že toto použití vykazuje jisté známky sémantické nekonzistence.
+					</p>
+				
+				</section>
+
+			</section>
+			
+			<section id="slovníky-slovníky">
+				<h3>Slovníky</h3>
+				
+				<p>
+					Slovníky samotné jsou také strojově čitelná RDF data, stejně jako každá jiná propojená data.
+					Pro definici jednotlivých slovníků se také používají slovníky - jednodušší RDF Schema (RDFS) [[!rdf-schema]] a složitější Web Ontology Language (OWL) [[!owl2-overview]].
+				</p>
+			
+				<section id="slovníky-slovníky-RDFS">
+					<h4>RDF Schema</h4>
+					
+					<p>
+						RDF Schema 1.1 [[!rdf-schema]] je doporučení W3C z roku 2014 a slouží k jednoduchému popisu tříd a vlastností a také k tvorbě jednoduchých hierarchií dědičnosti tříd a vlastností.
+						Ke každé třídě a vlastnosti je možno specifikovat její název a popis, pro vlastnosti pak navíc definiční obor a obor hodnot.
+					</p>
+					
+					<p>
+						V příkladu je definice vlastnosti &quot;Počet podlaží&quot;, její název, definiční obor (stavební objekt) a obor hodnot, kterým je kladné celé číslo.
+					</p>
+					
+					<aside class="example" title="Slovník RDF Schema - příklad definice vlastnosti">
+						<pre class="turtle">
+ruian:početPodlaží a rdf:Property;
+	rdfs:label &quot;Počet nadzemních a podzemních podlaží&quot;@cs;
+	rdfs:domain ruian-tp:SO;
+	rdfs:range xsd:positiveInteger;
+	.</pre>
+					</aside>
+					
+				</section>
+				
+				<section id="slovníky-slovníky-OWL">
+					<h4>OWL</h4>
+					
+					<p>
+						Web Ontology Language 2 [[!owl2-overview]] je doporučení W3C z roku 2012 pro tvorbu ontologií.
+						Umožňuje modelovat i velmi složité sémantické vztahy.
+						V prostředí propojených dat se nejvíce používá predikát <code>owl:sameAs</code>, který říká, že 2 IRI identifikují stejnou entitu reálného světa.
+						Toto užití je ilustrováno následujícím příkladem.
+					</p>
+					
+					<aside class="example" title="Užití predikátu owl:sameAs">
+						<pre class="turtle">
+&lt;https://jakub.klímek.com/#me&gt; owl:sameAs &lt;http://www.ksi.mff.cuni.cz/~klimek/#me&gt; .</pre>
+					</aside>
+				
+				</section>
+
+			</section>
+			
+		</section>
+		
+		<section id="pro-zadavatele">
+			<h2>Doporučení pro zadavatele systémů podporujících publikaci dat v podobě propojených dat</h2>
+		
+			<p>
+				Relevantní specifikace a zdroje informací pro každého dodavatele jsou tato otevřená formální norma a všechny její normativní reference.
+			</p>
+			
+			<section id="pro-zadavatele-vzory-IRI">
+				<h3>Vzory pro tvorbu IRI</h3>
+				<p>
+					Nedílnou součástí návrhu reprezentace 5* otevřených dat jsou pravidla pro tvorbu IRI RDF zdrojů.
+					Měla by zahrnovat zejména doménu, na které budou data v RDF podobě dostupná a dále pravidla pro tvorbu dalších částí IRI.
+					Ty obsahují zejména informaci zda se používá angličtina, nebo čeština, jak se rozliší zdroje od definic tříd a vlastností ve slovnících, jak se vytváří části IRI tvořené více slovy, např. pomocí kebap-case, apod.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně vzorů pro tvorbu IRI">
+					<p>
+						Nedílnou součástí návrhu 5* podoby propojených dat je soubor pravidel pro tvorbu IRI RDF zdrojů.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-slovníky">
+				<h3>Použití slovníků dle Linked Open Vocabularies</h3>
+				<p>
+					Při návrhu 5* reprezentace otevřených dat je třeba pečlivě zvažovat, jakými třídami a vlastnostmi budou data modelována.
+					Speciálně platí pravidlo, že pokud už někdo nějakou třídu či vlastnost definoval a používá, a tato významem sedí na publikovaná data, je vhodné ji použít a nikoliv definovat vlastní.
+					Tím se zvyšuje použitelnost této části publikovaných dat.
+					Takto tvořené slovníky jsou zpravidla registrovány na serveru Linked Open Vocabularies, ty nejpoužívanější jsou pak publikovány konsorciem W3C.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně slovníků">
+					<p>
+						Návrh struktury 5* dat bude přednostně používat významově vyhovující existující slovníky definované konsorciem W3C či slovníky registrované na serveru Linked Open Vocabularies (LOV - https://lov.linkeddata.es/dataset/lov/).
+						Teprve v případě nenalezení vhodné vlastnosti či třídy bude definována nová vlastnost či třída.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-vlastní-slovníky">
+				<h3>Publikace a dostupnost vlastnoručně definovaných vlastností a tříd</h3>
+				<p>
+					Pokud se při návrhu 5* reprezentace otevřených dat definují nové vlastnosti a nové třídy, je třeba je řádně popsat pomocí slovníku RDFS či OWL a tento popis taktéž vystavit v podobě 5* otevřených dat.
+					Pokud jsou tyto třídy a vlastnosti takové povahy, že by je mohl použít i někdo jiný, je vhodné je také opatřit metadaty a zaregistrovat na serveru Linked Open Vocabularies (LOV).
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně vlastních slovníků">
+					<p>
+						Veškeré nově definované vlastnosti a třídy musí být popsány slovníkem RDFS či OWL a jejich definice taktéž publikovány jako 5* otevřená data.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-soubory-ke-stažení">
+				<h3>Dostupnost souborů ke stažení</h3>
+				<p>
+					Základním způsobem zveřejňování 5* otevřených dat je jejich poskytnutí ve formě RDF dumpu, tj. souboru ke stažení v jedné ze standardních RDF serializací, tj. Turtle, TriG či JSON-LD.
+					Volitelně může být použita komprese gzip.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně souborů ke stažení">
+					<p>
+						Otevřená data v 5* reprezentaci musí být dostupná jako soubor ke stažení v jedné z těchto RDF serializací: Turtle, TriG, JSON-LD.
+						Volitelně mohou být tyto soubory komprimovány metodou gzip.
+						Hlavička Content-Type v HTTP odpovědi na požadavek HTTP HEAD a HTTP GET na stažení tohoto souboru musí odpovídat použité serializaci.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-SPARQL-endpoint">
+				<h3>Dostupnost SPARQL endpointu</h3>
+				<p>
+					Publikace 5* otevřených dat v podobě veřejného SPARQL endpointu může být velmi náročná na hardwarové prostředky, a není bezpodmínečně nutná, uživatelé 5* otevřených dat si mohou stáhnout RDF dump a použít pro dotazování vlastní SPARQL endpoint.
+					Pokud bude SPARQL endpoint vyžadován, pak lze použít tento text.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně dostupnosti SPARQL endpointu">
+					<p>
+						Otevřená data v 5* reprezentaci musí být dostupná ve veřejně přístupném SPARQL endpointu vyhovujícím specifikaci SPARQL 1.1.
+						Jediným přípustným omezením dotazování na tomto endpointu je nastavení časového limitu na vyhodnocení dotazu uživatele.
+					</p>
+				</aside>
+			
+			</section>
+
+			<section id="pro-zadavatele-dereference">
+				<h3>Dereferencovatelnost IRI RDF zdrojů</h3>
+				<p>
+					Při přístupu na IRI RDF zdroje si klient znalý 5* reprezentace otevřených dat říká i o RDF serializaci, ve které si přeje data dostat, a to pomocí hlavičky Accept protokolu HTTP, ve které uvede požadovaný Media type (MIME Type), např. text/turtle.
+					Stejného principu lze použít i pro prezentaci 5* dat v lidsky čitelné HTML podobě, kdy při přístupu na IRI RDF zdroje uvede webový prohlížeč v Accept hlavičce HTML Media Type, tj. text/html.
+				</p>
+
+				<aside class="example" title="Text do smlouvy s dodavatelem ohledně dereferencovatelnosti IRI RDF zdrojů">
+					<p>
+						Při přístupu na IRI RDF zdroje v 5* reprezentaci otevřených dat musí být poskytnuta RDF reprezentace tohoto zdroje v požadované RDF serializaci dle principů HTTP Content Negotiation dle Media typu.
+					</p>
+				</aside>
+			
+			</section>
+
+		</section>
+					
+    </body>
+</html>

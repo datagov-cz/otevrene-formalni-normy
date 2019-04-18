@@ -47,6 +47,9 @@
                     data: [{
                         value: "Portál otevřených dat",
                         href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
                     }]
                 }],
               };
@@ -58,7 +61,6 @@
             <p>
                 Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování adres.
                 Je navržena jako sdílená norma pro použití v dalších specifických otevřených formálních normách.
-                Ukazuje, jak reprezentovat informace o oznámeních, vystavených dokumentech, publikujících organizacích a další.
                 Norma je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
             </p>
         </section>
@@ -70,14 +72,23 @@
                 V této sekci jsou definovány vlastnosti adresy.
                 Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
             </p>
+            
+            <p class="note" title="Registr územní identifikace, adres a nemovitostí (RÚIAN)">
+                V České republice funguje od roku 2012 základní registr obsahující identifikátory pro, mimo jiné, všechna adresní místa.
+                Je to <a href="https://www.cuzk.cz/Uvod/Produkty-a-sluzby/RUIAN/RUIAN.aspx">Registr územní identifikace, adres a nemovitostí (RÚIAN)</a> spravovaný <a href="https://www.cuzk.cz/">Českým úřadem zeměměřickým a katastrálním (ČÚZK)</a>.
+                Pro specifikaci konkrétního adresního místa v České republice se tedy vždy použije <a href="#vlastnost-adresa-iri-adresniho-mista">IRI adresního místa</a> z tohoto registru, např. <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code>.
+				Tato IRI jsou specifikována <a href="https://geoportal.gov.cz/c/document_library/get_file?p_l_id=38571&groupId=10138&folderId=47260&name=DLFE-1801.pdf">Metadatovým profilem ČR verze 4.0</a>.
+                Jakákoliv jiná reprezentace konkrétního adresního místa v České republice není doporučená.
+                Další vlastnosti v této normě pak slouží pro reprezentaci neúplných adres, adres mimo Českou republiku či doplňujících údajů.
+            </p>
 
-            <section id="třída-oznámení-adresa">
-                <h4>Adresa</h4>
+            <section id="třída-adresa">
+                <h3>Adresa</h3>
                 <p>
                     Poštovní nebo elektronická adresa organizace, osoby, místa nebo události.
                 </p>
 
-                <section id="vlasnost-adresa-budova">
+                <section id="vlastnost-adresa-budova">
                     <h4>Budova</h4>
                     <dl>
                         <dt>
@@ -90,7 +101,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -113,7 +124,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-cislo-domovni">
+                <section id="vlastnost-adresa-cislo-domovni">
                     <h4>Číslo domovní</h4>
                     <dl>
                         <dt>
@@ -126,7 +137,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#celé-číslo">Celé číslo</a>
                         </dd>
                         <dt>
                             Jméno
@@ -149,7 +160,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-cislo-orientacni">
+                <section id="vlastnost-adresa-cislo-orientacni">
                     <h4>Číslo orientační</h4>
                     <dl>
                         <dt>
@@ -162,7 +173,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#celé-číslo">Celé číslo</a>
                         </dd>
                         <dt>
                             Jméno
@@ -185,259 +196,223 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-email">
-                    <h4>Email</h4>
+                <section id="vlastnost-adresa-iri-adresniho-mista">
+                    <h4>IRI adresního místa</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>email</code>
+                            <code>iri_adresního_místa</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Email
+                            Adresní místo
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Kontaktní email
+                            IRI adresního místa
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>info@example.com</code>
+                            <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code>
                         </dd>
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-kod-adresniho-mista">
-                    <h4>Kód adresního místa</h4>
+                <section id="vlastnost-adresa-iri-casti-obce">
+                    <h4>IRI části obce</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kód_adm</code>
+                            <code>iri_části_obce</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Kód adresního místa
+                            Část obce
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            ID adresního místa v Registru územních identifikátorů, adres a nemovitostí.
+                            IRI části obce
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>696285</code>
+                            <code>https://linked.cuzk.cz/resource/ruian/cast-obce/40151</code>
                         </dd>
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-kod-casti-obce">
-                    <h4>Kód části obce</h4>
+                <section id="vlastnost-adresa-iri-kraje">
+                    <h4>IRI kraje</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kód_části_obce</code>
+                            <code>iri_kraje</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Kód části obce
+                            Kraj dle rozdělení z roku 1960
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Kód části obce vedené v RÚIAN.
+                            IRI kraje
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>121533</code>
+                            <code>https://linked.cuzk.cz/resource/ruian/kraj-1960/31</code>
                         </dd>
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-kod-kraje">
-                    <h4>Kód kraje</h4>
+                <section id="vlastnost-adresa-iri-obce">
+                    <h4>IRI obce</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kód_kraje</code>
+                            <code>iri_obce</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Kód kraje
+                            Obec
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Kraj - NUTS 3 kód.
+                            IRI obce
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>CZ032</code>
+                            <code>https://linked.cuzk.cz/resource/ruian/obec/502235</code>
                         </dd>
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-kod-obce">
-                    <h4>Kód obce</h4>
+                <section id="vlastnost-adresa-iri-okresu">
+                    <h4>IRI okresu</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kód_obce</code>
+                            <code>iri_okresu</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Kód obce
+                            Okres
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Obec - LAU 2 kód.
+                            IRI okresu
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>CZ0325</code>, <code>559351</code>
+                            <code>https://linked.cuzk.cz/resource/ruian/okres/3209</code>
                         </dd>
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-kod-okresu">
-                    <h4>Kód okresu</h4>
+                <section id="vlastnost-adresa-iri-prvku">
+                    <h4>IRI prvku</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kód_okresu</code>
+                            <code>iri_rúian</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Kód okresu
+                            Prvek z registru RÚIAN
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Okres - LAU 1 kód.
+                            IRI prvku v Registru územních identifikátorů, adres a nemovitostí - bez rozlišení typu.
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>CZ032</code>
+                            <code>https://linked.cuzk.cz/resource/ruian/parcela/17099648010</code>
                         </dd>
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-kod-prvku">
-                    <h4>Kód prvku</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>kód_rúian</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:celé-císlo">Celé číslo</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Kód prvku
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            ID v Registru územních identifikátorů, adres a nemovitostí.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>696285</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlasnost-adresa-místnost">
+                <section id="vlastnost-adresa-místnost">
                     <h4>Místnost</h4>
                     <dl>
                         <dt>
@@ -450,7 +425,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -473,7 +448,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-mestskeho-obvodu">
+                <section id="vlastnost-adresa-nazev-mestskeho-obvodu">
                     <h4>Název městského obvodu</h4>
                     <dl>
                         <dt>
@@ -486,7 +461,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -509,7 +484,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-mestskeho-obvodu-prahy">
+                <section id="vlastnost-adresa-nazev-mestskeho-obvodu-prahy">
                     <h4>Název městského obvodu Prahy</h4>
                     <dl>
                         <dt>
@@ -522,7 +497,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -545,7 +520,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-casti-obce">
+                <section id="vlastnost-adresa-nazev-casti-obce">
                     <h4>Název části obce</h4>
                     <dl>
                         <dt>
@@ -558,7 +533,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -581,7 +556,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-kraje">
+                <section id="vlastnost-adresa-nazev-kraje">
                     <h4>Název kraje</h4>
                     <dl>
                         <dt>
@@ -594,7 +569,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -617,7 +592,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-obce">
+                <section id="vlastnost-adresa-nazev-obce">
                     <h4>Název obce</h4>
                     <dl>
                         <dt>
@@ -630,7 +605,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -653,7 +628,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-okresu">
+                <section id="vlastnost-adresa-nazev-okresu">
                     <h4>Název okresu</h4>
                     <dl>
                         <dt>
@@ -666,7 +641,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -689,7 +664,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-nazev-ulice">
+                <section id="vlastnost-adresa-nazev-ulice">
                     <h4>Název ulice</h4>
                     <dl>
                         <dt>
@@ -702,7 +677,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -725,7 +700,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-patro">
+                <section id="vlastnost-adresa-patro">
                     <h4>Patro</h4>
                     <dl>
                         <dt>
@@ -738,7 +713,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -761,7 +736,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-psč">
+                <section id="vlastnost-adresa-psč">
                     <h4>PSČ</h4>
                     <dl>
                         <dt>
@@ -774,7 +749,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -797,7 +772,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-text-adresy">
+                <section id="vlastnost-adresa-text-adresy">
                     <h4>Text adresy</h4>
                     <dl>
                         <dt>
@@ -810,7 +785,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -833,56 +808,20 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-typ-prvku">
-                    <h4>Typ prvku</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>typ_rúian</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Typ prvku
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Typ prvku v Registru územních identifikátorů, adres a nemovitostí.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>696285</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlasnost-adresa-typ-stavebniho-objektu">
+                <section id="vlastnost-adresa-typ-stavebniho-objektu">
                     <h4>Typ stavebního objektu</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>typ_so</code>
+                            <code>typ_stavebního_objektu</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -905,43 +844,7 @@
                     </dl>
                 </section>
 
-                <section id="vlasnost-adresa-url-webove-stranky">
-                    <h4>URL webové stránky</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>url</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            URL webové stránky
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            URL webové stránky
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://priklad.cz</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlasnost-adresa-znak-cisla-orientacniho">
+                <section id="vlastnost-adresa-znak-cisla-orientacniho">
                     <h4>Znak čísla orientačního</h4>
                     <dl>
                         <dt>
@@ -954,7 +857,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://opendata.gov.cz/datovy-typ:řetezec">Řetězec</a>
+                            <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -976,46 +879,47 @@
                         </dd>
                     </dl>
                 </section>
+                
             </section>
+            
         </section>
+        
         <section id="příklady">
             <h2>Příklady</h2>
-
+            
             <p>
                 V této sekci jsou uvedeny příklady reprezentace adresy v různých formátech a v různých úrovních detailu.
                 Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
-                Doporučenými formáty pro publikaci dat z úředních desek jsou JSON a XML, pro která jsou k dispozici příslušná schémata, tedy <a href="schémata/adresa.json">Schéma pro formát JSON v jazyce JSON Schema</a> a <a href="schémata/adresa.xsd">Schéma pro formát XML v jazyce XML Schema</a>.
-                Lze také použít zápis v CSV. Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[tabular-data-primer]].
+                Pro formáty JSON [[!ECMA-404]] a XML [[!xml]] jsou k dispozici příslušná schémata, tedy <a href="schémata/adresa.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[json-schema]] a <a href="schémata/adresa.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[xmlschema11-1]].
+                Lze také použít zápis v CSV. 
+                Soubor v CSV [[!rfc4180]] je nutné doplnit schématem dle specifikace CSV on the Web [[tabular-data-primer]].
             </p>
 
             <p class="note">
                 Pokud je adresa použita v rámci jiného datového standardu, tak se jména sloupců v CSV tabulce tvoří názvy atributů.
-                Zanořování je řešeno spojením názvu entity z jiného standardu, názvu <code>adresa</code> a z jejího atributu jejich spolením pomocí znaku podtržítka <code>_</code>, například <code>organizace_adresa_psč</code>.
+                Zanořování je řešeno spojením názvu entity z jiného standardu, například <code>adresa_sídla</code>, a z názvu atributu adresy jejich spojením pomocí znaku podtržítka <code>_</code>, například <code>adresa_sídla_psč</code>.
             </p>
 
-            <section id="příklady-jednoduchá-adresa">
-                <h3>Jednoduchá adresa</h3>
+            <section id="příklady-přímá-adresa">
+                <h3>Přímé určení adresy</h3>
                 
-                <aside class="example" title="Jednoduchá adresa v JSON">
+                <p>
+                    Jedná se o nejčistší způsob určení adresy v České republice pomocí IRI příslušného adresního místa v RÚIAN.
+                </p>
+                
+                <aside class="example" title="Přímé určení adresy v JSON">
                     <p>
-                       <a href="příklady/1.json">Stáhnout JSON</a>
+                       <a href="příklady/0.json">Stáhnout JSON</a>, <a href="schémata/adresa.json">Stáhnout JSON schéma</a>
                     </p>
                     <pre class="json">
 {
-    "číslo_domovní": 12,
-    "název_ulice": "Hlavní",
-    "název_obce": "Horní Datová",
-    "psč": "33101"
+    "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
 }</pre>
                 </aside>
-                <p>
-                    V XML musí být atributy seřazeny dle specifikace.
-                    V případě <code>adresy</code> je to dle abecedy:
-                </p>
                 
-                <aside class="example" title="Jednoduchá adresa v XML">
+                <aside class="example" title="Přímé určení adresy v XML">
                     <p>
-                       <a href="příklady/1.xml">Stáhnout XML</a>
+                       <a href="příklady/0.xml">Stáhnout XML</a>, <a href="schémata/adresa.xsd">Stáhnout XML schéma</a>
                     </p>
                 
                     <pre class="xml">
@@ -1025,31 +929,28 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://data.gov.cz/otevřené-formální-normy/adresy/ 
                         https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.xsd"&gt;
-    &lt;číslo_domovní&gt;12&lt;/číslo_domovní&gt;
-    &lt;název_obce&gt;Horní Datová&lt;/název_obce&gt;
-    &lt;název_ulice&gt;Hlavní&lt;/název_ulice&gt;
-    &lt;psč&gt;33101&lt;/psč&gt;
+    &lt;iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/iri_adresního_místa&gt;
 &lt;/adresa&gt;</pre>
                 </aside>
                 
-                <aside class="example" title="Jednoduchá adresa v CSV">
+                <aside class="example" title="Přímé určení adresy CSV">
                     <p>
-                       <a href="příklady/1.csv">Stáhnout CSV</a>
+                       <a href="příklady/0.csv">Stáhnout CSV</a>
                     </p>
 
                     <pre class="csv">
-číslo_domovní,název_obce,název_ulice,psč
-12,Hlavní,Horní Datová,33101</pre>
+iri_adresního_místa
+https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                 </aside>
                 
                 <p>
                     K souboru CSV je třeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
-                    Například pokud se CSV soubor jmenuje <code>adresa.csv</code>, je s ním publikován i <a href="příklady/1-metadata.json">metadatový soubor</a> <code>adresa.csv-metadata.json</code>:
+                    Například pokud se CSV soubor jmenuje <code>0.csv</code>, je s ním publikován i <a href="příklady/0.csv-metadata.json">metadatový soubor</a> <code>0.csv-metadata.json</code>:
                 </p>
                 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
-                       <a href="příklady/1-metadata.json">Stáhnout deskriptor</a>
+                       <a href="příklady/0.csv-metadata.json">Stáhnout deskriptor</a>
                     </p>
                 
                     <pre class="json">
@@ -1058,43 +959,35 @@
         "http://www.w3.org/ns/csvw",
         {"@language": "cs"}
     ],
-    "url": "1.csv",
+    "url": "0.csv",
     "header": true,
     "tableSchema": {
         "columns": [
             {
-                "name": "číslo_domovní",
-                "titles": "Číslo domovní",
-                "dc:description": "Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu."
-            }, {
-                "name": "název_obce",
-                "titles": "Název obce",
-                "dc:description": "Název obce."
-            }, {
-                "name": "název_ulice",
-                "titles": "Název ulice",
-                "dc:description": "Název ulice, která je navázána na adresní místo. Může být vyplněn pouze u obcí, které mají zavedenu uliční síť."
-            }, {
-                "name": "psč",
-                "titles": "PSČ",
-                "dc:description": "Poštovní směrovací číslo"
+                "titles": "iri_adresního_místa",
+                "dc:description": "Adresní místo v RÚIAN",
+                "datatype": "anyURI",
+                "required": true
             }
         ]
     }
-}</pre>
+}
+</pre>
                 </aside>
-            
+                
             </section>
             
             <section id="příklady-jednoduchá-adresa-vlastní-atributy">
                 <h3>Jednoduchá adresa s přidanými vlastními atributy</h3>
                 <p>
-                    Do schématu si lze v případě potřeby přidávat další atributy. V následujících příkladech jsou nad rámec standardu přidán atribut <code>poznámka</code>.
+                    Pokud publikovaná data ještě nejsou propojena s registrem RÚIAN, než se tak stane, lze data publikovat i nedoporučovaným postupem po položkách, které ale duplikují autoritativní informace dostupné v RÚIAN a mohou být zdrojem chyb.
+                    Do schématu si lze v případě potřeby přidávat další atributy.
+                    V následujících příkladech je přidán atribut <code>poznámka</code>.
                 </p>
                 
                 <aside class="example" title="Jednoduchá adresa s vlastními atributy v JSON">
                     <p>
-                        <a href="příklady/2.json">Stáhnout JSON</a>:
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/adresa.json">Stáhnout JSON schéma</a>
                     </p>
                     <pre class="json">
 {
@@ -1107,13 +1000,13 @@
                 </aside>
                 
                 <p>
-                    V XML se vlastní atributy přidávají na závěr adresy, do vlastního XML jmenného prostoru (XML namespace [[xml-names]].
+                    V XML se vlastní atributy přidávají na závěr adresy, do vlastního XML jmenného prostoru (XML namespace [[!xml-names]]).
                     V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
                 </p>
                 
                 <aside class="example" title="Jednoduchá adresa s vlastními atributy v XML">
                     <p>
-                        <a href="příklady/2.xml">Stáhnout XML</a>:
+                        <a href="příklady/2.xml">Stáhnout XML</a>, <a href="schémata/adresa.xsd">Stáhnout XML schéma</a>
                     </p>
                 
                     <pre class="xml">
@@ -1129,12 +1022,11 @@
     &lt;název_ulice&gt;Hlavní&lt;/název_ulice&gt;
     &lt;psč&gt;33101&lt;/psč&gt;
     &lt;x:poznámka&gt;dole u řeky&lt;/x:poznámka&gt;
-&lt;/adresa&gt;
-                    </pre>
+&lt;/adresa&gt;</pre>
                 </aside>
                 
                 <p>
-                    Alternativně je možné si nadefinovat celé nové XML xchéma, které by vycházelo ze zde uvedeného základního <a href="schémata/adresa.xsd">Schématu XML</a>.
+                    Alternativně je možné si nadefinovat celé nové XML schéma, které by vycházelo ze zde uvedeného základního <a href="schémata/adresa.xsd">XML schématu</a>.
                 </p>
 
                 <aside class="example" title="Jednoduchá adresa s vlastními atributy v CSV">
@@ -1148,12 +1040,12 @@
                 </aside>
                 
                 <p>
-                    K souboru CSV je opět potřeba připojit <a href="příklady/2-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[tabular-data-primer]]:
+                    K souboru CSV je opět potřeba připojit <a href="příklady/2.csv-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
                 </p>
 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
-                       <a href="příklady/2-metadata.json">Stáhnout deskriptor</a>
+                       <a href="příklady/2.csv-metadata.json">Stáhnout deskriptor</a>
                     </p>
                 
                     <pre class="json">
@@ -1162,30 +1054,35 @@
         "http://www.w3.org/ns/csvw",
         {"@language": "cs"}
     ],
-    "url": "uredni-deska.csv",
+    "url": "2.csv",
     "header": true,
     "tableSchema": {
         "columns": [
             {
-                "name": "číslo_domovní",
-                "titles": "Číslo domovní",
-                "dc:description": "Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu."
+                "name": "cislo_domovni",
+                "titles": "číslo_domovní",
+                "dc:description": "Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu.",
+                "datatype": "integer"
             }, {
-                "name": "název_obce",
-                "titles": "Název obce",
-                "dc:description": "Název obce."
+                "name": "nazev_ulice",
+                "titles": "název_ulice",
+                "dc:description": "Název ulice, která je navázána na adresní místo. Může být vyplněn pouze u obcí, které mají zavedenu uliční síť.",
+                "datatype": "string"
             }, {
-                "name": "název_ulice",
-                "titles": "Název ulice",
-                "dc:description": "Název ulice, která je navázána na adresní místo. Může být vyplněn pouze u obcí, které mají zavedenu uliční síť."
+                "name": "nazev_obce",
+                "titles": "název_obce",
+                "dc:description": "Název obce.",
+                "datatype": "string"
             }, {
-                "name": "psč",
-                "titles": "PSČ",
-                "dc:description": "Poštovní směrovací číslo"
+                "name": "psc",
+                "titles": "psč",
+                "dc:description": "Poštovní směrovací číslo",
+                "datatype": "string"
             }, {
                 "name": "poznamka",
-                "titles": "Poznámka",
-                "dc:description": "Poznámka."
+                "titles": "poznámka",
+                "dc:description": "Poznámka.",
+                "datatype": "string"
             }
         ]
     }
@@ -1204,37 +1101,21 @@
                 
                 <aside class="example" title="Komplexní adresa v JSON">
                     <p>
-                        <a href="příklady/3.json">Stáhnout JSON</a>
+                        <a href="příklady/3.json">Stáhnout JSON</a>, <a href="schémata/adresa.json">Stáhnout JSON schéma</a>
                     </p>
                 
                     <pre class="json">
 {
-    "kód_adm": 696285,
-    "kód_obce": "CZ0325 559351",
-    "název_obce": "Horní Datová",
-    "momc": "Horní Datová 1 - Drahotín",
-    "kód_části_obce": "121533",
-    "název_části_obce": "Žižkov",
-    "název_ulice": "Hlavní",
-    "typ_so": "č.ev.",
-    "číslo_domovní": 12,
-    "číslo_orientační": 1,
-    "znak_čísla_orientačního": "a",
-    "psč": "33101",
-    "kód_okresu": "CZ032",
-    "název_okresu": "Plzeň-sever",
-    "kód_kraje": "CZ032",
-    "název_kraje": "Plzeňský kraj",
+    "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661",
+    "typ_stavebního_objektu": "č.ev.",
     "budova": "HD Gate",
-    "místnost": "Místnost 4001",
-    "url": "https://horni.datova",
-    "email": "info@horni.datova"
+    "místnost": "Místnost 4001"
 }</pre>
                 </aside>
                 
                 <aside class="example" title="Komplexní adresa v XML">
                     <p>
-                        <a href="příklady/3.xml">Stáhnout XML</a>
+                        <a href="příklady/3.xml">Stáhnout XML</a>, <a href="schémata/adresa.xsd">Stáhnout XML schéma</a>
                     </p>
                 
                     <pre class="xml">
@@ -1245,25 +1126,9 @@
     xsi:schemaLocation="https://data.gov.cz/otevřené-formální-normy/adresy/ 
                         https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.xsd"&gt;
     &lt;budova&gt;HD Gate&lt;/budova&gt;
-    &lt;číslo_domovní&gt;12&lt;/číslo_domovní&gt;
-    &lt;číslo_orientační&gt;1&lt;/číslo_orientační&gt;
-    &lt;email&gt;info@horni.datova&lt;/email&gt;
-    &lt;kód_adm&gt;696285&lt;/kód_adm&gt;
-    &lt;kód_části_obce&gt;121533&lt;/kód_části_obce&gt;
-    &lt;kód_kraje&gt;CZ032&lt;/kód_kraje&gt;
-    &lt;kód_obce&gt;CZ0325 559351&lt;/kód_obce&gt;
-    &lt;kód_okresu&gt;CZ032&lt;/kód_okresu&gt;
+    &lt;iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/iri_adresního_místa&gt;
     &lt;místnost&gt;Místnost 4001&lt;/místnost&gt;
-    &lt;momc&gt;Horní Datová 1 - Drahotín&lt;/momc&gt;
-    &lt;název_části_obce&gt;Žižkov&lt;/název_části_obce&gt;
-    &lt;název_kraje&gt;Plzeňský kraj&lt;/název_kraje&gt;
-    &lt;název_obce&gt;Horní Datová&lt;/název_obce&gt;
-    &lt;název_okresu&gt;Plzeň-sever&lt;/název_okresu&gt;
-    &lt;název_ulice&gt;Hlavní&lt;/název_ulice&gt;
-    &lt;psč&gt;33101&lt;/psč&gt;
-    &lt;typ_so&gt;č.ev.&lt;/typ_so&gt;
-    &lt;url&gt;https://horni.datova&lt;/url&gt;
-    &lt;znak_čísla_orientačního&gt;a&lt;/znak_čísla_orientačního&gt;
+    &lt;typ_stavebního_objektu&gt;č.ev.&lt;/typ_stavebního_objektu&gt;
 &lt;/adresa&gt;</pre>
                 </aside>
                 
@@ -1273,17 +1138,17 @@
                     </p>
                 
                     <pre class="csv">
-budova,číslo_domovní,číslo_orientační,email,kód_adm,kód_části_obce,kód_kraje,kód_obce,kód_okresu,místnost,momc,název_části_obce,název_kraje,název_obce,název_okresu,název_ulice,psč,typ_so,url,znak_čísla_orientačního
-HD Gate,12,1,info@horni.datova,696285,121533,CZ032,CZ0325 559351,CZ032,Místnost 4001,Horní Datová 1 - Drahotín,Žižkov,Plzeňský kraj,Horní Datová,Plzeň-sever,Hlavní,33101,č.ev.,https://horni.datova,a</pre>
+iri_adresního_místa,typ_stavebního_objektu,budova,místnost,
+https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661,č.ev.,HD Gate,Místnost 4001</pre>
                 </aside>
                 
                 <p>
-                    A opět je k souboru CSV potřeba připojit <a href="příklady/3-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[tabular-data-primer]]:
+                    A opět je k souboru CSV potřeba připojit <a href="příklady/3.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
                 </p>
                 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
-                       <a href="příklady/3-metadata.json">Stáhnout deskriptor</a>
+                       <a href="příklady/3.csv-metadata.json">Stáhnout deskriptor</a>
                     </p>
                 
                     <pre class="json">
@@ -1292,90 +1157,30 @@ HD Gate,12,1,info@horni.datova,696285,121533,CZ032,CZ0325 559351,CZ032,Místnost
         "http://www.w3.org/ns/csvw",
         {"@language": "cs"}
     ],
-    "url": "uredni-deska.csv",
+    "url": "3.csv",
     "header": true,
     "tableSchema": {
         "columns": [
             {
+                "name": "iri_adresniho_mista",
+                "titles": "iri_adresního_místa",
+                "dc:description": "IRI adresního místa v Registru územních identifikátorů, adres a nemovitostí.",
+                "datatype": "anyURI"
+            }, {
+                "name": "typ_stavebniho_objektu",
+                "titles": "typ_stavebního_objektu",
+                "dc:description": "Typ stavebního objektu, může nabývat hodnot: č.p.- číslo popisné stavebního objektu č.ev.- číslo evidenční stavebního objektu.",
+                "datatype": "string"
+            }, {
                 "name": "budova",
-                "titles": "Budova",
-                "dc:description": "Označení budovy jejím názvem, číslem apod."
+                "titles": "budova",
+                "dc:description": "Označení budovy jejím názvem, číslem apod.",
+                "datatype": "string"
             }, {
-                "name": "číslo_domovní",
-                "titles": "Číslo domovní",
-                "dc:description": "Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu."
-             }, {
-                "name": "číslo_orientační",
-                "titles": "Číslo orientační",
-                "dc:description": "Číslo orientační, slouží k orientaci v rámci nadřazené ulice."
-            }, {
-                "name": "email",
-                "titles": "Email",
-                "dc:description": "Kontaktní email."
-            }, {
-                "name": "kód_adm",
-                "titles": "Kód adresního místa",
-                "dc:description": "ID adresního místa v Registru územních identifikátorů, adres a nemovitostí."
-            }, {
-                "name": "kód_části_obce",
-                "titles": "Kód části obce",
-                "dc:description": "Kód části obce vedené v RÚIAN."
-            }, {
-                "name": "kód_kraje",
-                "titles": "Kód kraje",
-                "dc:description": "Kraj - NUTS 3 kód."
-            }, {
-                "name": "kód_obce",
-                "titles": "Kód obce",
-                "dc:description": "Obec - LAU 2 kód."
-            }, {
-                "name": "kód_okresu",
-                "titles": "Kód okresu",
-                "dc:description": "Okres - LAU 1 kód."
-            }, {
-                "name": "místnost",
-                "titles": "Místnost",
-                "dc:description": "Číslo místnosti nebo jiné označení místnosti."
-            }, {
-                "name": "momc",
-                "titles": "Název městského obvodu",
-                "dc:description": "Název městského obvodu/městské části, který je vyplněn pouze v případě členěných statutárních měst."
-            }, {
-                "name": "název_části_obce",
-                "titles": "Název části obce",
-                "dc:description": "Název části obce, v rámci nadřazené obce, ve které je číslován stavební objekt."
-            }, {
-                "name": "název_kraje",
-                "titles": "Název kraje",
-                "dc:description": "Název kraje."
-            }, {
-                "name": "název_obce",
-                "titles": "Název obce",
-                "dc:description": "Název obce."
-            }, {
-                "name": "název_okresu",
-                "titles": "Název okresu",
-                "dc:description": "Název okresu."
-            }, {
-                "name": "název_ulice",
-                "titles": "Název ulice",
-                "dc:description": "Název ulice, která je navázána na adresní místo. Může být vyplněn pouze u obcí, které mají zavedenu uliční síť."
-            }, {
-                "name": "psč",
-                "titles": "PSČ",
-                "dc:description": "Poštovní směrovací číslo."
-            }, {
-                "name": "typ_so",
-                "titles": "Typ stavebního objektu",
-                "dc:description": "Typ stavebního objektu, může nabývat hodnot: č.p.- číslo popisné stavebního objektu č.ev.- číslo evidenční stavebního objektu."
-            }, {
-                "name": "url",
-                "titles": "URL webové stránky",
-                "dc:description": "URL webové stránky ."
-            }, {
-                "name": "znak_čísla_orientačního",
-                "titles": "Znak čísla orientačního",
-                "dc:description": "Znak čísla orientačního, uveden v případě, že je znak k orientačnímu číslu přidělen."
+                "name": "mistnost",
+                "titles": "místnost",
+                "dc:description": "Číslo místnosti nebo jiné označení místnosti.",
+                "datatype": "string"
             }
         ]
     }

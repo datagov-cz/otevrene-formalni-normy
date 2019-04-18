@@ -1,0 +1,1257 @@
+<html xmlns:db="http://docbook.org/ns/docbook" xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor" xmlns:xs="http://www.w3.org/2001/XMLSchema" lang="cs">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Registr práv a povinností - úkony</title>
+      <meta content="width=device-width,initial-scale=1" name="viewport">
+      <meta name="theme-color" content="#057fa5">
+      <meta name="msapplication-TileColor" content="#057fa5">
+      <meta name="msapplication-TileImage" content="../../../static/favicons/ms-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="57x57" href="../../../static/favicons/apple-icon-57x57.png">
+      <link rel="apple-touch-icon" sizes="60x60" href="../../../static/favicons/apple-icon-60x60.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="../../../static/favicons/apple-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="76x76" href="../../../static/favicons/apple-icon-76x76.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="../../../static/favicons/apple-icon-114x114.png">
+      <link rel="apple-touch-icon" sizes="120x120" href="../../../static/favicons/apple-icon-120x120.png">
+      <link rel="apple-touch-icon" sizes="144x144" href="../../../static/favicons/apple-icon-144x144.png">
+      <link rel="apple-touch-icon" sizes="152x152" href="../../../static/favicons/apple-icon-152x152.png">
+      <link rel="apple-touch-icon" sizes="180x180" href="../../../static/favicons/apple-icon-180x180.png">
+      <link rel="icon" type="image/png" sizes="192x192" href="../../../static/favicons/android-icon-192x192.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="../../../static/favicons/favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="96x96" href="../../../static/favicons/favicon-96x96.png">
+      <link rel="manifest" href="../../../static/favicons/manifest.json">
+      <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css"><script class="remove" src="../../../static/js/respec-odcz.js"></script><script class="remove" src="%C3%BAkony.config.js"></script></head>
+   <body>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="abstract" class="introductory">
+         <h2>Abstrakt</h2>
+         <p>
+            	  Tento dokument je otevřenou formální normou ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o úkonech z Registru práv a povinností ve smyslu <a xmlns="http://docbook.org/ns/docbook" href="https://www.zakonyprolidi.cz/cs/2009-111#p51">§ 51 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat. Otevřená data dle této otevřené formální normy jsou publikována
+            ve formátu JSON-LD, se kterým lze pracovat standardními softwarovými prostředky pro
+            práci s formátem JSON. Formát JSON-LD navíc umožňuje přímou interpretaci dat v podobě
+            datového modelu RDF.
+            	
+         </p>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="json">
+         <h2><dfn>JSON struktura</dfn></h2>
+         <p>V této sekci je popsána struktura JSON distribuce datové sady. Struktura je též popsána
+            v <a href="%C3%BAkony.schema.json">JSON schématu</a></p>
+         <section id="json-přehled">
+            <h3>Přehled JSON struktury</h3>Datová sada je tvořena seznamem prvků odpovídajících datové struktuře <a>Úkon</a>. Prvky jsou uvedeny v poli <code>položky</code>.
+            
+            <ul>
+               <li><a>Úkon</a> sestává z následujících nepovinných vlastností:
+                  <ul>
+                     <li><code><a>type</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a> dle regulárního výrazu <code>^úkon$</code></li>
+                     <li><code><a>id</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^úkon/U[0-9]+$</code></li>
+                     <li><code><a>identifikátor</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a> dle regulárního výrazu <code>^U[0-9]+$</code></li>
+                     <li><code><a>název</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>popis</a></code> : <a>Vícejazyčný řetězec</a></li>
+                     <li><code><a>agenda</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^agenda/A[0-9]+$</code></li>
+                     <li><code><a>elektronická-forma</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^elektronická-forma-úkonu/.+$</code></li>
+                     <li><code><a>poskytování-úkonu</a></code> :  seznam prvků sestávajících z následujících nepovinných vlastností:
+                        <ul>
+                           <li><code><a>činnost</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^činnost/A[0-9]+/CR[0-9]+$</code></li>
+                           <li><code><a>poskytovatel</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^(orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?)|(kategorie-ovm/KO[0-9]+)$</code></li>
+                        </ul>
+                     </li>
+                     <li><code><a>subjekty-využívající-úkon</a></code> : Seznam <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-subjektu/.+$</code></li>
+                     <li><code><a>místní-příslušnost</a></code> :  seznam prvků sestávajících z následujících nepovinných vlastností:
+                        <ul>
+                           <li><code><a>typ-subjektu</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-subjektu/.+$</code></li>
+                           <li><code><a>typ-místní-příslušnosti</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-místní-příslušnosti/.+$</code></li>
+                           <li><code><a>poskytovatel-k-místní-příslušnosti</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^(orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?)|(kategorie-ovm/KO[0-9]+)$</code></li>
+                        </ul>
+                     </li>
+                     <li><code><a>ustanovení</a></code> :  seznam prvků dle datové struktury <a>Ustanovení právního předpisu</a></li>
+                  </ul>
+               </li>
+               <li><a>Ustanovení právního předpisu</a> sestává z následujících nepovinných vlastností:
+                  <ul>
+                     <li><code><a>type</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a> dle regulárního výrazu <code>^ustanovení-právního-předpisu$</code></li>
+                     <li><code><a>označení</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </section>
+         <section id="json-specifikace">
+            <h3>Detailní specifikace prvků JSON struktury</h3>V této části jsou specifikovány jednotlivé prvky JSON struktury.
+            <section>
+               <h4><dfn>Úkon</dfn></h4>
+               <dl>
+                  <dt>Popis</dt>
+                  <dd>Úkon orgánu veřejné moci vykonávaný v rámci agendy na žádost subjektu, který není
+                     orgánem veřejné moci. Úkon na žádost je v naprosté většině případů totožný se službou
+                     veřejné správy, kdy konkrétní úředník umožňuje či pomáhá konkrétnímu občanovi vypořádat
+                     jeho práva nebo povinnosti dané právními předpisy. V rámci veřejné moci však existují
+                     i výjimky, kdy úkony na žádost nejsou službami veřejné správy (nejsou poskytovány
+                     a realizovány veřejnou správou), např. individuální veřejné služby v rámci moci soudní.
+                  </dd>
+                  <dt>Definující ustanovení právních předpisů</dt>
+                  <dd>
+                     <ul>
+                        <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                     </ul>
+                  </dd>
+                  <dt>Význam</dt>
+                  <dd>
+                     						Typ Úkon je definován v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>.
+                     					
+                  </dd>
+               </dl>
+               <section>
+                  <h5>Vlastnost <code><dfn>identifikátor</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a> dle regulárního výrazu <code>^U[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Jedinečný identifikátor úkonu. Jedná se o referenční údaj.</dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>"U61"</code><br></dd>
+                     <dt>
+                        								Definující ustanovení právních předpisů
+                        							
+                     </dt>
+                     <dd>
+                        <ul>
+                           <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>identifikátor</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-%C3%BAkonu">Má identifikátor úkonu</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-%C3%BAkonu">Má identifikátor úkonu</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>název</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Pojmenování úkonu.</dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>{"cs":"Řízení o přestupcích"}</code><br></dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>název</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAkonu">Má název úkonu</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAkonu">Má název úkonu</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>popis</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd><a>Vícejazyčný řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Slovní popis významu úkonu. Vysvětluje smysl úkonu, aby byl jasný pro poskytovatele.</dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>{"cs":"Jde o druh správního řízení, ve kterém věcně a místně příslušné správní orgány
+                           na základě zákona rozhodují o vině a správním trestu za přestupek. Přestupkem je společensky
+                           škodlivý protiprávní čin, který je v zákoně za přestupek výslovně označen a který
+                           vykazuje znaky stanovené zákonem, nejde-li o trestný čin."}</code><br></dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>popis</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAkonu">Má popis úkonu</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAkonu">Má popis úkonu</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>agenda</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^agenda/A[0-9]+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Přiřazuje úkon do agendy, v rámci které je vykonáván. Úkon je vždy vykonáván v právě
+                        jedné agendě. V jedné agendě může být vykonáváno více úkonů.
+                     </dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>"agenda/A3787"</code><br></dd>
+                     <dt>
+                        								Definující ustanovení právních předpisů
+                        							
+                     </dt>
+                     <dd>
+                        <ul>
+                           <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>agenda</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1n-v-agend%C4%9B">Je vykonáván v agendě</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1n-v-agend%C4%9B">Je vykonáván v agendě</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda">Agenda</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>elektronická-forma</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^elektronická-forma-úkonu/.+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Určuje, zda má úkon i elektronickou formu. Odpovídá na otázku zda v případě, že žadatel
+                        disponuje nezbytnými prostředky elektronické komunikace/identifikace (např. datová
+                        schránka, zaručený elektronický podpis), může s těmito prostředky požádat o výkon
+                        úkonu, aniž by následně kvůli podání žádosti musel fyzicky navštívit poskytovatele.
+                     </dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>"elektronická-forma-úkonu/PODMINKA"</code><br></dd>
+                     <dt>
+                        								Definující ustanovení právních předpisů
+                        							
+                     </dt>
+                     <dd>
+                        <ul>
+                           <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>elektronická-forma</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-elektronickou-formu-%C3%BAkonu">Má elektronickou formu úkonu</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-elektronickou-formu-%C3%BAkonu">Má elektronickou formu úkonu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/elektronick%C3%A1-forma-%C3%BAkonu">Elektronická forma úkonu</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>poskytování-úkonu</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd> seznam prvků sestávajících z následujících nepovinných vlastností:
+                        <ul>
+                           <li><code><a>činnost</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^činnost/A[0-9]+/CR[0-9]+$</code></li>
+                           <li><code><a>poskytovatel</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^(orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?)|(kategorie-ovm/KO[0-9]+)$</code></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Přiřazuje k úkonu způsoby jeho poskytování. Způsobů poskytování jednoho úkonu může
+                        být více.
+                     </dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>{"činnost":"činnost/A3787/CR43901","poskytovatel":"orgán-veřejné-moci/00007064"}</code><br></dd>
+                     <dt>
+                        								Definující ustanovení právních předpisů
+                        							
+                     </dt>
+                     <dd>
+                        <ul>
+                           <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>poskytování-úkonu</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-poskytov%C3%A1n">Je poskytován</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-poskytov%C3%A1n">Je poskytován</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a></p>
+                     </dd>
+                  </dl>
+                  <section>
+                     <h5>Vlastnost <code><dfn>činnost</dfn></code></h5>
+                     <dl>
+                        <dt>
+                           			  Typ
+                           		  
+                        </dt>
+                        <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^činnost/A[0-9]+/CR[0-9]+$</code></dd>
+                        <dt>
+                           			  Popis
+                           		  
+                        </dt>
+                        <dd>Určuje činnost agendy, v rámci které je úkon poskytován. Znamená, že úkon je vázán
+                           na konkrétní vnitřní procesy (mj. přístupy k základním registrům) a současně se automaticky
+                           načtou poskytovatelé úkonu na žádost. Jeden úkon může být poskytován v rámci různých
+                           činností. V rámci jedné činnosti může být poskytováno více úkonů.
+                        </dd>
+                        <dt>
+                           			  Příklad
+                           		  
+                        </dt>
+                        <dd><code>"činnost/A3787/CR43901"</code><br></dd>
+                        <dt>
+                           			  Význam
+                           		  
+                        </dt>
+                        <dd>
+                           <p>Vlastnost <code>činnost</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti">Je poskytován v rámci činnosti</a> následovně:
+                           </p>
+                           <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti">Je poskytován v rámci činnosti</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost">Činnost</a></p>
+                        </dd>
+                     </dl>
+                  </section>
+                  <section>
+                     <h5>Vlastnost <code><dfn>poskytovatel</dfn></code></h5>
+                     <dl>
+                        <dt>
+                           			  Typ
+                           		  
+                        </dt>
+                        <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^(orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?)|(kategorie-ovm/KO[0-9]+)$</code></dd>
+                        <dt>
+                           			  Popis
+                           		  
+                        </dt>
+                        <dd>Určuje poskytovatele úkonu, kterým je vždy orgán veřejné moci nebo jejich kategorie.
+                           Jeden úkon může mít více poskytovatelů. Jeden poskytovatel může poskytovat více úkonů.
+                        </dd>
+                        <dt>
+                           			  Příklad
+                           		  
+                        </dt>
+                        <dd><code>"orgán-veřejné-moci/00007064"</code><br></dd>
+                        <dt>
+                           								Definující ustanovení právních předpisů
+                           							
+                        </dt>
+                        <dd>
+                           <ul>
+                              <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                           </ul>
+                        </dd>
+                        <dt>
+                           			  Význam
+                           		  
+                        </dt>
+                        <dd>
+                           <p>Vlastnost <code>poskytovatel</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-poskytovatele">Má poskytovatele</a> následovně:
+                           </p>
+                           <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-poskytovatele">Má poskytovatele</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-kategorie">Orgán veřejné moci nebo kategorie</a></p>
+                        </dd>
+                     </dl>
+                  </section>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>subjekty-využívající-úkon</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd>Seznam <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-subjektu/.+$</code></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Vymezení subjektu, který může podat žádost o výkon úkonu. Uvádí, jaké oprávněné žadatele
+                        o výkon úkonu příslušný právní předpis vymezuje.
+                     </dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>"typ-subjektu/PFO"</code><br></dd>
+                     <dt>
+                        								Definující ustanovení právních předpisů
+                        							
+                     </dt>
+                     <dd>
+                        <ul>
+                           <li><a href="https://zakonyprolidi.cz/cs/2009-111#p51-5-d">§ 51 odst. 5 písm. d) zákona č. 111/2009 Sb.</a></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>subjekty-využívající-úkon</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vyu%C5%BE%C3%ADv%C3%A1n-subjektem">Je využíván subjektem</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vyu%C5%BE%C3%ADv%C3%A1n-subjektem">Je využíván subjektem</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-subjektu">Typ subjektu</a></p>
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>místní-příslušnost</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd> seznam prvků sestávajících z následujících nepovinných vlastností:
+                        <ul>
+                           <li><code><a>typ-subjektu</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-subjektu/.+$</code></li>
+                           <li><code><a>typ-místní-příslušnosti</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-místní-příslušnosti/.+$</code></li>
+                           <li><code><a>poskytovatel-k-místní-příslušnosti</a></code> : <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^(orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?)|(kategorie-ovm/KO[0-9]+)$</code></li>
+                        </ul>
+                     </dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Určuje místní příslušnost úkonu. Jeden úkon může mít více různých místních příslušností.</dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>{"typ-subjektu":"typ-subjektu/PFO","typ-místní-příslušnosti":"typ-místní-příslušnosti/M_CINNOST","poskytovatel-k-místní-příslušnosti":"orgán-veřejné-moci/00025844"}</code><br></dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>místní-příslušnost</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Má místní příslušnost</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Má místní příslušnost</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a></p>
+                     </dd>
+                  </dl>
+                  <section>
+                     <h5>Vlastnost <code><dfn>typ-subjektu</dfn></code></h5>
+                     <dl>
+                        <dt>
+                           			  Typ
+                           		  
+                        </dt>
+                        <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-subjektu/.+$</code></dd>
+                        <dt>
+                           			  Popis
+                           		  
+                        </dt>
+                        <dd>Určuje, jaký typ subjektu může v daném vymezení místní příslušnosti žádat o výkon
+                           úkonu.
+                        </dd>
+                        <dt>
+                           			  Příklad
+                           		  
+                        </dt>
+                        <dd><code>"typ-subjektu/PFO"</code><br></dd>
+                        <dt>
+                           			  Význam
+                           		  
+                        </dt>
+                        <dd>
+                           <p>Vlastnost <code>typ-subjektu</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu">Je místní příslušností pro typ subjektu</a> následovně:
+                           </p>
+                           <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu">Je místní příslušností pro typ subjektu</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-subjektu">Typ subjektu</a></p>
+                        </dd>
+                     </dl>
+                  </section>
+                  <section>
+                     <h5>Vlastnost <code><dfn>typ-místní-příslušnosti</dfn></code></h5>
+                     <dl>
+                        <dt>
+                           			  Typ
+                           		  
+                        </dt>
+                        <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^typ-místní-příslušnosti/.+$</code></dd>
+                        <dt>
+                           			  Popis
+                           		  
+                        </dt>
+                        <dd>Určuje typ místní příslušnosti.</dd>
+                        <dt>
+                           			  Příklad
+                           		  
+                        </dt>
+                        <dd><code>"typ-místní-příslušnosti/M_CINNOST"</code><br></dd>
+                        <dt>
+                           			  Význam
+                           		  
+                        </dt>
+                        <dd>
+                           <p>Vlastnost <code>typ-místní-příslušnosti</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti">Má typ místní příslušnosti</a> následovně:
+                           </p>
+                           <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti">Má typ místní příslušnosti</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti-k-subjektu">Typ místní příslušnosti k subjektu</a></p>
+                        </dd>
+                     </dl>
+                  </section>
+                  <section>
+                     <h5>Vlastnost <code><dfn>poskytovatel-k-místní-příslušnosti</dfn></code></h5>
+                     <dl>
+                        <dt>
+                           			  Typ
+                           		  
+                        </dt>
+                        <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> dle regulárního výrazu <code>^(orgán-veřejné-moci/[0-9]{8}(\.[0-9]+)?)|(kategorie-ovm/KO[0-9]+)$</code></dd>
+                        <dt>
+                           			  Popis
+                           		  
+                        </dt>
+                        <dd>Vymezuje, u jakého poskytovatele může žadatel v dané místní příslušnosti žádat o výkon
+                           úkonu.
+                        </dd>
+                        <dt>
+                           			  Příklad
+                           		  
+                        </dt>
+                        <dd><code>"orgán-veřejné-moci/00025844"</code><br></dd>
+                        <dt>
+                           			  Význam
+                           		  
+                        </dt>
+                        <dd>
+                           <p>Vlastnost <code>poskytovatel-k-místní-příslušnosti</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti">Má poskytovatele v místní příslušnosti</a> následovně:
+                           </p>
+                           <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti">Má poskytovatele v místní příslušnosti</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-kategorie">Orgán veřejné moci nebo kategorie</a></p>
+                        </dd>
+                     </dl>
+                  </section>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>ustanovení</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd> seznam prvků dle datové struktury <a>Ustanovení právního předpisu</a></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Vymezení ustanovení právního předpisu, na základě kterého je úkon vykonáván. Úkon
+                        může být vykonáván na základě více ustanovení.
+                     </dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd>viz <a>Ustanovení právního předpisu</a></dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>ustanovení</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Je vykonáván na základě ustanovení</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Je vykonáván na základě ustanovení</a></strong> ➡ <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a></p>
+                     </dd>
+                  </dl>
+               </section>
+            </section>
+            <section>
+               <h4><dfn>Ustanovení právního předpisu</dfn></h4>
+               <dl>
+                  <dt>Popis</dt>
+                  <dd>Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např.
+                     jeho paragraf, odstavec nebo písmeno.
+                  </dd>
+                  <dt>Význam</dt>
+                  <dd>
+                     						Typ Ustanovení právního předpisu je definován v sémantickém slovníku pojmů jako
+                     <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>.
+                     					
+                  </dd>
+               </dl>
+               <section>
+                  <h5>Vlastnost <code><dfn>označení</dfn></code></h5>
+                  <dl>
+                     <dt>
+                        			  Typ
+                        		  
+                     </dt>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a></dd>
+                     <dt>
+                        			  Popis
+                        		  
+                     </dt>
+                     <dd>Úplné označení ustanovení je řetězec, který obsahuje označení samotného předpisu dle
+                        jeho označení ve Sbírce zákonů a dále označení samotného ustanovení v rámci předpisu.
+                        Jeho vnitřní struktura není nijak předepsána.
+                     </dd>
+                     <dt>
+                        			  Příklad
+                        		  
+                     </dt>
+                     <dd><code>"§ 100 zákona č. 250/2016 Sb. - Zákon o odpovědnosti za přestupky a řízení o nich"</code><br></dd>
+                     <dt>
+                        			  Význam
+                        		  
+                     </dt>
+                     <dd>
+                        <p>Vlastnost <code>označení</code> je definována v sémantickém slovníku pojmů jako <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> následovně:
+                        </p>
+                        <p><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a> ➡ <strong><a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a></strong></p>
+                     </dd>
+                  </dl>
+               </section>
+            </section>
+            <section>
+               <h4>Obecné prvky</h4>
+               <p>Jedná se o JSON prvky, které jsou použity na různých místech JSON reprezentace datové
+                  sady v různých situacích
+               </p>
+               <section>
+                  <h5><dfn>Vícejazyčný řetězec</dfn></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><pre class="json">{"cs": "...", "en": "...", ...}</pre></dd>
+                     <dt>Popis</dt>
+                     <dd>Typ je použit pro vlastnosti, jejichž hodnotou jsou řetězce v různých jazycích.</dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>type</dfn></code></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a></dd>
+                     <dt>Popis</dt>
+                     <dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci
+                        datové sady. Sémantický typ je identifikován v podobě lokálního IRI. Aby jej bylo
+                        možné využít, je nutné JSON reprezentaci interpretovat jako JSON-LD reprezentaci s
+                        pomocí kontextu uvedeného v JSON-LD reprezentaci (<code>@context</code>). Při této interpretaci lze získat globální IRI sémantického typu. Jeho dereferencováním
+                        lze získat úplnou definici významu.
+                     </dd>
+                  </dl>
+               </section>
+               <section>
+                  <h5>Vlastnost <code><dfn>id</dfn></code></h5>
+                  <dl>
+                     <dt>Typ</dt>
+                     <dd><a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/#%C5%99et%C4%9Bzec">Řetězec</a></dd>
+                     <dt>Jméno</dt>
+                     <dd>Identifikátor prvku</dd>
+                     <dt>Popis</dt>
+                     <dd>Vlastnost přiřazuje prvku identifikátor entity, kterou v JSON reprezentaci datové
+                        sady reprezentuje. Identifikátor entity je uveden v podobě relativního nebo absolutního
+                        <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a>. V případě relativního <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> je pro získání absolutního <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí  kontextu uvedeného
+                        v JSON-LD reprezentaci (<code>@context</code>). Dereferencováním získaného absolutního <a href="https://data.gov.cz/otev%C5%99en%C3%A9-form%C3%A1ln%C3%AD-normy/propojen%C3%A1-data/draft/#IRI">IRI</a> lze získat úplnou podobu identifikované entity dostupnou v daném zdroji.
+                     </dd>
+                  </dl>
+               </section>
+            </section>
+         </section>
+      </section>
+      <section xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" id="rdf">
+         <h2><dfn>RDF struktura</dfn></h2>
+         <p>V této sekci je popsána struktura RDF distribuce datové sady.</p>
+         <section id="lod-přehled">
+            <h3>Přehled RDF struktury</h3>
+            <p>V této sekci je uveden přehled struktury RDF distribuce datové sady.</p>
+            <section id="lod-přehled-třídy">
+               <h4>RDF třídy</h4>
+               <ul>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">Úkon</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a>)
+                     							
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Úkon orgánu veřejné moci vykonávaný v rámci agendy na žádost subjektu, který není
+                           orgánem veřejné moci. Úkon na žádost je v naprosté většině případů totožný se službou
+                           veřejné správy, kdy konkrétní úředník umožňuje či pomáhá konkrétnímu občanovi vypořádat
+                           jeho práva nebo povinnosti dané právními předpisy. V rámci veřejné moci však existují
+                           i výjimky, kdy úkony na žádost nejsou službami veřejné správy (nejsou poskytovány
+                           a realizovány veřejnou správou), např. individuální veřejné služby v rámci moci soudní.
+                        </dd>
+                        <dt>Příklad</dt>
+                        <dd><a href="http://rpp-opendata.egon.gov.cz/odrpp/zdroj/%C3%BAkon/U61">http://rpp-opendata.egon.gov.cz/odrpp/zdroj/úkon/U61</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu" class="ssplink">Ustanovení právního předpisu</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu" class="ssplink">l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu</a>)
+                     							
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např.
+                           jeho paragraf, odstavec nebo písmeno.
+                        </dd>
+                     </dl>
+                  </li>
+               </ul>
+            </section>
+            <section id="lod-přehled-vlastnosti">
+               <h4>RDF vlastnosti</h4>
+               <ul>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-%C3%BAkonu" class="ssplink">Má identifikátor úkonu</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-%C3%BAkonu" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Jedinečný identifikátor úkonu. Jedná se o referenční údaj.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="http://www.w3.org/2000/01/rdf-schema#Literal" class="ssplink">rdfs:Literal</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAkonu" class="ssplink">Má název úkonu</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAkonu" class="ssplink">a-sgov-104-pojem:má-název-úkonu</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Pojmenování úkonu.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="http://www.w3.org/2000/01/rdf-schema#Literal" class="ssplink">rdfs:Literal</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAkonu" class="ssplink">Má popis úkonu</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAkonu" class="ssplink">a-sgov-104-pojem:má-popis-úkonu</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Slovní popis významu úkonu. Vysvětluje smysl úkonu, aby byl jasný pro poskytovatele.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="http://www.w3.org/2000/01/rdf-schema#Literal" class="ssplink">rdfs:Literal</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1n-v-agend%C4%9B" class="ssplink">Je vykonáván v agendě</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1n-v-agend%C4%9B" class="ssplink">l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Přiřazuje úkon do agendy, v rámci které je vykonáván. Úkon je vždy vykonáván v právě
+                           jedné agendě. V jedné agendě může být vykonáváno více úkonů.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/agenda" class="ssplink">l-sgov-sbírka-111-2009-pojem:agenda</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-elektronickou-formu-%C3%BAkonu" class="ssplink">Má elektronickou formu úkonu</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-elektronickou-formu-%C3%BAkonu" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Určuje, zda má úkon i elektronickou formu. Odpovídá na otázku zda v případě, že žadatel
+                           disponuje nezbytnými prostředky elektronické komunikace/identifikace (např. datová
+                           schránka, zaručený elektronický podpis), může s těmito prostředky požádat o výkon
+                           úkonu, aniž by následně kvůli podání žádosti musel fyzicky navštívit poskytovatele.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/elektronick%C3%A1-forma-%C3%BAkonu" class="ssplink">l-sgov-sbírka-111-2009-pojem:elektronická-forma-úkonu</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-poskytov%C3%A1n" class="ssplink">Je poskytován</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-poskytov%C3%A1n" class="ssplink">l-sgov-sbírka-111-2009-pojem:je-poskytován</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Přiřazuje k úkonu způsoby jeho poskytování. Způsobů poskytování jednoho úkonu může
+                           být více.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu" class="ssplink">l-sgov-sbírka-111-2009-pojem:poskytování-úkonu</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti" class="ssplink">Je poskytován v rámci činnosti</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti" class="ssplink">a-sgov-104-pojem:je-poskytován-v-rámci-činnosti</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Určuje činnost agendy, v rámci které je úkon poskytován. Znamená, že úkon je vázán
+                           na konkrétní vnitřní procesy (mj. přístupy k základním registrům) a současně se automaticky
+                           načtou poskytovatelé úkonu na žádost. Jeden úkon může být poskytován v rámci různých
+                           činností. V rámci jedné činnosti může být poskytováno více úkonů.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu" class="ssplink">l-sgov-sbírka-111-2009-pojem:poskytování-úkonu</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C4%8Dinnost" class="ssplink">l-sgov-sbírka-111-2009-pojem:činnost</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-poskytovatele" class="ssplink">Má poskytovatele</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-poskytovatele" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-poskytovatele</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Určuje poskytovatele úkonu, kterým je vždy orgán veřejné moci nebo jejich kategorie.
+                           Jeden úkon může mít více poskytovatelů. Jeden poskytovatel může poskytovat více úkonů.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu" class="ssplink">l-sgov-sbírka-111-2009-pojem:poskytování-úkonu</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-kategorie" class="ssplink">a-sgov-104-pojem:orgán-veřejné-moci-nebo-kategorie</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vyu%C5%BE%C3%ADv%C3%A1n-subjektem" class="ssplink">Je využíván subjektem</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vyu%C5%BE%C3%ADv%C3%A1n-subjektem" class="ssplink">a-sgov-104-pojem:je-využíván-subjektem</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Vymezení subjektu, který může podat žádost o výkon úkonu. Uvádí, jaké oprávněné žadatele
+                           o výkon úkonu příslušný právní předpis vymezuje.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-subjektu" class="ssplink">a-sgov-104-pojem:typ-subjektu</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost" class="ssplink">Má místní příslušnost</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost" class="ssplink">a-sgov-104-pojem:má-místní-příslušnost</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Určuje místní příslušnost úkonu. Jeden úkon může mít více různých místních příslušností.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost" class="ssplink">a-sgov-104-pojem:místní-příslušnost</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu" class="ssplink">Je místní příslušností pro typ subjektu</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu" class="ssplink">a-sgov-104-pojem:je-místní-příslušností-pro-typ-subjektu</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Určuje, jaký typ subjektu může v daném vymezení místní příslušnosti žádat o výkon
+                           úkonu.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost" class="ssplink">a-sgov-104-pojem:místní-příslušnost</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-subjektu" class="ssplink">a-sgov-104-pojem:typ-subjektu</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti" class="ssplink">Má typ místní příslušnosti</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti" class="ssplink">a-sgov-104-pojem:má-typ-místní-příslušnosti</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Určuje typ místní příslušnosti.</dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost" class="ssplink">a-sgov-104-pojem:místní-příslušnost</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti-k-subjektu" class="ssplink">a-sgov-104-pojem:typ-místní-příslušnosti-k-subjektu</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti" class="ssplink">Má poskytovatele v místní příslušnosti</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti" class="ssplink">a-sgov-104-pojem:má-poskytovatele-v-místní-příslušnosti</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Vymezuje, u jakého poskytovatele může žadatel v dané místní příslušnosti žádat o výkon
+                           úkonu.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost" class="ssplink">a-sgov-104-pojem:místní-příslušnost</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/org%C3%A1n-ve%C5%99ejn%C3%A9-moci-nebo-kategorie" class="ssplink">a-sgov-104-pojem:orgán-veřejné-moci-nebo-kategorie</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD" class="ssplink">Je vykonáván na základě ustanovení</a> (<a href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD" class="ssplink">a-sgov-104-pojem:je-vykonáván-na-základě-ustanovení</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Vymezení ustanovení právního předpisu, na základě kterého je úkon vykonáván. Úkon
+                           může být vykonáván na základě více ustanovení.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon" class="ssplink">l-sgov-sbírka-111-2009-pojem:úkon</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu" class="ssplink">l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu</a></dd>
+                     </dl>
+                  </li>
+                  <li><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu" class="ssplink">Má úplné označení ustanovení včetně označení právního předpisu</a> (<a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu" class="ssplink">l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu</a>)
+                     								
+                     <dl>
+                        <dt>Popis</dt>
+                        <dd>Úplné označení ustanovení je řetězec, který obsahuje označení samotného předpisu dle
+                           jeho označení ve Sbírce zákonů a dále označení samotného ustanovení v rámci předpisu.
+                           Jeho vnitřní struktura není nijak předepsána.
+                        </dd>
+                        <dt>Doména</dt>
+                        <dd><a href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu" class="ssplink">l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu</a></dd>
+                        <dt>Obor hodnot</dt>
+                        <dd><a href="http://www.w3.org/2000/01/rdf-schema#Literal" class="ssplink">rdfs:Literal</a></dd>
+                     </dl>
+                  </li>
+               </ul>
+            </section>
+         </section>
+         <section id="ukázky-lod">
+            <h2><dfn>Ukázky práce s RDF distribucí</dfn></h2>
+            <p>V této sekci jsou uvedeny příklady SPARQL dotazů pro práci s RDF distribucí datové
+               sady.
+            </p>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Úkon</h3>
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-identifik%C3%A1tor-%C3%BAkonu">Má identifikátor úkonu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon s danou hodnotou vlastnosti Má identifikátor úkonu">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaIdentifikatorUkonu%29%20%3D%20%22U61%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaIdentifikatorUkonu%29%20%3D%20%22U61%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+  FILTER (STR(?MaIdentifikatorUkonu) = "U61")
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-n%C3%A1zev-%C3%BAkonu">Má název úkonu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon s danou hodnotou vlastnosti Má název úkonu">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaNazevUkonu%29%20%3D%20%22%C5%98%C3%ADzen%C3%AD%20o%20p%C5%99estupc%C3%ADch%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaNazevUkonu%29%20%3D%20%22%C5%98%C3%ADzen%C3%AD%20o%20p%C5%99estupc%C3%ADch%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+  FILTER (STR(?MaNazevUkonu) = "Řízení o přestupcích")
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-popis-%C3%BAkonu">Má popis úkonu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon s danou hodnotou vlastnosti Má popis úkonu">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaPopisUkonu%29%20%3D%20%22Jde%20o%20druh%20spr%C3%A1vn%C3%ADho%20%C5%99%C3%ADzen%C3%AD%2C%20ve%20kter%C3%A9m%20v%C4%9Bcn%C4%9B%20a%20m%C3%ADstn%C4%9B%20p%C5%99%C3%ADslu%C5%A1n%C3%A9%20spr%C3%A1vn%C3%AD%20org%C3%A1ny%20na%20z%C3%A1klad%C4%9B%20z%C3%A1kona%20rozhoduj%C3%AD%20o%20vin%C4%9B%20a%20spr%C3%A1vn%C3%ADm%20trestu%20za%20p%C5%99estupek.%20P%C5%99estupkem%20je%20spole%C4%8Densky%20%C5%A1kodliv%C3%BD%20protipr%C3%A1vn%C3%AD%20%C4%8Din%2C%20kter%C3%BD%20je%20v%20z%C3%A1kon%C4%9B%20za%20p%C5%99estupek%20v%C3%BDslovn%C4%9B%20ozna%C4%8Den%20a%20kter%C3%BD%20vykazuje%20znaky%20stanoven%C3%A9%20z%C3%A1konem%2C%20nejde-li%20o%20trestn%C3%BD%20%C4%8Din.%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28STR%28%3FMaPopisUkonu%29%20%3D%20%22Jde%20o%20druh%20spr%C3%A1vn%C3%ADho%20%C5%99%C3%ADzen%C3%AD%2C%20ve%20kter%C3%A9m%20v%C4%9Bcn%C4%9B%20a%20m%C3%ADstn%C4%9B%20p%C5%99%C3%ADslu%C5%A1n%C3%A9%20spr%C3%A1vn%C3%AD%20org%C3%A1ny%20na%20z%C3%A1klad%C4%9B%20z%C3%A1kona%20rozhoduj%C3%AD%20o%20vin%C4%9B%20a%20spr%C3%A1vn%C3%ADm%20trestu%20za%20p%C5%99estupek.%20P%C5%99estupkem%20je%20spole%C4%8Densky%20%C5%A1kodliv%C3%BD%20protipr%C3%A1vn%C3%AD%20%C4%8Din%2C%20kter%C3%BD%20je%20v%20z%C3%A1kon%C4%9B%20za%20p%C5%99estupek%20v%C3%BDslovn%C4%9B%20ozna%C4%8Den%20a%20kter%C3%BD%20vykazuje%20znaky%20stanoven%C3%A9%20z%C3%A1konem%2C%20nejde-li%20o%20trestn%C3%BD%20%C4%8Din.%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+  FILTER (STR(?MaPopisUkonu) = "Jde o druh správního řízení, ve kterém věcně a místně příslušné správní orgány na základě zákona rozhodují o vině a správním trestu za přestupek. Přestupkem je společensky škodlivý protiprávní čin, který je v zákoně za přestupek výslovně označen a který vykazuje znaky stanovené zákonem, nejde-li o trestný čin.")
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-vykon%C3%A1v%C3%A1n-v-agend%C4%9B">Je vykonáván v agendě</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon s danou hodnotou vlastnosti Je vykonáván v agendě">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28%3FJeVykonavanVAgende%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Fagenda%2FA3787%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28%3FJeVykonavanVAgende%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Fagenda%2FA3787%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+  FILTER (?JeVykonavanVAgende = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A3787&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-elektronickou-formu-%C3%BAkonu">Má elektronickou formu úkonu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon s danou hodnotou vlastnosti Má elektronickou formu úkonu">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28%3FMaElektronickouFormuUkonu%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Felektronick%C3%A1-forma-%C3%BAkonu%2FPODMINKA%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20FILTER%20%28%3FMaElektronickouFormuUkonu%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Felektronick%C3%A1-forma-%C3%BAkonu%2FPODMINKA%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+  FILTER (?MaElektronickouFormuUkonu = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/elektronická-forma-úkonu/PODMINKA&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/%C3%BAkon">Úkon</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vyu%C5%BE%C3%ADv%C3%A1n-subjektem">Je využíván subjektem</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Úkon s danou hodnotou vlastnosti Je využíván subjektem">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20%3FUkon%20a-sgov-104-pojem%3Aje-vyu%C5%BE%C3%ADv%C3%A1n-subjektem%20%3FJeVyuzivanSubjektem%20.%0A%20%20FILTER%20%28%3FJeVyuzivanSubjektem%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Ftyp-subjektu%2FPFO%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUkon%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%C3%BAkon%20.%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-identifik%C3%A1tor-%C3%BAkonu%20%3FMaIdentifikatorUkonu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-n%C3%A1zev-%C3%BAkonu%20%3FMaNazevUkonu%20.%20FILTER%20%28LANG%28%3FMaNazevUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20a-sgov-104-pojem%3Am%C3%A1-popis-%C3%BAkonu%20%3FMaPopisUkonu%20.%20FILTER%20%28LANG%28%3FMaPopisUkonu%29%20%3D%20%22cs%22%29%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-vykon%C3%A1v%C3%A1n-v-agend%C4%9B%20%3FJeVykonavanVAgende%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FUkon%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-elektronickou-formu-%C3%BAkonu%20%3FMaElektronickouFormuUkonu%20.%20%7D%0A%20%20%3FUkon%20a-sgov-104-pojem%3Aje-vyu%C5%BE%C3%ADv%C3%A1n-subjektem%20%3FJeVyuzivanSubjektem%20.%0A%20%20FILTER%20%28%3FJeVyuzivanSubjektem%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Ftyp-subjektu%2FPFO%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+		
+SELECT *
+WHERE {
+  ?Ukon a l-sgov-sbírka-111-2009-pojem:úkon .
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-identifikátor-úkonu ?MaIdentifikatorUkonu . } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-název-úkonu ?MaNazevUkonu . FILTER (LANG(?MaNazevUkonu) = "cs") } 
+  OPTIONAL { ?Ukon a-sgov-104-pojem:má-popis-úkonu ?MaPopisUkonu . FILTER (LANG(?MaPopisUkonu) = "cs") } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:je-vykonáván-v-agendě ?JeVykonavanVAgende . } 
+  OPTIONAL { ?Ukon l-sgov-sbírka-111-2009-pojem:má-elektronickou-formu-úkonu ?MaElektronickouFormuUkonu . }
+  ?Ukon a-sgov-104-pojem:je-využíván-subjektem ?JeVyuzivanSubjektem .
+  FILTER (?JeVyuzivanSubjektem = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/typ-subjektu/PFO&gt;)
+}
+LIMIT 100</pre></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Poskytování úkonu</h3>
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Poskytování úkonu přiřazené k instanci typu Úkon prostřednictvím Je poskytován">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+
+SELECT *
+WHERE {
+  OPTIONAL { ?PoskytovaniUkonu a-sgov-104-pojem:je-poskytován-v-rámci-činnosti ?JePoskytovanVRamciCinnosti . } 
+  OPTIONAL { ?PoskytovaniUkonu l-sgov-sbírka-111-2009-pojem:má-poskytovatele ?MaPoskytovatele . } 
+  ?JePoskytovan l-sgov-sbírka-111-2009-pojem:je-poskytován ?PoskytovaniUkonu .
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti">Je poskytován v rámci činnosti</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Poskytování úkonu s danou hodnotou vlastnosti Je poskytován v rámci činnosti">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%20%20FILTER%20%28%3FJePoskytovanVRamciCinnosti%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C4%8Dinnost%2FA3787%2FCR43901%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%20%20FILTER%20%28%3FJePoskytovanVRamciCinnosti%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C4%8Dinnost%2FA3787%2FCR43901%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+	
+SELECT *
+WHERE {
+  OPTIONAL { ?PoskytovaniUkonu a-sgov-104-pojem:je-poskytován-v-rámci-činnosti ?JePoskytovanVRamciCinnosti . } 
+  OPTIONAL { ?PoskytovaniUkonu l-sgov-sbírka-111-2009-pojem:má-poskytovatele ?MaPoskytovatele . } 
+  ?JePoskytovan l-sgov-sbírka-111-2009-pojem:je-poskytován ?PoskytovaniUkonu .
+  FILTER (?JePoskytovanVRamciCinnosti = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/činnost/A3787/CR43901&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-poskytovatele">Má poskytovatele</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Poskytování úkonu s danou hodnotou vlastnosti Má poskytovatele">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%20%20FILTER%20%28%3FMaPoskytovatele%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00007064%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%20%20FILTER%20%28%3FMaPoskytovatele%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00007064%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+	
+SELECT *
+WHERE {
+  OPTIONAL { ?PoskytovaniUkonu a-sgov-104-pojem:je-poskytován-v-rámci-činnosti ?JePoskytovanVRamciCinnosti . } 
+  OPTIONAL { ?PoskytovaniUkonu l-sgov-sbírka-111-2009-pojem:má-poskytovatele ?MaPoskytovatele . } 
+  ?JePoskytovan l-sgov-sbírka-111-2009-pojem:je-poskytován ?PoskytovaniUkonu .
+  FILTER (?MaPoskytovatele = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/00007064&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/poskytov%C3%A1n%C3%AD-%C3%BAkonu">Poskytování úkonu</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/je-poskytov%C3%A1n">Je poskytován</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Poskytování úkonu s danou hodnotou vlastnosti Je poskytován">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%20%20FILTER%20%28%3FJePoskytovan%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C3%BAkon%2FU61%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%20%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20a-sgov-104-pojem%3Aje-poskytov%C3%A1n-v-r%C3%A1mci-%C4%8Dinnosti%20%3FJePoskytovanVRamciCinnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FPoskytovaniUkonu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-poskytovatele%20%3FMaPoskytovatele%20.%20%7D%20%0A%20%20%3FJePoskytovan%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Aje-poskytov%C3%A1n%20%3FPoskytovaniUkonu%20.%0A%20%20FILTER%20%28%3FJePoskytovan%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C3%BAkon%2FU61%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt; 
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt;
+		
+SELECT *
+WHERE {
+  OPTIONAL { ?PoskytovaniUkonu a-sgov-104-pojem:je-poskytován-v-rámci-činnosti ?JePoskytovanVRamciCinnosti . } 
+  OPTIONAL { ?PoskytovaniUkonu l-sgov-sbírka-111-2009-pojem:má-poskytovatele ?MaPoskytovatele . } 
+  ?JePoskytovan l-sgov-sbírka-111-2009-pojem:je-poskytován ?PoskytovaniUkonu .
+  FILTER (?JePoskytovan = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/úkon/U61&gt;)
+}
+LIMIT 100</pre></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Místní příslušnost</h3>
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Místní příslušnost přiřazené k instanci typu Úkon prostřednictvím Má místní příslušnost">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:je-místní-příslušností-pro-typ-subjektu ?JeMistniPrislusnostiProTypSubjektu . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-typ-místní-příslušnosti ?MaTypMistniPrislusnosti . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-poskytovatele-v-místní-příslušnosti ?MaPoskytovateleVMistniPrislusnosti . } 
+  ?MaMistniPrislusnost a-sgov-104-pojem:má-místní-příslušnost ?MistniPrislusnost .
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu">Je místní příslušností pro typ subjektu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Místní příslušnost s danou hodnotou vlastnosti Je místní příslušností pro typ subjektu">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FJeMistniPrislusnostiProTypSubjektu%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Ftyp-subjektu%2FPFO%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FJeMistniPrislusnostiProTypSubjektu%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Ftyp-subjektu%2FPFO%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:je-místní-příslušností-pro-typ-subjektu ?JeMistniPrislusnostiProTypSubjektu . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-typ-místní-příslušnosti ?MaTypMistniPrislusnosti . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-poskytovatele-v-místní-příslušnosti ?MaPoskytovateleVMistniPrislusnosti . } 
+  ?MaMistniPrislusnost a-sgov-104-pojem:má-místní-příslušnost ?MistniPrislusnost .
+  FILTER (?JeMistniPrislusnostiProTypSubjektu = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/typ-subjektu/PFO&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti">Má typ místní příslušnosti</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Místní příslušnost s danou hodnotou vlastnosti Má typ místní příslušnosti">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FMaTypMistniPrislusnosti%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Ftyp-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%2FM_CINNOST%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FMaTypMistniPrislusnosti%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Ftyp-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%2FM_CINNOST%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:je-místní-příslušností-pro-typ-subjektu ?JeMistniPrislusnostiProTypSubjektu . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-typ-místní-příslušnosti ?MaTypMistniPrislusnosti . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-poskytovatele-v-místní-příslušnosti ?MaPoskytovateleVMistniPrislusnosti . } 
+  ?MaMistniPrislusnost a-sgov-104-pojem:má-místní-příslušnost ?MistniPrislusnost .
+  FILTER (?MaTypMistniPrislusnosti = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/typ-místní-příslušnosti/M_CINNOST&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti">Má poskytovatele v místní příslušnosti</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Místní příslušnost s danou hodnotou vlastnosti Má poskytovatele v místní příslušnosti">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FMaPoskytovateleVMistniPrislusnosti%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00025844%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FMaPoskytovateleVMistniPrislusnosti%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F00025844%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:je-místní-příslušností-pro-typ-subjektu ?JeMistniPrislusnostiProTypSubjektu . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-typ-místní-příslušnosti ?MaTypMistniPrislusnosti . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-poskytovatele-v-místní-příslušnosti ?MaPoskytovateleVMistniPrislusnosti . } 
+  ?MaMistniPrislusnost a-sgov-104-pojem:má-místní-příslušnost ?MistniPrislusnost .
+  FILTER (?MaPoskytovateleVMistniPrislusnosti = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/00025844&gt;)
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Místní příslušnost</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/m%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost">Má místní příslušnost</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Místní příslušnost s danou hodnotou vlastnosti Má místní příslušnost">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FMaMistniPrislusnost%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C3%BAkon%2FU61%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Aje-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%C3%AD-pro-typ-subjektu%20%3FJeMistniPrislusnostiProTypSubjektu%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-typ-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaTypMistniPrislusnosti%20.%20%7D%20%0A%20%20OPTIONAL%20%7B%20%3FMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-poskytovatele-v-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nosti%20%3FMaPoskytovateleVMistniPrislusnosti%20.%20%7D%20%0A%20%20%3FMaMistniPrislusnost%20a-sgov-104-pojem%3Am%C3%A1-m%C3%ADstn%C3%AD-p%C5%99%C3%ADslu%C5%A1nost%20%3FMistniPrislusnost%20.%0A%20%20FILTER%20%28%3FMaMistniPrislusnost%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C3%BAkon%2FU61%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+		
+SELECT *
+WHERE {
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:je-místní-příslušností-pro-typ-subjektu ?JeMistniPrislusnostiProTypSubjektu . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-typ-místní-příslušnosti ?MaTypMistniPrislusnosti . } 
+  OPTIONAL { ?MistniPrislusnost a-sgov-104-pojem:má-poskytovatele-v-místní-příslušnosti ?MaPoskytovateleVMistniPrislusnosti . } 
+  ?MaMistniPrislusnost a-sgov-104-pojem:má-místní-příslušnost ?MistniPrislusnost .
+  FILTER (?MaMistniPrislusnost = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/úkon/U61&gt;)
+}
+LIMIT 100</pre></aside>
+            </section>
+            <section>
+               <h3>Ukázky SPARQL dotazů nad typem Ustanovení právního předpisu</h3>
+               <p>Následující SPARQL dotaz vrací seznam všech instancí typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>. Pro každou instanci vrací hodnoty všech datových vlastností (textové, datumové,
+                  atd.) a objektových vlastností, kde je instance v pozici subjektu či objektu a které
+                  mají horní kardinalitu druhého prvku rovnu 1. V případě volitelných vlastností používá
+                  klauzuli OPTIONAL. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Ustanovení právního předpisu přiřazené k instanci typu Úkon prostřednictvím Je vykonáván na základě ustanovení">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanNaZakladeUstanoveni%20a-sgov-104-pojem%3Aje-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanNaZakladeUstanoveni%20a-sgov-104-pojem%3Aje-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . } 
+  ?JeVykonavanNaZakladeUstanoveni a-sgov-104-pojem:je-vykonáván-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/m%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Má úplné označení ustanovení včetně označení právního předpisu</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Ustanovení právního předpisu s danou hodnotou vlastnosti Má úplné označení ustanovení včetně označení právního předpisu">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanNaZakladeUstanoveni%20a-sgov-104-pojem%3Aje-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%20%20FILTER%20%28STR%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%29%20%3D%20%22%C2%A7%20100%20z%C3%A1kona%20%C4%8D.%20250%2F2016%20Sb.%20-%20Z%C3%A1kon%20o%20odpov%C4%9Bdnosti%20za%20p%C5%99estupky%20a%20%C5%99%C3%ADzen%C3%AD%20o%20nich%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanNaZakladeUstanoveni%20a-sgov-104-pojem%3Aje-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%20%20FILTER%20%28STR%28%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%29%20%3D%20%22%C2%A7%20100%20z%C3%A1kona%20%C4%8D.%20250%2F2016%20Sb.%20-%20Z%C3%A1kon%20o%20odpov%C4%9Bdnosti%20za%20p%C5%99estupky%20a%20%C5%99%C3%ADzen%C3%AD%20o%20nich%22%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+	
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . } 
+  ?JeVykonavanNaZakladeUstanoveni a-sgov-104-pojem:je-vykonáván-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+  FILTER (STR(?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu) = "§ 100 zákona č. 250/2016 Sb. - Zákon o odpovědnosti za přestupky a řízení o nich")
+}
+LIMIT 100</pre></aside>
+               <p>Následující SPARQL dotaz vrací instance typu <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/legislativn%C3%AD/sb%C3%ADrka/111/2009/pojem/ustanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu">Ustanovení právního předpisu</a>, pro které jejich vlastnost <a class="ssplink" href="https://slovn%C3%ADk.gov.cz/agendov%C3%BD/104/pojem/je-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD">Je vykonáván na základě ustanovení</a> nabývá určité zadané hodnoty. Dotaz je typu SELECT, tudíž vrací tabulku.
+               </p>
+               <aside class="example" title="Instance typu Ustanovení právního předpisu s danou hodnotou vlastnosti Je vykonáván na základě ustanovení">
+                  <p><a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanNaZakladeUstanoveni%20a-sgov-104-pojem%3Aje-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%20%20FILTER%20%28%3FJeVykonavanNaZakladeUstanoveni%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C3%BAkon%2FU61%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fhtml&amp;timeout=0">Spustit dotaz (HTML)</a> | <a target="_blank" href="http://rpp-opendata.egon.gov.cz/odrpp/sparql?query=%0APREFIX%20l-sgov-sb%C3%ADrka-111-2009-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Flegislativn%C3%AD%2Fsb%C3%ADrka%2F111%2F2009%2Fpojem%2F%3E%20%0APREFIX%20a-sgov-104-pojem%3A%20%3Chttps%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fagendov%C3%BD%2F104%2Fpojem%2F%3E%0A%09%09%0ASELECT%20%2A%0AWHERE%20%7B%0A%20%20%3FUstanoveniPravnihoPredpisu%20a%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Austanoven%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20.%0A%20%20OPTIONAL%20%7B%20%3FUstanoveniPravnihoPredpisu%20l-sgov-sb%C3%ADrka-111-2009-pojem%3Am%C3%A1-%C3%BApln%C3%A9-ozna%C4%8Den%C3%AD-ustanoven%C3%AD-v%C4%8Detn%C4%9B-ozna%C4%8Den%C3%AD-pr%C3%A1vn%C3%ADho-p%C5%99edpisu%20%3FMaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu%20.%20%7D%20%0A%20%20%3FJeVykonavanNaZakladeUstanoveni%20a-sgov-104-pojem%3Aje-vykon%C3%A1v%C3%A1n-na-z%C3%A1klad%C4%9B-ustanoven%C3%AD%20%3FUstanoveniPravnihoPredpisu%20.%0A%20%20FILTER%20%28%3FJeVykonavanNaZakladeUstanoveni%20%3D%20%3Chttp%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2F%C3%BAkon%2FU61%3E%29%0A%7D%0ALIMIT%20100&amp;format=text%2Fcsv&amp;timeout=0">Spustit dotaz (CSV)</a></p><pre class="sparql">
+PREFIX l-sgov-sbírka-111-2009-pojem: &lt;https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/&gt; 
+PREFIX a-sgov-104-pojem: &lt;https://slovník.gov.cz/agendový/104/pojem/&gt;
+		
+SELECT *
+WHERE {
+  ?UstanoveniPravnihoPredpisu a l-sgov-sbírka-111-2009-pojem:ustanovení-právního-předpisu .
+  OPTIONAL { ?UstanoveniPravnihoPredpisu l-sgov-sbírka-111-2009-pojem:má-úplné-označení-ustanovení-včetně-označení-právního-předpisu ?MaUplneOznaceniUstanoveniVcetneOznaceniPravnihoPredpisu . } 
+  ?JeVykonavanNaZakladeUstanoveni a-sgov-104-pojem:je-vykonáván-na-základě-ustanovení ?UstanoveniPravnihoPredpisu .
+  FILTER (?JeVykonavanNaZakladeUstanoveni = &lt;http://rpp-opendata.egon.gov.cz/odrpp/zdroj/úkon/U61&gt;)
+}
+LIMIT 100</pre></aside>
+            </section>
+         </section>
+      </section>
+   </body>
+</html>
