@@ -7,7 +7,7 @@ var respecConfig = {
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/údaje/",
 	editors: [{
 	  name: "Martin Nečaský",
-	  url: "https://www.opendata.cz/martin-nečaský",
+	  url: "https://martin.necasky.solid.community/profile/card#me",
 	  company:    "Ministerstvo vnitra",
 	  companyURL: "http://www.mvcr.cz"
 	}],

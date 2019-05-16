@@ -4,9 +4,10 @@ var respecConfig = {
 	showPreviousVersion: false,
 	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/2019-04-03/",
 	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/",
+	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",
-	  url: "https://www.opendata.cz/martin-nečaský",
+	  url: "https://martin.necasky.solid.community/profile/card#me",
 	  company:    "Ministerstvo vnitra",
 	  companyURL: "http://www.mvcr.cz"
 	}],
