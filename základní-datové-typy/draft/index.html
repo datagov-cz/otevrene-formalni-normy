@@ -57,7 +57,7 @@
                 Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
                 Je navržena jako sdílená norma pro použití v dalších specifických otevřených formálních normách.
                 Ukazuje základní datové typy k použití v otevřených datových formátech.
-                Norma je ilustrována příklady dat ve formátech CSV [[!rfc4180]], JSON [[!ECMA-404]], XML [[!xml]] a RDF [[!rdf11-concepts]].
+                Norma je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a RDF [[rdf11-concepts]].
             </p>
         </section>
 
@@ -70,11 +70,11 @@
             
             <section id="jednoduché-datové-typy">
                 <h3>Jednoduché datové typy</h3>
-				
-				<p>
-					Jednoduché datové typy se už dále nedělí na jednotlivé položky.
-					Pokud jsou strukturované, je jejich struktura určena již pouze syntaxí použitého datového typu.
-				</p>
+                
+                <p>
+                    Jednoduché datové typy se už dále nedělí na jednotlivé položky.
+                    Pokud jsou strukturované, je jejich struktura určena již pouze syntaxí použitého datového typu.
+                </p>
 
                 <section id="boolean">
                     <h4>Booleovská hodnota - Ano či ne</h4>
@@ -122,7 +122,7 @@ faktura:A123 faktura:zaplaceno false ;
                 <section id="datum">
                     <h4>Datum</h4>
                     <p>
-                        Pro reprezentaci datumu se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:date</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci datumu se ve všech cílových otevřených formátech, tj. CSV [[!rfc4180]], JSON [[!ECMA-404]], XML [[!xml]] a RDF [[!rdf11-concepts]] používá typ <code>xsd:date</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         Tento datový typ umožňuje i explicitně zaznamenat časovou zónu.
                         To se hodí například pro data, u kterých se dá předpokládat využití v jiné časové zóně.
                     </p>
@@ -411,9 +411,9 @@ faktura:A123 faktura:název &quot;Název faktury v češtině&quot;@cs ;
             <section id="složené-datové-typy">
                 <h3>Složené datové typy</h3>
             
-				<p>
-					Složené datové typy se dále dělí na položky, které je pro úplné určení hodnoty třeba uvést.
-				</p>
+                <p>
+                    Složené datové typy se dále dělí na položky, které je pro úplné určení hodnoty třeba uvést.
+                </p>
 
                 <section id="množství">
                     <h4>Množství</h4>
@@ -489,8 +489,8 @@ faktura:A123 faktura:název &quot;Název faktury v češtině&quot;@cs ;
                     </section>                  
                                         
                     <aside class="example" title="Množství v JSON">
-					    <p><a href="příklady/množství.json">Příklad</a>, <a href="schémata/množství.json">JSON Schema</a>
-						</p>
+                        <p><a href="příklady/množství.json">Příklad</a>, <a href="schémata/množství.json">JSON Schema</a>
+                        </p>
                         <pre class="json">
 "množství": {
     "hodnota": 23.0,
@@ -536,7 +536,7 @@ množství: a gr:QuantitativeValue ;
                 <section id="částka">
                     <h4>Částka</h4>
                     <p>
-                        Pro reprezentaci peněžních částek je třeba vždy uvést dvě položky - výši částky a měnu částky.
+                        Pro reprezentaci peněžních částek je třeba vždy uvést výši částky a měnu částky. Pokud se jedná o částku za jednotku, pak se také uvede jednotka.
                     </p>
 
                     <section id="částka-výše">
@@ -605,13 +605,50 @@ množství: a gr:QuantitativeValue ;
                         </dl>
 
                     </section> 
+                    
+                    <section id="částka-jednotka">
+                        <h5>Jednotka</h5>
+                        
+                        <p class="note">
+                            Pro specifikaci jednotky množství je třeba použít <a href="http://wiki.goodrelations-vocabulary.org/Documentation/UN/CEFACT_Common_Codes">číselník UN/CEFACT Common Codes</a>.
+                        </p>
+                        
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>jednotka</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#řetězec">Řetězec</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Jednotka ceny.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>KGM</code>
+                            </dd>
+                        </dl>
+
+                    </section>  
                 
-                    <aside class="example" title="Částka v JSON">
+                    <aside class="example" title="Jednotková částka v JSON">
                         <pre class="json">
 {
     "zaplaceno": {
         "výše": 48151623.42,
-        "měna": "CZK"
+        "měna": "CZK",
+        "jednotka": "KGM"
     }
 }</pre>
                     </aside>
@@ -645,6 +682,19 @@ zaplaceno: a gr:PriceSpecification ;
 </pre>
                     </aside>
 
+                    <aside class="example" title="Jednotková částka za kilogram v RDF Turtle">
+                        <pre class="turtle">
+@prefix gr: &lt;http://purl.org/goodrelations/v1#&gt; .
+                        
+faktura:A124 gr:hasPriceSpecification zaplaceno: .
+
+zaplaceno: a gr:UnitPriceSpecification ;
+           gr:hasCurrency "CZK"^^xsd:string ;
+           gr:hasCurrencyValue 24.42 ;
+           gr:hasUnitOfMeasurement "KGM"^^xsd:string .
+</pre>
+                    </aside>
+
                     <p class="note" title="Špatná praxe v reprezentaci částek">
                         Částky bez určení měny jsou těžko interpretovatelné.
                         Při určování měny je třeba dodržet kódy z evropského číselníku, jinak se zesložiťuje použití dat.
@@ -652,6 +702,244 @@ zaplaceno: a gr:PriceSpecification ;
                     
                 </section>
                 
+                <section id="časový-interval">
+                    <h4>Časový interval</h4>
+                    <p>
+                        Pro reprezentaci časových intervalů je potřeba buď uvést jejich začátek a konec, a nebo pouze jeden údaj, pokud ten druhý není znám, ale je známo, že se jedná o interval.
+                        Časový interval může začínat a končit buďto datumem, časem a nebo kombinací data a času.
+                    </p>
+
+                    <section id="časový-interval-datum-začátku">
+                        <h5>Datum začátku</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>datum_začátku</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#datum">Datum</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Datum začátku intervalu.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>2019-01-01+01:00</code>
+                            </dd>
+                        </dl>
+
+                    </section>
+
+                    <section id="časový-interval-datum-konce">
+                        <h5>Datum konce</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>datum_konce</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#datum">Datum</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Datum konce intervalu.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>2020-01-01</code>
+                            </dd>
+                        </dl>
+
+                    </section>
+
+                    <section id="časový-interval-čas-začátku">
+                        <h5>Čas začátku</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>čas_začátku</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#čas">Čas</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Čas začátku intervalu.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>09:30:00</code>
+                            </dd>
+                        </dl>
+
+                    </section>
+                    
+                    <section id="časový-interval-čas-konce">
+                        <h5>Čas konce</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>čas_konce</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#čas">Čas</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Čas konce intervalu.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>09:30:10.5+01:00</code>
+                            </dd>
+                        </dl>
+
+                    </section>
+
+                    <section id="časový-interval-datum-a-čas-začátku">
+                        <h5>Datum a čas začátku</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>datum_a_čas_začátku</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#datum-a-čas">Datum a čas</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Datum a čas začátku intervalu.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>2019-01-01T09:30:00</code>
+                            </dd>
+                        </dl>
+
+                    </section>
+
+                    <section id="časový-interval-datum-a-čas-konce">
+                        <h5>Datum a čas konce</h5>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>datum_a_čas_konce</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#datum-a-čas">Datum a čas</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Datum a čas konce intervalu.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>2019-01-01T09:30:10.5+01:00</code>
+                            </dd>
+                        </dl>
+
+                    </section>
+
+                    <aside class="example" title="Časový interval (datum) v JSON">
+                        <pre class="json">
+{
+    "interval": {
+        "datum_začátku": "2019-07-31",
+        "datum_konce": "2019-07-31"
+    }
+}</pre>
+                    </aside>
+
+
+                    <aside class="example" title="Časový interval (čas) v XML">
+                        <pre class="xml">
+&lt;interval&gt;
+   &lt;čas_začátku&gt;09:00:00&lt;/čas_začátku&gt;
+   &lt;čas_konce&gt;10:00:00&lt;/čas_konce&gt;
+&lt;/interval&gt;</pre>
+                    </aside>
+
+                    <aside class="example" title="Časový interval (datum a čas) v CSV">
+                        <pre class="csv">
+datum_a_čas_začátku,datum_a_čas_konce
+2019-01-01T09:30:10.5+01:00,2020-01-01T09:30:10.5+01:00</pre>
+                    </aside>
+
+                    V datovém formátu RDF se pro specifikaci časového intervalu používá dvojice vlastností <code>schema:startDate</code> a <code>schema:endDate</code> ze slovníku <a href="https://schema.org">Schema.org</a>.
+                    
+                    <aside class="example" title="Částka v RDF Turtle">
+                        <pre class="turtle">
+@prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+@prefix schema:  &lt;http://schema.org/&gt; .
+                        
+datová-sada:D123 dcterms:temporal interval: .
+
+interval: schema:startDate "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime ;
+          schema:endDate "2020-01-01T09:30:10.5+01:00"^^xsd:dateTime .
+</pre>
+                    </aside>
+
+                    <p class="note" title="Špatná praxe v reprezentaci časových intervalů">
+                        Pokud je časový interval vždy určen datem a časem, pak je třeba použít vlastnosti s datovým typem <a href="#datum-a-čas">Datum a čas</a>, nikoliv dvojici vlastností kde je datum a čas odděleně.
+                    </p>
+                    
+                </section>
+
             </section>
             
         </section>
