@@ -32,14 +32,16 @@
                 latestVersion: "https://data.gov.cz/otevřené-formální-normy/číselníky/",
                 editors: [{
                   name: "Martin Nečaský",
+				  orcid: "0000-0002-5186-7734",
                   url: "https://martin.necasky.solid.community/profile/card#me",
                   company:    "Ministerstvo vnitra",
-                  companyURL: "http://www.mvcr.cz"
+                  companyURL: "https://www.mvcr.cz"
                 },{
                   name: "Jakub Klímek",
+				  orcid: "0000-0001-7234-3051",
                   url: "https://jakub.klímek.com/#me",
                   company:    "Ministerstvo vnitra",
-                  companyURL: "http://www.mvcr.cz"
+                  companyURL: "https://www.mvcr.cz"
                 }],
                 inlineCSS: "true",
                 github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
@@ -75,11 +77,11 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování číselníků.
-                Norma je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
+                Norma je ilustrována příklady dat ve formátech RDF [[rdf11-concepts]], CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
             </p>
         </section>
 
-        <section id="prehled">
+        <section id="co-je-číselník">
             <h2>Co je číselník?</h2>
 
             <p>
@@ -87,7 +89,7 @@
                 Takto chápe základní podobu číselníku i tato otevřená formální norma.
             </p>
             
-            <section id="prehled-struktura">
+            <section id="struktura-číselníků">
             
               <h3>Struktura číselníků</h3>
                         
@@ -95,7 +97,7 @@
                   Datovým prvkem rozumíme pro účely této otevřené formální normy jakýkoliv atribut či vlastnost určitého typu entit (např. pohlaví osoby, barva vozidla nebo měna finanční částky).
                   Číselník pak omezuje přípustné hodnoty datového prvku konečným výčtem (seznamem) kódovaných hodnot.
                   Kódovanou hodnotou rozumíme právě dvojici (kód, hodnota) a nazýváme ji prvek číselníku. 
-                  Kód je obvykle vyjádřen jako kladné celé číslo, který položku v rámci číselníku identifikuje.
+                  Kód je obvykle vyjádřen jako kladné celé číslo, které položku v rámci číselníku identifikuje.
                   Hodnota je obvykle tvořena názvem položky číselníku.
               </p>
               
@@ -152,19 +154,19 @@
                 <table>
                   <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Kód ISO</th></tr>
                   <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>BTN</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>BOB</td><td></td></tr>
+                  <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>BOB</td></tr>
                 </table>
               </aside>
   
               <p>
-                  V případě sofistikovanější správy číselníků je přímo v číselníku a jeho položkách reflektována také časová dimenze platnosti ať už jednotlivých položek číselníku tak i číselníku jako takového. To znamená, že položka číselníku nebo celý číselník může mít specifikovánu platnost od a platnost do. V případě uvažování intervalu platnosti nemusí být platnost od nebo platnost do uvedena. To potom znamená, že datum platnosti od resp. do je prozatím neznámý a chápeme jej jako otevřený.            
+                  V případě sofistikovanější správy číselníků je přímo v číselníku a jeho položkách reflektována také časová dimenze platnosti ať už jednotlivých položek číselníku tak i číselníku jako takového. To znamená, že položka číselníku nebo celý číselník může mít specifikovánu platnost od a platnost do. V případě uvažování intervalu platnosti nemusí být platnost od nebo platnost do uvedena. To potom znamená, že datum platnosti od resp. do je prozatím neznámé a chápeme jej jako otevřené.            
               </p>
               
               <aside class="example" title="Číselník měn - platnosti položek číselníku">
                 <table>
                   <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Platnost od</th><th>Platnost do</th></tr>
                   <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>1. 1. 2012</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>BOB</td><td>1. 1. 1000</td><td>31. 12. 2018</td></tr>
+                  <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>1. 1. 1000</td><td>31. 12. 2018</td></tr>
                 </table>
               </aside>
   
@@ -173,26 +175,26 @@
               </p>
               
               <p>
-                  Z uvedených příkladů vyplývá konceptuální model číselníků, který zahrnuje číselníky a položky číselníků a jejich běžné vlastnosti.
+                  Z uvedených příkladů vyplývá <a href="#model">konceptuální model číselníků</a>, který zahrnuje číselníky a položky číselníků a jejich běžné vlastnosti.
               </p>
 
             </section>
             
-            <section id="prehled-uziti">
+            <section id="správné-užití-číselníků" class="informative">
             
               <h3>Správné užití číselníků</h3>
 
               <p>
                 Jak bylo uvedeno výše, číselník definuje přípustné hodnoty datového prvku.
                 Číselník tedy definuje výčtový typ.
-                Vlastnosti, které mají výčtový typ přiřazen jako svůj typ pak nabývají hodnot z příslušného číselníku.
+                Vlastnosti, které mají výčtový typ přiřazen jako svůj datový typ pak nabývají hodnot z příslušného číselníku.
                 Uvažujme např. smlouvy. Každá smlouva má vlastnost <code>hodnota smlouvy</code>.
                 Hodnota smlouvy má pak 2 vlastnosti strukturující hodnotu smlouvy: <code>částka</code> a <code>měna</code>.
                 Typem vlastnosti <code>částka</code> je celé kladné číslo.
                 Typem vlastnosti <code>měna</code> je výčtový datový typ definovaný číselníkem měn.
                 Hodnotou vlastnosti <code>měna</code> ale není daná položka číselníku reprezentující příslušnou měnu hodnoty smlouvy.
                 Hodnotou je kód této položky.
-                Kód položky tedy musí být v rámci číselníku unikátní, abychom ji mohli referencovat.   
+                Kód položky tedy musí být v rámci číselníku unikátní, abychom se na ni mohli odkazovat.
               </p>
               
               <p>
@@ -205,16 +207,15 @@
                 Je nutné, aby byl daný číselník spravován a následně publikován pouze na jednom místě jako jedna datová sada.
                 Ostatní datové sady potom číselník a jeho jednotlivé položky referencují.
                 Je tedy nutné umožnit takové referencování.
-                To znamená, aby položky neměly jen kód pro jejich lokální identifikaci v rámci číselníku, ale aby měly přiřazeny i globální (v prostředí sítě WWW) identifikátor.
+                To znamená, aby položky neměly jen kód pro jejich lokální identifikaci v rámci číselníku, ale aby měly přiřazeny i globální identifikátor v prostředí Webu.
                 Globální identifikátor je vhodný též pro samotný číselník.
                 Pro referencování položek číselníku v jakékoliv datové sadě (smlouvy, veřejné zakázky, projekty, atd.) jsou potom používány tyto globální identifikátory.  
               </p>
               
               <p>
                 Ke správné interpretaci datové sady referencující položky číselníku je samozřejmě nutno mít k dispozici celou informaci o použitých položkách.
-                Je tedy potřebné, aby globální identifikátory sloužili i jako tzv. lokátory v prostředí sítě WWW.
-                Tj. aby identifikátor číselníku byl i zároveň jeho lokátorem, jehož užití vede k získání seznamu položek číselníku a též aby identifikátor položky číselníku sloužil jako její lokátor vedoucí k jejímu kódu a (strukturované) hodnotě.
-                Získaný seznam položek číselníku nebo získané údaje o dané položce musí být dostupná ve strojově čitelném a jednotném formátu.
+                Je tedy potřebné, aby globální identifikátory sloužili i jako tzv. lokátory v prostředí Webu, tj. aby identifikátor číselníku byl i zároveň jeho lokátorem, jehož užití vede k získání seznamu položek číselníku a též aby identifikátor položky číselníku sloužil jako její lokátor vedoucí k jejímu kódu a (strukturované) hodnotě.
+                Získaný seznam položek číselníku nebo získané údaje o dané položce musí být dostupné ve strojově čitelném a jednotném formátu.
                 Při nejednotnosti formátů by byla narušena interoperabilita zajišťovaná jednotným užitím číselníků zmiňovaná výše.
               </p>
 
@@ -248,7 +249,7 @@
 
             </section>
 
-            <section id="prehled-pozadavky">
+            <section id="požadavky-na-reprezentaci-číselníků" class="informative">
             
               <h3>Požadavky na otevřený formát a způsob zpřístupnění číselníků</h3>
               
@@ -256,12 +257,125 @@
                 Z výše uvedeného vyplývají následující požadavky na otevřený formát pro reprezentaci číselníků a na způsob jejich zpřístupnění:
               </p>
               
-              <ol>
+              <section id="požadavky-datový-formát">
+                
+                <h4>Datový formát</h4>
+                <!-- První dva body nejsou jasné. Píšeme OFN, takže to mapování musíme víc specifikovat. Mělo by to vést na JSON-LD či jinou RDF serializaci.-->                
+                <p>
+                    Otevřený formát musí být jeden nebo jich může být více, ale musí mezi nimi existovat explicitně vyjádřené jednoznačné mapování.
+                </p>
+                
+              </section>
+              
+              <section id="požadavky-jednotná-datová-struktura">
+                
+                <h4>Jednotná datová struktura</h4>
+                <!-- není jasné, co to znamená -->
+                <p>
+                    Datová struktura vyjádřená ve formátu nebo formátech musí být tedy jednotná.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-globální-identifikátory">
+                
+                <h4>Globální identifikátory</h4>
+                
+                <p>
+                    Datová struktura musí jednoznačným způsobem umožnit globálně identifikovat číselník a jeho položky pomocí identifikátorů standardizovaných v prostředí Webu.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-popis-číselníku">
+                
+                <h4>Popis číselníku</h4>
+                
+                <p>
+                    Datová struktura musí jednoznačným způsobem umožnit reprezentovat název, popis a platnost číselníku a seznam jeho položek.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-popis-položky-číselníku">
+                
+                <h4>Popis položky číselníku</h4>
+                <!-- zkrácený název a poznámka mi přijde out of scope - rozdíl mezi popisem a poznámkou je dost malý -->
+                <!-- TODO: název číselníku i položky vícejazyčně -->                
+                <p>
+                    Datová struktura musí jednoznačným způsobem umožnit reprezentovat kód, název, alternativní název, zkrácený název, definic, popis, platnost a poznámku k položce číselníku.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-reference-číselníku">
+                
+                <h4>Reference číselníku</h4>
+                
+                <p>
+                    Datová struktura musí jednoznačným způsobem umožnit vyjádřit referenci číselníku na jiný číselník z něhož je odvozen a to pomocí globálního identifikátoru.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-reference-položky-číselníku">
+                
+                <h4>Reference položky číselníku</h4>
+                
+                <p>
+                    Datová struktura musí jednoznačným způsobem umožnit vyjádřit referenci položky číselníku na ekvivalntní položku z jiného číselníku pomocí globálního identifikátoru.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-reference-zdroje-změn">
+                
+                <h4>Reference zdroje změn</h4>
+                
+                <!-- tady to není dost specifické - změnový zdroj se souborem - co to je? Api dle WebSub? XMPP? Atom? RSS? Pokud změnový soubor, potřebujeme jeho specifikaci-->
+                <p>
+                    Datová struktura musí jednoznačným způsobem umožnit vyjádřit referenci číselníku na změnový zdroj se souborem změn v číselníku pomocí globálního identifikátoru.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-identifikátory-jako-lokátory">
+                
+                <h4>Identifikátory jako lokátory</h4>
+                
+                <p>
+                    Užité globální identifikátory číselníků a jejich položek musí být též jejich lokátory. <!-- todo nějaká reference? To dost lidí nedá -->
+                </p>
+                
+              </section>
+
+              <section id="požadavky-dereference-číselníku-a-položek">
+                
+                <h4>Dereference číselníku a položek</h4>
+                
+                <p>
+                    Přístupem k lokátoru číselníku nebo položce číselníku prostřednictvím Webu <!-- a protokolu HTTPS --> musí být možné získat jejich obsah v tomto otevřeném formátu.
+                </p>
+                
+              </section>
+
+              <section id="požadavky-odkazování-na-existující-číselníky">
+                
+                <h4>Odkazování na existující číselníky</h4>
+                
+                <p>
+                    Správce číselníku aktivně hledá číselníky s ekvivalentními položkami, které při poskytování číselníku a jeho položek referencuje pomocí jejich globálních identifikátorů.
+                    Síť referencí se snaží mít co nejbohatší, ale správnou, aby vytvořil bohatý ale důvěryhodný kontext pro interpretaci poskytovaného číselníku a jeho položek.
+                </p>
+                
+              </section>
+
+              <!--<ol>
                 <li>Otevřený formát musí být jeden nebo jich může být více, ale musí mezi nimi existovat explicitně vyjádřené jednoznačné mapování.</li>
                 <li>Datová struktura vyjádřená ve formátu nebo formátech musí být tedy jednotná.</li>
                 <li>Datová struktura musí jednoznačným způsobem umožnit:
                   <ol>
-                    <li>globálně identifikovat číselník a jeho položky pomocí identifikátorů standardizovaných v prostředí sítě WWW,</li>
+                    <li>globálně identifikovat číselník a jeho položky pomocí identifikátorů standardizovaných v prostředí Webu,</li>
                     <li>reprezentovat název, popis a platnost číselníku a seznam jeho položek,</li>
                     <li>reprezentovat kód, název, alternativní název, zkrácený název, definic, popis, platnost a poznámku k položce číselníku,</li>
                     <li>vyjádřit referenci číselníku na jiný číselník z něhož je odvozen a to pomocí globálního identifikátoru,</li>
@@ -270,10 +384,13 @@
                   </ol>
                 </li>
                 <li>Užité globální identifikátory číselníků a jejich položek musí být též jejich lokátory.</li>
-                <li>Přístupem k lokátoru číselníku nebo položce číselníku prostřednictvím sítě WWW musí být možné získat jejich obsah v tomto otevřeném formátu.</li>
-                <li>Přístupem k lokátoru změnového zdroje číselníku prostřednictvím sítě WWW musí být možné získat seznam změn v číselníku a jeho položkách v tomto otevřeném formátu.</li>
-                <li>Správce číselníku aktivně hledá číselníky s ekvivalentními položkami, které při poskytování číselníku a jeho položek referencuje pomocí jejich globálních identifikátorů. Síť referencí se snaží mít co nejbohatší, ale správnou, aby vytvořil bohatý ale důvěryhodný kontext pro interpretaci poskytovaného číselníku a jeho položek.</li>
-              </ol>
+                <li>Přístupem k lokátoru číselníku nebo položce číselníku prostřednictvím Webu musí být možné získat jejich obsah v tomto otevřeném formátu.</li>
+                <li>Přístupem k lokátoru změnového zdroje číselníku prostřednictvím Webu musí být možné získat seznam změn v číselníku a jeho položkách v tomto otevřeném formátu.</li>
+                <li>
+                    Správce číselníku aktivně hledá číselníky s ekvivalentními položkami, které při poskytování číselníku a jeho položek referencuje pomocí jejich globálních identifikátorů.
+                    Síť referencí se snaží mít co nejbohatší, ale správnou, aby vytvořil bohatý ale důvěryhodný kontext pro interpretaci poskytovaného číselníku a jeho položek.
+                </li>
+              </ol>-->
 
             </section>  
             
@@ -290,101 +407,202 @@
             <figure id="model"><img alt="Diagram konceptuálního modelu číselníků" src="./schémata/konceptuální-model-číselníků.png">
                 <figcaption>
                     <a href="./schémata/konceptuální-model-číselníků.png">Diagram konceptuálního modelu číselníků.</a>
+                    <!-- změnit na svg -->
                 </figcaption>
             </figure>
               
-            <section>
-              <h3><dfn>Třída Číselník</dfn></h3>
-              <p>Číselník je seznam přípustných hodnot datového prvku kódovaný v podobě kódu a kódované strukturované hodnoty.</p>
-              <section>
-                <h4><dfn>Vlastnost Název číselníku</dfn></h4>
-                <p>Název číselníku, který je též použit pro pojmenování datové sady s číselníkem v katalogizačním záznamu v <a href="https://data.gov.cz">Národním katalogu otevřených dat</a>. Je doporučeno, aby název začínal nebo obsahoval slovo "číselník". Název je uveden v jednom nebo více jazycích.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Popis číselníku</dfn></h4>
-                <p>Popis číselníku, který blíže vysvětluje obsah či způsob užití číselníku. Popis je uveden v jednom nebo více jazycích.</p>
-              </section>
-              <section> 
-                <h5><dfn>Vlastnost Platnost číselníku</dfn></h5>
-                <p>Časový interval, ve kterém je číselník platný. Mimo daný interval platnosti číselník neexistuje a není tudíž možné jej použít.</p>
-              </section>
-              <section> 
-                <h5><dfn>Vlastnost Obsahuje položku</dfn></h5>
-                <p>Zařazuje do číselníku jeho položku.</p>
-              </section>
+            <section id="sekce-třída-číselník">
+                
+                <h3>Třída <code><dfn id="třída-číselník">Číselník</dfn></code></h3>
+                
+                <p>
+                    Číselník je seznam přípustných hodnot datového prvku kódovaný v podobě kódu a kódované strukturované hodnoty.
+                </p>
+                
+                <section id="sekce-číselník-název">
+                    
+                    <h4>Vlastnost <code><dfn id="číselník-název">Název číselníku</dfn></code></h4>
+                    
+                    <p>
+                        Název číselníku, který je též použit pro pojmenování datové sady s číselníkem v katalogizačním záznamu v <a href="https://data.gov.cz">Národním katalogu otevřených dat</a>.
+                        Je doporučeno, aby název začínal nebo obsahoval slovo "číselník". Název je uveden v jednom nebo více jazycích.
+                        <!-- Proč doporučujeme číselník v názvu? Raději bych doporučil keyword. U datasetu taky říkáme, ať tam nepíšou Seznam -->
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-číselník-popis">
+                    
+                    <h4>Vlastnost <code><dfn id="číselník-popis">Popis číselníku</dfn></code></h4>
+                    
+                    <p>
+                        Popis číselníku, který blíže vysvětluje obsah či způsob užití číselníku. Popis je uveden v jednom nebo více jazycích.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-číselník-platnost"> 
+                    
+                    <h4>Vlastnost <code><dfn id="číselník-platnost">Platnost číselníku</dfn></code></h4>
+                    
+                    <p>
+                        Časový interval, ve kterém je číselník platný.
+                        Mimo daný interval platnosti číselník neexistuje a není tudíž možné jej použít.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-číselník-obsahuje-položku"> 
+                <!-- v souladu se SKOSem bych to viděl jako vlastnost Položky -->
+                    
+                    <h4>Vlastnost <code><dfn id="číselník-obsahuje-položku">Obsahuje položku</dfn></code></h4>
+                    
+                    <p>
+                        Zařazuje do číselníku jeho položku.
+                    </p>
+                
+                </section>
+            
             </section>
 
-            <section>
-              <h3><dfn>Třída Položka</dfn></h4>
-              <p>Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.</p>
-              <section>
-                <h4><dfn>Vlastnost Kód položky</dfn></h4>
-                <p>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Název položky</dfn></h4>
-                <p>Název (hodnota) položky číselníku v jednom nebo více jazycích.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Alternativní název položky</dfn></h4>
-                <p>Alternativní název (hodnota) položky číselníku v jednom nebo více jazycích.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Zkrácený název položky</dfn></h4>
-                <p>Zkrácený název (hodnota) položky číselníku v jednom nebo více jazycích. V podstatě se též jedná o alternativní název položky číselníku.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Definice položky</dfn></h4>
-                <p>Textová definice položky číselníku v jednom nebo více jazycích.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Popis položky</dfn></h4>
-                <p>Popis položky číselníku, který blíže vysvětluje položku číselníku. Popis je uveden v jednom nebo více jazycích. Oproti definici je méně formální a více vysvětlující.</p>
-              </section>                
-              <section> 
-                <h4><dfn>Vlastnost Platnost položky</dfn></h4>
-                <p>Časový interval, ve kterém je položka číselníku platná. Mimo daný interval platnosti položka neexistuje a není tudíž možné ji referencovat ani jinak použít.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Ekvivalentní položka</dfn></h4>
-                <p>Identifikace ekvivalentní položky z jiného (externího) číselníku v podobě jejího jednoznačného IRI.</p>
-              </section>
-              <section>
-                <h4><dfn>Vlastnost Poznámka k položce</dfn></h4>
-                <p>Obecná poznámka k položce číselníku v jednom nebo více jazycích. Pro poznámky se specifičtějším významem lze použít odvozené dokumentační vlastnosti dle slovníku [[!skos-primer]] (např. poznámka k poslední změně týkající se položky číselníku nebo poznámka k předpokládanému způsobu užití položky číselníku).</p>
-              </section>  
+            <section id="sekce-třída-položka">
+            
+                <h3>Třída <code><dfn id="třída-položka">Položka</dfn></code></h3>
+                
+                <p>
+                    Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
+                </p>
+                
+                <section id="sekce-položka-kód">
+                
+                    <h4>Vlastnost <code><dfn id="položka-kód">Kód položky</dfn></code></h4>
+                    
+                    <p>
+                        Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-název">
+                
+                    <h4>Vlastnost <code><dfn id="položka-název">Název položky</dfn></code></h4>
+                    
+                    <p>
+                        Název (hodnota) položky číselníku v jednom nebo více jazycích.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-alternativní-název">
+                
+                    <h4>Vlastnost <code><dfn id="položka-alternativní-název">Alternativní název položky</dfn></code></h4>
+                    
+                    <p>
+                        Alternativní název (hodnota) položky číselníku v jednom nebo více jazycích.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-zkrácený-název">
+                
+                    <h4>Vlastnost <code><dfn id="položka-zkrácený-název">Zkrácený název položky</dfn></code></h4>
+                    
+                    <p>
+                        Zkrácený název (hodnota) položky číselníku v jednom nebo více jazycích.
+                        V podstatě se též jedná o alternativní název položky číselníku.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-definice">
+                
+                    <h4>Vlastnost <code><dfn id="položka-definice">Definice položky</dfn></code></h4>
+                    
+                    <p>
+                        Textová definice položky číselníku v jednom nebo více jazycích.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-popis">
+                
+                    <h4>Vlastnost <code><dfn id="položka-popis">Popis položky</dfn></code></h4>
+                    
+                    <p>
+                        Popis položky číselníku, který blíže vysvětluje položku číselníku.
+                        Popis je uveden v jednom nebo více jazycích. Oproti definici je méně formální a více vysvětlující.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-platnost">
+                
+                    <h4>Vlastnost <code><dfn id="položka-platnost">Platnost položky</dfn></code></h4>
+                    
+                    <p>
+                        Časový interval, ve kterém je položka číselníku platná.
+                        Mimo daný interval platnosti položka neexistuje a není tudíž možné ji referencovat ani jinak použít.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-ekvivalence">
+                
+                    <h4>Vlastnost <code><dfn id="položka-ekvivalence">Ekvivalentní položka</dfn></code></h4>
+                    
+                    <p>
+                        Identifikace ekvivalentní položky z jiného (externího) číselníku v podobě jejího jednoznačného IRI.
+                    </p>
+                    
+                </section>
+                
+                <section id="sekce-položka-poznámka">
+                
+                    <h4>Vlastnost <code><dfn id="položka-poznámka">Poznámka k položce</dfn></code></h4>
+                    
+                    <p>
+                        Obecná poznámka k položce číselníku v jednom nebo více jazycích.
+                        Pro poznámky se specifičtějším významem lze použít odvozené dokumentační vlastnosti dle slovníku [[!skos-primer]] (např. poznámka k poslední změně týkající se položky číselníku nebo poznámka k předpokládanému způsobu užití položky číselníku).
+                    </p>
+                    
+                </section>  
+                
             </section>
+            
         </section>            
 
-        <section id="rdf">
-          <h2>Reprezentace v podobě propojených dat</h2>
+        <section id="číselník-v-podobě-propojených-dat">
+		
+          <h2>Číselník v podobě propojených dat</h2>
           
           <p>
             Reprezentace číselníku v podobě propojených dat naplňuje všechny <a href="#prehled-pozadavky">požadavky</a> na reprezentaci číselníků.
             Jde tedy o primární způsob reprezentace a zpřístupnění číselníků v podobě otevřených dat.
-            Požadavky 1, 2 a 3 jsou naplněny užitím RDF slovníku <a href="#rdf-skos">SKOS</a> [[skos-primer]] doplněného slovníkem Dublin Core [[DC-TERMS]] a slovníkem OWL [[owl-guide]].
+            Požadavky 1, 2 a 3 jsou naplněny užitím RDF [[rdf11-concepts]] slovníku <a href="#rdf-skos">SKOS</a> [[skos-primer]] doplněného slovníkem Dublin Core [[DC-TERMS]] a slovníkem OWL [[owl-guide]].
             Požadavky 3 a 4 jsou naplněny <a href="#rdf-iri">využitím IRI jako globálních identifikátorů a lokátorů</a>.
             Požadavky 5 a 6 jsou naplněny správným <a href="#rdf-zpřístupnění">vystavením číselníků a jejich změn v propojené podobě</a>.
             Požadavek 7 je naplněn správným <a href="#rdf-propojování">propojováním číselníků</a>.
           </p>
           
           <p>
-            Při reprezentaci číselníků v podobě propojených dat je nutno dodržet otevřenou formální normu <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/">Propojená data</a>.
+            Při reprezentaci číselníků v podobě propojených dat je nutno dodržet otevřenou formální normu <a href="../../propojená-data/">Propojená data</a>.
           </p>
 
           <section id="rdf-iri">
+		  
             <h3>Využití IRI jako globálních identifikátorů a lokátorů</h3>
             
             <p>
-              Každý číselník a každá položka číselníku je identifikována svým unikátním <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">IRI</a> v HTTPS schématu.
-              Stejně tak je i zdroj se změnami v číselníku identifikován svým unikátním <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">IRI</a> v HTTPS schématu.
-              Konkrétní <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#url">IRI</a> jsou tvořena dle <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/#pravidla-pro-tvorbu-IRI">pravidel pro tvorbu IRI</a>.
-              Tato otevřená formální norma <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/#pravidla-pro-tvorbu-IRI">pravidla pro tvorbu IRI</a> více nespecifikuje.
+              Každý číselník a každá položka číselníku je identifikována svým unikátním <a href="../../základní-datové-typy/#url">IRI</a> v HTTPS schématu.
+              Stejně tak je i zdroj se změnami v číselníku identifikován svým unikátním <a href="../../základní-datové-typy/#url">IRI</a> v HTTPS schématu.
+              Konkrétní <a href="../../základní-datové-typy/#url">IRI</a> jsou tvořena dle <a href="../../propojená-data/#pravidla-pro-tvorbu-IRI">pravidel pro tvorbu IRI</a>.
+              Tato otevřená formální norma <a href="../../propojená-data/#pravidla-pro-tvorbu-IRI">pravidla pro tvorbu IRI</a> více nespecifikuje.
             </p>
                         
           </section>
 
           <section id="rdf-skos">
+		  
             <h3>Specifikace využití slovníku SKOS pro reprezentaci číselníků</h3>
            
             <p>
@@ -394,25 +612,25 @@
             </p>
             
             <ul>
-              <li><a>Třída Číselník</a> odpovídá SKOS třídě <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">ConceptScheme</a>
+              <li>Třída <a>Číselník</a> odpovídá SKOS třídě <a href="http://www.w3.org/2004/02/skos/core#ConceptScheme">ConceptScheme</a>
                 <ul>
-                   <li><a>Vlastnost Název číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/title">title</a> ze slovníku Dublin Core</li>
-                   <li><a>Vlastnost Popis číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/description">description</a> ze slovníku Dublin Core</li>
-                   <li><a>Vlastnost Platnost číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
-                   <li><a>Vlastnost Obsahuje položku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#inScheme">inScheme</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Název číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/title">title</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Popis číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/description">description</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Platnost číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Obsahuje položku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#inScheme">inScheme</a> ze slovníku SKOS</li>
                 </ul>
              </li>
-             <li><a>Třída položka</a> odpovídá SKOS třídě <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept</a>
+             <li>Třída <a>položka</a> odpovídá SKOS třídě <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept</a>
                 <ul>
-                   <li><a>Vlastnost Kód položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#notation">notation</a> ze slovníku SKOS</li>
-                   <li><a>Vlastnost Název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#prefLabel">prefLabel</a> ze slovníku SKOS</li>
-                   <li><a>Vlastnost Alternativní název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#altLabel">altLabel</a> ze slovníku SKOS</li>
-                   <li><a>Vlastnost Zkrácený název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#altLabel">altLabel</a> ze slovníku SKOS</li>
-                   <li><a>Vlastnost Definice položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#definition">definition</a> ze slovníku SKOS</li>
-                   <li><a>Vlastnost Popis položky</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/description">description</a> ze slovníku Dublin Core</li>
-                   <li><a>Vlastnost Platnost položky</a> odpovídá vlastnosti odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
-                   <li><a>Vlastnost Ekvivalentní položka</a> odpovídá vlastnosti <a href="http://www.w3.org/2002/07/owl#sameAs">sameAs</a> ze slovníku OWL</li>
-                   <li><a>Vlastnost Poznámka k položce</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#note">note</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Kód položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#notation">notation</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#prefLabel">prefLabel</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Alternativní název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#altLabel">altLabel</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Zkrácený název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#altLabel">altLabel</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Definice položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#definition">definition</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Popis položky</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/description">description</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Platnost položky</a> odpovídá vlastnosti odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Ekvivalentní položka</a> odpovídá vlastnosti <a href="http://www.w3.org/2002/07/owl#sameAs">sameAs</a> ze slovníku OWL</li>
+                   <li>Vlastnost <a>Poznámka k položce</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#note">note</a> ze slovníku SKOS</li>
                 </ul>
              </li>
           </ul>
@@ -440,33 +658,35 @@
             
             <section id="json-xml-csv-přehled">
               <h3>Přehled struktury</h3>
+			  
+			  <!-- tady to bude muset být pro každý formát zvlášť, nebo minimálně CSV a XML+JSON-->
               
               <p>Datová sada je tvořena prvkem odpovídajícím typu <a>číselník</a>. Prvky jsou uvedeny v poli <code>položky</code>.
               
               <ul>
                   <li><a>číselník</a> sestává z následujících vlastností:
                     <ul>
-                       <li><code><a>id</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a></li>
-                       <li><code><a>type</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a> s fixní hodnotou <code>číselník</code></li>
-                       <li><code><a>název-číselníku</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>popis-číselníku</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>platnost-číselníku</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#časový-interval">Časový interval</a></li>
+                       <li><code>id</code> : <a href="../../základní-datové-typy/draft/#url">IRI</a></li>
+                       <li><code>type</code> : <a href="../../základní-datové-typy/#řetězec">Řetězec</a> s fixní hodnotou <code>číselník</code></li>
+                       <li><code><a>název-číselníku</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>popis-číselníku</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>platnost-číselníku</a></code> : <a href="../../základní-datové-typy/#časový-interval">Časový interval</a></li>
                        <li><code><a>položky</a></code> : Seznam prvků typu <a>položka</a></li>
                     </ul>
                  </li>
                  <li><a>položka</a> sestává z následujících vlastností:
                     <ul>
-                       <li><code><a>id</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a></li>
-                       <li><code><a>type</a></code> : Seznam prvků typu <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a> s hodnotou <code>číselník</code> jako jedním z prvků v seznamu</li>
-                       <li><code><a>kód</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a> identifikující položku v rámci číselíku</li>
-                       <li><code><a>název</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>alt-název</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>zkr-název</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>definice</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>popis</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
-                       <li><code><a>platnost</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#časový-interval">Časový interval</a></li>
-                       <li><code><a>ekvivalent</a></code> : <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a></li>
-                       <li><code><a>poznámka</a></code> : Vícejazyčný <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code>id</code> : <a href="../../základní-datové-typy/draft/#url">IRI</a></li>
+                       <li><code>type</code> : Seznam prvků typu <a href="../../základní-datové-typy/#řetězec">Řetězec</a> s hodnotou <code>číselník</code> jako jedním z prvků v seznamu</li>
+                       <li><code><a>kód</a></code> : <a href="../../základní-datové-typy/#řetězec">Řetězec</a> identifikující položku v rámci číselíku</li>
+                       <li><code><a>název</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>alt-název</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>zkr-název</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>definice</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>popis</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
+                       <li><code><a>platnost</a></code> : <a href="../../základní-datové-typy/#časový-interval">Časový interval</a></li>
+                       <li><code><a>ekvivalent</a></code> : <a href="../../základní-datové-typy/draft/#url">IRI</a></li>
+                       <li><code><a>poznámka</a></code> : Vícejazyčný <a href="../../základní-datové-typy/#řetězec">řetězec</a></li>
                     </ul>
                  </li>
               </ul>
@@ -478,7 +698,7 @@
               V této části jsou specifikovány jednotlivé prvky JSON, XML a CSV struktury.
               
               <section>
-                <h4>Typ <code><dfn>číselník</dfn></code></h4>
+                <h4>Typ <code>číselník</code></h4>
                 <dl>
                    <dt>Význam</dt>
                    <dd><a>Třída Číselník</a></dd>
@@ -487,7 +707,7 @@
                   <h5>Vlastnost <code><dfn>název-číselníku</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Význam</dt>
                      <dd><a>Vlastnost Název číselníku</a></dd>
                      <dt>Příklad</dt>
@@ -506,7 +726,7 @@
                   <h5>Vlastnost <code><dfn>popis-číselníku</dfn></code></h5>
                   <dl>
                     <dt>Typ</dt>
-                    <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                    <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                     <dt>Význam</dt>
                     <dd><a>Vlastnost Popis číselníku</a></dd>
                     <dt>Příklad</dt>
@@ -523,7 +743,7 @@
                   <h5>Vlastnost <code><dfn>platnost-číselníku</dfn></code></h5>
                   <dl>
                     <dt>Typ</dt>
-                    <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#časový-interval">Časový interval</a></li></dd>
+                    <dd><a href="../../základní-datové-typy/#časový-interval">Časový interval</a></li></dd>
                     <dt>Význam</dt>
                     <dd><a>Vlastnost Platnost číselníku</a></dd>
                     <dt>Příklad</dt>
@@ -560,7 +780,7 @@
               </section>
 
               <section>
-                <h4>Třída <dfn>Položka</dfn></h4>
+                <h4>Třída <code>Položka</code></h4>
                 <dl>
                    <dt>Popis</dt>
                    <dd>Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.</dd>
@@ -569,7 +789,7 @@
                   <h5>Vlastnost <code><dfn>kód</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Kód položky číselníku</dd>
                      <dt>Popis</dt>
@@ -582,7 +802,7 @@
                   <h5>Vlastnost <code><dfn>název</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Název položky číselníku</dd>
                      <dt>Popis</dt>
@@ -598,7 +818,7 @@
                   <h5>Vlastnost <code><dfn>alt-název</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Alternativní název položky číselníku</dd>
                      <dt>Popis</dt>
@@ -614,7 +834,7 @@
                   <h5>Vlastnost <code><dfn>zkr-název</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Zkrácený název položky číselníku</dd>
                      <dt>Popis</dt>
@@ -630,7 +850,7 @@
                   <h5>Vlastnost <code><dfn>definice</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Definice položky číselníku</dd>
                      <dt>Popis</dt>
@@ -645,7 +865,7 @@
                   <h5>Vlastnost <code><dfn>popis</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Popis položky číselníku</dd>
                      <dt>Popis</dt>
@@ -660,7 +880,7 @@
                     <h5>Vlastnost <code><dfn>platnost</dfn></code></h5>
                     <dl>
                        <dt>Typ</dt>
-                       <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#časový-interval">Časový interval</a></li></dd>
+                       <dd><a href="../../základní-datové-typy/#časový-interval">Časový interval</a></li></dd>
                        <dt>Jméno</dt>
                        <dd>Platnost číselníku</dd>
                        <dt>Popis</dt>
@@ -676,7 +896,7 @@
                   <h5>Vlastnost <code><dfn>ekvivalent</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Ekvivalentní položka</dd>
                      <dt>Popis</dt>
@@ -689,7 +909,7 @@
                   <h5>Vlastnost <code><dfn>poznámka</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Poznámka</dd>
                      <dt>Popis</dt>
@@ -709,11 +929,11 @@
                   <h5>Vlastnost <code><dfn>id</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a></dd>
+                     <dd><a href="../../základní-datové-typy/draft/#url">IRI</a></dd>
                      <dt>Jméno</dt>
                      <dd>Globální identifikátor entity</dd>
                      <dt>Popis</dt>
-                     <dd>Vlastnost přiřazuje prvku identifikátor entity, kterou JSON prvek reprezentuje. Identifikátor entity je uveden v podobě relativního nebo absolutního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a>. V případě relativního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a> je pro získání absolutního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#urlI">IRI</a> nutno interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí příslušného JSON-LD <a href="číselník.context.jsonld">kontextu</a> (<code>@context</code>). Dereferencováním získaného absolutního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a> lze získat úplnou podobu identifikované entity dostupnou v daném zdroji.</dd>
+                     <dd>Vlastnost přiřazuje prvku identifikátor entity, kterou JSON prvek reprezentuje. Identifikátor entity je uveden v podobě relativního nebo absolutního <a href="../../základní-datové-typy/draft/#url">IRI</a>. V případě relativního <a href="../../základní-datové-typy/draft/#url">IRI</a> je pro získání absolutního <a href="../../základní-datové-typy/draft/#urlI">IRI</a> nutno interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí příslušného JSON-LD <a href="číselník.context.jsonld">kontextu</a> (<code>@context</code>). Dereferencováním získaného absolutního <a href="../../základní-datové-typy/draft/#url">IRI</a> lze získat úplnou podobu identifikované entity dostupnou v daném zdroji.</dd>
                      <dt>Příklad</dt>
                      <dd><code>https://data.czso.cz/zdroj/číselník/CMF</code></dd>
                   </dl>
@@ -722,11 +942,11 @@
                   <h5>Vlastnost <code><dfn>type</dfn></code></h5>
                   <dl>
                      <dt>Typ</dt>
-                     <dd><a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a> nebo seznam položek typu <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/#řetězec">Řetězec</a></dd>
+                     <dd><a href="../../základní-datové-typy/#řetězec">Řetězec</a> nebo seznam položek typu <a href="../../základní-datové-typy/#řetězec">Řetězec</a></dd>
                      <dt>Jméno</dt>
                      <dd>Typ</dd>
                      <dt>Popis</dt>
-                     <dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci datové sady. Sémantický typ je identifikován v podobě relativního nebo absolutního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a>. V případě relativního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a> je pro získání absolutního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#urlI">IRI</a> nutno interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí příslušného JSON-LD <a href="číselník.context.jsonld">kontextu</a> (<code>@context</code>). Dereferencováním získaného absolutního <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#url">IRI</a> lze získat úplnou definici významu.</dd>
+                     <dd>Vlastnost je použita pro označení sémantického typu daného prvku v JSON reprezentaci datové sady. Sémantický typ je identifikován v podobě relativního nebo absolutního <a href="../../základní-datové-typy/draft/#url">IRI</a>. V případě relativního <a href="../../základní-datové-typy/draft/#url">IRI</a> je pro získání absolutního <a href="../../základní-datové-typy/draft/#urlI">IRI</a> nutno interpretovat JSON reprezentaci jako JSON-LD reprezentaci s pomocí příslušného JSON-LD <a href="číselník.context.jsonld">kontextu</a> (<code>@context</code>). Dereferencováním získaného absolutního <a href="../../základní-datové-typy/draft/#url">IRI</a> lze získat úplnou definici významu.</dd>
                   </dl>
                 </section>
                       -->
@@ -775,10 +995,10 @@
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;adresa
-    xmlns="https://data.gov.cz/otevřené-formální-normy/adresy/"
+    xmlns="../../adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://data.gov.cz/otevřené-formální-normy/adresy/ 
-                        https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.xsd"&gt;
+    xsi:schemaLocation="../../adresy/ 
+                        ../../adresy/draft/schémata/adresa.xsd"&gt;
     &lt;iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/iri_adresního_místa&gt;
 &lt;/adresa&gt;</pre>
                 </aside>
@@ -862,10 +1082,10 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;adresa
-    xmlns="https://data.gov.cz/otevřené-formální-normy/adresy/"
+    xmlns="../../adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://data.gov.cz/otevřené-formální-normy/adresy/ 
-                        https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.xsd"
+    xsi:schemaLocation="../../adresy/ 
+                        ../../adresy/draft/schémata/adresa.xsd"
     xmlns:x="https://příklad.cz"&gt;
     &lt;číslo_domovní&gt;12&lt;/číslo_domovní&gt;
     &lt;název_obce&gt;Horní Datová&lt;/název_obce&gt;
@@ -971,10 +1191,10 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;adresa
-    xmlns="https://data.gov.cz/otevřené-formální-normy/adresy/"
+    xmlns="../../adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://data.gov.cz/otevřené-formální-normy/adresy/ 
-                        https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.xsd"&gt;
+    xsi:schemaLocation="../../adresy/ 
+                        ../../adresy/draft/schémata/adresa.xsd"&gt;
     &lt;budova&gt;HD Gate&lt;/budova&gt;
     &lt;iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/iri_adresního_místa&gt;
     &lt;místnost&gt;Místnost 4001&lt;/místnost&gt;
