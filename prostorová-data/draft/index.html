@@ -71,8 +71,8 @@
             <h2>Úvod</h2>
             <p>
                 Tento dokument je otevřenou formální normou pro prostorová data, kde je oproti ostatním typům dat potřeba počítat s prostorovou složkou.
-                Prostorová data zahrnují všechny typy dat, která jsou prostorově určena.
-                Jsou zpravidla určena geometrickým objektem.
+                Prostorová data zahrnují všechny typy dat, které jsou prostorově určeny, tedy že přímo nebo nepřímo odkazují na určitou polohu nebo zeměpisnou oblast.
+                Zpravidla jsou určena geometrickým objektem a prostorovými vztahy s okolím (topologií).
                 Obecně lze prostorová data rozdělit na vektorová a rastrová.
                 Standardizace otevřených prostorových dat je zaštítěna pracovní skupinou <a href="https://committee.iso.org/home/tc211">ISO/TC 211</a> a mezinárodní standardizační organizací <a href="https://www.opengeospatial.org/">Open Geospatial Consortium (<abbr title="Open Geospatial Consortium">OGC</abbr>)</a>.
                 Správa prostorových dat, včetně jejich publikace, popisu metadaty atd. je u větších organizací zajištěna vybudováním komplexní infrastruktury prostorových dat (<dfn>Spatial Data Infrastructure - <abbr title="Spatial Data Infrastructure">SDI</abbr></dfn>).
@@ -266,9 +266,9 @@
                     Systém jednotné trigonometrické sítě katastrální (<abbr title="Systém jednotné trigonometrické sítě katastrální">S-JTSK</abbr>) - používaný např. v katastru nemovitostí. Pro využití v GIS je využíváno EPSG kódu <code>5514</code>, který otáčí osy systému a souřadnice nabývají negativních hodnot (jsou uvozeny znaménkem minus). Souřadnice jsou uváděny v metrech na osách X a Y jako vzdálenost od počátku systému, kterým je vrchol kuželu.
                 </p>
                 <aside class="example" title="WKT">
-                    <pre>POINT(-904325.25 -1076279.09)</pre>
-                </aside>
-                <p>Příklad zobrazení dat v souřadnicovém referenčním systému S-JTSK v GML je vidět v příkladu zápisu polygonu.</p>
+					<pre>POINT(-904325.25 -1076279.09)</pre>
+				</aside>
+				<p>Příklad zobrazení dat v souřadnicovém referenčním systému S-JTSK v GML je vidět v příkladu zápisu lomené čáry.</p>
 
             </section>
 
@@ -723,7 +723,7 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
             </p>
 
             <p>
-                V případě tvorby metadat dle norem ISO 19115 a 19119 je vhodné použít <a href="https://geoportal.gov.cz/c/document_library/get_file?uuid=0633cc8c-83c0-47b2-893f-e4848c4d1d34&groupId=10138">český metadatový profil</a>, který mimo jiné definuje položku o otevřenosti dat.
+                V případě tvorby metadat dle norem ISO 19115 a 19119 je vhodné použít <a href="https://geoportal.gov.cz/c/document_library/get_file?uuid=0633cc8c-83c0-47b2-893f-e4848c4d1d34&groupId=10138">Metadatový profil ČR</a>, který mimo jiné definuje položku o otevřenosti dat.
             </p>
         </section>
 
@@ -734,53 +734,54 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
                 V roce 2007 vešla v platnost směrnice 2007/2/ES <a href="https://inspire.ec.europa.eu/">INSPIRE</a> (Infrastructure for Spatial Information in Europe), která si klade za cíl standardizovat publikaci prostorových dat v Evropě.
                 Data rozděluje do 34 témat na základě obsahu a definuje strukturu, v jaké by data měla být poskytována.
                 Směrnice dále vyžaduje užívání standardů, které v tomto textu již byly několikrát zmíněny, jako je využití formátu GML, publikace dat prostřednictvím webových služeb OGC WFS, OGC WCS nebo pomocí ATOM, opatření dat i služeb metadaty podle standardů ISO 19115 a 19119 a jejich správu použitím služby OGC CSW.
-                Směrnice je v České republice implementována novelou zákona 123/1998 sb., o právu na informace o životním prostředí, a vyhláškou 103/2010 sb.
+                Směrnice je v České republice implementována novelou zákona <a href=""https://www.zakonyprolidi.cz/cs/1998-123>123/1998 sb.</a>, o právu na informace o životním prostředí, a vyhláškou <a href="https://www.zakonyprolidi.cz/cs/2010-103">103/2010 sb</a>.
                 V případě publikace dat orgánem veřejné správy je vhodné pokusit se publikovat data v souladu se směrnicí INSPIRE a to i v případě, že se nejedná o povinného poskytovatele ve smyslu implementace této směrnice (zákonem 123/1998 sb.).
             </p>
 
         </section>
 
 
-        <section id="software" class="informative">
-            <h2>Software</h2>
+		<section id="software" class="informative">
+			<h2>Software</h2>
 
-            <p>
-                Datové formáty, které jsou podporovány sdružením OGC, by měly být podporovány prostřednictvím <a href="https://www.gdal.org/">knihovny GDAL</a>.
-                Tu implementuje většina software určených pro správu prostorových dat.
-                Mezi nejvýznamější open-source projekty, které bez problému umožňují načítání dat ve formátech GML, GeoJSON, GeoPackage, CSV nebo Shapefile, ale které umí i stahovat nebo zobrazovat data prostřednictvím služeb WFS, WCS, WMS nebo WMTS patří <a href="#software-qgis">QGIS</a> nebo <a href="#software-grass">Grass GIS</a>.
-                Lze také použít <a href="https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software">Seznam dalších open source GIS software na Wikipedii</a>.
-                Nejpoužívanějším GIS software v České republice však zůstává komerční <a href="#software-arcgis">ArcGIS</a>, přestože řadu standardů nepodporuje nebo podporuje velmi omezeně.
-                Prohlédněte si <a href="https://gisgeography.com/qgis-arcgis-differences/">základní srovnání ArcGIS a QGIS</a>.
-            </p>
+			<p>
 
-            <section id="software-qgis">
-                <h3>QGIS</h3>
-                <p>
-                    Open source projekt <a href="https://www.qgis.org/">QGIS</a>, dříve Quantum GIS je jedním z nejstabilnějších a nejrychleji se rozvíjejících GIS projektů.
-                    V aktuální verzi podporuje GML, GeoJSON, GeoPackage, Shapefile, standardy WFS 2.0, WCS, WMS i WMTS.
-                    Software využívá knihovnu GDAL, některé její části byly implementovány přednostně, na jiné se ještě čeká.
-                    Zpracování komplexních typů v GML nebo zpracování dotazu GetFeatureInfo za použití importů schémat zůstávají problematické.
-                </p>
-            </section>
+				Datové formáty, které jsou podporovány sdružením OGC, by měly být podporovány prostřednictvím <a href="https://www.gdal.org/">knihovny GDAL</a>.
+				Tu implementuje většina software určených pro správu prostorových dat.
+				Mezi nejvýznamější open-source projekty, které bez problému umožňují načítání dat ve formátech GML, GeoJSON, GeoPackage, CSV nebo Shapefile, ale které umí i stahovat nebo zobrazovat data prostřednictvím služeb WFS, WCS, WMS nebo WMTS patří <a href="#software-qgis">QGIS</a> nebo <a href="#software-grass">Grass GIS</a>.
+				Seznam dalších open source GIS software je na wikipedii <a href="https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software">https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software</a>.
+				Nejpoužívanějším GIS software v České republice však zůstává komerční <a href="#software-arcgis">ArcGIS</a>, přestože řadu standardů nepodporuje nebo podporuje velmi omezeně.
+				Základní srovnání ArcGIS a QGIS je na webu <a href="https://gisgeography.com/qgis-arcgis-differences/">https://gisgeography.com/qgis-arcgis-differences/</a>.
+			</p>
 
-            <section id="software-grass">
-                <h3>Grass GIS</h3>
-                <p>
-                    <a href="https://grass.osgeo.org/">Grass GIS</a> patří mezi nejstarší a nejsilnější nástroje pro správu a analýzu prostorových informací, zároveň je však poměrně náročný na ovládání a nezkušení uživatelé mohou být ze začátku poměrně zmatení. Jeho prostorové analýzy jsou využívány i v jiných projektech.
-                    Software využívá knihovnu GDAL a podporuje všechny otevřené standardy, které jsou uvedeny v tomto standardu.
-                </p>
-            </section>
+			<section id="software-qgis">
+				<h3>QGIS</h3>
+				<p>
+					Open source projekt <a href="https://www.qgis.org/">QGIS</a>, dříve Quantum GIS je jedním z nejstabilnějších a nejrychleji se rozvíjejících GIS projektů.
+					V aktuální verzi 3.x podporuje GML, GeoJSON, GeoPackage, Shapefile, standardy WFS 2.0, WCS, WMS i WMTS.
+					Software využívá knihovnu GDAL, některé její části byly implementovány přednostně, na jiné se ještě čeká.
+					Zpracování komplexních typů v GML nebo zpracování dotazu GetFeatureInfo za použití importů schémat zůstávají problematické.
+				</p>
+			</section>
 
-            <section id="software-arcgis">
-                <h3>ArcGIS</h3>
-                <p>
-                    Americká firma ESRI patří posledních 20 let mezi lídry vývoje v GIS.
-                    Vyvíjejí standardy, které jsou široce používané, k otevřenosti však mají daleko.
-                    Formát Shapefile byl opatřen otevřenou dokumentací, ale například ESRI GeoDatabase zůstává proprietární.
-                    Software ArcGIS dlouhou dobu ignoroval vývoj evropských infrastruktur pro prostorová data využívajících otevřených standardů a implementace standardů jako je GML nebo WFS ve evrzi 2.0 nebyla řešena buď vůbec, nebo nedostatečně.
-                </p>
-            </section>
+			<section id="software-grass">
+				<h3>Grass GIS</h3>
+				<p>
+					<a href="https://grass.osgeo.org/">Grass GIS</a> patří mezi nejstarší a nejsilnější nástroje pro správu a analýzu prostorových informací, zároveň je však poměrně náročný na ovládání a nezkušení uživatelé mohou být ze začátku poměrně zmatení. Jeho prostorové analýzy jsou využívány i v jiných projektech.
+					Software využívá knihovnu GDAL a podporuje všechny otevřené standardy, které jsou uvedeny v tomto standardu.
+				</p>
+			</section>
 
-        </section>
+			<section id="software-arcgis">
+				<h3>ArcGIS</h3>
+				<p>
+					Americká firma ESRI patří posledních 20 let mezi lídry vývoje v GIS.
+					Vyvíjejí standardy, které jsou široce používané, k otevřenosti však mají daleko.
+					Formát Shapefile byl opatřen otevřenou dokumentací, ale například ESRI GeoDatabase zůstává proprietární.
+					Software ArcGIS dlouhou dobu ignoroval vývoj evropských infrastruktur pro prostorová data využívajících otevřených standardů a implementace standardů jako je GML nebo WFS ve verzi 2.0 nebyla řešena buď vůbec, nebo nedostatečně.
+				</p>
+			</section>
+
+		</section>
     </body>
 </html>
