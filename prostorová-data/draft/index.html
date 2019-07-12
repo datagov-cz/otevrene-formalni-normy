@@ -109,7 +109,7 @@
                         Je vhodný především k zápisu 2D geometrií, jako je point, multipoint, line, polyline, polygon a pod.
                         Ve WKT je také možné definovat souřadnicové systémy a transformovat souřadnice.
                         Reprezentace souřadnic ve WKT je nicméně bez definovaného souřadnicového systému.
-                        Většina knihoven očekává data v souřadnicovém systému WGS 84, nicméně souřadnice můžou být v libovolném souřadnicovém referenčním systému.
+                        Většina knihoven pro zpracování WKT očekává data v souřadnicovém referenčním systému WGS 84, nicméně souřadnice můžou být v libovolném souřadnicovém referenčním systému.
                         Použitý souřadnicový referenční systém by měl být uveden v datech.
                         V <a href="#geosparql">GeoSPARQL</a> je souřadnicový referenční systém pro WKT uveden před objektem, je možné ho tam uvádět i ve vektorových formátech.
 
@@ -257,18 +257,22 @@
                 Pro definici souřadnicových referenčních systémů je používán registr EPSG (European Petroleum Survey Group), podporovaný všemi programy pro práci s prostorovými daty (<abbr title="Geographic Information System">GIS</abbr>).
                 Registr obsahuje celou řadu souřadnicových referenčních systémů, které opatřuje kódem.
                 V České republice jsou nejčastěji využívány souřadnicové referenční systémy uvedené níže.
+                Souřadnicové referenční systémy rozlišují geografické a projektované (využívající projekci geografického souřadnicového referenčního systému).
             </p>
 
             <section id="souřadnicové-referenční-systémy-s-jtsk">
                 <h3>Systém jednotné trigonometrické sítě katastrální (S-JTSK)</h3>
 
                 <p>
-                    Systém jednotné trigonometrické sítě katastrální (<abbr title="Systém jednotné trigonometrické sítě katastrální">S-JTSK</abbr>) - používaný např. v katastru nemovitostí. Pro využití v GIS je využíváno EPSG kódu <code>5514</code>, který otáčí osy systému a souřadnice nabývají negativních hodnot (jsou uvozeny znaménkem minus). Souřadnice jsou uváděny v metrech na osách X a Y jako vzdálenost od počátku systému, kterým je vrchol kuželu.
+                    Systém jednotné trigonometrické sítě katastrální (<abbr title="Systém jednotné trigonometrické sítě katastrální">S-JTSK</abbr>) - používaný např. v katastru nemovitostí.
+                    Pro využití v GIS je využíváno EPSG kódu <code>5514</code>, který otáčí osy systému a souřadnice nabývají negativních hodnot (jsou uvozeny znaménkem minus).
+                    Kód 5514 představuje projektovaný systém S-JTSK / Krovak East North, tedy Křovákovo zobrazení geografického souřadnicového systému S-JTSK.
+                    Souřadnice jsou uváděny v metrech na osách X a Y jako vzdálenost od počátku systému, kterým je vrchol kuželu.
                 </p>
                 <aside class="example" title="WKT">
 					<pre>POINT(-904325.25 -1076279.09)</pre>
 				</aside>
-				<p>Příklad zobrazení dat v souřadnicovém referenčním systému S-JTSK v GML je vidět v příkladu zápisu lomené čáry.</p>
+				<p>Příklad zobrazení dat v souřadnicovém referenčním systému S-JTSK / Krovak East North v GML je vidět v příkladu zápisu lomené čáry.</p>
 
             </section>
 
@@ -276,10 +280,10 @@
                 <h3>World Geodetic System 1984 (<abbr title="World Geodetic System 1984">WGS 84</abbr>)</h3>
 
                 <p>
-                    World Geodetic System 1984 (WGS 84) - někdy zvaný též &quot;souřadnice GPS&quot;.
+                    World Geodetic System 1984 (WGS 84) - někdy laicky zvaný též &quot;souřadnice GPS&quot;.
                     Souřadnice bývají uvedeny ve stupních s několika desetinnými místy.
-                    Některé publikační formáty (např. GPX nebo KML) počítají přímo s tím, že data jsou uložena v tomto souřadnicovém systému.
-                    V registru EPSG je souřadnicový systém označen kódem <code>4326</code>.
+                    Některé publikační formáty (např. GPX, GeoJSON nebo KML) počítají přímo s tím, že data jsou uložena v tomto souřadnicovém referenčním systému.
+                    V registru EPSG je tento souřadnicový referenční systém označen kódem <code>4326</code>.
                     Souřadnice jsou uváděny ve stupních jako zeměpisná šířka a délka, při zkráceném zápisu kódu souřadnicového referenčního systému jsou zapisovány v opačném pořadí (X, Y).
                 </p>
 
@@ -299,7 +303,7 @@
                 <h3>Web Mercator</h3>
 
                 <p>
-                    Web (nebo též Google) Mercator - je systém používaný na většině globálních webových aplikací.
+                    Systém WGS 84 / Pseuso Mercator, označovaný také Web (nebo Google) Mercator - je projektovaný souřadnicový referenční systém používaný na většině globálních webových aplikací.
                     Jeho nevýhodou je mimo jiné zkreslení významné velikosti ploch směrem k pólům.
                     Je označen kódem <code>3857</code>.
                     Souřadnice jsou uváděny v metrech jako vzdálenost na osách X a Y od počátku, kterým je průsečík rovníku a nultého poledníku.
@@ -319,8 +323,8 @@
                 <h3>European Terrestrial Reference System (ETRS-89)</h3>
 
                 <p>
-                    European Terrestrial Reference System - je systém zpřesňující WGS pro území Evropy.
-                    Zápis je stejný jako u WGS, souřadnice se liší v rámci milimetrů až centimetrů.
+                    European Terrestrial Reference System - je geografický souřadnicový referenční systém zpřesňující WGS 84 pro území Evropy.
+                    Zápis je stejný jako u WGS 84, souřadnice se liší v rámci milimetrů až centimetrů.
                     Je označen kódem <code>4258</code>.
                     Souřadnice jsou uváděny ve stupních jako zeměpisná šířka a délka, při zkráceném zápisu kódu souřadnicového referenčního systému jsou zapisovány v opačném pořadí (X, Y).
                 </p>
@@ -538,7 +542,7 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
             </p>
             <ol>
                 <li>Obrazové soubory jsou georeferencované v daném popsaném souřadnicovém referenčním systému,</li>
-                <li>datová sada může obsahovat více obrazových souborů, ty by však měly obsahovat data stejného typu ve stejném souřadnicovém systému,</li>
+                <li>datová sada může obsahovat více obrazových souborů, ty by však měly obsahovat data stejného typu ve stejném souřadnicovém referenčním systému,</li>
                 <li>datová sada by měla být opatřena metadaty, které obsahují dodatečný popis datové sady,</li>
                 <li>data by měla být publikována v otevřeném formátu pro rastrová prostorová data.</li>
             </ol>
