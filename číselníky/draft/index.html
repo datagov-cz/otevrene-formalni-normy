@@ -569,7 +569,7 @@
                 <ul>
                    <li>Vlastnost <a>Název číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/title">title</a> ze slovníku Dublin Core</li>
                    <li>Vlastnost <a>Popis číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/description">description</a> ze slovníku Dublin Core</li>
-                   <li>Vlastnost <a>Platnost číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Platnost číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core a hodnota odpovídá základnímu datovému typu <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/#časový-interval">časový interval</a> dle otevřené formální normy <a href="https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/">Základní datové typy</a></li>
                    <li>Vlastnost <a>Obsahuje položku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#inScheme">inScheme</a> ze slovníku SKOS</li>
                 </ul>
              </li>
@@ -624,8 +624,8 @@
             
             <p>V této sekci jsou uvedeny příklady reprezentace číselníků v podobě propojených dat v doporučovaných serializacích modelu RDF </p>
             
-            <section id="příklady-číselník-turtle">
-              <h3>Serializace číselníku s položkami s vícejazyčným názvem v serializaci Turtle</h3>
+            <section id="příklady-číselník-jednoduchý-turtle">
+              <h3>Reprezentace číselníku s položkami s vícejazyčným názvem v serializaci Turtle</h3>
               
               <p>
                   Příklad ukazuje reprezentaci číselníku z <a href="#example-2-ciselnik-men-ruzne-jazyky">příkladu číselníku měn s položkami s vícejazyčným názvem</a> v serializaci Turtle. 
@@ -633,31 +633,31 @@
               
               <aside class="example" title="Číselník měn - položky s vícejazyčným názvem - Turtle">
                   <p>
-                     <a href="příklady/číselník-měn-základní-podoba.jsonld">Stáhnout Turtle</a>
+                     <a href="příklady/číselník-měn-základní-podoba.ttl">Stáhnout Turtle</a>
                   </p>
                   <pre class="turtle">
-@prefix dct: &lt;http://purl.org/dc/terms/&gt;
-@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
 
 &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; a skos:ConceptScheme ;
   dct:title "Číselník měn"@cs .
 
 &lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/64&gt; a skos:Concept ;
-  skos:inScheme &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; .
-  skos:notation "64" .
+  skos:inScheme &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; ;
+  skos:notation "64" ;
   skos:prefLabel "bhutanese ngultrum"@en, "bhútánský ngultrum"@cs .
 
 &lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/68&gt; a skos:Concept ;
-  skos:inScheme &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; .
-  skos:notation "68" .
+  skos:inScheme &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; ;
+  skos:notation "68" ;
   skos:prefLabel "bolivian boliviano"@en, "bolivijské boliviano"@cs .</pre>
               </aside>
                 
           
-          </section>
+            </section>
             
-            <section id="příklady-číselník-json-ld">
-              <h3>Serializace číselníku s položkami s vícejazyčným názvem v serializaci JSON-LD</h3>
+            <section id="příklady-číselník-jednoduchý-json-ld">
+              <h3>Reprezentace číselníku s položkami s vícejazyčným názvem v serializaci JSON-LD</h3>
               
               <p>
                   Příklad ukazuje reprezentaci číselníku z <a href="#example-2-ciselnik-men-ruzne-jazyky">příkladu číselníku měn s položkami s vícejazyčným názvem</a>. 
@@ -665,7 +665,7 @@
               
               <aside class="example" title="Číselník měn - položky s vícejazyčným názvem - JSON-LD">
                   <p>
-                     <a href="příklady/číselník-měn-základní-podoba.jsonld">Stáhnout JSON-LD</a>, <a href="schémata/číselník-měn-základní-podoba.context.json">Stáhnout JSON kontext</a>, <a href="schémata/číselník-měn-základní-podoba.json">Stáhnout JSON schéma</a>
+                     <a href="příklady/číselník-měn-základní-podoba.jsonld">Stáhnout JSON-LD</a>, <a href="schémata/číselník-měn-základní-podoba.context.json">Stáhnout JSON kontext</a>, <a href="schémata/číselník-měn-základní-podoba.schema.json">Stáhnout JSON schéma</a>
                   </p>
                   <pre class="json">
 {
@@ -676,6 +676,7 @@
   "id": "@id",
   "xsd": "http://www.w3.org/2001/XMLSchema#",
   "skos": "http://www.w3.org/2004/02/skos/core#",
+  "dct": "http://purl.org/dc/terms/",
   "číselník": "skos:ConceptScheme",
   "položka": "skos:Concept",
   "název-číselníku": {
@@ -723,9 +724,195 @@
               </aside>
                 
           
+            </section>
+            
+            <section id="příklady-číselník-turtle">
+              <h3>Reprezentace číselníku s kompletní strukturou v serializaci Turtle</h3>
+              
+              <p>
+                  Příklad ukazuje reprezentaci číselníku s kompletní strukturou zkombinovanou z příkladů výše v serializaci Turtle. 
+              </p>
+              
+              <aside class="example" title="Číselník měn - Turtle">
+                  <p>
+                     <a href="příklady/číselník-měn.ttl">Stáhnout Turtle</a>
+                  </p>
+                  <pre class="turtle">
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+&lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; a skos:ConceptScheme ;
+  dct:title "Číselník měn"@cs ;
+  dct:description "Číselník měn obsahuje všechny ve světě používané standardní měny. Neobsahuje kryptoměny."@cs ;
+  dct:temporal &lt;https://data.poskytovatel.cz/zdroj/číselník/měny/platnost&gt; .
+  
+&lt;https://data.poskytovatel.cz/zdroj/číselník/měny/platnost&gt; schema:startDate "2009-01-01T00:00:00.0+01:00"^^xsd:dateTime ;
+  schema:endDate "2021-01-01T00:00:00.0+01:00"^^xsd:dateTime . 
+
+&lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/64&gt; a skos:Concept ;
+  skos:inScheme &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; ;
+  skos:notation "64" ;
+  skos:prefLabel "bhutanese ngultrum"@en, "bhútánský ngultrum"@cs ;
+  skos:altLabel "ngultrum"@en, "ngultrum"@cs ;
+  skos:definition "1 ngultrum=100 chhetrum."@en, "1 ngultrum=100 chhetrum."@cs ;
+  dct:description "Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN."@cs ;
+  dct:temporal &lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/64/platnost&gt; .
+  
+&lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/64/platnost&gt; schema:startDate "2009-01-01T00:00:00.0+01:00"^^xsd:dateTime ;
+  schema:endDate "2020-07-01T00:00:00.0+01:00"^^xsd:dateTime .
+  
+
+&lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/68&gt; a skos:Concept ;
+  skos:inScheme &lt;https://data.poskytovatel.cz/zdroj/číselník/měny&gt; ;
+  skos:notation "68" ;
+  skos:prefLabel "bolivian boliviano"@en, "bolivijské boliviano"@cs ;
+  skos:altLabel "boliviano"@en, "boliviano"@cs ;
+  skos:definition "1 boliviano=100 centavo."@en, "1 boliviano=100 centavo."@cs ;
+  dct:description "Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB. Bolivijská měna nese své jméno po Simónu Bolívaru."@cs ;
+  dct:temporal &lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/68/platnost&gt; .
+  
+&lt;https://data.poskytovatel.cz/zdroj/číselník/měny/položka/64/platnost&gt; schema:startDate "2009-01-01T00:00:00.0+01:00"^^xsd:dateTime ;
+  schema:endDate "2020-07-01T00:00:00.0+01:00"^^xsd:dateTime .</pre>
+              </aside>
+                
+          
+            </section>
+            
+            <section id="příklady-číselník-json-ld">
+              <h3>Serializace číselníku s položkami s vícejazyčným názvem v serializaci JSON-LD</h3>
+              
+              <p>
+                  Příklad ukazuje reprezentaci číselníku s kompletní strukturou zkombinovanou z příkladů výše v serializaci JSON-LD. 
+              </p>
+              
+              <aside class="example" title="Číselník měn - položky s vícejazyčným názvem - JSON-LD">
+                  <p>
+                     <a href="příklady/číselník-měn.jsonld">Stáhnout JSON-LD</a>, <a href="schémata/číselník-měn.context.json">Stáhnout JSON kontext</a>, <a href="schémata/číselník-měn.schema.json">Stáhnout JSON schéma</a>
+                  </p>
+                  <pre class="json">
+{
+"@context": {
+  "@base": "https://data.poskytovatel.cz/zdroj/",
+  "položky": "@graph",
+  "typ": "@type",
+  "id": "@id",
+  "xsd": "http://www.w3.org/2001/XMLSchema#",
+  "skos": "http://www.w3.org/2004/02/skos/core#",
+  "dct": "http://purl.org/dc/terms/",
+  "schema": "http://schema.org/",
+  "číselník": "skos:ConceptScheme",
+  "položka": "skos:Concept",
+  "název-číselníku": {
+    "@id": "dct:title",
+    "@container": "@language"
+  },
+  "platnost-číselníku": {
+    "@id": "dct:temporal"
+  },
+  "položky": {
+    "@reverse": "skos:inScheme",
+    "@container": "@set"
+  },
+  "kód": {
+    "@id": "skos:notation",
+    "@type": "xsd:string"
+  },
+  "název": {
+    "@id": "skos:prefLabel",
+    "@container": "@language"
+  },
+  "alt-název": {
+    "@id": "skos:altLabel",
+    "@container": "@language"
+  },
+  "definice": {
+    "@id": "skos:definition",
+    "@container": "@language"
+  },
+  "popis": {
+    "@id": "dct:description",
+    "@container": "@language"
+  },
+  "platnost": {
+    "@id": "dct:temporal"
+  },
+  "datum_začátku": {
+    "@id": "schema:startDate"
+  },
+  "datum_konce": {
+    "@id": "schema:endDate"
+  }
+},
+"id": "číselník/měny",
+"typ": "číselník",
+"název-číselníku": {
+  "cs":  "Číselník měn"
+},
+"platnost-číselníku": {
+  "id": "číselník/měny/platnost",
+  "datum_začátku": "2009-01-01",
+  "datum_konce": "2020-12-31"
+},
+"položky": [
+  {
+    "typ": "položka",
+    "id": "číselník/měny/položka/64",
+    "kód": "64",
+    "název": {
+      "cs": "bhútánský ngultrum",
+      "en": "bhutanese ngultrum"
+    },
+    "alt-název": {
+      "cs": "ngultrum",
+      "en": "ngultrum"
+    },
+    "definice": {
+      "cs": "1 ngultrum=100 chhetrum.",
+      "en": "1 ngultrum=100 chhetrum."
+    },
+    "popis": {
+      "cs": "Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN."
+    },
+    "platnost": {
+      "id": "číselník/měny/položka/64/platnost",
+      "datum_začátku": "2009-01-01",
+      "datum_konce": "2020-06-30"
+    }
+  },{
+    "typ": "položka",
+    "id": "číselník/měny/položka/68",
+    "kód": "68",
+    "název": {
+      "cs": "bolivijské boliviano",
+      "en": "bolivian boliviano"
+    },
+    "alt-název": {
+      "cs": "boliviano",
+      "en": "boliviano"
+    },
+    "definice": {
+      "cs": "1 boliviano=100 centavo.",
+      "en": "1 boliviano=100 centavo."
+    },
+    "popis": {
+      "cs": "Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB. Bolivijská měna nese své jméno po Simónu Bolívaru."
+    },
+    "platnost": {
+      "id": "číselník/měny/položka/68/platnost",
+      "datum_začátku": "2009-01-01",
+      "datum_konce": "2020-06-30"
+    }
+  }
+]
+}</pre>
+              </aside>
+                
+          
+            </section>
+            
           </section>
-          
-          
             
         </section>
             
