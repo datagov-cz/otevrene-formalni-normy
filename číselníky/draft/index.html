@@ -63,175 +63,214 @@
             <h2>Abstrakt</h2>
             <p>
               Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování číselníků.
-            </p>
-            <p>
-              Kapitola <a href="#model">Konceptuální model číselníků</a> popisuje abstraktní pohled na podobu zveřejňovaných číselníků v podobě konceptuálního modelu. Ukazuje základní souvislost mezi číselníkem a jeho položkami a také jaké atributy číselníků a jejich položek jsou při zveřejňování uvažovány.
-            </p>
-            <p>
-              Kapitola <a href="#propojená-data">Číselník v podobě propojených dat</a> popisuje způsob publikace číselníku v podobě propojených dat.
-            </p>
-            <p>
-              Kapitoly <a href="#csv">Číselník v podobě CSV souboru</a>, <a href="#json">Číselník v podobě JSON souboru</a> a <a href="#xml">Číselník v podobě XML souboru</a> popisují způsob publikace číselníku v podobě CSV, JSON, resp. XML souboru.
-            </p>
-            <p>
-              Kapitola <a href="#co-je-číselník">Co je číselník?</a> poskytuje detailní nenormativní vysvětlení pojmu číselník na příkladech a uvádí dobrou praxi publikace číselníků, ze které tato otevřená formální norma vychází.
+              Norma popisuje přehled struktury a významu číselníků v podobě konceptuálního modelu a stanovuje, jakým způsobem mají být číselníky publikovány v podobě propojených dat v modelu RDF [[rdf11-concepts]] a v podobě CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]] souborů.
+              Jednotlivé způsoby publikace demonstruje na příkladech.
+              Dále také uvádí doporučenou dobrou praxi při publikaci číselníků. 
             </p>
         </section>
 
-        <section id="model">
-            <h2>Konceptuální model číselníků</h2>
-            
-            <p>
-                Tato kapitola popisuje konceptuální model číselníků, který zahrnuje číselníky a položky číselníků a jejich běžné vlastnosti uvažované v této otevřené formální normě.
-                Diagram konceptuálního modelu číselníků je zobrazen na následujícím obrázku.
-            </p>
-            
-            <figure id="model"><img alt="Diagram konceptuálního modelu číselníků" src="./schémata/konceptuální-model-číselníků.svg">
-                <figcaption>
-                    <a href="./schémata/konceptuální-model-číselníků.svg">Diagram konceptuálního modelu číselníků.</a>
-                </figcaption>
-            </figure>
-              
-            <section id="sekce-třída-číselník">
-                
-                <h3>Třída <code><dfn id="třída-číselník">Číselník</dfn></code></h3>
-                
-                <p>
-                    Číselník je seznam přípustných hodnot datového prvku kódovaný v podobě kódu a kódované strukturované hodnoty.
-                </p>
-                
-                <section id="sekce-číselník-název">
-                    
-                    <h4>Vlastnost <code><dfn id="číselník-název">Název číselníku</dfn></code></h4>
-                    
-                    <p>
-                        Název číselníku, který je též použit pro pojmenování datové sady s číselníkem v katalogizačním záznamu v <a href="https://data.gov.cz">Národním katalogu otevřených dat</a>.
-                        Název je uveden v jednom nebo více jazycích.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-číselník-popis">
-                    
-                    <h4>Vlastnost <code><dfn id="číselník-popis">Popis číselníku</dfn></code></h4>
-                    
-                    <p>
-                        Popis číselníku, který blíže vysvětluje obsah či způsob užití číselníku. Popis je uveden v jednom nebo více jazycích.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-číselník-platnost"> 
-                    
-                    <h4>Vlastnost <code><dfn id="číselník-platnost">Platnost číselníku</dfn></code></h4>
-                    
-                    <p>
-                        Časový interval, ve kterém je číselník platný.
-                        Platnost číselníku určuje, v jakém časovém období byl, je nebo bude číselník platný.
-                        Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky.
-                        Je doporučeno platnost položek uvést přímo pro jednotlivé položky.
-                        Viz <a>Platnost položky</a>.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-číselník-obsahuje-položku"> 
-                <!-- v souladu se směrem vazby skos:inScheme bych to viděl jako vlastnost Položky -->
-                    
-                    <h4>Vlastnost <code><dfn id="číselník-obsahuje-položku">Obsahuje položku</dfn></code></h4>
-                    
-                    <p>
-                        Zařazuje do číselníku jeho položku.
-                    </p>
-                
-                </section>
-            
-            </section>
+        <section id="úvod">
+          <h2>Úvod</h2>
 
-            <section id="sekce-třída-položka">
+          <p>
+            Číselníkem se ve smyslu <a href="https://www.zakonyprolidi.cz/cs/2000-365#p2-1-i">§ 2 písm. i) zákona č. 365/2000 Sb. o informačních systémech veřejné správy</a> rozumí seznam přípustných hodnot datového prvku obvykle ve formě dvojic, to znamená kódovaného údaje a hodnoty jeho kódu.
+            Takto chápe základní podobu číselníku i tato otevřená formální norma.
+          </p>
+          
+          <p>
+            Datovým prvkem rozumíme pro účely této otevřené formální normy jakýkoliv atribut či vlastnost určitého typu entit (např. pohlaví osoby, barva vozidla nebo měna finanční částky).
+            Číselník pak omezuje přípustné hodnoty datového prvku konečným výčtem (seznamem) kódovaných hodnot.
+            Kódovanou hodnotou rozumíme právě dvojici (kód, hodnota) a nazýváme ji prvek číselníku. 
+            Kód je obvykle vyjádřen jako kladné celé číslo, které položku v rámci číselníku identifikuje.
+            Hodnota je obvykle tvořena názvem položky číselníku.
+          </p>
+          
+          <aside class="example" title="Číselník měn - základní podoba" id="příklad-číselník-měn-základní-podoba">
+            <table>
+              <tr><th>Kód</th><th>Název</th></tr>
+              <tr><td>64</td><td>bhútánský ngultrum</td></tr>                 
+              <tr><td>68</td><td>bolivijské boliviano</td></tr>
+            </table>
+          </aside>
+
+          <p>
+            Otevřená formální norma je strukturována následovně:
+          </p>
+          <ul>          
+            <li>
+              Kapitola <a href="#model">Konceptuální model číselníků</a> popisuje abstraktní pohled na podobu zveřejňovaných číselníků v podobě konceptuálního modelu. Ukazuje základní souvislost mezi číselníkem a jeho položkami a také jaké atributy číselníků a jejich položek jsou při zveřejňování uvažovány.
+            </li>
+            <li>
+              Kapitola <a href="#propojená-data">Číselník v podobě propojených dat</a> popisuje způsob publikace číselníku v podobě propojených dat.
+            </li>
+            <li>
+              Kapitoly <a href="#csv">Číselník v podobě CSV souboru</a>, <a href="#json">Číselník v podobě JSON souboru</a> a <a href="#xml">Číselník v podobě XML souboru</a> popisují způsob publikace číselníku v podobě CSV, JSON, resp. XML souboru.
+            </li>
+            <li>
+              Kapitola <a href="#obvyklá-struktura-číselníků">Obvyklá struktura číselníků</a> navazuje na úvod a dále na příkladech rozvíjí, jaké další atributy se obvykle objevují u položek číselníků. Na těchto příkladech je založen <a href="#model">konceptuální model</a>.
+            </li>
+            <li>
+              Kapitola <a href="#dobrá-praxe">Dobrá praxe při publikaci číselníku</a> popisuje praxi, kterou otevřená formální norma doporučuje při publikování číselníků dodržovat.
+            </li>
+
+          </ul>
+                  
+        </section>
+
+        <section id="model">
+          <h2>Konceptuální model číselníků</h2>
+          
+          <p>
+              Tato kapitola popisuje konceptuální model číselníků, který zahrnuje číselníky a položky číselníků a jejich běžné vlastnosti uvažované v této otevřené formální normě.
+              Diagram konceptuálního modelu číselníků je zobrazen na následujícím obrázku.
+          </p>
+          
+          <figure id="model"><img alt="Diagram konceptuálního modelu číselníků" src="./schémata/konceptuální-model-číselníků.svg">
+              <figcaption>
+                  <a href="./schémata/konceptuální-model-číselníků.svg">Diagram konceptuálního modelu číselníků.</a>
+              </figcaption>
+          </figure>
             
-                <h3>Třída <code><dfn id="třída-položka">Položka</dfn></code></h3>
-                
-                <p>
-                    Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
-                </p>
-                
-                <section id="sekce-položka-kód">
-                
-                    <h4>Vlastnost <code><dfn id="položka-kód">Kód položky</dfn></code></h4>
-                    
-                    <p>
-                        Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-položka-název">
-                
-                    <h4>Vlastnost <code><dfn id="položka-název">Název položky</dfn></code></h4>
-                    
-                    <p>
-                        Název (hodnota) položky číselníku v jednom nebo více jazycích.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-položka-alternativní-název">
-                
-                    <h4>Vlastnost <code><dfn id="položka-alternativní-název">Alternativní název položky</dfn></code></h4>
-                    
-                    <p>
-                        Alternativní název (hodnota) položky číselníku v jednom nebo více jazycích.
-                    </p>
-                    
-                </section>
-                               
-                <section id="sekce-položka-definice">
-                
-                    <h4>Vlastnost <code><dfn id="položka-definice">Definice položky</dfn></code></h4>
-                    
-                    <p>
-                        Textová definice položky číselníku v jednom nebo více jazycích.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-položka-popis">
-                
-                    <h4>Vlastnost <code><dfn id="položka-popis">Popis položky</dfn></code></h4>
-                    
-                    <p>
-                        Popis položky číselníku, který blíže vysvětluje položku číselníku.
-                        Popis je uveden v jednom nebo více jazycích. Oproti definici je méně formální a více vysvětlující.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-položka-platnost">
-                
-                    <h4>Vlastnost <code><dfn id="položka-platnost">Platnost položky</dfn></code></h4>
-                    
-                    <p>
-                        Časový interval, ve kterém je položka číselníku platná.
-                        Platnost položky číselníku určuje, v jakém časovém období byla, je nebo bude položka platná.
-                        Pro snazší strojové zpracování není platnost položky číselníku nijak odvozována z uvedené platnosti číselníku.
-                        Viz <a>Platnost číselníku</a>.
-                    </p>
-                    
-                </section>
-                
-                <section id="sekce-položka-reference">
-                
-                    <h4>Vlastnost <code><dfn id="položka-reference">Referencovaná položka</dfn></code></h4>
-                    
-                    <p>
-                        Identifikace referencovan0 položky z jiného (externího) číselníku v podobě jejího jednoznačného IRI.
-                    </p>
-                    
-                </section>
-                                
-            </section>
-            
+          <section id="sekce-třída-číselník">
+              
+              <h3>Třída <code><dfn id="třída-číselník">Číselník</dfn></code></h3>
+              
+              <p>
+                  Číselník je seznam přípustných hodnot datového prvku kódovaný v podobě kódu a kódované strukturované hodnoty.
+              </p>
+              
+              <section id="sekce-číselník-název">
+                  
+                  <h4>Vlastnost <code><dfn id="číselník-název">Název číselníku</dfn></code></h4>
+                  
+                  <p>
+                      Název číselníku, který je též použit pro pojmenování datové sady s číselníkem v katalogizačním záznamu v <a href="https://data.gov.cz">Národním katalogu otevřených dat</a>.
+                      Název je uveden v jednom nebo více jazycích.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-číselník-popis">
+                  
+                  <h4>Vlastnost <code><dfn id="číselník-popis">Popis číselníku</dfn></code></h4>
+                  
+                  <p>
+                      Popis číselníku, který blíže vysvětluje obsah či způsob užití číselníku. Popis je uveden v jednom nebo více jazycích.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-číselník-platnost"> 
+                  
+                  <h4>Vlastnost <code><dfn id="číselník-platnost">Platnost číselníku</dfn></code></h4>
+                  
+                  <p>
+                      Časový interval, ve kterém je číselník platný.
+                      Platnost číselníku určuje, v jakém časovém období byl, je nebo bude číselník platný.
+                      Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky.
+                      Je doporučeno platnost položek uvést přímo pro jednotlivé položky.
+                      Viz <a>Platnost položky</a>.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-číselník-obsahuje-položku"> 
+              <!-- v souladu se směrem vazby skos:inScheme bych to viděl jako vlastnost Položky -->
+                  
+                  <h4>Vlastnost <code><dfn id="číselník-obsahuje-položku">Obsahuje položku</dfn></code></h4>
+                  
+                  <p>
+                      Zařazuje do číselníku jeho položku.
+                  </p>
+              
+              </section>
+          
+          </section>
+
+          <section id="sekce-třída-položka">
+          
+              <h3>Třída <code><dfn id="třída-položka">Položka</dfn></code></h3>
+              
+              <p>
+                  Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
+              </p>
+              
+              <section id="sekce-položka-kód">
+              
+                  <h4>Vlastnost <code><dfn id="položka-kód">Kód položky</dfn></code></h4>
+                  
+                  <p>
+                      Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-položka-název">
+              
+                  <h4>Vlastnost <code><dfn id="položka-název">Název položky</dfn></code></h4>
+                  
+                  <p>
+                      Název (hodnota) položky číselníku v jednom nebo více jazycích.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-položka-alternativní-název">
+              
+                  <h4>Vlastnost <code><dfn id="položka-alternativní-název">Alternativní název položky</dfn></code></h4>
+                  
+                  <p>
+                      Alternativní název (hodnota) položky číselníku v jednom nebo více jazycích.
+                  </p>
+                  
+              </section>
+                             
+              <section id="sekce-položka-definice">
+              
+                  <h4>Vlastnost <code><dfn id="položka-definice">Definice položky</dfn></code></h4>
+                  
+                  <p>
+                      Textová definice položky číselníku v jednom nebo více jazycích.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-položka-popis">
+              
+                  <h4>Vlastnost <code><dfn id="položka-popis">Popis položky</dfn></code></h4>
+                  
+                  <p>
+                      Popis položky číselníku, který blíže vysvětluje položku číselníku.
+                      Popis je uveden v jednom nebo více jazycích. Oproti definici je méně formální a více vysvětlující.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-položka-platnost">
+              
+                  <h4>Vlastnost <code><dfn id="položka-platnost">Platnost položky</dfn></code></h4>
+                  
+                  <p>
+                      Časový interval, ve kterém je položka číselníku platná.
+                      Platnost položky číselníku určuje, v jakém časovém období byla, je nebo bude položka platná.
+                      Pro snazší strojové zpracování není platnost položky číselníku nijak odvozována z uvedené platnosti číselníku.
+                      Viz <a>Platnost číselníku</a>.
+                  </p>
+                  
+              </section>
+              
+              <section id="sekce-položka-reference">
+              
+                  <h4>Vlastnost <code><dfn id="položka-reference">Referencovaná položka</dfn></code></h4>
+                  
+                  <p>
+                      Identifikace referencovan0 položky z jiného (externího) číselníku v podobě jejího jednoznačného IRI.
+                  </p>
+                  
+              </section>
+                              
+          </section>
+          
         </section>            
 
         <section id="propojená-data">
@@ -329,7 +368,7 @@
               <h3>Příklady v serializaci Turtle</h3>
               
               <p>
-                Tato kapitola obsahuje <a href="#struktura-číselníků">příklady různých variant číselníku měn</a> v serializaci Turtle [[turtle]].
+                Tato kapitola obsahuje <a href="#obvyklá-struktura-číselníků">příklady různých variant číselníku měn</a> v serializaci Turtle [[turtle]].
               </p>
                           
               <section id="příklad-číselník-měn-základní-podoba-turtle">
@@ -523,7 +562,7 @@
               <h3>Příklady v serializaci JSON-LD</h3>
 
               <p>
-                Tato kapitola obsahuje <a href="#struktura-číselníků">příklady různých variant číselníku měn</a> v serializaci JSON-LD [[json-ld]].
+                Tato kapitola obsahuje <a href="#obvyklá-struktura-číselníků">příklady různých variant číselníku měn</a> v serializaci JSON-LD [[json-ld]].
                 Těla JSON-LD souborů v uvedených příkladech jsou strukturována podle <a href="./schémata/číselníky.schema.json">doporučeného JSON schématu pro číselníky</a> a referencují <a href="./schémata/číselníky.context.jsonld">doporučený JSON-LD kontext pro číselníky</a>.
               </p>
                           
@@ -865,223 +904,198 @@
           </p>            
         </section>
         
-        <section id="co-je-číselník" class="informative">
-            <h2>Co je číselník?</h2>
-
-            <p>
-                Číselníkem se ve smyslu <a href="https://www.zakonyprolidi.cz/cs/2000-365#p2-1-i">§ 2 písm. i) zákona č. 365/2000 Sb. o informačních systémech veřejné správy</a> rozumí seznam přípustných hodnot datového prvku obvykle ve formě dvojic, to znamená kódovaného údaje a hodnoty jeho kódu.
-                Takto chápe základní podobu číselníku i tato otevřená formální norma.
-            </p>
-            
-            <section id="struktura-číselníků">
-            
-              <h3>Struktura číselníků</h3>
+        <section id="obvyklá-struktura-číselníků">
+        
+          <h2>Obvyklá struktura číselníků</h2>
                         
-              <p>
-                  Datovým prvkem rozumíme pro účely této otevřené formální normy jakýkoliv atribut či vlastnost určitého typu entit (např. pohlaví osoby, barva vozidla nebo měna finanční částky).
-                  Číselník pak omezuje přípustné hodnoty datového prvku konečným výčtem (seznamem) kódovaných hodnot.
-                  Kódovanou hodnotou rozumíme právě dvojici (kód, hodnota) a nazýváme ji prvek číselníku. 
-                  Kód je obvykle vyjádřen jako kladné celé číslo, které položku v rámci číselníku identifikuje.
-                  Hodnota je obvykle tvořena názvem položky číselníku.
-              </p>
-              
-              <aside class="example" title="Číselník měn - základní podoba" id="příklad-číselník-měn-základní-podoba">
-                <table>
-                  <tr><th>Kód</th><th>Název</th></tr>
-                  <tr><td>64</td><td>bhútánský ngultrum</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td></tr>
-                </table>
-              </aside>
-              
-              <p>
-                  Lze ale uvažovat i složitější strukturované hodnoty. 
-                  Jelikož je název určen pro lidského čtenáře, může být potřeba jej vyjádřit v různých jazycích.
-              </p>
-              
-              <aside class="example" title="Číselník měn - různé jazyky" id="příklad-číselník-měn-různé-jazyky">
-                <table>
-                  <tr><th>Kód</th><th>Název (cs)</th><th>Název (en)</th></tr>
-                  <tr><td>64</td><td>bhútánský ngultrum</td><td>bhutanese ngultrum</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>bolivian boliviano</td></tr>
-                </table>
-              </aside>
-              
-              <p>
-                  Dále může být potřebné vyjádřit i různé zkrácené či jinak alternativní pojmenování hodnot. 
-              </p>
-              
-              <aside class="example" title="Číselník měn - alternativní pojmenování" id="příklad-číselník-měn-alternativní-pojmenování">
-                <table>
-                  <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Název (en)</th><th>Alternativní název (en)</th></tr>
-                  <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>bhutanese ngultrum</td><td>ngultrum</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>bolivian boliviano</td><td>boliviano</td></tr>
-                </table>
-              </aside>
-              
-              <p>
-                  Pro položku číselníku může být také nutné v hodnotě vyjádřit i další atributy, např. definici nebo popis. 
-              </p>
-              
-              <aside class="example" title="Číselník měn - další atributy" id="příklad-číselník-měn-další-atributy">
-                <table>
-                  <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Popis</th></tr>
-                  <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN. 1 ngultrum je rozdělen na 100 chhetrum.</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB. Dílčí jednotkou (1/100) se nazývá centavo. Bolivijská měna nese své jméno po Simónu Bolívaru.</td></tr>
-                </table>
-              </aside>
-              
-              <p>
-                  Někdy jsou položky číselníku kódovány i jinými externími kódy, než jsou použity přímo v číselníku. Příkladem mohou být např. různá kódování ISO. 
-              </p>
-              
-              <aside class="example" title="Číselník měn - externí kódování" id="příklad-číselník-měn-reference">
-                <table>
-                  <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Kód ISO</th></tr>
-                  <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>BTN</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>BOB</td></tr>
-                </table>
-              </aside>
-  
-              <p>
-                  V případě sofistikovanější správy číselníků je přímo v číselníku a jeho položkách reflektována také časová dimenze platnosti ať už jednotlivých položek číselníku tak i číselníku jako takového.
-                  To znamená, že položka číselníku nebo celý číselník může mít specifikovánu platnost od a platnost do.
-                  V případě uvažování intervalu platnosti nemusí být platnost od nebo platnost do uvedena.
-                  To potom znamená, že datum platnosti od resp. do je prozatím neznámé a chápeme jej jako otevřené.            
-              </p>
-              
-              <aside class="example" title="Číselník měn - platnosti položek číselníku" id="příklad-číselník-měn-platnosti">
-                <table>
-                  <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Platnost od</th><th>Platnost do</th></tr>
-                  <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>1. 1. 2009</td><td>30. 6. 2020</td></tr>                 
-                  <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>1. 1. 2009</td><td>31. 12. 2020</td></tr>
-                </table>
-              </aside>
-  
-              <p>
-                  Výše uvedené příklady se týkají číselníků s jednoduchou plochou strukturou.
-                  Někdy ale existují mezi položkami číselníku hierarchické vazby, které určují vztah nadřazenosti a podřazenosti položek číselníků.
-                  Takové struktuře pak říkáme taxonomie. Pro reprezentaci taxonomií existuje samostatná otevřená formální norma.
-              </p>
-              
-              <p>
-                  Z uvedených příkladů vyplývá <a href="#model">konceptuální model číselníků</a>, který zahrnuje číselníky a položky číselníků a jejich běžné vlastnosti.
-              </p>
+          <p>
+              Lze ale uvažovat i složitější strukturované hodnoty. 
+              Jelikož je název určen pro lidského čtenáře, může být potřeba jej vyjádřit v různých jazycích.
+          </p>
+          
+          <aside class="example" title="Číselník měn - různé jazyky" id="příklad-číselník-měn-různé-jazyky">
+            <table>
+              <tr><th>Kód</th><th>Název (cs)</th><th>Název (en)</th></tr>
+              <tr><td>64</td><td>bhútánský ngultrum</td><td>bhutanese ngultrum</td></tr>                 
+              <tr><td>68</td><td>bolivijské boliviano</td><td>bolivian boliviano</td></tr>
+            </table>
+          </aside>
+          
+          <p>
+              Dále může být potřebné vyjádřit i různé zkrácené či jinak alternativní pojmenování hodnot. 
+          </p>
+          
+          <aside class="example" title="Číselník měn - alternativní pojmenování" id="příklad-číselník-měn-alternativní-pojmenování">
+            <table>
+              <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Název (en)</th><th>Alternativní název (en)</th></tr>
+              <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>bhutanese ngultrum</td><td>ngultrum</td></tr>                 
+              <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>bolivian boliviano</td><td>boliviano</td></tr>
+            </table>
+          </aside>
+          
+          <p>
+              Pro položku číselníku může být také nutné v hodnotě vyjádřit i další atributy, např. definici nebo popis. 
+          </p>
+          
+          <aside class="example" title="Číselník měn - další atributy" id="příklad-číselník-měn-další-atributy">
+            <table>
+              <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Popis</th></tr>
+              <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN. 1 ngultrum je rozdělen na 100 chhetrum.</td></tr>                 
+              <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB. Dílčí jednotkou (1/100) se nazývá centavo. Bolivijská měna nese své jméno po Simónu Bolívaru.</td></tr>
+            </table>
+          </aside>
+          
+          <p>
+              Někdy jsou položky číselníku kódovány i jinými externími kódy, než jsou použity přímo v číselníku. Příkladem mohou být např. různá kódování ISO. 
+          </p>
+          
+          <aside class="example" title="Číselník měn - externí kódování" id="příklad-číselník-měn-reference">
+            <table>
+              <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Kód ISO</th></tr>
+              <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>BTN</td></tr>                 
+              <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>BOB</td></tr>
+            </table>
+          </aside>
 
-            </section>
-            
-            <section id="dobrá-praxe">
-            
-              <h3>Dobrá praxe při publikaci číselníku</h3>
+          <p>
+              V případě sofistikovanější správy číselníků je přímo v číselníku a jeho položkách reflektována také časová dimenze platnosti ať už jednotlivých položek číselníku tak i číselníku jako takového.
+              To znamená, že položka číselníku nebo celý číselník může mít specifikovánu platnost od a platnost do.
+              V případě uvažování intervalu platnosti nemusí být platnost od nebo platnost do uvedena.
+              To potom znamená, že datum platnosti od resp. do je prozatím neznámé a chápeme jej jako otevřené.            
+          </p>
+          
+          <aside class="example" title="Číselník měn - platnosti položek číselníku" id="příklad-číselník-měn-platnosti">
+            <table>
+              <tr><th>Kód</th><th>Název (cs)</th><th>Alternativní název (cs)</th><th>Platnost od</th><th>Platnost do</th></tr>
+              <tr><td>64</td><td>bhútánský ngultrum</td><td>ngultrum</td><td>1. 1. 2009</td><td>30. 6. 2020</td></tr>                 
+              <tr><td>68</td><td>bolivijské boliviano</td><td>boliviano</td><td>1. 1. 2009</td><td>31. 12. 2020</td></tr>
+            </table>
+          </aside>
 
-              <p>
-                Při publikaci číselníku je doporučováno dodržet dobrou praxi popsanou v této kapitole.
-                <a href="#propojená-data">Publikace číselníku v podobě propojených dat</a> zároveň zajišťuje, že je této dobré praxe dosaženo dle řady doporučení W3C.
-              </p>
+          <p>
+              Výše uvedené příklady se týkají číselníků s jednoduchou plochou strukturou.
+              Někdy ale existují mezi položkami číselníku hierarchické vazby, které určují vztah nadřazenosti a podřazenosti položek číselníků.
+              Takové struktuře pak říkáme taxonomie. Pro reprezentaci taxonomií existuje samostatná otevřená formální norma.
+          </p>
+          
+          <p>
+              Z uvedených příkladů vyplývá <a href="#model">konceptuální model číselníků</a>, který zahrnuje číselníky a položky číselníků a jejich běžné vlastnosti.
+          </p>
 
-              <p>
-                Jak bylo uvedeno výše, číselník definuje přípustné hodnoty datového prvku.
-                Číselník tedy definuje výčtový typ.
-                Vlastnosti, které mají výčtový typ přiřazen jako svůj datový typ pak nabývají hodnot z příslušného číselníku.
-                Uvažujme např. smlouvy. Každá smlouva má vlastnost <code>hodnota smlouvy</code>.
-                Hodnota smlouvy má pak 2 vlastnosti strukturující hodnotu smlouvy: <code>částka</code> a <code>měna</code>.
-                Typem vlastnosti <code>částka</code> je celé kladné číslo.
-                Typem vlastnosti <code>měna</code> je výčtový datový typ definovaný číselníkem měn.
-                Hodnotou vlastnosti <code>měna</code> je kód položky z tohoto číselníku.
-                Kód položky tedy musí být v rámci číselníku unikátní, abychom se na ni mohli odkazovat.
-              </p>
-              
-              <p>
-                Může existovat více datových sad, jejichž některé vlastnosti mají výčtový typ se stejnou sémantikou.
-                V našem případě existují různé datové sady se smlouvami, které obsahují hodnoty smluv dělené na částku a měnu.
-                Navíc existují datové sady s veřejnými zakázkami, vědeckými projekty financovanými z veřejných zdrojů, apod.
-                Všechny tyto datové sady v nějaké části obsahují částky a jejich měny.
-                Pro zajištění interoperability mezi takovými datovými sadami (tj. minimalizace pracnosti jejich integrace) je nutné používat pro měny jeden a ten samý číselník.
-                To v žádném případě neznamená kopírování číselníku a používání těchto kopií, což by vedlo k nekonzistencím.
-                Je nutné, aby byl daný číselník spravován a následně publikován pouze na jednom místě jako jedna datová sada.
-                Ostatní datové sady potom číselník a jeho jednotlivé položky referencují.
-                Je tedy nutné umožnit takové referencování.
-                To znamená, aby položky neměly jen kód pro jejich lokální identifikaci v rámci číselníku, ale aby měly přiřazeny i globální identifikátor v prostředí Webu.
-                Globální identifikátor je vhodný též pro samotný číselník.
-                Pro referencování položek číselníku v jakékoliv datové sadě (smlouvy, veřejné zakázky, projekty, atd.) jsou potom používány tyto globální identifikátory.  
-              </p>
-              
-              <div class="practice">
-                <p class="practicedesc">
-                  <span class="practicelab">Globální identifikátory</span>
-                  Číselník a každá jeho položka by měla mít globální identifikátory, které jsou standardizované v prostředí Webu.
-                </p>
-              </div>
-              
-              <p>
-                Jak ukazují příklady výše, každá položka číselníku má vždy minimálně svůj kód a název.
-                Hodnotou položky číselníku ale nemusí být pouze její název, ale i další vlastnosti, které je potřeba uvádět strukturovaně.
-              </p>
-              
-              <div class="practice">
-                <p class="practicedesc">
-                  <span class="practicelab">Struktorvaný popis položek číselníku</span>
-                  Pro položky číselníku vždy uvádíme ve strukturované podobě minimálně jejich kód a název.
-                  Pokud je to možné a smysluplné, uvádíme též ve strukturované podobě jejich alternativní názvy, definice, popisy, případně další popisné atributy.
-                </p>
-              </div>
-              
-              <p>
-                Stejně tak je potřeba strukturovaným způsobem popsat i samotný číselník.
-              </p>
-              
-              <div class="practice">
-                <p class="practicedesc">
-                  <span class="practicelab">Strukturovaný popis číselníku</span>
-                  Pro číselník vždy uvádíme ve strukturované podobě jeho název a popis.
-                </p>
-              </div>
-              
-              <p>
-                Je potřeba myslet na to, že číselník může být užíván i mimo české jazykové prostředí.
-                Je proto vhodné uvádět také alespoň anglické překlady.
-              </p>
-              
-              <div class="practice">
-                <p class="practicedesc">
-                  <span class="practicelab">Vícejazyčné popisy číselníků a jejich položek</span>
-                  Hodnoty atributů číselníku a jeho položek určené pro čtení člověkem (název, popis, definice, atd.) uvádíme v českém jazyku.
-                  Dále hodnoty uvádíme též v anglickém jazyku.
-                  Existují-li překlady hodnot i do jiných jazyků, uvádíme i tyto hodnoty.
-                  Je-li to technicky možné, jazyk hodnoty explicitně označujeme strojově čitelným způsobem.  
-                </p>
-              </div>
-
-              <p>
-                Jak ukázal příklad výše, položky číselníku mohou mít i externí kódy.
-                Obvykle to znamená, že položky číselníku se referencují na položky jiného číselníku.
-                Reference může mít různý význam.
-                Referencující položka např. může mít stejný význam jako referencovaná položka nebo může být jejich význam blízký nikoliv však stejný.  
-              </p>
-              
-              <div class="practice">
-                <p class="practicedesc">
-                  <span class="practicelab">Reference mezi různými číselníky</span>
-                  Významové souvislosti mezi různými číselníky jsou strukturovaně zaznamenávány v podobě referencí (odkazů).
-                  Jsou-li k dispozici globální identifikátory, jsou referencovány (odkazovány) tyto globální identifikátory.
-                </p>
-              </div>
-              
-              <p>
-                Jeden z příkladů výše též ukázal, že může mít smysl udávat též platnost jednotlivých položek číselníků.
-                Jindy může být vhodné uvést platnost celého číselníku, která se pak vztahuje na všechny položky.
-                Nebo může být potřebné uvést kombinaci, tj. platnost celého číselníku a platnost některých položek ještě dále upravit.
-                Platnost číselníku nebo položky číselníku uvádí, v jakém časovém období byl, je nebo bude číselník nebo položka číselníku používán.  
-              </p>
-              
-              <div class="practice">
-                <p class="practicedesc">
-                  <span class="practicelab">Platnost číselníku a položek</span>
-                  Je-li to možné a vhodné, uvádíme platnost číselníku, příp. jendotlivých položek, ve strukturované podobě.
-                </p>
-              </div>
-
-            </section>
-            
         </section>
+        
+        <section id="dobrá-praxe">
+        
+          <h2>Dobrá praxe při publikaci číselníku</h2>
+
+          <p>
+            Při publikaci číselníku je doporučováno dodržet dobrou praxi popsanou v této kapitole.
+            <a href="#propojená-data">Publikace číselníku v podobě propojených dat</a> zároveň zajišťuje, že je této dobré praxe dosaženo dle řady doporučení W3C.
+          </p>
+
+          <p>
+            Jak bylo uvedeno výše, číselník definuje přípustné hodnoty datového prvku.
+            Číselník tedy definuje výčtový typ.
+            Vlastnosti, které mají výčtový typ přiřazen jako svůj datový typ pak nabývají hodnot z příslušného číselníku.
+            Uvažujme např. smlouvy. Každá smlouva má vlastnost <code>hodnota smlouvy</code>.
+            Hodnota smlouvy má pak 2 vlastnosti strukturující hodnotu smlouvy: <code>částka</code> a <code>měna</code>.
+            Typem vlastnosti <code>částka</code> je celé kladné číslo.
+            Typem vlastnosti <code>měna</code> je výčtový datový typ definovaný číselníkem měn.
+            Hodnotou vlastnosti <code>měna</code> je kód položky z tohoto číselníku.
+            Kód položky tedy musí být v rámci číselníku unikátní, abychom se na ni mohli odkazovat.
+          </p>
+          
+          <p>
+            Může existovat více datových sad, jejichž některé vlastnosti mají výčtový typ se stejnou sémantikou.
+            V našem případě existují různé datové sady se smlouvami, které obsahují hodnoty smluv dělené na částku a měnu.
+            Navíc existují datové sady s veřejnými zakázkami, vědeckými projekty financovanými z veřejných zdrojů, apod.
+            Všechny tyto datové sady v nějaké části obsahují částky a jejich měny.
+            Pro zajištění interoperability mezi takovými datovými sadami (tj. minimalizace pracnosti jejich integrace) je nutné používat pro měny jeden a ten samý číselník.
+            To v žádném případě neznamená kopírování číselníku a používání těchto kopií, což by vedlo k nekonzistencím.
+            Je nutné, aby byl daný číselník spravován a následně publikován pouze na jednom místě jako jedna datová sada.
+            Ostatní datové sady potom číselník a jeho jednotlivé položky referencují.
+            Je tedy nutné umožnit takové referencování.
+            To znamená, aby položky neměly jen kód pro jejich lokální identifikaci v rámci číselníku, ale aby měly přiřazeny i globální identifikátor v prostředí Webu.
+            Globální identifikátor je vhodný též pro samotný číselník.
+            Pro referencování položek číselníku v jakékoliv datové sadě (smlouvy, veřejné zakázky, projekty, atd.) jsou potom používány tyto globální identifikátory.  
+          </p>
+          
+          <div class="practice">
+            <p class="practicedesc">
+              <span class="practicelab">Globální identifikátory</span>
+              Číselník a každá jeho položka by měla mít globální identifikátory, které jsou standardizované v prostředí Webu.
+            </p>
+          </div>
+          
+          <p>
+            Jak ukazují příklady výše, každá položka číselníku má vždy minimálně svůj kód a název.
+            Hodnotou položky číselníku ale nemusí být pouze její název, ale i další vlastnosti, které je potřeba uvádět strukturovaně.
+          </p>
+          
+          <div class="practice">
+            <p class="practicedesc">
+              <span class="practicelab">Struktorvaný popis položek číselníku</span>
+              Pro položky číselníku vždy uvádíme ve strukturované podobě minimálně jejich kód a název.
+              Pokud je to možné a smysluplné, uvádíme též ve strukturované podobě jejich alternativní názvy, definice, popisy, případně další popisné atributy.
+            </p>
+          </div>
+          
+          <p>
+            Stejně tak je potřeba strukturovaným způsobem popsat i samotný číselník.
+          </p>
+          
+          <div class="practice">
+            <p class="practicedesc">
+              <span class="practicelab">Strukturovaný popis číselníku</span>
+              Pro číselník vždy uvádíme ve strukturované podobě jeho název a popis.
+            </p>
+          </div>
+          
+          <p>
+            Je potřeba myslet na to, že číselník může být užíván i mimo české jazykové prostředí.
+            Je proto vhodné uvádět také alespoň anglické překlady.
+          </p>
+          
+          <div class="practice">
+            <p class="practicedesc">
+              <span class="practicelab">Vícejazyčné popisy číselníků a jejich položek</span>
+              Hodnoty atributů číselníku a jeho položek určené pro čtení člověkem (název, popis, definice, atd.) uvádíme v českém jazyku.
+              Dále hodnoty uvádíme též v anglickém jazyku.
+              Existují-li překlady hodnot i do jiných jazyků, uvádíme i tyto hodnoty.
+              Je-li to technicky možné, jazyk hodnoty explicitně označujeme strojově čitelným způsobem.  
+            </p>
+          </div>
+
+          <p>
+            Jak ukázal příklad výše, položky číselníku mohou mít i externí kódy.
+            Obvykle to znamená, že položky číselníku se referencují na položky jiného číselníku.
+            Reference může mít různý význam.
+            Referencující položka např. může mít stejný význam jako referencovaná položka nebo může být jejich význam blízký nikoliv však stejný.  
+          </p>
+          
+          <div class="practice">
+            <p class="practicedesc">
+              <span class="practicelab">Reference mezi různými číselníky</span>
+              Významové souvislosti mezi různými číselníky jsou strukturovaně zaznamenávány v podobě referencí (odkazů).
+              Jsou-li k dispozici globální identifikátory, jsou referencovány (odkazovány) tyto globální identifikátory.
+            </p>
+          </div>
+          
+          <p>
+            Jeden z příkladů výše též ukázal, že může mít smysl udávat též platnost jednotlivých položek číselníků.
+            Jindy může být vhodné uvést platnost celého číselníku, která se pak vztahuje na všechny položky.
+            Nebo může být potřebné uvést kombinaci, tj. platnost celého číselníku a platnost některých položek ještě dále upravit.
+            Platnost číselníku nebo položky číselníku uvádí, v jakém časovém období byl, je nebo bude číselník nebo položka číselníku používán.  
+          </p>
+          
+          <div class="practice">
+            <p class="practicedesc">
+              <span class="practicelab">Platnost číselníku a položek</span>
+              Je-li to možné a vhodné, uvádíme platnost číselníku, příp. jendotlivých položek, ve strukturované podobě.
+            </p>
+          </div>
+
+        </section>
+
     </body>
 </html>
