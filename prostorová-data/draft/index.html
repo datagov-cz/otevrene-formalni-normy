@@ -107,12 +107,10 @@
                     <p>
                         Formát byl vytvořen OGC a je specifikován ve standardech <a href="https://www.opengeospatial.org/standards/sfa">Simple Feature Access</a> a ISO 19125.
                         Je vhodný především k zápisu 2D geometrií, jako je point, multipoint, line, polyline, polygon apod.
-                        Ve WKT je také možné definovat souřadnicové systémy a transformovat souřadnice.
-                        Reprezentace souřadnic ve WKT je nicméně bez definovaného souřadnicového systému.
-                        Většina knihoven pro zpracování WKT očekává data v souřadnicovém referenčním systému WGS 84, nicméně souřadnice můžou být v libovolném souřadnicovém referenčním systému.
-                        Použitý souřadnicový referenční systém by měl být uveden v datech.
+                        Většina knihoven pro zpracování WKT očekává data v souřadnicovém referenčním systému WGS 84, souřadnice ale mohou být v libovolném souřadnicovém referenčním systému.
+                        Samotná reprezentace souřadnic ve WKT je nicméně bez definovaného souřadnicového systému.
+                        Použitý souřadnicový referenční systém by tedy měl být uveden jinde v datech.
                         V <a href="#geosparql">GeoSPARQL</a> je souřadnicový referenční systém pro WKT uveden před objektem, je možné ho tam uvádět i ve vektorových formátech.
-
                     </p>
                 </section>
 
@@ -258,7 +256,7 @@
                 Existuje několik způsobů zápisu kódu souřadncových referenčních systémů, ale dle doporučení OGC je nejvhodnější používat zápis ve formě HTTP URI http://opengis.net/def/crs/EPSG/0/[kód], například http://opengis.net/def/crs/EPSG/0/4326.
                 Tento zápis formou HTTP URI je doporučen i touto otevřenou formální normou.
                 Často se lze setkat i se zápisem ve formě URN (urn:ogc:def:crs:EPSG::4326) nebo jeho zkrácené formě (EPSG:4326).
-                Zkrácený zápis má opačné pořadí souřadnic v případě souřadnicových refrenčních systémů, které mají standardně osy nastavené jinak než v kartézském systému souřadnic (typicky například WGS 84 nebo ETRS 89, viz dále).
+                Zkrácený zápis má opačné pořadí souřadnic v případě souřadnicových refrenčních systémů, které mají standardně osy nastavené jinak než v kartézském systému souřadnic (typicky například WGS 84 nebo ETRS89, viz dále).
                 Registr obsahuje celou řadu souřadnicových referenčních systémů, které opatřuje kódem.
                 V České republice jsou nejčastěji využívány souřadnicové referenční systémy uvedené níže.
                 Souřadnicové referenční systémy jsou rozlišovány geografické a projektované (využívající projekci geografického souřadnicového referenčního systému).
@@ -324,7 +322,7 @@
             </section>
 
             <section id="souřadnicové-referenční-systémy-etrs">
-                <h3>European Terrestrial Reference System (ETRS-89)</h3>
+                <h3>European Terrestrial Reference System (<abbr title="European Terrestrial Reference System 1989">ETRS89</abbr>)</h3>
 
                 <p>
                     European Terrestrial Reference System - je geografický souřadnicový referenční systém zpřesňující WGS 84 pro území Evropy.
@@ -616,16 +614,18 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
               <h3>GeoSPARQL</h3>
                 <p>
                     K reprezentaci prostorových objektů GeoSPARQL využívá <a href="standardy-wkt">WKT</a> i <a href="#standardy-gml">GML</a>.
-                    Data je možné serializovat stejnými způsoby jako v otevřené formální normě pro Propojená data.
+                    Data je možné serializovat stejnými způsoby jako v <a href="../../propojená-data/">otevřené formální normě pro Propojená data</a>.
                     Příklady, jak publikovat prostorová propojená data, jsou v této otevřené formální normě publikována v serializaci Turtle ([[turtle]]).
-                    Geosparql je standard, ontologie a dotazovací jazyk.
-                    Ontologie definuje třídy SpatialObject, Feature, Geometry a její specializace a vztahy mezi nimi (viz obrázek).
+                    GeoSPARQL je standard, ontologie a dotazovací jazyk.
+                    Ontologie definuje třídy <code>SpatialObject</code>, <code>Feature</code>, <code>Geometry</code> a její specializace a vztahy mezi nimi (viz obrázek).
                 </p>
 
                 <div style="width:image width px; font-size:80%; text-align:center;"><img src="obrázky/GeoSPARQL-geometry.png" alt="GeoSPARQL Ontology" width="80%" height="auto" align="center"/><br/>Schéma ontologie GeoSPARQL.</div>
 
                 <p>
-                    Objekt, který lze definovat v prostoru, je typu geo:Feature. Vyjádření geometrie je samostatný objekt typu geo:Geometry. Vztah mezi těmito objekty je:
+                    Objekt, který lze definovat v prostoru, je typu <code>geo:Feature</code>.
+					Vyjádření geometrie je samostatný objekt typu <code>geo:Geometry</code>.
+					Vztah mezi těmito objekty je:
                 </p>
 
                 <aside class="example" title="GeoSPARQL objekty">
@@ -708,12 +708,15 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
             <p>
                 Kromě výše uvedených služeb standardizovaných OGC jsou ještě hojně používané služby Web Map Service [[!wms]] a Web Map Tile Service [[!wmts]].
                 Nejedná se však o služby poskytující otevřená data - služby poskytují pouze otisk dat ve formě obrázku.
-                Přesto jsou vhodné k prohlížení dat nebo jako podkladové vrstvy ve webových prohlížečkách.
+                Přesto jsou vhodné k prohlížení dat nebo jako podkladové vrstvy ve webových prohlížečích.
             </p>
 
             <p>
                 Pokud jsou data organizace poskytována nebo zpracovávána externím subjektem - například firmou zpracovávající územní plán - měli by zadavatelé trvat na odevzdání práce v některém z otevřených formátů prostorových dat.
-                Podstatné je vyhnout se uzavřeným formátům (mezi nejčastěji používané uzavřené formáty patří DWG, DGN, ESRI GeoDatabase a další).
+			</p>
+			<p class="warning">
+                Podstatné je vyhnout se uzavřeným formátům.
+				Mezi nejčastěji používané uzavřené formáty patří DWG, DGN, ESRI GeoDatabase a další.
                 Stejně tak je vhodné vyhnout se proprietárním službám pro publikaci dat, které používají některé GIS softwary.
                 Data publikovaná prostřednictvím těchto služeb nelze považovat za otevřená.
                 Služby nebývají podporovány existujícími softwary třetích stran a licenční podmínky jejich využití nebývají transparentní.
@@ -742,7 +745,7 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
 
         </section>
 
-        <section id="metadata">
+        <section id="metadata" class="informative">
             <h2>Metadata</h2>
 
             <p>
@@ -761,7 +764,7 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
 
             <p>
                 Metadata o vektorových datech by měla obsahovat popis atributů a poskytovaných datových formátů.
-                Metadata o rastrových datech by měla obsahovat velikost pixelu, počet řádků a sloupců, počet kanálů, hodnotu no data, typ a hloubku pixelu, velikost nekomprimovaného rastru a minimální a maximální hodnotu kanálů.
+                Metadata o rastrových datech by měla obsahovat velikost pixelu, počet řádků a sloupců, počet kanálů, hodnotu <code>no data</code>, typ a hloubku pixelu, velikost nekomprimovaného rastru a minimální a maximální hodnotu kanálů.
                 Pro vektorová i rastrová data by metadata měla obsahovat použitý souřadnicový referenční systém, informace o aktuálnosti a úplnosti dat, o jejich územním rozsahu, o způsobech publikace, o použité licenci a kvalitě dat a o poskytovateli dat a kontakt na něj.
                 V současné době je cílem dostat všechny tyto informace do Metadatového profilu ČR.
             </p>
@@ -772,10 +775,10 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
 
             <p>
                 V roce 2007 vešla v platnost směrnice 2007/2/ES <a href="https://inspire.ec.europa.eu/">INSPIRE</a> (Infrastructure for Spatial Information in Europe), která si klade za cíl standardizovat publikaci prostorových dat v Evropě.
-                Data rozděluje do 34 témat na základě obsahu a definuje strukturu, v jaké by data měla být poskytována.
-                Směrnice dále vyžaduje užívání standardů, které v tomto textu již byly několikrát zmíněny, jako je využití formátu GML, publikace dat prostřednictvím webových služeb OGC WFS, OGC WCS nebo pomocí ATOM, opatření dat i služeb metadaty podle standardů ISO 19115 a 19119 a jejich správu použitím služby OGC CSW.
-                Směrnice je v České republice implementována novelou zákona <a href=""https://www.zakonyprolidi.cz/cs/1998-123>123/1998 sb.</a>, o právu na informace o životním prostředí, a vyhláškou <a href="https://www.zakonyprolidi.cz/cs/2010-103">103/2010 sb</a>.
-                V případě publikace dat orgánem veřejné správy je vhodné pokusit se publikovat data v souladu se směrnicí INSPIRE a to i v případě, že se nejedná o povinného poskytovatele ve smyslu implementace této směrnice zákonem 123/1998 sb.
+                Data rozděluje do <a href="https://inspire.ec.europa.eu/Themes/Data-Specifications/2892">34 témat</a> na základě obsahu a definuje strukturu, v jaké by data měla být poskytována.
+                Směrnice dále vyžaduje užívání standardů, které v tomto textu již byly zmíněny, jako je využití formátu GML, publikace dat prostřednictvím webových služeb OGC WFS, OGC WCS nebo pomocí ATOM, opatření dat i služeb metadaty podle standardů ISO 19115 a 19119 a jejich správu použitím služby OGC CSW.
+                Směrnice je v České republice implementována novelou <a href="https://www.zakonyprolidi.cz/cs/1998-123">Zákona č. 123/1998 Sb.</a>, o právu na informace o životním prostředí, a <a href="https://www.zakonyprolidi.cz/cs/2010-103">Vyhláškou č. 103/2010 Sb.</a>.
+                V případě publikace dat orgánem veřejné správy je vhodné pokusit se publikovat data v souladu se směrnicí INSPIRE a to i v případě, že se nejedná o povinného poskytovatele ve smyslu implementace této směrnice <a href="https://www.zakonyprolidi.cz/cs/1998-123">Zákonem č. 123/1998 Sb.</a>
             </p>
 
         </section>
@@ -789,9 +792,9 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
 				Datové formáty, které jsou podporovány sdružením OGC, by měly být podporovány prostřednictvím <a href="https://www.gdal.org/">knihovny GDAL</a>.
 				Tu implementuje většina software určených pro správu prostorových dat.
 				Mezi nejvýznamnější open-source projekty, které bez problému umožňují načítání dat ve formátech GML, GeoJSON, GeoPackage, CSV nebo Shapefile, ale které umí i stahovat nebo zobrazovat data prostřednictvím služeb WFS, WCS, WMS nebo WMTS, patří <a href="#software-qgis">QGIS</a> nebo <a href="#software-grass">Grass GIS</a>.
-				Seznam dalších open source GIS software je na wikipedii <a href="https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software">https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software</a>.
+				Seznam dalších open source GIS software je <a href="https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software">na Wikipedii</a>.
 				Nejpoužívanějším GIS software v České republice však zůstává komerční <a href="#software-arcgis">ArcGIS</a>, přestože řadu standardů nepodporuje nebo podporuje velmi omezeně.
-				Základní srovnání ArcGIS a QGIS je na webu <a href="https://gisgeography.com/qgis-arcgis-differences/">https://gisgeography.com/qgis-arcgis-differences/</a>.
+				K dispozici je také <a href="https://gisgeography.com/qgis-arcgis-differences/">základní srovnání ArcGIS a QGIS</a>.
 			</p>
 
 			<section id="software-qgis">
@@ -800,14 +803,15 @@ Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,C
 					Open source projekt <a href="https://www.qgis.org/">QGIS</a>, dříve Quantum GIS je jedním z nejstabilnějších a nejrychleji se rozvíjejících GIS projektů.
 					V aktuální verzi 3.x podporuje GML, GeoJSON, GeoPackage, Shapefile, standardy WFS (i ve verzi 2.0), WCS, WMS i WMTS.
 					Software využívá knihovnu GDAL, některé její části byly implementovány přednostně, na jiné se ještě čeká.
-					Zpracování komplexních typů v GML nebo zpracování dotazu GetFeatureInfo za použití importů schémat zůstávají problematické.
+					Zpracování komplexních typů v GML nebo zpracování dotazu <code>GetFeatureInfo</code> za použití importů schémat zůstávají problematické.
 				</p>
 			</section>
 
 			<section id="software-grass">
 				<h3>Grass GIS</h3>
 				<p>
-					<a href="https://grass.osgeo.org/">Grass GIS</a> patří mezi nejstarší a nejsilnější nástroje pro správu a analýzu prostorových informací, zároveň je však poměrně náročný na ovládání a nezkušení uživatelé mohou být ze začátku poměrně zmatení. Jeho prostorové analýzy jsou využívány i v jiných projektech.
+					<a href="https://grass.osgeo.org/">Grass GIS</a> patří mezi nejstarší a nejsilnější nástroje pro správu a analýzu prostorových informací, zároveň je však poměrně náročný na ovládání a nezkušení uživatelé mohou být ze začátku poměrně zmatení.
+					Jeho prostorové analýzy jsou využívány i v jiných projektech.
 					Software využívá knihovnu GDAL a podporuje všechny otevřené standardy, které jsou uvedeny v této otevřené formální normě.
 				</p>
 			</section>
