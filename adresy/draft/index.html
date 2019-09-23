@@ -60,9 +60,9 @@
         <section id="abstract" class="introductory">
             <h2>Abstrakt</h2>
             <p>
-                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování adres.
-                Je navržena jako sdílená norma pro použití v dalších specifických otevřených formálních normách.
-                Norma je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování adres v poskytovaných datech.
+                Tato norma je navržena jako sdílená norma pro použití v dalších, specifických otevřených formálních normách.
+                Norma obsahuje schémata a příklady dat v datovém modelu RDF [[rdf11-concepts]] a ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
             </p>
         </section>
 
@@ -70,23 +70,31 @@
             <h2>Specifikace</h2>
 
             <p>
-                V této sekci jsou definovány vlastnosti adresy.
+                V této sekci jsou definovány jednotlivé položky, které lze použít k určení místa v poskytovaných datech.
+				Příkladem takového místa může být místo konání akce či sídlo organizace.
+				Adresou v této OFN označujeme určení místa v poskytovaných datech zejména pomocí identifikátorů z RÚIAN.
+				
+				Pouze pokud tyto identifikátory nejsou k dispozici, lze použít určení místa pomocí strukturovaných textových položek, v nejhorším případě pouze volným textem.
+				Každopádně je třeba dodržet, že adresa v ČR musí adresní místo určovat jednoznačně (<a href="https://www.zakonyprolidi.cz/cs/2009-111#p29-h">§ 29 písm. h) zákona č. 111/2009 Sb. o základních registrech</a>) a v případě volného textu má předepsanou strukturu (<a href="https://www.zakonyprolidi.cz/cs/2011-359?citace=1#prilohy">Příloha č. 1 k vyhlášce č. 359/2011 Sb. o základním registru územní identifikace, adres a nemovitostí</a>).
+
                 Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+				
+				Tato otevřená formální norma také popisuje mapování jednotlivých položek adresy na <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
             </p>
             
             <p class="note" title="Registr územní identifikace, adres a nemovitostí (RÚIAN)">
-                V České republice funguje od roku 2012 základní registr obsahující identifikátory pro, mimo jiné, všechna adresní místa.
-                Je to <a href="https://www.cuzk.cz/Uvod/Produkty-a-sluzby/RUIAN/RUIAN.aspx">Registr územní identifikace, adres a nemovitostí (RÚIAN)</a> spravovaný <a href="https://www.cuzk.cz/">Českým úřadem zeměměřickým a katastrálním (ČÚZK)</a>.
-                Pro specifikaci konkrétního adresního místa v České republice se tedy vždy použije <a href="#vlastnost-adresa-iri-adresniho-mista">IRI adresního místa</a> z tohoto registru, např. <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code>.
+                V České republice funguje základní registr obsahující identifikátory pro, mimo jiné, všechna adresní místa, již od roku 2012.
+                Je jím <a href="https://www.cuzk.cz/Uvod/Produkty-a-sluzby/RUIAN/RUIAN.aspx">Registr územní identifikace, adres a nemovitostí (RÚIAN)</a> spravovaný <a href="https://www.cuzk.cz/">Českým úřadem zeměměřickým a katastrálním (ČÚZK)</a>.
+                Pro specifikaci konkrétního adresního místa v České republice se tedy použije <a href="#vlastnost-adresa-iri-adresniho-mista">IRI adresního místa</a> z tohoto registru, např. <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code>, které adresní místo jednoznačně určuje.
 				Tato IRI jsou specifikována <a href="https://geoportal.gov.cz/c/document_library/get_file?p_l_id=38571&groupId=10138&folderId=47260&name=DLFE-1801.pdf">Metadatovým profilem ČR verze 4.0</a>.
-                Jakákoliv jiná reprezentace konkrétního adresního místa v České republice není doporučená.
-                Další vlastnosti v této normě pak slouží pro reprezentaci neúplných adres, adres mimo Českou republiku či doplňujících údajů.
             </p>
 
             <section id="třída-adresa">
                 <h3>Adresa</h3>
                 <p>
-                    Poštovní nebo elektronická adresa organizace, osoby, místa nebo události.
+                    Adresou v této OFN označujeme určení místa v poskytovaných datech, zejména pomocí identifikátorů z RÚIAN.
+					Příkladem může být místo konání akce či sídlo organizace.
+					Tato třída odpovídá třídě <a href="http://www.w3.org/ns/locn#Address">Address</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                 </p>
 
                 <section id="vlastnost-adresa-budova">
@@ -151,6 +159,7 @@
                         </dt>
                         <dd>
                             Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu.
+							Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -187,6 +196,7 @@
                         </dt>
                         <dd>
                             Číslo orientační, slouží k orientaci v rámci nadřazené ulice.
+							Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -222,7 +232,8 @@
                             Popis
                         </dt>
                         <dd>
-                            IRI adresního místa
+                            IRI adresního místa.
+							Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#addressId">addressId</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -270,7 +281,7 @@
                 </section>
 
                 <section id="vlastnost-adresa-iri-kraje">
-                    <h4>IRI kraje</h4>
+                    <h4>IRI kraje z roku 1960</h4>
                     <dl>
                         <dt>
                             Vlastnost
@@ -439,6 +450,7 @@
                         </dt>
                         <dd>
                             Číslo místnosti nebo jiné označení místnosti.
+							Hodnota této vlastnosti odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#locatorName">locatorName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -690,7 +702,9 @@
                             Popis
                         </dt>
                         <dd>
-                            Název ulice, která je navázána na adresní místo. Může být vyplněn pouze u obcí, které mají zavedenu uliční síť.
+                            Název ulice, která je navázána na adresní místo.
+							Může být vyplněn pouze u obcí, které mají zavedenu uliční síť.
+							Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#thoroughfare">thoroughfare</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -727,6 +741,7 @@
                         </dt>
                         <dd>
                             Číslo patra nebo jiné označení patra.
+							Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -763,6 +778,7 @@
                         </dt>
                         <dd>
                             Poštovní směrovací číslo.
+							Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#postcode">postcode</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
@@ -799,12 +815,14 @@
                         </dt>
                         <dd>
                             Celá adresa jako jeden řetězec.
+							Text se řídí <a href="https://www.zakonyprolidi.cz/cs/2011-359?citace=1#prilohy">Přílohou č. 1 k vyhlášce č. 359/2011 Sb. o základním registru územní identifikace, adres a nemovitostí</a>.
+							Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#fullAddress">fullAddress</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>Plzeňská 285, 33101, Plasy</code>
+                            <code>Plzeňská 285, 33101 Plasy</code>
                         </dd>
                     </dl>
                 </section>
@@ -870,7 +888,9 @@
                             Popis
                         </dt>
                         <dd>
-                            Znak čísla orientačního, uveden v případě, že je znak k orientačnímu číslu přidělen.
+                            Znak čísla orientačního. Je uveden v případě, že je znak k orientačnímu číslu přidělen.
+							Tato položka nedává smysl bez současného vyplnění <a href="#vlastnost-adresa-cislo-orientacni">čísla orientačního</a>.
+							Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
                         </dd>
                         <dt>
                             Příklad
