@@ -3,34 +3,47 @@
     "$id": "https://data.gov.cz/otevřené-formální-normy/umístění/draft/schémata/umístění.json",
     "name": "Umístění",
     "description": "Specifikace umístění adresou, geometrií či identifikátorem.",
-    "properties": {
-        "název": {
-            "type": "string",
-            "title": "Geografický název",
-            "description": "Geografický název objektu.",
-            "examples": [
-               "Krušné hory"
-            ]
+    "anyOf": [{
+            "required": ["název"],
+            "properties": {
+                "název": {
+                    "type": "string",
+                    "title": "Geografický název",
+                    "description": "Geografický název objektu.",
+                    "examples": [
+                        "Krušné hory"
+                    ]
+                }
+            }
+        }, {
+            "required": ["iri"],
+            "properties": {
+                "iri": {
+                    "type": "string",
+                    "format": "iri",
+                    "title": "Geografický identifikátor",
+                    "description": "Geografický identifikátor objektu.",
+                    "examples": [
+                        "http://publications.europa.eu/resource/authority/continent/ANTARCTICA"
+                    ]
+                }
+            }
         },
-        "iri": {
-            "type": "string",
-            "format": "iri",
-            "title": "Geografický identifikátor",
-            "description": "Geografický identifikátor objektu.",
-            "examples": [
-                "http://publications.europa.eu/resource/authority/continent/ANTARCTICA"
-            ]
+        {
+            "required": ["geometrie"],
+            "properties": {
+                "geometrie": {
+                    "$ref": "https://raw.githubusercontent.com/ropensci/geojsonlint/master/inst/schema/geojson.json"
+                }
+            }
         },
-        "geometrie": {
-            "type": "string",
-            "title": "Geometrie",
-            "description": "Geometrický objekt specifikující umístění.",
-            "examples": [
-                "POINT(50.056 14.434)"
-            ]
-        },
-        "adresa": {
-            "$ref": "https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.json"
+        {
+            "required": ["adresa"],
+            "properties": {
+                "adresa": {
+                    "$ref": "https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.json"
+                }
+            }
         }
-    }
+    ]
 }
