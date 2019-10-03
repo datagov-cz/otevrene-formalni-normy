@@ -8,6 +8,16 @@
         "type": "object",
         "title": "Akce",
         "properties": {
+            "iri": {
+                "$id": "#/items/properties/id",
+                "type": "string",
+                "format": "iri",
+                "title": "Identifikátor",
+                "description": "",
+                "examples": [
+                    "https://brno.cz/zdroj/akce/abcd"
+                ]
+            },
             "název": {
                 "$id": "#/items/properties/název",
                 "type": "string",
@@ -26,201 +36,62 @@
                     "Babylonfest je setkáním společného soužití menšin a seznámení se s jednotlivými kulturami národů, které žijí v Brně. Široké veřejnosti ukazuje tradiční lidovou kulturu a prezentuje život národnostních menšin."
                 ]
             },
-            "id": {
-              "$id": "#/items/properties/id",
-              "type": "Identifi",
-              "title": "Identifikátor",
-              "description": "",
-              "examples": [
-                  "IRI"
-              ]
-            },
-            "pořadatel_fyzická_osoba": {
-              "$ref": "https://data.gov.cz/otevřené-formální-normy/lidé/draft/schémata/člověk.json"
-            },
-            "pořadatel_právnická_osoba": {
-              "$ref": "https://data.gov.cz/otevřené-formální-normy/osoby/draft/schémata/osoba.json"
+            "pořadatel": {
+                "type": "array",
+                "items": {
+                    "$ref": "https://data.gov.cz/otevřené-formální-normy/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
+                }
             },
             "umístění": {
-              "$ref":"https://data.gov.cz/otevřené-formální-normy/umístění/draft/schémata/umístění.json"
+                "type": "array",
+                "items": {
+                    "$ref": "https://data.gov.cz/otevřené-formální-normy/umístění/draft/schémata/umístění.json"
+                }
             },
-            "časový_interval": {
-              "$id": "#/items/properties/časový_interval",
-              "type": "array",
-              "format": "time",
-              "title": "Časový interval",
-              "description": "Časové ohraničení konání události",
-              "items": {
-                  "$id": "#/items/properties/časový_interval/items",
-                  "type": "object",
-                  "properties": {
-                    "datum_začátku": {
-                        "$id": "#/items/properties/časový_interval/items/properties/datum_začátku",
-                        "type": "date",
-                        "title": "Datum začátku intervalu.",
-                        "examples": [
-                            "2019-01-01+01:00"
-                        ]
-                    },
-                    "datum_konce": {
-                        "$id": "#/items/properties/časový_interval/items/properties/datum_konce",
-                        "type": "string",
-                        "title": "Datum konce intervalu.",
-                        "examples": [
-                            "2020-01-01"
-                        ]
-                    },
-                    "čas_začátku": {
-                        "$id": "#/items/properties/časový_interval/items/properties/čas_začátku",
-                        "type": "time",
-                        "title": "Čas začátku intervalu.",
-                        "examples": [
-                            "09:30:00"
-                        ]
-                    },
-                    "čas_konce": {
-                        "$id": "#/items/properties/časový_interval/items/properties/čas_konce",
-                        "type": "time",
-                        "title": "Čas konce intervalu.",
-                        "examples": [
-                            "09:30:10.5+01:00"
-                        ]
-                    },
-                    "datum_a_čas_začátku": {
-                        "$id": "#/items/properties/časový_interval/items/properties/datum_a_čas_začátku",
-                        "type": "dateTime",
-                        "title": "Datum a čas konce intervalu.",
-                        "examples": [
-                            "2019-01-01T09:30:00"
-                        ]
-                    },
-                    "datum_a_čas_konce": {
-                        "$id": "#/items/properties/časový_interval/items/properties/datum_a_čas_konce",
-                        "type": "dateTime",
-                        "title": "Datum a čas konce intervalu.",
-                        "examples": [
-                            "2019-01-01T09:30:10.5+01:00"
-                        ]
-                    }
-                  }
-              }
+            "trvání": {
+                "type": "array",
+                "items": {
+                    "$ref": "https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/schémata/časový-interval.json"
+                }
             },
             "kontakt": {
-              "$id": "#/items/properties/kontakt",
-              "type": "array",
-              "title": "Kontakt",
-              "items": {
-                  "$id": "#/items/properties/kontakt/items",
-                  "type": "object",
-                  "properties": {
-                      "email": {
-                          "$id": "#/items/properties/kontakt/items/properties/email",
-                          "type": "string",
-                          "title": "E-mail",
-                          "description": "Kontaktní e-mailová adresa",
-                          "examples": [
-                              "otevrenadata@mvcr.cz"
-                          ]
-                      },
-                      "idds": {
-                          "$id": "#/items/properties/kontakt/items/properties/idds",
-                          "type": "string",
-                          "title": "ID datové schránky",
-                          "description": "ID datové schránky.",
-                          "examples": [
-                              "abcdef"
-                          ]
-                      },
-                      "mobil": {
-                          "$id": "#/items/properties/kontakt/items/properties/mobil",
-                          "type": "string",
-                          "title": "Mobilní telefon",
-                          "description": "Telefonní číslo na mobilní telefon.",
-                          "examples": [
-                              "+4200123456789"
-                          ]
-                      },
-                      "telefon": {
-                          "$id": "#/items/properties/kontakt/items/properties/telefon",
-                          "type": "string",
-                          "title": "Telefon",
-                          "description": "Telefonní číslo na pevnou linku.",
-                          "examples": [
-                              "+420123456789"
-                          ]
-                      },
-                      "facebook": {
-                          "$id": "#/items/properties/kontakt/items/properties/facebook",
-                          "type": "string",
-                          "title": "Účet na Facebooku",
-                          "description": "Uživatelské jméno na Facebooku.",
-                          "examples": [
-                              "MinisterstvoobranyCeskerepubliky"
-                          ]
-                      },
-                      "instagram": {
-                          "$id": "#/items/properties/kapitola_rozpočtu/items/properties/instagram",
-                          "type": "string",
-                          "title": "Účet na Instagramu",
-                          "description": "Uživatelské jméno na Instagramu.",
-                          "examples": [
-                              "ceskystatistickyurad"
-                          ]
-                      },
-                      "twitter": {
-                          "$id": "#/items/properties/kontakt/items/properties/twitter",
-                          "type": "string",
-                          "title": "Účet na Twitteru",
-                          "description": "Uživatelské jméno na Twitteru.",
-                          "examples": [
-                              "vnitro"
-                          ]
-                      },
-                      "url": {
-                          "$id": "#/items/properties/kontakt/items/properties/url",
-                          "type": "anyURI",
-                          "title": "Adresa na webu",
-                          "description": "Webová kontaktní adresa.",
-                          "examples": [
-                              "https://data.gov.cz/"
-                          ]
-                      }
-                  }
-              }
+                "type": "array",
+                "items": {
+                    "$ref": "https://data.gov.cz/otevřené-formální-normy/kontakty/draft/schémata/kontakt.json"
+                }
             },
             "vstupné": {
-              "$id": "#/items/properties/vstupné",
-              "type": "string",
-              "title": "Vstupné",
-              "description": "Tato třída reprezentuje položku vstupné.",
-              "items": {
-                  "$id": "#/items/properties/vstupné/items",
-                  "type": "object",
-                  "properties": {
-                    "název": {
-                        "$id": "#/items/properties/vstupné/items/properties/název",
-                        "type": "string",
-                        "title": "Název typu vstupného",
-                        "description": "Název typu vstupného.",
-                        "examples": [
-                            "Pro dospělé"
-                        ]
-                    },
-                    "podmínka": {
-                        "$id": "#/items/properties/vstupné/items/properties/podmínka",
-                        "type": "string",
-                        "title": "Podmínka",
-                        "description": "Podmínky vstupného.",
-                        "examples": [
-                            "Občané starší 18 let, kteří nevyužívají slevy (ZTP, studenti)."
-                        ]
-                    },
-                    "částka": {
-                       "$ref": "https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/schémata/částka.json"
-                  }
-              }
+                "type": "array",
+                "items": {
+                    "$id": "#/items/properties/vstupné/items",
+                    "type": "object",
+                    "title": "Vstupné",
+                    "description": "Typ vstupného",
+                    "properties": {
+                        "název": {
+                            "$id": "#/items/properties/vstupné/items/properties/název",
+                            "type": "string",
+                            "title": "Název typu vstupného",
+                            "description": "Název typu vstupného.",
+                            "examples": [
+                                "Pro dospělé"
+                            ]
+                        },
+                        "podmínka": {
+                            "$id": "#/items/properties/vstupné/items/properties/podmínka",
+                            "type": "string",
+                            "title": "Podmínka",
+                            "description": "Podmínky vstupného.",
+                            "examples": [
+                                "Občané starší 18 let, kteří nevyužívají slevy (ZTP, studenti)."
+                            ]
+                        },
+                        "částka": {
+                            "$ref": "https://data.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/schémata/částka.json"
+                        }
+                    }
+                }
             }
-          }
         }
     }
 }
