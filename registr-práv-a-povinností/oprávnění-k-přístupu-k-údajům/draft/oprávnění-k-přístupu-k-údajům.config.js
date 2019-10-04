@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-oprávnění-k-přístupu-k-údajům",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-převod-úkonů-v-rámci-působnosti",
 	showPreviousVersion: false,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/převod-úkonů-v-rámci-působnosti/2019-04-03/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/převod-úkonů-v-rámci-působnosti/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/převod-úkonů-v-rámci-působnosti/2019-04-03/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/převod-úkonů-v-rámci-působnosti/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",

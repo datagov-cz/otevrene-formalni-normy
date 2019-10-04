@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-agendy",
 	showPreviousVersion: true,
-    previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendy/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendy/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/agendy/",
+    previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/agendy/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/agendy/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/agendy/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

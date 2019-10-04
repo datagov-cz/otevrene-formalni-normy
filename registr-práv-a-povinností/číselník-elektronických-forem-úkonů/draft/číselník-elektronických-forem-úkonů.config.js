@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-elektronických-forem-úkonů",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-elektronických-forem-úkonů/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-elektronických-forem-úkonů/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-elektronických-forem-úkonů/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-elektronických-forem-úkonů/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-elektronických-forem-úkonů/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-elektronických-forem-úkonů/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-států",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-států/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-států/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-států/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-států/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-států/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-států/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

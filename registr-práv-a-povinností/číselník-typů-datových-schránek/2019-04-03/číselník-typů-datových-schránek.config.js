@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-číselník-typů-datových-schránek",
 	showPreviousVersion: false,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/2019-04-03/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-datových-schránek/2019-04-03/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-datových-schránek/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",

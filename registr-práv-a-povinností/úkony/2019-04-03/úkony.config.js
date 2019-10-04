@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-úkony",
 	showPreviousVersion: false,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/úkony/2019-04-03/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/úkony/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/úkony/2019-04-03/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/úkony/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",
