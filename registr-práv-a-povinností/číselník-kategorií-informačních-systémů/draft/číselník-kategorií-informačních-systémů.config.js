@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-kategorií-informačních-systémů",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-kategorií-informačních-systémů/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-kategorií-informačních-systémů/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-kategorií-informačních-systémů/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-kategorií-informačních-systémů/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

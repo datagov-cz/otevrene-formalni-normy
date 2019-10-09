@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-orgány-veřejné-moci",
 	showPreviousVersion: false,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/orgány-veřejné-moci/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",

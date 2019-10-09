@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-typů-datových-schránek",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-datových-schránek/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-datových-schránek/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-datových-schránek/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-datových-schránek/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

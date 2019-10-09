@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-veřejnoprávní-smlouvy",
 	showPreviousVersion: false,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/veřejnoprávní-smlouvy/2019-04-03/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/veřejnoprávní-smlouvy/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/veřejnoprávní-smlouvy/2019-04-03/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/veřejnoprávní-smlouvy/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",

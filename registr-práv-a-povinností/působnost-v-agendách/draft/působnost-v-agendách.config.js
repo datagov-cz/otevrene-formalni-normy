@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-působnost-v-agendách",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/působnost-v-agendách/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/působnost-v-agendách/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/působnost-v-agendách/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

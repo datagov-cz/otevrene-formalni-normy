@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-právních-forem",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-právních-forem/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-právních-forem/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-právních-forem/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-právních-forem/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-právních-forem/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-právních-forem/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

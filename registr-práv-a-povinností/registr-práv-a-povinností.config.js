@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-agendy",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

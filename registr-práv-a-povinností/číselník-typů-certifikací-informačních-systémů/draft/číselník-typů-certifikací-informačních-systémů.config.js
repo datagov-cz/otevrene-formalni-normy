@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-číselník-typů-certifikací-informačních-systémů",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-certifikací-informačních-systémů/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",

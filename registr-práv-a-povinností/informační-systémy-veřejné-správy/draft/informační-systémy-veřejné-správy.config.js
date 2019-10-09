@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-informační-systémy-veřejné-správy",
 	showPreviousVersion: true,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/informační-systémy-veřejné-správy/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/informační-systémy-veřejné-správy/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/informační-systémy-veřejné-správy/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/informační-systémy-veřejné-správy/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",
