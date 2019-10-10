@@ -371,42 +371,87 @@ faktura:A123 faktura:stránka &quot;https://data.gov.cz/&quot;^^xsd:anyURI ;
                 <section id="řetězec">
                     <h4>Řetězec</h4>
                     <p>
-                        Pro reprezentaci kódů, textů a jiných jednoduchých hodnot, kterým neodpovídá žádný existující datový typ z jazyka XML Schema [[!xmlschema11-2-20120405]], se použije <code>xsd:string</code> v kódování UTF-8.
+                        Pro reprezentaci kódů a jiných jednoduchých hodnot, kterým neodpovídá žádný existující datový typ z jazyka XML Schema [[!xmlschema11-2-20120405]], se použije <code>xsd:string</code> v kódování UTF-8.
                         U všech formátů je třeba dodržovat pravidla pro nahrazování speciálních znaků, které se v textech mohou vyskytovat.
-                        Pokud se jedná o texty v přirozeném jazyce, formáty XML a RDF umožňují přímo v datech specifikovat, ve kterém jazyce text je.
-                        U formátu CSV je toto možno dospecifikovat ve schématu souboru.
+                        Pokud se ale jedná o text v přirozeném jazyce, jako je název, popis apod., je třeba využít datový typ <a href="#text-v-přirozeném-jazyce">text v přirozeném jazyce</a>.
                     </p>
                     
                     <aside class="example" title="Řetězec v JSON">
                         <pre class="json">
 {
-    &quot;název&quot;: &quot;Název faktury&quot;,
-    &quot;popis&quot;: &quot;Popis faktury&quot;
+    &quot;kód&quot;: &quot;AA-23&quot;,
 }</pre>
                     </aside>
 
 
                     <aside class="example" title="Řetězec v XML">
                         <pre class="xml">
-&lt;název xml:lang=&quot;cs&quot;&gt;Název faktury v češtině&lt;/název&gt;
-&lt;popis xml:lang=&quot;en&quot;&gt;English description of the invoice&lt;/popis&gt;</pre>
+&lt;kód&gt;AA-23&lt;/kód&gt;</pre>
                     </aside>
 
                     <aside class="example" title="Řetězec v CSV">
                         <pre class="csv">
-název,popis
-Název faktury,&quot;Popis faktury&quot;</pre>
+kód
+AA-23</pre>
                     </aside>
 
                     <aside class="example" title="Řetězec v RDF Turtle">
                         <pre class="turtle">
-faktura:A123 faktura:název &quot;Název faktury v češtině&quot;@cs ;
-             faktura:popis &quot;English description of the invoice&quot;@en .
+:A123 skos:notation &quot;AA-23&quot; .
 </pre>
                     </aside>
                     
                 </section>
             
+                <section id="text">
+                    <h4>Text</h4>
+                    <p>
+                        Pro texty v přirozeném jazyce je třeba specifikovat, v jakém jazyce jsou.
+                        Tato informace se pak dá využít ve vícejazyčných aplikacích či automatických překladačích.
+                    </p>
+                    
+                    <p>
+                        Ve formátu JSON je třeba dodržet <a href="schémata/vícejazyčný-text.json">schéma pro vícejazyčné texty</a>.
+                    </p>
+                    
+                    <aside class="example" title="Řetězec v JSON">
+                        <pre class="json">
+{
+    "název": {
+        "cs": "Název faktury",
+        "en": "Label of the invoice"
+    }
+}</pre>
+                    </aside>
+
+                    <p>
+                        Formáty XML a RDF umožňují přímo v datech specifikovat, ve kterém jazyce text je.
+                    </p>
+
+                    <aside class="example" title="Řetězec v XML">
+                        <pre class="xml">
+&lt;název xml:lang=&quot;cs&quot;&gt;Název faktury&lt;/název&gt;
+&lt;název xml:lang=&quot;en&quot;&gt;Label of the invoice&lt;/název&gt;</pre>
+                    </aside>
+
+                    <aside class="example" title="Řetězec v RDF Turtle">
+                        <pre class="turtle">
+faktura:A123 faktura:název &quot;Název faktury&quot;@cs, &quot;Label of the invoice&quot;@en .
+</pre>
+                    </aside>
+
+                    <p>
+                        U formátu CSV je toto možno specifikovat pro každý sloupec ve schématu souboru, a také promítnout v názvu sloupce.
+                    </p>
+                    
+                    <aside class="example" title="Řetězec v CSV">
+                        <pre class="csv">
+název_cs,název_en
+Název faktury,&quot;Label of the invoice&quot;</pre>
+                    </aside>
+
+                </section>
+
             </section>
             
             <section id="složené-datové-typy">
@@ -644,14 +689,14 @@ množství: a gr:QuantitativeValue ;
                     </section>  
                 
                     <aside class="example" title="Jednotková částka v JSON">
-						<p>
-							<a href="příklady/částka.json">Stáhnout JSON</a>, <a href="schémata/částka.json">JSON Schema</a>
-						</p>
+                        <p>
+                            <a href="příklady/částka.json">Stáhnout JSON</a>, <a href="schémata/částka.json">JSON Schema</a>
+                        </p>
                         <pre class="json">
 {
-	"výše": 48151623.42,
-	"měna": "CZK",
-	"jednotka": "KGM"
+    "výše": 48151623.42,
+    "měna": "CZK",
+    "jednotka": "KGM"
 }</pre>
                     </aside>
 
