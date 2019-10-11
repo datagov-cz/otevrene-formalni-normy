@@ -753,9 +753,9 @@ zaplaceno: a gr:UnitPriceSpecification ;
                     <h4>Časový okamžik</h4>
                     <p>
                         Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času.
-						Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy <a href="#datum">datum</a>, <a href="#čas">čas</a> či <a href="#datum-a-čas">datum a čas</a>.
-						Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici.
-						Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.
+                        Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy <a href="#datum">datum</a>, <a href="#čas">čas</a> či <a href="#datum-a-čas">datum a čas</a>.
+                        Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici.
+                        Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.
                     </p>
 
                     <section id="časový-okamžik-datum">
@@ -886,6 +886,10 @@ instant: a time:Instant ;
 </pre>
                     </aside>
 
+                    <p class="note" title="Špatná praxe v reprezentaci časových intervalů">
+                        Pokud je časový okamžik vždy určen datem a časem, pak je třeba použít vlastnosti s datovým typem <a href="#datum-a-čas">Datum a čas</a>, nikoliv dvojici vlastností kde je datum a čas odděleně.
+                    </p>
+
                 </section>
 
                 <section id="časový-interval">
@@ -951,23 +955,33 @@ instant: a time:Instant ;
                         </p>
                         <pre class="json">
 {
-    "začátek": "2019-07-31",
-    "konec": "2019-07-31"
+    "začátek": {
+        "datum": "2019-07-31"
+    },
+    "konec": {
+        "datum": "2020-07-31"
+    }
 }</pre>
                     </aside>
 
 
                     <aside class="example" title="Časový interval (čas) v XML">
                         <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;interval&gt;
-   &lt;čas_začátku&gt;09:00:00&lt;/čas_začátku&gt;
-   &lt;čas_konce&gt;10:00:00&lt;/čas_konce&gt;
-&lt;/interval&gt;</pre>
+    &lt;začátek&gt;
+        &lt;datum&gt;2019-08-01&lt;/datum&gt;
+    &lt;/začátek&gt;
+    &lt;konec&gt;
+        &lt;datum&gt;2020-08-01&lt;/datum&gt;
+    &lt;/konec&gt;
+&lt;/interval&gt;
+</pre>
                     </aside>
 
                     <aside class="example" title="Časový interval (datum a čas) v CSV">
                         <pre class="csv">
-datum_a_čas_začátku,datum_a_čas_konce
+začátek_datum_a_čas,konec_datum_a_čas
 2019-01-01T09:30:10.5+01:00,2020-01-01T09:30:10.5+01:00</pre>
                     </aside>
 
@@ -984,10 +998,6 @@ interval: schema:startDate "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime ;
           schema:endDate "2020-01-01T09:30:10.5+01:00"^^xsd:dateTime .
 </pre>
                     </aside>
-
-                    <p class="note" title="Špatná praxe v reprezentaci časových intervalů">
-                        Pokud je časový interval vždy určen datem a časem, pak je třeba použít vlastnosti s datovým typem <a href="#datum-a-čas">Datum a čas</a>, nikoliv dvojici vlastností kde je datum a čas odděleně.
-                    </p>
                     
                 </section>
 
