@@ -1,72 +1,73 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:deska="https://ofn.gov.cz/úřední-desky/" xmlns:adresa="https://ofn.gov.cz/adresy/" targetNamespace="https://ofn.gov.cz/úřední-desky/" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="https://ofn.gov.cz/adresy/" schemaLocation="https://ofn.gov.cz/adresy/draft/schémata/adresa.xsd"/>
-	<xs:complexType name="úřední_deska">
-		<xs:sequence maxOccurs="unbounded">
-			<xs:element name="url" type="xs:string" minOccurs="0"/>
-			<xs:element name="provozovatel" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:element name="ičo" type="xs:string" minOccurs="0"/>
-						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="oznámení" type="deska:oznámení"/>
-			<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="oznámení">
-		<xs:sequence>
-			<xs:element name="identifikátor" type="xs:string" minOccurs="0"/>
-			<xs:element name="autor" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="název" type="xs:string"/>
-			<xs:element name="anotace" type="xs:string" minOccurs="0"/>
-			<xs:element name="zveřejněno" type="xs:date" minOccurs="0"/>
-			<xs:element name="zveřejněno_čas" type="xs:time" minOccurs="0"/>
-			<xs:element name="sejmuto" type="xs:date" minOccurs="0"/>
-			<xs:element name="sejmuto_čas" type="xs:time" minOccurs="0"/>
-			<xs:element name="schváleno" type="xs:date" minOccurs="0"/>
-			<xs:element name="schváleno_čas" type="xs:time" minOccurs="0"/>
-			<xs:element name="značka" type="xs:string" minOccurs="0"/>
-			<xs:element name="číslo_jednací" type="xs:string" minOccurs="0"/>
-			<xs:element name="revize" type="xs:string" minOccurs="0"/>
-			<xs:element name="agenda" minOccurs="0" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:sequence maxOccurs="unbounded">
-						<xs:element name="název" type="xs:string" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="dokument" minOccurs="0" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:sequence minOccurs="0">
-						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
-						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="subjekt" minOccurs="0" maxOccurs="unbounded">
-				<xs:complexType>
-					<xs:sequence minOccurs="0">
-						<xs:element name="název" type="xs:string" minOccurs="0"/>
-						<xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
-						<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:element name="úřední_deska" type="deska:úřední_deska"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:deska="https://ofn.gov.cz/úřední-desky/" xmlns:adresa="https://ofn.gov.cz/adresy/" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/" targetNamespace="https://ofn.gov.cz/úřední-desky/" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:import namespace="https://ofn.gov.cz/adresy/" schemaLocation="https://ofn.gov.cz/adresy/draft/schémata/adresa.xsd"/>
+    <xs:import namespace="https://ofn.gov.cz/základní-datové-typy/" schemaLocation="https://ofn.gov.cz/základní-datové-typy/draft/schémata/základní-datové-typy.xsd"/>
+    <xs:complexType name="úřední_deska">
+        <xs:sequence maxOccurs="unbounded">
+            <xs:element name="url" type="xs:string" minOccurs="0"/>
+            <xs:element name="provozovatel" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="název" type="xs:string" minOccurs="0"/>
+                        <xs:element name="ičo" type="xs:string" minOccurs="0"/>
+                        <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="adresa" type="adresa:adresa" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="oznámení" type="deska:oznámení"/>
+            <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="oznámení">
+        <xs:sequence>
+            <xs:element name="identifikátor" type="xs:string" minOccurs="0"/>
+            <xs:element name="autor" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="název" type="xs:string" minOccurs="0"/>
+                        <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+            <xs:element name="název" type="základ:text" maxOccurs="unbounded"/>
+            <xs:element name="anotace" type="základ:text" minOccurs="0"/>
+            <xs:element name="zveřejněno" type="xs:date" minOccurs="0"/>
+            <xs:element name="zveřejněno_čas" type="xs:time" minOccurs="0"/>
+            <xs:element name="sejmuto" type="xs:date" minOccurs="0"/>
+            <xs:element name="sejmuto_čas" type="xs:time" minOccurs="0"/>
+            <xs:element name="schváleno" type="xs:date" minOccurs="0"/>
+            <xs:element name="schváleno_čas" type="xs:time" minOccurs="0"/>
+            <xs:element name="značka" type="xs:string" minOccurs="0"/>
+            <xs:element name="číslo_jednací" type="xs:string" minOccurs="0"/>
+            <xs:element name="revize" type="xs:string" minOccurs="0"/>
+            <xs:element name="agenda" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="název" type="základ:text" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="dokument" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence minOccurs="0">
+                        <xs:element name="název" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+                        <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="subjekt" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence minOccurs="0">
+                        <xs:element name="název" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="adresa" type="adresa:adresa" minOccurs="0"/>
+                        <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="úřední_deska" type="deska:úřední_deska"/>
 </xs:schema>
