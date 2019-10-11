@@ -749,21 +749,23 @@ zaplaceno: a gr:UnitPriceSpecification ;
                     
                 </section>
                 
-                <section id="časový-interval">
-                    <h4>Časový interval</h4>
+                <section id="časový-okamžik">
+                    <h4>Časový okamžik</h4>
                     <p>
-                        Pro reprezentaci časových intervalů je potřeba buď uvést jejich začátek a konec, a nebo pouze jeden údaj, pokud ten druhý není znám, ale je známo, že se jedná o interval.
-                        Časový interval může začínat a končit buďto datumem, časem a nebo kombinací data a času.
+                        Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času.
+						Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy <a href="#datum">datum</a>, <a href="#čas">čas</a> či <a href="#datum-a-čas">datum a čas</a>.
+						Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici.
+						Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.
                     </p>
 
-                    <section id="časový-interval-datum-začátku">
-                        <h5>Datum začátku</h5>
+                    <section id="časový-okamžik-datum">
+                        <h5>Datum</h5>
                         <dl>
                             <dt>
                                 Vlastnost
                             </dt>
                             <dd>
-                                <code>datum_začátku</code>
+                                <code>datum</code>
                             </dd>
                             <dt>
                                 Typ
@@ -775,7 +777,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Jméno
                             </dt>
                             <dd>
-                                Datum začátku intervalu.
+                                Datum okamžiku.
                             </dd>
                             <dt>
                                 Příklad
@@ -787,45 +789,14 @@ zaplaceno: a gr:UnitPriceSpecification ;
 
                     </section>
 
-                    <section id="časový-interval-datum-konce">
-                        <h5>Datum konce</h5>
+                    <section id="časový-okamžik-čas">
+                        <h5>Čas</h5>
                         <dl>
                             <dt>
                                 Vlastnost
                             </dt>
                             <dd>
-                                <code>datum_konce</code>
-                            </dd>
-                            <dt>
-                                Typ
-                            </dt>
-                            <dd>
-                                <a href="#datum">Datum</a>
-                            </dd>
-                            <dt>
-                                Jméno
-                            </dt>
-                            <dd>
-                                Datum konce intervalu.
-                            </dd>
-                            <dt>
-                                Příklad
-                            </dt>
-                            <dd>
-                                <code>2020-01-01</code>
-                            </dd>
-                        </dl>
-
-                    </section>
-
-                    <section id="časový-interval-čas-začátku">
-                        <h5>Čas začátku</h5>
-                        <dl>
-                            <dt>
-                                Vlastnost
-                            </dt>
-                            <dd>
-                                <code>čas_začátku</code>
+                                <code>čas</code>
                             </dd>
                             <dt>
                                 Typ
@@ -837,7 +808,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Jméno
                             </dt>
                             <dd>
-                                Čas začátku intervalu.
+                                Čas okamžiku.
                             </dd>
                             <dt>
                                 Příklad
@@ -849,45 +820,14 @@ zaplaceno: a gr:UnitPriceSpecification ;
 
                     </section>
                     
-                    <section id="časový-interval-čas-konce">
-                        <h5>Čas konce</h5>
+                    <section id="časový-okamžik-datum-a-čas">
+                        <h5>Datum a čas</h5>
                         <dl>
                             <dt>
                                 Vlastnost
                             </dt>
                             <dd>
-                                <code>čas_konce</code>
-                            </dd>
-                            <dt>
-                                Typ
-                            </dt>
-                            <dd>
-                                <a href="#čas">Čas</a>
-                            </dd>
-                            <dt>
-                                Jméno
-                            </dt>
-                            <dd>
-                                Čas konce intervalu.
-                            </dd>
-                            <dt>
-                                Příklad
-                            </dt>
-                            <dd>
-                                <code>09:30:10.5+01:00</code>
-                            </dd>
-                        </dl>
-
-                    </section>
-
-                    <section id="časový-interval-datum-a-čas-začátku">
-                        <h5>Datum a čas začátku</h5>
-                        <dl>
-                            <dt>
-                                Vlastnost
-                            </dt>
-                            <dd>
-                                <code>datum_a_čas_začátku</code>
+                                <code>datum_a_čas</code>
                             </dd>
                             <dt>
                                 Typ
@@ -899,7 +839,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Jméno
                             </dt>
                             <dd>
-                                Datum a čas začátku intervalu.
+                                Datum a čas začátku okamžiku.
                             </dd>
                             <dt>
                                 Příklad
@@ -911,32 +851,95 @@ zaplaceno: a gr:UnitPriceSpecification ;
 
                     </section>
 
-                    <section id="časový-interval-datum-a-čas-konce">
-                        <h5>Datum a čas konce</h5>
+                    <aside class="example" title="Časový okamžik (datum) v JSON">
+                        <p>
+                            <a href="příklady/časový-okamžik.json">Stáhnout JSON</a>, <a href="schémata/časový-okamžik.json">JSON Schema</a>
+                        </p>
+                        <pre class="json">
+{
+    "datum": "2019-07-31"
+}</pre>
+                    </aside>
+
+
+                    <aside class="example" title="Časový okamžik (čas) v XML">
+                        <pre class="xml">
+&lt;okamžik&gt;
+   &lt;čas&gt;09:00:00&lt;/čas&gt;
+&lt;/okamžik&gt;</pre>
+                    </aside>
+
+                    <aside class="example" title="Časový okamžik (datum a čas) v CSV">
+                        <pre class="csv">
+datum_a_čas
+2019-01-01T09:30:10.5+01:00</pre>
+                    </aside>
+
+                    V datovém formátu RDF se pro specifikaci časového okamžiku používá slovník Time Ontology [[owl-time]].
+                    
+                    <aside class="example" title="Částka v RDF Turtle">
+                        <pre class="turtle">
+@prefix time:  &lt;http://www.w3.org/2006/time#&gt; .
+                        
+instant: a time:Instant ;
+    time:inXSDDateTime "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime .
+</pre>
+                    </aside>
+
+                </section>
+
+                <section id="časový-interval">
+                    <h4>Časový interval</h4>
+                    <p>
+                        Pro reprezentaci časových intervalů je potřeba buď uvést jejich začátek a konec, a nebo pouze jeden údaj, pokud ten druhý není znám, ale je známo, že se jedná o interval.
+                        Časový interval začíná a končí časovým okamžikem.
+                    </p>
+
+                    <section id="časový-interval-začátek">
+                        <h5>Začátek</h5>
                         <dl>
                             <dt>
                                 Vlastnost
                             </dt>
                             <dd>
-                                <code>datum_a_čas_konce</code>
+                                <code>začátek</code>
                             </dd>
                             <dt>
                                 Typ
                             </dt>
                             <dd>
-                                <a href="#datum-a-čas">Datum a čas</a>
+                                <a href="#časový-okamžik">Časový okamžik</a>
                             </dd>
                             <dt>
                                 Jméno
                             </dt>
                             <dd>
-                                Datum a čas konce intervalu.
+                                Okamžik začátku intervalu.
                             </dd>
+                        </dl>
+
+                    </section>
+
+                    <section id="časový-interval-konec">
+                        <h5>Konec</h5>
+                        <dl>
                             <dt>
-                                Příklad
+                                Vlastnost
                             </dt>
                             <dd>
-                                <code>2019-01-01T09:30:10.5+01:00</code>
+                                <code>konec</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="#časový-okamžik">Časový okamžik</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Okamžik konce intervalu.
                             </dd>
                         </dl>
 
@@ -948,8 +951,8 @@ zaplaceno: a gr:UnitPriceSpecification ;
                         </p>
                         <pre class="json">
 {
-    "datum_začátku": "2019-07-31",
-    "datum_konce": "2019-07-31"
+    "začátek": "2019-07-31",
+    "konec": "2019-07-31"
 }</pre>
                     </aside>
 
