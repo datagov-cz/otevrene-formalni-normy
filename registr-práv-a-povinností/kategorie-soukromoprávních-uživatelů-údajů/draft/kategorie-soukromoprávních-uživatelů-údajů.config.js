@@ -2,9 +2,9 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-kategorie-soukromoprávních-uživatelů-údajů",
 	showPreviousVersion: true,
-	previousVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/2019-04-03/",
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/draft/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/2019-04-03/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/draft/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/",
 	editors: [{
 	  name: "Martin Nečaský",
 	  url: "https://martin.necasky.solid.community/profile/card#me",

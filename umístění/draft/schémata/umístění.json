@@ -1,0 +1,49 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://ofn.gov.cz/umístění/draft/schémata/umístění.json",
+    "name": "Umístění",
+    "description": "Specifikace umístění adresou, geometrií či identifikátorem.",
+    "anyOf": [{
+            "required": ["název"],
+            "properties": {
+                "název": {
+                    "type": "string",
+                    "title": "Geografický název",
+                    "description": "Geografický název objektu.",
+                    "examples": [
+                        "Krušné hory"
+                    ]
+                }
+            }
+        }, {
+            "required": ["iri"],
+            "properties": {
+                "iri": {
+                    "type": "string",
+                    "format": "iri",
+                    "title": "Geografický identifikátor",
+                    "description": "Geografický identifikátor objektu.",
+                    "examples": [
+                        "http://publications.europa.eu/resource/authority/continent/ANTARCTICA"
+                    ]
+                }
+            }
+        },
+        {
+            "required": ["geometrie"],
+            "properties": {
+                "geometrie": {
+                    "$ref": "https://raw.githubusercontent.com/ropensci/geojsonlint/master/inst/schema/geojson.json"
+                }
+            }
+        },
+        {
+            "required": ["adresa"],
+            "properties": {
+                "adresa": {
+                    "$ref": "https://ofn.gov.cz/adresy/draft/schémata/adresa.json"
+                }
+            }
+        }
+    ]
+}

@@ -2,8 +2,8 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-číselník-typů-rozhodnutí-založení",
 	showPreviousVersion: false,
-	thisVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/2019-04-03/",
-	latestVersion: "https://data.gov.cz/otevřené-formální-normy/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/2019-04-03/",
+	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/číselník-typů-rozhodnutí-založení/",
 	publishDate: "2019-04-03",
 	editors: [{
 	  name: "Martin Nečaský",

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://data.gov.cz/otevřené-formální-normy/úřední-desky/draft/schémata/úřední-deska.json",
+    "$id": "https://ofn.gov.cz/úřední-desky/draft/schémata/úřední-deska.json",
     "name": "Oznámení na úřední desce",
     "type": "object",
     "description": "Seznam všech oznámení na úřední desce (informace o platnosti, obsahu a odkazy na konkrétní dokumenty).",
@@ -14,8 +14,12 @@
                 "https://example.com/uredni_deska"
             ]
         },
-        "adresa":  { "$ref": "https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.json" },
-        "provozovatel": { "$ref": "https://data.gov.cz/otevřené-formální-normy/osoby/draft/schémata/osoba.json" },
+        "provozovatel": {
+            "$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/osoba.json"
+        },
+        "umístění": {
+            "$ref": "https://ofn.gov.cz/umístění/draft/schémata/umístění.json"
+        },
         "oznámení": {
             "type": "array",
             "name": "Oznámení",
@@ -30,21 +34,6 @@
                             "P2018-13"
                         ]
                     },
-                    "autor": {
-                        "type": "object",
-                        "title": "Autor oznámení",
-                        "description": "Původní autor oznámení.",
-                        "properties": {
-                            "název": {
-                                "type": "string",
-                                "title": "Název",
-                                "description": "Původní autor oznámení. Název.",
-                                "examples": [
-                                    "Obec Dolní Datová"
-                                ]
-                            }
-                        }
-                    },
                     "url": {
                         "type": "string",
                         "format": "iri",
@@ -55,73 +44,16 @@
                         ]
                     },
                     "název": {
-                        "type": "string",
-                        "title": "Název",
-                        "description": "Název oznámení",
-                        "examples": [
-                            "Dotační program Hasiči 2018"
-                        ]
+                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
                     },
                     "anotace": {
-                        "type": "string",
-                        "title": "Anotace",
-                        "description": "Krátké shrnutí oznámení, anotace, abstrakt.",
-                        "examples": [
-                            "Program na podporu dobrovolných hasičů v roce 2018"
-                        ]
+                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
                     },
                     "zveřejněno": {
-                        "type": "string",
-                        "format": "date",
-                        "title": "Zveřejněno od",
-                        "description": "Datum zveřejnění oznámení na úřední desce.",
-                        "examples": [
-                            "2018-01-03"
-                        ]
-                    },
-                    "zveřejněno_čas": {
-                        "type": "string",
-                        "format": "time",
-                        "title": "Zveřejněno od - čas",
-                        "description": "Čas zveřejnění oznámení na úřední desce. Jedná se o upřesňující údaj k zveřejněno.",
-                        "examples": [
-                            "11:12:13"
-                        ]
-                    },
-                    "sejmuto": {
-                        "type": "string",
-                        "format": "date",
-                        "title": "Sejmuto, zveřejněno do",
-                        "description": "Datum, do kdy je oznámení zveřejněno na úřední desce. Může jít o údaj v budoucnu (do kdy bude oznámení zveřejněno) i v minulosti (do kdy bylo oznámení zveřejněno).",
-                        "examples": [
-                            "2018-01-03"
-                        ]
-                    },
-                    "sejmuto_čas": {
-                        "type": "string",
-                        "title": "Sejmuto, zveřejněno do - čas",
-                        "description": "Čas, do kdy je oznámení zveřejněno na úřední desce.  Může jít o údaj v budoucnu (do kdy bude oznámení zveřejněno) i v minulosti (do kdy bylo oznámení zveřejněno).  Jedná se o upřesňující údaj k sejmuto",
-                        "examples": [
-                            "11:12:13"
-                        ]
+                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-interval.json"
                     },
                     "schváleno": {
-                        "type": "string",
-                        "format": "date",
-                        "title": "Schváleno",
-                        "description": "Datum vydání/schválení oznámení.",
-                        "examples": [
-                            "2017-12-31"
-                        ]
-                    },
-                    "schváleno_čas": {
-                        "type": "string",
-                        "format": "time",
-                        "title": "Schváleno - čas",
-                        "description": "Čas vydání/schválení oznámení. Doplňující údaje k schváleno.",
-                        "examples": [
-                            "11:12:13"
-                        ]
+                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
                     },
                     "značka": {
                         "type": "string",
@@ -147,25 +79,26 @@
                             "20180101"
                         ]
                     },
-                    "agenda": {
+                    "autor": {
+                        "$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
+                    },
+                    "subjekt": {
                         "type": "array",
-                        "title": "Agenda",
-                        "description": "Agendy, kategorie, správní činnosti, pod které spadá oznámení.",
+                        "title": "Subjekty oznámení",
+                        "description": "Osoby, organizace a místa, kterých se oznámení týká.",
                         "items": {
                             "type": "object",
-                            "title": "Agenda",
-                            "description": "Agenda, kategorie, správní činnost, pod které spadá oznámení.",
+                            "title": "Subjekt oznámení",
+                            "description": "Osoby, organizace nebo místa, kterého se oznámení týká.",
                             "properties": {
                                 "název": {
-                                    "název": {
-                                        "type": "string",
-                                        "title": "Název",
-                                        "description": "Název agendy.",
-                                        "examples": [
-                                            "dotace",
-                                            "přenesená působnost"
-                                        ]
-                                    }
+                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+                                },
+                                "člověk_či_osoba": {
+                                    "$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
+                                },
+                                "umístění": {
+                                    "$ref": "https://ofn.gov.cz/umístění/draft/schémata/umístění.json"
                                 }
                             }
                         }
@@ -178,12 +111,7 @@
                             "description": "Další dokumenty k oznámení. Přílohy.",
                             "properties": {
                                 "název": {
-                                    "type": "string",
-                                    "title": "Název",
-                                    "description": "Další dokument/y. Název dokumentu.",
-                                    "examples": [
-                                        "Příloha 1", "Příloha 2"
-                                    ]
+                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
                                 },
                                 "url": {
                                     "type": "string",
@@ -197,25 +125,18 @@
                             }
                         }
                     },
-                    "subjekt": {
+                    "agenda": {
                         "type": "array",
-                        "title": "Subjekty oznámení",
-                        "description": "Osoby, organizace a místa, kterých se oznámení týká.",
+                        "title": "Agenda",
+                        "description": "Agendy, kategorie, správní činnosti, pod které spadá oznámení.",
                         "items": {
                             "type": "object",
-                            "title": "Subjekt oznámení",
-                            "description": "Osoby, organizace nebo místa, kterého se oznámení týká.",
+                            "title": "Agenda",
+                            "description": "Agenda, kategorie, správní činnost, pod které spadá oznámení.",
                             "properties": {
                                 "název": {
-                                    "type": "string",
-                                    "title": "Název",
-                                    "description": "Název subjektu, kterého se oznámení týká.",
-                                    "examples": [
-                                        "Sbor dobrovolných hasičů Dolní Datová"
-                                    ]
-                                },
-                                "adresa":  { "$ref": "https://data.gov.cz/otevřené-formální-normy/adresy/draft/schémata/adresa.json" },
-                                "umístění": { "$ref": "https://raw.githubusercontent.com/ropensci/geojsonlint/master/inst/schema/geojson.json"}
+                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+                                }
                             }
                         }
                     }
