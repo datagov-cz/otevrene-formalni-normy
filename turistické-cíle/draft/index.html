@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Turistické cíle</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "turistické cíle",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:turisticke-cile",
+                thisVersion: "https://ofn.gov.cz/turistické-cíle/draft/",
+                latestVersion: "https://ofn.gov.cz/turistické-cíle/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  url: "mailto:dvorka.martini92@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  url: "mailto:spal.robert@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  url: "mailto:marek.jiri.openaccess@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o turistických cílech jakéhokoliv druhu - od přírodních cílů typu hora Sněžka, řeka Morava po kulturní památky typu Karlův most nebo hrad Špilberk.  
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací dostupných o turistických cílech.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="Přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu turistických cílů" src="obrázky/Turistické cíle.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1Aa-W6R7c1WH1i9hAiyab58ci7gRHBYVh/view?usp=sharing">
+                        Diagram datového modelu turistických cílů
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis turistických cílů.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-akce">
+                <h3>Turistický cíl</h3>
+                <p>
+                    Tato třída reprezentuje samotný turistický cíl.
+                </p>
+
+                <section id="vlastnost-turistický-cíl-iri">
+                    <h4>Identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>iri</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">IRI</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Indentifikátor daného turistického cíle
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            IRI turistického cíle
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://www.spilberk.cz/</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-turistický-cíl-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název turistického cíle.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Hrad Špilberk</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-turistický-cíl-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis daného cíle.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Špilberk (německy Spielberg, v hantecu Špilas) je hrad a pevnost tvořící dominantu města Brna. Nachází se na vrcholu stejnojmenného kopce, který leží v městské části Brno-střed, na západě katastrálního území Město Brno.</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-turistický-cíl-obrázek">
+                    <h4>Obrázek</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obrázek</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#url/">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obrázek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Obrázek daného objektu.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://upload.wikimedia.org/wikipedia/commons/4/47/Mesto_Brno_-_hrad_Spilberk.jpg</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-turistický-cíl-kouření">
+                    <h4>Kouření</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kouření</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kouření
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Určuje, zda je možné kouření tabákových výrobků. 
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Ano</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                <section id="vlastnost-turistický-cíl-přístupnost-pro-veřejnost">
+                    <h4>Přístupnost pro veřejnost</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>přístupnost_pro_veřejnost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Přístupnost pro veřejnost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Určuje zda je daný objekt veřejně přístupný.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Ano</code>
+                        </dd>
+                    </dl>
+                     </section>
+                     
+                <section id="vlastnost-turistický-cíl-kapacita">
+                    <h4>Kapacita</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kapacita</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#cel%C3%A9-%C4%8D%C3%ADslo">Celé číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kapacita
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kapacita daného objektu. 
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>500</code>
+                        </dd>
+                    </dl>
+
+                </section>    
+
+                <section id="vazba-turistický-cíl-provozovatel">
+                    <h4>Vazba: Provozovatel</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>provozovatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/draft/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Provozovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Provozovatel daného objektu.
+                        </dd>
+                    </dl>
+
+                </section>  
+                
+                <section id="vazba-turistický-cíl-vlastník">
+                    <h4>Vazba: Vlastník</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vlastník</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/draft/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vlastník
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vlastník daného objektu.
+                        </dd>
+                    </dl>
+
+                </section>  
+                
+
+                <section id="vazba-turistický-cíl-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/draft/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění daného objektu.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace objektu.
+                        </dd>
+                    </dl>
+
+                </section>  
+            
+                <section id="vazba-turistický-cíl-kontakt">
+                    <h4>Vazba: Kontakt</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>kontakt</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../kontakty/draft/#třída-kontakt">Kontakt</a>  
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontakt
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kontaktní údaje na provozovatele.
+                        </dd>
+                    </dl>
+
+                </section>          
+
+                <section id="vazba-turistický-cíl-bezbariérovost">
+                    <h4>Vazba: Bezbariérovost</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>bezbariérovost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../bezbariérovost/draft/#třída-bezbariérovost">Bezbariérovost</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Bezbariérovost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis typu bezbariérového přístupu a formy přístupnosti.
+                        </dd>
+                    </dl>
+
+                </section>
+            
+                <section id="vazba-sportoviště-vstupné">
+                    <h4>Vazba: Vstupné</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vstupné</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../vstupné/draft/#třída-vstupné">Vstupné</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vstupné
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název typu vstupného, podmínka udělení vstupného a celková výše vstupného.
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vazba-turistický-cíl-otevírací-doba">
+                    <h4>Vazba: Otevírací doba</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>otevírací_doba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../otevírací_doba/draft/#třída-otevírací_doba">Otevírací doba</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Otevírací doba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Otevírací doba daného objektu.
+                        </dd>
+                    </dl>
+
+                </section>                
+
+                <section id="vazba-turistický-cíl-typ-turistického-cíle">
+                    <h4>Vazba: Typ turistického cíle</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ_turistického_cíle</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/turistický-cíl/draft/#vlastnost-turistický-cíl-typ-turistického-cíle">Typ turistického cíle</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ turistického cíle
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kategorizace daného turistického objektu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Přírodní, kulturní, ...</code>
+                        </dd>                        
+                    </dl>
+
+                </section>   
+
+                <section id="vazba-turistický-cíl-jazyk">
+                    <h4>Vazba: Jazyk</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>jazyk</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/turisticky-cil/draft/#vlastnost-turistický-cíl-jazyk">Jazyk</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Jazyk
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Dostupný jazyk, kterým je objekt průvodcován a popisován.
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Čeština, angličtina, němčina, ...</code>
+                        </dd>                            
+                        </dd>
+                    </dl>
+
+                </section>      
+              
+            </section> 
+                <section id="třída-typ-turistického-cíle">
+                <h3>Typ turistického cíle</h3>
+                <p>
+                    Tato třída reprezentuje typ turistického cíle.
+                </p>
+
+                <section id="vlastnost-typ-turistického-cíle-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#%C5%99et%C4%9Bzec">řetězec</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ turistického cíle
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kategorizace turistického cíle
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Přírodní, kulturní, ...</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+            </section>
+                <section id="třída-jazyk">
+                <h3>Jazyk</h3>
+                <p>
+                    Tato třída reprezentuje jazykovou dostupnost v turistickém objektu.
+                </p>  
+                    <section id="vlastnost-jazyk-kód">
+                    <h4>Kód</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kód</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#retezec">řetězec</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kód dostupného jazyka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kód dostupného jazyka
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>cs</code>
+                        </dd>
+                    </dl>
+
+                    </section>
+                    <section id="vlastnost-jazyk-název">
+                    <h4>Název</h4>
+                        <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#retezec">řetězec</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název dostupného jazyka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název dostupného jazyka
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>čeština</code>
+                        </dd>
+                    </dl>
+
+                    </section>
+                </section>
+            </section>
+             
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci je uveden příklad reprezentace  turistického cíle.
+            </p>
+
+            <section id="příklady-sportoviště">
+                <h3>Komplexní turistický cíl</h3>
+                
+                <p>
+                    Příklady ukazují, jak lze akce reprezentovat.
+                    Všechny položky v této OFN jsou nepovinné, a další lze přidávat dle potřeby.
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Jednoduché oznámení v JSON">
+                    <p>
+                        <a href="příklady/turisticky_cil.json">Stáhnout JSON</a>, <a href="schémata/turisticky_cil.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "iri": "https://www.spilberk.cz/",
+    "název": {
+        "cs": "Hrad Špilberk"
+    },
+    "popis": {
+        "cs": "Špilberk (německy Spielberg, v hantecu Špilas) je hrad a pevnost tvořící dominantu města Brna. Nachází se na vrcholu stejnojmenného kopce, který leží v městské části Brno-střed, na západě katastrálního území Město Brno."
+    },
+    "obrázek": "https://upload.wikimedia.org/wikipedia/commons/4/47/Mesto_Brno_-_hrad_Spilberk.jpg",
+    "kouření": "ano",
+    "přístupnost_pro_veřejnost": "ano",
+    "kapacita": 500,
+    "provozovatel": {
+        "osoba": {
+            "ičo": "60747862 ",
+            "název": "Špilberk"
+        }
+    },
+    "vlastník": [{
+        "osoba": {
+            "ičo": "60747862 ",
+            "název": "Špilberk"
+        }
+    }],
+    "umístění": {
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [16.5995939, 49.1944522]
+        },
+        "adresa": {
+            "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+        }
+    },
+    "kontakt": {
+        "email": "muzeum.brno@spilberk.cz",
+        "mobil": "+420123456789",
+        "facebook": "MuzemměstaBrna",
+        "instagram": "špilberkbrno",
+        "twitter": "špilberkbrno",
+        "url": "https://www.spilberk.cz/"
+    },
+    "bezbariérovost": {
+	      "typ": "pro všechny",
+	      "přístupnost": "objekt přístupný"	
+    },
+    "vstupné": [{
+        "název": {
+            "cs": "Základní vstupné"
+        },
+        "podmínka": {
+            "cs": "Občané, kteří nevyuživají slevy(ZTP, studenti)."
+        },
+        "částka": {
+            "výše": 199,
+            "měna": "CZK"
+        }
+    }, {
+        "název": {
+            "cs": "Studentské"
+        },
+        "podmínka": {
+            "cs": "Po předložení průkazu ISIC"
+        },
+        "částka": {
+            "výše": 99,
+            "měna": "CZK"
+        }
+    }],
+    "otevírací_doba": [{
+	        "název": "letní",
+	        "popis": "od května do října",
+	        "od": "9:00",
+	        "do": "17:00",
+	        "časová platnost": "květen, červen, červenec, srpen, září, říjen"
+    }],
+    "jazyk": [{
+	      "název": {
+            "cs": "čeština"
+        },
+        "kód": {
+            "cs": "cs"
+        }
+    }, {
+        "název": {
+            "cs": "angličtina"
+        },
+        "kód": {
+            "cs": "en"
+        }
+    }],
+    "typ_turistického_cíle": {
+	        "název": {
+            "cs": "kulturní"
+        }
+    }
+}]
+</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
+
