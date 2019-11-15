@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Otevírací doba</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "otevírací-doba",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:otevírací-doba",
+                thisVersion: "https://ofn.gov.cz/otevírací-doba/draft/",
+                latestVersion: "https://ofn.gov.cz/otevírací-doba/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  url: "mailto:dvorka.martini92@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  url: "mailto:spal.robert@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  url: "mailto:marek.jiri.openaccess@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování otevíracích dob.
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování otevíracích dob.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="Přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu otevírací doby" src="obrázky/otevírací-doba.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1mcKDhyqrtrL9QL9APtTJQT_HDQ2leaqO/view?usp=sharing">
+						Diagram datového modelu otevírací doby
+					</a>.
+					Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis otevírací doby.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-otevírací-doba">
+                <h3>Otevírací doba</h3>
+                <p>
+                    Tato třída reprezentuje samotnou zveřejněnou otevírací dobu.
+                </p>
+
+                <section id="vlastnost-otevírací-doba-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název otevírací doby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Zimní otevírací doba</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                
+                <section id="vlastnost-otevírací-doba-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis otevírací doby.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Zimní otevírací doba platí vždy od 1.12. do 31.3. Během této doby není možné využívat venkovní bazen.</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-otevírací-doba-od">
+                    <h4>Od</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>od</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Od
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum od kterého otevírací doba platí.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>2018-12-01</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-otevírací-doba-do">
+                    <h4>Do</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>do</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Do
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum do kterého otevírací doba platí.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>2019-03-31</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-otevírací-doba-den-v-týdnu">
+                    <h4>Den v týdnu</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>den_v_týdnu</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Den v týdnu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Dny v týdnu pro které platí otevírací doba. 
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Pondělí, Středa, Pátek</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+
+                <section id="vazba-otevírací-doba-čas">
+                    <h4>Vazba: Čas</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>čas</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-Otevírací-čas">Časový interval</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Čas
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časový interval v kterém je otevřeno.
+                        </dd>
+                    </dl>
+
+                </section> 
+               
+              
+            </section>
+
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci je uveden příklad reprezentace otevírací doby.
+            </p>
+
+            <section id="příklady-otevírací-doba">
+                <h3>Komplexní otevírací doba</h3>
+                
+                <p>
+                    Příklady ukazují, jak lze otevírací dobu reprezentovat.
+                    Všechny položky v této OFN jsou nepovinné, a další lze přidávat dle potřeby.
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Jednoduché oznámení v JSON">
+                    <p>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/otevírací-doba.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "iri": "https://www.trebic.cz/diky-kamerovemu-systemu-byl-vinik-ihned-dopaden/d-43329",
+    "název": {
+        "cs": "Díky kamerovému systému byl viník ihned dopaden"
+    },
+    "popis": {
+        "cs": "Ve čtvrtek 26. září večer poničilo projíždějící nákladní auto\nčtyři sloupky zábradlí na Masarykově náměstí. Nákladní auto pokračovalo\nv jízdě po ulici Bráfova. Obsluha městského kamerového systému incident zaznamenala, strážníci městské policie\nzastavili auto ve Sportovní ulici a přivolali policisty z oddělení dopravních nehod.\nTi záležitost převzali k dořešení. Během pátečního dopoledne byly následky odstraněny a chodník byl provizorně zabezpečen.\nOprava proběhne během následujících týdnů."
+    },
+    "zveřejněno": "2019-09-27T09:30:00",
+    "relevantní_do": "2019-10-27T09:00:00",
+    "obrázek": "https://www.trebic.cz/assets/Image.ashx?id_org=16973&id_obrazky=62139",
+    "téma": {
+        "cs": "Bezpečnost"
+    },
+    "oznamovatel": [{
+        "osoba": {
+            "ičo": "44992785",
+            "název": {
+                "cs": "Město Třebíč"
+            }
+        }
+    }],  
+    "přílohy": [{
+        "název": {
+            "cs": "Záznam z přepadení"
+        },
+        "url": "https://www.trebic.cz/prilohy/zaznam_z_prepadeni"  
+    }]
+}]</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
+
