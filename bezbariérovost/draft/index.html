@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Bezbariérovost</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "bezbariérovost",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:bezbariérovost",
+                thisVersion: "https://ofn.gov.cz/bezbariérovost/draft/",
+                latestVersion: "https://ofn.gov.cz/bazbariérovost/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  url: "mailto:dvorka.martini92@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  url: "mailto:spal.robert@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  url: "mailto:marek.jiri.openaccess@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o bezbariérovosti ve smyslu fyzické přístupnosti objektu pro fyzicky hendikepované občany. 
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací dostupných o bezbariérovosti.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="Přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu bezbariérovosti" src="obrázky/Bezbariérovost.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1TgDNNcmuBcY8CrAAiQCEWPNhUeTsv161/view?usp=sharing">
+                        Diagram datového modelu bezbariérovosti
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis bezbariérovosti.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-akce">
+                <h3>Bezbariérovost</h3>
+                <p>
+                    Tato třída reprezentuje bezbariérovost
+                </p>
+                
+                <section id="vlastnost-bezbariérovost-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis bezbariérovosti
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Veřejné toalety se nachází v pasáži obchodu. Klíče od toalet pro vozíčkáře má k dispozici každý obchod v pasáži. Toalety jsou bez schodu.
+</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-bezbariérovost-obrázek">
+                    <h4>Obrázek</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obrázek</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#url/">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obrázek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Obrázek daného objektu.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://www.vozejkmap.cz/83465-verejny-zachody-pro-vozickare</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-bezbariérovost-zrakově-omezení">
+                    <h4>Vazba: Zrakově omezení</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>zrakově_omezení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/bezbariérovost/draft/#vlastnost-bezbariérovost-zrakově-omezení">Zrakově omezení</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zrakově omezení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytuje základní přehled o vybavenosti objektu pro zrakově postižené.
+                        </dd>
+                    </dl>
+
+                </section>  
+                
+                <section id="vazba-bezbariérovost-pohybově-omezení">
+                    <h4>Vazba: Pohybově omezení</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>pohybově_omezení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/bezbariérovost/draft/#vlastnost-bezbariérovost-pohybově-postižení">Pohybově omezení</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Pohybově omezení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytuje základní přehled o vybavenosti objektu pro pohybově omezené.
+                        </dd>
+                    </dl>
+
+                </section>
+              
+            </section> 
+                <section id="třída-typ-zrakově-omezení">
+                <h3>Zrakově omezení</h3>
+                <p>
+                    Tato třída reprezentuje přístupnost objektu pro zrakově hendikepované.
+                </p>
+
+                <section id="vlastnost-braillové-písmo">
+                    <h4>Braillové písmo</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>braillové_písmo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Braillové písmo
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Říká, zda je v objektu k dispozici popis v Braillovém písmu. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-hlasový-asistent">
+                    <h4>Hlasový asistent</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>hlasový_asistent</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlasový asistent
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Říká, zda je v objektu k dispozici hlasový asistent. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                <section id="vlastnost-vodící-linie">
+                    <h4>Vodící linie</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vodící_linie</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vodící linie
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Říká, zda jsou v objektu k dispozici vodící linie. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                <section id="vlastnost-asistenční-pes">
+                    <h4>Asistenční pes</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>asistenční_pes</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Asistenční pes
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Říká, zda je v objektu možnost mít k dispozici asistenčního psa. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-hodnocení-přístupnosti">
+                    <h4>Hodnocení přístupnosti</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>hodnocení_přístupnosti</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#text">Text</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hodnocení přístupnosti
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uvádí celkovou přístupnost objektu pro zrakově postižené dle škály. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>přístupný</code>
+                        </dd>
+                    </dl>
+
+                </section>
+            </section>
+                <section id="třída-pohybově-omezení">
+                <h3>Pohybově omezení</h3>
+                <p>
+                    Tato třída reprezentuje přístupnost pro pohybově omezené občany.
+                </p>  
+                    <section id="vlastnost-bezbariérové-parkování">
+                    <h4>Bezbariérové parkování</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>bezbariérové_parkování</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Bezbariérové parkování
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Říká, zda je v objektu umožněno bazbariérově zaparkovat. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                    </section>
+                    <section id="vlastnost-pohybově-omezení-bazbariérový-vstup">
+                    <h4>Bezbariérový vstup</h4>
+                        <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>bezbariérový_vstup</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Bezbariérový vstup
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Říká, zda má objekt bezbariérový vstup. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                    </section>
+                    <section id="vlastnost-pohybově-omezení-bazbariérová-toaleta">
+                        <h4>Bezbariérová toaleta</h4>
+                            <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>bezbariérová_toaleta</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Bezbariérová toaleta
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Říká, zda je v objektu bezbariérová toaleta.  
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>false</code>
+                            </dd>
+                        </dl>
+    
+                        </section>
+
+                        <section id="vlastnost-pohybově-omezení-přístupnost-podlaží">
+                            <h4>Přístupnost podlaží</h4>
+                                <dl>
+                                <dt>
+                                    Vlastnost
+                                </dt>
+                                <dd>
+                                    <code>přístupnost_podlaží</code>
+                                </dd>
+                                <dt>
+                                    Typ
+                                </dt>
+                                <dd>
+                                    <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                                </dd>
+                                <dt>
+                                    Jméno
+                                </dt>
+                                <dd>
+                                    Přístupnost podlaží
+                                </dd>
+                                <dt>
+                                    Popis
+                                </dt>
+                                <dd>
+                                    Říká, zda jsou v objektu všechna podlaží přístupná pro fyzicky hendikepované.  
+                                </dd>
+                                <dt>
+                                    Příklad
+                                </dt>
+                                <dd>
+                                    <code>true</code>
+                                </dd>
+                            </dl>
+        
+                        </section>
+
+                         <section id="vlastnost-pohybově-omezení-asistenční-pes">
+                                <h4>Asistenční pes</h4>
+                                    <dl>
+                                    <dt>
+                                        Vlastnost
+                                    </dt>
+                                    <dd>
+                                        <code>asistenční_pes</code>
+                                    </dd>
+                                    <dt>
+                                        Typ
+                                    </dt>
+                                    <dd>
+                                        <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#boolean">Boolean</a> 
+                                    </dd>
+                                    <dt>
+                                        Jméno
+                                    </dt>
+                                    <dd>
+                                        Asistenční pes
+                                    </dd>
+                                    <dt>
+                                        Popis
+                                    </dt>
+                                    <dd>
+                                        Říká, zda je v objektu možnost mít k dispozici asistenčního psa. 
+                                    </dd>
+                                    <dt>
+                                        Příklad
+                                    </dt>
+                                    <dd>
+                                        <code>true</code>
+                                    </dd>
+                                </dl>
+            
+                                </section>
+
+                                <section id="vlastnost-pohybově-omezení-hodnocení-přístupnosti">
+                                    <h4>Hodnocení přístupnosti</h4>
+                                        <dl>
+                                        <dt>
+                                            Vlastnost
+                                        </dt>
+                                        <dd>
+                                            <code>hodnocení_přístupnosti</code>
+                                        </dd>
+                                        <dt>
+                                            Typ
+                                        </dt>
+                                        <dd>
+                                            <a href="https://ofn.gov.cz/z%C3%A1kladn%C3%AD-datov%C3%A9-typy/draft/#text">Text</a> 
+                                        </dd>
+                                        <dt>
+                                            Jméno
+                                        </dt>
+                                        <dd>
+                                            Bezbariérový vstup
+                                        </dd>
+                                        <dt>
+                                            Popis
+                                        </dt>
+                                        <dd>
+                                            Uvádí celkovou přístupnost objektu pro zrakově postižené dle škály. 
+                                        </dd>
+                                        <dt>
+                                            Příklad
+                                        </dt>
+                                        <dd>
+                                            <code>částečně přístupný</code>
+                                        </dd>
+                                    </dl>
+                
+                                    </section>
+                </section>
+            </section>
+             
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci je uveden příklad reprezentace bezbariérovosti. 
+            </p>
+
+            <section id="příklady-bezbariérovost">
+                <h3>Komplexní bezbariérovost</h3>
+                
+                <p>
+                    Příklady ukazují, jak lze bezbariérovost reprezentovat.
+                    Všechny položky v této OFN jsou nepovinné, a další lze přidávat dle potřeby.
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Jednoduché oznámení v JSON">
+                    <p>
+                        <a href="příklady/Bezbariérovost.json">Stáhnout JSON</a>, <a href="schémata/Bezbariérovost.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "popis": {
+        "cs": "Veřejné toalety se nachází v pasáži obchodu. Klíče od toalet pro vozíčkáře má k dispozici každý obchod v pasáži. Toalety jsou bez schodu."
+    },
+    "obrázek": "https://www.vozejkmap.cz/83465-verejny-zachody-pro-vozickare",
+    "zrakově omezení": {
+        "braillové písmo": true, 
+        "hlasový asistent": true,
+        "vodící linie": true,
+        "asistenční pes": true,
+        "celkové hodnocení": {
+          "cs": "přístupný"
+        }
+    },
+    "pohybově omezení": {
+        "bezbariérové parkování": true,
+        "bezbariérový vstup": true,
+        "bezbariérová toaleta": false,
+        "přístupnost podlaží": true,
+        "asistenční pes": true,
+        "celkové hodnocení": {
+          "cs": "částečně přístupný"
+        }
+    }
+}]
+</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
+
