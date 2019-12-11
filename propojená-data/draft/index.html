@@ -1128,34 +1128,62 @@ GRAPH &lt;https://sociálnísíť.cz/uživatelé&gt; {
 			<p>
 				Propojená data staví na existujících principech uplatňovaných na dnešním webu lidsky čitelných dokumentů - webových stránek.
 				Pro přenos dat je tedy používán protokol HTTP [[rfc7540]], avšak v řadě případů je jeho použití nedostatečné, či dokonce chybné.
-				Jedná se zejména o správný obsah HTTP hlavičky <code>Content-Type</code>, který musí odpovídat formátu přenášených dat.
-				Při přenosu RDF dat se tedy uplatňují následující hodnoty, dle použité RDF serializace:
 			</p>
 			
-			<ul>
-				<li><code>application/n-triples</code></li>
-				<li><code>text/turtle</code></li>
-				<li><code>application/n-quads</code></li>
-				<li><code>application/trig</code></li>
-				<li><code>application/ld+json</code></li>
-				<li><code>application/rdf+xml</code></li>
-			</ul>
+			<section id="pravidla-pro-přenos-propojených-dat-po-Internetu-content-type">
+				<h3>HTTP hlavička <code>Content-Type</code></h3>
+				
+				<p>
+					Jedná se zejména o správný obsah HTTP hlavičky <code>Content-Type</code>, který musí odpovídat formátu přenášených dat.
+					Při přenosu RDF dat se tedy uplatňují následující hodnoty, dle použité RDF serializace:
+				</p>
+				
+				<ul>
+					<li><code>application/n-triples</code></li>
+					<li><code>text/turtle</code></li>
+					<li><code>application/n-quads</code></li>
+					<li><code>application/trig</code></li>
+					<li><code>application/ld+json</code></li>
+					<li><code>application/rdf+xml</code></li>
+				</ul>
+				
+				<p>
+					Dále by měla hlavička <code>Content-Type</code> obsahovat explicitní specifikaci použitého UTF-8 kódování.
+					Celá tedy pak vypadá například takto: <code>text/turtle;charset=utf-8</code>.
+				</p>
+				
+			</section>
 			
-			<p>
-				Dále by měla hlavička <code>Content-Type</code> obsahovat explicitní specifikaci použitého UTF-8 kódování.
-				Celá tedy pak vypadá například takto: <code>text/turtle;charset=utf-8</code>.
-			</p>
+			<section id="pravidla-pro-přenos-propojených-dat-po-Internetu-content-encoding">
+				<h3>HTTP hlavička <code>Content-Encoding</code></h3>
+							
+				<p>
+					Vzhledem k tomu, že RDF serializace jsou textové dokumenty, je vhodné používat při jejich přenosu kompresi, například gzip [[rfc1952]].
+					Komprimovaný obsah pak doprovází hlavička <code>Content-Encoding</code> s hodnotou <code>gzip</code>.
+				</p>
 			
-			<p>
-				Vzhledem k tomu, že RDF serializace jsou textové dokumenty, je vhodné používat při jejich přenosu kompresi, například gzip [[rfc1952]].
-				Komprimovaný obsah pak doprovází hlavička <code>Content-Encoding</code> s hodnotou <code>gzip</code>.
-			</p>
+			</section>
 			
-			<p>
-				V rámci protokolu HTTP může klient požadovat data v konkrétní RDF serializaci, například pokud jde o SPARQL dotaz zaslaný na SPARQL endpoint či webový server zprostředkovávající dereferenci IRI zdroje - poskytnutí RDF dat při přístupu na dané IRI.
-				Ten by měl rozumět HTTP hlavičce <code>Accept</code> s hodnotou specifikující MIME typ požadované serializace.
-			</p>
+			<section id="pravidla-pro-přenos-propojených-dat-po-Internetu-accept">
+				<h3>HTTP hlavička <code>Accept</code></h3>
+							
+				<p>
+					V rámci protokolu HTTP může klient požadovat data v konkrétní RDF serializaci, například pokud jde o SPARQL dotaz zaslaný na SPARQL endpoint či webový server zprostředkovávající dereferenci IRI zdroje - poskytnutí RDF dat při přístupu na dané IRI.
+					Ten by měl rozumět HTTP hlavičce <code>Accept</code> s hodnotou specifikující MIME typ požadované serializace.
+				</p>
+			
+			</section>
 		
+			<section id="pravidla-pro-přenos-propojených-dat-po-Internetu-cors">
+				<h3>Cross-Origin Resource Sharing (CORS)</h3>
+				
+				<p>
+					Pro propojená otevřená data platí, že jednotlivé zdroje a přístupové body (SPARQL endpointy) musí podporovat techniku <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">Cross-Origin Resource Sharing (CORS) (anglicky)</a>, která umožňuje přístup k datům aplikacím běžícím ve webovém prohlížeči.
+					Pokud technika <a href="https://opendata.gov.cz/špatná-praxe:chybějící-cors">podporována není</a>, jedná se o špatnou praxi, jelikož je to překážou ve volném použití dat.
+				</p>				
+							
+			</section>
+			
 		</section>
 		
 		<section id="pravidla-pro-výběr-slovníků-pro-vybrané-typy-dat">
