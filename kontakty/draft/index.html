@@ -32,7 +32,7 @@
                 editors: [{
                   name: "Jakub Klímek",
                   url: "https://jakub.klímek.com/#me",
-				  orcid: "0000-0001-7234-3051",
+                  orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
                   companyURL: "http://www.mvcr.cz"
                 }],
@@ -75,6 +75,42 @@
                 <p>
                     Kontakt na člověka či společnost.
                 </p>
+
+                <section id="vlastnost-kontakt-druh">
+                    <h4>Druh kontaktu</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>druh</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Druh kontaktu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Druh kontaktu, například <code>Oficiální</code>, <code>Neformální</code>, apod.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Neformální</code>
+                        </dd>
+                    </dl>
+                </section>
 
                 <section id="vlastnost-kontakt-email">
                     <h4>E-mail</h4>
@@ -367,7 +403,7 @@
             </section>
             
         </section>
-		
+        
         <section id="příklady">
             <h2>Příklady</h2>
 
@@ -376,7 +412,7 @@
                 Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
                 Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/kontakt.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/kontakt.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
                 Lze také použít zápis v CSV. 
-				Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
+                Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
             </p>
 
             <p class="note">
@@ -577,6 +613,10 @@ otevrenadata@mvcr.cz,+420123456789,jakub_klimek</pre>
                 
                     <pre class="json">
 {
+    "druh": {
+        "cs": "Neformální",
+        "en": "Informal"
+    },
     "email": "otevrenadata@mvcr.cz",
     "idds": "abcdef",
     "mobil": "+420123456789",
@@ -591,17 +631,20 @@ otevrenadata@mvcr.cz,+420123456789,jakub_klimek</pre>
                     </p>
                 
                     <pre class="xml">
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;kontakt:kontakt xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
-xmlns:kontakt=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/&quot;
-xmlns:x=&quot;https://p&rcaron;&iacute;klad.cz&quot;
-xsi:schemaLocation=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/ https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/draft/sch&eacute;mata/kontakt.xsd&quot;&gt;
-&#x9;&lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
-&#x9;&lt;kontakt:idds&gt;abcdef&lt;/kontakt:idds&gt;
-&#x9;&lt;kontakt:telefon&gt;+420123456789&lt;/kontakt:telefon&gt;
-&#x9;&lt;kontakt:mobil&gt;+420123456789&lt;/kontakt:mobil&gt;
-&#x9;&lt;kontakt:url&gt;https://data.gov.cz&lt;/kontakt:url&gt;
-&lt;/kontakt:kontakt&gt;</pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:kontakt="https://ofn.gov.cz/kontakty/"
+xmlns:x="https://příklad.cz"
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/ https://ofn.gov.cz/kontakty/draft/schémata/kontakt.xsd"&gt;
+    &lt;kontakt:druh xml:lang="cs"&gt;Neformální&lt;/kontakt:druh&gt;
+    &lt;kontakt:druh xml:lang="en"&gt;Informal&lt;/kontakt:druh&gt;
+    &lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
+    &lt;kontakt:idds&gt;abcdef&lt;/kontakt:idds&gt;
+    &lt;kontakt:mobil&gt;+420123456789&lt;/kontakt:mobil&gt;
+    &lt;kontakt:telefon&gt;+420123456789&lt;/kontakt:telefon&gt;
+    &lt;kontakt:url&gt;https://data.gov.cz&lt;/kontakt:url&gt;
+&lt;/kontakt:kontakt&gt;
+</pre>
                 </aside>
                 
                 <aside class="example" title="Komplexní kontakt v CSV">
@@ -610,9 +653,8 @@ xsi:schemaLocation=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;
                     </p>
                 
                     <pre class="csv">
-email,idds,mobil,telefon,url
-otevrenadata@mvcr.cz,abcdef,+420123456789,+420123456789,https://data.gov.cz</pre>
-                </aside>
+druh_cs,druh_en,email,idds,mobil,telefon,url
+Neformální,Informal,otevrenadata@mvcr.cz,abcdef,+420123456789,+420123456789,https://data.gov.cz                </aside>
                 
                 <p>
                     A opět je k souboru CSV potřeba připojit <a href="příklady/3.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
@@ -634,6 +676,18 @@ otevrenadata@mvcr.cz,abcdef,+420123456789,+420123456789,https://data.gov.cz</pre
     "tableSchema": {
         "columns": [
             {
+                "name": "druh_cs",
+                "titles": "druh_cs",
+                "dc:description": "Druh kontaktu (česky)",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "druh_en",
+                "titles": "druh_en",
+                "dc:description": "Druh kontaktu (anglicky)",
+                "datatype": "string",
+                "lang": "en"
+            }, {
                 "name": "email",
                 "titles": "email",
                 "dc:description": "Kontaktní e-mailová adresa",
