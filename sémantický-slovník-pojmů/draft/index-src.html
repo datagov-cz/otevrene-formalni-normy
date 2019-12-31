@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="cs"
+  xmlns:gen="https://data.gov.cz/otevřené-formální-normy/generátor">
+  <head>
+    <title>Sémantický slovník pojmů</title>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta name="theme-color" content="#057fa5"/>
+    <meta name="msapplication-TileColor" content="#057fa5"/>
+    <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png"/>
+    <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png"/>
+    <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png"/>
+    <link rel="manifest" href="../../static/favicons/manifest.json"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/ssp.css"/>
+    <script class="remove" src="../../static/js/respec-odcz.js"></script>
+    <script class="remove">
+        var respecConfig = {
+            specStatus: "ED",
+            shortName: "sgov",               
+            showPreviousVersion: true,
+            thisVersion: "https://data.gov.cz/otevřené-formální-normy/sémantický-slovník-pojmů/draft/",
+            latestVersion: "https://data.gov.cz/otevřené-formální-normy/sémantický-slovník-pojmů/",
+            editors: [{
+              name: "Martin Nečaský",
+              url: "https://martin.necasky.solid.community/profile/card#me",
+		          orcid: "0000-0002-5186-7734",
+              company:    "Ministerstvo vnitra",
+              companyURL: "http://www.mvcr.cz"
+            }],
+            inlineCSS: "true",
+            github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+            otherLinks: [{
+              key: "Odkazy",
+              data: [{
+                value: "Portál otevřených dat",
+                href: "https://data.gov.cz"
+              },{
+                value: "Kontaktní e-mail",
+                href: "mailto:otevrenadata@mvcr.cz"
+              }]  
+            }],
+          };
+    </script>
+  </head>
+  <body>
+    <section id="abstract" class="introductory">
+      <h2>Abstrakt</h2>
+      <p>
+        Cílem tohoto dokumentu je stanovit způsob tvorby a publikace sémantického slovníku pojmů veřejné správy České republiky.
+		    Sémantický slovník pojmů je základním prostředkem pro harmonizaci sémantiky dat vedených v informačních systémech veřejné správy ČR.
+        Dokument nejprve definuje pojem sémantický slovník pojmů a popisuje jeho vrstevnatou architekturu.
+        Poté se detailně věnuje jednotlivým vrstvám i ve formě příkladů.
+        Na závěr popisuje metodiku tvorby a zveřejnění sémantického slovníku pojmů.  
+      </p>
+    </section>
+    
+    <section id="úvod">
+      <h2>Úvod</h2>
+			<p>
+				Sémantický slovník pojmů veřejné správy (SGoV) je definován v <a href="https://archi.gov.cz/nap">Národním architektonickém plánu</a> v kapitole <a href="https://archi.gov.cz/nap-dokument:architektonicka_vize_e_governmentu_cr#podstata_zmen_v_datove_architekture">Podstata změn v datové architektuře</a>.
+        Je prostředkem pro postupnou harmonizaci významu (sémantiky) dat vedených v informačních systémech veřejné správy (ISVS).
+        Lze jej chápat jako katalog odborného pojmosloví používaného v rámci veřejné správy.
+        SGoV zahrnuje pojmy, jejich definice a vazby na legislativu, vzájemné sémantické vazby pojmů mezi sebou i sémantické vazby pojmů na standardní veřejné slovníky používané v zahraničí (především z iniciativy EU, např. ISA Core Vocabularies).
+        SGoV je zveřejňován jako otevřená data, viz <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-11">§ 3 odst. 11 zákona č. 106/1999 Sb. o svobodném přístupu k informacím</a>.
+      </p>
+      <p>
+        SGoV je přirozenou evolucí stavu, kdy je v <a href="https://archi.gov.cz/rpp">Registru práv a povinností</a> veden výčet údajů vedených k agendám v dle § 51 odst. 5 písm. <a href="https://www.zakonyprolidi.cz/cs/2009-111#p51-5-g">g)</a>, <a href="https://www.zakonyprolidi.cz/cs/2009-111#p51-5-h">h)</a> a <a href="https://www.zakonyprolidi.cz/cs/2009-111#p51-5-i">i)</a> zákona č. 111/2009 Sb. o základních registrech.
+        SGoV údaje rozpracovává do podoby strojově čitelných informačních modelů (ontologických modelů), které je možno sdílet prostřednictvím běžných principů, protokolů a technologií sítě WWW.
+      </p>
+      <p>
+        SGoV je budován postupným doplňováním pojmů z jednotlivých domén odpovídajících agendám a sémantických souvislostí mezi těmito pojmy jednotlivými orgány veřejné správy (OVS), které jsou ohlašovateli těchto agend.
+        Není tedy budován centrálně, Odbor hlavního architekta eGovernmentu Ministerstva vnitra ČR (OHA) má pouze vzdělávací, poradní a koordinační roli.
+        SGoV má vrstvenou architekturu, kde sjednocujícícm prvkem jsou první dvě horní vrstvy společné pro všechny OVS.
+        Tyto dvě první vrstvy jsou v gesci OHA, na ostatních vrstvách jsou části odpovídající jednotlivým doménám tvořeny ohlašovateli příslušných agend, avšak ve vazbě na horní dvě vrstvy. 
+      </p>
+      <p>
+        Pro účely harmonizace sémantiky dat vedených v ISVS jsou logická schémata popisující strojové (syntaktické) vyjádření dat vedených v ISVS propojována na pojmy SGoV.
+        Tím je realizováno propojení sémantiky (významu) dat napříč jednotlivými ISVS.
+        Díky tomu, že SGoV integruje údaje vedené k agendám v Registru práv a povinností dle § 51 odst. 5 písm. g), h) a i) zákona č. 111/2009 Sb. o základních registrech, které jsou legislativně ukotveny, je vazba každého pojmu SGoV na legislativu buď přímo uvedena, nebo je dohledatelná přes souvisejicí pojmy pomocí dokumentovaných vazeb.
+        SGoV sám o sobě nezajišťuje syntaktickou ani sémantickou interoperabilitu, neboť logická schémata nejsou nutně, a zvlášť na počátku budování sémantického slovníku pojmů, propojena úplně, tj. nejsou propojeny všechny prvky logických schémat na přesný sémantický popis vyjádřený pojmy ze sémantického slovníku pojmů.
+        SGoV je pouze harmonizačním prostředkem usnadňujícím zajišťování syntaktické a sémantické interoperability dat.
+      </p>
+      <p>
+        SGoV je v první řadě určen pro podporu <a href="https://archi.gov.cz/nap-dokument:pravidla_tvorby_a_udrzby_vlastni_ctyrvrstve_architektury_jednotlivych_uradu#pravidla_pro_data_verejneho_datoveho_fondu">kvalitní publikace otevřených dat</a> ve Veřejném datovém fondu (VDF).
+        Údaje zveřejňované jako otevřená data ve VDF musejí být opatřena publikovaným logickým schématem popisujícím strojově čitelným způsobem jejich syntaxi a strukturu.
+        Sémanticky významné prvky logického schématu musí být propojeny strojově čitelným způsobem na pojmy SGoV a tato propojení musí být publikována jako otevřená data.
+        Podoba propojení a způsob jejich publikace v podobě otevřených dat určuje otevřená formální norma <a href=" https://data.gov.cz/otevřené-formální-normy/popis-dat-sémantickým-slovníkem-pojmů/">Popis dat sémantickým slovníkem pojmů</a>.
+      </p>
+      <p>
+        Následující obrázek ukazuje příklad, který demonstruje uvedené principy.
+      </p>
+      <p>
+        <figure id="propojení-prvků-json-sch-ssp"><img alt="Propojení prvků logických JSON schémat datových sad Agendy a Orgány veřejé moci na pojmy sémantického slovníku pojmů" src="obrázky/anotace schémat pojmy slovníku 01.svg" />
+          <figcaption>
+            <a href="obrázky/anotace schémat pojmy slovníku 01.svg">
+              Propojení prvků logických JSON schémat datových sad Agendy a Orgány veřejé moci na pojmy sémantického slovníku pojmů
+            </a>.
+            Na levé straně je fragment JSON schématu datové sady <a href="">Agendy</a>, na pravé je fragment JSON schématu datové sady <a href="">Orgány veřejné moci</a> z Registru práv a povinností.
+            Modře ohraničené prvky obou JSON schémat jsou propojeny na odpovídající prvky sémantického slovníku pojmů zákona č. 111/2009 Sb., který definuje pojmy jako agenda, název agendy, orgán veřejné moci apod.
+            Prvky sémantického slovníku pojmů jsou zobrazeny jako zelené obdelníky.
+            Přerušované čáry značí propojení prvků JSON schémat s pojmy sémantického slovníku pojmů.
+            Plné orientované čáry značí sémantické vazby mezi pojmy sémantického slovníku pojmů.
+            Každý znázorněný prvek sémantického slovníku pojmů má svoji sémantiku definovanou v sémantickém slovníku pojmů ve formální strojově zpracovatelné podobě.
+          </figcaption>
+        </figure>
+      </p>
+    </section>
+    
+    <section id="základní-principy">
+      <h2>Základní principy</h2>
+      <p>
+        V této kapitole jsou představeny klíčové principy sémantického slovníku pojmů, spolu s odůvodněním jejich smyslu a základními myšlenkami jejich realizace.
+      </p>
+      <section id="základní-princip-globální-identita">
+        <h3>Globální identita</h3>
+        <dl>
+  				<dt>
+  					Princip
+  				</dt>
+  				<dd>
+  					Každý odborný pojem sémantického slovníku pojmů má přiřazenu globální identitu unikátní v rámci celé veřejné správy i pro sdílení významu pojmu s veřejností a třetími stranami.
+            Tento globální identifikátor musí umožnit snadné získání informace o významu daného pojmu.
+            Globální identifikátor v průběhu času může označovat jediný odborný pojem - jediný význam.
+            V případě zavedení nového odborného pojmu je vždy vytvořen nový globální identifikátor.
+  				</dd>
+          <dt>
+  					Odůvodnění
+  				</dt>
+  				<dd>
+  					Smyslem globální identity pojmu je umožnit sdílení pojmu a jeho významu definovaného jedním OVS včetně sdílení pro účely zakotvení významu pojmů spravovaných jinými OVS, tj. definice významu pojmů pomocí jiných pojmů spravovaných jinými OVS. 
+  				</dd>
+          <dt>
+  					Realizace
+  				</dt>
+  				<dd>
+  					Globální identita odborného pojmu je zajištěna identifikátorem odborného pojmu, který bude tvořen dle otevřené formální normy <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/">Propojená data</a>.
+            To zahrnuje identifikaci pomocí <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#pravidla-pro-tvorbu-IRI ">HTTP IRI</a>, a <a href="https://data.gov.cz/otevřené-formální-normy/propojená-data/draft/#pro-zadavatele-dereference ">dereferencovatelnost těchto IRI</a>.  
+  				</dd>
+          <dt>
+  					Příklad
+  				</dt>
+  				<dd>
+            <ul>
+              <li>IRI <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda</a> identifikuje odborný pojem 'agenda' ve smyslu zákona č. 111/2009 Sb. o základních registrech.</li>
+              <li>IRI <a href="https://slovník.gov.cz/agendový/104/pojem/má-datum-vzniku-agendy">https://slovník.gov.cz/agendový/104/pojem/má-datum-vzniku-agendy</a> identifikuje odborný pojem označující 'datum vzniku agendy' tak, jak je chápán v rámci domény registru práv a povinností, resp. agendy A104 "Základní registr - registr práv a povinností".</li>
+            </ul>
+  				</dd>
+        </dl>
+      </section>
+      <section id="základní-princip-ukotvení-významu">
+        <h3>Ukotvení významu</h3>
+        <dl>
+  				<dt>
+  					Princip
+  				</dt>
+  				<dd>
+  					Každý odborný pojem je popsán strojově čitelnými metadaty, které definují a ukotvují jeho význam.
+            Je-li význam odborného pojmu definován ve veřejném normativním dokumentu, je odborný pojem doplněn rovněž odkazem na tento dokument (zákon, vyhláška, jiný předpis) nebo jeho část, kde je význam pojmu definován.
+  				</dd>
+          <dt>
+  					Odůvodnění
+  				</dt>
+  				<dd>
+  					Ukotvení významu v podobě definic a normativní dokumentace je nutné pro stabilizaci významu daného pojmu a zajištění konzistentní interpretace datových sad, datových zdrojů, informačních systémů a dalších informačních artefaktů, které se na daný odborný pojem vážou. 
+  				</dd>
+          <dt>
+  					Realizace
+  				</dt>
+  				<dd>
+  					Význam odborného pojmu je určen jeho charakteristikami jako je např. jeho název, definice nebo normativní odkaz a jeho významové souvislosti s ostatními odbornými pojmy.
+            Tyto charakteristiky jsou modelovány pomocí metod ontologického inženýrství.
+            Významová souvislost propojuje např. pojem, který je vztahem s pojmy, které jsou účastníky tohoto vztahu. 
+  				</dd>
+          <dt>
+  					Příklad
+  				</dt>
+  				<dd>
+            Charakteristiky pojmu <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda</a>
+            <table>
+              <tr><td>Název pojmu</td><td>Agenda</td></tr>
+              <tr><td>Normativní odkaz</td><td>§ 2 písm. e) zákona č. 111/2009 Sb. o základních registrech</td></tr>
+              <tr><td>Příklad</td><td>Agenda A1136 - Registr docentů a profesorů</td></tr>
+              <tr><td>Typ</td><td><a href="https://slovník.gov.cz/základní/pojem/typ-objektu">https://slovník.gov.cz/základní/pojem/typ-objektu</a></td></tr>
+              <tr><td>Specializuje pojem</td><td><a href="https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva">https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva</a></td></tr>
+            </table>
+  				</dd>
+        </dl>
+      </section>
+      <section id="základní-princip-určené-zodpovědnosti">
+        <h3>Princip určené zodpovědnosti</h3>
+        <dl>
+  				<dt>
+  					Princip
+  				</dt>
+  				<dd>
+  					Každá ucelená a konzistentní sada odborných pojmů je popsána v rámci jednoho slovníku.
+            Za správu každého slovníku, jeho aktuálnost a konzistenci je zodpovědný jeden OVS (správce slovníku).
+  				</dd>
+          <dt>
+  					Odůvodnění
+  				</dt>
+  				<dd>
+  					Tento princip zajistí vnitřní konzistenci odborných pojmů v rámci daného slovníku, zajistí vyhledatelnost a využitelnost pojmů pro ostatní OVS a třetí strany.
+            V neposlední řadě umožní nastavit procesy pro správu pojmů v rámci jednotlivých OVS. 
+  				</dd>
+          <dt>
+  					Realizace
+  				</dt>
+  				<dd>
+  					Slovník představuje konzistentní soubor odborných pojmů včetně pojmů, které reprezentují vlastnosti nebo vztahy.
+            Odborný pojem je v rámci slovníku unikátní.
+            Každý slovník je spravován jedním OVS, který má zodpovědnost za aktuálnost, konzistenci a publikaci jeho obsahu ve smyslu této otevřené formální normy.
+            Správce slovníku zveřejňuje slovník v podobě otevřených dat jako jednu datovou sadu.
+            Povinný způsob zveřejnění slovníku v podobě otevřených dat je upraven touto otevřenou formální normou.
+  				</dd>
+          <dt>
+  					Příklad
+  				</dt>
+  				<dd>
+            <a href="https://slovník.gov.cz/agendový/104/slovník">Agendový slovník agendy A104</a> je spravován Ministerstvem vnitra, ohlašovatelem agendy A104. Slovník obsahuje odborné pojmy týkající se Registru práv a povinností.
+  				</dd>
+        </dl>
+      </section>
+    </section>
+		<section id="architektura">
+      <h2>Architektura SGoV</h2>
+      <p>
+        SGoV označuje soubor informačních artefaktů sloužících ke sdílení významu pojmů používaných v rámci veřejné správy České republiky.
+        Slovník je vrstven do několika úrovní, lišících se životním cyklem odborných pojmů a rozsahem jejich využití.
+      </p>
+      <section id="úrovně">
+        <h3>Úrovně SGoV</h3>
+        <p>
+          Architektura SGoV vychází z úrovní popisu procesů ve veřejné správě.
+          Legislativě definuje a používá pojmy, které jsou dále přejímány a interpretovány v popisu agend veřejné správy.
+          Agendy jako takové dále poskytují strukturovaný popis činností, v rámci kterých existují a vznikají různé informační artefakty, jako např. služby, informační systémy nebo datové sady.
+          Na základě této logiky architektura SGoV sestává z těchto úrovní:
+          <dl>
+            <dt>Základní sémantický slovník pojmů (Z-SGoV)</dt>
+            <dd>
+              <ul>
+                <li>Definuje pojmy obecné, vyjadřující základní, doménově nezávislé významy, které jsou používány jako konstrukty pro modelování na nižších úrovních SGoV.</li>
+                <li>Není specifický pro veřejnou správu a je poplatný zvolené metodice ontologického inženýrství.</li>
+                <li>Jeho správcem je OHA.</li>
+              </ul>
+            </dd>
+            <dt>Sémantický slovník pojmů veřejného sektoru (V-SGoV)</dt>
+            <dd>
+              <ul>
+                <li>Definuje pojmy sdílené napříč veřejným sektorem, základní pojmy právní teorie, popisu dat a evidence informačních a datových artefaktů veřejné správy.</li> 
+                <li>Tvoří společný pojmoslovný rámec pro veřejnou správu ČR.</li>
+                <li>Je specifický pro veřejnou správu ČR.</li> 
+                <li>Není specifický pro žádnou agendu ani konkrétní právní předpis.</li>
+                <li>K definici pojmů a souvislostí využívá pojmy definované v Z-SGoV jako modelovací konstrukty.</li>
+                <li>Jeho správcem je OHA.</li>
+              </ul>
+            </dd>
+            <dt>Sémantické slovníky pojmů legislativy (L-SGoV)</dt>
+            <dd>
+              <ul>
+                <li>Definují pojmy popsané v jednotlivých právních předpisech.</li>
+                <li>Jeden L-SGoV může definovat pojmy pouze z jednoho právního předpisu. Jedná se o pojmy zaváděné i pouze používané tímto právním předpisem.</li>
+                <li>Definice pojmů z jednoho právního předpisu mohou být rozděleny do více L-SGoV.</li>
+                <li>K definici pojmů využívají pojmy definované v Z-SGoV, V-SGoV i jiných L-SGoV.</li>
+                <li>L-SGoV jsou základem pro sémantické slovníky pojmů agend.</li>
+                <li>Správcem L-SGoV je OHA nebo ohlašovatel agendy.</li>
+              </ul>
+            </dd>
+            <dt>Sémantické slovníky pojmů agend (A-SGoV)</dt>
+            <dd>
+              <ul>
+                <li>Definují pojmy specifické pro agendy, přičemž agendy jsou chápány ve smyslu § 2 <a href="https://www.zakonyprolidi.cz/cs/2009-111#p2-1-e">písm. e)</a> zákona č. 111/2009 Sb. o základních registrech.</li>
+                <li>Jeden A-SGoV může definovat pojmy pouze z jedné agendy. Jedná se o pojmy používané v rámci této agendy, které však nejsou popsané v právních předpisech (jinak by byly definovány v L-SGoV).</li>
+                <li>Definice pojmů z jedné agendy mohou být rozděleny do více A-SGoV.</li>
+                <li>K definici pojmů využívají pojmy definované v Z-SGoV, V-SGoV, L-SGoV i jiných A-SGoV.</li>
+                <li>Správcem L-SGoV je ohlašovatel agendy ve smyslu § 48 <a href="https://www.zakonyprolidi.cz/cs/2009-111#p48-1-f">písm. f)</a> zákona č. 111/2009 Sb. o základních registrech.</li>
+              </ul>
+            </dd>
+            <dt>Sémantické slovníky pojmů datových sad (D-SGoV)</dt>
+            <dd>
+              <ul>
+                <li>Definují pojmy specifické pro datové sady zveřejňované jako otevřená data nebo vedené v IS VS.</li>
+                <li>Jeden D-SGoV může definovat pojmy pro více datových sad. Jedná se o pojmy specifické pro datové sady, které nejsou definovány na vyšších úrovních sémantického slovníku pojmů, nebo nejsou definovány v dostatečném technickém detailů pro úplný popis datových sad.</li>
+                <li>K definici pojmů využívají pojmy definované v Z-SGoV, V-SGoV, L-SGoV, A-SGoV i jiných D-SGoV.</li>
+                <li>Správcem D-SGoV je poskytovatel příslušných datových sad nebo správce příslušných IS VS.</li>
+              </ul>
+            </dd>
+          </dl>
+        </p>
+      </section>
+      <section id="struktura">
+        <h3>Struktura SGoV</h3>
+        <p>
+          Každý slovník na každé úrovni má stejnou strukturu sestávající ze 3 artefaktů:
+        </p>
+        <dl>
+          <dt>Glosář pojmů</dt>
+          <dd>
+            Glosář pojmů je seznamem pojmů opatřených popisem.
+            Dle principu <a href="#základní-princip-ukotvení-významu">Ukotvení významu</a> je popis pojmu v glosáři tvořen jeho charakteristikami, které specifikují jeho význam - identifikační název, definice (nebo vymezující popis), zdroj definice (např. normativním odkazem do legislativy) či typ pojmu (jiný pojem, který charakterizuje povahu nově definovaného pojmu).
+            Identifikační název pojmu je jednoznačný v rámci identifikačních názvů všech pojmů z daného glosáře, viz <a href="#základní-princip-určené-zodpovědnosti">Princip určené zodpovědnosti</a>.
+          </dd>
+          <dt>Ontologický model</dt>
+          <dd>
+            Ontologický model popisuje významové vztahy (viz <a href="#základní-princip-ukotvení-významu">Ukotvení významu</a>) pojmů z glosáře do podoby ontologického modelu.
+            Ontologický model zajišťuje sdílení významu pojmů v rámci širší komunity tím, že je postaven na principech kognitivních věd, popisujících modely lidského myšlení.
+            To rovněž usnadňuje jeho integraci s existujícími slovníky.
+            V případě SGoV je komunitou veřejná správa a uživatelé jejích dat (např. zpracovatelé otevřených dat).
+          </dd>
+          <dt>Mapování ontologického modelu na stávající odborné doménové slovníky</dt>
+          <dd>
+            Mapování ontologického modelu na doménové slovníky umožňuje sdílet význam pojmů, resp. dat, které tyto pojmy popisují, s třetími stranami.
+            V případě SGoV se jedná zejména o evropské a světové organizace používající již dříve standardizované slovníky. 
+            Jedná se např. o mapování na <a href="https://ec.europa.eu/isa2/solutions/core-vocabularies_en">ISA Core Vocabularies</a>, které byly navrženy s cílem poskytnout sdílený pojmoslovný rámec pro evropskou veřejnou správu.
+          </dd>
+        </dl>
+      </section>
+      <section id="zsgov">
+        <h3>Základní sémantický slovník pojmů (Z-SGoV)</h3>
+        <p>
+          Z-SGoV popisuje pojmosloví obecné, které není specifické pro žádnou doménu veřejné správy.
+          Jedná se o pojmy obecné povahy jako např. <gen:link iri="https://slovník.gov.cz/základní/pojem/událost"/> nebo <gen:link iri="https://slovník.gov.cz/základní/pojem/objekt"/>).
+          Pojmy Z-SGoV jsou využívány ve slovnících na nižších úrovních SGoV jako modelovací konstrukty.
+          Definují tedy modelovací jazyk SGoV. 
+        </p>
+        <p>
+          Obecné pojmy a jejich vzájemné vazby jsou vytvářeny na základě výsledků a metod ontologického inženýrství v oblasti základních ontologií.
+          Z-SGoV je založen na části základních ontologií rodiny Unified Foundational Ontology (UFO). Tato rodina základních ontologických modelů popisuje klíčové oblasti znalostního popisu reálného světa.
+          Z-SGoV přejímá a rozšiřuje některé části ontologií rodiny UFO v české verzi:
+        </p>
+        <ul>
+          <li>UFO-A - sloužící k popisu statických strukturálních modelů objektů, vlastností, vztahů, atd.</li>
+          <li>UFO-B - sloužící k popisu časově proměnných údajů - událostí, stavů objektů, atd.</li>
+          <li>UFO-MLT - popisující modelování typů - typů objektů, typů vlastností, typů vztahů, typů událostí, atd.</li>
+        </ul>
+        <p>
+          ZSGoV je výběrem konstruktů ontologií rodiny UFO.
+          Některé části ontologií UFO nejsou do slovníku zahrnuty, neboť by zvýšily složitost popisu, aniž by poskytly zřejmé výhody vzhledem k přepokládanému využití SGoV.
+          V budoucnu však může být Z-SGoV podle potřeby o další části rozšířen.
+          Z-SGoV je plně kompatibilní s ontologiemi UFO, což do budoucna zajišťuje možnost jeho dalšího rozšiřování. 
+        </p>
+        <section id="zgp">
+          <h4>Základní glosář pojmů (Z-GP)</h4>
+          <p>
+            Základní glosář zahrnuje popisné odborné pojmy a jejich vzájemné vazby.
+            Klíčové pojmy a vazby jsou uvedeny v následujících odstavcích.
+            Pojmy ze základního glosáře uvedené v této sekci jsou definovány jako ontologické kategorie identifikované v rámci tvorby ontologií rodiny UFO.
+            Pro pojmy základního glosáře se evidují zejména:
+          </p>
+          <ul>
+            <li><b>Název </b> označuje identifikační název pojmu v češtině.
+            Více názvů pojmu se nevylučuje, jsou synonimní a jeden z nich musí být vybrán v rámci daného slovníku jako identifikační.</li>
+            <li><b>Definice</b> je definiční text popisující význam pojmu pomocí pozitivních a negativních vymezení vůči ostatním pojmům ve slovníku.</li>
+          </ul>
+          <dl>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/prvek"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/prvek"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/proměnný-prvek"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/proměnný-prvek"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/pasivní-objekt"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/pasivní-objekt"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/prostorový-objekt"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/prostorový-objekt"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/agent"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/agent"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/objekt"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/objekt"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/vlastnost"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/vlastnost"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/vztah"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/vztah"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/neměnný-prvek"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/neměnný-prvek"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/událost"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/událost"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/akce"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/akce"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/vznik-proměnného-prvku"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/vznik-proměnného-prvku"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/změna-proměnného-prvku"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/změna-proměnného-prvku"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/zánik-proměnného-prvku"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/zánik-proměnného-prvku"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/okamžitý-stav-proměnného-prvku"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/okamžitý-stav-proměnného-prvku"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/časový-prvek"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/časový-prvek"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/typ"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/typ"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/typ-proměnného-prvku"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/typ-proměnného-prvku"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/typ-objektu"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/typ-objektu"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/typ-vlastnosti"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/typ-vlastnosti"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/typ-vztahu"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/typ-vztahu"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/typ-události"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/typ-události"/></dd>
+          </dl>
+          <p>
+            Dále Z-GP zavádí pojmy, které reprezentují vazby mezi ostatními pojmy.
+          </p>
+          <dl>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/je-instancí-typu"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/je-instancí-typu"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/je-ve-vztahu"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/je-ve-vztahu"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-vlastnost"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-vlastnost"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/je-vlastností"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/je-vlastností"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-prostorové-určení"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-prostorové-určení"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-časové-určení"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-časové-určení"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-počáteční-stav"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-počáteční-stav"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-koncový-stav"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-koncový-stav"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/má-účastníka"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/má-účastníka"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/je-vykonána"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/je-vykonána"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/je-stavem"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/je-stavem"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/specializuje"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/specializuje"/></dd>
+            <dt><gen:link iri="https://slovník.gov.cz/základní/pojem/je-metatypem"/></dt>
+            <dd><gen:definition iri="https://slovník.gov.cz/základní/pojem/je-metatypem"/></dd>
+          </dl>
+        </section>
+        <section id="zom">
+          <h4>Základní ontologický model (Z-OM)</h4>
+          <p>
+            Základní ontologický model (Z-OM) popisuje vazby (souvislosti) mezi pojmy zavedené v Z-GP.
+            Z-OM umožňuje reprezentovat objekty a jejich závislé vlastnosti/vztahy, včetně okamžitých stavů těchto objektů, vlastností a vztahů.
+            Všechny proměnné prvky mohou být měněny, vytvářeny či destruovány událostmi, které mají časové a prostorové určení a definují jednotlivé okamžité stavy těchto proměnných prvků.
+            Důležitou roli hrají rovněž typy samotné - proměnné prvky, které lze použít pro označování/kategorizaci jiných proměnných či neměnných prvků.
+          </p>
+          <p>
+            Popis znalosti typicky probíhá na 3 základních úrovních obecnosti - úroveň typů, úroveň instancí a úroveň okamžitých stavů.
+            Příkladem na úrovni typů je <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> (<gen:link iri="https://slovník.gov.cz/základní/pojem/typ-objektu"/>), který <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-orgánu-veřejné-moci"/> (<gen:link iri="https://slovník.gov.cz/základní/pojem/typ-vlastnosti"/>) a <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/ohlašuje-agendu"/> (<gen:link iri="https://slovník.gov.cz/základní/pojem/typ-vztahu"/>).
+            Příkladem na úrovni instancí je Ministerstvo vnitra jako instance typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/>. Název Ministerstva vnitra je pak instancí typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-orgánu-veřejné-moci"/>.
+            Příkladem instance typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/ohlašuje-agendu"/> je pak konkrétní vztah mezi Ministerstvem vnitra a konkrétní agendou, kterou Ministerstvo vnitra ohlásilo, např. agenda A1043 Veřejné sbírky.
+            Každá z těchto instancí je proměnným prvkem, který někdy vzniknul, v čase se mění a někdy také zanikl nebo zanikne.
+            Jejich stavy se tak v čase mohou měnit.
+            Můžeme tak uvažovat aktuální stav každé z instancí nebo okamžitý stav k danému časovému okamžiku.
+          </p>
+          <p>
+            Následující obrázek zobrazuje Z-OM v podobě diagramu tříd vyjádřeném v jazyku UML.
+            Pojmy Z-GP jsou zobrazeny jako UML třídy.
+            Vazby mezi pojmy Z-GP jsou zobrazeny jako UML asociace.
+            Barva zobrazení jednotlivých pojmů určuje, do jaké úrovně patří instance daného pojmu - typy (oranžová), objekty (modrá), vlastnosti/vztahy (tmavě modrá), události (světle modrá), okamžité stavy (šedá) a ostatní  (černá).
+          </p>
+          <figure id="z-sgov"><img alt="UML diagram ontologického modelu (Z-OM)" src="obrázky/z-sgov.png" />
+            <figcaption>
+              <a href="obrázky/z-sgov.png">
+                UML diagram základního ontologického modelu (Z-OM)
+              </a>
+            </figcaption>
+          </figure>
+          <p>
+            Pro přesnější kategorizaci typů základní slovník zavádí hierarchii typů.
+            Tato hierarchie je zobrazena na následujícím obrázku.
+          </p>
+          <figure id="z-sgov"><img alt="UML diagram hierarchie typů základního ontologického modelu (Z-OM)" src="obrázky/z-sgov-typy.png" />
+            <figcaption>
+              <a href="obrázky/z-sgov-typy.png">
+                UML diagram hierarchie typů základního ontologického modelu (Z-OM)
+              </a>
+            </figcaption>
+          </figure>          
+        </section>
+      </section>
+      <section id="vsgov">
+        <h3>Sémantický slovník pojmů veřejného sektoru (V-SGoV)</h3>
+        <p>
+          Sémantický slovník pojmů veřejného sektoru (V-SGoV) představuje konceptuální model konsensuálního pojmosloví používaného napříč veřejnou správou zejména v oblasti základních pojmů teorie práva, struktury dat a jejich evidence.
+          Jedná se o některé společné pojmy, které nejsou legislativně ukotveny, mají však široce přijímaný význam, např. pojem Člověk, Organizace, Dokument, atp.
+          Jednotlivé pojmy V-SGoV jsou axiomatizované pomocí pojmů a vazeb základního slovníku.
+        </p>
+        <section id="vgp">
+          <h4>Glosář pojmů veřejného sektoru (V-GP)</h4>
+          <p>
+            V-GP je uveden ve struktuře analogické k Z-GP.
+          </p>
+          <gen:glossary prefix="https://slovník.gov.cz/veřejný-sektor/pojem/" iris="objekt-práva primární-objekt-práva sekundární-objekt-práva subjekt-práva člověk člověk-jako-subjekt-práva fyzická-osoba organizace organizace-jako-subjekt-práva právnická-osoba orgán-veřejné-moci stát veřejnoprávní-korporace právní-vztah právo povinnost způsobilost-k-právům-a-povinnostem způsobilost-k-právnímu-jednání způsobilost-k-protiprávnímu-jednání výkon-svrchované-moci právní-skutečnost právní-jednání protiprávní-jednání protiprávní-stav právní-událost informační-systém datová-sada evidenční-systém typ-evidenčního-systému je-evidencí-pro eviduje dokument bezkontextový-dokument právní-předpis právní-předpis-ze-sbírky-zákonů kontextový-dokument část-právního-předpisu-ze-sbírky-zákonů hlava paragraf odstavec písmeno má-část-právního-předpisu má-kontext znalostní-struktura slovník glosář model legislativní-znalostní-struktura má-glosář má-model má-zdrojový-předpis typ-znalostní-struktury základní-struktura struktura-veřejného-sektoru legislativní-struktura agendová-struktura datová-struktura"/>
+        </section>
+        <section id="vom">
+          <h4>Ontologický model veřejného sektoru (V-OM)</h4>
+          <p>
+            Následující diagram znázorňuje strukturu ontologického modelu veřejného sektoru pojmů z oblasti teorie práva vyjádřenou pomocí základního slovníku.
+            Ústředním pojmem je zde <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/právní-vztah">právní vztah</gen:link>, který vytváří vztah mezi <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva">subjekty práva</gen:link> a který se týká daných <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva">objektů práva</gen:link>.
+            <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva">Subjektům práva</gen:link> jsou tímto vztahem přirazeny <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/právo">práva</gen:link> a <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/povinnost">povinnosti</gen:link>.
+          </p>
+          <figure id="v-sgov"><img alt="UML diagram ontologického modelu veřejného sektoru (V-OM)" src="obrázky/v-sgov.png" />
+            <figcaption>
+              <a href="obrázky/v-sgov.png">
+                UML diagram modelu veřejného sektoru (V-OM)
+              </a>
+            </figcaption>
+          </figure>
+          <p>
+            Další diagram znázorňuje vazby mezi pojmy popisujícími slovníky samotné.
+            Ústředním pojmem je zde <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/znalostní-struktura">znalostní struktura</gen:link>, která je kategorizována podle typu slovníku.
+          </p>
+          <figure id="v-sgov-slovníky"><img alt="UML diagram ontologického modelu veřejného sektoru (V-OM) v oblasti znalostních struktur" src="obrázky/v-sgov-slovníky.png" />
+            <figcaption>
+              <a href="obrázky/v-sgov-slovníky.png">
+                UML diagram modelu veřejného sektoru (V-OM) v oblasti znalostních struktur
+              </a>
+            </figcaption>
+          </figure>
+          <p>
+            Pro popis evidencí (datových sad evidujících datové položky o proměnný prvcích jediného typu) zavádíme pojem <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/evidenční-systém"/>, který <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/eviduje"/> dané <gen:link iri="https://slovník.gov.cz/základní/pojem/proměnný-prvek">proměnné prvky</gen:link>.
+            Na úrovni typů je zaveden paralelní vztah <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/je-evidencí-pro"/> popisující jaké typy proměnných prvků evideční systémy daného typu popisují.
+            Viz následující obrázek. 
+          </p>
+          <figure id="v-sgov-evidence"><img alt="UML diagram ontologického modelu veřejného sektoru (V-OM) v oblasti evidencí" src="obrázky/v-sgov-evidence.png" />
+            <figcaption>
+              <a href="obrázky/v-sgov-evidence.png">
+                UML diagram modelu veřejného sektoru (V-OM) v oblasti evidencí
+              </a>
+            </figcaption>
+          </figure>
+          <p>
+            Strukturu právních předpisů ukazuje následující diagram.
+            Základem je pojem <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/dokument"/> reprezentující obecně jakýkoliv dokument.
+            Rozlišujeme <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/bezkontextový-dokument"/> jako dokument, který je integrální a <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/kontextový-dokument"/> jako dokument, který je součástí jiného dokumentu.
+            <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/právní-předpis"/> je potom speciálním případem bezkontextového dokumentu který sestává z částí.
+            
+          </p>
+          <figure id="v-sgov-právní-předpisy"><img alt="UML diagram ontologického modelu veřejného sektoru (V-OM) v oblasti právních předpisů" src="obrázky/v-sgov-právní-předpisy.png" />
+            <figcaption>
+              <a href="obrázky/v-sgov-právní-předpisy.png">
+                UML diagram modelu veřejného sektoru (V-OM) v oblasti právních předpisů
+              </a>
+            </figcaption>
+          </figure>          
+        </section>
+      </section>
+      <section id="lsgov">
+        <h3>Sémantický slovník pojmů legislativy (L-SGoV)</h3>
+        <p>
+          Sémantický slovník pojmů legislativy (L-SGoV) představuje konceptuální model odborného pojmosloví zavedené v jednom konkrétním právním předpisu a tvoří jeho pojmoslovný rámec.
+          Právní předpisy uvažované v této otevřené formální normě jsou zejména zákony a vyhlášky ze Sbírky zákonů ČR.
+          Otevřená formální norma však není na typu předpisů nijak závislá a naopak předpokládá rozšiřování typů legislativních dokumentů o další normativní předpisy - evropská legislativa, vnitřní organizační předpisy, atd.
+          Pojmy v L-SGoV jsou definovány s využitím pojmů z V-SGoV a Z-SGoV.
+          L-SGoV může k definici svých pojmů přepoužívat pojmy z jiných L-SGoV v případech, kdy se právní předpis odkazuje na jiné odpovídající právní předpisy.
+        </p>
+        <section id="lgp">
+          <h4>Glosář pojmů legislativy (L-GP)</h4>
+          <p>
+            Glosář pojmů daného právního předpisu je tvořen pojmy, které jsou v daném předpise definovány či významově vymezovány, nebo které jsou v daném předpise nějakým způsobem používány.
+            Pro každý pojem jsou v glosáři uvedeny následující údaje:
+          </p>
+          <dl>
+            <dt>název</dt>
+            <dd>slovo nebo slovní spojení v základním tvaru používané v právním předpisu k označení pojmu</dd>
+            <dt>definice</dt>
+            <dd>vymezení významu pojmu, který je v právním předpisu buď uveden jako definice nebo nějakým způsobem opsán nebo nějakým jiným objektivním způsobem z právního předpisu vyplývá</dd>
+            <dt>normativní odkaz</dt>
+            <dd>označuje nejnižší nadřazenou část dokumentu, ve kterém lze nalézt definici nebo jiné vymezení významu pojmu nebo všechny jeho výskyty, pokud není v dokumentu definice nebo jiné vymezení významu pojmu přítomno</dd>
+          </dl>
+          <p>
+            Jako příklad L-GP uvádíme vybrané pojmy zákona č. 111/2009 Sb. o základních registrech, konkrétně z části popisující registr práv a povinností.
+            Jedná se o pojmy, které zákon explicitně definuje, popisuje nebo používá.
+            Každý takový pojem je tedy součástí sémantického slovníku pojmů zákona č. 111/2009 o základních registrech.
+          </p>
+          <gen:glossary prefix="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/" iris="osoba orgán-veřejné-moci soukromoprávní-uživatel-údajů datová-schránka agenda má-identifikační-číslo-osoby má-název-orgánu-veřejné-moci má-identifikační-číslo-osoby-orgánu-veřejné-moci má-obchodní-firmu-nebo-název-nebo-označení-osoby-nebo-jméno-nebo--popřípadně-jména-nebo--a-příjmení-soukromoprávního-uživatele-údajů má-identifikační-číslo-osoby-soukromoprávního-uživatele-údajů má-kód-agendy má-název-agendy má-datovou-schránku-orgánu-veřejné-moci ohlašuje-agendu"/>
+          <p>
+            Pojem reprezentuje význam platný v kontextu tohoto konkrétního zákona.
+            Globální identita pojmu je dle principu <a href="#základní-princip-globální-identita">globální identity</a> zajištěna pomocí HTTP IRI, jehož součástí je identita slovníku zákona a pojmenování pojmu.
+            Pojmenování pojmu vyplývá z jeho názvu.
+            Název sám o sobě není globálním identifikátorem.
+            Je jedinečný pouze v rámci samotného slovníku.
+            Stejný název tak může být použit v jiných slovnících pro pojmenování jiných pojmů s jiným významem.
+            To odpovídá situaci, kdy různé legislativní předpisy používají stejné názvy (tj. stejná slova či sekvence slov) pro označování různých významů. 
+            Příkladem je výše uvedený pojem <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/>, který nese pojmenování 'osoba'.
+            Nereprezentuje však obecný význam, ale pouze význam platný a relevantní pouze v kontextu zákona č. 111/2009 Sb.
+            Z <a href="https://zakonyprolidi.cz/cs/2009-111#p25">definice</a> v zákoně můžeme vidět, že pojem reprezentuje jasně vymezený okruh subjektů, o nichž se vedou údaje v registru osob.
+            Pojmenování 'osoba' se vyskytuje v řadě jiných zákonů, např. v zákoně č. 137/2001 Sb. o zvláštní ochraně svědka a dalších osob v souvislosti s trestním řízením.
+            Zde se však pojmenováním 'osoba' označuje zcela jiný význam a jedná se tak pouze o lingvistickou shodu v pojmenování, nikoliv však významovou, tj. sémantickou. 
+          </p>
+        </section>
+        <section id="lom">
+          <h4>Ontologický model legislativy (L-OM)</h4>
+          <p>
+            Ontologický model daného právního předpisu popisuje souvislosti mezi pojmy definované příslušným glosářem pojmů a souvislosti pojmů s pojmy z jiných glosářů.
+            K popisu souvislostí využívá konstruktů zavedených v základním slovníku pojmů (Z-SGoV).
+            Následující obrázek ukazuje ontologický model pro část glosáře zákona č. 111/2009 Sb. o základních registrech uvedeného výše.  
+          </p>
+          <figure id="l-sgov-rpp-simple"><img alt="UML diagram ontologického modelu části zákona č. 111/2009 Sb. o základních registrech (L-OM)" src="obrázky/l-sgov-rpp-simple.png" />
+            <figcaption>
+              <a href="obrázky/l-sgov-rpp-simple.png">
+                UML diagram ontologického modelu části zákona č. 111/2009 Sb. o základních registrech (L-OM)
+              </a>
+            </figcaption>
+          </figure>
+          <p>
+            Souvislosti zachycené v ontologickém modelu popisují sémantiku pojmů glosáře.
+            Jsou vyjádřeny pomocí vazeb zavedených v Z-SGoV.
+            Vazba <gen:link iri="https://slovník.gov.cz/základní/pojem/je-instancí-typu"/> určuje typ prvku.
+            UML diagram v příkladu výše např. popisuje, že <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/je-instancí-typu"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/typ-objektu"/>, <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikační-číslo-osoby"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/je-instancí-typu"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/typ-vlastnosti"/> a <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/je-instancí-typu"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/typ-vztahu"/>.
+            Jinými slovy, <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> je typem objektu.
+            Jeho instance jsou potom konkrétními osobami.
+            <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikační-číslo-osoby"/> je typem vlastnosti a jeho instance jsou vlastnosti reprezentující identifikační čísla konkrétních osob a nabývající konkrétních hodnot.
+            <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> je typem vztahu a jeho instance jsou jednotlivé vztahy mezi konkrétními osobami a jejich datovými schránkami. 
+            V UML diagramu je přiřazení typů pojmům vyjádřeno pomocí tzv. UML stereotypů, které jsou graficky znázorněny v pravém horním rohu pojmu.  
+          </p>
+          <p>
+            Vazba <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vlastnost"/> propojuje typ a typ vlastnosti.
+            Specifikuje, že instance typu mají vlastnost daného typu a nabývají hodnot této vlastnosti.            
+            UML diagram např. vyjadřuje, že <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vlastnost"/> <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikační-číslo-osoby"/>.
+            To znamená, že prvek typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> má vlastnost typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikační-číslo-osoby"/>.
+            Jinými slovy to znamená, že konkrétní osoba má své identifikační číslo osoby.
+            Kardinalita typu vlastnosti ve vazbě omezuje možný počet hodnot vlastnosti.
+            V případě typu vlastnosti <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikační-číslo-osoby"/> kardinalita značí, že osoba má právě jedno identifikační číslo osoby. 
+          </p>
+          <p>
+            Vazby <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek-1"/> a <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek-2"/> propojují typ vztahu s typy, které se vztahu účastní.
+            Číslování určuje směr čtení vztahů.
+            UML diagram např. vyjadřuje, že <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek-1"/> <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> a <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek-2"/> <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/datová-schránka"/>.
+            To znamená, že mezi danou osobou a datovou schránkou může existovat vztah typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/>, který přiřazuje osobě datovou schránku.
+            Kardinalita u vazby <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek-1"/> (a obdobně u <gen:link iri="https://slovník.gov.cz/základní/pojem/má-vztažený-prvek-2"/>) na straně typu vztahu značí kolika různých vztahů tohoto typu se může daná instance vztaženého typu účastnit. Na straně vztaženého typu značí, kolik jeho instancí se účastní jedné instance typu vztahu.  
+            V případě <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> tak kardinality čteme následujícím způsobem.
+            Daná osoba se může účastnit libovolného počtu vztahů (vč. žádného) typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/>, tj. osoba je prostřednictvím <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> vztažena k různým datovým schránkám.
+            Jeden konkrétní vztah typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> zahrnuje právě jednu osobu. 
+            Daná datová schránka se může účastnit právě jednoho vztahu typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> a jeden konkrétní vztah typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> zahrnuje právě jednu datovou schránku.
+          </p>
+          <p>
+            <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> je typickou binární asociací a pokud bychom neuvažovali proměnnost prvků (viz <gen:link iri="https://slovník.gov.cz/základní/pojem/proměnný-prvek"/>), pak by bylo možné tento typ vztahu modelovat jako jednoduchou binární UML asociaci.
+            S jednoduchými binárnímu UML asociacemi si však v SGoV nevystačíme, neboť např. <gen:link iri="https://slovník.gov.cz/veřejný/pojem/právní-vztah">právní vztahy</gen:link> jsou složitější.
+            Mohou vztahovat více než 2 typy, vztahu se může účastnit více než jedna instance vztaženého typu a vztah může zahrnovat i další prvky než pouze účastníky.
+            Dále je nutné umožnit modelovat situace, kdy instance vztahu vzniká, kdy se mění a kdy zaniká.
+            To vše SGoV umožňuje modelovat, ale budeme se tomu věnovat v jiné části. 
+          </p>
+          <p>
+            Výše uvedený UML diagram také modeluje specializaci pojmů.
+            Vyjadřujeme jí pomocí vazby <gen:link iri="https://slovník.gov.cz/základní/pojem/specializuje"/>.
+            UML diagram např. popisuje, že <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> <gen:link iri="https://slovník.gov.cz/základní/pojem/specializuje"/> <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/>.
+            To znamená, že typ <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> reprezentuje podmožinu instancí typu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/>.
+            Každý orgán veřejné moci je osobou (ve kontextu zákona č. 111/2009 Sb. samozřejmě).
+            Jinými slovy vše, co je v modelu vyjádřeno pro <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> platí též pro <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/>.
+            Programátoři také někdy říkají, že <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> "dědí" od <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> jeho vlastnosti, vztahy atd.
+            V UML diagramu je vazba <gen:link iri="https://slovník.gov.cz/základní/pojem/specializuje"/> vyjádřena šipkou s koncem ve tvaru trojúhelníku bez pozadí na straně specializovaného typu.  
+          </p>
+          <p>
+            UML diagram výše ale přesně neodpovídá legislativnímu předpisu, jehož model vyjadřuje.
+            Např. vztah <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/> je v zákoně 111/2009 Sb. popsán v <gen:legislation iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/>.
+            Tohoto vztahu se účastní osoby a tudíž také orgány veřejné moci a soukromoprávní uživatelé údajů.
+            Jenže <gen:legislation iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-orgánu-veřejné-moci"/> explicitně popisuje specifičtější vztah mezi orgánem veřejné moci a datovou schránkou tohoto orgánu.
+            Spoléhat tedy pouze na specializaci mezi <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> a <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"/> tak není zcela správně, protože pomíjíme <gen:legislation iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-orgánu-veřejné-moci"/>.
+            Pokud je tato nepřesnost problém, je řešením zavést nový typ vztahu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-orgánu-veřejné-moci"/> vztahující <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> a <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/datová-schránka"/>.
+            Tento typ vztahu specializuje <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby"/>.
+            Tento nový typ vztahu je specifičtější už jenom v tom, že je dále ve legislativě upraven (<gen:legislation iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-orgánu-veřejné-moci"/>).
+            To samé platí pro datovou schránku soukromoprávního uživatele údajů a typy vlastností přiřazené k typům objektů <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> a <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/soukromoprávní-uživatel-údajů"/>.
+            Tyto nové specializace ukazují následující dva UML diagramy.     
+          </p>
+          <figure id="l-sgov-rpp-full"><img alt="UML diagram ontologického modelu části zákona č. 111/2009 Sb. o základních registrech (L-OM) - úplný model" src="obrázky/l-sgov-rpp-full.png" />
+            <figcaption>
+              <a href="obrázky/l-sgov-rpp-full.png">
+                UML diagram ontologického modelu části zákona č. 111/2009 Sb. o základních registrech (L-OM) - úplný model
+              </a>
+            </figcaption>
+          </figure>
+          <p>
+          </p>
+          <figure id="l-sgov-rpp-specialization"><img alt="UML diagram ontologického modelu části zákona č. 111/2009 Sb. o základních registrech (L-OM) - specializace" src="obrázky/l-sgov-rpp-specialization.png" />
+            <figcaption>
+              <a href="obrázky/l-sgov-rpp-specialization.png">
+                UML diagram ontologického modelu části zákona č. 111/2009 Sb. o základních registrech (L-OM) - specializace
+              </a>
+            </figcaption>
+          </figure>
+        </section>
+      </section>
+      <section id="asgov">
+        <h3>Sémantický slovník pojmů agendy (A-SGoV)</h3>
+        <p>
+          Sémantický slovník pojmů agendy tvoří společný pojmoslovný rámec agendy, kde agendu chápeme ve smyslu zákona č. 111/2009 Sb (viz <a href="https://zakonyprolidi.cz/cs/2009-111#p2-1-e">příslušná legislativa</a>).
+          Je podmnožinou sémantických slovníků pojmů těch právních předpisů, které agendu definují, a může být doplněn o definice dalších pojmů a vazeb mezi pojmy, které nejsou definovány na úrovni legislativních slovníků, ale jsou z pohledu agendy důležité.
+          Může se jednat o pojmy zavádějící zcela nové, ale v agendě důležité významy.
+          Mohou to být také pojmy sloužící ke zjednodušení popisu agendy, nebo k integraci pojmů z jednotlivých legislativních slovníků (např. proto, že jednotlivé legislativní glosáře/ontologické modely obsahují různě identifikované pojmy se stejným významem, nebo různě identifikované pojmy s různým významem ovšem se stejným názvem pojmu, který by při využívání agendy komplikoval porozumění).
+        </p>
+        <section id="agp">
+          <h4>Glosář pojmů agendy (A-GP)</h4>
+          <p>
+            Glosář pojmů agendy je podmnožinou glosářů pojmů těch právních předpisů, které agendu definují, doplněnou o nové pojmy, které v legislativě nejsou definovány, ale jsou z pohledu agendy důležité.
+            Např. glosáře pojmů agendy A104 - Základní registr - registr práv a povinností je tvořen glosářem pojmů zákona č. 111/2009 Sb. a doplňuje jej o další pojmy.
+            Následující výčet obsahuje vybrané pojmy z tohoto doplnění.
+            Podobně jako v případě L-GP, je pro pojmy v A-GP uváděn jejich název a definice.
+            Normativní odkaz je uveden pouze v případě, že existuje normativní dokument (nelegislativního charakteru), který definuje nebo popisuje význam pojmu, nebo z něj význam pojmu nějakým jiným způsobem vyplývá.
+            Protože ale takový dokument nemusí existovat, není uvedení normativního odkazu v případě A-GP povinné.  
+          </p>
+          <gen:glossary prefix="https://slovník.gov.cz/agendový/104/pojem/" iris="má-datum-vzniku-agendy má-datum-zániku-agendy orgán-veřejné-moci-nebo-kategorie"/>
+        </section>
+        <section id="aom">
+          <h4>Ontologický model agendy (A-OM)</h4>
+          <p>
+            Ontologický model agendy popisuje souvislosti mezi pojmy definované příslušným glosářem pojmů a souvislosti pojmů s pojmy z jiných glosářů.
+            K popisu souvislostí využívá konstruktů zavedených v základním slovníku pojmů (Z-SGoV).
+            Následující obrázek ukazuje ontologický model pro část glosáře agendy A104 uvedenou výše.
+            Ontologický model přiřazuje typy vlastností <gen:link iri="https://slovník.gov.cz/agendový/104/pojem/má-datum-vzniku-agendy"/> a <gen:link iri="https://slovník.gov.cz/agendový/104/pojem/má-datum-zániku-agendy"/> k legislativnímu pojmu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda"/>.
+            Dále specifikuje typ objektu <gen:link iri="https://slovník.gov.cz/agendový/104/pojem/orgán-veřejné-moci-nebo-kategorie"/> jako generalizaci legislativních pojmů <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> a <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/kategorie-orgánů-veřejné-moci"/>.
+          </p>
+          <figure id="a-sgov-a104"><img alt="UML diagram ontologického modelu části agendy A104 - Základní registr - registr práv a povinností (A-OM)" src="obrázky/a-sgov-a104.png" />
+            <figcaption>
+              <a href="obrázky/a-sgov-a104.png">
+                UML diagram ontologického modelu části agendy A104 - Základní registr - registr práv a povinností (A-OM)
+              </a>
+            </figcaption>
+          </figure>
+        </section>
+      </section>
+      <section id="dsgov">
+        <h3>Sémantický slovník pojmů datového artefaktu (D-SGoV)</h3>
+        <p>
+          Datovým artefaktem rozumíme <gen:link iri="https://slovník.gov.cz/základní/pojem/pasivní-objekt"/>, který poskytuje data.
+          Je jím např. jedna <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/datová-sada"/> nebo celý <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/informační-systém"/>.  
+          Sémantický slovník pojmů datového artefaktu tvoří pojmy, které popisují význam dat poskytovaných artefaktem.
+          Obsahuje pojmy ze sémantických slovníků agend, v rámci kterých je datový artefakt vytvářen, spravován či zveřejňov nebo které obsahují takové pojmy, pomocí kterých může být význam datového artefaktu popsán.
+          Může být dále rozšířen o nové pojmy a souvislosti, které ve slovnících definovány nejsou, ale jsou pro popis jeho významu důležité.
+        </p>
+        <section id="dgp">
+          <h4>Glosář pojmů datového artefaktu (D-GP)</h4>
+          <p>
+            Glosář pojmů datového artefaktu je tvořen vybranými pojmy z glosářů agend souvisejících s datovou sadou a doplňuje je o nové pojmy, které jsou potřebné pro popis významu datového artefaktu.
+            Např. glosář datové sady <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2FMV%2F706529437%2F9c73b802263c5e0ccf5542f10fbc35bb">Agendy</a> je tvořen vybranými pojmy z glosáře Zákona č. 111/2009 Sb. a z glosáře agendy A104.
+            Jeho část je uvedena v následujícím výčtu.      
+          </p>
+          <gen:glossary prefix="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/" iris="orgán-veřejné-moci agenda má-kód-agendy má-název-agendy ohlašuje-agendu"/>
+          <gen:glossary prefix="https://slovník.gov.cz/agendový/104/pojem/" iris="má-datum-vzniku-agendy má-datum-zániku-agendy"/>
+          <p>
+            Pro popis významu datové sady <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2FMV%2F706529437%2F9c73b802263c5e0ccf5542f10fbc35bb">Agendy</a> nejsou potřebné další pojmy nad rámec pojmů definovaných v těchto dvou glosářích a proto glosář datové sady nezavádí další vlastní pojmy.
+            Je pouze podmnožinou existujících glosářů.
+          </p>
+        </section>
+        <section id="dom">
+          <h4>Ontologický model datového artefaktu (D-OM)</h4>
+          <p>
+            Ontologický model datového artefaktu je podmnožinou ontologických modelů ze slovníků, jejichž glosáře tvoří glosář pojmů datového artefaktu a doplňuje je o sémantické vazby pojmů nově zavedených v glosáři pojmů datového artefaktu.
+          </p>
+          <figure id="d-sgov-agendy"><img alt="UML diagram části ontologického modelu datové sady Agendy (D-OM)" src="obrázky/d-sgov-agendy.png" />
+            <figcaption>
+              <a href="obrázky/d-sgov-agendy.png">
+                UML diagram části ontologického modelu datové sady Agendy (D-OM)
+              </a>
+            </figcaption>
+          </figure>
+        </section>
+      </section>
+    </section>
+    <section id="vyjádření-sgov-jako-otevřená-data">
+      <h2>Vyjádření sémantického slovníku pojmů jako otevřená data</h2>
+      <p>
+        Sémantický slovník pojmů je vyjádřen jako propojená otevřená data.
+        Vyjadření v podobě propojených otevřených dat je nutné, neboť ve strojově čitelné reprezentaci je nutno zaznamenat především propojení mezi jednotlivými pojmy uvnitř jednoho slovníku i napříč různými slovníky.
+        Slovníky nejsou primárně ukládány v jednom datovém zdroji, ale publikovány na různých místech.
+        Tato sekce ukáže reprezentaci jednotlivých částí sémantického slovníku pojmů.
+        Spolu s modelem RDF budou využity dvě standardizované nadstavby - jazyk <a href="https://www.w3.org/TR/skos-primer/">SKOS</a> pro popis glosářů a jazyk <a href="https://www.w3.org/TR/owl-primer/">OWL</a> pro popis ontologických modelů.
+      </p>
+      <section id="sgov-iri">
+        <h3>Identifikátory jednotlivých částí sémantického slovníku pojmů</h3>
+        <p>
+          V souladu s principy propojených dat a v souladu s otevřenou formální normou <a href="https://ofn.gov.cz/propojená-data/">Propojená data</a> jsou jednotlivé slovníky, glosáře, ontologické modely a jednotlivé jimi zaváděné pojmy identifikovány pomocí <a href="https://ofn.gov.cz/propojená-data/draft/#IRI">IRI</a>.
+          Tvar IRI vychází z <a href="https://ofn.gov.cz/propojená-data/draft/#obecná-pravidla-pro-tvorbu-IRI">obecných pravidel pro tvorbu IRI</a>.
+        </p>
+        <p>
+          Jednotlivé části sémantického slovníku pojmů jsou identifikovány pomocí následujících IRI.
+        </p>
+        <dl>
+          <dt>IRI slovníků</dt>
+          <dd>
+            <ul>
+              <li><a href="https://slovník.gov.cz/slovník"><code>https://slovník.gov.cz/slovník</code></a> pro sémantický slovník pojmů jako celek</li>
+              <li><a href="https://slovník.gov.cz/základní/slovník"><code>https://slovník.gov.cz/základní/slovník</code></a> pro základní slovník</li>            
+              <li><a href="https://slovník.gov.cz/veřejný-sektor/slovník"><code>https://slovník.gov.cz/veřejný-sektor/slovník</code></a> pro slovník veřejného sektoru</li>
+              <li>
+                <code>https://slovník.gov.cz/legislativní/sbírka/&lt;Č&gt;/&lt;R&gt;/slovník</code> pro legislativní slovník předpisu vydaného ve Sbírce zákonů, kde <code>&lt;Č&gt;/&lt;R  &gt;</code> je číslo předpisu ve Sbírce zákonů.
+                Příkladem je slovník zákona č. 111/2009 Sb., jehož IRI je ve tvaru <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/slovník"><code>https://slovník.gov.cz/legislativní/sbírka/111/2009/slovník</code></a>.
+                V případě, že správce slovníku využívá vlastní infrastrukturu pro správu slovníku, může místo domény <code>gov.cz</code> zvolit vlastní doménu.
+              </li>
+              <li>
+                <code>https://slovník.gov.cz/agendový/&lt;A&gt;/slovník</code> pro agendový slovník agendy s číslem <code>&lt;A&gt;</code>.
+                Příkladem je slovník agendy A104, jehož IRI je ve tvaru <a href="https://slovník.gov.cz/agendový/104/slovník"><code>https://slovník.gov.cz/agendový/104/slovník</code></a>.
+                V případě, že správce slovníku využívá vlastní infrastrukturu pro správu slovníku, může místo domény <code>gov.cz</code> zvolit vlastní doménu.
+              </li>
+              <li>
+                <code>https://slovník.gov.cz/datový/&lt;D&gt;/slovník</code> pro datový slovník datového artefaktu, kde <code>&lt;D&gt;</code> je identifikátor datového artefaktu.
+                V případě, že správce slovníku využívá vlastní infrastrukturu pro správu slovníku, může místo domény <code>gov.cz</code> zvolit vlastní doménu.
+              </li>
+            </ul>
+          </dd>
+          <dt>IRI glosářů</dt>
+          <dd>
+            IRI glosáře vychází z IRI slovníku, do kterého glosář patří.
+            Je ve tvaru <code>&lt;základ IRI slovníku&gt;/glosář</code>, kde <code>&lt;základ IRI slovníku&gt;/slovník</code> je IRI slovníku.
+            Např. <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/glosář"><code>https://slovník.gov.cz/legislativní/sbírka/111/2009/glosář</code></a> je IRI glosáře zákona č. 111/2009 Sb.
+          </dd>
+          <dt>IRI ontologických modelů</dt>
+          <dd>
+            IRI modelu vychází z IRI slovníku, do kterého model patří.
+            Je ve tvaru <code>&lt;základ IRI slovníku&gt;/model</code>, kde <code>&lt;základ IRI slovníku&gt;/slovník</code> je IRI slovníku.
+            Např. <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/model"><code>https://slovník.gov.cz/legislativní/sbírka/111/2009/model</code></a> je IRI glosáře zákona č. 111/2009 Sb.
+          </dd>
+          <dt>IRI pojmu</dt>
+          <dd>
+            IRI pojmu vychází z IRI slovníku, do kterého pojem patří.
+            Je ve tvaru <code>&lt;základ IRI slovníku&gt;/pojem/&lt;identifikátor-pojmu&gt;</code>, kde <code>&lt;základ IRI slovníku&gt;/slovník</code> je IRI slovníku a <code>&lt;identifikátor-pojmu&gt;</code> je identifikační název pojmu.
+            Např. <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"><code>https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci</code></a> je IRI pojmu <gen:link iri="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/orgán-veřejné-moci"/> ze sémantického slovníku pojmů zákona č. 111/2009 Sb.
+          </dd>
+        </dl>
+      </section>
+      <section id="sgov-struktura">
+        <h3>Struktura sémantického slovníku pojmů</h3>
+        <p>
+          Sémantický slovník pojmů je vyjádřen jako OWL ontologie sdružující slovníky na jednotlivých úrovních.
+        </p>
+        <pre>
+          <code>
+&lt;https://slovnik.gov.cz/slovník&gt; a owl:Ontology;
+  owl:imports &lt;https://slovnik.gov.cz/základní/slovník&gt; ;
+  owl:imports &lt;https://slovnik.gov.cz/veřejný-sektor/slovník&gt; ;
+  owl:imports &lt;https://slovnik.gov.cz/legislativní/sbírka/111/2009/slovník&gt; ;
+  &lt;-- importy dalších legislativních slovníků --&gt;
+  owl:imports &lt;https://slovnik.gov.cz/agendový/104/slovník&gt; ;
+  &lt;-- importy dalších agendových slovníků --&gt;
+  &lt;-- importy slovníků datových artefaktů --&gt;
+          </code>
+        </pre>
+        <p>
+          Každý ze slovníků je také OWL ontologie, která importuje další dvě OWL ontologie:
+        </p>
+        <ul>
+          <li>OWL ontologie reprezentující glosář pojmů. Tento import je zde pouze pro zajištění konzistentní struktury slovníku, neboť glosář pojmů je do slovníku importován rovněž tranzitivně z ontologického modelu.</li>
+          <li>OWL ontologie reprezentující ontologický model</li>
+        </ul>
+        <p>
+          Jako příklad uvádíme sémantický slovník zákona č. 111/2009 Sb.
+        </p>
+        <pre>
+          <code>
+&lt;https://slovnik.gov.cz/legislativní/sbírka/111/2009/slovník&gt; a owl:Ontology ;
+  owl:imports &lt;https://slovnik.gov.cz/legislativní/sbírka/111/2009/glosář&gt;
+  owl:imports &lt;https://slovnik.gov.cz/legislativní/sbírka/111/2009/model&gt;            
+          </code>
+        </pre>
+        <p>
+          OWL ontologie s definicí daného sémantického slovníku, OWL ontologie s definicí glosáře včetně jeho pojmů a OWL ontologie s definicí ontologického modelu včetně všech vazeb mezi pojmy uvedenými v modelu jsou publikovány jako 3 různé datové sady.
+          Pro každou datovou sadu musí být publikována alespoň distribuce v serializaci Turtle.
+        </p>
+      </section>
+      <section id="sgov-obecná-pravidla-glosář">
+        <h3>Obecná pravidla pro vyjádření glosáře pojmů</h3>
+        <p>
+          Tato sekce popisuje pravidla pro vyjádření glosářů pojmů slovníků všech úrovní.
+          Pro jednotlivé typy slovníků pak mohou být definovat další specifická pravidla, která budou uvedena v příslušných následujících sekcích.
+        </p>
+        <section id="sgov-dokument-glosáře">
+          <h3>Dokument glosáře</h3>
+          <p>
+            Dokument glosáře pojmů má formu OWL ontologie ve tvaru:
+          </p>
+          <pre>
+            <code>
+&lt;identifikátor glosáře&gt; a z-sgov-pojem:glosář, &gt;identifikátor typu znalostní struktury&lt;, owl:Ontology, skos:ConceptScheme ;
+  rdfs:label "&lt;název glosáře&gt;"@cs ;
+  owl:imports &lt;identifikátor glosáře 1&gt;, ... ,&lt;identifikátor glosáře n&gt;.            
+            </code>
+          </pre>
+          <ul>
+            <li><code>&lt;identifikátor glosáře&gt;</code> je IRI glosáře pojmů,</li>
+            <li><code>&lt;identifikátor typu znalostní struktury&gt;</code> identifikuje pojem, který označuje úroveň glosáře. Rozlišujeme čtyři úrovně pomocí následujících pojmů ze Z-SGoV: <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/základní-struktura"/>, <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/struktura-veřejného-sektoru"/>, <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/legislativní-struktura"/>, <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/agendová-struktura"/> a <gen:link iri="https://slovník.gov.cz/veřejný-sektor/pojem/datová-struktura"/>,</li>
+            <li><code>&lt;název glosáře&gt;</code> je identifikační název glosáře v češtině,</li>
+            <li><code>&lt;identifikátor glosáře 1&gt;, ... ,&lt;identifikátor glosáře n&gt;</code> jsou IRI glosářů, jejichž pojmy glosář využívá.</li>
+          </ul>
+        </section>
+        <section id="sgov-pojmy-glosáře">
+          <h3>Pojmy glosáře</h3>
+          <p>
+            Pojem definovaný v glosáři pojmů je vyjádřen dle následujícího předpisu:
+          </p>
+          <pre>
+            <code>
+&lt;identifikátor pojmu&gt; a skos:Concept, &lt;Identifikátor pojmu typu dle základního glosáře pojmů&gt; ;
+  skos:prefLabel "&lt;název pojmu&gt;"@cs ;
+  skos:inScheme &lt;Identifikátor glosáře&gt; .            
+            </code>
+          </pre>
+          <ul>
+            <li><code>&lt;identifikátor pojmu&gt;</code> je IRI pojmu,</li>
+            <li><code>&lt;název pojmu&gt;</code> je identifikační název pojmu v češtině unikátní v rámci glosáře,</li>
+            <li><code>&lt;identifikátor glosáře&gt;</code> je IRI glosáře pojmů, ve kterém je pojem definován.</li>
+          </ul>
+        </section>
+      </section>
+    </section>		
+  </body>
+</html>
