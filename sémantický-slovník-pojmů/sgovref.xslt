@@ -63,7 +63,11 @@
       <xsl:choose>
         <xsl:when test="$title">{$title}</xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="gen:getDatatypePropertyValue($iri, 'http://www.w3.org/2004/02/skos/core#prefLabel', 'cs')" />
+          <xsl:variable name="prefLabel" select="gen:getDatatypePropertyValue($iri, 'http://www.w3.org/2004/02/skos/core#prefLabel', 'cs')" />
+          <xsl:choose>
+            <xsl:when test="$prefLabel">{$prefLabel}</xsl:when>
+            <xsl:otherwise>CHYBA: Nepodařilo se nalézt název prvku {$iri}.</xsl:otherwise>
+          </xsl:choose>
         </xsl:otherwise>
       </xsl:choose>
     </a>
