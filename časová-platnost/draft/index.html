@@ -137,7 +137,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Časový interval určuje začátek a konec dané časové platnosti. Pokud není u časové platnosti vyplněn interval a pouze její další atributy, rozumíme tím, že dle specifikace vycházející z daných atributů je časová platnost validní až do odvolání.
+                            Časový interval určuje začátek a konec dané časové platnosti. Pokud není u časové platnosti určen konec intervalu a pouze její další atributy, rozumíme tím, že dle specifikace vycházející z daných atributů je časová platnost validní až do odvolání.
                         </dd>
                     </dl>
 
@@ -168,7 +168,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Výjimka určuje, kdy daná časová platnost v rámci svého časového intervalu neplatí. To znamená, že se od množiny časových úseků odečítá to, co je specifikováno výjimkou. 
+                            Výjimka určuje, kdy daná časová platnost v rámci svého časového intervalu neplatí. To znamená, že se od množiny časových úseků odečítá to, co je specifikováno výjimkou. Pokud výjimka nemá určen konec, výjimka je validní do odvolání. Pokud je výjimka definována bez přesně specifikace intervalu na den a čas, je validní ve stejném intervalu jako časová platnost.
                         </dd>
                     </dl>
 
@@ -199,7 +199,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Opakovatelnost určuje, kdy se v daném časovém intervalu opakuje časová platnost nebo výjimka v rámci dané časové platnosti. Pokud časová platnost nemá časový interval a pouze jiné atributy, tak dojde ke kombinaci uvedeného atributu časové platnosti a výjimky.
+                            Opakovatelnost určuje, kdy se v daném časovém intervalu opakuje časová platnost nebo výjimka v rámci dané časové platnosti. Pokud časová platnost nemá konec časového intervalu a pouze jiné atributy, tak dojde ke kombinaci uvedeného atributu časové platnosti případně výjimky.
                         </dd>
                     </dl>
 
@@ -350,7 +350,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Specifická frekvence určuje, v jaké frekvenci je časová platnost nebo výjimka validní. To znamená, že pokud se jedná o časovou platnost např. v intervalu od 1.1.2020 do 31.12.2020 se specifickou frekvencí hodina, časová platnost je validní každou hodinu v daném časovém intervalu.
+                            Specifická frekvence určuje, v jaké frekvenci je časová platnost validní. To znamená, že pokud se jedná o časovou platnost např. v intervalu od 1.1.2020 do 31.12.2020 se specifickou frekvencí hodina, časová platnost je validní každou hodinu v daném časovém intervalu.
                         </dd>
                     </dl>
 
@@ -502,7 +502,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Týden v měsíci vyjadřuje číselné vyjádření konkrétního týdne v měsíci, kdy je daná časová platnost v rámci časového intervalu časové platnosti validní.  Pokud daný týden v měsíci není (krátký měsíc), tak v daný měsíc časová platnost nebo výjimka validní není.
+                            Týden v měsíci vyjadřuje číselné vyjádření konkrétního týdne v měsíci, kdy je daná časová platnost v rámci časového intervalu časové platnosti validní.  Pokud daný týden v měsíci není (krátký měsíc), tak v daný měsíc časová platnost validní není.
                         </dd>
                         <dt>
                             Příklad
@@ -636,8 +636,8 @@
                 V této sekci jsou uvedeny příklady reprezentace časové platnosti.
             </p>
 
-            <section id="příklady-časová-platnost-první příklad">
-                <h3>Časová platnost první příklad</h3>
+            <section id="příklady-časová-platnost-první-příklad">
+                <h3>Jednoduchá časová platnost</h3>
                 
                 <p>
                     Příklad ukazuje, jak lze prezentovat časovou platnost s minimálními položkami k publikaci. Další položky lze přidávat dle potřeby. 
@@ -649,117 +649,309 @@
 
                 <aside class="example" title="Jednoduchá časová platnost">
                     <p>
-                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema</a>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>
                     </p>
                     <pre class="json">
 [{
-    "vznik_časové_platnosti": {
-        "datum_a_čas": "2019-09-20T09:30:00"
-    },
-    "ukončení_časové_platnosti": {
-        "datum_a_čas": "2019-01-22T09:30:00"
-    },
-    "poslední_změna_platnosti": {
-		"datum_a_čas": "2019-01-23T09:30:00"
-    },
-    "časový_interval": [{
-        "začátek": {
-            "datum_a_čas": "2019-09-24T09:30:00+02:00"
-        },
-        "konec": {
-            "datum_a_čas": "2019-09-28T09:30:00+02:00"
-        }
-    }, {
-        "začátek": {
-            "datum_a_čas": "2019-10-24T09:30:00+02:00"
-        },
-        "konec": {
-            "datum_a_čas": "2019-11-28T09:30:00+02:00"
-        }
-    }],
-    "časová_opakovatelnost": [
-	"každý rok",
-      	"každé století"
-    ]
+    "interval": {    
+	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
 }]
 </pre>
-                </aside>
+</aside>
+</section>                
+            <section id="příklady-časová-platnost-druhý-příklad">
+                <h3>Jednoduchá časová platnost s výjimkou</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časovou platnost s výjimkou. Příklad určuje, že časová platnost je validní od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2020 s výjimkou intervalu od 9:30:00 dne 21.9.2020 do 10:30:00 dne 21.9.2020. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časová platnost s výjimkou">
+                    <p>
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
+    },
+    "výjimka": {
+	    "interval": {    
+		"začátek": {
+       	    	   "datum_a_čas": "2020-09-21T09:30:00"
+    		    },
+    		"konec": {
+       	    	   "datum_a_čas": "2020-01-21T10:30:00"
+    	            }
+		}
+	}
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časová-platnost-třetí-příklad">
+                <h3>Jednoduchá časová platnost s opakovatelností</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časovou platnost s opakovatelností. Příklad určuje, že časová platnost je validní každý druhý týden od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2020. Tzn. platí 1. týden v roce, poté 3. týden v roce apod. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
                 
                <aside class="example" title="Časová platnost s opakovatelností">
                     <p>
-                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema</a>
+                        <a href="příklady/3.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časové opakovatelnosti</a>
                     </p>
                     <pre class="json">
 [{
-    "vznik_časové_platnosti": {
-        "datum_a_čas": "2019-09-20T09:30:00"
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
     },
-    "ukončení_časové_platnosti": {
-        "datum_a_čas": "2019-01-22T09:30:00"
-    },
-    "poslední_změna_platnosti": {
-		"datum_a_čas": "2019-01-23T09:30:00"
-    },
-    "časový_interval": [{
-        "začátek": {
-            "datum_a_čas": "2019-09-24T09:30:00+02:00"
-        },
-        "konec": {
-            "datum_a_čas": "2019-09-28T09:30:00+02:00"
-        }
-    }, {
-        "začátek": {
-            "datum_a_čas": "2019-10-24T09:30:00+02:00"
-        },
-        "konec": {
-            "datum_a_čas": "2019-11-28T09:30:00+02:00"
-        }
-    }],
-    "časová_opakovatelnost": [
-	"každý rok",
-      	"každé století"
-    ]
+    "opakovatelnost": {
+	    "frekvence": [    
+              "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+            ]
+    }
 }]
 </pre>
-                </aside>
-               <aside class="example" title="Časová platnost s opakovatelností 2">
+</aside>
+</section>
+            <section id="příklady-časová-platnost-čtvrtý-příklad">
+                <h3>Časová platnost s opakovatelností s více atributy</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časovou platnost s opakovatelností s více atributy. Příklad určuje, že časová platnost je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2021. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 apod. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časová platnost s opakovatelností s více atributy">
                     <p>
-                        <a href="příklady/3.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema</a>
+                        <a href="příklady/4.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časové opakovatelnosti</a>
                     </p>
                     <pre class="json">
 [{
-    "vznik_časové_platnosti": {
-        "datum_a_čas": "2019-09-20T09:30:00"
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2021-12-31T23:59:59"
+    	}
     },
-    "ukončení_časové_platnosti": {
-        "datum_a_čas": "2019-01-22T09:30:00"
-    },
-    "poslední_změna_platnosti": {
-		"datum_a_čas": "2019-01-23T09:30:00"
-    },
-    "časový_interval": [{
-        "začátek": {
-            "datum_a_čas": "2019-09-24T09:30:00+02:00"
-        },
-        "konec": {
-            "datum_a_čas": "2019-09-28T09:30:00+02:00"
-        }
-    }, {
-        "začátek": {
-            "datum_a_čas": "2019-10-24T09:30:00+02:00"
-        },
-        "konec": {
-            "datum_a_čas": "2019-11-28T09:30:00+02:00"
-        }
-    }],
-    "časová_opakovatelnost": [
-	"každý rok",
-      	"každé století"
-    ]
+    "opakovatelnost": {
+	    "frekvence": [    
+               "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+            ],
+	    "dny_v_týdnu": [
+	       "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+	    ],
+	    "časová doba": [
+	        "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"
+	    ]
+	    
+    }
 }]
 </pre>
-                </aside>
-            </section>
+</aside>
+</section>
+            <section id="příklady-časová-platnost-pátý-příklad">
+                <h3>Časová platnost s výjimkou a opakovatelností s více atributy</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časovou platnost s výjimkou a opakovatelností s více atributy. Příklad určuje, že časová platnost je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2021 s výjimkou intervalu od 9:30:00 dne 1.10.2021 do 10:30:00 dne 10.10.2021. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 apod. a neplatí 1. pondělí v říjnu 2021, protože v této době je validní výjimka. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časová platnost s výjimkou a opakovatelností s více atributy">
+                    <p>
+                        <a href="příklady/5.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časové opakovatelnosti</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2022-12-31T23:59:59"
+    	}
+    },
+    "výjimka": {
+	    "interval": {    
+		"začátek": {
+       	    	   "datum_a_čas": "2021-10-01T09:30:00"
+    		    },
+    		"konec": {
+       	    	   "datum_a_čas": "2021-10-10T10:30:00"
+    	            }
+	        }
+	    },
+    "opakovatelnost": {
+	    "frekvence": [    
+               "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+            ],
+	    "dny_v_týdnu": [
+	       "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+	    ],
+	    "časová doba": [
+	        "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"
+	    ]
+	    
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časová-platnost-šestý-příklad">
+                <h3>Časová platnost s výjimkou a opakovatelností s více atributy validní do odvolání</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časovou platnost s výjimkou a opakovatelností s více atributy. Příklad určuje, že časová platnost je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do odvolání s výjimkou intervalu od 9:30:00 dne 1.10.2021 do 10:30:00 dne 10.10.2021. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 a tak obdobně do odvolání. Naopak neplatí 1. pondělí v říjnu 2021, protože v této době je validní výjimka. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časová platnost s výjimkou a opakovatelností s více atributy validní do odvolání">
+                    <p>
+                        <a href="příklady/6.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časové opakovatelnosti</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	}
+    },
+    "výjimka": {
+	    "interval": {    
+		"začátek": {
+       	    	   "datum_a_čas": "2021-10-01T09:30:00"
+    		    },
+    		"konec": {
+       	    	   "datum_a_čas": "2021-10-10T10:30:00"
+    	            }
+	        }
+	    },
+    "opakovatelnost": {
+	    "frekvence": [    
+               "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+            ],
+	    "dny_v_týdnu": [
+	       "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+	    ],
+	    "časová doba": [
+	        "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"
+	    ]
+	    
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časová-platnost-šestý-příklad">
+                <h3>Časová platnost s opakovanou výjimkou a opakovatelností s více atributy validní do odvolání</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časovou platnost s opakovanou výjimkou a opakovatelností s více atributy. Příklad určuje, že časová platnost je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do odvolání s výjimkou každého prvního roku v desetiletí od 9:30:00 dne 1.10. daného roku do 10:30:00 dne 10.10. daného roku. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 a tak obdobně do odvolání. Naopak neplatí 1. pondělí v říjnu 2021, 2031 apod., protože v této době je validní výjimka (ta je v tomto případě validní stejně jako časová platnost). 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časová platnost s opakovanou výjimkou a opakovatelností s více atributy validní do odvolání">
+                    <p>
+                        <a href="příklady/6.json">Stáhnout JSON</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časové opakovatelnosti</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	}
+    },
+    "výjimka": {
+	    "interval": {    
+		"začátek": {
+       	    	   "čas": "09:30:00"
+    		    },
+    		"konec": {
+       	    	   "čas": "10:30:00"
+    	            }
+	        },
+	    "opakovatelnost": {
+		"specifická frekvence": {
+		     "rok_v_desetiletí": "1",
+		     "den_v_měsíci": [
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6",
+			"7",
+			"8",
+			"9",
+			"10"
+			]},
+	    	"časová doba": [
+	            "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"
+	            ]
+		    }},
+    "opakovatelnost": {
+	    "frekvence": [    
+               "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+            ],
+	    "dny_v_týdnu": [
+	       "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+	    ],
+	    "časová doba": [
+	        "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"
+	    ]
+	    
+    }
+}]
+</pre>
+</aside>
+</section>
+
+
+
         </section>
     </body>
 </html>
