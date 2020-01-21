@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Prostorová data</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "prostorová-data",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/standardy:technicke-standardy-pro-datove-sady-na-stupni-3#standardy_pro_prostorové_datové_sady",
+                thisVersion: "https://data.gov.cz/otevřené-formální-normy/prostorová-data/draft/",
+                latestVersion: "https://data.gov.cz/otevřené-formální-normy/prostorová-data/",
+                editors: [{
+                  name: "Michal Med",
+                  url: "https://twitter.com/medmichal",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+				  orcid: "0000-0001-7234-3051",
+                  url: "https://jakub.klímek.com/#me",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro prostorová data.
+                Definuje základní pojmy v oblasti prostorových dat, popisuje standardy pro reprezentaci vektorových a rastrových dat a zasazuje je do kontextu služeb pro vyhledávání a přístup k prostorovým datům.
+                Obsahuje také pokyny pro popis prostorových dat metadaty.
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou pro prostorová data, kde je oproti ostatním typům dat potřeba počítat s prostorovou složkou.
+                Prostorová data zahrnují všechny typy dat, které jsou prostorově určeny, tedy že přímo nebo nepřímo odkazují na určitou polohu nebo zeměpisnou oblast.
+                Zpravidla jsou určena geometrickým objektem a prostorovými vztahy s okolím (topologií).
+                Obecně lze prostorová data rozdělit na vektorová a rastrová.
+                Standardizace otevřených prostorových dat je zaštítěna pracovní skupinou <a href="https://committee.iso.org/home/tc211">ISO/TC 211</a> a mezinárodní standardizační organizací <a href="https://www.opengeospatial.org/">Open Geospatial Consortium (<abbr title="Open Geospatial Consortium">OGC</abbr>)</a>.
+                Správa prostorových dat, včetně jejich publikace, popisu metadaty atd. je u větších organizací zajištěna vybudováním komplexní infrastruktury prostorových dat (<dfn>Spatial Data Infrastructure - <abbr title="Spatial Data Infrastructure">SDI</abbr></dfn>).
+                SDI umožňuje poskytování dat prostřednictvím standardizovaných služeb, jejich vyhledávání v katalogu pomocí klíčových slov a územního rozsahu a umožňuje například transformaci dat mezi jednotlivými formáty nebo souřadnicovými referenčními systémy.
+                V případě menších obcí a organizací není budování SDI nezbytné, data lze poskytovat například vystavením souborů na internet, je však potřeba data pravidelně aktualizovat.
+                Doporučujeme také vytvořit alespoň webovou stránku, která poskytovaná data popisuje.
+            </p>
+            <p>
+                Na obecní úrovni mohou být datovými sadami, které je vhodné publikovat jako prostorová data, například seznam památných stromů nebo pomníků (bodová data), lokální cestní nebo inženýrská síť (liniová data), přehled obecní zeleně nebo územní plán (plošná data).
+                Vektorová data by měla být publikována ve vhodném otevřeném formátu za použití standardizovaných geometrických objektů.
+                Reprezentace geometrických objektů bývá zpravidla popsána ve standardu formátu, proto je vhodné si před implementací standard alespoň zběžně prostudovat, zpravidla se však pro reprezentaci geometrickcých objektů používá buď standard Geography Markup Language ([[!gml]]), nebo Well-Known Text (WKT).
+                Je krajně nevhodné reprezentovat prostorovou složku použitím atributů <code>lat</code> a <code>lon</code>, respektive <code>x</code> a <code>y</code>, nebo podobné.
+                Tato reprezentace nemusí obsahovat některé důležité informace o objektu (jako je například souřadnicový referenční systém) a není schopná reprezentovat jiné než bodové prvky.
+                Norma je ilustrována příklady dat ve formátech <a href="#vektorové-formáty-gml">GML</a> a <a href="#vektorové-formáty-geojson">GeoJSON</a>.
+            </p>
+        </section>
+
+        <section id="geometrické-objekty">
+            <h2>Geometrické objekty</h2>
+            <p>
+                Geometrické objekty jsou abstraktním zobrazením jevu reálného světa určeného polohou.
+            </p>
+            <section id="standardy">
+                <h3>Standardy pro vyjádření geometrických objektů</h3>
+                <p>
+                    Obecně je vhodné k vyjádření geometrického objektu používat interpretaci geometrických objektů tak, jak je definována v použitém formátu.
+                    Nejrozšířenější formáty pro zápis geometrických objektů jsou <a href="#standardy-wkt"><abbr title="Well-Known Text">WKT</abbr></a> a <a href="#standardy-gml"><abbr title="Geography Mark-up Language">GML</abbr></a>.
+                </p>
+
+                <section id="standardy-wkt">
+                    <h4>Well-Known Text (WKT)</h4>
+                    <p>
+                        Formát byl vytvořen OGC a je specifikován ve standardech <a href="https://www.opengeospatial.org/standards/sfa">Simple Feature Access</a> a ISO 19125.
+                        Je vhodný především k zápisu 2D geometrií, jako je point, multipoint, line, polyline, polygon apod.
+                        Ve WKT je také možné definovat souřadnicové systémy a transformovat souřadnice.
+                        Reprezentace souřadnic ve WKT je nicméně bez definovaného souřadnicového systému.
+                        Většina knihoven pro zpracování WKT očekává data v souřadnicovém referenčním systému WGS 84, nicméně souřadnice můžou být v libovolném souřadnicovém referenčním systému.
+                        Použitý souřadnicový referenční systém by měl být uveden v datech.
+                        V <a href="#geosparql">GeoSPARQL</a> je souřadnicový referenční systém pro WKT uveden před objektem, je možné ho tam uvádět i ve vektorových formátech.
+
+                    </p>
+                </section>
+
+                <section id="standardy-gml">
+                    <h4>Geography Mark-up Language (GML)</h4>
+                    <p>
+                        Formát je rozšířením značkovacího jazyka <abbr title="eXtensible Markup Language">XML</abbr> za účelem reprezentace geometrických objektů.
+                        Je definován ve standardu OGC [[!gml]] a je velice robustní.
+                        Umožňuje zápis souřadnic v mnoha souřadnicových systémech (pro ČR je nejdůležitější podpora souřadnicového referenčního systému <a href="#souřadnicové-referenční-systémy-s-jtsk">S-JTSK</a>) a reprezentaci všech forem prostorových informací, včetně pokryvu nebo senzorových dat.
+                        Větší robustnost je vykoupena větší složitostí zápisu.
+                    </p>
+                </section>
+
+            </section>
+
+            <section id="geometrické-objekty-typy">
+                <h3>Typy geometrických objektů</h3>
+
+                <p>
+                    Základními typy geometrických objektů jsou:
+                </p>
+
+                <section id="geometrické-objekty-bod">
+                    <h4>Bod</h4>
+                    <p>
+                        Objekt je reprezentován bodem (Point). Podobně jako bod je reprezentován i multipoint - objekt reprezentovaný množinou bodů.
+                    </p>
+
+                    <aside class="example" title="WKT">
+                        <p>
+                            Reprezentace ve WKT
+                        </p>
+                        <pre>POINT(50.056 14.434)</pre>
+                        <pre>MULTIPOINT((50.056 14.434),(50.052 14.436))</pre>
+                    </aside>
+
+                    <aside class="example" title="GML">
+                      <p>
+                        Reprezentace v GML
+                      </p>
+                      <pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
+                      <pre class="xml">
+&lt;gml:MultiPoint srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:PointMemeber&gt;
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;
+    &lt;/gml:PointMemeber&gt;
+        &lt;gml:PointMemeber&gt;
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.052 14.436&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;
+    &lt;/gml:PointMemeber&gt;
+&lt;/gml:MultiPoint&gt;</pre>
+                    </aside>
+
+                </section>
+
+                <section id="geometrické-objekty-lomená-čára">
+                    <h4>Lomená čára</h4>
+                    <p>
+                        Objekt je reprezentován lomenou čárou (například uliční čára, osa vodního toku).
+                    </p>
+
+                    <aside class="example" title="WKT">
+                        <p>
+                            Reprezentace ve WKT
+                        </p>
+                        <pre>LINESTRING(50.056 14.434, 50.064 14.442, 50.042 14.445)</pre>
+                    </aside>
+
+                    <aside class="example" title="GML">
+                        <p>
+                            Reprezentace v GML
+                        </p>
+                        <pre class="xml">
+&lt;gml:Curve srsName="http://opengis.net/def/crs/EPSG/0/5514" srsDimension="2"&gt;
+    &lt;gml:segments&gt;
+      &lt;gml:LineStringSegment&gt;
+        &lt;gml:posList&gt;-641126.76 -1093821.18 -641119.35 -1093831.05 -641109.75 -1093844.44&lt;/gml:posList&gt;
+      &lt;/gml:LineStringSegment&gt;
+    &lt;/gml:segments&gt;
+&lt;/gml:Curve&gt;</pre>
+                    </aside>
+
+                    <aside class="example" title="GML">
+                        <p>
+                            Alternativní reprezentace souřadnic lomené čáry v GML
+                        </p>
+                        <pre class="xml">
+&lt;gml:Curve srsName="http://opengis.net/def/crs/EPSG/0/5514" srsDimension="2"&gt;
+    &lt;gml:segments&gt;
+      &lt;gml:LineStringSegment&gt;
+        &lt;gml:coordinates&gt;-641126.76, -1093821.18 -641119.35, -1093831.05 -641109.75, -1093844.44&lt;/gml:coordinates&gt;
+      &lt;/gml:LineStringSegment&gt;
+    &lt;/gml:segments&gt;
+&lt;/gml:Curve&gt;</pre>
+                    </aside>
+
+                </section>
+
+                <section id="geometrické-objekty-polygon">
+                    <h4>Polygon</h4>
+                    <p>
+                        Objekt je reprezentován plochou, plochami, případně plochou s dírou (například plocha zeleně, vodní plocha, plocha parcely).
+                    </p>
+
+                    <aside class="example" title="WKT">
+                        <p>
+                            Reprezentace ve WKT
+                        </p>
+                        <pre>POLYGON(50.088131 14.402751,50.088105 14.402749, 50.088104 14.402738, 50.088099 14.402742, 50.088089 14.402746, 50.088082 14.402751, 50.088079 14.402744, 50.088075 14.40275, 50.088053 14.402748, 50.088053 14.402742, 50.088044 14.402748, 50.088041 14.402744, 50.08804 14.402739, 50.088033 14.402732, 50.088032 14.402739, 50.088021 14.402733, 50.08801 14.402728, 50.088002 14.402746, 50.087994 14.402749, 50.08799 14.402751, 50.087988 14.402746, 50.087984 14.402752, 50.087954 14.402749, 50.087951 14.402754, 50.087945 14.40275, 50.087943 14.402743)</pre>
+                    </aside>
+
+                    <aside class="example" title="GML">
+                        <p>
+                            Reprezentace v GML
+                        </p>
+                        <pre class="xml">
+&lt;gml:Polygon gml:id="CPX.2384051101" srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:exterior&gt;
+        &lt;gml:LinearRing&gt;
+            &lt;gml:posList&gt;50.088131 14.402751,50.088105 14.402749, 50.088104 14.402738, 50.088099 14.402742, 50.088089 14.402746, 50.088082 14.402751, 50.088079 14.402744, 50.088075 14.40275, 50.088053 14.402748, 50.088053 14.402742, 50.088044 14.402748, 50.088041 14.402744, 50.08804 14.402739, 50.088033 14.402732, 50.088032 14.402739, 50.088021 14.402733, 50.08801 14.402728, 50.088002 14.402746, 50.087994 14.402749, 50.08799 14.402751, 50.087988 14.402746, 50.087984 14.402752, 50.087954 14.402749, 50.087951 14.402754, 50.087945 14.40275, 50.087943 14.402743&lt;/gml:posList&gt;
+        &lt;/gml:LinearRing&gt;
+    &lt;/gml:exterior&gt;
+&lt;/gml:Polygon&gt;</pre>
+                    </aside>
+
+                </section>
+
+            </section>
+
+        </section>
+
+        <section id="souřadnicové-referenční-systémy">
+            <h2>Souřadnicové referenční systémy</h2>
+
+            <p>
+                Pro definici souřadnicových referenčních systémů je používán registr EPSG (European Petroleum Survey Group), podporovaný všemi programy pro práci s prostorovými daty (<abbr title="Geographic Information System">GIS</abbr>).
+                Existuje několik způsobů zápisu kódu souřadncových referenčních systémů, ale dle doporučení OGC je nejvhodnější používat zápis ve formě HTTP URI http://opengis.net/def/crs/EPSG/0/[kód], například http://opengis.net/def/crs/EPSG/0/4326.
+                Tento zápis formou HTTP URI je doporučen i touto otevřenou formální normou.
+                Často se lze setkat i se zápisem ve formě URN (urn:ogc:def:crs:EPSG::4326) nebo jeho zkrácené formě (EPSG:4326).
+                Zkrácený zápis má opačné pořadí souřadnic v případě souřadnicových refrenčních systémů, které mají standardně osy nastavené jinak než v kartézském systému souřadnic (typicky například WGS 84 nebo ETRS 89, viz dále).
+                Registr obsahuje celou řadu souřadnicových referenčních systémů, které opatřuje kódem.
+                V České republice jsou nejčastěji využívány souřadnicové referenční systémy uvedené níže.
+                Souřadnicové referenční systémy jsou rozlišovány geografické a projektované (využívající projekci geografického souřadnicového referenčního systému).
+            </p>
+
+            <section id="souřadnicové-referenční-systémy-s-jtsk">
+                <h3>Systém jednotné trigonometrické sítě katastrální (S-JTSK)</h3>
+
+                <p>
+                    Systém jednotné trigonometrické sítě katastrální (<abbr title="Systém jednotné trigonometrické sítě katastrální">S-JTSK</abbr>) - používaný např. v katastru nemovitostí.
+                    Pro využití v GIS je využíváno EPSG kódu <code>5514</code>, který otáčí osy systému a souřadnice nabývají negativních hodnot (jsou uvozeny znaménkem minus).
+                    Kód 5514 představuje projektovaný systém S-JTSK / Krovak East North, tedy Křovákovo zobrazení geografického souřadnicového systému S-JTSK.
+                    Souřadnice jsou uváděny v metrech na osách X a Y jako vzdálenost od počátku systému, kterým je vrchol kuželu.
+                </p>
+                <aside class="example" title="WKT">
+					<pre>POINT(-904325.25 -1076279.09)</pre>
+				</aside>
+				<p>Příklad zobrazení dat v souřadnicovém referenčním systému S-JTSK / Krovak East North v GML je vidět v příkladu zápisu lomené čáry.</p>
+
+            </section>
+
+            <section id="souřadnicové-referenční-systémy-wgs84">
+                <h3>World Geodetic System 1984 (<abbr title="World Geodetic System 1984">WGS 84</abbr>)</h3>
+
+                <p>
+                    World Geodetic System 1984 (WGS 84) - někdy laicky zvaný též &quot;souřadnice GPS&quot;.
+                    Souřadnice bývají uvedeny ve stupních s několika desetinnými místy.
+                    Některé publikační formáty (např. GPX, GeoJSON nebo KML) počítají přímo s tím, že data jsou uložena v tomto souřadnicovém referenčním systému.
+                    V registru EPSG je tento souřadnicový referenční systém označen kódem <code>4326</code>.
+                    Souřadnice jsou uváděny ve stupních jako zeměpisná šířka a délka, při zkráceném zápisu kódu souřadnicového referenčního systému ve formě URN jsou zapisovány v opačném pořadí (X, Y).
+                </p>
+
+                <aside class="example" title="WKT">
+                    <pre>POINT(50.056 14.434)</pre>
+                </aside>
+                <aside class="example" title="GML">
+                    <pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4326" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
+                </aside>
+
+            </section>
+
+            <section id="souřadnicové-referenční-systémy-web-mercator">
+                <h3>Web Mercator</h3>
+
+                <p>
+                    Systém WGS 84 / Pseuso Mercator, označovaný také Web (nebo Google) Mercator - je projektovaný souřadnicový referenční systém používaný na většině globálních webových aplikací.
+                    Jeho nevýhodou je mimo jiné zkreslení významné velikosti ploch směrem k pólům.
+                    Je označen kódem <code>3857</code>.
+                    Souřadnice jsou uváděny v metrech jako vzdálenost na osách X a Y od počátku, kterým je průsečík rovníku a nultého poledníku.
+                </p>
+                <aside class="example" title="WKT">
+                    <pre>POINT(162413.977 6447616.209)</pre>
+                </aside>
+                <aside class="example" title="GML">
+                    <pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/3857" srsDimension="2"&gt;
+    &lt;gml:pos&gt;162413.977 6447616.209&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
+                </aside>
+            </section>
+
+            <section id="souřadnicové-referenční-systémy-etrs">
+                <h3>European Terrestrial Reference System (ETRS-89)</h3>
+
+                <p>
+                    European Terrestrial Reference System - je geografický souřadnicový referenční systém zpřesňující WGS 84 pro území Evropy.
+                    Zápis je stejný jako u WGS 84, souřadnice se liší v rámci milimetrů až centimetrů.
+                    Je označen kódem <code>4258</code>.
+                    Souřadnice jsou uváděny ve stupních jako zeměpisná šířka a délka, při zkráceném zápisu kódu souřadnicového referenčního systému ve fromě URN jsou zapisovány v opačném pořadí (X, Y).
+                </p>
+                <aside class="example" title="WKT">
+                    <pre>POINT(50.056 14.434)</pre>
+                </aside>
+                <aside class="example" title="GML">
+                    <pre class="xml">
+&lt;gml:Point srsName="http://opengis.net/def/crs/EPSG/0/4258" srsDimension="2"&gt;
+    &lt;gml:pos&gt;50.056 14.434&lt;/gml:pos&gt;
+&lt;/gml:Point&gt;</pre>
+                </aside>
+            </section>
+            <p>
+                Vlastní organizace již neexistuje, ale oficiální stránka registru epsg, kde lze najít podrobnosti o všech EPSG kódech je dostupná na webové stránce <a href="http://www.epsg-registry.org/">www.epsg-registry.org/</a>.
+                Přehlednou a úplnou webovou aplikaci nad databází souřadnicových referenčních systémů vedených v EPSG lze najít také na <a href="https://epsg.io">webu epsg.io</a>.
+            </p>
+
+        </section>
+
+        <section id="vektorové-formáty">
+            <h2>Vektorové formáty</h2>
+
+            <p>
+                Datové sady prostorových dat by měly být publikovány ve vhodném otevřeném formátu, který musí umožnit strojovou čitelnost.
+                Tato sekce obsahuje přehled používaných otevřených formátů pro vektorová data.
+            </p>
+
+            <section id="vektorové-formáty-gml">
+                <h3>Geography Markup Language (GML)</h3>
+
+                <p>
+                    Jedná se formát XML pro prostorová data a <a href="https://www.opengeospatial.org/standards/gml">standard OGC</a>.
+                    Geometrie je zapisována za použití GML.
+                    Jedná se o komplexní formát, který je schopen zápisu v podstatě libovolného typu geometrických objektů a atributových hodnot.
+                    Formát GML ve verzi 3.2.1 je používán pro publikaci datových sad směrnice <a href="https://inspire.ec.europa.eu/">INSPIRE</a>.
+                    K zápisu jsou používány dvojice tagů, jazyk XML je rozšířen o abstraktní typ AbstractFeatureType, který musí obsahovat geometrický objekt.
+                    Pro komplexní poskytování dat ve formátu GML je vhodné vytvořit schéma dokumentu v XML Schema Definition (<abbr title="XML Schema Definition">XSD</abbr>), které zajišťuje validitu dat.
+                </p>
+
+                <aside class="example" title="GML">
+                    <p>
+                        Příklad dat z datové sady Adresy publikované v rámci směrnice INSPIRE pro Českou republiku ve formátu GML.
+                    </p>
+
+                    <pre class="xml">
+
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+                      <ad:Address gml:id="AD.22547665" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0" xmlns:gco="http://www.isotc211.org/2005/gco" xsi:schemaLocation="http://www.opengis.net/gml/3.2 http://www.opengis.net/gml/3.2.1/gml.xsd http://inspire.ec.europa.eu/schemas/base/3.3 http://inspire.ec.europa.eu/schemas/base/3.3/BaseTypes.xsd  http://inspire.ec.europa.eu/schemas/ad/4.0 http://inspire.ec.europa.eu/schemas/ad/4.0/Addresses.xsd">
+
+
+
+&lt;ad:Address gml:id="AD.22547665"
+       xmlns:gml="http://www.opengis.net/gml/3.2"
+       xmlns:xlink="http://www.w3.org/1999/xlink"
+       xmlns:base="http://inspire.ec.europa.eu/schemas/base/3.3"
+       xmlns:ad="http://inspire.ec.europa.eu/schemas/ad/4.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+       xmlns:gn="http://inspire.ec.europa.eu/schemas/gn/4.0"
+       xmlns:gco="http://www.isotc211.org/2005/gco"
+       xsi:schemaLocation="http://www.opengis.net/gml/3.2 http://www.opengis.net/gml/3.2.1/gml.xsd
+              http://inspire.ec.europa.eu/schemas/base/3.3 http://inspire.ec.europa.eu/schemas/base/3.3/BaseTypes.xsd
+              http://inspire.ec.europa.eu/schemas/ad/4.0 http://inspire.ec.europa.eu/schemas/ad/4.0/Addresses.xsd"&gt;
+    &lt;ad:inspireId&gt;
+        &lt;base:Identifier&gt;
+            &lt;base:localId&gt;AD.22547665&lt;/base:localId&gt;
+            &lt;base:namespace&gt;CZ-00025712-CUZK_AD&lt;/base:namespace&gt;
+        &lt;/base:Identifier&gt;
+    &lt;/ad:inspireId&gt;
+    &lt;ad:alternativeIdentifier&gt;K Pitkovicům 1, Benice, 10300 Praha 10&lt;/ad:alternativeIdentifier&gt;
+    &lt;ad:position&gt;
+        &lt;ad:GeographicPosition&gt;
+            &lt;ad:geometry&gt;
+                &lt;gml:Point gml:id="P.AD.22547665" srsName="urn:ogc:def:crs:EPSG::5514"
+                    srsDimension="2"&gt;
+                    &lt;gml:pos&gt;-731037.56 -1053052.98&lt;/gml:pos&gt;
+                &lt;/gml:Point&gt;
+            &lt;/ad:geometry&gt;
+            &lt;ad:specification
+                xlink:href="http://inspire.ec.europa.eu/codelist/GeometrySpecificationValue/entrance"
+                xlink:title="entrance"/&gt;
+            &lt;ad:method
+                xlink:href="http://inspire.ec.europa.eu/codelist/GeometryMethodValue/byAdministrator"
+                xlink:title="byAdministrator"/&gt;
+            &lt;ad:default&gt;true&lt;/ad:default&gt;
+        &lt;/ad:GeographicPosition&gt;
+    &lt;/ad:position&gt;
+    &lt;ad:locator&gt;
+        &lt;ad:AddressLocator&gt;
+            &lt;ad:designator&gt;
+                &lt;ad:LocatorDesignator&gt;
+                    &lt;ad:designator&gt;č.p.&lt;/ad:designator&gt;
+                    &lt;ad:type
+                        xlink:href="http://inspire.ec.europa.eu/codelist/LocatorDesignatorTypeValue/buildingIdentifierPrefix"
+                        xlink:title="buildingIdentifierPrefix"/&gt;
+                &lt;/ad:LocatorDesignator&gt;
+            &lt;/ad:designator&gt;
+            &lt;ad:designator&gt;
+                &lt;ad:LocatorDesignator&gt;
+                    &lt;ad:designator&gt;1&lt;/ad:designator&gt;
+                    &lt;ad:type
+                        xlink:href="http://inspire.ec.europa.eu/codelist/LocatorDesignatorTypeValue/buildingIdentifier"
+                        xlink:title="buildingIdentifier"/&gt;
+                &lt;/ad:LocatorDesignator&gt;
+            &lt;/ad:designator&gt;
+            &lt;ad:level xlink:href="http://inspire.ec.europa.eu/codelist/LocatorLevelValue/siteLevel"
+                xlink:title="siteLevel"/&gt;
+        &lt;/ad:AddressLocator&gt;
+    &lt;/ad:locator&gt;
+    &lt;ad:validFrom&gt;2017-06-22T21:07:18Z&lt;/ad:validFrom&gt;
+    &lt;ad:beginLifespanVersion&gt;2017-06-22T21:07:18Z&lt;/ad:beginLifespanVersion&gt;
+    &lt;ad:endLifespanVersion xsi:nil="true"
+        nilReason="http://inspire.ec.europa.eu/codelist/VoidReasonValue/Unpopulated"/&gt;
+    &lt;ad:component xlink:href="#AA.MOP.108" xlink:title="Praha 10"/&gt;
+    &lt;ad:component xlink:href="#AA.MOMC.538078" xlink:title="Praha-Benice"/&gt;
+    &lt;ad:component xlink:href="#AA.2585" xlink:title="Benice"/&gt;
+    &lt;ad:component xlink:href="#TF.498211" xlink:title="K Pitkovicům"/&gt;
+    &lt;ad:component xlink:href="#PD.10300" xlink:title="10300"/&gt;
+&lt;/ad:Address&gt;</pre>
+                </aside>
+
+            </section>
+
+            <section id="vektorové-formáty-geopackage">
+                <h3>OGC GeoPackage</h3>
+
+                <p>
+                    Jedná se o nad souborovou databází <a href="https://www.sqlite.org/">SQLite</a> postavený standardizovaný formát pro prostorová data.
+                    Lze do něj uložit stejnou  strukturu jako do CSV a složitou geometrickou strukturu jako samostatný atribut.
+                    Vzhledem ke své povaze umí GeoPackage spravovat mimo vektorových dat i rastrová data.
+                    Jedná se o souborovou databázi, takže zde není uveden příklad dat.
+                    Více informací je ve <a href="https://www.opengeospatial.org/standards/geopackage">standardu</a> a na <a href="https://www.geopackage.org/guidance/getting-started.html">stránkách formátu</a>.
+                </p>
+
+            </section>
+
+            <section id="vektorové-formáty-geojson">
+
+                <h3>GeoJSON [[!rfc7946]]</h3>
+
+                <p>
+                    Jedná se o rozšíření formátu <abbr title="JavaScript Object Notation">JSON</abbr> pro reprezentaci geometrických objektů.
+                    Jednotlivé záznamy jsou reprezentovány jako samostatné objekty.
+                    Formát JSON vychází z formy objektu v jazyce JavaScript.
+                    Formát není tak robustní jako GML, ale není ani tak složitý.
+                    Podle specifikace formát předpokládá použití souřadnicového referenčního systému WGS 84. Původně specifikace počítala i s využitím jiných souřadnicových referenčních systémů, ale ukázalo se, že jejich použití je problematické.
+                    Do budoucna GeoJSON s použitím dalších souřadnicových referenčních systémů nepočítá.
+                    Přesto lze formát pro jiné souřadnicové referenční systémy využít, neexistuje ale standardizovaný způsob, jak souřadnicový referenční systém specifikovat.
+                    Doporučeným způsobem je využití atributu crs v následujícím příkladu, nebo využití formátů GML nebo GeoPackage.
+                    Formát JSON je hojně používaný jako výměnný formát v internetových formulářích.
+                    K dispozici je <a href="https://geojson.org/">plná dokumentace formátu</a> (v angličtině).
+                </p>
+
+                <aside class="example" title="GeoJSON">
+                    <p>
+                        Příklad objektu tržního řádu Prahy doplněný o souřadnice adresních míst, nebo definičních bodů katastrálních parcel ve formátu GeoJSON, včetně definice použitého souřadnicového referenčního systému.
+                    </p>
+                    <pre class="json">
+{
+  "geometry":{
+    "coordinates":[
+    14.419134,
+    50.090122
+    ],
+    "type":"Point"
+  },
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::4326"
+    }
+  },
+  "properties":{
+    "cislo_orientacni":"22",
+    "cislo_popisne":"128",
+    "druh_mista":"RESTAURAČNÍZAHRÁDKY",
+    "druh_zbozi":"",
+    "momc":"Praha 1",
+    "ulice":"Pařížská"
+  },
+  "type":"Feature"
+}</pre>
+                </aside>
+
+            </section>
+
+            <section id="vektorové-formáty-csv">
+
+                <h3><abbr title="Comma-Separated Values">CSV</abbr> [[!rfc4180]]</h3>
+
+                <p>
+                    Tabulkový způsob zápisu vhodný pro nepříliš komplexní data.
+                    Jednotlivé záznamy atributové tabulky jsou zapsány jako řádky textového souboru a hodnoty záznamů jako řetězce oddělené čárkou (znak UTF-8 s kódem <code>U+002C</code>).
+                    Zápis geometrického objektu zpravidla obsahuje čárky, proto je vhodné hodnoty uzavřít do uvozovek (znak UTF-8 s kódem <code>U+0022</code>).
+                    Pro zápis prostorové informace je vhodné použít WKT.
+                    Data ve formátu CSV by měla obsahovat informaci o použitém souřadnicovém referenčním systému buď formou <abbr title="European Petroleum Survey Group">EPSG</abbr> kódu, nebo URI (viz <a href="#souřadnicové-referenční-systémy">Souřadnicové referenční systémy</a>), buď v hlavičce souboru, nebo jako atribut.
+                    Obecně však formát CSV není pro zápis prostorových objektů příliš doporučován.
+                </p>
+
+                <aside class="example" title="CSV">
+                    <p>
+                        Příklad dat obsahující informace o ulicích s geometrií uliční čáry.
+                    </p>
+                    <pre class="csv">
+Kód,Název ulice,Kód Obce,Název Obce,Kód Okresu,Název Okresu,WKT_Geometry,CRS
+442666,Adamovská,554782,Praha,3100,Hlavní město Praha,"LINESTRING(14.450325965881346 50.05789646795757, 14.450948238372803 50.05791713211645, 14.45121645927429 50.05803422884852, 14.451420307159424 50.058764354966634, 14.451624155044554 50.0591569653608, 14.451828002929688 50.059460030836206, 14.45177435874939 50.059522021265785)",http://www.opengis.net/def/crs/EPSG/0/4258
+442674,Africká,554782,Praha,3100,Hlavní město Praha,"LINESTRING(14.349464178085329 50.09616500163075, 14.349786043167112 50.096075528282334, 14.349968433380127 50.09575892893866, 14.350258111953734 50.09575892893866, 14.350826740264893 50.09566257220141, 14.352350234985352 50.09597228959578, 14.354592561721802 50.096399008059755, 14.355171918869019 50.096392125534024, 14.355483055114746 50.09633018275811, 14.355762004852295 50.09634394782634, 14.358251094818113 50.096791310391346, 14.358723163604736 50.096873899946615, 14.359141588211058 50.09697713669046, 14.359956979751587 50.09699778401253, 14.36085820198059 50.09715607985288, 14.362660646438599 50.09761031718664, 14.363701343536377 50.09788561044452, 14.363905191421507 50.09789937506589, 14.364173412322996 50.09786496350506, 14.364463090896606 50.09773419934845)",http://www.opengis.net/def/crs/EPSG/0/4258
+442682,Akátová,554782,Praha,3100,Hlavní město Praha,"LINESTRING(14.41953420639038 50.077619800339754, 14.41979169845581 50.077647341221535, 14.421336650848389 50.07749586617591, 14.42479133605957 50.077330620125764, 14.429275989532469 50.07717914407949, 14.431657791137694 50.07711029117297)",http://www.opengis.net/def/crs/EPSG/0/4258</pre>
+                </aside>
+
+            </section>
+
+            <section id="vektorové-formáty-shapefile">
+                <h3>ESRI Shapefile</h3>
+
+                <p>
+                    ESRI Shapefile je poměrně zastaralý, přesto stále hojně používaný formát pro správu prostorových dat, vyvinutý společností ESRI, která uvolnila <a href="https://www.esri.com/library/whitepapers/pdfs/shapefile.pdf">technickou dokumentaci</a> formátu.
+                    Jedná se o otevřený formát, který uchovává informace ve více souborech.
+                    Vlastnosti jednotlivých prvků dodržují strukturu pro datovou sadu.
+                    Organizace spravující data prostřednictvím software od společnosti ESRI by s publikací dat v tomto formátu neměly mít problémy.
+                    Formát má řadu <a href="http://switchfromshapefile.org/">známých chyb</a> a jeho používání není doporučeno. Pro publikaci otevřených dat je vhodnější použít formát GML, GeoJSON nebo GeoPackage.
+                </p>
+
+            </section>
+
+        </section>
+
+        <section id="rastrové-formáty">
+            <h2>Rastrové formáty</h2>
+
+            <p>
+                Pro rastrová data platí podobné podmínky jako pro kolekce obrázků, s několika upřesněními.
+            </p>
+            <ol>
+                <li>Obrazové soubory jsou georeferencované v daném popsaném souřadnicovém referenčním systému,</li>
+                <li>datová sada může obsahovat více obrazových souborů, ty by však měly obsahovat data stejného typu ve stejném souřadnicovém referenčním systému,</li>
+                <li>datová sada by měla být opatřena metadaty, které obsahují dodatečný popis datové sady,</li>
+                <li>data by měla být publikována v otevřeném formátu pro rastrová prostorová data.</li>
+            </ol>
+
+            <p>
+                Příklady některých vhodných otevřených formátů pro rastrová data jsou uvedeny níže.
+            </p>
+
+            <section id="rastrové-formáty-geotiff">
+                <h3>GeoTIFF</h3>
+
+                <p>
+                    Jedná se o metadatový standard umožňující georeferencování obrázků ve formátu TIFF. Definice formátu je na adrese <a href="https://trac.osgeo.org/geotiff/">https://trac.osgeo.org/geotiff/</a>.
+                </p>
+            </section>
+
+            <section id="rastrové-formáty-jpeg">
+
+                <h3>JPEG 2000 [[!JPEG2000]]</h3>
+
+                <p>
+                    JPEG 2000 je obrazový kompresní formát odpovídající <a href="https://www.iso.org/standard/69462.html">standardu ISO/IEC 15444-5:2015</a>.
+                    Organizace OGC specifikovala metadatový standard ve formátu GML pro georeferencování JPEG 2000 - tímto standardem je <a href="https://www.opengeospatial.org/standards/gmljp2">GML JP2</a>.
+                    Formát JPEG 2000 není přímo otevřený, ale všichni vlastníci patentů se shodli na tom, že specifikace bude volně dostupná každému bez poplatků.
+                </p>
+            </section>
+
+            <section id="rastrové-formáty-geopackage">
+                <h3>OGC GeoPackage</h3>
+
+                <p>
+                    Jedná se o nad souborovou databází <a href="https://www.sqlite.org/">SQLite</a> postavený standardizovaný formát pro prostorová data, uvedený již mezi formáty pro vektrová data.Od verze knihovny GDAL 2.0 podporuje i rastrová data. Více na <a href="https://www.gdal.org/drv_geopackage_raster.html">stránce zabývající se podporou rastrových dat v geopackage</a>.
+                </p>
+            </section>
+
+        </section>
+
+        <section id="prostorová-linked-data">
+            <h2>Propojená prostorová data</h2>
+
+            <p>
+                I prostorová data je možné publikovat podle principů propojených dat (linked data) tak, jak jsou popsána v <a href="../../propojená-data/">otevřené formální normě pro Propojená data</a>.
+                K reprezentaci prostorových propojených dat slouží standard OGC GeoSPARQL [[geosparql]].
+            </p>
+
+            <section id="geosparql">
+              <h3>GeoSPARQL</h3>
+                <p>
+                    K reprezentaci prostorových objektů GeoSPARQL využívá <a href="standardy-wkt">WKT</a> i <a href="#standardy-gml">GML</a>.
+                    Data je možné serializovat stejnými způsoby jako v otevřené formální normě pro Propojená data.
+                    Příklady, jak publikovat prostorová propojená data, jsou v této otevřené formální normě publikována v serializaci Turtle ([[turtle]]).
+                    Geosparql je standard, ontologie a dotazovací jazyk.
+                    Ontologie definuje třídy SpatialObject, Feature, Geometry a její specializace a vztahy mezi nimi (viz obrázek).
+                </p>
+
+                <div style="width:image width px; font-size:80%; text-align:center;"><img src="obrázky/GeoSPARQL-geometry.png" alt="GeoSPARQL Ontology" width="80%" height="auto" align="center"/><br/>Schéma ontologie GeoSPARQL.</div>
+
+                <p>
+                    Objekt, který lze definovat v prostoru, je typu geo:Feature. Vyjádření geometrie je samostatný objekt typu geo:Geometry. Vztah mezi těmito objekty je:
+                </p>
+
+                <aside class="example" title="GeoSPARQL objekty">
+                    <pre class="turtle">
+     @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+
+     geo:Feature geo:hasGeometry geo:Geometry .
+                    </pre>
+                </aside>
+
+                <p>
+                    Následující příklad představuje katastrální parcelu a její geometrii vyjádřenou jako WKT objekt:
+               </p>
+
+                <aside class="example" title="GeoSPARQL v Turtle">
+                                    <pre class="turtle">
+    @prefix ds-par: &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcely/&gt; .
+    @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+    @prefix par: &lt;http://onto.fel.cvut.cz/ontologies/town-plan/databaseTableParcely/&gt; .
+
+
+    &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/100&gt; a ds-par:Parcely,
+           geosparql:Feature ;
+        rdfs:label  &lt;parcelakn_dokm_p/100&gt; ;
+        par:dat_vznik "2004-01-13"^^xsd:date ;
+        par:id 2091193101 ;
+        par:id_poskyt 397 ;
+        par:katuze_kod 727164 ;
+        par:nazev_ku "Vinohrady" ;
+        par:parcela "4204" ;
+        par:poskyt "ČÚZK" ;
+        par:shape_area 1048.04744997 ;
+        par:shape_length 218.406764453 ;
+        par:vymera 1048 ;
+        geo:hasGeometry &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/geometry/100&gt; .
+
+    &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/geometry/100&gt; a geo:Geometry ;
+        rdfs:label &lt;parcelakn_dokm_p/geometry/100&gt; ;
+        geo:asWKT "MULTIPOLYGON(((-741985.27 -1045443.98,-741994.129999999 -1045444.13,-741993.23 -1045442.7,-741991.530000001 -1045440.48,-741990.989999998 -1045437.09,-741990.199999999 -1045432.24,-741994.800000001 -1045432.09,-741993.91 -1045420.49,-741990.539999999 -1045398.7,-741989.170000002 -1045386.14,-741986.629999999 -1045364.56,-741986.27 -1045360.74,-741986 -1045358.82,-741985.699999999 -1045354.77,-741984.66 -1045345.76,-741982.030000001 -1045348.86,-741973.77 -1045360.2,-741973.219999999 -1045360.86,-741974.32 -1045361.43,-741975.59 -1045372.47,-741981.100000001 -1045420.8,-741981.41 -1045423.64,-741981.84 -1045427.37,-741982.350000001 -1045431.76,-741984.34 -1045431.86,-741985.129999999 -1045436.73,-741985.199999999 -1045440.71,-741985.27 -1045443.98)))" .
+                        </pre>
+                          </aside>
+
+                <p>
+                    Následující příklad ukazuje definici souřadnicového referenčního systému jako součást řetězce WKT:
+               </p>
+
+                <aside class="example" title="GeoSPARQL s CRS">
+                        <pre class="turtle">
+    @prefix geo: &lt;http://www.opengis.net/ont/geosparql#&gt; .
+
+    &lt;http://onto.fel.cvut.cz/ontologies/town-plan/parcelakn_dokm_p/100&gt; a ds-par:Parcely,
+           geosparql:Feature ;
+        geo:asWKT  "&lt;http://www.opengis.net/def/crs/EPSG/0/4326&gt; Point(50.95 14.38)"^^&lt;http://www.opengis.net/ont/geosparql#wktLiteral&gt; .
+                        </pre>
+                </aside>
+
+            </section>
+        </section>
+
+        <section id="publikace-dat">
+            <h2>Publikace dat</h2>
+
+            <p>
+                Datová sada může obsahovat objekty různých typů (například katastrální parcely a katastrální území), ale všechny objekty stejného typu v rámci datové sady musí mít stejnou strukturu (stejné atributy).
+                Data je možné publikovat několika různými způsoby.
+                Pro komplexní prostorová data s vybudovanou SDI je nejvhodnější publikovat data prostřednictvím standardizovaných služeb pro poskytování prostorových dat.
+
+                Nejvhodnější jsou služby standardizované konsorciem OGC, jmenovitě <a href="publikace-dat-wfs">Web Feature Service</a> ([[!wfs]]) a <a href="publikace-dat-wcs">Web Coverage Service (<abbr title="Web Coverage Service">WCS</abbr>)</a>.
+            </p>
+
+            <p>
+                Komplexní řešení pro SDI umožňují zpravidla poskytování dat na základě těchto standardů.
+                Další možností je generovat datové soubory (pokrývající například území obce nebo povodí).
+                Tyto soubory lze poskytovat prostřednictvím protokolu ATOM [[!rfc4287]], nebo vystavením na webové stránky.
+                Poskytování dat přes ATOM patří mezi možnosti poskytování dat dle směrnice <a href="#inspire">INSPIRE</a>.
+                Poskytování dat prostřednictvím webových služeb standardizovaných OGC nebo pomocí ATOM umožňuje uživatelům data snadněji vyhledávat a filtrovat.
+                Pokud vaše organizace chce poskytovat komplexnější data, zvažte publikaci pomocí těchto služeb.
+            </p>
+
+            <p>
+                Kromě výše uvedených služeb standardizovaných OGC jsou ještě hojně používané služby Web Map Service [[!wms]] a Web Map Tile Service [[!wmts]].
+                Nejedná se však o služby poskytující otevřená data - služby poskytují pouze otisk dat ve formě obrázku.
+                Přesto jsou vhodné k prohlížení dat nebo jako podkladové vrstvy ve webových prohlížečkách.
+            </p>
+
+            <p>
+                Pokud jsou data organizace poskytována nebo zpracovávána externím subjektem - například firmou zpracovávající územní plán - měli by zadavatelé trvat na odevzdání práce v některém z otevřených formátů prostorových dat.
+                Podstatné je vyhnout se uzavřeným formátům (mezi nejčastěji používané uzavřené formáty patří DWG, DGN, ESRI GeoDatabase a další).
+                Stejně tak je vhodné vyhnout se proprietárním službám pro publikaci dat, které používají některé GIS softwary.
+                Data publikovaná prostřednictvím těchto služeb nelze považovat za otevřená.
+                Služby nebývají podporovány existujícími softwary třetích stran a licenční podmínky jejich využití nebývají transparentní.
+                Jedná se například o tzv. REST API v softwarech firmy ESRI.
+            </p>
+
+            <section id="publikace-dat-wfs">
+                <h3>Web Feature Service (<abbr title="Web Feature Service">WFS</abbr>)</h3>
+
+                <p>
+                    WFS slouží k poskytování vektorových dat s konkrétními prvky na základě prostorových dotazů a filtrů (například omezení výběru pomocí typu prvku a ohraničujícího obdélníku).
+                    Služba se řídí <a href="https://www.opengeospatial.org/standards/wfs">standardem OGC Web Feature Service</a>.
+                    Příkladem služby WFS běžící v českém prostředí je služba pro stahování katastrálních parcel podle směrnice INSPIRE provozovaná Českým úřadem zeměměřickým a katastrálním, která je dostupná přes <a href="https://services.cuzk.cz/wfs/inspire-cp-wfs.asp?service=WFS&version=2.0.0&request=getCapabilities">přístupový bod WFS</a>.
+                </p>
+            </section>
+
+            <section id="publikace-dat-wcs">
+                <h3>Web Coverage Service (WCS)</h3>
+
+                <p>
+                    WCS slouží k poskytování pokrytí nebo jeho části na základě prostorových dotazů a filtrů.
+                    Služba se řídí <a href="https://www.opengeospatial.org/standards/wcs">standardem OGC Web Coverage Service</a>.
+                    Příkladem služby WCS běžící v českém prostředí je služba pro stahování ortofotosnímků provozovaná Zeměměřickým úřadem, která je dostupná přes <a href="https://geoportal.cuzk.cz/WCS_OI/WCService.aspx?request=GetCapabilities&service=WCS&version=1.0.0">přístupový bod WCS</a>.
+                </p>
+            </section>
+
+        </section>
+
+        <section id="metadata">
+            <h2>Metadata</h2>
+
+            <p>
+                Kromě samotných dat je vhodné poskytovat i metadata - data o datech.
+                Pro popis prostorových dat se běžně používá metadový standard dle normy <a href="https://www.iso.org/standard/26020.html">ISO 19115</a>.
+            </p>
+
+            <p>
+                V případě poskytování dat pomocí OGC standardizovaných služeb je vhodné poskytovat i metadata o těchto službách (např. podle standardu <a href="https://www.iso.org/standard/59221.html">ISO 19119</a>).
+                Pro poskytování a vyhledávání metadat je vhodné používat službu <a href="https://www.opengeospatial.org/standards/csw">OGC CSW</a>, která spravuje metadatové záznamy a na jejich základě umožňuje vyhledávání datových sad a služeb.
+            </p>
+
+            <p>
+                V případě tvorby metadat dle norem ISO 19115 a 19119 je vhodné použít <a href="https://geoportal.gov.cz/c/document_library/get_file?uuid=0633cc8c-83c0-47b2-893f-e4848c4d1d34&groupId=10138">Metadatový profil ČR</a>, který mimo jiné definuje položku o otevřenosti dat.
+            </p>
+
+            <p>
+                Metadata o vektorových datech by měla obsahovat popis atributů a poskytovaných datových formátů.
+                Metadata o rastrových datech by měla obsahovat velikost pixelu, počet řádků a sloupců, počet kanálů, hodnotu no data, typ a hloubku pixelu, velikost nekomprimovaného rastru a minimální a maximální hodnotu kanálů.
+                Pro vektorová i rastrová data by metadata měla obsahovat použitý souřadnicový referenční systém, informace o aktuálnosti a úplnosti dat, o jejich územním rozsahu, o způsobech publikace, o použité licenci a kvalitě dat a o poskytovateli dat a kontakt na něj.
+                Většina těchto informací je v současné době již součástí Metadatového profilu ČR.
+                Cílem je dostat do profilu nebo do metadatových dokumentů, s kterými je provázán, i ty zbývající položky.
+            </p>
+        </section>
+
+        <section id="inspire">
+            <h2>INSPIRE</h2>
+
+            <p>
+                V roce 2007 vešla v platnost směrnice 2007/2/ES <a href="https://inspire.ec.europa.eu/">INSPIRE</a> (Infrastructure for Spatial Information in Europe), která si klade za cíl standardizovat publikaci prostorových dat v Evropě.
+                Data rozděluje do 34 témat na základě obsahu a definuje strukturu, v jaké by data měla být poskytována.
+                Směrnice dále vyžaduje užívání standardů, které v tomto textu již byly několikrát zmíněny, jako je využití formátu GML, publikace dat prostřednictvím webových služeb OGC WFS, OGC WCS nebo pomocí ATOM, opatření dat i služeb metadaty podle standardů ISO 19115 a 19119 a jejich správu použitím služby OGC CSW.
+                Směrnice je v České republice implementována novelou zákona <a href=""https://www.zakonyprolidi.cz/cs/1998-123>123/1998 sb.</a>, o právu na informace o životním prostředí, a vyhláškou <a href="https://www.zakonyprolidi.cz/cs/2010-103">103/2010 sb</a>.
+                V případě publikace dat orgánem veřejné správy je vhodné pokusit se publikovat data v souladu se směrnicí INSPIRE a to i v případě, že se nejedná o povinného poskytovatele ve smyslu implementace této směrnice zákonem 123/1998 sb.
+            </p>
+
+        </section>
+
+
+		<section id="software" class="informative">
+			<h2>Software</h2>
+
+			<p>
+
+				Datové formáty, které jsou podporovány sdružením OGC, by měly být podporovány prostřednictvím <a href="https://www.gdal.org/">knihovny GDAL</a>.
+				Tu implementuje většina software určených pro správu prostorových dat.
+				Mezi nejvýznamnější open-source projekty, které bez problému umožňují načítání dat ve formátech GML, GeoJSON, GeoPackage, CSV nebo Shapefile, ale které umí i stahovat nebo zobrazovat data prostřednictvím služeb WFS, WCS, WMS nebo WMTS, patří <a href="#software-qgis">QGIS</a> nebo <a href="#software-grass">Grass GIS</a>.
+				Seznam dalších open source GIS software je na wikipedii <a href="https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software">https://en.wikipedia.org/wiki/List_of_geographic_information_systems_software</a>.
+				Nejpoužívanějším GIS software v České republice však zůstává komerční <a href="#software-arcgis">ArcGIS</a>, přestože řadu standardů nepodporuje nebo podporuje velmi omezeně.
+				Základní srovnání ArcGIS a QGIS je na webu <a href="https://gisgeography.com/qgis-arcgis-differences/">https://gisgeography.com/qgis-arcgis-differences/</a>.
+			</p>
+
+			<section id="software-qgis">
+				<h3>QGIS</h3>
+				<p>
+					Open source projekt <a href="https://www.qgis.org/">QGIS</a>, dříve Quantum GIS je jedním z nejstabilnějších a nejrychleji se rozvíjejících GIS projektů.
+					V aktuální verzi 3.x podporuje GML, GeoJSON, GeoPackage, Shapefile, standardy WFS (i ve verzi 2.0), WCS, WMS i WMTS.
+					Software využívá knihovnu GDAL, některé její části byly implementovány přednostně, na jiné se ještě čeká.
+					Zpracování komplexních typů v GML nebo zpracování dotazu GetFeatureInfo za použití importů schémat zůstávají problematické.
+				</p>
+			</section>
+
+			<section id="software-grass">
+				<h3>Grass GIS</h3>
+				<p>
+					<a href="https://grass.osgeo.org/">Grass GIS</a> patří mezi nejstarší a nejsilnější nástroje pro správu a analýzu prostorových informací, zároveň je však poměrně náročný na ovládání a nezkušení uživatelé mohou být ze začátku poměrně zmatení. Jeho prostorové analýzy jsou využívány i v jiných projektech.
+					Software využívá knihovnu GDAL a podporuje všechny otevřené standardy, které jsou uvedeny v této otevřené formální normě.
+				</p>
+			</section>
+
+			<section id="software-arcgis">
+				<h3>ArcGIS</h3>
+				<p>
+					Americká firma ESRI patří posledních 20 let mezi lídry vývoje v GIS.
+					Vyvíjejí standardy, které jsou široce používané, k otevřenosti však mají daleko.
+					Formát Shapefile byl opatřen otevřenou dokumentací, ale například ESRI GeoDatabase zůstává proprietární.
+					Software ArcGIS dlouhou dobu ignoroval vývoj evropských infrastruktur pro prostorová data využívajících otevřených standardů a implementace standardů jako je GML nebo WFS ve verzi 2.0 nebyla řešena buď vůbec, nebo nedostatečně.
+				</p>
+			</section>
+
+		</section>
+    </body>
+</html>

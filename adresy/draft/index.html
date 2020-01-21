@@ -40,6 +40,11 @@
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
                   companyURL: "http://www.mvcr.cz"
+                },{
+                  name: "Michal Med",
+                  url: "https://twitter.com/medmichal",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
                 }],
                 inlineCSS: "true",
                 github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
@@ -72,22 +77,24 @@
             <p>
                 V této sekci jsou definovány jednotlivé položky, které lze použít k určení adresy v poskytovaných datech.
                 Příkladem může být adresa místa konání akce či adresa sídla organizace.
-                Adresou v této OFN označujeme určení místa v poskytovaných datech zejména pomocí identifikátorů z RÚIAN.
+                Adresou v této OFN označujeme určení místa v poskytovaných datech zejména pomocí identifikátorů z RÚIAN ve formě IRI.
             </p>
-            
-            <p>             
-                Pouze pokud tyto identifikátory nejsou k dispozici, lze použít určení místa pomocí strukturovaných textových položek, v nejhorším případě pouze volným textem.
-                Každopádně je třeba dodržet, že adresa v ČR musí adresní místo určovat jednoznačně (<a href="https://www.zakonyprolidi.cz/cs/2009-111#p29-h">§ 29 písm. h) zákona č. 111/2009 Sb. o základních registrech</a>) a v případě volného textu má předepsanou strukturu (<a href="https://www.zakonyprolidi.cz/cs/2011-359?citace=1#prilohy">Příloha č. 1 k vyhlášce č. 359/2011 Sb. o základním registru územní identifikace, adres a nemovitostí</a>).
+
+            <p>
+                Pouze pokud identifikátor ve formě IRI není k dispozici, lze použít určení místa pomocí strukturovaných položek částí adresy ideálně pomocí identifikátorů v podobě IRI, nebo textově.
+                V nejhorším případě pouze volným textem v souladu s <a href="https://www.zakonyprolidi.cz/cs/2011-359?citace=1#prilohy">Přílohou č. 1 k vyhlášce 359/2011 Sb., o základním registru územní identifikace, adres a nemovitostí</a>).
+                V každém případě musí být adresní místo v ČR určeno jednoznačně (<a href="https://www.zakonyprolidi.cz/cs/2009-111#p29-h">§ 29 písm. h) zákona č. 111/2009 Sb. o základních registrech</a>).
+                V nezbytných případech mohou být použžity doplňující informace, které v RÚIAN uvedeny nejsou (budova, číslo místnosti).
             </p>
-            
-            <p>             
-                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+
+            <p>
+                Pro každou vlastnost je uveden její identifikátor ve formě IRI, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
             </p>
-            
-            <p>                             
+
+            <p>
                 Tato otevřená formální norma také popisuje mapování jednotlivých položek adresy na <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
             </p>
-            
+
             <p class="note" title="Registr územní identifikace, adres a nemovitostí (RÚIAN)">
                 V České republice funguje základní registr obsahující identifikátory pro, mimo jiné, všechna adresní místa, již od roku 2012.
                 Je jím <a href="https://www.cuzk.cz/Uvod/Produkty-a-sluzby/RUIAN/RUIAN.aspx">Registr územní identifikace, adres a nemovitostí (RÚIAN)</a> spravovaný <a href="https://www.cuzk.cz/">Českým úřadem zeměměřickým a katastrálním (ČÚZK)</a>.
@@ -101,896 +108,1102 @@
                     Adresou v této OFN označujeme určení místa v poskytovaných datech, zejména pomocí identifikátorů z RÚIAN.
                     Příkladem může být místo konání akce či sídlo organizace.
                     Tato třída odpovídá třídě <a href="http://www.w3.org/ns/locn#Address">Address</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                    Způsob identifikace adresy je pro účely této OFN rozdělen do 4 kategorií:
                 </p>
 
-                <section id="vlastnost-adresa-budova">
-                    <h4>Budova</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>budova</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Budova
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Označení budovy jejím názvem, číslem apod.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>HD Gate</code>
-                        </dd>
-                    </dl>
+                <ol>
+                  <li>Identifikátor adresního místa</li>
+                  <li>Adresní prvky definující adresu dle <a href="https://www.zakonyprolidi.cz/cs/2009-111"> zákona č. 111/2009 Sb. o základních registrech</a></li>
+                  <li>Doplňující prvky adresy</li>
+                  <li>Zápis adresy volným textem</li>
+                </ol>
+
+                <section id="kategorie-adresni-misto">
+                  <h4>Identifikátor adresního místa</h4>
+                  <section id="vlastnost-adresa-iri-adresniho-mista">
+                      <h5>Kód adresního místa</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_adresního_místa</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Adresní místo
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód adresního místa ve formě IRI.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#addressId">addressId</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code>
+                          </dd>
+                      </dl>
+                  </section>
                 </section>
 
-                <section id="vlastnost-adresa-cislo-domovni">
-                    <h4>Číslo domovní</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>číslo_domovní</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#celé-číslo">Celé číslo</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Číslo domovní
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu.
-                            Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>12</code>
-                        </dd>
-                    </dl>
-                </section>
+                <section id="kategorie-adresni-prvky-ruian">
+                  <h4>Adresní prvky definující adresu dle <a href="https://www.zakonyprolidi.cz/cs/2009-111"> zákona č. 111/2009 Sb. o základních registrech</a></h4>
 
-                <section id="vlastnost-adresa-cislo-orientacni">
-                    <h4>Číslo orientační</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>číslo_orientační</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#celé-číslo">Celé číslo</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Číslo orientační
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Číslo orientační, slouží k orientaci v rámci nadřazené ulice.
-                            Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>1</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-iri-okresu">
+                      <h5>Kód okresu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_okresu</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Okres
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód okresu ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/okres/3209</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-iri-adresniho-mista">
-                    <h4>IRI adresního místa</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri_adresního_místa</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Adresní místo
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI adresního místa.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#addressId">addressId</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-iri-obce">
+                      <h5>Kód obce nebo vojenského újezdu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_obce</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Obec nebo vojenský újezd
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód obce nebo vojenského újezdu ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/obec/502235</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-iri-casti-obce">
-                    <h4>IRI části obce</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri_části_obce</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Část obce
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI části obce
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://linked.cuzk.cz/resource/ruian/cast-obce/40151</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-iri-části-obce">
+                      <h5>Kód části obce</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_části_obce</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Část obce
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód části obce ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/cast-obce/40151</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-iri-kraje">
-                    <h4>IRI kraje z roku 1960</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri_kraje</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Kraj dle rozdělení z roku 1960
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI kraje
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://linked.cuzk.cz/resource/ruian/kraj-1960/31</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-iri-katastrálního-území">
+                      <h5>Kód katastrálního území</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_katastrálního_území</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Katastrální území
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód katastrálního území ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/katastralni-uzemi/622052</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-iri-obce">
-                    <h4>IRI obce</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri_obce</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Obec
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI obce
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://linked.cuzk.cz/resource/ruian/obec/502235</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-iri-mop">
+                      <h5>Kód městského obvodu v hlavním městě Praze</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_mop</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Městský obvod v hlavním městě Praze
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód MOP ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/mop/60</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-iri-okresu">
-                    <h4>IRI okresu</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri_okresu</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Okres
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI okresu
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://linked.cuzk.cz/resource/ruian/okres/3209</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-iri-ulice">
+                      <h5>Kód ulice</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_ulice</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Ulice
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód ulice ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/ulice/75523</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-iri-prvku">
-                    <h4>IRI prvku</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri_rúian</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Prvek z registru RÚIAN
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI prvku v Registru územních identifikátorů, adres a nemovitostí - bez rozlišení typu.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://linked.cuzk.cz/resource/ruian/parcela/17099648010</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-nazev-okresu">
+                      <h5>Název okresu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_okresu</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název okresu
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název okresu.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Praha-západ</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-místnost">
-                    <h4>Místnost</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>místnost</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Místnost
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Číslo místnosti nebo jiné označení místnosti.
-                            Hodnota této vlastnosti odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#locatorName">locatorName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Místnost 4001</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-název-obce">
+                      <h5>Název obce nebo vojenského újezdu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_obce</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název obce nebo vojenského újezdu
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název obce nebo vojenského újezdu.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#postName">postName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Hradiště</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-nazev-mestskeho-obvodu">
-                    <h4>Název městského obvodu</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>momc</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            název městského obvodu
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název městského obvodu/městské části, který je vyplněn pouze v případě členěných statutárních měst.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Horní Datová 1 - Drahotín</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-název-části-obce">
+                      <h5>Název části obce</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>Název_části_obce</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název části obce
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název části obce, v rámci nadřazené obce, ve které je číslován stavební objekt.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#addressArea">addressArea</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Bojanovice</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-nazev-mestskeho-obvodu-prahy">
-                    <h4>Název městského obvodu Prahy</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>mop</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            název městského obvodu Prahy
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název městského obvodu Prahy, který je vyplněn pouze v případě Hlavního města Prahy.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Praha 8</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-název-katastrálního-území">
+                      <h5>Název katastrálního území</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_katastrálního_území</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název katastrálního území.
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název katastrálního území, který je vyplněn pouze v Praze v kombinaci s názvem městského obvodu Prahy místo části obce.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Bojanovice</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-nazev-casti-obce">
-                    <h4>Název části obce</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název_části_obce</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název části obce
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název části obce, v rámci nadřazené obce, ve které je číslován stavební objekt.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#addressArea">addressArea</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Žižkov</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-název-mop">
+                      <h5>Název městského obvodu v hlavním městě Praze</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_mop</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název městského obvodu v hlavním městě Praze
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název městského obvodu v hlavním městě Praze, který je vyplněn pouze v Praze v kombinaci s názvem katastrálního území místo části obce.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Praha 6</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-nazev-kraje">
-                    <h4>Název kraje</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název_kraje</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název kraje
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název kraje.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#adminUnitL2">adminUnitL2</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Plzeňský kraj</code>
-                        </dd>
-                    </dl>
-                </section>
+                  <section id="vlastnost-adresa-cislo-domovni">
+                      <h5>Číslo domovní</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>číslo_domovní</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#celé-číslo">Celé číslo</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Číslo domovní
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu.
+                              Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>12</code>
+                          </dd>
+                      </dl>
+                  </section>
 
-                <section id="vlastnost-adresa-nazev-obce">
-                    <h4>Název obce</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název_obce</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název obce
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název obce.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#postName">postName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Horní Datová</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlastnost-adresa-nazev-okresu">
-                    <h4>Název okresu</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název_okresu</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název okresu
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název okresu.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Plzeň-sever</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlastnost-adresa-nazev-ulice">
-                    <h4>Název ulice</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název_ulice</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název ulice
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název ulice, která je navázána na adresní místo.
-                            Může být vyplněn pouze u obcí, které mají zavedenu uliční síť.
+                  <section id="vlastnost-adresa-název-ulice">
+                      <h5>Název ulice</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_ulice</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název ulice
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                            Název ulice, na kterou je navázáno adresní místo.
+                            Může být vyplněn pouze u obcí, které mají zavedenou uliční síť.
                             Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#thoroughfare">thoroughfare</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Hlavní</code>
-                        </dd>
-                    </dl>
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Járy Cimrmana</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-cislo-orientacni">
+                      <h5>Číslo orientační</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>číslo_orientační</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#celé-číslo">Celé číslo</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Číslo orientační
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Číslo orientační, slouží k orientaci v rámci ulice.
+                              Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>1</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-psč">
+                      <h5>PSČ</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>psč</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              PSČ
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Poštovní směrovací číslo.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#postcode">postcode</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>37001</code>
+                          </dd>
+                      </dl>
+                  </section>
                 </section>
 
-                <section id="vlastnost-adresa-patro">
-                    <h4>Patro</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>patro</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Patro
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Číslo patra nebo jiné označení patra.
-                            Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>4.patro</code>
-                        </dd>
-                    </dl>
+                <section id="kategorie-adresni-prvky-doplnky">
+                  <h4>Doplňující prvky adresy</h4>
+
+                  <section id="vlastnost-adresa-iri-statu">
+                      <h5>Kód státu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>kód_státu</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Stát
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Kód státu ve formě IRI.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/stat/1</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-iri-kraje">
+                      <h5>IRI kraje z roku 1960</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>iri_kraje</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Kraj dle rozdělení z roku 1960
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              IRI kraje
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/kraj-1960/31</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-iri-prvku">
+                      <h5>IRI prvku</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>iri_rúian</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Prvek z registru RÚIAN
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              IRI prvku v Registru územních identifikátorů, adres a nemovitostí - bez rozlišení typu.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>https://linked.cuzk.cz/resource/ruian/parcela/17099648010</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-nazev-statu">
+                      <h5>Kód státu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_státu</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#url">URL</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název státu
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název státu.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Afghánistán</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-nazev-kraje">
+                      <h5>Název kraje</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>název_kraje</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Název kraje
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název kraje.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#adminUnitL2">adminUnitL2</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Plzeňský kraj</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-nazev-mestskeho-obvodu">
+                      <h5>Název městského obvodu</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>momc</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              název městského obvodu
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Název městského obvodu/městské části, který je vyplněn pouze v případě členěných statutárních měst.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Horní Datová 1 - Drahotín</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-budova">
+                      <h5>Budova</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>budova</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Budova
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Označení budovy jejím názvem, číslem apod.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>HD Gate</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-místnost">
+                      <h5>Místnost</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>místnost</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Místnost
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Číslo místnosti nebo jiné označení místnosti.
+                              Hodnota této vlastnosti odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#locatorName">locatorName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Místnost 4001</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-patro">
+                      <h5>Patro</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>patro</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Patro
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Číslo patra nebo jiné označení patra.
+                              Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>4.patro</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-po-box">
+                      <h5>PO box</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>po_box</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              PO Box
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Číslo PO boxu.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#poBox">poBox</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>33101</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-typ-čísla domovního">
+                      <h5>Typ čísla domovního</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>typ_čísla_domovního</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Typ čísla domovního
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Typ čísla domovního, může nabývat hodnot: <code>č.p.</code> - číslo popisné stavebního objektu <code>č.ev.</code> - číslo evidenční stavebního objektu.
+                              Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>č.ev.</code>
+                          </dd>
+                      </dl>
+                  </section>
+
+                  <section id="vlastnost-adresa-znak-cisla-orientacniho">
+                      <h5>Znak čísla orientačního</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>znak_čísla_orientačního</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Znak čísla orientačního
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Znak čísla orientačního. Je uveden v případě, že je znak k orientačnímu číslu přidělen.
+                              Tato položka nedává smysl bez současného vyplnění <a href="#vlastnost-adresa-cislo-orientacni">čísla orientačního</a>.
+                              Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>a</code>
+                          </dd>
+                      </dl>
+                  </section>
                 </section>
 
-                <section id="vlastnost-adresa-psč">
-                    <h4>PSČ</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>psč</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            PSČ
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Poštovní směrovací číslo.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#postcode">postcode</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>33101</code>
-                        </dd>
-                    </dl>
+                <section id="kategorie-textova-adresa">
+                  <h4>Zápis adresy volným textem</h4>
+                  <section id="vlastnost-adresa-text-adresy">
+                      <h5>Text adresy</h5>
+                      <dl>
+                          <dt>
+                              Vlastnost
+                          </dt>
+                          <dd>
+                              <code>text</code>
+                          </dd>
+                          <dt>
+                              Typ
+                          </dt>
+                          <dd>
+                              <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                          </dd>
+                          <dt>
+                              Jméno
+                          </dt>
+                          <dd>
+                              Text adresy
+                          </dd>
+                          <dt>
+                              Popis
+                          </dt>
+                          <dd>
+                              Celá adresa jako jeden řetězec.
+                              Text se řídí <a href="https://www.zakonyprolidi.cz/cs/2011-359?citace=1#prilohy">Přílohou č. 1 k vyhlášce č. 359/2011 Sb. o základním registru územní identifikace, adres a nemovitostí</a>.
+                              Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#fullAddress">fullAddress</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                          </dd>
+                          <dt>
+                              Příklad
+                          </dt>
+                          <dd>
+                              <code>Plzeňská 285, 33101 Plasy</code>
+                              <code>Sibeliova 368/51, Střešovice, 16200  Praha 6</code>
+                          </dd>
+                      </dl>
+                  </section>
                 </section>
-
-                <section id="vlastnost-adresa-po-box">
-                    <h4>PO box</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>po_box</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            PO Box
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Číslo PO boxu.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#poBox">poBox</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>33101</code>
-                        </dd>
-                    </dl>
-                </section>
-                
-                <section id="vlastnost-adresa-text-adresy">
-                    <h4>Text adresy</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>text</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Text adresy
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Celá adresa jako jeden řetězec.
-                            Text se řídí <a href="https://www.zakonyprolidi.cz/cs/2011-359?citace=1#prilohy">Přílohou č. 1 k vyhlášce č. 359/2011 Sb. o základním registru územní identifikace, adres a nemovitostí</a>.
-                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#fullAddress">fullAddress</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Plzeňská 285, 33101 Plasy</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlastnost-adresa-typ-stavebniho-objektu">
-                    <h4>Typ stavebního objektu</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>typ_stavebního_objektu</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Typ stavebního objektu
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Typ stavebního objektu, může nabývat hodnot: <code>č.p.</code> - číslo popisné stavebního objektu <code>č.ev.</code> - číslo evidenční stavebního objektu.
-                            Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>č.ev.</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlastnost-adresa-znak-cisla-orientacniho">
-                    <h4>Znak čísla orientačního</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>znak_čísla_orientačního</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Znak čísla orientačního
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Znak čísla orientačního. Je uveden v případě, že je znak k orientačnímu číslu přidělen.
-                            Tato položka nedává smysl bez současného vyplnění <a href="#vlastnost-adresa-cislo-orientacni">čísla orientačního</a>.
-                            Hodnota této vlastnosti je částí hodnoty vlastnosti <a href="http://www.w3.org/ns/locn#locatorDesignator">locatorDesignator</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>a</code>
-                        </dd>
-                    </dl>
-                </section>
-                
-                <section id="vazba-adresa-stát">
-                    <h4>Vazba: Stát</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>stát</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#třída-stát">Stát</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Stát
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Stát, ve kterém se nachází popisovaná adresa.
-                            Kód státu odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#adminUnitL1">adminUnitL1</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
-                        </dd>
-                    </dl>
-                </section>
-
             </section>
-            
         </section>
-        
+
         <section id="příklady">
             <h2>Příklady</h2>
-            
+
             <p>
                 V této sekci jsou uvedeny příklady reprezentace adresy v různých formátech a v různých úrovních detailu.
                 Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
                 Pro formáty JSON [[!ECMA-404]] a XML [[!xml]] jsou k dispozici příslušná schémata, tedy <a href="schémata/adresa.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[json-schema]] a <a href="schémata/adresa.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[xmlschema11-1]].
-                Lze také použít zápis v CSV. 
+                Lze také použít zápis v CSV.
                 Soubor v CSV [[!rfc4180]] je nutné doplnit schématem dle specifikace CSV on the Web [[tabular-data-primer]].
             </p>
 
@@ -1005,11 +1218,11 @@
 
             <section id="příklady-přímá-adresa">
                 <h3>Přímé určení adresy</h3>
-                
+
                 <p>
                     Jedná se o nejčistší způsob určení adresy v České republice pomocí IRI příslušného adresního místa v RÚIAN.
                 </p>
-                
+
                 <aside class="example" title="Přímé určení adresy v JSON">
                     <p>
                        <a href="příklady/0.json">Stáhnout JSON</a>, <a href="schémata/adresa.json">Stáhnout JSON schéma</a>
@@ -1019,23 +1232,23 @@
     "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
 }</pre>
                 </aside>
-                
+
                 <aside class="example" title="Přímé určení adresy v XML">
                     <p>
                        <a href="příklady/0.xml">Stáhnout XML</a>, <a href="schémata/adresa.xsd">Stáhnout XML schéma</a>
                     </p>
-                
+
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;adresa
     xmlns="https://ofn.gov.cz/adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://ofn.gov.cz/adresy/ 
+    xsi:schemaLocation="https://ofn.gov.cz/adresy/
                         https://ofn.gov.cz/adresy/draft/schémata/adresa.xsd"&gt;
     &lt;iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/iri_adresního_místa&gt;
 &lt;/adresa&gt;</pre>
                 </aside>
-                
+
                 <aside class="example" title="Přímé určení adresy CSV">
                     <p>
                        <a href="příklady/0.csv">Stáhnout CSV</a>
@@ -1045,17 +1258,17 @@
 iri_adresního_místa
 https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                 </aside>
-                
+
                 <p>
                     K souboru CSV je třeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
                     Například pokud se CSV soubor jmenuje <code>0.csv</code>, je s ním publikován i <a href="příklady/0.csv-metadata.json">metadatový soubor</a> <code>0.csv-metadata.json</code>:
                 </p>
-                
+
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
                        <a href="příklady/0.csv-metadata.json">Stáhnout deskriptor</a>
                     </p>
-                
+
                     <pre class="json">
 {
     "@context": [
@@ -1077,9 +1290,9 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
 }
 </pre>
                 </aside>
-                
+
             </section>
-            
+
             <section id="příklady-jednoduchá-adresa-vlastní-atributy">
                 <h3>Jednoduchá adresa s přidanými vlastními atributy</h3>
                 <p>
@@ -1087,7 +1300,7 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                     Do schématu si lze v případě potřeby přidávat další atributy.
                     V následujících příkladech je přidán atribut <code>poznámka</code>.
                 </p>
-                
+
                 <aside class="example" title="Jednoduchá adresa s vlastními atributy v JSON">
                     <p>
                         <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/adresa.json">Stáhnout JSON schéma</a>
@@ -1101,23 +1314,23 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
     "poznámka": "dole u řeky"
 }</pre>
                 </aside>
-                
+
                 <p>
                     V XML se vlastní atributy přidávají na závěr adresy, do vlastního XML jmenného prostoru (XML namespace [[!xml-names]]).
                     V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
                 </p>
-                
+
                 <aside class="example" title="Jednoduchá adresa s vlastními atributy v XML">
                     <p>
                         <a href="příklady/2.xml">Stáhnout XML</a>, <a href="schémata/adresa.xsd">Stáhnout XML schéma</a>
                     </p>
-                
+
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;adresa
     xmlns="https://ofn.gov.cz/adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://ofn.gov.cz/adresy/ 
+    xsi:schemaLocation="https://ofn.gov.cz/adresy/
                         https://ofn.gov.cz/adresy/draft/schémata/adresa.xsd"
     xmlns:x="https://příklad.cz"&gt;
     &lt;číslo_domovní&gt;12&lt;/číslo_domovní&gt;
@@ -1127,7 +1340,7 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
     &lt;x:poznámka&gt;dole u řeky&lt;/x:poznámka&gt;
 &lt;/adresa&gt;</pre>
                 </aside>
-                
+
                 <p>
                     Alternativně je možné si nadefinovat celé nové XML schéma, které by vycházelo ze zde uvedeného základního <a href="schémata/adresa.xsd">XML schématu</a>.
                 </p>
@@ -1136,12 +1349,12 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                     <p>
                        <a href="příklady/2.csv">Stáhnout CSV</a>
                     </p>
-                
+
                     <pre class="csv">
 číslo_domovní,název_ulice,název_obce,psč,poznámka
 12,Hlavni,Horní Datová,33101,dole u řeky</pre>
                 </aside>
-                
+
                 <p>
                     K souboru CSV je opět potřeba připojit <a href="příklady/2.csv-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
                 </p>
@@ -1150,7 +1363,7 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                     <p>
                        <a href="příklady/2.csv-metadata.json">Stáhnout deskriptor</a>
                     </p>
-                
+
                     <pre class="json">
 {
     "@context": [
@@ -1193,20 +1406,20 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                 </aside>
 
             </section>
-            
+
             <section id="příklady-komplexní-adresa">
                 <h3>Komplexní adresa</h3>
-                
+
                 <p>
                     Adresy mohou obsahovat různé množství informací.
                     Některé mohou být velice detailní.
                 </p>
-                
+
                 <aside class="example" title="Komplexní adresa v JSON">
                     <p>
                         <a href="příklady/3.json">Stáhnout JSON</a>, <a href="schémata/adresa.json">Stáhnout JSON schéma</a>
                     </p>
-                
+
                     <pre class="json">
 {
     "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661",
@@ -1215,18 +1428,18 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
     "místnost": "Místnost 4001"
 }</pre>
                 </aside>
-                
+
                 <aside class="example" title="Komplexní adresa v XML">
                     <p>
                         <a href="příklady/3.xml">Stáhnout XML</a>, <a href="schémata/adresa.xsd">Stáhnout XML schéma</a>
                     </p>
-                
+
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;adresa
     xmlns="https://ofn.gov.cz/adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://ofn.gov.cz/adresy/ 
+    xsi:schemaLocation="https://ofn.gov.cz/adresy/
                         https://ofn.gov.cz/adresy/draft/schémata/adresa.xsd"&gt;
     &lt;budova&gt;HD Gate&lt;/budova&gt;
     &lt;iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/iri_adresního_místa&gt;
@@ -1234,26 +1447,26 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
     &lt;typ_stavebního_objektu&gt;č.ev.&lt;/typ_stavebního_objektu&gt;
 &lt;/adresa&gt;</pre>
                 </aside>
-                
+
                 <aside class="example" title="Komplexní adresa v CSV">
                     <p>
                         <a href="příklady/3.csv">Stáhnout CSV</a>
                     </p>
-                
+
                     <pre class="csv">
 iri_adresního_místa,typ_stavebního_objektu,budova,místnost,
 https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661,č.ev.,HD Gate,Místnost 4001</pre>
                 </aside>
-                
+
                 <p>
                     A opět je k souboru CSV potřeba připojit <a href="příklady/3.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
                 </p>
-                
+
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
                        <a href="příklady/3.csv-metadata.json">Stáhnout deskriptor</a>
                     </p>
-                
+
                     <pre class="json">
 {
     "@context": [
