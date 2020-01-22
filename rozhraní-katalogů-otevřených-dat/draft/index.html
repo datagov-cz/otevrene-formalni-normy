@@ -24,13 +24,13 @@
         <script class="remove" src="../../static/js/respec-odcz.js"></script>
         <script class="remove">
             var respecConfig = {
-                specStatus: "REC",
+                specStatus: "ED",
                 shortName: "rozhraní-katalogů-otevřených-dat",               
                 showPreviousVersion: true,
-                prevVersion: "https://opendata.gov.cz/nastroj:ckan-api",
-                thisVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2019-04-04/",
+                prevRecURI: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2019-04-04/",
+                prevVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2019-04-04/",
+                thisVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/",
                 latestVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/",
-                publishDate: "2019-04-04",
                 editors: [{
                   name: "Jakub Klímek",
                   url: "https://jakub.klímek.com/#me",
@@ -61,8 +61,8 @@
                 Stejná specifikace platí i pro datový model NKOD a data poskytovaná z NKOD v podobě souborů ke stažení či SPARQL endpointu.
                 Nejprve je specifikován datový model katalogizačního záznamu.
                 Poté jsou specifikovány 3 varianty rozhraní pro harvestaci.
-                Varianta CKAN API je podporována v režimu zpětné kompatibility.
-                Dvě varianty jsou založeny na standardu <a href="https://joinup.ec.europa.eu/release/dcat-ap/12">DCAT-AP v1.2</a>, jedna využívá SPARQL endpoint a jedna specifikuje variantu uložení záznamů v souborech, bez použití SPARQL endpointu.
+                Dvě varianty jsou založeny na standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>, jedna využívá SPARQL endpoint a jedna specifikuje variantu uložení záznamů v souborech, bez použití SPARQL endpointu.
+                Varianta CKAN API je podporována pouze v režimu zpětné kompatibility a neumožňuje vyplnění všech položek záznamu.
             </p>
             
         </section>
@@ -81,16 +81,17 @@
             
             <p>
                 V této sekci jsou popsány položky, které mohou být evidované v Národním katalogu otevřených dat (NKOD) pro každou datovou sadu a její distribuci.
-                Položky se řídí standardem <a href="https://joinup.ec.europa.eu/release/dcat-ap/12">DCAT Application Profile for data portals in Europe Version 1.2 (DCAT-AP v1.2)</a>.
+                Položky se řídí standardem <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT Application Profile for data portals in Europe Version 2.0.0 (DCAT-AP 2.0.0)</a>.
                 Jedná se o standard založený na propojených datech, předpokládá se tedy znalost <a href="../../propojená-data/">Otevřené formální normy Propojená data</a>.
             </p>
             
             <p>
-                DCAT-AP v1.2 rozlišuje dva základní typy entit, datovou sadu, a její distribuci.
+                DCAT-AP 2.0.0 rozlišuje tři základní typy entit.
+				Datovou sadu, její distribuci a datovou službu.
                 Metadata datové sady ji popisují bez ohledu na konkrétní reprezentaci jejích dat.
-                Ta je popsána jako distribuce datové sady.
-                Distribucí může mít datová sada více, lišit se ale mohou pouze formátem souboru ke stažení (např. CSV či JSON).
-                Informačně by distribuce měly být ekvivalentní.
+                Ta je popsána jako distribuce datové sady, která reprezentuje buď soubor ke stažení, nebo odkazuje na datovou službu, přes kterou jsou data k dispozici.
+                Distribucí může mít datová sada více, lišit se ale mohou pouze formátem souboru ke stažení (např. CSV či JSON) či způsobem zpřístupnění (soubor ke stažení či datová služba).
+                Obsahově by distribuce měly být ekvivalentní.
             </p>
             
             <section id="slovníky-prefixy">
@@ -101,15 +102,12 @@
                 </p>
                 
                 <ul>
-                    <li><code>adms: http://www.w3.org/ns/adms#</code></li>
                     <li><code>dcat: http://www.w3.org/ns/dcat#</code></li>
                     <li><code>dct: http://purl.org/dc/terms/</code></li>
                     <li><code>foaf: http://xmlns.com/foaf/0.1/</code></li>
-                    <li><code>owl: http://www.w3.org/2002/07/owl#</code></li>
                     <li><code>rdfs: http://www.w3.org/2000/01/rdf-schema#</code></li>
                     <li><code>schema: http://schema.org/</code></li>
                     <li><code>skos: http://www.w3.org/2004/02/skos/core#</code></li>
-                    <li><code>spdx: http://spdx.org/rdf/terms#</code></li>
                     <li><code>xsd: http://www.w3.org/2001/XMLSchema#</code></li>
                     <li><code>vcard: http://www.w3.org/2006/vcard/ns#</code></li>
                     <li><code>pú: https://data.gov.cz/slovník/podmínky-užití/</code></li>
@@ -122,6 +120,7 @@
                 <ul>
                     <li><code>sada: https://data.gov.cz/zdroj/datová-sada/1</code></li>
                     <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
+                    <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
                     <li><code>čas: https://data.gov.cz/zdroj/datová-sada/1/časové-pokrytí</code></li>
                     <li><code>kurátor: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
                     <li><code>podmínky: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1/podmínky-užití</code></li>
@@ -177,7 +176,7 @@
                             Typ
                         </dt>
                         <dd>
-                            Text
+                            <a href="../../základní-datové-typy/#Text">Text</a>
                         </dd>
                         <dt>
                             Povinnost
@@ -189,7 +188,7 @@
                             Příklad
                         </dt>
                         <dd>
-                            <code>sada: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení"@cs .</code>
+                            <code>sada: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení"@cs, "Duty fulfillment inspections in the area of social security"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -219,7 +218,7 @@
                             Typ
                         </dt>
                         <dd>
-                            Text
+                            <a href="../../základní-datové-typy/#Text">Text</a>
                         </dd>
                         <dt>
                             Povinnost
@@ -231,7 +230,7 @@
                             Příklad
                         </dt>
                         <dd>
-                            <code>sada: dct:description "Statistika kontrol plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení od roku 2009"@cs .</code>
+                            <code>sada: dct:description "Statistika kontrol plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení od roku 2009"@cs, "Social security statistics for 2009"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -249,7 +248,8 @@
                             Popis
                         </dt>
                         <dd>
-                            Tato vlastnost odkazuje na kategorii či téma datové sady. Datová sada může být popsána více tématy.
+                            Tato vlastnost odkazuje na kategorii či téma datové sady.
+							Datová sada může být popsána více tématy.
                         </dd>
                         <dt>
                             Vlastnost
@@ -261,7 +261,8 @@
                             Typ
                         </dt>
                         <dd>
-                            IRI položky z <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/data-theme">evropského číselníku datových témat</a>
+                            <a href="../../základní-datové-typy/#URL">IRI</a>.
+							Alespoň jedno téma musí být z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/data-theme">evropského číselníku datových témat</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -303,7 +304,7 @@
                             Typ
                         </dt>
                         <dd>
-                            IRI položky z <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/frequency">evropského číselníku frekvencí</a>
+                            <a href="../../základní-datové-typy/#URL">IRI</a> položky z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/frequency">evropského číselníku frekvencí</a>
                         </dd>
                         <dt>
                             Povinnost
@@ -345,7 +346,7 @@
                             Typ
                         </dt>
                         <dd>
-                            Text, opakovaná vlastnost.
+                            <a href="../../základní-datové-typy/#Text">Text</a>, opakovaná vlastnost.
                         </dd>
                         <dt>
                             Povinnost
@@ -357,7 +358,7 @@
                             Příklad
                         </dt>
                         <dd>
-                            <code>sada: dcat:keyword "kontrola"@cs, "statistika"@cs .</code>
+                            <code>sada: dcat:keyword "kontrola"@cs, "statistika"@cs, "inspection"@en, "statistics"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -387,7 +388,7 @@
                             Typ
                         </dt>
                         <dd>
-                            IRI <a href="../../propojená-data/draft/#RÚIAN">územního prvku RÚIAN</a>
+                            <a href="../../propojená-data/#RÚIAN">IRI územního prvku RÚIAN</a>
                         </dd>
                         <dt>
                             Povinnost
@@ -429,7 +430,7 @@
                             Typ
                         </dt>
                         <dd>
-                            Entita typu <code>dct:PeriodOfTime</code> s vlastnostmi <code>schema:startDate</code> a <code>schema:endDate</code>, které mají datový typ <code>xsd:date</code>.
+                            Entita typu <code>dct:PeriodOfTime</code> s vlastnostmi <code>dcat:startDate</code> a <code>dcat:endDate</code>, které mají datový typ <code>xsd:date</code>.
                         </dd>
                         <dt>
                             Povinnost
@@ -443,8 +444,8 @@
                         <dd>
                             <pre class="turtle">sada: dct:temporal čas: .
 
-čas: schema:startDate "2009-01-01"^^xsd:date ;
-     schema:endDate "2017-12-31"^^xsd:date .</pre>
+čas: dcat:startDate "2009-01-01"^^xsd:date ;
+     dcat:endDate "2017-12-31"^^xsd:date .</pre>
                         </dd>
                     </dl>
                 </section>
@@ -520,7 +521,7 @@ kurátor: a vcard:Individual ;
                             Typ
                         </dt>
                         <dd>
-                            IRI webové stránky dokumentace.
+                            <a href="../../základní-datové-typy/#URL">URL</a> webové stránky dokumentace.
                         </dd>
                         <dt>
                             Povinnost
@@ -563,7 +564,7 @@ kurátor: a vcard:Individual ;
                             Typ
                         </dt>
                         <dd>
-                            IRI konceptu z <a href="https://publications.europa.eu/cs/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc">evropského tezauru EuroVoc</a>
+                            <a href="../../základní-datové-typy/#URL">IRI</a> konceptu z <a href="https://op.europa.eu/cs/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc">evropského tezauru EuroVoc</a>
                         </dd>
                         <dt>
                             Povinnost
@@ -580,8 +581,94 @@ kurátor: a vcard:Individual ;
                     </dl>
                 </section>
 
+                <section id="položky-datová-sada-prostorové-rozlišení-v-metrech">
+                    <h4>Prostorové rozlišení v metrech</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Prostorové rozlišení v metrech
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost určuje prostorové rozlišení dat v datové sadě v metrech.
+							Jedná se o nejmenší prostorový rozdíl v datové sadě.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:spatialResolutionInMeters</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#desetinné-číslo">Desetinné číslo</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>0.5</code>
+                        </dd>
+                    </dl>
+                </section>
+
+				<section id="položky-datová-sada-časové-rozlišení">
+                    <h4>Časové rozlišení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časové rozlišení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost určuje časové rozlišení dat v datové sadě.
+							Jedná se o nejmenší časový rozdíl v datové sadě.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:temporalResolution</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://www.w3.org/TR/xmlschema11-2/#duration"><code>xsd:duration</code></a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>P1D</code>
+                        </dd>
+                    </dl>
+                </section>
+
                 <section id="položky-datová-sada-distribuce">
-                    <h4>Distribuce datové sady</h4>
+                    <h4>Vazba: Distribuce datové sady</h4>
                     <dl>
                         <dt>
                             Jméno
@@ -605,7 +692,7 @@ kurátor: a vcard:Individual ;
                             Typ
                         </dt>
                         <dd>
-                            IRI <a href="#položky-distribuce">distribuce datové sady</a>.
+                            Entita typu <a href="#položky-distribuce">distribuce datové sady</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -632,13 +719,14 @@ kurátor: a vcard:Individual ;
                         Jméno
                     </dt>
                     <dd>
-                        Distribuce datové sady
+                        Distribuce datové sady.
+						Reprezentuje buď soubor ke stažení, nebo datovou službu, nikdy obojí.
                     </dd>
                     <dt>
                         Popis
                     </dt>
                     <dd>
-                        Fyzická podoba datové sady v konkrétním formátu.
+                        Fyzická podoba datové sady v konkrétním formátu nebo jako konkrétní služba.
                     </dd>
                     <dt>
                         Třída
@@ -767,7 +855,7 @@ podmínky: a pú:Specifikace ;
                             Typ
                         </dt>
                         <dd>
-                            IRI položky z <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>
+                            IRI položky z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>
                         </dd>
                         <dt>
                             Povinnost
@@ -809,7 +897,7 @@ podmínky: a pú:Specifikace ;
                             Typ
                         </dt>
                         <dd>
-                            IRI Media type z rejstříku IANA.
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -868,6 +956,92 @@ podmínky: a pú:Specifikace ;
                     </dl>
                 </section>
 
+                <section id="položky-distribuce-kompresní-formát">
+                    <h4>Media type kompresního formátu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Media type použitého kompresního formátu souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na media typ kompresního formátu souboru ke stažení tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
+							Kompresní formát určuje techniku použitou ke zmenšení velikosti jednoho souboru ke stažení.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:compressFormat</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-balíčkovací-formát">
+                    <h4>Media type balíčkovacího formátu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Media type použitého balíčkovacího formátu souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na media typ balíčkovacího formátu souboru ke stažení tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
+							Balíčkovací formát určuje techniku použitou k zabalení více souborů do jednoho.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:packageFormat</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:packageFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
                 <section id="položky-distribuce-název">
                     <h4>Název distribuce datové sady</h4>
                     <dl>
@@ -899,29 +1073,240 @@ podmínky: a pú:Specifikace ;
                             Povinnost
                         </dt>
                         <dd>
+                            Nepovinná pro soubor ke stažení, povinná pro datovou službu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení v CSV."@cs, "CSV representation of inspections in the area of social security."@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-přístupová-služba">
+                    <h4>Vazba: přístupová služba</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Přístupová služba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datová služba zpřístupňující distribuci datové sady.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:accessService</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita typu <a href="#položky-datová-služba">datová služba</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+						<dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:accessService služba: .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+			</section>          
+            
+            <section id="položky-datová-služba">
+                <h3>Třída: Datová služba</h3>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Datová služba
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Konceptuální entita reprezentující datovou službu zpřístupňující data datové sady.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>služba: a dcat:DataService .</code>
+                    </dd>
+                </dl>
+				
+                <section id="položky-datová-služba-název">
+                    <h4>Název datové služby</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název datové služby
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název datové služby.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Text
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>služba: dct:title "SPARQL endpoint České správy sociálního zabezpečení"@cs, "Czech Social Security Administration SPARQL endpoint"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+				
+                <section id="položky-datová-služba-URL-přístupového-bodu">
+                    <h4>URL přístupového bodu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            URL přístupového bodu datové služby.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL přístupového bodu datové služby.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:endpointURL</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.cssz.cz/sparql</code>
+                        </dd>
+                    </dl>
+                </section>
+				
+				<section id="položky-datová-služba-popis-přístupového-bodu">
+                    <h4>Popis přístupového bodu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis přístupového bodu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL popisu přístupového bodu datové služby.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dcat:endpointDescription</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            UEL
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
                             Nepovinná
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>distribuce: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení v CSV"@cs .</code>
+                            <code>https://data.cssz.cz/sparql</code>
                         </dd>
                     </dl>
+					
                 </section>
 
-            </section>          
-            
+			</section>
+
         </section>
 
         <section id="dcat-ap-sparql-endpoint">
             <h2>Rozhraní DCAT-AP SPARQL Endpoint</h2>
             
             <p>
-                Toto rozhraní předpokládá, že metadata datových sad dle této specifikace jsou uložena a přístupná ve SPARQL Endpointu.
-                Po registraci tohoto SPARQL endpointu se na něm NKOD zeptá nejprve na seznam instancí třídy <code>dcat:Dataset</code>, a poté se po skupinách bude ptát na povinné, nepovinné i další položky jednotlivých datových sad dle této specifikace a specifikace <a href="https://joinup.ec.europa.eu/release/dcat-ap/12">DCAT-AP v1.2</a>.
+                Toto rozhraní předpokládá, že metadata datových sad dle této specifikace jsou uložena a přístupná ve SPARQL endpointu.
+                Po registraci tohoto SPARQL endpointu se na něm NKOD zeptá nejprve na seznam instancí třídy <code>dcat:Dataset</code>, a poté se po skupinách bude ptát na povinné, nepovinné i další položky jednotlivých datových sad dle této specifikace a specifikace <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>.
                 Jedná se o nejjednodušší způsob registrace lokálního katalogu otevřených dat.
             </p>
+
+            <section class="informative" id="dcat-ap-sparql-endpoint-příklady">
+                <h3>Příklady lokálních katalogů typu SPARQL endpoint</h3>
+
+                <p>
+                    V této sekci uvádíme příklady katalogů užívajících rozhraní SPARQL endpoint.
+                </p>
+                                                
+                <aside class="example" title="Příklady lokálních katalogů typu SPARQL endpoint">
+                    <ul>
+                        <li><code>https://data.cssz.cz/sparql</code></li>
+                        <li><code>https://data.mvcr.gov.cz/sparql</code></li>
+                    </ul>
+                </aside>
+
+            </section>      
 
         </section>
 
@@ -930,9 +1315,9 @@ podmínky: a pú:Specifikace ;
 
             <p>
                 Tato varianta rozhraní je určena pro instituce, které nechtějí nebo nemohou provozovat pro účely harvestace metadat o datových sadách do NKOD SPARQL endpoint.
-                Počítá se serializací metadat o datových sadách do souborů umístěných na web podobně, jako varianta <a href="#ckan-api">CKAN API</a>, ale s využitím standardu DCAT-AP v1.2.
+                Počítá se serializací metadat o datových sadách do statických souborů umístěných na web podobně, jako varianta <a href="#ckan-api">CKAN API</a>, ale s využitím standardu DCAT-AP 2.0.0.
                 Jako indexový soubor pak poslouží soubor obsahující instanci třídy <code>dcat:Catalog</code>, která pomocí vlastnosti <code>dcat:dataset</code> ukazuje na URL jednotlivých datových sad.
-                Při přístupu na tato URL datových sad NKOD předpokládá, že v odpovědi dostane kompletní katalogizační záznam pro danou datovou sadu, včetně jejích distribucí.
+                Při přístupu na tato URL datových sad NKOD předpokládá, že v odpovědi dostane kompletní katalogizační záznam pro danou datovou sadu, včetně jejích distribucí a datových služeb.
             </p>
             
             <section id="dcat-ap-dokumenty-katalog">
@@ -1023,14 +1408,14 @@ podmínky: a pú:Specifikace ;
             </p>
             
             <p class="warning">
-                Rozhraní CKAN API je podporováno jen v režimu zpětné kompatibility, což znamená, že se již nebude rozšiřovat o nové položky či funkcionality.
-                Doporučujeme tedy použít jedno z ostatních rozhraní LKOD založených na standardu <a href="https://joinup.ec.europa.eu/release/dcat-ap/12">DCAT-AP v1.2</a>.
+                Rozhraní CKAN API je podporováno již jen v režimu zpětné kompatibility, což znamená, že se již nebude rozšiřovat o nové položky či funkcionality.
+                Doporučujeme tedy použít jedno z ostatních rozhraní LKOD založených na standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>.
             </p>
             
             <p>
-                Rozhraní CKAN API je pro NKOD rozšířeno o některé metadatové položky inspirované standardem DCAT-AP.
-                Bez nich bude metadatový záznam z hlediska NKOD neúplný.
-                Jsou k dispozici vzorová <a href="https://github.com/jakubklimek/ckanext-odczdataset">rozšíření pro CKAN</a> a <a href="https://github.com/jakubklimek/dkanext-nkod">rozšíření pro DKAN</a>, která lze využít pro předávání úplných metadatových záznamů tímto rozhraním.
+                Rozhraní CKAN API bylo pro NKOD rozšířeno o některé metadatové položky inspirované standardem DCAT-AP.
+                Jsou k dispozici vzorová <a href="https://github.com/jakubklimek/ckanext-odczdataset">rozšíření pro CKAN</a> a <a href="https://github.com/jakubklimek/dkanext-nkod">rozšíření pro DKAN</a>, která lze využít pro předávání metadatových záznamů tímto rozhraním.
+				Ani s tímto rozšířením ovšem nebude záznam úplný, jelikož se toto rozhraní nepřizpůsobuje standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>.
             </p>
             
             <section id="ckan-api-package-list">
@@ -1200,8 +1585,7 @@ podmínky: a pú:Specifikace ;
                                 Typ
                             </dt>
                             <dd>
-                                <a href="../../základní-datové-typy/#řetězec">Řetězec</a> dle <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/frequency/?target=Browse&">EU slovníku pro frekvence</a>.
-                                V minulosti to bylo dle <a href="https://project-open-data.cio.gov/iso8601_guidance/">ISO 8601</a>, ale to již nedoporučujeme kvůli kompatibilitě s evropským slovníkem.
+                                <a href="../../základní-datové-typy/#řetězec">Řetězec</a> dle <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/frequency/?target=Browse&">EU slovníku pro frekvence</a>.
                             </dd>
                             <dt>
                                 Jméno
@@ -1309,7 +1693,7 @@ podmínky: a pú:Specifikace ;
                                 Typ
                             </dt>
                             <dd>
-                                Seznam URL oddělený mezerou
+                                Seznam <a href="../../základní-datové-typy/#URL">URL</a> oddělený mezerou
                             </dd>
                             <dt>
                                 Jméno
@@ -1417,7 +1801,7 @@ podmínky: a pú:Specifikace ;
                                 Typ
                             </dt>
                             <dd>
-                                URL [[!URL]] webové stránky
+                                <a href="../../základní-datové-typy/#URL">URL</a> webové stránky
                             </dd>
                             <dt>
                                 Jméno
@@ -1603,7 +1987,7 @@ podmínky: a pú:Specifikace ;
                                 Typ
                             </dt>
                             <dd>
-                                URL [[!URL]]
+                                <a href="../../základní-datové-typy/#URL">URL</a>
                             </dd>
                             <dt>
                                 Jméno
@@ -1676,7 +2060,7 @@ podmínky: a pú:Specifikace ;
                                 Typ
                             </dt>
                             <dd>
-                                URL [[!URL]]
+                                <a href="../../základní-datové-typy/#URL">URL</a>
                             </dd>
                             <dt>
                                 Jméno
@@ -1754,7 +2138,7 @@ podmínky: a pú:Specifikace ;
                                 Typ
                             </dt>
                             <dd>
-                                URL [[!URL]]
+                                <a href="../../základní-datové-typy/#URL">URL</a>
                             </dd>
                             <dt>
                                 Jméno
@@ -1823,7 +2207,6 @@ podmínky: a pú:Specifikace ;
                         <li><code>http://data.ctu.cz/api/3/action/package_list</code></li>
                         <li><code>https://data.army.cz/api/3/action/package_list</code></li>
                         <li><code>https://opendata.plzen.eu/api/3/action/package_list</code></li>
-                        <li><code>https://data.cssz.cz/api/3/action/package_list</code></li>
                         <li><code>http://kod.opava-city.cz/api/3/action/package_list</code></li>
                         <li><code>https://opendata.ostrava.cz/api/3/action/package_list</code></li>
                         <li><code>https://www.vlada.cz/scripts/modules/otevrena_data/package_list</code></li>
