@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Kontejnery na tříděný odapd</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "kontejnery",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:kontejnery-na-tříděný-odpad",
+                thisVersion: "https://ofn.gov.cz/kontejnery-na-tříděný-odpad/draft/",
+                latestVersion: "https://ofn.gov.cz/kontejnery-na-tříděný-odpad/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  url: "mailto:dvorka.martini92@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  url: "mailto:spal.robert@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  url: "mailto:marek.jiri.openaccess@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování kontejnerů na tříděný odpad. 
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování kontejnerů na tříděný odpad.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu kontejnerů na tříděný odpad" src="obrázky/kontejnery-na-tříděný-odpad.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1siWurfe4pv6V8RhoucV3iE9o585KUMUu/view?usp=sharing">
+                        Diagram datového modelu kontejnerů na tříděný odpad. 
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis kontejnerů na tříděný odpad.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-kontejner">
+                <h3>Kontejner</h3>
+                <p>
+                    Tato třída reprezentuje kontejner.
+                </p>
+
+                <section id="vlastnost-kontejner-iri">
+                    <h4>Identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>iri</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">IRI</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Identifikátor kontejneru.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            IRI kontejneru.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://www.sako.cz/sberna-strediska-a-kontejnery/kontejner/Brno2458/</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-kontejner-objem">
+                    <h4>Objem</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>objem</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#množství">Množství</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Objem.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kapacita daného kontejneru.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>1000 l</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-kontejner-nejbližší-vývoz">
+                    <h4>Nejbližší vývoz</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>nejbližší_vývoz</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#datum">Datum</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Nejbližší vývoz
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum nejbližšího vývozu kontejneru. 
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>2020-05-05</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-kontejner-poznámka">
+                    <h4>Poznámka</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>poznámka</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poznámka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Doplňující informace ke kontejneru. 
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Kontejner má poškozené držadlo. Dbejte zvýšené opatrnosti při nakládání. </code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-kontejner-stání">
+                    <h4>Vazba: Stání</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>stání</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="třída-kontejnerové-stání">Kontejnerové stání</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Stání
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Místo sdružující více kontejnerových nádob. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-kontejner-správce">
+                    <h4>Vazba: Správce</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>správce</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/draft/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Správce
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Subjekt, který má kontejnery na starost. Nemusí být totožný se správcem kontejnerového stání či správcem svozové oblasti. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-kontejner-typ">
+                    <h4>Vazba: Typ</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="">Typ tříděného odpadu</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Typ tříděného odpadu.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-kontejner-četnost-vývozu">
+                    <h4>Vazba: Četnost vývozu</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>četnost_vývozu</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../časová-platnost/draft/#třída-časová-platnost">Časová platnost</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Četnost vývozu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uvádí frekvenci vývozu a období, ve kterém tato frekvence platí. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>  
+
+            <section id="třída-kontejnerové-stání">
+                <h3>Kontejnerové stání</h3>
+                <p>
+                    Tato třída reprezentuje kontejnerové stání.
+                </p>
+
+                <section id="vlastnost-kontejnerové-stání-iri">
+                    <h4>Identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>iri</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">IRI</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Identifikátor kontejnerového stání.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            IRI kontejnerového tání.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://www.sako.cz/sberna-strediska-a-kontejnery/kontejnerové-stání/Brno387/</code>
+                        </dd>
+                    </dl>
+
+                </section> 
+
+                <section id="vlastnost-kontejnerové-stání-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název.  
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název kontejnerového stání. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Tilhonova 58-60</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-kontejnerové-stání-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis.  
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis místa kontejnerového stání. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Kontejnerové stání leží v blíkosti ulice Tilhonova.</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-kontejnerové-stání-veřejná-přístupnost">
+                    <h4>Veřejná přístupnost</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>veřejná_přístupnost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Veřejná přístupnost.  
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Určuje, zda je místo kontejnerového stání veřejně přístupné. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-kontejnerové-stání-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/draft/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění kontejnerového stání. 
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace kontejnerového stání.
+                        </dd>
+                    </dl>
+
+                </section>  
+            
+                <section id="vazba-kontejnerové-stání-svozová-oblast">
+                    <h4>Vazba: Svozová oblast</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>svozová_oblast</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../kontejnery-na-tříděný-odpad/draft/#svozová-oblast">Svozová oblast</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Svozová oblast
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Oblast, do které kontejnerové stání spadá. 
+                        </dd>
+                    </dl>
+
+                </section> 
+            
+
+                <section id="vazba-kontejnerové-stání-správce">
+                    <h4>Vazba: Správce</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>správce</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/draft/#třída-člověk-či-osoba">Člověk či osoba</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Správce
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Subjekt, který má kontejnerové stání na starost. Nemusí být totožný se správcem kontejnerů či správcem svozové oblasti. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>
+
+                <section id=třída-svozová-oblast>
+                    <h3>Svozová oblast</h3>
+                    <p>
+                        Tato třída reprezentuje svozovou oblast.
+                    </p>
+    
+                    <section id="vlastnost-svozová-oblast-iri">
+                        <h4>Identifikátor</h4>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>iri</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../základní-datové-typy/draft/#url">IRI</a> 
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Identifikátor svozové oblasti.
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                IRI svozové oblasti.
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>https://www.sako.cz/oblast/Brno_1/</code>
+                            </dd>
+                        </dl>
+    
+                    </section>
+
+                    <section id="vlastnost-svozová-oblast-název">
+                        <h4>Název</h4>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>název</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../základní-datové-typy/draft/#text">Text</a> 
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Název oblasti.
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Název svozové oblasti
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>Brno 1</code>
+                            </dd>
+                        </dl>
+    
+                    </section>
+
+                    <section id="vlastnost-svozová-oblast-polygon">
+                        <h4>Polygon</h4>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>polygon</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../prostorová-data/#geometrické-objekty-polygon">Polygon</a> 
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Polygon
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Polygon svozové oblasti
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>Polygon (50.088131 14.402751,50.088105 14.402749, 50.088104 14.402738, 50.088099 14.402742, 50.088089 14.402746, 50.088082 14.402751, 50.088079 14.402744, 50.088075 14.40275, 50.088053 14.402748, 50.088053 14.402742, 50.088044 14.402748, 50.088041 14.402744, 50.08804 14.402739, 50.088033 14.402732, 50.088032 14.402739, 50.088021 14.402733, 50.08801 14.402728, 50.088002 14.402746, 50.087994 14.402749, 50.08799 14.402751, 50.087988 14.402746, 50.087984 14.402752, 50.087954 14.402749, 50.087951 14.402754, 50.087945 14.40275, 50.087943 14.402743)</code>
+                            </dd>
+                        </dl>
+    
+                    </section>
+
+                    <section id="vazba-svozová-oblast-správce">
+                        <h4>Vazba: Správce</h4>
+                        <dl>
+                            <dt>
+                                Vazba
+                            </dt>
+                            <dd>
+                                <code>správce</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../lidé-a-osoby/draft/#třída-člověk-či-osoba">Člověk či osoba</a>
+                            </dd>
+                            <dt> 
+                                Jméno
+                            </dt>
+                            <dd>
+                                Správce
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Subjekt, který má svozovou oblast na starost. Nemusí být totožný se správcem kontejnerového stání či správcem kontejnerů. 
+                            </dd>
+                        </dl>
+    
+                    </section>
+                    
+                </section>
+            
+            </section>
+
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace akcí v různých úrovních detailu. 
+            </p>
+            <section id="příklady-jednoduchá-akce">
+                <h3>Jednoduchá akce</h3>
+
+                <p>
+                    Příklad ukazuje, jak lze prezentovat akce s minimálními položkami k publikaci. Další položky lze přidávat dle potřeby.
+                </p>
+
+                <aside class="example" title="Jednoduchá akce v JSON">
+                    <p>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/akce.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "iri": "https://brno.cz/vinobraní/2019",
+    "název": {
+        "cs": "Brněnské vinobraní",
+        "en": "Brno Wine Festival"
+    },
+    "popis": {
+        "cs": "Město Brno Vás zve na již 21. vinobraní.",
+        "en": "City of Brno invites you to 21th Wine Festival."
+    },
+    "pořadatel": [{
+        "osoba": {
+            "ičo": "44992785",
+            "název": "Statutární město Brno"
+        }
+    }],
+    "umístění": [{
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    }],
+    "trvání": [{
+        "začátek": {
+            "datum_a_čas": "2019-01-01T09:30:00+02:00"
+        },
+        "konec": {
+            "datum_a_čas": "2019-01-07T18:00:00+02:00"
+        }
+    }, {
+        "začátek": {
+            "datum_a_čas": "2019-01-14T09:30:00+02:00"
+        },
+        "konec": {
+            "datum_a_čas": "2019-01-20T18:00:00+02:00"
+        }
+    }]
+}]</pre>
+                </aside>
+            </section>
+            <section id="příklady-komplexní-akce">
+                <h3>Komplexní akce</h3>
+                
+                <p>
+                    V komplexním příkladu jsou uvedeny položky, které je vhodné vyplnit, aby měl uživatel co nejlepší představu o dané akci. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Komplexní akce v JSON">
+                    <p>
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/akce.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "iri": "https://brno.cz/vinobraní/2019",
+    "název": {
+        "cs": "Brněnské vinobraní",
+        "en": "Brno Wine Festival"
+    },
+    "popis": {
+        "cs": "Město Brno Vás zve na již 21. vinobraní.",
+        "en": "City of Brno invites you to 21th Wine Festival."
+    },
+    "dlouhý_popis": {
+        "cs": "První Znojemské historické vinobraní se uskutečnilo již v roce 1966. Jeho autorem a zakladatelem byl František Koukal, který dokázal\nve svém scénáři skloubit jak slavnou minulost královského města na řece Dyji, tak i jeho zachovalé historické kulisy a vinařskou tradici.\nÚstřední postavou vinobraní se stal král Jan Lucemburský, který do Znojma v roce 1327 přijel zapít zdařilé státnické jednání ve Vratislavi.\nMěsto pro něj tehdy připravilo bohatý program, jehož střípky, včetně tradičního předávání práv do rukou konšelů, se divákům nabízejí k zhlédnutí dodnes.\nZatím největší a nejúspěšnější ZHV se konalo v roce 1967. Originální program s téměř 600 účinkujícími zhlédlo na 110 000 návštěvníků.\nTradice Znojemského historického vinobraní byla komunistickým režimem přerušena roku 1974 a k jejímu znovuobnovení došlo až v 90. letech minulého století.\nOd té doby přiláká každoročně vinobraní do Znojma desetitisíce návštěvníků, kteří sem přijíždějí nejen za vínem\n a burčákem, ale také za výborným kulturním programem, ve kterém nesmí chybět průvod krále Jana Lucemburského s chotí a dvořany.",
+        "en": "The first historical wine festival in Znojmo took place as early as 1966. The founder of festival was František Koukal, who managed \n to combine both the glorious past of the royal town on the Dyje River, as well as its well-preserved historical background and wine tradition. \nThe central figure of the wine festival was King John of Luxembourg, who came to Znojmo in 1327 to celebrate successful state meeting in Wroclaw. \nThe city prepared for him a rich program, including traditional handing of rights over to the councilors, which as a reenactment is part of the festival program to this day. \nThe largest and most successful wine festival took place in 1967. The original program with almost 600 performers saw 110,000 visitors. \nThe tradition of Znojmo's historic wine festival was interrupted by the Communist regime in 1974 and was not re-established until the 1990s. \nSince then, festival attracts tens of thousands of visitors who come here not only for wine \n or half-fermented wine, but also for an excellent cultural program, including the parade of King John of Luxembourg with his wife and courtiers."
+    },
+    "obrázek": "https://brno.cz/vinobrani.jpg",
+    "pořadatel": [{
+        "osoba": {
+            "ičo": "44992785",
+            "název": "Statutární město Brno"
+        }
+    }],
+    "hlavní_sponzor": [{
+        "osoba": {
+            "ičo": "44992785",
+            "název": "Vinařství Vinam"
+        }
+    }],
+    "sponzor": [{
+        "osoba": {
+            "ičo": "35922742",
+            "název": "Vinařství Znovín"
+        },
+        "osoba": {
+            "ičo": "65885514",
+            "název": "Vinařství Valtice"
+        }
+    }],
+    "mediální_partner": [{
+        "osoba": {
+            "ičo": "56485227",
+            "název": "Brněnský denník"
+        }
+    }],
+    "umístění": [{
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    }],
+    "trvání": [{
+        "začátek": {
+            "datum_a_čas": "2019-01-01T09:30:00+02:00"
+        },
+        "konec": {
+            "datum_a_čas": "2019-01-07T18:00:00+02:00"
+        }
+    }, {
+        "začátek": {
+            "datum_a_čas": "2019-01-14T09:30:00+02:00"
+        },
+        "konec": {
+            "datum_a_čas": "2019-01-20T18:00:00+02:00"
+        }
+    }],
+    "kontakt": [{
+        "email": "akce@brno.cz",
+        "mobil": "+420123456789",
+        "facebook": "ChytreBrno",
+        "instagram": "chytrebrno",
+        "twitter": "chytrebrno",
+        "url": "https://data.brno.cz"
+    }],
+    "vstupné": [[{
+        "název": {
+            "cs": "Pro dospělé ve vybrané dny a časy.",
+            "en": "Adults - selected days and times."
+        },
+        "podmínka": {
+            "cs": "Občané starší 18 let, kteří nevyuživají slevy (ZTP, studenti).",
+            "en": "Adults older 18 years, cannot be combined with other discounts."
+        },
+        "časová_platnost": [{
+            "vznik_časové_platnosti": {
+                "datum_a_čas": "2019-01-01T09:30:00+02:00"
+        },
+            "ukončení_časové_platnosti": {
+                "datum_a_čas": "2019-01-05T18:00:00+02:00"
+        }
+    }, {
+            "vznik_časové_platnosti": {
+                "datum_a_čas": "2019-01-14T09:30:00+02:00"
+        },
+            "ukončení_časové_platnosti": {
+                "datum_a_čas": "2019-01-19T18:00:00+02:00"
+        }
+    }],
+        "částka": {
+            "výše": 219.90,
+            "měna": "CZK"
+        }
+    }, {
+        "název": {
+            "cs": "Pro děti",
+            "en": "Children's admission"
+        },
+        "podmínka": {
+            "cs": "Osoby mladší 18 let",
+            "en": "Person must be younger than 18"
+        },
+        "částka": {
+            "výše": 180.90,
+            "měna": "CZK"
+        }
+    }]]
+}]
+</pre>
+                </aside>
+            </section>
+        </section>
+        <section id="metadata">
+            <h2>Předpřipravená metadata</h2>
+            <p>
+                Tato sekce obsahuje odkaz na <a href="metadata/akce.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>. Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledat podobné datové sady publikované dle této otevřené formální normy.
+            </p>
+        </section>
+    </body>
+</html>
+
