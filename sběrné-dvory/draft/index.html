@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Sběrné dvory</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "sběrné dvory",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:sběrné-dvory",
+                thisVersion: "https://ofn.gov.cz/sběrné-dvory/draft/",
+                latestVersion: "https://ofn.gov.cz/sběrné-dvory/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  url: "mailto:dvorka.martini92@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  url: "mailto:spal.robert@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  url: "mailto:marek.jiri.openaccess@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o sběrných dvorech, které slouží jako místa pro zbavení se odpadu. 
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací dostupných o sběrných dvorech.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu sběrných dvorů" src="obrázky/sběrné-dvory.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1Aa-W6R7c1WH1i9hAiyab58ci7gRHBYVh/view?usp=sharing">
+                        Diagram datového modelu sběrných dvorů
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis sběrných dvorů.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-sběrný-dvůr">
+                <h3>Sběrný dvůr</h3>
+                <p>
+                    Tato třída reprezentuje samotný sběrný dvůr.
+                </p>
+
+                <section id="vlastnost-sběrný-dvůr-iri">
+                    <h4>Identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>iri</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#url">IRI</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Identifikátor daného sběrného dvora
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            IRI sběrného dvora
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://www.trebic.cz/sberne-dvory/na-klinkach</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-sběrný-dvůr-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název sběrného dvora.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>SSO Na Klinkách</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-sběrný-dvůr-obrázek">
+                    <h4>Obrázek</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obrázek</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obrázek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Obrázek nebo logo sběrného dvora.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://www.esko-t.cz/wp-content/uploads/2017/11/Sberny_dvur_Trebic_D2_Na_Klinkach.jpg</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-sběrný-dvůr-podmínky-užití">
+                    <h4>Podmínky užití</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>podmínky_užití</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Podmínky užití
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Specifikace podmínek za kterých je možné sberný dvůr využít.  
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Sběrný dvůr Na Klinkách mohou zdarma využívat občané s trvalým pobytem v Třebíči. Ostatní za poplatek.</code>
+                        </dd>
+                    </dl>
+
+                </section>    
+
+                <section id="vazba-sběrný-dvůr-provozovatel">
+                    <h4>Vazba: Provozovatel</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>provozovatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/draft/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Provozovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Provozovatel sběrného dvora.
+                        </dd>
+                    </dl>
+
+                </section>                  
+
+                <section id="vazba-sběrný-dvůr-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/draft/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace sběrného dvora.
+                        </dd>
+                    </dl>
+
+                </section>  
+            
+                <section id="vazba-sběrný-dvůr-kontakt">
+                    <h4>Vazba: Kontakt</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>kontakt</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../kontakty/draft/#třída-kontakt">Kontakt</a>  
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontakt
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kontaktní údaje na provozovatele.
+                        </dd>
+                    </dl>
+
+                </section>          
+                
+                <section id="vazba-sběrný-dvůr-otevírací-doba">
+                    <h4>Vazba: Otevírací doba</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>otevírací_doba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../otevírací-doba/draft/#třída-otevírací-doba">Otevírací doba</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Otevírací doba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Otevírací doba sběrného dvora.
+                        </dd>
+                    </dl>
+
+                </section>                
+
+                <section id="vazba-sběrný-dvůr-odpad">
+                    <h4>Vazba: Odpad</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>odpad</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-odpad">Odpad</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnota této vlastnosti je z <a href="https://data.mvcr.gov.cz/zdroj/datové-sady/číselníky/typy-turistických-cílů">Číselníku pro typy turistických cílů</a> publikovaného jako <a href="https://data.gov.cz/datové-sady?poskytovatel=Ministerstvo%20vnitra">číselník v Národním katalogu otevřených dat.</a> Typ turistického cíle nabývá hodnot přírodní a kulturní. V příkladu je uvedena prezentace přírodního turistického cíle. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů/položky/přírodní</code>
+                        </dd>                        
+                    </dl>
+
+                </section>   
+
+            </section> 
+
+            <section id="třída-odpad">
+                <h3>Odpad</h3>
+                <p>
+                    Tato třída reprezentuje odpad.
+                </p>
+                
+                <section id="vazba-odpad-typ-odpadu">
+                    <h4>Vazba: Typ odpadu</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ_odpadu</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href=".....">Typy odpadů</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ odpadu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                             Hodnota této vlastnosti je z <a href="https://data.mvcr.gov.cz/zdroj/datové-sady/číselníky/typy-odpadů">Číselníku pro typy odpadů</a> publikovaného jako <a href="https://data.gov.cz/datové-sady?poskytovatel=Ministerstvo%20vnitra">číselník v Národním katalogu otevřených dat.</a> Číselník vychází z katalogu odpadů, který je přílohou k vyhlášce Ministerstva životního prostředí č. 93/2016 Sb.  
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky</code>
+                        </dd>                        
+                    
+                    </dl>
+
+                </section>                    
+                
+                <section id="vazba-odpad-minimum">
+                    <h4>Vazba: Minimum</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>minimum</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/základní-datové-typy/draft/#množství">Množství</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Minimum
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Minimální množství odpadu, které je možné do sběrného dvora přinést bez poplatků. 
+                        </dd>                        
+                    </dl>
+                
+                </section>
+
+                <section id="vazba-odpad-maximum">
+                    <h4>Vazba: Maximum</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>maximum</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/základní-datové-typy/draft/#množství">Množství</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Minimum
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Maximální množství odpadu, které je možné do sběrného dvora přinést bez poplatků. 
+                        </dd>                       
+                    </dl>
+                
+                </section>
+
+                <section id="vazba-odpad-cena">
+                    <h4>Vazba: Cena</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>cena</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://ofn.gov.cz/základní-datové-typy/draft/#částka">Částka</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Cena
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Výše poplatku za odpad, při překročení minimálního nebo maximálního množství odpadu.  
+                        </dd>                       
+                    </dl>
+                
+                </section>
+            </section>
+
+    </section>
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace sběrných dvorů v různých úrovních detailu. 
+            </p>
+
+            <section id="příklady-jednoduchý-sběrný-dvůr">
+                <h3>Jednoduchý sběrný dvůr</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat sběrný dvůr s minimálními položkami k publikaci. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Jednoduchý sběrný dvůr v JSON">
+                    <p>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/sběrné-dvory.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "iri": "https://www.trebic.cz/sberne-dvory/na-klinkach",
+    "název": {
+        "cs": "SSO Na Klinkách",
+        "en": "Waste collection center - Na Klinkách"
+    },
+    "umístění": {
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.874303, 49.228439]
+        },
+        "adresa": {
+            "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/25351141"
+        }
+    },
+    "otevírací_doba": [{
+        "název": {
+            "cs": "Letní otevírací doba",
+            "en": "Summer opening hours"
+        },
+        "popis": {
+            "cs": "Letní otevírací doba platí vždy od 1.4. do 31.9.",
+            "en": "Summer opening hours begins on the 1st of April and lasts till 31st of September."
+        },
+        "od": "08:00:00",
+        "do": "16:00:00",
+        
+        "dny-v-týdnu": [{
+            "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/úterý",
+            "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/středa",
+            "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/čtvrtek"  
+        }] 
+    }],
+       "odpad": [{
+        "typ_odpadu": [{    
+               "iri":"https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky"
+            }],
+        "minimum": {
+                "hodnota": 1,
+                "jednotka": "ks" 
+        },
+        "maximum": {
+                "hodnota": 100.0,
+                "jednotka": "ks"
+        },
+        "cena": {
+                "výše": 100.0,
+                "měna": "CZK"
+                }
+            }
+        ]
+    }
+]
+</pre>
+                </aside>
+            </section>
+            <section id="příklady-komplexní-sběrný-dvůr">
+                <h3>Komplexní sběrný dvůr</h3>
+                
+                <p>
+                    V komplexním příkladu jsou uvedeny položky, které je vhodné vyplnit, aby měl uživatel co nejlepší představu o daném sběrném dvore. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Komplexní sběrný dvůr v JSON">
+                    <p>
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/sběrné-dvory.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+[{
+    "iri": "https://www.trebic.cz/sberne-dvory/na-klinkach",
+    "název": {
+        "cs": "SSO Na Klinkách",
+        "en": "Waste collection center - Na Klinkách"
+    },
+    "obrázek": "https://www.esko-t.cz/wp-content/uploads/2017/11/Sberny_dvur_Trebic_D2_Na_Klinkach.jpg",
+    "podmínky_užití": {
+        "cs": "Sběrný dvůr na Okružní mohou využívat občané s trvalým pobytem v Brně. Ostatní za poplatek.",
+        "en": "The waste collection center at Na Klinkách can be used by permanent residents living in\n Trebič free of charge. Others can use it for a small fee."
+    },
+    "provozovatel": {
+        "osoba": {
+            "ičo": "60227852",
+            "název": "esko-t"
+        }
+    },
+    "umístění": {
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.874303, 49.228439]
+        },
+        "adresa": {
+            "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/25351141"
+        }
+    },
+    "kontakt": [{
+      "druh": {
+        "cs": "Oficiální",
+        "en": "Official"
+    },
+        "email": "odpady@trebic.cz",
+        "mobil": "+420123442785",
+        "facebook": "OdpadyTřebíč",
+        "url": "https://www.trebic.cz/sberne-dvory/na-klinkach"
+    }],
+    "otevírací_doba": [{
+        "název": {
+            "cs": "Letní otevírací doba",
+            "en": "Summer opening hours"
+        },
+        "popis": {
+            "cs": "Letní otevírací doba platí vždy od 1.4. do 31.9.",
+            "en": "Summer opening hours begins on the 1st of April and lasts till 31st of September."
+        },
+        "od": "08:00:00",
+        "do": "16:00:00",
+        
+        "dny-v-týdnu": [{
+            "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/úterý",
+            "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/středa",
+            "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/čtvrtek"  
+        }] 
+    }],
+       "odpad": [{
+        "typ_odpadu": [{    
+               "iri":"https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky"
+            }],
+        "minimum": {
+                "hodnota": 1.0,
+                "jednotka": "ks" 
+        },
+        "maximum": {
+                "hodnota": 50.0,
+                "jednotka": "ks"
+        },
+        "cena": {
+                "výše": 100.0,
+                "měna": "CZK",
+                "jednotka": "ks"
+                }
+            }
+        ],
+        "odpad": [{
+            "typ_odpadu": [{    
+                "iri":"https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/dřevo"
+            }],
+            "minimum": {
+                "hodnota": 1.0,
+                "jednotka": "KGM" 
+        },
+            "maximum": {
+                "hodnota": 100.0,
+                "jednotka": "KGM"
+        },
+            "cena": {
+                "výše": 35.0,
+                "měna": "CZK",
+                "jednotka": "KGM"
+                }
+            }
+        ],
+        "odpad": [{
+            "typ_odpadu": [{    
+                "iri":"https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/polyester"
+            }],
+            "minimum": {
+                "hodnota": 0.5,
+                "jednotka": "KGM" 
+        },
+            "maximum": {
+                "hodnota": 120.0,
+                "jednotka": "KGM"
+        },
+            "cena": {
+                "výše": 14.0,
+                "měna": "CZK",
+                "jednotka": "KGM"
+                }
+            }
+        ]
+    }
+]
+</pre>
+                </aside>
+            </section>
+        </section>
+        <section id="metadata">
+            <h2>Předpřipravená metadata</h2>
+            <p>
+                Tato sekce obsahuje odkaz na <a href="metadata/sběrné_dvory.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>. Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledat podobné datové sady publikované dle této otevřené formální normy.
+            </p>
+        </section>
+    </body>
+</html>
+
