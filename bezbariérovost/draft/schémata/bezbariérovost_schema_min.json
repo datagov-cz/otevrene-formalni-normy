@@ -1,230 +1,381 @@
-{
-  "definitions": {},
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://ofn.gov.cz/bezbariérovost/draft/schémata/bezbariérovost_schema_min.json",
-  "type": "object",
-  "title": "The Root Schema",
-  "required": [
-    "popis",
-    "fotografie",
-    "datum_mapování",
-    "mapující_organizace",
-    "děti_s_doprovodem",
-    "tělesně_postižení",
-    "senioři"
-  ],
-  "properties": {
-    "popis": {
-      "$id": "#/properties/popis",
+  {
+      "$schema": "http://json-schema.org/draft-07/schema",
+      "$id": "https://ofn.gov.cz/bezbariérovost/draft/schémata/bezbariérovost_schema_min.json",
       "type": "object",
-      "title": "The Popis Schema",
+      "readOnly": false,
+      "writeOnly": false,
+      "minProperties": 0,
+      "title": "The Root Schema",
+      "description": "The root schema comprises the entire JSON document.",
+      "additionalProperties": true,
       "required": [
-        "cs"
+          "popis",
+          "fotografie",
+          "datum_mapování",
+          "mapující_subjekt",
+          "děti_s_doprovodem",
+          "tělesně_postižení",
+          "senioři"
       ],
       "properties": {
-        "cs": {
-          "$id": "#/properties/popis/properties/cs",
-          "type": "string",
-          "title": "The Cs Schema",
-          "default": "",
-          "examples": [
-            "Parkování: vyhrazené parkoviště pro vozíčkáře se nachází uvnitř areálu cca 100 metrů od nádvoří zámku, od kterého vede k zámku rovná, částečně asfaltová cesta.\nVstup: do areálu zámku se vchází dvoukřídlou železnou bránou. Na prohlídku Aristokracie se vstupuje dvoukřídlými dveřmi s otevíráním dovnitř (šířka hlavního křídla 57 cm a vedlejšího křídla 61 cm). U těchto dveří se nachází práh vysoký 6 cm.\nInteriér: pokladna je umístěná v přízemí špýcharu a je bezbariérová. Do výstavních prostor v přízemí vede z pokladny schod vysoký 17 cm a do 2. podlaží je potom třeba překonat dřevěné schodiště. V areálu je možné navštívit i zámecký park spolu výstavou Historických kočárů. V areálu se nachází schodolez, který je možné využít po předchozí telefonické domluvě.\nWC: volně přístupné WC se nachází v oddělení WC ženy. Dveře šířky 90 cm vedou do kabiny o šířce 174 cm a hloubce 155 cm. Vypínač je umístěn ve výšce 90 cm. Záchodová mísa je odsazena od pravé stěny 95 cm. Výška sedátka mísy je 54 cm. Obě madla jsou sklopná o délce 51 cm a výšce 90 cm."
-          ],
-          "pattern": "^(.*)$"
-        }
-      }
-    },
-    "fotografie": {
-      "$id": "#/properties/fotografie",
-      "type": "array",
-      "title": "The Fotografie Schema",
-      "items": {
-        "$id": "#/properties/fotografie/items",
-        "type": "string",
-        "title": "The Items Schema",
-        "default": "",
-        "examples": [
-          "http://presbariery.cz/images/objekty/item_9284_field_54/s_img_20160309_103912.jpg",
-          "http://presbariery.cz/images/objekty/item_9284_field_54/s_img_20160309_101347.jpg",
-          "http://presbariery.cz/images/objekty/item_9284_field_54/s_img_20160309_094647.jpg"
-        ],
-        "pattern": "^(.*)$"
-      }
-    },
-    "datum_mapování": {
-      "$id": "#/properties/datum_mapování",
-      "type": "string",
-      "title": "The Datum_mapování Schema",
-      "default": "",
-      "examples": [
-        "2016-03-01"
-      ],
-      "pattern": "^(.*)$"
-    },
-    "mapující_organizace": {
-      "$id": "#/properties/mapující_organizace",
-      "type": "string",
-      "title": "The Mapující_organizace Schema",
-      "default": "",
-      "examples": [
-        "http://www.pov.cz/"
-      ],
-      "pattern": "^(.*)$"
-    },
-    "děti_s_doprovodem": {
-      "$id": "#/properties/děti_s_doprovodem",
-      "type": "object",
-      "title": "The Děti_s_doprovodem Schema",
-      "required": [
-        "děti_s_doprovodem_objekt_přístupnost"
-      ],
-      "properties": {
-        "děti_s_doprovodem_objekt_přístupnost": {
-          "$id": "#/properties/děti_s_doprovodem/properties/děti_s_doprovodem_objekt_přístupnost",
-          "type": "object",
-          "title": "The Děti_s_doprovodem_objekt_přístupnost Schema",
-          "required": [
-            "cs",
-            "en"
-          ],
-          "properties": {
-            "cs": {
-              "$id": "#/properties/děti_s_doprovodem/properties/děti_s_doprovodem_objekt_přístupnost/properties/cs",
+          "popis": {
+              "$id": "#/properties/popis",
+              "type": "object",
+              "readOnly": false,
+              "writeOnly": false,
+              "minProperties": 0,
+              "title": "The Popis Schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                  {
+                      "cs": "Parkování: Parkování je možné přímo na parkovišti u hospitalu Kuks odbočením ze silnice č. 37 a projetím obce Slotov. Na parkovišti jsou 2 vyhrazené parkovací stání. Povrch parkoviště tvoří velké kostky.\n Vstup: Přístup ke vstupům do objektu vede po chodníku, který je zpevněn kamínky. Vstup do pokladny vede přes vchod (šířka 181 cm) do závětří. Návštěvou objektu Kuks je možné absolvovat 2 prohlídkové okruhy (1. Hospital, 2. Šporkovská hrobka). Hlavní vstup na 1. okruh se nalézá několik desítek metrů za vstupem do závětří. K němu je potřeba zdolat schodiště čítající 18 schodů (výška 18 cm, hloubka 36 cm). U samotného vstupu jsou dvoukřídlé mechanické dveře s otevíráním dovnitř (šířky hlavního křídla 64 cm a vedlejšího křídla 70 cm). Jako vedlejší vstup lze využít zmíněný vchod do závětří (šířka 181 cm). 2. okruh se nachází mimo hlavní objekt hospitalu. Pro vstup na 2. okruh je třeba překonat schodiště o 30 schodech. Samotný vstup do hrobky je tvořen dvoukřídlou mříží s otevíráním dovnitř.\n Interiér: Samotný hospital má 2 prohlídkové okruhy. 1. okruh vede z větší části po 2. NP, do něhož je možné se dostat jak po schodišti, tak výtahem při využití vedlejšího vstupu. V samotném podlaží se nevyskytují jednotlivé schody, vyskytují se jen prahy do 5 cm. Pouze při vstupu do lékárny je nutné překonat 9 cm práh. Prohlídkový okruh vede krom 2. NP i přes nádvoří do lapidária. Do nádvoří se lze dostat bezbariérově za pomoci výtahu. Bez využití výtahu by bylo nutné překonat schodiště o 5 schodech (max. šířka 270 cm). Nádvoří je již pak bezbariérové. Do lapidária je možné se dostat za pomoci nainstalované mobilní rampy. 2. okruh je přístupný pouze za předpokladu překonání schodiště před vstupem. V samotném objektu hrobky se potom nachází 3 schody (šířka 175 cm, výška 18 cm, hloubka 50 cm).\nWC: V objektu Kuksu se nalézají 2 bezbariérové WC. První WC se nachází v objektu Kuksu v 1. NP a je veřejnosti volně přístupné. Dveře do kabiny WC nesou označení pro hendikepované. Dveře šířky 81 cm vedou do kabiny o šířce 357 cm a hloubce 225 cm. Vypínač je ve výšce 91 cm. Záchodová mísa je odsazena od pravé stěny 141 cm. Výška sedátka mísy je 49 cm. Levé madlo je pevné o délce 83 cm a výšce 78 cm. Pravé madlo je sklopné o délce 83 cm a výšce 78 cm. Umyvadlo je umístěno ve výšce 83 cm. Druhé WC se nachází v objektu Kuksu ve 2. NP a je veřejnosti volně přístupné. Dveře do kabiny WC nesou označení pro hendikepované. Dveře šířky 93 cm vedou do kabiny o šířce 180 cm a hloubce 241 cm. Vypínač je ve výšce 93 cm. Záchodová mísa je odsazena od levé stěny 95 cm. Výška sedátka mísy je 52 cm. Levé madlo je mobilní o délce 80 cm a výšce 78 cm. Pravé madlo je pevné o délce 80 cm a výšce 78 cm. Umyvadlo je umístěno ve výšce 82 cm.\nVýtah: Výtah v objektu je umístěn po vstupu vedlejším vstupem na druhé straně objektu. Jedná se o výtah, který je uzamčen a přístup do něho zajistí průvodce. Dojezd výtahu je na hlavních podestách. Šířka šachetních dveří je 88 cm a klecových dveří 101 cm. Šířka klece je 101 cm a hloubka 183 cm.\n Rampa: Rampa se nachází před vstupem do lapidária. Jedná se o rampu mobilní a přístup zajistí průvodce. Sklon rampy je 18,5 %, šířka 94 cm a délka 185 cm, povrch je nekluzký. Madlo u rampy z důvodu mobility chybí."
+                  }
+              ],
+              "additionalProperties": true,
+              "required": [
+                  "cs"
+              ],
+              "properties": {
+                  "cs": {
+                      "$id": "#/properties/popis/properties/cs",
+                      "type": "string",
+                      "readOnly": false,
+                      "writeOnly": false,
+                      "minLength": 0,
+                      "title": "The Cs Schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": "",
+                      "examples": [
+                          "Parkování: Parkování je možné přímo na parkovišti u hospitalu Kuks odbočením ze silnice č. 37 a projetím obce Slotov. Na parkovišti jsou 2 vyhrazené parkovací stání. Povrch parkoviště tvoří velké kostky.\n Vstup: Přístup ke vstupům do objektu vede po chodníku, který je zpevněn kamínky. Vstup do pokladny vede přes vchod (šířka 181 cm) do závětří. Návštěvou objektu Kuks je možné absolvovat 2 prohlídkové okruhy (1. Hospital, 2. Šporkovská hrobka). Hlavní vstup na 1. okruh se nalézá několik desítek metrů za vstupem do závětří. K němu je potřeba zdolat schodiště čítající 18 schodů (výška 18 cm, hloubka 36 cm). U samotného vstupu jsou dvoukřídlé mechanické dveře s otevíráním dovnitř (šířky hlavního křídla 64 cm a vedlejšího křídla 70 cm). Jako vedlejší vstup lze využít zmíněný vchod do závětří (šířka 181 cm). 2. okruh se nachází mimo hlavní objekt hospitalu. Pro vstup na 2. okruh je třeba překonat schodiště o 30 schodech. Samotný vstup do hrobky je tvořen dvoukřídlou mříží s otevíráním dovnitř.\n Interiér: Samotný hospital má 2 prohlídkové okruhy. 1. okruh vede z větší části po 2. NP, do něhož je možné se dostat jak po schodišti, tak výtahem při využití vedlejšího vstupu. V samotném podlaží se nevyskytují jednotlivé schody, vyskytují se jen prahy do 5 cm. Pouze při vstupu do lékárny je nutné překonat 9 cm práh. Prohlídkový okruh vede krom 2. NP i přes nádvoří do lapidária. Do nádvoří se lze dostat bezbariérově za pomoci výtahu. Bez využití výtahu by bylo nutné překonat schodiště o 5 schodech (max. šířka 270 cm). Nádvoří je již pak bezbariérové. Do lapidária je možné se dostat za pomoci nainstalované mobilní rampy. 2. okruh je přístupný pouze za předpokladu překonání schodiště před vstupem. V samotném objektu hrobky se potom nachází 3 schody (šířka 175 cm, výška 18 cm, hloubka 50 cm).\nWC: V objektu Kuksu se nalézají 2 bezbariérové WC. První WC se nachází v objektu Kuksu v 1. NP a je veřejnosti volně přístupné. Dveře do kabiny WC nesou označení pro hendikepované. Dveře šířky 81 cm vedou do kabiny o šířce 357 cm a hloubce 225 cm. Vypínač je ve výšce 91 cm. Záchodová mísa je odsazena od pravé stěny 141 cm. Výška sedátka mísy je 49 cm. Levé madlo je pevné o délce 83 cm a výšce 78 cm. Pravé madlo je sklopné o délce 83 cm a výšce 78 cm. Umyvadlo je umístěno ve výšce 83 cm. Druhé WC se nachází v objektu Kuksu ve 2. NP a je veřejnosti volně přístupné. Dveře do kabiny WC nesou označení pro hendikepované. Dveře šířky 93 cm vedou do kabiny o šířce 180 cm a hloubce 241 cm. Vypínač je ve výšce 93 cm. Záchodová mísa je odsazena od levé stěny 95 cm. Výška sedátka mísy je 52 cm. Levé madlo je mobilní o délce 80 cm a výšce 78 cm. Pravé madlo je pevné o délce 80 cm a výšce 78 cm. Umyvadlo je umístěno ve výšce 82 cm.\nVýtah: Výtah v objektu je umístěn po vstupu vedlejším vstupem na druhé straně objektu. Jedná se o výtah, který je uzamčen a přístup do něho zajistí průvodce. Dojezd výtahu je na hlavních podestách. Šířka šachetních dveří je 88 cm a klecových dveří 101 cm. Šířka klece je 101 cm a hloubka 183 cm.\n Rampa: Rampa se nachází před vstupem do lapidária. Jedná se o rampu mobilní a přístup zajistí průvodce. Sklon rampy je 18,5 %, šířka 94 cm a délka 185 cm, povrch je nekluzký. Madlo u rampy z důvodu mobility chybí."
+                      ]
+                  }
+              }
+          },
+          "fotografie": {
+              "$id": "#/properties/fotografie",
+              "type": "array",
+              "readOnly": false,
+              "writeOnly": false,
+              "uniqueItems": false,
+              "minItems": 0,
+              "minContains": 1,
+              "title": "The Fotografie Schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                  "$id": "#/properties/fotografie/items",
+                  "type": "string",
+                  "readOnly": false,
+                  "writeOnly": false,
+                  "minLength": 0,
+                  "title": "The Items Schema",
+                  "description": "An explanation about the purpose of this instance.",
+                  "default": "",
+                  "examples": [
+                      "https://www.hospital-kuks.cz/pamatky/hospital-kuks/fotogalerie/novy-hospital/nadvori/img_4839.jpg"
+                  ]
+              }
+          },
+          "datum_mapování": {
+              "$id": "#/properties/datum_mapování",
               "type": "string",
-              "title": "The Cs Schema",
+              "readOnly": false,
+              "writeOnly": false,
+              "minLength": 0,
+              "title": "The Datum_mapování Schema",
+              "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "částečně přístupný"
-              ],
-              "pattern": "^(.*)$"
-            },
-            "en": {
-              "$id": "#/properties/děti_s_doprovodem/properties/děti_s_doprovodem_objekt_přístupnost/properties/en",
+                  "2015-08-25"
+              ]
+          },
+          "mapující_subjekt": {
+              "$id": "#/properties/mapující_subjekt",
               "type": "string",
-              "title": "The En Schema",
+              "readOnly": false,
+              "writeOnly": false,
+              "minLength": 0,
+              "title": "The Mapující_subjekt Schema",
+              "description": "An explanation about the purpose of this instance.",
               "default": "",
               "examples": [
-                "partially accessible"
+                  "http://www.mapybezbarier.cz/"
+              ]
+          },
+          "děti_s_doprovodem": {
+              "$id": "#/properties/děti_s_doprovodem",
+              "type": "object",
+              "readOnly": false,
+              "writeOnly": false,
+              "minProperties": 0,
+              "title": "The Děti_s_doprovodem Schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                  {
+                      "děti_s_doprovodem_objekt_přístupnost": {
+                          "en": "partially accessible",
+                          "cs": "částečně přístupný"
+                      }
+                  }
               ],
-              "pattern": "^(.*)$"
-            }
+              "additionalProperties": true,
+              "required": [
+                  "děti_s_doprovodem_objekt_přístupnost"
+              ],
+              "properties": {
+                  "děti_s_doprovodem_objekt_přístupnost": {
+                      "$id": "#/properties/děti_s_doprovodem/properties/děti_s_doprovodem_objekt_přístupnost",
+                      "type": "object",
+                      "readOnly": false,
+                      "writeOnly": false,
+                      "minProperties": 0,
+                      "title": "The Děti_s_doprovodem_objekt_přístupnost Schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
+                          {
+                              "en": "partially accessible",
+                              "cs": "částečně přístupný"
+                          }
+                      ],
+                      "additionalProperties": true,
+                      "required": [
+                          "cs",
+                          "en"
+                      ],
+                      "properties": {
+                          "cs": {
+                              "$id": "#/properties/děti_s_doprovodem/properties/děti_s_doprovodem_objekt_přístupnost/properties/cs",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The Cs Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "částečně přístupný"
+                              ]
+                          },
+                          "en": {
+                              "$id": "#/properties/děti_s_doprovodem/properties/děti_s_doprovodem_objekt_přístupnost/properties/en",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The En Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "partially accessible"
+                              ]
+                          }
+                      }
+                  }
+              }
+          },
+          "tělesně_postižení": {
+              "$id": "#/properties/tělesně_postižení",
+              "type": "object",
+              "readOnly": false,
+              "writeOnly": false,
+              "minProperties": 0,
+              "title": "The Tělesně_postižení Schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                  {
+                      "tělesně_postižení_toaleta_přístupnost": {
+                          "en": "accessible",
+                          "cs": "přístupná"
+                      },
+                      "tělesně_postižení_objekt_přístupnost": {
+                          "en": "partially accessible",
+                          "cs": "částečně přístupný"
+                      }
+                  }
+              ],
+              "additionalProperties": true,
+              "required": [
+                  "tělesně_postižení_objekt_přístupnost",
+                  "tělesně_postižení_toaleta_přístupnost"
+              ],
+              "properties": {
+                  "tělesně_postižení_objekt_přístupnost": {
+                      "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_objekt_přístupnost",
+                      "type": "object",
+                      "readOnly": false,
+                      "writeOnly": false,
+                      "minProperties": 0,
+                      "title": "The Tělesně_postižení_objekt_přístupnost Schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
+                          {
+                              "en": "partially accessible",
+                              "cs": "částečně přístupný"
+                          }
+                      ],
+                      "additionalProperties": true,
+                      "required": [
+                          "cs",
+                          "en"
+                      ],
+                      "properties": {
+                          "cs": {
+                              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_objekt_přístupnost/properties/cs",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The Cs Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "částečně přístupný"
+                              ]
+                          },
+                          "en": {
+                              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_objekt_přístupnost/properties/en",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The En Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "partially accessible"
+                              ]
+                          }
+                      }
+                  },
+                  "tělesně_postižení_toaleta_přístupnost": {
+                      "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_toaleta_přístupnost",
+                      "type": "object",
+                      "readOnly": false,
+                      "writeOnly": false,
+                      "minProperties": 0,
+                      "title": "The Tělesně_postižení_toaleta_přístupnost Schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
+                          {
+                              "en": "accessible",
+                              "cs": "přístupná"
+                          }
+                      ],
+                      "additionalProperties": true,
+                      "required": [
+                          "cs",
+                          "en"
+                      ],
+                      "properties": {
+                          "cs": {
+                              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_toaleta_přístupnost/properties/cs",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The Cs Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "přístupná"
+                              ]
+                          },
+                          "en": {
+                              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_toaleta_přístupnost/properties/en",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The En Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "accessible"
+                              ]
+                          }
+                      }
+                  }
+              }
+          },
+          "senioři": {
+              "$id": "#/properties/senioři",
+              "type": "object",
+              "readOnly": false,
+              "writeOnly": false,
+              "minProperties": 0,
+              "title": "The Senioři Schema",
+              "description": "An explanation about the purpose of this instance.",
+              "default": {},
+              "examples": [
+                  {
+                      "senioři_objekt_přístupnost": {
+                          "cs": "částečně přístupný",
+                          "en": "partially accessible"
+                      }
+                  }
+              ],
+              "additionalProperties": true,
+              "required": [
+                  "senioři_objekt_přístupnost"
+              ],
+              "properties": {
+                  "senioři_objekt_přístupnost": {
+                      "$id": "#/properties/senioři/properties/senioři_objekt_přístupnost",
+                      "type": "object",
+                      "readOnly": false,
+                      "writeOnly": false,
+                      "minProperties": 0,
+                      "title": "The Senioři_objekt_přístupnost Schema",
+                      "description": "An explanation about the purpose of this instance.",
+                      "default": {},
+                      "examples": [
+                          {
+                              "cs": "částečně přístupný",
+                              "en": "partially accessible"
+                          }
+                      ],
+                      "additionalProperties": true,
+                      "required": [
+                          "cs",
+                          "en"
+                      ],
+                      "properties": {
+                          "cs": {
+                              "$id": "#/properties/senioři/properties/senioři_objekt_přístupnost/properties/cs",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The Cs Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "částečně přístupný"
+                              ]
+                          },
+                          "en": {
+                              "$id": "#/properties/senioři/properties/senioři_objekt_přístupnost/properties/en",
+                              "type": "string",
+                              "readOnly": false,
+                              "writeOnly": false,
+                              "minLength": 0,
+                              "title": "The En Schema",
+                              "description": "An explanation about the purpose of this instance.",
+                              "default": "",
+                              "examples": [
+                                  "partially accessible"
+                              ]
+                          }
+                      }
+                  }
+              }
           }
-        }
       }
-    },
-    "tělesně_postižení": {
-      "$id": "#/properties/tělesně_postižení",
-      "type": "object",
-      "title": "The Tělesně_postižení Schema",
-      "required": [
-        "tělesně_postižení_objekt_přístupnost",
-        "tělesně_postižení_toaleta_přístupnost"
-      ],
-      "properties": {
-        "tělesně_postižení_objekt_přístupnost": {
-          "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_objekt_přístupnost",
-          "type": "object",
-          "title": "The Tělesně_postižení_objekt_přístupnost Schema",
-          "required": [
-            "cs",
-            "en"
-          ],
-          "properties": {
-            "cs": {
-              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_objekt_přístupnost/properties/cs",
-              "type": "string",
-              "title": "The Cs Schema",
-              "default": "",
-              "examples": [
-                "částečně přístupný"
-              ],
-              "pattern": "^(.*)$"
-            },
-            "en": {
-              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_objekt_přístupnost/properties/en",
-              "type": "string",
-              "title": "The En Schema",
-              "default": "",
-              "examples": [
-                "partially accessible"
-              ],
-              "pattern": "^(.*)$"
-            }
-          }
-        },
-        "tělesně_postižení_toaleta_přístupnost": {
-          "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_toaleta_přístupnost",
-          "type": "object",
-          "title": "The Tělesně_postižení_toaleta_přístupnost Schema",
-          "required": [
-            "cs",
-            "en"
-          ],
-          "properties": {
-            "cs": {
-              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_toaleta_přístupnost/properties/cs",
-              "type": "string",
-              "title": "The Cs Schema",
-              "default": "",
-              "examples": [
-                "přístupná"
-              ],
-              "pattern": "^(.*)$"
-            },
-            "en": {
-              "$id": "#/properties/tělesně_postižení/properties/tělesně_postižení_toaleta_přístupnost/properties/en",
-              "type": "string",
-              "title": "The En Schema",
-              "default": "",
-              "examples": [
-                "accessible"
-              ],
-              "pattern": "^(.*)$"
-            }
-          }
-        }
-      }
-    },
-    "senioři": {
-      "$id": "#/properties/senioři",
-      "type": "object",
-      "title": "The Senioři Schema",
-      "required": [
-        "senioři_objekt_přístupnost"
-      ],
-      "properties": {
-        "senioři_objekt_přístupnost": {
-          "$id": "#/properties/senioři/properties/senioři_objekt_přístupnost",
-          "type": "object",
-          "title": "The Senioři_objekt_přístupnost Schema",
-          "required": [
-            "cs",
-            "en"
-          ],
-          "properties": {
-            "cs": {
-              "$id": "#/properties/senioři/properties/senioři_objekt_přístupnost/properties/cs",
-              "type": "string",
-              "title": "The Cs Schema",
-              "default": "",
-              "examples": [
-                "částečně přístupný"
-              ],
-              "pattern": "^(.*)$"
-            },
-            "en": {
-              "$id": "#/properties/senioři/properties/senioři_objekt_přístupnost/properties/en",
-              "type": "string",
-              "title": "The En Schema",
-              "default": "",
-              "examples": [
-                "partially accessible"
-              ],
-              "pattern": "^(.*)$"
-            }
-          }
-        }
-      }
-    }
   }
-}
