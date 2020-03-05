@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ofn.gov.cz/dřeviny/draft/schémata/dřeviny.json",
+  "type": "array",
+  "title": "Dřeviny",
+  "items": {
+    "$id": "#/items",
+    "type": "object",
+    "title": "Dřeviny",
+    "properties": {
+      "název": {
+        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+      },
+      "poznámka": {
+        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+      },
+      "druh_dřeviny": {
+        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+      },
+      "obrázek": {
+        "type": "array",
+        "title": "URL obrázku dřeviny",
+        "description": "URL obrázku dřeviny",
+        "items": {
+          "type": "string",
+          "format": "iri",
+          "title": "URL obrázku dřeviny",
+          "description": "URL obrázku dřeviny",
+          "examples": ["https://příklad.cz/obrázek.jpg"]
+        }
+      },
+      "typ_dřeviny": {
+        "type": "string",
+        "format": "iri",
+        "title": "URL typu dřeviny",
+        "description": "URL typu dřeviny z číselníku",
+        "examples": ["https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/listnatý-strom"],
+        "pattern": "^https:\\/\\/data\\.mvcr\\.gov\\.cz\\/zdroj\\/číselníky\\/typy-dřevin\\/položky\\/.+$"
+      },
+      "kategorie_ochrany": {
+        "type": "string",
+        "format": "iri",
+        "title": "URL typu ochrany",
+        "description": "URL typu ochrany území z číselníku",
+        "examples": ["https://data.mvcr.gov.cz/zdroj/číselníky/kategorie-územní-ochrany/položky/přírodní-památka"],
+        "pattern": "^^https:\\/\\/data\\.mvcr\\.gov\\.cz\\/zdroj\\/číselníky\\/kategorie-územní-ochrany\\/položky\\/.+$"
+      },
+      "umístění": {
+        "$ref": "https://ofn.gov.cz/umístění/draft/schémata/umístění.json"
+      },
+      "členské_dřeviny": {
+        "type": "array",
+        "items": {
+          "$ref": "https://ofn.gov.cz/dřeviny/draft/schémata/dřeviny.json"
+        }
+      }
+    }
+  }
+}
