@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Dřeviny</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "Dřeviny",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/dřeviny/draft/",
+                latestVersion: "https://ofn.gov.cz/dřeviny/",
+                editors: [{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+				  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "http://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování kontaktů.
+                Je navržena jako sdílená norma pro použití v dalších specifických otevřených formálních normách.
+                Ukazuje, jak reprezentovat informace o telefonních číslech, e-mailových adresách a odkazech na webové stránky.
+                Norma je ilustrována příklady dat ve formátech CSV JSON [[ECMA-404]].
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování dřevin.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="Přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu dřevin" src="obrázky/dřeviny.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/160EzxSul6Kt5XmADBVINKpLGY0oGT1Ao/view?usp=sharing">
+                        Diagram datového modelu dřevin
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="specifikace">
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány vlastnosti dřeviny.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-dřevina">
+                <h3>Dřevina</h3>
+                <p>
+                    Dřevina či dřevnatá oblast.
+                </p>
+
+                <section id="vlastnost-dřevina-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název dřeviny / oblasti dřevin.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Smrk u obrázku na Miroslavi</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-dřevina-poznámka">
+                    <h4>Poznámka</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>poznámka</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poznámka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poznámka k dřevině.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>cca 1 km jižně od kostela v Lipové Lázních, u lesní cesty cca 200 m nad rekreačním areálem Miroslav</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-dřevina-druh">
+                    <h4>Druh dřeviny</h4>
+
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>druh_dřeviny</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Druh dřeviny
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Druh dřeviny.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Smrk ztepilý</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-dřevina-obrázek">
+                    <h4>Obrázek</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obrázek</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obrázek
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            URL odkaz na obrázek dřeviny.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://d34-a.sdn.szn.cz/d_34/c_B_C/3fz4a.jpeg</code>
+                        </dd>
+                    </dl>
+                </section>
+              
+                <section id="vlastnost-dřevina-typ_dřeviny">
+                    <h4>Typ dřeviny</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ_dřeviny</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">IRI</a> dle regulárního výrazu <code>^https:\/\/data\.mvcr\.gov\.cz\/zdroj\/číselníky\/typy-dřevin\/položky\/.+$</code>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ dřeviny
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Typ dřeviny / dřevnaté oblasti z <a href="https://data.mvcr.gov.cz/zdroj/%C4%8D%C3%ADseln%C3%ADky/typy-d%C5%99evin">Číselníku typů dřevin</a>.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/jehličnatý-les</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-dřevina-kategorie_ochrany">
+                    <h4>Kategorie ochrany</h4>
+    
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kategorie_ochrany</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#url">IRI</a> dle regulárního výrazu <code>^https:\/\/data\.mvcr\.gov\.cz\/zdroj\/číselníky\/kategorie-územní-ochrany\/položky\/.+$</code>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kategorie ochrany
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Typ územní ochrany z <a href="https://data.mvcr.gov.cz/zdroj/%C4%8D%C3%ADseln%C3%ADky/kategorie-%C3%BAzemn%C3%AD-ochrany">Číselníku typů územní ochrany</a>.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/kategorie-územní-ochrany/položky/národní-park</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-dřevina-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/draft/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace dřeviny.
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-dřevina-dřevina">
+                    <h4>Vazba: Dřevina</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>členské_dřeviny</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-dřevina">Dřevina</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Členské dřeviny
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Členské dřeviny oblasti dřevin.
+                        </dd>
+                    </dl>
+                </section>
+            </section>
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci je uveden příklad reprezentace dřevin.
+            </p>
+
+            <p>
+                Příklady ukazují, jak lze dřeviny reprezentovat.
+                Všechny položky v této OFN jsou nepovinné, a další lze přidávat dle potřeby.
+            </p>
+
+            <section id="příklady-jednoduchá-dřevina">
+                <h3>Jednoduchá dřevina</h3>
+                <p>
+                    V prvním příkladu je ukázána jednoduchá dřevina, jedná se o jeden samostatný strom a jedno stromořadí bez členských dřevin.
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Jednoduchá dřevina v JSON">
+                    <p>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/dřeviny.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+                      [
+                        {
+                          "název": {
+                            "cs": "Smrk u obrázku na Miroslavi"
+                          },
+                          "poznámka": {
+                            "cs": "cca 1 km jižně od kostela v Lipové Lázních, u lesní cesty cca 200 m nad rekreačním areálem Miroslav"
+                          },
+                          "druh_dřeviny": {
+                            "cs": "Smrk ztepilý"
+                          },
+                          "obrázek": ["https://d34-a.sdn.szn.cz/d_34/c_img_G_K/qraBzdw.jpeg"],
+                          "typ_dřeviny": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/jehličnatý-strom",
+                          "kategorie_ochrany": "https://data.mvcr.gov.cz/zdroj/číselníky/kategorie-územní-ochrany/položky/přírodní-památka",
+                          "umístění": {
+                            "geometrie": {
+                              "type": "Point",
+                              "coordinates": [50.22054209714138, 17.128712012726094]
+                            },
+                            "adresa": {
+                              "název_kraje": "Olomoucký",
+                              "název_okresu": "Jeseník",
+                              "název_obce": "Jeseník"
+                            }
+                          }
+                        },
+                        {
+                          "název": {
+                            "cs": "Kaštany u kostela"
+                          },
+                          "poznámka": {
+                            "cs": "Před kostelem Nanebevzetí Panny Marie asi 50 m od náměstí Svobody ve Zlatých Horách"
+                          },
+                          "obrázek": ["https://d34-a.sdn.szn.cz/d_34/c_img_G_U/eo8BXFN.jpeg"],
+                          "typ_dřeviny": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/listnatý-strom",
+                          "kategorie_ochrany": "https://data.mvcr.gov.cz/zdroj/číselníky/kategorie-územní-ochrany/položky/přírodní-památka",
+                          "umístění": {
+                            "geometrie": {
+                              "type": "LineString",
+                              "coordinates": [
+                                [50.26519422535036, 17.398559716715265],
+                                [50.265107459617475, 17.398591795934845],
+                                [50.26498719685399, 17.39860601169148]
+                              ]
+                            },
+                            "adresa": {
+                              "název_kraje": "Olomoucký",
+                              "název_okresu": "Jeseník",
+                              "název_obce": "Jeseník"
+                            }
+                          }
+                        }
+                      ]
+                    </pre>
+                </aside>
+            </section>
+
+            <section id="příklady-komlexní-dřevina">
+                <h3>Komlexní dřevina</h3>
+                <p>
+                    V druhém příkladu je ukázána složitější oblast dřevin s dvěmi členskými dřevinami.
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Komplexní dřevina v JSON">
+                    <p>
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/dřeviny.json">JSON Schema</a>
+                    </p>
+                    <pre class="json">
+                      [
+                        {
+                          "název": {
+                            "cs": "Chráněná krajinná oblast Jeseníky"
+                          },
+                          "obrázek": ["https://www.kct-tabor.cz/gymta/ChranenaUzemiCR/Jeseniky/img/panorama.jpg"],
+                          "typ_dřeviny": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/skupina-stromů",
+                          "typ_ochrany": "https://data.mvcr.gov.cz/zdroj/číselníky/kategorie-územní-ochrany/položky/chráněná-krajinná-oblast",
+                          "umístění": {
+                            "geometrie": {
+                              "type": "Point",
+                              "coordinates": [50.04361, 17.21028]
+                            }
+                          },
+                          "členské_dřeviny": [
+                            {
+                              "název": {
+                                "cs": "Klen nad Českou Vsí"
+                              },
+                              "poznámka": {
+                                "cs": "Na svažité louce při rozhraní obecní zástavby a lučních porostů, cca 150 m jihovýchodně od kostela"
+                              },
+                              "typ_dřeviny": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/listnatý-strom",
+                              "umístění": {
+                                "geometrie": {
+                                  "type": "Point",
+                                  "coordinates": [50.25166931594392, 17.22599651254377]
+                                },
+                                "adresa": {
+                                  "název_kraje": "Olomoucký",
+                                  "název_okresu": "Jeseník",
+                                  "název_obce": "Jeseník"
+                                }
+                              }
+                            },
+                            {
+                              "název": {
+                                "cs": "Smrk u obrázku na Miroslavi"
+                              },
+                              "poznámka": {
+                                "cs": "cca 1 km jižně od kostela v Lipové Lázních, u lesní cesty cca 200 m nad rekreačním areálem Miroslav"
+                              },
+                              "druh_dřeviny": {
+                                "cs": "Smrk ztepilý"
+                              },
+                              "obrázek": ["https://d34-a.sdn.szn.cz/d_34/c_img_G_U/eo8BXFN.jpeg"],
+                              "typ_dřeviny": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-dřevin/položky/jehličnatý-strom",
+                              "umístění": {
+                                "geometrie": {
+                                  "type": "Point",
+                                  "coordinates": [50.22054209714138, 17.128712012726094]
+                                },
+                                "adresa": {
+                                  "název_kraje": "Olomoucký",
+                                  "název_okresu": "Jeseník",
+                                  "název_obce": "Jeseník"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]                                                                             
+                    </pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
