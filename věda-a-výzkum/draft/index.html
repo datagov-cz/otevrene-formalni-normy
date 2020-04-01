@@ -61,6 +61,22 @@
             </p>
         </section>
 
+        <section id="přehled">
+
+            <h2>Přehled</h2>
+            <p>
+                V této OFN jsou modelovány společné entity pro vědu a výzkum.
+            </p>
+
+            <figure id="model">
+                <img alt="Model člověka či osoby" src="obrázky/věda-a-výzkum.svg"/>
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1_jKfDxUI7nh_eQp_AOIY7XS_ewumnA1e">Model OFN Věda a výzkum</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+
         <section id="specifikace">
             <h2>Specifikace</h2>
 
@@ -69,14 +85,14 @@
                 Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
             </p>
 
-            <section id="třída-vědec">
-                <h3>Vědec</h3>
+            <section id="třída-výzkumník">
+                <h3>Výzkumník</h3>
                 <p>
-                    Vědec.
+                    Výzkumník.
                     Jedná se o <a href="../../lidé-a-osoby/#třída-člověk">člověka</a>, který má navíc vědecké identifikátory.
                 </p>
 
-                <section id="vlastnost-vědec-orcid">
+                <section id="vlastnost-výzkumník-orcid">
                     <h4>ORCID</h4>
                     <dl>
                         <dt>
@@ -112,7 +128,7 @@
                     </dl>
                 </section>
 
-                <section id="vlastnost-vědec-researcherid">
+                <section id="vlastnost-výzkumník-researcherid">
                     <h4>ResearcherID</h4>
                     <dl>
                         <dt>
@@ -148,7 +164,7 @@
                     </dl>
                 </section>
 
-                <section id="vlastnost-vědec-scopus-author-id">
+                <section id="vlastnost-výzkumník-scopus-author-id">
                     <h4>Scopus Author ID</h4>
                     <dl>
                         <dt>
@@ -199,15 +215,15 @@
                 Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
             </p>
 
-            <section id="příklady-vědec">
-                <h3>Vědec</h3>
+            <section id="příklady-výzkumník">
+                <h3>Výzkumník</h3>
                 
                 <p>
                     Úplný příklad reprezentace vědce.
-                    Pro formát JSON je k dispozici <a href="schémata/vědec.json">Schéma pro vědce ve formátu JSON v jazyce JSON Schema</a> [[!json-schema]].
+                    Pro formát JSON je k dispozici <a href="schémata/výzkumník.json">Schéma pro výzkumníka ve formátu JSON v jazyce JSON Schema</a> [[!json-schema]].
                 </p>
                 
-                <aside class="example" title="Vědec v JSON">
+                <aside class="example" title="Výzkumník v JSON">
                     <p>
                         <a href="příklady/1.json">Stáhnout JSON</a>
                     </p>
@@ -225,14 +241,14 @@
 }</pre>
                 </aside>
                 
-                <aside class="example" title="Vědec v XML">
+                <aside class="example" title="Výzkumník v XML">
                     <p>
                         <a href="příklady/1.xml">Stáhnout XML</a>
                     </p>
                 
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;vav:vědec xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+&lt;vav:výzkumník xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns:vav="https://ofn.gov.cz/věda-a-výzkum/" 
 xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/" 
 xsi:schemaLocation="https://ofn.gov.cz/věda-a-výzkum/ https://ofn.gov.cz/v%C4%9Bda-a-v%C3%BDzkum/draft/sch%C3%A9mata/v%C4%9Bda-a-v%C3%BDzkum.xsd"&gt;
@@ -244,11 +260,11 @@ xsi:schemaLocation="https://ofn.gov.cz/věda-a-výzkum/ https://ofn.gov.cz/v%C4%
 	&lt;vav:orcid&gt;https://orcid.org/0000-0001-7234-3051&lt;/vav:orcid&gt;
 	&lt;vav:researcherid&gt;K-1134-2014&lt;/vav:researcherid&gt;
 	&lt;vav:scopus_author_id&gt;35956632500&lt;/vav:scopus_author_id&gt;
-&lt;/vav:vědec&gt;
+&lt;/vav:výzkumník&gt;
 </pre>
                 </aside>
                 
-                <aside class="example" title="Vědec v CSV">
+                <aside class="example" title="Výzkumník v CSV">
                     <p>
                         <a href="příklady/1.csv">Stáhnout CSV</a>
                     </p>
@@ -269,86 +285,56 @@ Jakub,Klímek,RNDr.,Ph.D.,"RNDr. Jakub Klímek, Ph.D.",https://orcid.org/0000-00
                 
                     <pre class="json">
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://ofn.gov.cz/věda-a-výzkum/draft/schémata/vědec.json",
-    "name": "Vědec",
-    "description": "Vědec",
-    "required": ["jméno", "příjmení"],
-    "properties": {
-        "jméno": {
-            "type": "string",
-            "title": "Jméno",
-            "description": "Křestní jméno",
-            "examples": [
-                "Jakub"
-            ]
-        },
-        "příjmení": {
-            "type": "string",
-            "title": "Příjmení",
-            "description": "Příjmení",
-            "examples": [
-                "Klímek"
-            ]
-        },
-        "tituly_před": {
-            "type": "string",
-            "title": "Tituly před jménem",
-            "description": "Tituly před jménem",
-            "examples": [
-                "RNDr."
-            ]
-        },
-        "tituly_za": {
-            "type": "string",
-            "title": "Tituly za jménem",
-            "description": "Tituly za jménem",
-            "examples": [
-                "Ph.D."
-            ]
-        },
-        "pohlaví": {
-            "id": "#/items/properties/pohlaví",
-            "type": "string",
-            "format": "iri",
-            "title": "Pohlaví",
-            "examples": [
-                "https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské"
-            ]
-        },
-        "text": {
-            "type": "string",
-            "title": "Celé jméno",
-            "description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
-            "examples": [
-                "RNDr. Jakub Klímek, Ph.D."
-            ]
-        },
-        "orcid": {
-            "type": "string",
-			"format": "iri",
-            "title": "ORCID iD",
-            "description": "URL profilu ORCID.",
-            "examples": [
-                "https://orcid.org/0000-0001-7234-3051"
-            ]
-        },
-        "researcherid": {
-            "type": "string",
-            "title": "ResearcherID",
-            "description": "ResearcherID z portálu Publons.",
-            "examples": [
-                "K-1134-2014"
-            ]
-        },
-		"scopus_author_id": {
-            "type": "string",
-            "title": "Scopus Author ID",
-            "description": "Author ID z portálu Scopus.",
-            "examples": [
-                "35956632500"
-            ]
-        }
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "1.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "jmeno",
+                "titles": "jméno",
+                "dc:description": "Křestní jméno",
+                "datatype": "string"
+            }, {
+                "name": "prijmeni",
+                "titles": "příjmení",
+                "dc:description": "Příjmení",
+                "datatype": "string"
+            }, {
+                "name": "tituly_pred",
+                "titles": "tituly_před",
+                "dc:description": "Tituly před jménem",
+                "datatype": "string"
+            }, {
+                "name": "tituly_za",
+                "titles": "tituly_za",
+                "dc:description": "Tituly za jménem",
+                "datatype": "string"
+            }, {
+                "name": "text",
+                "titles": "text",
+                "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
+                "datatype": "string"
+            }, {
+                "name": "orcid",
+                "titles": "orcid",
+                "dc:description": "URL profilu ORCID.",
+                "datatype": "anyURI"
+            }, {
+                "name": "researcherid",
+                "titles": "researcherid",
+                "dc:description": "ResearcherID z portálu Publons.",
+                "datatype": "string"
+            }, {
+                "name": "scopus_author_id",
+                "titles": "scopus_author_id",
+                "dc:description": "Author ID z portálu Scopus.",
+                "datatype": "string"
+            }
+        ]
     }
 }</pre>
                 </aside>
