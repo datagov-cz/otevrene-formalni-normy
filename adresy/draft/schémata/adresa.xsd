@@ -1,40 +1,44 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:adresa="https://ofn.gov.cz/adresy/" xmlns:zdt="https://ofn.gov.cz/základní-datové-typy/" targetNamespace="https://ofn.gov.cz/adresy/"  elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<import namespace="https://ofn.gov.cz/základní-datové-typy/" schemaLocation="https://ofn.gov.cz/základní-datové-typy/schémata/zdt.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:adresa="https://ofn.gov.cz/adresy/"
+	xmlns:zdt="https://ofn.gov.cz/základní-datové-typy/"
+	targetNamespace="https://ofn.gov.cz/adresy/" elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	<import namespace="https://ofn.gov.cz/základní-datové-typy/"
+		schemaLocation="https://ofn.gov.cz/základní-datové-typy/schémata/zdt.xsd"/>
 	<xs:complexType name="adresa">
 		<xs:sequence minOccurs="0" maxOccurs="1">
 			<xs:element name="adresní_místo" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="okres" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="obec" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="část_obce" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="katastrální_území" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="mop" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="ulice" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="název_okresu" type="xs:string" minOccurs="0"/>
 			<xs:element name="název_obce" type="xs:string" minOccurs="0"/>
 			<xs:element name="název_části_obce" type="xs:string" minOccurs="0"/>
 			<xs:element name="název_katastrálního_území" type="xs:string" minOccurs="0"/>
 			<xs:element name="název_mop" type="xs:string" minOccurs="0"/>
 			<xs:element name="název_ulice" type="xs:string" minOccurs="0"/>
 			<xs:element name="číslo_domovní" type="xs:integer" minOccurs="0"/>
+			<xs:element name="typ_čísla_domovního" minOccurs="0">
+				<xs:simpleType>
+					<xs:list>
+						<xs:simpleType>
+							<xs:restriction base="xs:string">
+								<xs:enumeration value="č.p."/>
+								<xs:enumeration value="č.ev."/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:list>
+				</xs:simpleType>
+			</xs:element>
 			<xs:element name="číslo_orientační" type="xs:integer" minOccurs="0"/>
+			<xs:element name="znak_čísla_orientačního" type="xs:string" minOccurs="0"/>
 			<xs:element name="psč" type="xs:string" minOccurs="0"/>
-      <xs:element name="vúsc" type="xs:string" minOccurs="0"/>
+			<xs:element name="vúsc" type="xs:string" minOccurs="0"/>
+			<xs:element name="okres" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="prvek_rúian" type="xs:anyURI" minOccurs="0"/>
 			<xs:element name="název_vúsc" type="xs:string" minOccurs="0"/>
+			<xs:element name="název_okresu" type="xs:string" minOccurs="0"/>
 			<xs:element name="název_momc" type="xs:string" minOccurs="0"/>
-			<xs:element name="typ_čísla_domovního" minOccurs="0">
-				<simpleType>
-            <list>
-                <simpleType>
-                    <restriction base="xs:string">
-                        <enumeration value="č. p."/>
-                        <enumeration value="č. ev."/>
-                    </restriction>
-                </simpleType>
-            </list>
-        </simpleType>
-			</xs:element>
-			<xs:element name="znak_čísla_orientačního" type="xs:string" minOccurs="0"/>
 			<xs:element name="text" type="xs:string" minOccurs="0"/>
 			<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
