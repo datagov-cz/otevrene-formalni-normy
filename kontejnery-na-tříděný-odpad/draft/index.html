@@ -143,20 +143,20 @@
                             Příklad
                         </dt>
                         <dd>
-                            <code>https://www.sako.cz/sberna-strediska-a-kontejnery/kontejner/Brno2458/</code>
+                            <code>https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/kontejner/Brno2458/</code>
                         </dd>
                     </dl>
 
                 </section>
 
-                <section id="vlastnost-nádoba-na-odpad-typ">
-                    <h4>Typ</h4>
+                <section id="vlastnost-nádoba-na-odpad-typ-nádoby">
+                    <h4>Typ nádoby</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>typ</code>
+                            <code>typ_nádoby</code>
                         </dd>
                         <dt>
                             Typ
@@ -168,7 +168,7 @@
                             Jméno
                         </dt>
                         <dd>
-                            Typ.
+                            Typ nádoby
                         </dd>
                         <dt>
                             Popis
@@ -213,12 +213,6 @@
                         <dd>
                             Kapacita dané nádoby.
                         </dd>
-                        <dt>
-                            Příklady
-                        </dt>
-                        <dd>
-                            <code>1000 l</code>
-                        </dd>
                     </dl>
 
                 </section>
@@ -236,7 +230,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#datum">Datum</a>
+                            <a href="../../základní-datové-typy/#časový-okamžik">Časový okamžik</a>
                         </dd>
                         <dt>
                             Jméno
@@ -248,13 +242,13 @@
                             Popis
                         </dt>
                         <dd>
-                            Datum nejbližšího vývozu. 
+                            Datum a čas nejbližšího vývozu. 
                         </dd>
                         <dt>
                             Příklady
                         </dt>
                         <dd>
-                            <code>2020-05-05</code>
+                            <code>2020-09-27T09:30:00</code>
                         </dd>
                     </dl>
 
@@ -610,12 +604,6 @@
                         <dd>
                             Uvádí počet nádob na tříděný odpad v daném místě. 
                         </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>4 nádoby</code>
-                        </dd>
                     </dl>
 
                 </section>
@@ -919,14 +907,12 @@
 
                 <aside class="example" title="Kontejner na tříděný odpad v JSON">
                     <p>
-                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/kontejner-na-tříděný-odpad.json">JSON Schema</a>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/kontejner-na-tříděný-odpad.json">JSON Schema</a>, <a href="schémata/seznam-kontejnerů-na-tříděný-odpad.json">JSON Schema pro více kontejnerů</a>
                     </p>
                     <pre class="json">
 [{
-    "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/kontejner/Brno2458/",
-    "typ": [{
-        "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/typy--tříděného-odpadu/položky/plast"
-    }],
+    "iri": "https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/kontejner/Brno2458/",
+    "typ": ["https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast"],
     "kontejnerové_stání": [{
         "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/kontejnerové-stání/Brno387/",
         "umístění": {
@@ -935,7 +921,7 @@
                 "coordinates": [16.5995939, 49.1944522]
             },
             "adresa": {
-                "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+                "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
             }
         }
     }]
@@ -944,7 +930,7 @@
                 </aside>
             </section>
             <section id="příklady-komplexní-kontejner-na-tříděný-odpad">
-                <h3></h3>
+                <h3>Komplexní kontejner na tříděný odpad</h3>
                 
                 <p>
                     V komplexním příkladu jsou uvedeny položky, které je vhodné vyplnit, aby měl uživatel co nejlepší představu o místě s kontejnery. Další položky lze přidávat dle potřeby. 
@@ -956,19 +942,21 @@
 
                 <aside class="example" title="Komplexní kontejner na tříděný odpad v JSON">
                     <p>
-                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/kontejner-na-tříděný-odpad.json">JSON Schema</a>
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/kontejnery-na-tříděný-odpad.json">JSON Schema</a>
                     </p>
                     <pre class="json">
 [{
-    "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/kontejner/Brno2458/",
-    "typ": [
-    ASA-200i
+    "iri": "https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/kontejner/Brno2458/",
+    "typ_nádoby": [
+    "ASA-200i"
     ],
     "objem": {
         "hodnota": 1000,
         "jednotka": "LTR"
     },
-    "nejbližší_vývoz": "2020-05-05",
+    "nejbližší_vývoz": {
+        "datum_a_čas": "2020-09-27T09:30:00"
+    }, 
     "poznámka": {
         "cs": "Kontejner má poškozené držadlo. Dbejte zvýšené opatrnosti při nakládání.",
         "en": "The container has a damaged handle. Use caution when handling."
@@ -979,9 +967,7 @@
             "název": "SAKO Brno, a.s."
         }
     },
-    "typ": [{
-        "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast"
-    }],
+    "typ": ["https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast"],
     "četnost_vývozu": {
         "frekvence": [
             "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
@@ -1027,7 +1013,7 @@
                 "coordinates": [16.5995939, 49.1944522]
             },
             "adresa": {
-                "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+                "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
             }
         },
         "správce": {
@@ -1072,7 +1058,7 @@
         <section id="metadata">
             <h2>Předpřipravená metadata</h2>
             <p>
-                Tato sekce obsahuje odkaz na <a href="metadata/akce.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>. Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledat podobné datové sady publikované dle této otevřené formální normy.
+                Tato sekce obsahuje odkaz na <a href="metadata/kontejnery.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>. Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledat podobné datové sady publikované dle této otevřené formální normy.
             </p>
         </section>
     </body>

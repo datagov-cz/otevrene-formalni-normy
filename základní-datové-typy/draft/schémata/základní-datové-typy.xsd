@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="https://ofn.gov.cz/základní-datové-typy/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
-	<xs:complexType name="stát">
-		<xs:choice>
+	<xs:element name="rozšiřující_položky">
+		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="iri" type="xs:anyURI"/>
-			</xs:sequence>
-			<xs:sequence>
-				<xs:element name="kód" type="xs:string"/>
-				<xs:element name="název" type="xs:string" minOccurs="0"/>
-			</xs:sequence>
-		</xs:choice>
-	</xs:complexType>
+				<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>				
+		</xs:complexType>
+	</xs:element>
 	<xs:complexType name="časový_okamžik">
 		<xs:choice>
 			<xs:element name="datum" type="xs:date"/>
@@ -36,7 +32,7 @@
 	<xs:complexType name="částka">
 		<xs:sequence>
 			<xs:element name="výše" type="xs:decimal"/>
-			<xs:element name="měna" type="xs:string"/>
+			<xs:element name="měna" type="xs:anyURI"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="množství">

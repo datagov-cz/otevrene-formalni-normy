@@ -1,20 +1,16 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://ofn.gov.cz/sběrné-dvory/draft/schémata/sběrné-dvory.json",
-    "type": "array",
+    "type": "object",
     "title": "Sběrné dvory",
-    "items": {
-        "$id": "#/items",
-        "type": "object",
-        "title": "Sběrné dvory",
-        "properties": {
+    "properties": {
             "iri": {
                 "$id": "#/items/properties/iri",
                 "type": "string",
                 "format": "iri",
                 "title": "Identifikátor",
                 "examples": [
-                    "https://www.trebic.cz/sberne-dvory/na-klinkach"
+                    "https://www.trebic.cz/zdroj/sberne-dvory/na-klinkach"
                 ]
             },
             "název": {
@@ -47,35 +43,49 @@
             "otevírací_doba": {
                     "$ref": "https://ofn.gov.cz/otevírací-doba/draft/schémata/otevírací-doba.json"
             },
-            "odpad": {
-                "$id": "#/items/properties/odpad",
+            "kontejner": {
+                "$id": "#/items/properties/kontejner",
                 "type": "array",
-                "title": "Odpad",
+                "title": "Kontejner",
                 "items": {
-                    "$id": "#/items/properties/odpad/items",
+                    "$id": "#/items/properties/kontejner/items",
                     "type": "object",
-                    "title": "Odpad",
+                    "title": "Kontejner",
                     "properties": {
                         "typ_odpadu": {
                             "id": "#/items/properties/typ",
-                            "type": "string",
+                            "type": "array",
                             "format": "iri",
                             "title": "Typ odpadu",
                             "examples": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky"
                         },
-                        "minimum": {
+                        "omezení": {
                                 "$ref":"https://ofn.gov.cz/základní-datové-typy/draft/schémata/množství.json"
                         },
-                        "maximum": {
-                                "$ref":"https://ofn.gov.cz/základní-datové-typy/draft/schémata/množství.json"
-                        },
-                        "cena": {
-                          "$ref":"https://ofn.gov.cz/základní-datové-typy/draft/schémata/částka.json" 
-                        }     
+                        "poplatek": {
+                            "$id": "#/items/properties/poplatek",
+                            "type": "array",
+                            "title": "Poplatek",
+                            "items": {
+                                "$id": "#/items/properties/poplatek/items",
+                                "type": "object",
+                                "title": "Poplatek",
+                                "properties": {
+                                    "odpad": {
+                                        "id": "#/items/properties/typ",
+                                        "type": "array",
+                                        "format": "iri",
+                                        "title": "Odpad",
+                                        "examples": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky"
+                                     },
+                                    "cena": {
+                                            "$ref":"https://ofn.gov.cz/základní-datové-typy/draft/schémata/částka.json"
+                                    }   
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
-}
-        
