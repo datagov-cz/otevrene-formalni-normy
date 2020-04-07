@@ -129,7 +129,7 @@
                     <li><code>skos: http://www.w3.org/2004/02/skos/core#</code></li>
                     <li><code>xsd: http://www.w3.org/2001/XMLSchema#</code></li>
                     <li><code>vcard: http://www.w3.org/2006/vcard/ns#</code></li>
-                    <li><code>pú: https://data.gov.cz/slovník/podmínky-užití/</code></li>
+                    <li><code>pu: https://data.gov.cz/slovník/podmínky-užití/</code></li>
                 </ul>
                 
                 <p>
@@ -777,13 +777,13 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>pú:specifikace</code>
+                            <code>pu:specifikace</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            Entita typu <code>pú:Specifikace</code> s vlastnostmi <code>pú:autorské-dílo</code>, <code>pú:databáze-jako-autorské-dílo</code>, <code>pú:databáze-chráněná-zvláštními-právy</code> a <code>pú:osobní-údaje</code>.
+                            Entita typu <code>pu:Specifikace</code> s vlastnostmi <code>pu:autorské-dílo</code>, <code>pu:databáze-jako-autorské-dílo</code>, <code>pu:databáze-chráněná-zvláštními-právy</code> a <code>pu:osobní-údaje</code>.
                         </dd>
                         <dt>
                             Povinnost
@@ -795,13 +795,13 @@ kurátor: a vcard:Individual ;
                             Příklad
                         </dt>
                         <dd>
-                            <pre class="turtle">distribuce: pú:specifikace podmínky: .
+                            <pre class="turtle">distribuce: pu:specifikace podmínky: .
 
-podmínky: a pú:Specifikace ;
-          pú:autorské-dílo &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt; ;
-          pú:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
-          pú:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
-          pú:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; .</pre>
+podmínky: a pu:Specifikace ;
+          pu:autorské-dílo &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt; ;
+          pu:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
+          pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
+          pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; .</pre>
                         </dd>
                     </dl>
                                         
@@ -1343,10 +1343,10 @@ podmínky: a pú:Specifikace ;
                 <h3>Soubor katalogu</h3>
                 
                 <p>
-                    Soubor katalogu je soubor v serializaci <a href="../../propojená-data/draft/#serializace-RDF-Turtle">Turtle</a>, který obsahuje instanci třídy <code>dcat:Catalog</code> a odkazy na jednotlivé katalogizované datové sady.
+                    Soubor katalogu je soubor v RDF serializaci <a href="../../propojená-data/draft/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/draft/#serializace-JSON-LD">JSON-LD</a>, který obsahuje instanci třídy <code>dcat:Catalog</code> a odkazy na jednotlivé katalogizované datové sady.
                 </p>
                 
-                <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami">
+                <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami ve formátu RDF Turtle">
                   Pro URL <code>https://data.gov.cz/lkod/mdcr/katalog</code>
                   <pre class="turtle">
 @prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
@@ -1357,16 +1357,30 @@ podmínky: a pú:Specifikace ;
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-trate&gt; .</pre>
                 </aside>                
                 
+                <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami ve formátu JSON-LD">
+                    Pro URL <code>https://data.gov.cz/lkod/mdcr/katalog</code>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
+    "iri": "https://data.gov.cz/lkod/mdcr/katalog",
+    "typ": "Katalog",
+    "datová_sada": [
+         "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
+         "https://data.gov.cz/lkod/mdcr/datové-sady/seznam-zastavky",
+         "https://data.gov.cz/lkod/mdcr/datové-sady/seznam-trate"
+  ]
+}</aside>
+
             </section>
             
             <section id="dcat-ap-dokumenty-datová-sada">
                 <h3>Soubor datové sady</h3>
                 
                 <p>
-                    Na URL specifikovaných v souboru katalogu pak NKOD očekává soubory v serializaci <a href="../../propojená-data/draft/#serializace-RDF-Turtle">Turtle</a> obsahující kompletní metadatový záznam datové sady, včetně distribucí.
+                    Na URL specifikovaných v souboru katalogu pak NKOD očekává soubory v RDF serializaci <a href="../../propojená-data/draft/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/draft/#serializace-JSON-LD">JSON-LD</a> obsahující kompletní metadatový záznam datové sady, včetně distribucí.
                 </p>
                 
-                <aside class="example" title="Vzorový soubor s metadaty datové sady">
+                <aside class="example" title="Vzorový soubor s metadaty datové sady v RDF Turtle">
                   Pro URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>
                   <pre class="turtle">
 @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
@@ -1383,7 +1397,6 @@ podmínky: a pú:Specifikace ;
 &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld&gt; a dcat:Dataset ;
     dct:title "Jízdní řády veřejné linkové dopravy"@cs ;
     dct:description "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu."@cs ;
-    dct:publisher &lt;https://data.gov.cz/zdroj/ovm/MDopravy&gt; ;
     dct:accrualPeriodicity freq:WEEKLY_3 ;
     dct:spatial &lt;http://publications.europa.eu/resource/authority/country/CZE&gt;, &lt;https://linked.cuzk.cz/resource/ruian/stat/1&gt; ;
     dcat:contactPoint &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/kontaktní-bod&gt; ;
@@ -1403,14 +1416,63 @@ podmínky: a pú:Specifikace ;
                     pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
                     pu:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
                     pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; ] ;
-    dcat:accessURL &lt;ftp://ftp.cisjr.cz/JDF/JDF.zip&gt; ;
     dcat:downloadURL &lt;ftp://ftp.cisjr.cz/JDF/JDF.zip&gt; ;
     dcat:mediaType application:zip .
 
 &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/kontaktní-bod&gt; a vcard2006:Organization ;
     vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs ;
     vcard2006:hasEmail "sekretariat.190@mdcr.cz" .</pre>
-                </aside>                
+                </aside>
+
+                <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
+                    Pro URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
+    "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
+    "typ": "Datová sada",
+    "název": {
+        "cs": "Jízdní řády veřejné linkové dopravy"
+    },
+    "popis": {
+        "cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu."
+    },
+    "téma": "theme:TRAN",
+    "periodicita_aktualizace": "frequency:WEEKLY_3",
+    "klíčové_slovo": {
+        "cs": [
+          "jízdní řády",
+          "autobusy",
+          "veřejná linková doprava",
+          "CIS JŘ"
+        ]
+    },
+    "prostorové_pokrytí": [
+        "country:CZE",
+        "https://linked.cuzk.cz/resource/ruian/stat/1"
+    ],
+    "kontaktní_bod": {
+        "typ": "Organizace",
+        "jméno": "Ministerstvo dopravy, Odbor veřejné dopravy",
+        "e-mail": "sekretariat.190@mdcr.cz"
+    },
+    "dokumentace": "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy",
+    "euroVoc": "euroVoc:4512",
+    "distribuce": {
+        "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv",
+        "typ": "Distribuce",
+        "podmínky_užití": {
+            "typ": "Specifikace podmínek užití",
+            "autorské_dílo": "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+            "databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+            "databáze_jako_autorské_dílo": "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+            "osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
+        },
+        "soubor_ke_stažení": "ftp://ftp.cisjr.cz/JDF/JDF.zip",
+        "formát": "format:ZIP",
+        "mediaType": "http://www.iana.org/assignments/media-types/application/zip"
+      }
+  }</aside>
 
             </section>
 
