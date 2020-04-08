@@ -84,13 +84,14 @@
             <ol>
                 <li>Přechod ze standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/12">DCAT-AP 1.2</a> na <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a></li>
                 <li>Podpora pro textové položky katalogizačních záznamů jak v češtině, tak v angličtině</li>
-                <li>Podpora pro registraci <a href="#položky-datová-služba">datových služeb</a>, které typicky představují způsob přístupu k datové sadě pomocí API</li>
+                <li>Podpora pro registraci <a href="#třída-datová-služba">datových služeb</a>, které typicky představují způsob přístupu k datové sadě pomocí API</li>
                 <li>Podpora pro specifikaci <a href="#položky-datová-sada-časové-rozlišení">časového rozlišení</a> datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-datová-sada-prostorové-rozlišení-v-metrech">prostorového rozlišení</a> datové sady v metrech</li>
                 <li>Podpora pro specifikaci více <a href="#položky-datová-sada-téma">témat</a> datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-distribuce-kompresní-formát">media typu kompresního formátu</a> distribuce datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-distribuce-balíčkovací-formát">media typu balíčkovacího formátu</a> distribuce datové sady</li>
                 <li>Změna predikátů pro <a href="#položky-datová-sada-časové-pokrytí">časové pokrytí</a> ze <code>schema:startDate</code> a <code>schema:endDate</code> na <code>dcat:startDate</code> a <code>dcat:endDate</code></li>
+                <li>Podpora formátu JSON-LD v rozhraní <a href="#dcat-ap-dokumenty">DCAT-AP Dokumenty</a></li>
             </ol>
 
         </section>
@@ -138,6 +139,7 @@
                 
                 <ul>
                     <li><code>sada: https://data.gov.cz/zdroj/datová-sada/1</code></li>
+                    <li><code>katalog: https://data.gov.cz/zdroj/katalog/1</code></li>
                     <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
                     <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
                     <li><code>čas: https://data.gov.cz/zdroj/datová-sada/1/časové-pokrytí</code></li>
@@ -146,7 +148,202 @@
                 </ul>
             </section>
 
-            <section id="položky-datová-sada">
+            <section id="třída-katalog">
+                <h3>Třída: Katalog</h3>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Katalog
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Konceptuální entita reprezentující datový katalog.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>katalog: a dcat:Catalog .</code>
+                    </dd>
+                </dl>
+                                
+                <section id="položky-katalog-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název datového katalogu.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>, <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#Text">Text</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dct:title "Katalog otevřených dat Ministerstva dopravy"@cs, "Open Data Catalog of the Ministry of Transport"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+            
+                <section id="položky-katalog-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje volný text s popisem datového katalogu.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>, <code>dct:description</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#Text">Text</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dct:description "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy."@cs, "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+            
+                <section id="položky-katalog-poskytovatel">
+                    <h4>Poskytovatel</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poskytovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytovatel datového katalogu.
+                            Jedná se o Orgán veřejné moci (OVM).
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>poskytovatel</code>, <code>dct:publisher</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#url">IRI</a> <a href="../../registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/#organ-verejne-moci">OVM z Registru práv a povinností (RPP)</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-katalog-datová-sada">
+                    <h4>Vazba: Datová sada</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datová sada
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na datové sady v katalogu.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>datová_sada</code>, <code>dcat:dataset</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita typu <a href="#třída-datová-sada">datová sada</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dcat:dataset sada: .</code>
+                        </dd>
+                    </dl>
+                </section>
+            
+            </section>
+
+            <section id="třída-datová-sada">
                 <h3>Třída: Datová sada</h3>
                 
                 <dl>
@@ -171,13 +368,13 @@
                 </dl>
                                 
                 <section id="položky-datová-sada-název">
-                    <h4>Název datové sady</h4>
+                    <h4>Název</h4>
                     <dl>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Název datové sady
+                            Název
                         </dd>
                         <dt>
                             Popis
@@ -189,7 +386,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:title</code>
+                            <code>název</code>, <code>dct:title</code>
                         </dd>
                         <dt>
                             Typ
@@ -213,13 +410,13 @@
                 </section>
 
                 <section id="položky-datová-sada-popis">
-                    <h4>Popis datové sady</h4>
+                    <h4>Popis</h4>
                     <dl>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Popis datové sady
+                            Popis
                         </dd>
                         <dt>
                             Popis
@@ -231,7 +428,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:description</code>
+                            <code>popis</code>, <code>dct:description</code>
                         </dd>
                         <dt>
                             Typ
@@ -254,6 +451,49 @@
                     </dl>
                 </section>
 
+                <section id="položky-datová-sada-poskytovatel">
+                    <h4>Poskytovatel</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poskytovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytovatel datové sady.
+                            Jedná se o Orgán veřejné moci (OVM).
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>poskytovatel</code>, <code>dct:publisher</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#url">IRI</a> <a href="../../registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/#organ-verejne-moci">OVM z Registru práv a povinností (RPP)</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:publisher <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008> .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="položky-datová-sada-téma">
                     <h4>Téma datové sady</h4>
                     <dl>
@@ -274,7 +514,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:theme</code>
+                            <code>téma</code>, <code>dcat:theme</code>
                         </dd>
                         <dt>
                             Typ
@@ -317,7 +557,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:accrualPeriodicity</code>
+                            <code>periodicita_aktualizace</code>, <code>dct:accrualPeriodicity</code>
                         </dd>
                         <dt>
                             Typ
@@ -359,7 +599,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:keyword</code>
+                            <code>klíčové_slovo</code>, <code>dcat:keyword</code>
                         </dd>
                         <dt>
                             Typ
@@ -401,7 +641,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:spatial</code>
+                            <code>prvek_rúian</code>, <code>dct:spatial</code>
                         </dd>
                         <dt>
                             Typ
@@ -443,7 +683,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:temporal</code>
+                            <code>časové_pokrytí</code>, <code>dct:temporal</code>
                         </dd>
                         <dt>
                             Typ
@@ -488,7 +728,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:contactPoint</code>
+                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
                         </dd>
                         <dt>
                             Typ
@@ -534,7 +774,7 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>foaf:page</code>
+                            <code>dokumentace</code>, <code>foaf:page</code>
                         </dd>
                         <dt>
                             Typ
@@ -577,7 +817,7 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:theme</code>
+                            <code>koncept_euroVoc</code>, <code>dcat:theme</code>
                         </dd>
                         <dt>
                             Typ
@@ -620,7 +860,7 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:spatialResolutionInMeters</code>
+                            <code>prostorové_rozlišení_v_metrech</code>, <code>dcat:spatialResolutionInMeters</code>
                         </dd>
                         <dt>
                             Typ
@@ -663,7 +903,7 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:temporalResolution</code>
+                            <code>časové_rozlišení</code>, <code>dcat:temporalResolution</code>
                         </dd>
                         <dt>
                             Typ
@@ -705,13 +945,13 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:distribution</code>
+                            <code>distribuce</code>, <code>dcat:distribution</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            Entita typu <a href="#položky-distribuce">distribuce datové sady</a>.
+                            Entita typu <a href="#třída-distribuce">distribuce datové sady</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -730,7 +970,7 @@ kurátor: a vcard:Individual ;
 
             </section>
 
-            <section id="položky-distribuce">
+            <section id="třída-distribuce">
                 <h3>Třída: Distribuce datové sady</h3>
                 
                 <dl>
@@ -777,7 +1017,7 @@ kurátor: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>pu:specifikace</code>
+                            <code>podmínky_užití</code>, <code>pu:specifikace</code>
                         </dd>
                         <dt>
                             Typ
@@ -826,7 +1066,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:downloadURL</code>
+                            <code>soubor_ke_stažení</code>, <code>dcat:downloadURL</code>
                         </dd>
                         <dt>
                             Typ
@@ -868,7 +1108,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:format</code>
+                            <code>formát</code>, <code>dct:format</code>
                         </dd>
                         <dt>
                             Typ
@@ -910,7 +1150,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:mediaType</code>
+                            <code>mediaType</code>, <code>dcat:mediaType</code>
                         </dd>
                         <dt>
                             Typ
@@ -952,7 +1192,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:conformsTo</code>
+                            <code>schéma</code>, <code>dct:conformsTo</code>
                         </dd>
                         <dt>
                             Typ
@@ -995,7 +1235,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:compressFormat</code>
+                            <code>mediaType_komprese</code>, <code>dcat:compressFormat</code>
                         </dd>
                         <dt>
                             Typ
@@ -1038,7 +1278,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:packageFormat</code>
+                            <code>mediaType_balíčku</code>, <code>dcat:packageFormat</code>
                         </dd>
                         <dt>
                             Typ
@@ -1080,7 +1320,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:title</code>
+                            <code>název</code>, <code>dct:title</code>
                         </dd>
                         <dt>
                             Typ
@@ -1122,13 +1362,13 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:accessService</code>
+                            <code>přístupová_služba</code>, <code>dcat:accessService</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            Entita typu <a href="#položky-datová-služba">datová služba</a>.
+                            Entita typu <a href="#třída-datová-služba">datová služba</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -1147,7 +1387,7 @@ podmínky: a pu:Specifikace ;
 
             </section>          
             
-            <section id="položky-datová-služba">
+            <section id="třída-datová-služba">
                 <h3>Třída: Datová služba</h3>
                 
                 <dl>
@@ -1190,7 +1430,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dct:title</code>
+                            <code>název</code>, <code>dct:title</code>
                         </dd>
                         <dt>
                             Typ
@@ -1232,7 +1472,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:endpointURL</code>
+                            <code>endpoint</code>, <code>dcat:endpointURL</code>
                         </dd>
                         <dt>
                             Typ
@@ -1274,7 +1514,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dcat:endpointDescription</code>
+                            <code>popis_endpointu</code>, <code>dcat:endpointDescription</code>
                         </dd>
                         <dt>
                             Typ
@@ -1354,7 +1594,14 @@ podmínky: a pu:Specifikace ;
                     <pre class="turtle">
 @prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
 
+@prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix dct:     &lt;http://purl.org/dc/terms/&gt; .
+
 &lt;https://data.gov.cz/lkod/mdcr/katalog&gt; a dcat:Catalog ;
+    dct:title "Katalog otevřených dat Ministerstva dopravy"@cs, "Open Data Catalog of the Ministry of Transport"@en ;
+    dct:description "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy."@cs;
+    dct:description "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."@en ;
+    dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; ;
     dcat:dataset  &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-zastavky&gt; ,
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld&gt; ,
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-trate&gt; .</pre>
@@ -1370,6 +1617,15 @@ podmínky: a pu:Specifikace ;
     "@context": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
     "iri": "https://data.gov.cz/lkod/mdcr/katalog",
     "typ": "Katalog",
+    "název": {
+        "cs": "Katalog otevřených dat Ministerstva dopravy",
+        "en": "Open Data Catalog of the Ministry of Transport"
+    },
+    "popis": {
+        "cs": "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy.",
+        "en": "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."
+    },
+    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
     "datová_sada": [
          "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
          "https://data.gov.cz/lkod/mdcr/datové-sady/seznam-zastavky",
@@ -1412,6 +1668,7 @@ podmínky: a pu:Specifikace ;
     dct:title "Jízdní řády veřejné linkové dopravy"@cs, "Public transport timetables"@en;
     dct:description "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu."@cs ;
     dct:description "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."@en ;
+    dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; ;
     dcat:theme theme:TRAN ;
     dct:accrualPeriodicity freq:WEEKLY_3 ;
     dcat:keyword "autobusy"@cs, "jízdní řády"@cs, "veřejná linková doprava"@cs, "timetable"@en, "bus"@en, "public transport"@en ;
@@ -1482,6 +1739,7 @@ podmínky: a pu:Specifikace ;
         "cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu.",
         "en": "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."
     },
+    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
     "téma": [
         "theme:TRAN"
     ],
@@ -1582,7 +1840,6 @@ podmínky: a pu:Specifikace ;
                 CKAN API je rozhraní nejrozšířenější implementace datového katalogu, <a href="https://ckan.org/">CKAN</a>.
                 Je založené na formátu JSON [[!ECMA-404]], a obsahuje dvě hlavní funkce, <code>package_list</code> a <code>package_show</code>.
                 Toto rozhraní je implemetováno samotným katalogem <a href="https://ckan.org/">CKAN</a> a také katalogem <a href="https://getdkan.org/">DKAN</a>.
-                Pro instituce, které nemohou nebo nechtějí provozovat celé katalogizační řešení postačí, když budou CKAN API simulovat pomocí statických JSON souborů umístěných na odpovídající URL [[!URL]].
             </p>
             
             <p class="warning">
