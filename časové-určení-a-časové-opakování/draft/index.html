@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Časové určení a Časové opakování</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "časové_určení",
+                showPreviousVersion: true,
+                prevVersion: "https://opendata.gov.cz/datova-sada:časové_určení_a_časové_opakování",
+                thisVersion: "https://ofn.gov.cz/časové_určení_a_časové_opakování/draft/",
+                latestVersion: "https://ofn.gov.cz/časové_určení_a_časové_opakování/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  url: "mailto:dvorka.martini92@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  url: "mailto:spal.robert@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  url: "mailto:marek.jiri.openaccess@gmail.com",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  url: "https://jakub.klímek.com/#me",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování časového určení a časového opakování.
+            </p>
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování čosvého určení a časového časové_určení_a_časové_opakování.
+                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+
+            <figure id="diagram"><img alt="Diagram datového modelu časového určení a časového opakování" src="obrázky/časové-určení-a-časové-opakování.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1W4xa_I-3eDSlt4CIq74aviIbLmUlpIuE/view?usp=sharing">
+						Diagram datového modelu časového určení a časového opakování
+					</a>.
+					Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>            
+            
+            <figure id="diagram"><img alt="Diagram datového modelu časového určení" src="obrázky/časové-určení.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1VRcKKT6PniXxhryJ1_m6Szqc9FOfRujj/view?usp=sharing">
+						Diagram datového modelu z pohledu časového určení
+					</a>.
+					Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu časového opakování" src="obrázky/časové-opakování.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1S6b1yhVKb4PAgwUkg5AHEe66Gpb2QeUh/view?usp=sharing">
+						Diagram datového modelu z pohledu časového opakování
+					</a>.
+					Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis časového určení a časového opakování.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-časové-určení">
+                <h3>Časové určení</h3>
+                <p>
+                    Tato třída reprezentuje časové určení. Časové určení specifikuje množinu časových úseků pomocí různých způsobů. Výsledná množina časových úseků je průnikem specifikací.
+                </p>
+
+                <section id="vazba-časové-určení-interval">
+                    <h4>Vazba: Interval</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>interval</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/draft/#časový-interval">Časový interval</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Interval
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časový interval určuje začátek a konec daného časového určení. Pokud není u časového určení specifikován konec intervalu a pouze jeho další atributy, rozumíme tím, že dle specifikace vycházející z daných atributů je časové určení validní až do odvolání.
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vazba-časové-určení-výjimka">
+                    <h4>Vazba: Výjimka</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>výjimka</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../časové-určení-a-časové-opakování/draft/#třída-časové-určení">Časové určení</a> 
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Výjimka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Výjimka určuje, kdy daná časové určení v rámci svého časového intervalu neplatí. To znamená, že se od množiny časových úseků odečítá to, co je specifikováno výjimkou. Pokud výjimka nemá určen konec, výjimka je validní do odvolání. Pokud je výjimka definována bez přesně specifikace časového intervalu na den a čas, je validní ve stejném intervalu jako časové určení.
+                        </dd>
+                    </dl>
+
+                </section>                
+
+                <section id="vazba-časové-určení-specifické-časové-určení">
+                    <h4>Vazba: Specifické časové určení</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>specifické_časové_určení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                             <a href="#třída-specifické-časové určení">Specifické časové určení</a> 
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Specifické časové určení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Specifické časové určení určuje specifické situace časového určení jako jsou "v případě dobré/špatné počasí" apod. v rámci daného časového určení. Pokud časové určení je specifikováno pouze tímto specifickým časovým určením, má se za to, že toto časové určení je validní až do odlování při splnění specifických podmínek časového určení.
+                        </dd>
+                    </dl>
+
+                </section> 
+
+                <section id="třída-specifické-časové určení">
+                    <h4>Specifické časové určení</h4>
+                    <p>
+                        Tato třída reprezentuje specifické časové určení.
+                    </p>
+
+                    <section id="vlastnost-specifické-časové-určení-dobré-počasí">
+                    <h5>Dobré počasí</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dobré_počasí</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#boolean">Boolean</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Dobré počasí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Dobré počasí označuje specifickou formu časového určení, které je validní v případě dobrého počasí.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>True</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                    <section id="vlastnost-specifické-časové-určení-špatné-počasí">
+                    <h5>Špatné počasí</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>špatné_počasí</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#boolean">Boolean</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Špatné počasí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Špatné počasí označuje specifickou formu časového určení, které je validní v případě špatného počasí.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>True</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>
+            
+            <section id="vazba-časové-určení-časové-opakování">
+                <h4>Vazba: Časové opakování</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>časové_opakovaní</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                             <a href="#třída-časové-opakování">Časové opakování</a> 
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časové opakování
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časové opakování určuje, kdy se v daném časovém intervalu opakuje časové určení nebo výjimka v rámci daného časového určení. Pokud časové určení nemá konec časového intervalu a pouze jiné atributy, tak dojde ke kombinaci uvedeného atributu časového určení případně výjimky.
+                        </dd>
+                    </dl>
+
+                </section>    
+            
+        </section>   
+
+            <section id="třída-časové-opakování">
+                <h3>Časové opakování</h3>
+                <p>
+                    Tato třída reprezentuje časové opakování. Pokud není použita sohromady s časovým určením, tak se má za to, že časové opakování trvá až do odvolání.
+                </p>
+                
+                <section id="vazba-časové-opakování-frekvence">
+                    <h4>Vazba: Frekvence</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>frekvence</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/frequency/?target=Browse&uri=http://publications.europa.eu/resource/authority/frequency">Frekvence</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Frekvence
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Frekvence určuje v jaké frekvenci je časové určení validní. To znamená, že pokud se jedná o časové určení v intervalu od 1.1.2020 do 31.12.2020 s frekvencí čtrnáctidenní, časové určení je validní každých čtrnáct dní v roce 2020. Hodnoty této vlastnosti jsou částí hodnoty vlastnosti <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/frequency/?target=Browse&uri=http://publications.europa.eu/resource/authority/frequency">Frequency</a> publikované jako <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/frequency/?target=Browse&uri=http://publications.europa.eu/resource/authority/frequency">číselník EU Vocabularies.</a> V příkladu je uvedena prezentace pro frekvenci čtrnáctidenní. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>http://publications.europa.eu/resource/authority/frequency/BIWEEKLY</code>
+                        </dd>                        
+                    
+                    </dl>
+
+                </section>                    
+                
+                <section id="vazba-časové-opakování-den">
+                    <h4>Vazba: Den</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>den</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2F650aaf45d4c8cec5d288f7f78bd8bc2d">Dny v týdnu</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Den
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu">Číselníku pro dny v týdnu</a> publikovaného jako <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2F650aaf45d4c8cec5d288f7f78bd8bc2d">číselník v Národním katalogu otevřených dat.</a> Dny v týdnu nabývájí hodnot od pondělí do neděle. V příkladu je uvedena prezentace pondělí. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí</code>
+                        </dd>                        
+                    </dl>
+                
+                </section>    
+
+                <section id="vazba-časové-opakování-časová-doba">
+                    <h4>Vazba: Časová doba</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>časová_doba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/timeperiod/?target=Browse&uri=http://publications.europa.eu/resource/authority/timeperiod">Časová doba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časová doba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časová doba určuje, v jaké době je časové určení validní. To znamená, že pokud se jedná o časové určení v intervalu od 1.1.2020 do 31.12.2021 s časovou dobou říjen, časová platnost je validní každý říjen. V tomto případě tedy dvakrát. Hodnoty této vlastnosti jsou částí hodnoty vlastnosti <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/timeperiod/?target=Browse&uri=http://publications.europa.eu/resource/authority/timeperiod">Time period</a> publikované jako <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/timeperiod/?target=Browse&uri=http://publications.europa.eu/resource/authority/timeperiod">číselník EU Vocabularies.</a> V příkladu je uvedena prezentace pro časovou dobu říjen. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT</code>
+                        </dd>                        
+                    </dl>
+
+                </section>                     
+
+                <section id="vazba-časové-opakování-specifická-frekvence">
+                    <h4>Vazba: Specifická frekvence</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>specifická_frekvence</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                             <a href="#třída-specifická-frekvence">Specifická frekvence</a> 
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Specifická frekvence
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Specifická frekvence určuje, v jaké frekvenci je časové určení validní. To znamená, že pokud se jedná o časové určení např. v intervalu od 1.1.2020 do 31.12.2020 se specifickou frekvencí hodina, časové určení je validní každou hodinu v daném časovém intervalu.
+                        </dd>
+                    </dl>
+
+                </section>                
+
+            <section id="třída-specifická-frekvence">
+                <h4>Specifická frekvence</h4>
+                <p>
+                    Tato třída reprezentuje specifickou frekvenci.
+                </p>
+                
+                <section id="vlastnost-specifická-frekvence-minuta">
+                    <h5>Minuta</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>minuta</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Minuta
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Minuta vyjadřuje číselné vyjádření každé minuty v hodině, kdy je dané časové určení v rámci časového intervalu časového určení validní.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>20</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-specifická-frekvence-hodina">
+                    <h5>Hodina</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>hodina</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hodina
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodina vyjadřuje číselné vyjádření každé hodiny ve dni, kdy je dané časové určení v rámci časového intervalu časového určení validní.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>20</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-specifická-frekvence-den-v-měsíci">
+                    <h5>Den v měsíci</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>den_v_měsíci</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Den v měsíci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Den v měsíci vyjadřuje číselné vyjádření konkrétního dne v měsíci, kdy je dané časové určení v rámci časového intervalu časového určení validní. Pokud daný den v měsíci není (krátký měsíc), tak v daný měsíc časové určení validní není. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>20</code>
+                        </dd>
+                    </dl>
+
+                </section>    
+
+                <section id="vlastnost-specifická-frekvence-týden-v-měsíci">
+                    <h5>Týden v měsíci</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>týden_v_měsíci</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Týden v měsíci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Týden v měsíci vyjadřuje číselné vyjádření konkrétního týdne v měsíci, kdy je daná časové určení v rámci časového intervalu časového určení validní. Pokud daný týden v měsíci není (krátký měsíc), tak v daný měsíc časové určení validní není.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-specifická-frekvence-týden-v-roku">
+                    <h5>Týden v roku</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>týden_v_roku</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Týden v roku
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Týden v roku vyjadřuje číselné vyjádření konkrétního týdne v roku, kdy je dané časové určení  v rámci časového intervalu časového určení validní. Pokud daný týden v roce není (krátký rok), tak v daný rok časové určení validní není. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>20</code>
+                        </dd>
+                    </dl>
+
+                </section>    
+                
+                <section id="vlastnost-specifická-frekvence-rok-v-desetiletí">
+                    <h5>Rok v desetiletí</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>rok_v_desetiletí</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Rok v desetiletí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Rok vyjadřuje číselné vyjádření každého roku v desetiletí, kdy je daná časové určení v rámci časového intervalu časového určení validní. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>2</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-specifická-frekvence-rok-ve-století">
+                    <h5>Rok ve století</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>rok_ve_století</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#celé-číslo">Číslo</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Rok ve století
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Rok ve století vyjadřuje číselné vyjádření konkrétního roku ve století, kdy je dané časové určení v rámci časového intervalu časového určení validní. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>20</code>
+                        </dd>
+                    </dl>
+
+                </section>
+            
+            </section>
+               
+            <section id="vazba-časové-opakování-časové-určení">
+                <h4>Vazba: Časové určení</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>časové_určení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                             <a href="#třída-časové-určení">Časové určení</a> 
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časové určení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časové určení určuje, v jaké časovém rozmezí je časové opakování validní. To znamená, že pokud se jedná o časové opakování s časovým určením např. v intervalu od 1.1.2020 do 31.12.2020, časové opakování je validní každou hodinu v daném časovém intervalu.
+                        </dd>
+                    </dl>
+
+                </section>  
+    </section>
+    
+    <section id="třída-časové-určení-a-časové-opakování">
+        <h3>Časové určení a Časové opakování</h3>
+        <p>
+            Tato třída reprezentuje použití časového určení a časového opakování společně. Výsledná množina časových určení a opakování je průnikem specifikací časového určení a časového opakování.
+        </p>
+    </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace časového určení.
+            </p>
+
+            <section id="příklady-časové-určení-a-časové-opakování-první-příklad">
+                <h3>Jednoduché časové určení</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s minimálními položkami k publikaci. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+
+                <aside class="example" title="Jednoduché časové určení">
+                    <p>
+                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+	    "začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
+    }	
+}]
+</pre>
+</aside>
+</section>                
+            <section id="příklady-časové-určení-a-časové-opakování-druhý-příklad">
+                <h3>Jednoduché časové určení s výjimkou</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s výjimkou. Příklad určuje, že časové určení je validní od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2020 s výjimkou intervalu od 9:30:00 dne 21.9.2020 do 10:30:00 dne 21.9.2020. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časové určení s výjimkou">
+                    <p>
+                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+        },
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
+    },
+    "výjimka": {
+        "interval": {    
+	        "začátek": {
+       	        "datum_a_čas": "2020-09-21T09:30:00"
+    	    },
+            "konec": {
+       	        "datum_a_čas": "2020-01-21T10:30:00"
+            }
+        }
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časové-určení-a-časové-opakování-třetí-příklad">
+                <h3>Jednoduché časové určení se specifickým časovým určením</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení se specifickým časovým určením. Příklad určuje, že časové určení je validní od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2020 pouze v případě dobrého počasí. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časové určení se specifickým časovým určením">
+                    <p>
+                        <a href="příklady/3.json">Stáhnout JSON</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+        },
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
+    },
+    "specifické_časové_určení": {
+        "dobré počasí": true
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časové-určení-a-časové-opakování-čtvrtý-příklad">
+                <h3>Jednoduché časové určení s opakováním</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s opakováním. Příklad určuje, že časové určení je validní každý druhý týden od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2020. Tzn. platí 1. týden v roce, poté 3. týden v roce apod. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časové určení s opakováním">
+                    <p>
+                        <a href="příklady/4.json">Stáhnout JSON</a>, <a href="schémata/časové-určení-a-časové-opakování.json">JSON Schema časového určení a časového opakování</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>, <a href="schémata/časové-opakování.json">JSON Schema časového opakování</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2020-12-31T23:59:59"
+    	}
+    },
+    "opakování": {
+	    "frekvence": [    
+            "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+        ]
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časové-určení-a-časové-opakování-pátý-příklad">
+                <h3>Časové určení s opakováním s více atributy</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s opakováním s více atributy. Příklad určuje, že časové určení je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2021. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 apod. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časové určení s opakováním s více atributy">
+                    <p>
+                        <a href="příklady/5.json">Stáhnout JSON</a>, <a href="schémata/časové-určení-a-časové-opakování.json">JSON Schema časového určení a časového opakování</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>, <a href="schémata/časové-opakování.json">JSON Schema časového opakování</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2021-12-31T23:59:59"
+    	}
+    },
+    "opakování": {
+	    "frekvence": [    
+            "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+        ],
+	    "dny_v_týdnu": [
+	        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+        ],
+	    "časová_doba": [
+	        "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/"
+        ]
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časové-určení-a-časové-opakování-šestý-příklad">
+                <h3>Časové určení s výjimkou a opakováním s více atributy</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s výjimkou a opakováním s více atributy. Příklad určuje, že časové určení je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do 23:59:59 dne 31.12.2021 s výjimkou intervalu od 9:30:00 dne 1.10.2021 do 10:30:00 dne 10.10.2021. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 apod. a neplatí 1. pondělí v říjnu 2021, protože v této době je validní výjimka. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časové určení s výjimkou a opakováním s více atributy">
+                    <p>
+                        <a href="příklady/6.json">Stáhnout JSON</a>, <a href="schémata/časové-určení-a-časové-opakování.json">JSON Schema časového určení a časového opakování</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časového opakování</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+    	},
+    	"konec": {
+       	    "datum_a_čas": "2022-12-31T23:59:59"
+    	}
+    },
+    "výjimka": {
+	    "interval": {    
+		    "začátek": {
+       	        "datum_a_čas": "2021-10-01T09:30:00"
+            },
+    		"konec": {
+       	    	"datum_a_čas": "2021-10-10T10:30:00"
+            }
+        }
+    },
+    "opakování": {
+	    "frekvence": [    
+            "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+        ],
+	    "den": [
+            "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+        ],
+	    "časová_doba": [
+            "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/"
+        ]
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časové-určení-a-časové-opakování-sedmý-příklad">
+                <h3>Časové určení s výjimkou a opakováním s více atributy validní do odvolání</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s výjimkou a opakováním s více atributy. Příklad určuje, že časové určení je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do odvolání s výjimkou intervalu od 9:30:00 dne 1.10.2021 do 10:30:00 dne 10.10.2021. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 a tak obdobně do odvolání. Naopak neplatí 1. pondělí v říjnu 2021, protože v této době je validní výjimka. 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časové určení s výjimkou a opakováním s více atributy validní do odvolání">
+                    <p>
+                        <a href="příklady/7.json">Stáhnout JSON</a>, <a href="schémata/časové-určení-a-časové-opakování.json">JSON Schema časového určení a časového opakování</a>, <a href="schémata/časové-určení.json">JSON Schema časového určení</a>, <a href="schémata/časové-opakování.json">JSON Schema časového opakování</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+	    "začátek": {
+       	    "datum_a_čas": "2021-10-01T09:30:00"
+        },
+    	"konec": {
+            "nespecifikovaný": true
+        }
+    },
+    "výjimka": {
+	    "interval": {    
+		    "začátek": {
+       	        "datum_a_čas": "2021-10-01T09:30:00"
+            },
+    		"konec": {
+                "datum_a_čas": "2021-10-10T10:30:00"
+            }
+        }
+    },
+    "opakování": {
+	    "frekvence": [    
+            "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+        ],
+	    "den": [
+            "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+        ],
+	    "časová_doba": [
+	        "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/"
+        ]
+    }
+}]
+</pre>
+</aside>
+</section>
+            <section id="příklady-časové-určení-a-časové-opakování-osmý-příklad">
+                <h3>Časové určení s opakovanou výjimkou a opakováním s více atributy validní do odvolání</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat časové určení s opakovanou výjimkou a opakováním s více atributy. Příklad určuje, že časové určení je validní každé druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do odvolání s výjimkou každého prvního roku v desetiletí od 9:30:00 dne 1.10. daného roku do 10:30:00 dne 10.10. daného roku. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 a tak obdobně do odvolání. Naopak neplatí 1. pondělí v říjnu 2021, 2031 apod., protože v této době je validní výjimka (ta je v tomto případě validní stejně jako časové určení). 
+                </p>
+                
+                <p class="warning">
+                   Příklad a schéma jsou stále ve vývoji.
+                </p>
+                
+                
+               <aside class="example" title="Časová platnost s opakovanou výjimkou a opakovatelností s více atributy validní do odvolání">
+                    <p>
+                        <a href="příklady/8.json">Stáhnout JSON</a>, <a href="schémata/časové-určení-a-časové-opakování.json">JSON Schema časového určení a časového opakování</a>, <a href="schémata/časová-platnost.json">JSON Schema časové platnosti</a>, <a href="schémata/časová-opakovatelnost.json">JSON Schema časové opakovatelnosti</a>
+                    </p>
+                    <pre class="json">
+[{
+    "interval": {    
+    	"začátek": {
+       	    "datum_a_čas": "2020-01-01T00:00:01"
+		},
+    	"konec": {
+            "nespecifikovaný": true
+        }
+    },
+    "výjimka": {
+	    "interval": {    
+		    "začátek": {
+                "čas": "09:30:00"
+            },
+    		"konec": {
+                "čas": "10:30:00"
+            }
+        },
+        "opakování": {
+		    "specifická frekvence": {
+		        "rok_v_desetiletí": 1,
+		        "den_v_měsíci": [
+			                        1,
+		                        	2,
+		                        	3,
+		                           	4,
+			                        5,
+			                        6,
+			                        7,
+			                        8,
+			                        9,
+			                        10
+			    ]
+            },
+	    	"časová_doba": [
+                "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"
+	        ]
+        }
+    },
+    "opakování": {
+	    "frekvence": [    
+            "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+        ],
+	    "den": [
+	        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
+        ],
+	    "časová_doba": [
+            "https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/"
+        ]
+    }
+}]
+</pre>
+</aside>
+</section>
+
+
+
+        </section>
+    </body>
+</html>
+
