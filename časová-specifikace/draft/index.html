@@ -167,7 +167,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Časový interval určuje začátek a konec dané časové specifikace. Pokud není u časové specifikace určen konec časového intervalu a pouze jeho další atributy, rozumíme tím, že dle množiny vycházející z daných atributů je časová specifikace validní až do odvolání.
+                            Časový interval určuje začátek a konec dané časové specifikace. Pokud není u časové specifikace určen konec časového intervalu a pouze jeho další atributy, rozumíme tím, že dle množiny vycházející z daných atributů je časová specifikace validní až do odvolání. Pokud je časový interval určen pouze časem bez určení data, má se za to, že tento časový interval se opakuje každý den ve stejný čas (pokud není určeno opakování např. konkrétní dny v týdnu nebo výjimka).
                         </dd>
                     </dl>
 
@@ -1153,70 +1153,44 @@
 </aside>
 </section>
             <section id="příklady-časová specifikace-jedenáctý-příklad">
-                <h3>Časová specifikace určující časovou platnost s opakovanou výjimkou a opakováním s více atributy validní do odvolání</h3>
+                <h3>Časová specifikace vyjadřující otevírací dobu</h3>
                 
                 <p>
-                    Příklad ukazuje, jak lze prezentovat časovou platnost pomocí časové specifikace s opakovanou výjimkou a opakováním s více atributy. Příklad určuje časovou platnost pro druhé říjnové pondělí od 00:00:01 dne 1.1.2020 do odvolání s výjimkou každého prvního roku v desetiletí od 9:30:00 dne 1.10. daného roku do 10:30:00 dne 10.10. daného roku. Tzn. platí 1. pondělí v říjnu roku 2020, poté 3. pondělí v říjnu roku 2020 a tak obdobně do odvolání. Naopak neplatí 1. pondělí v říjnu 2021, 2031 apod., protože v této době je validní výjimka (ta je v tomto případě validní stejně jako časová platnost). 
+                    Příklad ukazuje, jak lze prezentovat otevírací dobu (od do, dny v týdnu, časová platnost otevírací doby apod.). Příklad určuje otevírací dobu každé pondělí, středu a pátek od 08:00:00 do 12:00:00, která platí od 1.1.2020 do odvolání (případné užití výjimek pro jejich vyjádření pro otevírací dobu je obdobné jako v předchozích případech).
                 </p>
                 
                 <p class="warning">
                    Příklad a schéma jsou stále ve vývoji.
                 </p>
                 
-               <aside class="example" title="Časová specifikace určující časovou platnost s opakovanou výjimkou a opakováním s více atributy validní do odvolání">
+               <aside class="example" title="Časová specifikace vyjadřující otevírací dobu">
                     <p>
                         <a href="příklady/11.json">Stáhnout JSON</a>, <a href="schémata/časová specifikace.json">JSON Schema časové specifikace</a>
                     </p>
                     <pre class="json">
 [{
+    "časový_interval": {
+        "začátek": {
+            "čas": "08:00:00"
+            },
+        "konec": {
+            "čas": "12:00:00"
+        }
+    },
+    "den_v-týdnu": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/středa"
+        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pátek"
+    ],
     "časová_platnost": {
-        "časový_interval": {    
+        "časový_interval": {
             "začátek": {
                 "datum_a_čas": "2020-01-01T00:00:01"
             },
             "konec": {
                 "nespecifikovaný": true
             }
-        },
-        "výjimka": {
-            "časový_interval": {    
-                "začátek": {
-                    "čas": "09:30:00"
-                },
-                "konec": {
-                    "čas": "10:30:00"
-                }
-            },
-            "specifická_frekvence": {
-                "rok_v_desetiletí": [
-                    1
-                ],    
-                "den_v_měsíci": [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10
-                ]
-            },
-            "časová_doba": [
-                "http://publications.europa.eu/resource/authority/timeperiod/OCT"
-            ]
-        },
-        "frekvence": [    
-            "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
-        ],
-        "den_v-týdnu": [
-            "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"
-        ],
-        "časová_doba": [
-            "http://publications.europa.eu/resource/authority/timeperiod/OCT"
-        ]
+        }
     }    
 }]
 </pre>
