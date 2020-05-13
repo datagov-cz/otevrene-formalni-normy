@@ -1,30 +1,47 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://ofn.gov.cz/časové-určení-a-časové-opakování/draft/schémata/časové-opakování.json",
+    "$id": "https://ofn.gov.cz/časová-specifikace/draft/schémata/časová-specifikace.json",
     "type": "object",
-    "title": "Časové opakování",
+    "title": "Časová specifikace",
     "properties": {
-        "frekvence": {
-            "id": "#/properties/frekvence",
-            "type": "string",
-            "format": "iri",
-            "title": "Frekvence",
-            "examples": ["http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"]
+        "počet_opakování": {
+            "$id": "#/properties/počet_opakování",
+                    "type": "integer",
+                    "title": "Počet opakování",
+                    "examples": [3]
         },
-        "den": {
-            "$id": "#/properties/den",
+        "časový interval": {
+            "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-interval.json"
+        },
+        "jiná_časová_specifikace": {
+            "$id": "#/properties/jiná_časová_specifikace",
             "type": "string",
             "format": "iri",
-            "title": "Den",
+            "title": "Jiná časová specifikace",
+            "examples": 
+            ["https://data.mvcr.gov.cz/zdroj/číselníky/jiná-časová-specifikace/položky/dobré-počasí"]  
+        },
+        "den_v_týdnu": {
+            "$id": "#/properties/den_v_týdnu",
+            "type": "string",
+            "format": "iri",
+            "title": "Den v týdnu",
             "examples": 
             ["https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí"]
-        },
+        },        
         "časová_doba": {
             "id": "#/properties/časová_doba",
             "type": "string",
             "format": "iri",
             "title": "Časová doba",
             "examples": ["https://op.europa.eu/cs/web/eu-vocabularies/at-concept/-/resource/authority/timeperiod/OCT/?uri=http://publications.europa.eu/resource/authority/timeperiod/OCT"]
+        },        
+        "frekvence": {
+            "id": "#/properties/frekvence",
+            "type": "string",
+            "format": "iri",
+            "title": "Frekvence",
+            "examples": ["http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"]
         },
         "specifická_frekvence": {
             "$id": "#/properties/specifická_frekvence",
@@ -74,6 +91,12 @@
                     "examples": [20]
                 }
             }  
+        },
+        "výjimka": {
+            "$ref": "https://ofn.gov.cz/časová-specifikace/draft/schémata/časová-specifikace.json"
+        },
+        "časová_platnost": {
+            "$ref": "https://ofn.gov.cz/časová-specifikace/draft/schémata/časová-specifikace.json"
         }
     }
 }
