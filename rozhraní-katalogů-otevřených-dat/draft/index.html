@@ -85,6 +85,8 @@
                 <li>Přechod ze standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/12">DCAT-AP 1.2</a> na <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a></li>
                 <li>Podpora pro textové položky katalogizačních záznamů jak v češtině, tak v angličtině</li>
                 <li>Podpora pro registraci <a href="#třída-datová-služba">datových služeb</a>, které typicky představují způsob přístupu k datové sadě pomocí API</li>
+                <li>Podpora pro rozšířenou specifikaci <a href="#položky-datová-sada-územní-pokrytí">souvisejícího geografického území</a> datové sady</li>
+                <li>Podpora pro odkaz na <a href="#položky-datová-sada-specifikace">specifikaci</a> datové sady, např. otevřenou formální normu</li>
                 <li>Podpora pro specifikaci <a href="#položky-datová-sada-časové-rozlišení">časového rozlišení</a> datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-datová-sada-prostorové-rozlišení-v-metrech">prostorového rozlišení</a> datové sady v metrech</li>
                 <li>Podpora pro specifikaci více <a href="#položky-datová-sada-téma">témat</a> datové sady</li>
@@ -635,7 +637,8 @@
                             Popis
                         </dt>
                         <dd>
-                            Tato vlastnost odkazuje na geografickou oblast pokrytou datovou sadou.
+                            Tato vlastnost odkazuje na územní prvek RÚIAN pokrytý datovou sadou.
+                            Datová sada může pokrývat více územních prvků RÚIAN.
                         </dd>
                         <dt>
                             Vlastnost
@@ -664,6 +667,53 @@
                     </dl>
                 </section>
 
+                <section id="položky-datová-sada-územní-pokrytí">
+                    <h4>Související geografické území</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Související geografické území
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na geografickou oblast pokrytou datovou sadou.
+                            Datová sada může být popsána více geografickými oblastmi.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>geografické_území</code>, <code>dct:spatial</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#URL">IRI</a> položek z evropských číselníků 
+                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/country">zemí</a>,
+                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/continent">kontinentů</a>,
+                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/place">míst</a> nebo IRI objektu z <a href="https://www.geonames.org/">Geonames</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>sada: dct:spatial &lt;http://publications.europa.eu/resource/authority/continent/EUROPE&gt; .</code><br/>
+                            <code>sada: dct:spatial &lt;https://sws.geonames.org/6290257/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="položky-datová-sada-časové-pokrytí">
                     <h4>Časové pokrytí</h4>
                     <dl>
@@ -793,6 +843,49 @@ kurátor: a vcard:Individual ;
                         </dt>
                         <dd>
                             <code>sada: foaf:page &lt;https://data.cssz.cz/documentation/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-specifikace">
+                    <h4>Odkaz na specifikaci</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na specifikaci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na specifikaci, jíž se datová sada řídí.
+                            Takovou specifikací jsou zejména <a href="https://ofn.gov.cz">Otevřené formální normy</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>specifikace</code>, <code>dct:conformsTo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL specifikace.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/sběrné-dvory/draft/&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1702,6 +1795,7 @@ podmínky: a pu:Specifikace ;
 @prefix application: &lt;http://www.iana.org/assignments/media-types/application/&gt; .
 @prefix freq: &lt;http://publications.europa.eu/resource/authority/frequency/&gt; .
 @prefix theme: &lt;http://publications.europa.eu/resource/authority/data-theme/&gt; .
+@prefix continent: &lt;http://publications.europa.eu/resource/authority/continent/&gt; .
 @prefix ruian_ST: &lt;https://linked.cuzk.cz/resource/ruian/stat/&gt; .
 @prefix euroVoc: &lt;http://eurovoc.europa.eu/&gt; .
 
@@ -1715,7 +1809,7 @@ podmínky: a pu:Specifikace ;
     dcat:theme theme:TRAN ;
     dct:accrualPeriodicity freq:WEEKLY_3 ;
     dcat:keyword "autobusy"@cs, "jízdní řády"@cs, "veřejná linková doprava"@cs, "timetable"@en, "bus"@en, "public transport"@en ;
-    dct:spatial ruian_ST:1 ;
+    dct:spatial ruian_ST:1, continent:EUROPE ;
     dct:temporal [
         a dct:PeriodOfTime ;
         dcat:startDate "2009-01-01"^^xsd:date ;
@@ -1727,6 +1821,7 @@ podmínky: a pu:Specifikace ;
         vcard2006:hasEmail "sekretariat.190@mdcr.cz"
     ] ;
     foaf:page &lt;https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy&gt; ;
+    dct:conformsTo &lt;https://ofn.gov.cz/jízdní-řády/2020-05-01/&gt; ;
     dcat:theme euroVoc:4512 ;
     dcat:spatialResolutionInMeters 12.0 ;
     dcat:temporalResolution "P1D"^^xsd:duration ;
@@ -1762,114 +1857,6 @@ podmínky: a pu:Specifikace ;
     dct:title "SPARQL endpoint pro jízdní řády"@cs, "SPARQL endpoint for timetables"@en ;
     dcat:endpointURL &lt;https://portal.cisjr.cz/sparql&gt; ;
     dcat:endpointDescription &lt;https://portal.cisjr.cz/sparql&gt; .</pre>
-                </aside>
-
-                <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
-                    <p>
-                        <a href="příklady/datová-sada.jsonld">Stáhnout JSON-LD</a>.
-                        Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
-                    </p>
-                    <pre class="json">
-{
-    "@context": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
-    "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
-    "typ": "Datová sada",
-    "název": {
-        "cs": "Jízdní řády veřejné linkové dopravy",
-        "en": "Public transport timetables"
-    },
-    "popis": {
-        "cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu.",
-        "en": "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."
-    },
-    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
-    "téma": [
-        "theme:TRAN"
-    ],
-    "periodicita_aktualizace": "frequency:WEEKLY_3",
-    "klíčové_slovo": {
-        "cs": [
-          "jízdní řády",
-          "veřejná linková doprava",
-          "autobusy"
-        ],
-        "en": [
-          "public transport",
-          "timetable",
-          "bus"
-        ]
-    },
-    "prvek_rúian": "https://linked.cuzk.cz/resource/ruian/stat/1",
-    "časové_pokrytí": {
-        "typ": "Časový interval",
-        "začátek": "2009-01-01",
-        "konec": "2017-12-31"
-    },
-    "kontaktní_bod": {
-        "typ": "Organizace",
-        "jméno": {
-          "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
-          "en": "Ministry of Transport"
-        },
-        "e-mail": "sekretariat.190@mdcr.cz"
-    },
-    "dokumentace": "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy",
-    "koncept_euroVoc": [
-        "euroVoc:4512"
-    ],
-    "prostorové_rozlišení_v_metrech": "12.0",
-    "časové_rozlišení": "P1D",
-    "distribuce": [
-        {
-            "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv",
-            "typ": "Distribuce",
-            "podmínky_užití": {
-                "typ": "Specifikace podmínek užití",
-                "autorské_dílo": "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
-                "databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
-                "databáze_jako_autorské_dílo": "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
-                "osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
-            },
-            "přístupové_url": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
-            "soubor_ke_stažení": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
-            "formát": "format:ZIP",
-            "mediaType": "http://www.iana.org/assignments/media-types/application/json",
-            "schéma": "https://portal.cisjr.cz/schemata/json-schema.json",
-            "mediaType_komprese": "http://www.iana.org/assignments/media-types/application/zip",
-            "mediaType_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
-            "název": {
-                "en": "JSON distribution in ZIP file",
-                "cs": "JSON distribuce v ZIP soubrou"
-            }  
-        },
-        {
-            "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql",
-            "typ": "Distribuce",
-            "podmínky_užití": {
-                "typ": "Specifikace podmínek užití",
-                "autorské_dílo": "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
-                "databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
-                "databáze_jako_autorské_dílo": "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
-                "osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
-            },
-            "přístupové_url": "https://portal.cisjr.cz/sparql",
-            "název": {
-              "en": "SPARQL endpoint for timetables",
-              "cs": "SPARQL endpoint pro jízdní řády"
-            },
-            "přístupová_služba": {
-                "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql",
-                "typ": "Datová služba",
-                "název": {
-                  "cs": "SPARQL endpoint pro jízdní řády",
-                  "en": "SPARQL endpoint for timetables"
-                },
-                "endpoint": "https://portal.cisjr.cz/sparql",
-                "popis_endpointu": "https://portal.cisjr.cz/sparql"
-            }
-        }
-    ] 
-}</pre>
                 </aside>
 
             </section>
