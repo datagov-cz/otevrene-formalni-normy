@@ -96,6 +96,81 @@
                     Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
 
+                <section id="vlastnost-umístění-identifikátor">
+                    <h4>Geografický identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>iri</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#URL">IRI</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Geografický identifikátor
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Geografický identifikátor objektu.
+                            Použije se tam, kde existuje IRI pro dané místo, například z databáze <a href="http://www.geonames.org/">Geonames</a>, <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>, <a href="https://wiki.dbpedia.org/">DBpedia</a> nebo z evropských číselníků <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/place">míst</a>, <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/country">zemí</a> či <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/continent">kontinentů</a>.
+                            Tato vlastnost odpovídá vlastnosti <a href="https://www.w3.org/ns/locn#rdfs:seeAlso">geographic identifier</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a> a slovníku RDF Schema [[rdf-schema]].
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>http://publications.europa.eu/resource/authority/continent/ANTARCTICA</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-umístění-název">
+                    <h4>Geografický název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Geografický název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Geografický název objektu.
+                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#geographicName">geographicName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Krušné hory</code>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="vlastnost-umístění-geometrie">
                     <h4>Geometrie</h4>
                     <dl>
@@ -124,12 +199,12 @@
                             Geometrický objekt specifikující umístění.
                             Použije se tam, kde umístění nelze specifikovat <a href="#vlastnost-umístění-adresa">adresou</a> či <a href="#vlastnost-umístění-identifikátor">identifikátorem</a>.
                         </dd>
-						<dt>
-							Příklad
-						</dt>
-						<dd>
-							<code>{ "type": "Point", "coordinates": [15.9915114, 48.8566829] }</code>
-						</dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>{ "type": "Point", "coordinates": [15.9915114, 48.8566829] }</code>
+                        </dd>
                     </dl>
                 </section>
 
@@ -417,7 +492,9 @@ http://publications.europa.eu/resource/authority/continent/ANTARCTICA</pre>
                     </p>
                     <pre class="json">
 {
-    "název": "Národní park Šumava",
+    "název": {
+        "cs": "Národní park Šumava"
+    },
     "geometrie": {
         "type": "Point",
         "coordinates": [13.6309462, 48.9720309]
@@ -434,10 +511,12 @@ http://publications.europa.eu/resource/authority/continent/ANTARCTICA</pre>
 &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
 &lt;umístění
     xmlns="https://ofn.gov.cz/umístění/"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:věc="https://ofn.gov.cz/věc/"
     xsi:schemaLocation="https://ofn.gov.cz/umístění/ 
                         https://ofn.gov.cz/um%C3%ADst%C4%9Bn%C3%AD/draft/sch%C3%A9mata/um%C3%ADst%C4%9Bn%C3%AD.xsd"&gt;
-    &lt;název&gt;Národní park Šumava&lt;/název&gt;
+    &lt;věc:název xml:lang="cs"&gt;Národní park Šumava&lt;/věc:název&gt;
     &lt;geometrie&gt;POINT(48.9720274 13.6309462)&lt;/geometrie&gt;
 &lt;/umístění&gt;</pre>
                 </aside>
@@ -448,7 +527,7 @@ http://publications.europa.eu/resource/authority/continent/ANTARCTICA</pre>
                     </p>
                 
                     <pre class="csv">
-název,geometrie
+název_cs,geometrie
 Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
                 </aside>
                 
@@ -472,10 +551,11 @@ Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
     "tableSchema": {
         "columns": [
             {
-                "name": "nazev",
-                "titles": "název",
+                "name": "nazev_cs",
+                "titles": "název_cs",
                 "dc:description": "Geografický název",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
                 "titles": "geometrie",
                 "dc:description": "Geometrie",
@@ -483,8 +563,7 @@ Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
             }
         ]
     }
-}
-</pre>
+}</pre>
                 </aside>
 
             </section>
@@ -504,7 +583,9 @@ Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
                 
                     <pre class="json">
 {
-    "název": "Samota u lesa",
+    "název": {
+        "cs": "Samota u lesa"
+    },
     "adresa": {
         "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
     }
@@ -522,9 +603,10 @@ Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
     xmlns="https://ofn.gov.cz/umístění/"
     xmlns:adresa="https://ofn.gov.cz/adresy/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:věc="https://ofn.gov.cz/věc/"
     xsi:schemaLocation="https://ofn.gov.cz/umístění/ 
                         https://ofn.gov.cz/um%C3%ADst%C4%9Bn%C3%AD/draft/sch%C3%A9mata/um%C3%ADst%C4%9Bn%C3%AD.xsd"&gt;
-    &lt;název&gt;Samota u lesa&lt;/název&gt;
+    &lt;věc:název xml:lang="cs"&gt;Samota u lesa&lt;/věc:název&gt;
     &lt;adresa&gt;
         &lt;adresa:adresní_místo&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/adresa:adresní_místo&gt;
     &lt;/adresa&gt;
@@ -537,7 +619,7 @@ Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
                     </p>
                 
                     <pre class="csv">
-název,adresní_místo
+název_cs,adresní_místo
 Samota u lesa,https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                 </aside>
                 
@@ -561,10 +643,11 @@ Samota u lesa,https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
     "tableSchema": {
         "columns": [
             {
-                "name": "nazev",
-                "titles": "název",
+                "name": "nazev_cs",
+                "titles": "název_cs",
                 "dc:description": "Geografický název",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
                 "name": "adresni_misto",
                 "titles": "adresní_místo",
