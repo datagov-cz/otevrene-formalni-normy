@@ -536,7 +536,8 @@ Název faktury,&quot;Label of the invoice&quot;</pre>
                         <p><a href="příklady/množství.json">Stáhnout JSON</a>, <a href="schémata/množství.json">JSON Schema</a>
                         </p>
                         <pre class="json">
-"množství": {
+{
+    "typ": "Množství",
     "hodnota": 23.0,
     "jednotka": "KGM"
 }</pre>
@@ -686,18 +687,30 @@ množství: a gr:QuantitativeValue ;
 
                     </section>  
                 
-                    <aside class="example" title="Jednotková částka v JSON">
+                    <aside class="example" title="Částka v JSON">
                         <p>
                             <a href="příklady/částka.json">Stáhnout JSON</a>, <a href="schémata/částka.json">JSON Schema</a>
                         </p>
                         <pre class="json">
 {
+    "typ": "Částka",
+    "výše": 48151623.42,
+    "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+}</pre>
+                    </aside>
+
+                    <aside class="example" title="Jednotková částka v JSON">
+                        <p>
+                            <a href="příklady/jednotková-částka.json">Stáhnout JSON</a>, <a href="schémata/jednotková-částka.json">JSON Schema</a>
+                        </p>
+                        <pre class="json">
+{
+    "typ": "Jednotková částka",
     "výše": 48151623.42,
     "měna": "http://publications.europa.eu/resource/authority/currency/CZK",
     "jednotka": "KGM"
 }</pre>
                     </aside>
-
 
                     <aside class="example" title="Částka v XML">
                         <pre class="xml">
@@ -874,8 +887,8 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Popis
                             </dt>
                             <dd>
-								Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá.
-								Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na <code>3333-03-03</code> či <code>9999-09-09</code> apod. nebo hodnotu vynechat.
+                                Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá.
+                                Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na <code>3333-03-03</code> či <code>9999-09-09</code> apod. nebo hodnotu vynechat.
                             </dd>
                             <dt>
                                 Příklad
@@ -893,6 +906,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                         </p>
                         <pre class="json">
 {
+    "typ": "Časový okamžik",
     "datum": "2019-07-31"
 }</pre>
                     </aside>
@@ -903,6 +917,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                         </p>
                         <pre class="json">
 {
+    "typ": "Časový okamžik",
     "nespecifikovaný": true
 }</pre>
                     </aside>
@@ -1000,10 +1015,13 @@ instant: a time:Instant ;
                         </p>
                         <pre class="json">
 {
+    "typ": "Časový interval",
     "začátek": {
+        "typ": "Časový okamžik",
         "datum": "2019-07-31"
     },
     "konec": {
+        "typ": "Časový okamžik",
         "datum": "2020-07-31"
     }
 }</pre>
@@ -1013,16 +1031,19 @@ instant: a time:Instant ;
                         <p>
                             <a href="příklady/časový-interval-otevřený.json">Stáhnout JSON</a>, <a href="schémata/časový-interval.json">JSON Schema</a>
                         </p>
-						<p>
-							Takto lze reprezentovat interval, u kterého nevíme, kdy bude končit, nicméně víme, že někdy končit bude.
-							Jedná se o pro interoperabilitu výrazně lepší variantu, než si konec uměle definovat na <code>3333-03-03</code> či <code>9999-09-09</code> apod.
-						</p>
+                        <p>
+                            Takto lze reprezentovat interval, u kterého nevíme, kdy bude končit, nicméně víme, že někdy končit bude.
+                            Jedná se o pro interoperabilitu výrazně lepší variantu, než si konec uměle definovat na <code>3333-03-03</code> či <code>9999-09-09</code> apod.
+                        </p>
                         <pre class="json">
 {
+    "typ": "Časový interval",
     "začátek": {
+        "typ": "Časový okamžik",
         "datum": "2019-07-31"
     },
     "konec": {
+        "typ": "Časový okamžik",
         "nespecifikovaný": true
     }
 }</pre>
