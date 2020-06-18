@@ -1,9 +1,13 @@
 {
-	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
 	"$id": "https://ofn.gov.cz/sportoviště/draft/schémata/sportoviště.json",
 	"type": "object",
 	"title": "Sportoviště",
+	"required": ["typ"],
 	"properties": {
+		"typ": {
+			"const": "Sportoviště"
+		},
 		"iri": {
 			"$id": "#/properties/iri",
 			"type": "string",
@@ -64,34 +68,41 @@
 		"doplňková_služba": {
 			"$id": "#/properties/doplňková-služba",
 			"type": "array",
-			"title": "Doplňková služba",
-			"properties": {
-				"iri": {
-					"$id": "#/properties/iri",
-					"type": "string",
-					"format": "iri",
-					"title": "Identifikátor",
-					"examples": [
-						"https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
-					]
-				},
-				"název": {
-					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-				},
-				"popis": {
-					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-				},
-				"vytvořeno": {
-					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
-				},
-				"relevantní_do": {
-					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
-				},
-				"zneplatněno": {
-					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
-				},
-				"příloha": {
-					"$ref": "https://ofn.gov.cz/přílohy/draft/schémata/přílohy.json"
+			"items": {
+				"type": "object",
+				"title": "Doplňková služba",
+				"required": ["typ"],
+				"properties": {
+					"typ": {
+						"const": "Služba"
+					},
+					"iri": {
+						"$id": "#/properties/iri",
+						"type": "string",
+						"format": "iri",
+						"title": "Identifikátor",
+						"examples": [
+							"https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+						]
+					},
+					"název": {
+						"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+					},
+					"popis": {
+						"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+					},
+					"vytvořeno": {
+						"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+					},
+					"relevantní_do": {
+						"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+					},
+					"zneplatněno": {
+						"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+					},
+					"příloha": {
+						"$ref": "https://ofn.gov.cz/přílohy/draft/schémata/přílohy.json"
+					}
 				}
 			}
 		},
@@ -108,17 +119,17 @@
 				]
 			}
 		},
-		"typ": {
-			"id": "#/items/properties/typ",
+		"typ_sportoviště": {
+			"id": "#/items/properties/typ_sportoviště",
 			"type": "array",
 			"items": {
 				"type": "string",
 				"format": "iri",
 				"pattern": "^https\\:\/\/data\\.mvcr\\.gov\\.cz\/zdroj\/číselníky\/typy-sportovišť\/položky\/.*$",
-				"title": "Typ",
+				"title": "Typ sportoviště",
 				"examples": [
 					"https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/bazén"
-				]	
+				]
 			}
 		}
 	}
