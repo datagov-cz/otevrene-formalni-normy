@@ -726,15 +726,18 @@ zaplaceno_výše,zaplaceno_měna
                     </aside>
 
                     V datovém formátu RDF se pro specifikaci ceny používá třída <code>gr:PriceSpecification</code> ze slovníku <a href="http://www.heppnetz.de/projects/goodrelations/">GoodRelations</a>.
-                    
+                    Jelikož je již starší, tak jako specifikaci měny používá její kód formou řetězce.
+                    Ten lze do dat přidat pro zpětnou kompatibilitu, ale potřeba je zejména uvést měnu ve formě IRI z příslušného evropského číselníku.
                     <aside class="example" title="Částka v RDF Turtle">
                         <pre class="turtle">
 @prefix gr: &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix pojem: &lt;https://slovník.gov.cz/generický/částky/pojem/&gt; .
                         
 faktura:A123 gr:hasPriceSpecification zaplaceno: .
 
 zaplaceno: a gr:PriceSpecification ;
            gr:hasCurrency "CZK"^^xsd:string ;
+           pojem:má-měnu &lt;http://publications.europa.eu/resource/authority/currency/CZK&gt; ;
            gr:hasCurrencyValue 48151623.42 .
 </pre>
                     </aside>
@@ -742,11 +745,13 @@ zaplaceno: a gr:PriceSpecification ;
                     <aside class="example" title="Jednotková částka za kilogram v RDF Turtle">
                         <pre class="turtle">
 @prefix gr: &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix pojem: &lt;https://slovník.gov.cz/generický/částky/pojem/&gt; .
                         
 faktura:A124 gr:hasPriceSpecification zaplaceno: .
 
 zaplaceno: a gr:UnitPriceSpecification ;
            gr:hasCurrency "CZK"^^xsd:string ;
+           pojem:má-měnu &lt;http://publications.europa.eu/resource/authority/currency/CZK&gt; ;
            gr:hasCurrencyValue 24.42 ;
            gr:hasUnitOfMeasurement "KGM"^^xsd:string .
 </pre>
