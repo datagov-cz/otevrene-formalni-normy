@@ -104,7 +104,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -140,7 +140,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -176,7 +176,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -212,7 +212,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -248,7 +248,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -428,11 +428,21 @@
                     <pre class="json">
 {
     "typ": "Člověk",
-    "jméno": "Jakub",
-    "příjmení": "Novák",
-    "tituly_před": "RNDr.",
-    "tituly_za": "Ph.D.",
-    "text": "RNDr. Jakub Novák, Ph.D.",
+    "jméno": {
+        "cs": "Jakub"
+    },
+    "příjmení": {
+        "cs": "Novák"
+    },
+    "tituly_před": {
+        "cs": "RNDr."
+    },
+    "tituly_za": {
+        "cs": "Ph.D."
+    },
+    "text": {
+        "cs": "RNDr. Jakub Novák, Ph.D."
+    },
     "pohlaví": "https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské"
 }</pre>
                 </aside>
@@ -446,14 +456,16 @@
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;člověk:člověk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
 xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/ https://ofn.gov.cz/lid%C3%A9-a-osoby/draft/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
-    &lt;člověk:jméno&gt;Jakub&lt;/člověk:jméno&gt;
-    &lt;člověk:příjmení&gt;Novák&lt;/člověk:příjmení&gt;
-    &lt;člověk:tituly_před&gt;RNDr.&lt;/člověk:tituly_před&gt;
-    &lt;člověk:tituly_za&gt;Ph.D.&lt;/člověk:tituly_za&gt;
+    &lt;člověk:jméno xml:lang="cs"&gt;Jakub&lt;/člověk:jméno&gt;
+    &lt;člověk:příjmení xml:lang="cs"&gt;Novák&lt;/člověk:příjmení&gt;
+    &lt;člověk:tituly_před xml:lang="cs"&gt;RNDr.&lt;/člověk:tituly_před&gt;
+    &lt;člověk:tituly_za xml:lang="cs"&gt;Ph.D.&lt;/člověk:tituly_za&gt;
     &lt;člověk:pohlaví&gt;https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské&lt;/člověk:pohlaví&gt;
-    &lt;člověk:text&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
+    &lt;člověk:text xml:lang="cs"&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
 &lt;/člověk:člověk&gt;
+
 </pre>
                 </aside>
                 
@@ -463,8 +475,8 @@ xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/ https://ofn.gov.cz/lid%C3%
                     </p>
                 
                     <pre class="csv">
-jméno,příjmení,tituly_před,tituly_za,pohlaví,text
-Jakub,Novák,RNDr.,Ph.D.,https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské,&quot;RNDr. Jakub Novák, Ph.D.&quot;</pre>
+jméno_cs,příjmení_cs,tituly_před_cs,tituly_za_cs,text_cs
+Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D."</pre>
                 </aside>
                 
                 <p>
@@ -482,40 +494,40 @@ Jakub,Novák,RNDr.,Ph.D.,https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/po
         "http://www.w3.org/ns/csvw",
         {"@language": "cs"}
     ],
-    "url": "3.csv",
+    "url": "4.csv",
     "header": true,
     "tableSchema": {
         "columns": [
             {
-                "name": "jmeno",
-                "titles": "jméno",
+                "name": "jmeno_cs",
+                "titles": "jméno_cs",
                 "dc:description": "Křestní jméno",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "prijmeni",
-                "titles": "příjmení",
+                "name": "prijmeni_cs",
+                "titles": "příjmení_cs",
                 "dc:description": "Příjmení",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "tituly_pred",
-                "titles": "tituly_před",
+                "name": "tituly_pred_cs",
+                "titles": "tituly_před_cs",
                 "dc:description": "Tituly před jménem",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "tituly_za",
-                "titles": "tituly_za",
+                "name": "tituly_za_cs",
+                "titles": "tituly_za_cs",
                 "dc:description": "Tituly za jménem",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "pohlavi",
-                "titles": "pohlaví",
-                "dc:description": "Pohlaví",
-                "datatype": "anyURI"
-            }, {
-                "name": "text",
-                "titles": "text",
+                "name": "text_cs",
+                "titles": "text_cs",
                 "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }
         ]
     }
@@ -537,12 +549,22 @@ Jakub,Novák,RNDr.,Ph.D.,https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/po
                     <pre class="json">
 {
     "typ": "Člověk",
-    "jméno": "Jakub",
-    "příjmení": "Novák",
-    "tituly_před": "RNDr.",
-    "tituly_za": "Ph.D.",
-    "text": "RNDr. Jakub Novák, Ph.D.",
-    "poznámka": "Kamarád"
+    "jméno": {
+        "cs": "Jakub"
+    },
+    "příjmení": {
+        "cs": "Novák"
+    },
+    "tituly_před": {
+        "cs": "RNDr."
+    },
+    "tituly_za": {
+        "cs": "Ph.D."
+    },
+    "text": {
+        "cs": "RNDr. Jakub Novák, Ph.D."
+    },
+    "poznámka": "kamarád"
 }</pre>
                 </aside>
                 
@@ -560,17 +582,18 @@ Jakub,Novák,RNDr.,Ph.D.,https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/po
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;člověk:člověk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns:x="http://příklad.cz" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
 xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/" 
 xmlns:základ="https://ofn.gov.cz/základní-datové-typy/" 
 xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/ https://ofn.gov.cz/lid%C3%A9-a-osoby/draft/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
     &lt;základ:rozšiřující_položky&gt;
         &lt;x:poznámka&gt;Kamarád&lt;/x:poznámka&gt;
     &lt;/základ:rozšiřující_položky&gt;
-    &lt;člověk:jméno&gt;Jakub&lt;/člověk:jméno&gt;
-    &lt;člověk:příjmení&gt;Novák&lt;/člověk:příjmení&gt;
-    &lt;člověk:tituly_před&gt;RNDr.&lt;/člověk:tituly_před&gt;
-    &lt;člověk:tituly_za&gt;Ph.D.&lt;/člověk:tituly_za&gt;
-    &lt;člověk:text&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
+    &lt;člověk:jméno xml:lang="cs"&gt;Jakub&lt;/člověk:jméno&gt;
+    &lt;člověk:příjmení xml:lang="cs"&gt;Novák&lt;/člověk:příjmení&gt;
+    &lt;člověk:tituly_před xml:lang="cs"&gt;RNDr.&lt;/člověk:tituly_před&gt;
+    &lt;člověk:tituly_za xml:lang="cs"&gt;Ph.D.&lt;/člověk:tituly_za&gt;
+    &lt;člověk:text xml:lang="cs"&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
 &lt;/člověk:člověk&gt;
 </pre>
                 </aside>
@@ -585,8 +608,8 @@ xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/ https://ofn.gov.cz/lid%C3%
                     </p>
                 
                     <pre class="csv">
-jméno,příjmení,tituly_před,tituly_za,text,poznámka
-Jakub,Novák,RNDr.,Ph.D.,&quot;RNDr. Jakub Novák, Ph.D.&quot;,&quot;Kamarád&quot;</pre>
+jméno_cs,příjmení_cs,tituly_před_cs,tituly_za_cs,text_cs,poznámka
+Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D.","Kamarád"</pre>
                 </aside>
                 
                 <p>
@@ -609,30 +632,35 @@ Jakub,Novák,RNDr.,Ph.D.,&quot;RNDr. Jakub Novák, Ph.D.&quot;,&quot;Kamarád&qu
     "tableSchema": {
         "columns": [
             {
-                "name": "jmeno",
-                "titles": "jméno",
+                "name": "jmeno_cs",
+                "titles": "jméno_cs",
                 "dc:description": "Křestní jméno",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "prijmeni",
-                "titles": "příjmení",
+                "name": "prijmeni_cs",
+                "titles": "příjmení_cs",
                 "dc:description": "Příjmení",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "tituly_pred",
-                "titles": "tituly_před",
+                "name": "tituly_pred_cs",
+                "titles": "tituly_před_cs",
                 "dc:description": "Tituly před jménem",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "tituly_za",
-                "titles": "tituly_za",
+                "name": "tituly_za_cs",
+                "titles": "tituly_za_cs",
                 "dc:description": "Tituly za jménem",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "text",
-                "titles": "text",
+                "name": "text_cs",
+                "titles": "text_cs",
                 "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
                 "name": "poznamka",
                 "titles": "poznámka",
@@ -873,11 +901,21 @@ ičo,název_cs,název_en,poznámka
                     <pre class="json">
 {
     "typ": "Člověk",
-    "jméno": "Jakub",
-    "příjmení": "Novák",
-    "tituly_před": "RNDr.",
-    "tituly_za": "Ph.D.",
-    "text": "RNDr. Jakub Novák, Ph.D."
+    "jméno": {
+        "cs": "Jakub"
+    },
+    "příjmení": {
+        "cs": "Novák"
+    },
+    "tituly_před": {
+        "cs": "RNDr."
+    },
+    "tituly_za": {
+        "cs": "Ph.D."
+    },
+    "text": {
+        "cs": "RNDr. Jakub Novák, Ph.D."
+    }
 }</pre>
                 </aside>
                 
@@ -890,13 +928,14 @@ ičo,název_cs,název_en,poznámka
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;člověk:člověk_či_osoba xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
 xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/ https://ofn.gov.cz/lid%C3%A9-a-osoby/draft/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
     &lt;člověk:člověk&gt;
-        &lt;člověk:jméno&gt;Jakub&lt;/člověk:jméno&gt;
-        &lt;člověk:příjmení&gt;Novák&lt;/člověk:příjmení&gt;
-        &lt;člověk:tituly_před&gt;RNDr.&lt;/člověk:tituly_před&gt;
-        &lt;člověk:tituly_za&gt;Ph.D.&lt;/člověk:tituly_za&gt;
-        &lt;člověk:text&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
+        &lt;člověk:jméno xml:lang="cs"&gt;Jakub&lt;/člověk:jméno&gt;
+        &lt;člověk:příjmení xml:lang="cs"&gt;Novák&lt;/člověk:příjmení&gt;
+        &lt;člověk:tituly_před xml:lang="cs"RNDr.&lt;/člověk:tituly_před&gt;
+        &lt;člověk:tituly_za xml:lang="cs"&gt;Ph.D.&lt;/člověk:tituly_za&gt;
+        &lt;člověk:text xml:lang="cs"&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
     &lt;/člověk:člověk&gt;
 &lt;/člověk:člověk_či_osoba&gt;
 </pre>
@@ -908,8 +947,8 @@ xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/ https://ofn.gov.cz/lid%C3%
                     </p>
                 
                     <pre class="csv">
-člověk_jméno,člověk_příjmení,člověk_tituly_před,člověk_tituly_za,člověk_text
-Jakub,Novák,RNDr.,Ph.D.,&quot;RNDr. Jakub Novák, Ph.D.&quot;</pre>
+člověk_jméno_cs,člověk_příjmení_cs,člověk_tituly_před_cs,člověk_tituly_za_cs,člověk_text_cs
+Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D."</pre>
                 </aside>
                 
                 <p>
@@ -932,30 +971,35 @@ Jakub,Novák,RNDr.,Ph.D.,&quot;RNDr. Jakub Novák, Ph.D.&quot;</pre>
     "tableSchema": {
         "columns": [
             {
-                "name": "jmeno",
-                "titles": "člověk_jméno",
+                "name": "clovek_jmeno_cs",
+                "titles": "člověk_jméno_cs",
                 "dc:description": "Křestní jméno",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "prijmeni",
-                "titles": "člověk_příjmení",
+                "name": "clovek_prijmeni_cs",
+                "titles": "člověk_příjmení_cs",
                 "dc:description": "Příjmení",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "tituly_pred",
-                "titles": "člověk_tituly_před",
+                "name": "clovek_tituly_pred_cs",
+                "titles": "člověk_tituly_před_cs",
                 "dc:description": "Tituly před jménem",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "tituly_za",
-                "titles": "člověk_tituly_za",
+                "name": "clovek_tituly_za_cs",
+                "titles": "člověk_tituly_za_cs",
                 "dc:description": "Tituly za jménem",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }, {
-                "name": "text",
-                "titles": "člověk_text",
+                "name": "clovek_text_cs",
+                "titles": "člověk_text_cs",
                 "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
-                "datatype": "string"
+                "datatype": "string",
+                "lang": "cs"
             }
         ]
     }
