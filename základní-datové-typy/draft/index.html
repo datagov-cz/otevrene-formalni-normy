@@ -207,16 +207,15 @@ faktura:A123 faktura:zaplaceno &quot;09:30:00&quot;^^xsd:time ;
                 <section id="datum-a-čas">
                     <h4>Datum a čas</h4>
                     <p>
-                        Pro reprezentaci data a času jakožto jedné hodnoty se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:dateTime</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
-                        Tento datový typ umožňuje i explicitně zaznamenat časovou zónu.
-                        To se hodí například pro data a časy, u kterých se dá předpokládat využití v jiné časové zóně.
+                        Pro reprezentaci data a času jakožto jedné hodnoty se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:dateTimeStamp</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Tento datový typ vyžaduje explicitně zaznamenat časovou zónu.
                         Syntakticky se jedná se o spojení datových typů <a href="#datum" title="Datum">Datum</a> a <a href="#čas" title="Čas">Čas</a> pomocí znaku <code>T</code>.
                     </p>
                     
                     <aside class="example" title="Datum a čas v JSON">
                         <pre class="json">
 {
-    &quot;zaplaceno&quot;: &quot;2019-01-01T09:30:00&quot;,
+    &quot;zaplaceno&quot;: &quot;2019-01-01T09:30:00+02:00&quot;,
     &quot;přijato&quot;: &quot;2019-01-01T09:30:10.5+01:00&quot;
 }</pre>
                     </aside>
@@ -224,20 +223,20 @@ faktura:A123 faktura:zaplaceno &quot;09:30:00&quot;^^xsd:time ;
 
                     <aside class="example" title="Datum a čas v XML">
                         <pre class="xml">
-&lt;zaplaceno&gt;2019-01-01T09:30:00&lt;/zaplaceno&gt;
+&lt;zaplaceno&gt;2019-01-01T09:30:00+02:00&lt;/zaplaceno&gt;
 &lt;přijato&gt;2019-01-01T09:30:10.5+01:00&lt;/přijato&gt;</pre>
                     </aside>
 
                     <aside class="example" title="Datum a čas v CSV">
                         <pre class="csv">
 zaplaceno,přijato
-2019-01-01T09:30:00,2019-01-01T09:30:10.5+01:00</pre>
+2019-01-01T09:30:00+02:00,2019-01-01T09:30:10.5+01:00</pre>
                     </aside>
 
                     <aside class="example" title="Datum a čas v RDF Turtle">
                         <pre class="turtle">
-faktura:A123 faktura:zaplaceno &quot;2019-01-01T09:30:00&quot;^^xsd:dateTime ;
-             faktura:přijato &quot;2019-01-01T09:30:10.5+01:00&quot;^^xsd:dateTime .
+faktura:A123 faktura:zaplaceno &quot;2019-01-01T09:30:00+02:00&quot;^^xsd:dateTimeStamp ;
+             faktura:přijato &quot;2019-01-01T09:30:10.5+01:00&quot;^^xsd:dateTimeStamp .
 </pre>
                     </aside>
 
@@ -856,7 +855,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Příklad
                             </dt>
                             <dd>
-                                <code>2019-01-01T09:30:00</code>
+                                <code>2019-01-01T09:30:00+02:00</code>
                             </dd>
                         </dl>
 
@@ -942,7 +941,7 @@ datum_a_čas
 @prefix time:  &lt;http://www.w3.org/2006/time#&gt; .
                         
 instant: a time:Instant ;
-    time:inXSDDateTime "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime .
+    time:inXSDDateTimeStamp "2019-01-01T09:30:10.5+01:00"^^xsd:dateTimeStamp .
 </pre>
                     </aside>
 
@@ -1078,8 +1077,8 @@ začátek_datum_a_čas,konec_datum_a_čas
                         
 datová-sada:D123 dcterms:temporal interval: .
 
-interval: schema:startDate "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime ;
-          schema:endDate "2020-01-01T09:30:10.5+01:00"^^xsd:dateTime .
+interval: schema:startDate "2019-01-01T09:30:10.5+01:00"^^xsd:dateTimeStamp ;
+          schema:endDate "2020-01-01T09:30:10.5+01:00"^^xsd:dateTimeStamp .
 </pre>
                     </aside>
                     
