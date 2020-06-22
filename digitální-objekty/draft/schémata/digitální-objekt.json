@@ -1,14 +1,15 @@
 {
 	"$schema": "https://json-schema.org/draft/2019-09/schema",
-	"$id": "https://ofn.gov.cz/aktuality/draft/schémata/aktualita.json",
+	"$id": "https://ofn.gov.cz/digitální-objekty/draft/schémata/digitální-objekt.json",
 	"type": "object",
-	"title": "Aktualita",
+	"title": "Digitální objekt",
 	"required": ["typ"],
 	"properties": {
 		"typ": {
-			"const": "Aktualita"
+			"const": "Digitální objekt"
 		},
 		"iri": {
+
 			"type": "string",
 			"format": "iri",
 			"title": "Identifikátor",
@@ -34,28 +35,31 @@
 		"příloha": {
 			"$ref": "https://ofn.gov.cz/digitální-objekty/draft/schémata/digitální-objekty.json"
 		},
-		"informuje_o": {
+		"url": {
 			"type": "string",
-			"format": "iri",
-			"title": "Informuje o",
+			"format": "url",
+			"title": "URL",
 			"examples": [
-				"https://data.brno.cz/zdroj/akce/2019/vinobraní"
+				"https://www.brno.cz/fileadmin/user_upload/sprava_mesta/magistrat_mesta_brna/PO/volna_mista/VR_067_20_OUPR_urbanista_-_bydleni_05.docx"
 			]
 		},
-		"téma": {
+		"autor": {
 			"type": "array",
 			"items": {
-				"type": "string",
-				"format": "iri",
-				"pattern": "^https\\:\/\/data\\.mvcr\\.gov\\.cz\/zdroj\/číselníky\/témata-událostí\/položky\/.*$",
-				"title": "Téma aktuality",
-				"examples": [
-					"https://data.mvcr.gov.cz/zdroj/číselníky/témata-událostí/položky/doprava"
-				]
+				"$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
 			}
 		},
-		"oznamovatel": {
-			"$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
+		"typ_media": {
+			"type": "string",
+			"format": "iri",
+			"pattern": "^http\\:\/\/www\\.iana\\.org\/assignments\/media-types\/.*$",
+			"title": "Typ media",
+			"examples": [
+				"http://www.iana.org/assignments/media-types/image/tiff"
+			]
+		},
+		"podmínky_užití": {
+			
 		}
 	}
 }
