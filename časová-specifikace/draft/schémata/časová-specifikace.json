@@ -36,7 +36,6 @@
 			"$ref": "https://ofn.gov.cz/přílohy/draft/schémata/přílohy.json"
 		},
 		"počet_opakování": {
-
 			"type": "integer",
 			"title": "Počet opakování",
 			"examples": [
@@ -47,7 +46,6 @@
 			"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-interval.json"
 		},
 		"jiná_časová_specifikace": {
-
 			"type": "array",
 			"items": {
 				"type": "string",
@@ -60,7 +58,6 @@
 			}
 		},
 		"den_v_týdnu": {
-
 			"type": "array",
 			"items": {
 				"type": "string",
@@ -72,8 +69,7 @@
 				]
 			}
 		},
-		"časová_doba": {
-
+		"časové_období": {
 			"type": "array",
 			"items": {
 				"type": "string",
@@ -86,7 +82,6 @@
 			}
 		},
 		"frekvence": {
-
 			"type": "array",
 			"items": {
 				"type": "string",
@@ -98,22 +93,68 @@
 				]
 			}
 		},
-		"specifická_frekvence": {
+		"časová_doba": {
+			"type": "array",
+			"items": {
+				"type": "object",
+				"oneOf": [{
+						"type": "object",
+						"required": ["typ", "čas"],
+						"properties": {
+							"typ": {
+								"const": "Časová doba"
+							},
+							"čas": {
+								"type": "string",
+								"format": "time",
+								"title": "Konkrétní čas.",
+								"examples": [
+									"08:00:00"
+								]
+							}
+						}
+					},
+					{
+						"type": "object",
+						"required": ["typ", "od", "do"],
+						"properties": {
+							"typ": {
+								"const": "Časová doba"
+							},
+							"od": {
+								"type": "string",
+								"format": "time",
+								"title": "Začátek časového vymezení.",
+								"examples": [
+									"08:00:00"
+								]
+							},
+							"do": {
+								"type": "string",
+								"format": "time",
+								"title": "Konec časového vymezení.",
+								"examples": [
+									"23:00:00"
+								]
+							}
+						}
+					}
 
+				]
+			}
+		},
+		"specifická_frekvence": {
 			"type": "array",
 			"title": "Specifická frekvence",
 			"items": {
-
 				"type": "object",
 				"title": "Specifická frekvence",
 				"required": ["typ"],
 				"properties": {
 					"typ": {
-
 						"const": "Specifická frekvence"
 					},
 					"minuta": {
-
 						"type": "integer",
 						"title": "Minuta",
 						"examples": [
@@ -121,7 +162,6 @@
 						]
 					},
 					"hodina": {
-
 						"type": "integer",
 						"title": "Hodina",
 						"examples": [
@@ -129,7 +169,6 @@
 						]
 					},
 					"den_v_měsíci": {
-
 						"type": "integer",
 						"title": "Den v měsíci",
 						"examples": [
@@ -137,7 +176,6 @@
 						]
 					},
 					"týden_v_měsíci": {
-
 						"type": "integer",
 						"title": "Týden v měsíci",
 						"examples": [
@@ -145,7 +183,6 @@
 						]
 					},
 					"týden_v_roku": {
-
 						"type": "integer",
 						"title": "Týden v roku",
 						"examples": [
@@ -153,7 +190,6 @@
 						]
 					},
 					"rok_v_desetiletí": {
-
 						"type": "integer",
 						"title": "Týden v měsíci",
 						"examples": [
@@ -162,7 +198,6 @@
 
 					},
 					"rok_ve_století": {
-
 						"type": "integer",
 						"title": "Rok ve století",
 						"examples": [
