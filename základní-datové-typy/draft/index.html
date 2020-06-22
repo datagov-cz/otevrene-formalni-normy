@@ -31,10 +31,10 @@
                 latestVersion: "https://ofn.gov.cz/základní-datové-typy/",
                 editors: [{
                   name: "Jakub Klímek",
-                  url: "https://jakub.klímek.com/#me",
+                  
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
-                  companyURL: "http://www.mvcr.cz"
+                  companyURL: "https://www.mvcr.cz"
                 }],
                 inlineCSS: "true",
                 github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
@@ -55,10 +55,8 @@
         <section id="abstract" class="introductory">
             <h2>Abstrakt</h2>
             <p>
-                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Je navržena jako sdílená norma pro použití v dalších specifických otevřených formálních normách.
-                Ukazuje základní datové typy k použití v otevřených datových formátech.
-                Norma je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a RDF [[rdf11-concepts]].
+                Tento dokument je sdílenou specifikací pro základní datové typy pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
+                Specifikace je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a RDF [[rdf11-concepts]].
             </p>
         </section>
 
@@ -209,16 +207,15 @@ faktura:A123 faktura:zaplaceno &quot;09:30:00&quot;^^xsd:time ;
                 <section id="datum-a-čas">
                     <h4>Datum a čas</h4>
                     <p>
-                        Pro reprezentaci data a času jakožto jedné hodnoty se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:dateTime</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
-                        Tento datový typ umožňuje i explicitně zaznamenat časovou zónu.
-                        To se hodí například pro data a časy, u kterých se dá předpokládat využití v jiné časové zóně.
+                        Pro reprezentaci data a času jakožto jedné hodnoty se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:dateTimeStamp</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Tento datový typ vyžaduje explicitně zaznamenat časovou zónu.
                         Syntakticky se jedná se o spojení datových typů <a href="#datum" title="Datum">Datum</a> a <a href="#čas" title="Čas">Čas</a> pomocí znaku <code>T</code>.
                     </p>
                     
                     <aside class="example" title="Datum a čas v JSON">
                         <pre class="json">
 {
-    &quot;zaplaceno&quot;: &quot;2019-01-01T09:30:00&quot;,
+    &quot;zaplaceno&quot;: &quot;2019-01-01T09:30:00+02:00&quot;,
     &quot;přijato&quot;: &quot;2019-01-01T09:30:10.5+01:00&quot;
 }</pre>
                     </aside>
@@ -226,20 +223,20 @@ faktura:A123 faktura:zaplaceno &quot;09:30:00&quot;^^xsd:time ;
 
                     <aside class="example" title="Datum a čas v XML">
                         <pre class="xml">
-&lt;zaplaceno&gt;2019-01-01T09:30:00&lt;/zaplaceno&gt;
+&lt;zaplaceno&gt;2019-01-01T09:30:00+02:00&lt;/zaplaceno&gt;
 &lt;přijato&gt;2019-01-01T09:30:10.5+01:00&lt;/přijato&gt;</pre>
                     </aside>
 
                     <aside class="example" title="Datum a čas v CSV">
                         <pre class="csv">
 zaplaceno,přijato
-2019-01-01T09:30:00,2019-01-01T09:30:10.5+01:00</pre>
+2019-01-01T09:30:00+02:00,2019-01-01T09:30:10.5+01:00</pre>
                     </aside>
 
                     <aside class="example" title="Datum a čas v RDF Turtle">
                         <pre class="turtle">
-faktura:A123 faktura:zaplaceno &quot;2019-01-01T09:30:00&quot;^^xsd:dateTime ;
-             faktura:přijato &quot;2019-01-01T09:30:10.5+01:00&quot;^^xsd:dateTime .
+faktura:A123 faktura:zaplaceno &quot;2019-01-01T09:30:00+02:00&quot;^^xsd:dateTimeStamp ;
+             faktura:přijato &quot;2019-01-01T09:30:10.5+01:00&quot;^^xsd:dateTimeStamp .
 </pre>
                     </aside>
 
@@ -538,7 +535,8 @@ Název faktury,&quot;Label of the invoice&quot;</pre>
                         <p><a href="příklady/množství.json">Stáhnout JSON</a>, <a href="schémata/množství.json">JSON Schema</a>
                         </p>
                         <pre class="json">
-"množství": {
+{
+    "typ": "Množství",
     "hodnota": 23.0,
     "jednotka": "KGM"
 }</pre>
@@ -688,18 +686,30 @@ množství: a gr:QuantitativeValue ;
 
                     </section>  
                 
-                    <aside class="example" title="Jednotková částka v JSON">
+                    <aside class="example" title="Částka v JSON">
                         <p>
                             <a href="příklady/částka.json">Stáhnout JSON</a>, <a href="schémata/částka.json">JSON Schema</a>
                         </p>
                         <pre class="json">
 {
+    "typ": "Částka",
+    "výše": 48151623.42,
+    "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+}</pre>
+                    </aside>
+
+                    <aside class="example" title="Jednotková částka v JSON">
+                        <p>
+                            <a href="příklady/jednotková-částka.json">Stáhnout JSON</a>, <a href="schémata/jednotková-částka.json">JSON Schema</a>
+                        </p>
+                        <pre class="json">
+{
+    "typ": "Jednotková částka",
     "výše": 48151623.42,
     "měna": "http://publications.europa.eu/resource/authority/currency/CZK",
     "jednotka": "KGM"
 }</pre>
                     </aside>
-
 
                     <aside class="example" title="Částka v XML">
                         <pre class="xml">
@@ -716,15 +726,18 @@ zaplaceno_výše,zaplaceno_měna
                     </aside>
 
                     V datovém formátu RDF se pro specifikaci ceny používá třída <code>gr:PriceSpecification</code> ze slovníku <a href="http://www.heppnetz.de/projects/goodrelations/">GoodRelations</a>.
-                    
+                    Jelikož je již starší, tak jako specifikaci měny používá její kód formou řetězce.
+                    Ten lze do dat přidat pro zpětnou kompatibilitu, ale potřeba je zejména uvést měnu ve formě IRI z příslušného evropského číselníku.
                     <aside class="example" title="Částka v RDF Turtle">
                         <pre class="turtle">
 @prefix gr: &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix pojem: &lt;https://slovník.gov.cz/generický/částky/pojem/&gt; .
                         
 faktura:A123 gr:hasPriceSpecification zaplaceno: .
 
 zaplaceno: a gr:PriceSpecification ;
            gr:hasCurrency "CZK"^^xsd:string ;
+           pojem:má-měnu &lt;http://publications.europa.eu/resource/authority/currency/CZK&gt; ;
            gr:hasCurrencyValue 48151623.42 .
 </pre>
                     </aside>
@@ -732,11 +745,13 @@ zaplaceno: a gr:PriceSpecification ;
                     <aside class="example" title="Jednotková částka za kilogram v RDF Turtle">
                         <pre class="turtle">
 @prefix gr: &lt;http://purl.org/goodrelations/v1#&gt; .
+@prefix pojem: &lt;https://slovník.gov.cz/generický/částky/pojem/&gt; .
                         
 faktura:A124 gr:hasPriceSpecification zaplaceno: .
 
 zaplaceno: a gr:UnitPriceSpecification ;
            gr:hasCurrency "CZK"^^xsd:string ;
+           pojem:má-měnu &lt;http://publications.europa.eu/resource/authority/currency/CZK&gt; ;
            gr:hasCurrencyValue 24.42 ;
            gr:hasUnitOfMeasurement "KGM"^^xsd:string .
 </pre>
@@ -752,8 +767,8 @@ zaplaceno: a gr:UnitPriceSpecification ;
                 <section id="časový-okamžik">
                     <h4>Časový okamžik</h4>
                     <p>
-                        Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času.
-                        Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy <a href="#datum">datum</a>, <a href="#čas">čas</a> či <a href="#datum-a-čas">datum a čas</a>.
+                        Pro reprezentaci časových okamžiků lze použít datum, kombinaci data a času a nebo říci, že je časový okamžik nespecifikován.
+                        Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy <a href="#datum">datum</a> či <a href="#datum-a-čas">datum a čas</a>.
                         Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici.
                         Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.
                     </p>
@@ -788,37 +803,6 @@ zaplaceno: a gr:UnitPriceSpecification ;
                         </dl>
 
                     </section>
-
-                    <section id="časový-okamžik-čas">
-                        <h5>Čas</h5>
-                        <dl>
-                            <dt>
-                                Vlastnost
-                            </dt>
-                            <dd>
-                                <code>čas</code>
-                            </dd>
-                            <dt>
-                                Typ
-                            </dt>
-                            <dd>
-                                <a href="#čas">Čas</a>
-                            </dd>
-                            <dt>
-                                Jméno
-                            </dt>
-                            <dd>
-                                Čas okamžiku.
-                            </dd>
-                            <dt>
-                                Příklad
-                            </dt>
-                            <dd>
-                                <code>09:30:00</code>
-                            </dd>
-                        </dl>
-
-                    </section>
                     
                     <section id="časový-okamžik-datum-a-čas">
                         <h5>Datum a čas</h5>
@@ -845,7 +829,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Příklad
                             </dt>
                             <dd>
-                                <code>2019-01-01T09:30:00</code>
+                                <code>2019-01-01T09:30:00+02:00</code>
                             </dd>
                         </dl>
 
@@ -876,8 +860,8 @@ zaplaceno: a gr:UnitPriceSpecification ;
                                 Popis
                             </dt>
                             <dd>
-								Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá.
-								Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na <code>3333-03-03</code> či <code>9999-09-09</code> apod. nebo hodnotu vynechat.
+                                Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá.
+                                Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na <code>3333-03-03</code> či <code>9999-09-09</code> apod. nebo hodnotu vynechat.
                             </dd>
                             <dt>
                                 Příklad
@@ -895,6 +879,7 @@ zaplaceno: a gr:UnitPriceSpecification ;
                         </p>
                         <pre class="json">
 {
+    "typ": "Časový okamžik",
     "datum": "2019-07-31"
 }</pre>
                     </aside>
@@ -905,15 +890,9 @@ zaplaceno: a gr:UnitPriceSpecification ;
                         </p>
                         <pre class="json">
 {
+    "typ": "Časový okamžik",
     "nespecifikovaný": true
 }</pre>
-                    </aside>
-
-                    <aside class="example" title="Časový okamžik (čas) v XML">
-                        <pre class="xml">
-&lt;okamžik&gt;
-   &lt;čas&gt;09:00:00&lt;/čas&gt;
-&lt;/okamžik&gt;</pre>
                     </aside>
 
                     <aside class="example" title="Časový okamžik (datum a čas) v CSV">
@@ -924,12 +903,12 @@ datum_a_čas
 
                     V datovém formátu RDF se pro specifikaci časového okamžiku používá slovník Time Ontology [[owl-time]].
                     
-                    <aside class="example" title="Částka v RDF Turtle">
+                    <aside class="example" title="Časový okamžik v RDF Turtle">
                         <pre class="turtle">
 @prefix time:  &lt;http://www.w3.org/2006/time#&gt; .
                         
 instant: a time:Instant ;
-    time:inXSDDateTime "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime .
+    time:inXSDDateTimeStamp "2019-01-01T09:30:10.5+01:00"^^xsd:dateTimeStamp .
 </pre>
                     </aside>
 
@@ -1002,10 +981,13 @@ instant: a time:Instant ;
                         </p>
                         <pre class="json">
 {
+    "typ": "Časový interval",
     "začátek": {
+        "typ": "Časový okamžik",
         "datum": "2019-07-31"
     },
     "konec": {
+        "typ": "Časový okamžik",
         "datum": "2020-07-31"
     }
 }</pre>
@@ -1015,16 +997,19 @@ instant: a time:Instant ;
                         <p>
                             <a href="příklady/časový-interval-otevřený.json">Stáhnout JSON</a>, <a href="schémata/časový-interval.json">JSON Schema</a>
                         </p>
-						<p>
-							Takto lze reprezentovat interval, u kterého nevíme, kdy bude končit, nicméně víme, že někdy končit bude.
-							Jedná se o pro interoperabilitu výrazně lepší variantu, než si konec uměle definovat na <code>3333-03-03</code> či <code>9999-09-09</code> apod.
-						</p>
+                        <p>
+                            Takto lze reprezentovat interval, u kterého nevíme, kdy bude končit, nicméně víme, že někdy končit bude.
+                            Jedná se o pro interoperabilitu výrazně lepší variantu, než si konec uměle definovat na <code>3333-03-03</code> či <code>9999-09-09</code> apod.
+                        </p>
                         <pre class="json">
 {
+    "typ": "Časový interval",
     "začátek": {
+        "typ": "Časový okamžik",
         "datum": "2019-07-31"
     },
     "konec": {
+        "typ": "Časový okamžik",
         "nespecifikovaný": true
     }
 }</pre>
@@ -1059,8 +1044,8 @@ začátek_datum_a_čas,konec_datum_a_čas
                         
 datová-sada:D123 dcterms:temporal interval: .
 
-interval: schema:startDate "2019-01-01T09:30:10.5+01:00"^^xsd:dateTime ;
-          schema:endDate "2020-01-01T09:30:10.5+01:00"^^xsd:dateTime .
+interval: schema:startDate "2019-01-01T09:30:10.5+01:00"^^xsd:dateTimeStamp ;
+          schema:endDate "2020-01-01T09:30:10.5+01:00"^^xsd:dateTimeStamp .
 </pre>
                     </aside>
                     

@@ -31,10 +31,10 @@
                 latestVersion: "https://ofn.gov.cz/kontakty/",
                 editors: [{
                   name: "Jakub Klímek",
-                  url: "https://jakub.klímek.com/#me",
+                  
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
-                  companyURL: "http://www.mvcr.cz"
+                  companyURL: "https://www.mvcr.cz"
                 }],
                 inlineCSS: "true",
                 github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
@@ -55,11 +55,25 @@
         <section id="abstract" class="introductory">
             <h2>Abstrakt</h2>
             <p>
-                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování kontaktů.
-                Je navržena jako sdílená norma pro použití v dalších specifických otevřených formálních normách.
+                Tento dokument je sdílenou specifikací pro kontakty pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
+                Specifikace je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a v datovém modelu RDF [[rdf11-concepts]].
                 Ukazuje, jak reprezentovat informace o telefonních číslech, e-mailových adresách a odkazech na webové stránky.
-                Norma je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a v datovém modelu RDF [[rdf11-concepts]].
             </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu kontaktů" src="obrázky/kontakty.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1SaPl-m_r500IzZeHm4hjhNytUUi75t40/view?usp=sharing">
+                        Diagram datového modelu kontaktů
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                    Vazby bez kardinalit(šipka) reprezentují dědění vlastností a vazeb třídy <a href="../../věc/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
         </section>
 
         <section id="specifikace">
@@ -67,13 +81,13 @@
 
             <p>
                 V této sekci jsou definovány vlastnosti kontaktu.
-                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou, dědí vlastnosti a vazby třídy <a href="../../věc/#třída-věc">Věc</a>.
             </p>
 
             <section id="třída-kontakt">
                 <h3>Kontakt</h3>
                 <p>
-                    Kontakt na člověka či společnost.
+                    Kontakt na člověka či společnost. Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
 
                 <section id="vlastnost-kontakt-druh">
@@ -432,7 +446,7 @@
 
                 </section>  
 
-			</section>
+            </section>
             
         </section>
         
@@ -461,6 +475,7 @@
                     </p>
                     <pre class="json">
 {
+    "typ": "Kontakt",
     "telefon": "+420123456789",
     "email": "otevrenadata@mvcr.cz"
 }</pre>
@@ -476,13 +491,14 @@
                     </p>
                 
                     <pre class="xml">
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;kontakt:kontakt xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
-xmlns:kontakt=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/&quot; 
-xsi:schemaLocation=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/ https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/draft/sch&eacute;mata/kontakt.xsd&quot;&gt;
-&#x9;&lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
-&#x9;&lt;kontakt:telefon&gt;+420123456789&lt;/kontakt:telefon&gt;
-&lt;/kontakt:kontakt&gt;</pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01" 
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/2020-07-01 https://ofn.gov.cz/kontakty/draft/schémata/kontakt.xsd"&gt;
+    &lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
+    &lt;kontakt:telefon&gt;+420123456789&lt;/kontakt:telefon&gt;
+&lt;/kontakt:kontakt&gt;
+</pre>
                 </aside>
                 
                 <aside class="example" title="Telefon a e-mail v CSV">
@@ -546,6 +562,7 @@ otevrenadata@mvcr.cz,+420123456789</pre>
                     </p>
                     <pre class="json">
 {
+    "typ": "Kontakt",
     "telefon": "+420123456789",
     "email": "otevrenadata@mvcr.cz",
     "telegram": "jakub_klimek"
@@ -563,15 +580,19 @@ otevrenadata@mvcr.cz,+420123456789</pre>
                     </p>
                 
                     <pre class="xml">
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;kontakt:kontakt xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
-xmlns:kontakt=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/&quot;
-xmlns:x=&quot;https://p&rcaron;&iacute;klad.cz&quot;
-xsi:schemaLocation=&quot;https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/ https://data.gov.cz/otev&rcaron;en&eacute;-form&aacute;ln&iacute;-normy/kontakty/draft/sch&eacute;mata/kontakt.xsd&quot;&gt;
-&#x9;&lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
-&#x9;&lt;kontakt:telefon&gt;+420123456789&lt;/kontakt:telefon&gt;
-&#x9;&lt;x:telegram&gt;jakub_klimek&lt;/x:telegram&gt;
-&lt;/kontakt:kontakt&gt;</pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01"
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xmlns:x="https://příklad.cz"
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/2020-07-01 https://ofn.gov.cz/kontakty/draft/schémata/kontakt.xsd"&gt;
+    &lt;základ:rozšiřující_položky&gt;
+        &lt;x:telegram&gt;jakub_klimek&lt;/x:telegram&gt;
+    &lt;/základ:rozšiřující_položky&gt;
+    &lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
+    &lt;kontakt:telefon&gt;+420123456789&lt;/kontakt:telefon&gt;
+&lt;/kontakt:kontakt&gt;
+</pre>
                 </aside>
                 
                 <p>
@@ -645,6 +666,7 @@ otevrenadata@mvcr.cz,+420123456789,jakub_klimek</pre>
                 
                     <pre class="json">
 {
+    "typ": "Kontakt",
     "druh": {
         "cs": "Neformální",
         "en": "Informal"
@@ -655,8 +677,10 @@ otevrenadata@mvcr.cz,+420123456789,jakub_klimek</pre>
     "telefon": "+420123456789",
     "url": "https://data.gov.cz",
     "umístění": {
+        "typ": "Umístění",
         "adresa": {
-            "iri_adresního_místa": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
         }
     }
 }</pre>
@@ -670,10 +694,11 @@ otevrenadata@mvcr.cz,+420123456789,jakub_klimek</pre>
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xmlns:kontakt="https://ofn.gov.cz/kontakty/"
+xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01"
 xmlns:x="https://příklad.cz"
-xmlns:umístění="https://ofn.gov.cz/umístění/"
-xsi:schemaLocation="https://ofn.gov.cz/kontakty/ https://ofn.gov.cz/kontakty/draft/schémata/kontakt.xsd"&gt;
+xmlns:adresy="https://ofn.gov.cz/adresy/2020-07-01"
+xmlns:umístění="https://ofn.gov.cz/umístění/2020-07-01"
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/2020-07-01 https://ofn.gov.cz/kontakty/draft/schémata/kontakt.xsd"&gt;
     &lt;kontakt:druh xml:lang="cs"&gt;Neformální&lt;/kontakt:druh&gt;
     &lt;kontakt:druh xml:lang="en"&gt;Informal&lt;/kontakt:druh&gt;
     &lt;kontakt:email&gt;otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
@@ -683,7 +708,7 @@ xsi:schemaLocation="https://ofn.gov.cz/kontakty/ https://ofn.gov.cz/kontakty/dra
     &lt;kontakt:url&gt;https://data.gov.cz&lt;/kontakt:url&gt;
     &lt;kontakt:umístění&gt;
         &lt;umístění:adresa&gt;
-            &lt;adresa:iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/adresa:iri_adresního_místa&gt;
+            &lt;adresy:adresní_místo&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/adresy:adresní_místo&gt;
         &lt;/umístění:adresa&gt;
     &lt;/kontakt:umístění&gt; 
 &lt;/kontakt:kontakt&gt;</pre>
@@ -695,12 +720,12 @@ xsi:schemaLocation="https://ofn.gov.cz/kontakty/ https://ofn.gov.cz/kontakty/dra
                     </p>
                 
                     <pre class="csv">
-druh_cs,druh_en,email,idds,mobil,telefon,url,umístětní_adresa_iri_adresního_místa
-Neformální,Informal,otevrenadata@mvcr.cz,abcdef,+420123456789,+420123456789,https://data.gov.cz,https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</aside>
-                
+druh_cs,druh_en,email,idds,mobil,telefon,url,umístětní_adresa_adresní_místo
+Neformální,Informal,otevrenadata@mvcr.cz,abcdef,+420123456789,+420123456789,https://data.gov.cz,https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
                 <p>
                     A opět je k souboru CSV potřeba připojit <a href="příklady/3.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
                 </p>
+                </aside>
                 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
@@ -755,8 +780,8 @@ Neformální,Informal,otevrenadata@mvcr.cz,abcdef,+420123456789,+420123456789,ht
                 "dc:description": "Adresa webové stránky pro kontakt",
                 "datatype": "anyURI"
             }, {
-                "name": "umistetni_adresa_iri_adresniho_mista",
-                "titles": "umístětní_adresa_iri_adresního_místa",
+                "name": "umistetni_adresa_adresni_misto",
+                "titles": "umístětní_adresa_adresní_místo",
                 "dc:description": "Adresa pro kontakt",
                 "datatype": "anyURI"
             }

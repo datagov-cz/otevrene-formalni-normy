@@ -1,55 +1,97 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/osoba.json",
-    "name": "Osoba",
-    "type": "object",
-    "description": "Právnická osoba a její identifikace",
-    "oneOf": [{
-            "required": ["ičo"],
-            "properties": {
-                "ičo": {
-                    "$id": "#/oneOf/tuzemská/properties/ičo",
-                    "type": "string",
-                    "title": "IČO",
-                    "description": "IČO",
-                    "examples": [
-                        "00112233"
-                    ]
-                },
-                "název": {
-                    "$id": "#/oneOf/tuzemská/properties/název",
-                    "type": "string",
-                    "title": "Název",
-                    "description": "Název právnické osoby.",
-                    "examples": [
-                        "MojeFirma s.r.o."
-                    ]
-                }
-            }
-        }, {
-            "required": ["název", "stát_registrace"],
-            "properties": {
-                "název": {
-                    "$id": "#/oneOf/zahraniční/properties/název",
-                    "type": "string",
-                    "title": "Název",
-                    "description": "Název právnické osoby.",
-                    "examples": [
-                        "MojeFirma s.r.o."
-                    ]
-                },
-                "stát_registrace": {
-                    "$id": "#/oneOf/zahraniční/properties/stát_registrace",
-                    "type": "string",
-                    "format": "iri",
-                    "title": "Stát",
-                    "description": "Stát registrace zahraniční právnické osoby.",
-                    "examples": [
-                        "http://publications.europa.eu/resource/authority/country/SVK"
-                    ]
-                }
-            }
-        }
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/osoba.json",
+	"name": "Osoba",
+	"type": "object",
+	"description": "Právnická osoba a její identifikace",
+	"oneOf": [{
+			"required": ["typ", "ičo"],
+			"properties": {
+				"typ": {
+					"const": "Osoba"
+				},
+				"iri": {
+					"type": "string",
+					"format": "iri",
+					"title": "Identifikátor",
+					"examples": [
+						"https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+					]
+				},
+				"název": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+				},
+				"popis": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+				},
+				"vytvořeno": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+				},
+				"relevantní_do": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+				},
+				"zneplatněno": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+				},
+				"příloha": {
+					"$ref": "https://ofn.gov.cz/digitální-objekty/draft/schémata/digitální-objekty.json"
+				},
+				"ičo": {
 
-    ]
+					"type": "string",
+					"title": "IČO",
+					"pattern": "^[0-9]{8}$",
+					"description": "IČO",
+					"examples": [
+						"00112233"
+					]
+				}
+			}
+		}, {
+			"required": ["typ", "název", "stát_registrace"],
+			"properties": {
+				"typ": {
+					"const": "Zahraniční osoba"
+				},
+				"iri": {
+					"type": "string",
+					"format": "iri",
+					"title": "Identifikátor",
+					"examples": [
+						"https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+					]
+				},
+				"název": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+				},
+				"popis": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
+				},
+				"vytvořeno": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+				},
+				"relevantní_do": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+				},
+				"zneplatněno": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
+				},
+				"příloha": {
+					"$ref": "https://ofn.gov.cz/digitální-objekty/draft/schémata/digitální-objekty.json"
+				},
+				"stát_registrace": {
+
+					"type": "string",
+					"format": "iri",
+					"pattern": "^http\\:\/\/publications\\.europa\\.eu\/resource\/authority\/country\/.*$",
+					"title": "Stát",
+					"description": "Stát registrace zahraniční právnické osoby.",
+					"examples": [
+						"http://publications.europa.eu/resource/authority/country/SVK"
+					]
+				}
+			}
+		}
+
+	]
 }
