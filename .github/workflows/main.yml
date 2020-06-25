@@ -18,13 +18,19 @@ jobs:
         input-file: ./files.json
         filter-json: >-
           {
-            "./files-json.json": [ ".*\\.json" ]
+            "./files-json.json": [ ".*\\.json$" ],
+            "./files-jsonld.json": [ ".*\\.jsonld$" ]
           }
     - run: touch ${HOME}/report.json
     - name: Validate JSON syntax
       uses: opendata-mvcr/lkod-github-actions/validate-json-syntax@master
       with:
         input-file: ./files-json.json
+        output-file: ./report.json
+    - name: Validate JSON-LD JSON syntax
+      uses: opendata-mvcr/lkod-github-actions/validate-json-syntax@master
+      with:
+        input-file: ./files-jsonld.json
         output-file: ./report.json
 #    - name: Validate JSON-LD not empty
 #      uses: opendata-mvcr/lkod-github-actions/validate-jsonld-not-empty@master
