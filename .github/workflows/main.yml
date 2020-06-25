@@ -19,7 +19,7 @@ jobs:
         filter-json: >-
           {
             "./files-json.json": [ ".*\\.json" ],
-            "./files-jsonld.json": [ ".*\\.jsonld" ]
+ #           "./files-jsonld.json": [ ".*\\.jsonld" ]
           }
     - run: touch ${HOME}/report.json
     - name: Validate JSON syntax
@@ -27,11 +27,11 @@ jobs:
       with:
         input-file: ./files-json.json
         output-file: ./report.json
-    - name: Validate JSON-LD not empty
-      uses: opendata-mvcr/lkod-github-actions/validate-jsonld-not-empty@master
-      with:
-        input-file: ./files-jsonld.json
-        output-file: ./report.json
+#    - name: Validate JSON-LD not empty
+#      uses: opendata-mvcr/lkod-github-actions/validate-jsonld-not-empty@master
+#      with:
+#        input-file: ./files-jsonld.json
+#        output-file: ./report.json
     - name: Push annotations
       uses: opendata-mvcr/lkod-github-actions/push-annotations@master
       with:
