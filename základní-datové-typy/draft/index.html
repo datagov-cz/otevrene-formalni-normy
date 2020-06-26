@@ -56,7 +56,7 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je sdílenou specifikací pro základní datové typy pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Specifikace je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a RDF [[rdf11-concepts]].
+                Specifikace je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]], CSV [[rfc4180]] a RDF Turtle [[turtle]].
             </p>
         </section>
 
@@ -79,11 +79,11 @@
                     <h4>Booleovská hodnota - Ano či ne</h4>
                     <p>
                         Booleovská hodnota se hodí pro reprezentaci vlastností, které mohou mít pouze dvě hodnoty - Ano či ne.
-                        Ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF se pro reprezentaci booleovské hodnoty používá typ <code>xsd:boolean</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] se pro reprezentaci booleovské hodnoty používá typ <code>xsd:boolean</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         Hodnota <code>true</code> vyjadřuje Ano, <code>false</code> vyjadřuje Ne.
                     </p>
 
-                    <aside class="example" title="Booleovská hodnota v JSON">
+                    <aside class="example" title="Booleovská hodnota v JSON-LD">
                         <pre class="json">
 {
     &quot;zaplaceno&quot;: false,
@@ -121,12 +121,12 @@ faktura:A123 faktura:zaplaceno false ;
                 <section id="datum">
                     <h4>Datum</h4>
                     <p>
-                        Pro reprezentaci datumu se ve všech cílových otevřených formátech, tj. CSV [[!rfc4180]], JSON [[!ECMA-404]], XML [[!xml]] a RDF [[!rdf11-concepts]] používá typ <code>xsd:date</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci datumu se ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] používá typ <code>xsd:date</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         Tento datový typ umožňuje i explicitně zaznamenat časovou zónu.
                         To se hodí například pro data, u kterých se dá předpokládat využití v jiné časové zóně.
                     </p>
 
-                    <aside class="example" title="Datum v JSON">
+                    <aside class="example" title="Datum v JSON-LD">
                         <pre class="json">
 {
     &quot;zaplaceno&quot;: &quot;2019-01-01&quot;,
@@ -164,12 +164,12 @@ faktura:A123 faktura:zaplaceno "2019-01-01"^^xsd:date ;
                 <section id="čas">
                     <h4>Čas</h4>
                     <p>
-                        Pro reprezentaci času se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:time</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci času se ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] používá typ <code>xsd:time</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         Tento datový typ umožňuje i explicitně zaznamenat časovou zónu.
                         To se hodí například pro časy, u kterých se dá předpokládat využití v jiné časové zóně.
                     </p>
 
-                    <aside class="example" title="Čas v JSON">
+                    <aside class="example" title="Čas v JSON-LD">
                         <pre class="json">
 {
     &quot;zaplaceno&quot;: &quot;09:30:00&quot;,
@@ -207,12 +207,12 @@ faktura:A123 faktura:zaplaceno &quot;09:30:00&quot;^^xsd:time ;
                 <section id="datum-a-čas">
                     <h4>Datum a čas</h4>
                     <p>
-                        Pro reprezentaci data a času jakožto jedné hodnoty se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:dateTimeStamp</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci data a času jakožto jedné hodnoty se ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] používá typ <code>xsd:dateTimeStamp</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         Tento datový typ vyžaduje explicitně zaznamenat časovou zónu.
                         Syntakticky se jedná se o spojení datových typů <a href="#datum" title="Datum">Datum</a> a <a href="#čas" title="Čas">Čas</a> pomocí znaku <code>T</code>.
                     </p>
                     
-                    <aside class="example" title="Datum a čas v JSON">
+                    <aside class="example" title="Datum a čas v JSON-LD">
                         <pre class="json">
 {
     &quot;zaplaceno&quot;: &quot;2019-01-01T09:30:00+02:00&quot;,
@@ -250,10 +250,10 @@ faktura:A123 faktura:zaplaceno &quot;2019-01-01T09:30:00+02:00&quot;^^xsd:dateTi
                 <section id="celé-číslo">
                     <h4>Celé číslo</h4>
                     <p>
-                        Pro reprezentaci celých čísel se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:integer</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci celých čísel se ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] používá typ <code>xsd:integer</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                     </p>
                     
-                    <aside class="example" title="Celá čísla v JSON">
+                    <aside class="example" title="Celá čísla v JSON-LD">
                         <pre class="json">
 {
     &quot;zaplaceno&quot;: 4,
@@ -291,11 +291,11 @@ faktura:A123 faktura:zaplaceno 4 ;
                 <section id="desetinné-číslo">
                     <h4>Desetinné číslo</h4>
                     <p>
-                        Pro reprezentaci desetinných čísel se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:decimal</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci desetinných čísel se ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] používá typ <code>xsd:decimal</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         Oddělovačem desetinných míst je <code>.</code> - tečka.
                     </p>
                     
-                    <aside class="example" title="Desetinná čísla v JSON">
+                    <aside class="example" title="Desetinná čísla v JSON-LD">
                         <pre class="json">
 {
     &quot;zaplaceno&quot;: 4.25,
@@ -333,11 +333,11 @@ faktura:A123 faktura:zaplaceno 4.25 ;
                 <section id="url">
                     <h4>URI, IRI, URL</h4>
                     <p>
-                        Pro reprezentaci webových identifikátorů a odkazů URI, IRI a URL se ve všech cílových otevřených formátech, tj. CSV, XML, JSON a RDF používá typ <code>xsd:anyURI</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
+                        Pro reprezentaci webových identifikátorů a odkazů URI, IRI a URL se ve všech cílových otevřených formátech, tj. JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]], CSV [[!rfc4180]] a RDF Turlte [[!turtle]] používá typ <code>xsd:anyURI</code> z jazyka XML Schema [[!xmlschema11-2-20120405]].
                         URI, IRI ani URL nesmí obsahovat nezakódované mezery.
                     </p>
                     
-                    <aside class="example" title="IRI v JSON">
+                    <aside class="example" title="IRI v JSON-LD">
                         <pre class="json">
 {
     &quot;stránka&quot;: &quot;https://data.gov.cz/&quot;
@@ -373,7 +373,7 @@ faktura:A123 faktura:stránka &quot;https://data.gov.cz/&quot;^^xsd:anyURI ;
                         Pokud se ale jedná o text v přirozeném jazyce, jako je název, popis apod., je třeba využít datový typ <a href="#text">text v přirozeném jazyce</a>.
                     </p>
                     
-                    <aside class="example" title="Řetězec v JSON">
+                    <aside class="example" title="Řetězec v JSON-LD">
                         <pre class="json">
 {
     &quot;kód&quot;: &quot;AA-23&quot;,
@@ -411,7 +411,7 @@ AA-23</pre>
                         Ve formátu JSON je třeba dodržet <a href="schémata/text.json">schéma pro vícejazyčné texty</a>.
                     </p>
                     
-                    <aside class="example" title="Text v JSON">
+                    <aside class="example" title="Text v JSON-LD">
                         <pre class="json">
 {
     "název": {
@@ -531,11 +531,12 @@ Název faktury,&quot;Label of the invoice&quot;</pre>
 
                     </section>                  
                                         
-                    <aside class="example" title="Množství v JSON">
-                        <p><a href="příklady/množství.json">JSON soubor</a>, <a href="schémata/množství.json">JSON Schema</a>, <a href="kontexty/množství.jsonld">JSON-LD kontext</a>
+                    <aside class="example" title="Množství v JSON-LD">
+                        <p><a href="příklady/množství.jsonld">JSON-LD soubor</a>, <a href="schémata/množství.json">JSON Schema</a>, <a href="kontexty/množství.jsonld">JSON-LD kontext</a>
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/množství.jsonld",
     "typ": "Množství",
     "hodnota": 23.0,
     "jednotka": "KGM"
@@ -686,24 +687,26 @@ množství: a gr:QuantitativeValue ;
 
                     </section>  
                 
-                    <aside class="example" title="Částka v JSON">
+                    <aside class="example" title="Částka v JSON-LD">
                         <p>
-                            <a href="příklady/částka.json">JSON soubor</a>, <a href="schémata/částka.json">JSON Schema</a>, <a href="kontexty/částka.jsonld">JSON-LD kontext</a>
+                            <a href="příklady/částka.jsonld">JSON-LD soubor</a>, <a href="schémata/částka.json">JSON Schema</a>, <a href="kontexty/částka.jsonld">JSON-LD kontext</a>
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/částka.jsonld",
     "typ": "Částka",
     "výše": 48151623.42,
     "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
 }</pre>
                     </aside>
 
-                    <aside class="example" title="Jednotková částka v JSON">
+                    <aside class="example" title="Jednotková částka v JSON-LD">
                         <p>
-                            <a href="příklady/jednotková-částka.json">JSON soubor</a>, <a href="schémata/jednotková-částka.json">JSON Schema</a>, <a href="kontexty/jednotková-částka.jsonld">JSON-LD kontext</a>
+                            <a href="příklady/jednotková-částka.jsonld">JSON-LD soubor</a>, <a href="schémata/jednotková-částka.json">JSON Schema</a>, <a href="kontexty/jednotková-částka.jsonld">JSON-LD kontext</a>
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/jednotková-částka.jsonld",
     "typ": "Jednotková částka",
     "výše": 48151623.42,
     "měna": "http://publications.europa.eu/resource/authority/currency/CZK",
@@ -873,23 +876,25 @@ zaplaceno: a gr:UnitPriceSpecification ;
 
                     </section>
 
-                    <aside class="example" title="Časový okamžik (datum) v JSON">
+                    <aside class="example" title="Časový okamžik (datum) v JSON-LD">
                         <p>
-                            <a href="příklady/časový-okamžik.json">JSON soubor</a>, <a href="schémata/časový-okamžik.json">JSON Schema</a>, <a href="kontexty/časový-okamžik.jsonld">JSON-LD kontext</a>
+                            <a href="příklady/časový-okamžik.jsonld">JSON-LD soubor</a>, <a href="schémata/časový-okamžik.json">JSON Schema</a>, <a href="kontexty/časový-okamžik.jsonld">JSON-LD kontext</a>
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/časový-okamžik.jsonld",
     "typ": "Časový okamžik",
     "datum": "2019-07-31"
 }</pre>
                     </aside>
 
-                    <aside class="example" title="Nespecifikovaný časový okamžik v JSON">
+                    <aside class="example" title="Nespecifikovaný časový okamžik v JSON-LD">
                         <p>
-                            <a href="příklady/časový-okamžik-nespecifikovaný.json">JSON soubor</a>, <a href="schémata/časový-okamžik.json">JSON Schema</a>, <a href="kontexty/časový-okamžik.jsonld">JSON-LD kontext</a>
+                            <a href="příklady/časový-okamžik-nespecifikovaný.jsonld">JSON-LD soubor</a>, <a href="schémata/časový-okamžik.json">JSON Schema</a>, <a href="kontexty/časový-okamžik.jsonld">JSON-LD kontext</a>
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/časový-okamžik.jsonld",
     "typ": "Časový okamžik",
     "nespecifikovaný": true
 }</pre>
@@ -975,12 +980,13 @@ instant: a time:Instant ;
 
                     </section>
 
-                    <aside class="example" title="Časový interval (datum) v JSON">
+                    <aside class="example" title="Časový interval (datum) v JSON-LD">
                         <p>
-                            <a href="příklady/časový-interval.json">JSON soubor</a>, <a href="schémata/časový-interval.json">JSON Schema</a>, <a href="kontexty/časový-interval.jsonld">JSON-LD kontext</a>
+                            <a href="příklady/časový-interval.jsonld">JSON-LD soubor</a>, <a href="schémata/časový-interval.json">JSON Schema</a>, <a href="kontexty/časový-interval.jsonld">JSON-LD kontext</a>
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/časový-interval.jsonld",
     "typ": "Časový interval",
     "začátek": {
         "typ": "Časový okamžik",
@@ -993,9 +999,9 @@ instant: a time:Instant ;
 }</pre>
                     </aside>
 
-                    <aside class="example" title="Otevřený časový interval v JSON">
+                    <aside class="example" title="Otevřený časový interval v JSON-LD">
                         <p>
-                            <a href="příklady/časový-interval-otevřený.json">JSON soubor</a>, <a href="schémata/časový-interval.json">JSON Schema</a>, <a href="kontexty/časový-interval.jsonld">JSON-LD kontext</a>
+                            <a href="příklady/časový-interval-otevřený.jsonld">JSON-LD soubor</a>, <a href="schémata/časový-interval.json">JSON Schema</a>, <a href="kontexty/časový-interval.jsonld">JSON-LD kontext</a>
                         </p>
                         <p>
                             Takto lze reprezentovat interval, u kterého nevíme, kdy bude končit, nicméně víme, že někdy končit bude.
@@ -1003,6 +1009,7 @@ instant: a time:Instant ;
                         </p>
                         <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/základní-datové-typy/draft/kontexty/časový-interval.jsonld",
     "typ": "Časový interval",
     "začátek": {
         "typ": "Časový okamžik",

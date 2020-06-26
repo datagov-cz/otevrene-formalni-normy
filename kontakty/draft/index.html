@@ -55,7 +55,7 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je sdílenou specifikací pro kontakty pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Specifikace je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a v datovém modelu RDF [[rdf11-concepts]].
+                Specifikace je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]] a CSV [[rfc4180]].
                 Ukazuje, jak reprezentovat informace o telefonních číslech, e-mailových adresách a odkazech na webové stránky.
             </p>
         </section>
@@ -453,9 +453,10 @@
             <h2>Příklady</h2>
 
             <p>
-                V této sekci jsou uvedeny příklady reprezentace kontaktů v různých formátech a v různých úrovních detailu.
-                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
+                V této sekci jsou uvedeny příklady reprezentace kontaktů ve formátech JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]] a CSV [[!rfc4180]] a v různých úrovních detailu.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů.
                 Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/kontakt.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/kontakt.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
+                Pro formát JSON-LD [[!json-ld11]] je k dispozici <a href="kontexty/kontakt.jsonld">kontext</a>.
                 Lze také použít zápis v CSV. 
                 Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
             </p>
@@ -468,12 +469,13 @@
             <section id="příklady-jednoduchá-adresa">
                 <h3>Kontaktní telefon a e-mail</h3>
                 
-                <aside class="example" title="Telefon a e-mail v JSON">
+                <aside class="example" title="Telefon a e-mail v JSON-LD">
                     <p>
-                       <a href="příklady/1.json">JSON soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
+                       <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/kontakty/draft/kontexty/kontakt.jsonld",
     "typ": "Kontakt",
     "telefon": "+420123456789",
     "email": "otevrenadata@mvcr.cz"
@@ -555,12 +557,13 @@ otevrenadata@mvcr.cz,+420123456789</pre>
                     V následujících příkladech jsou nad rámec standardu přidán atribut <code>telegram</code>.
                 </p>
                 
-                <aside class="example" title="Jednoduchý kontakt s vlastním atributem v JSON">
+                <aside class="example" title="Jednoduchý kontakt s vlastním atributem v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">JSON soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/kontakty/draft/kontexty/kontakt.jsonld",
     "typ": "Kontakt",
     "telefon": "+420123456789",
     "email": "otevrenadata@mvcr.cz",
@@ -658,13 +661,14 @@ otevrenadata@mvcr.cz,+420123456789,jakub_klimek</pre>
                     Některé mohou být detailní.
                 </p>
                 
-                <aside class="example" title="Komplexní kontakt v JSON">
+                <aside class="example" title="Komplexní kontakt v JSON-LD">
                     <p>
-                        <a href="příklady/3.json">JSON soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
                     </p>
                 
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/kontakty/draft/kontexty/kontakt.jsonld",
     "typ": "Kontakt",
     "druh": {
         "cs": "Neformální",
