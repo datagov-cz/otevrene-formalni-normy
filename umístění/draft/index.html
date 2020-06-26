@@ -56,7 +56,7 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je sdílenou specifikací pro umístění pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Specifikace obsahuje schémata a je ilustrována příklady dat v datovém modelu RDF [[rdf11-concepts]] a ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
+                Specifikace obsahuje schémata a je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]] a CSV [[rfc4180]].
             </p>
         </section>
 
@@ -394,6 +394,7 @@
                 V této sekci jsou uvedeny příklady reprezentace umístění v různých formátech a v různých úrovních detailu.
                 Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
                 Pro formáty JSON [[!ECMA-404]] a XML [[!xml]] jsou k dispozici příslušná schémata, tedy <a href="schémata/umístění.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[json-schema]] a <a href="schémata/umístění.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[xmlschema11-1]].
+                Pro formát JSON-LD [[!json-ld11]] je k dispozici <a href="kontexty/umístění.jsonld">kontext</a>.
                 Lze také použít zápis v CSV. 
                 Soubor v CSV [[!rfc4180]] je nutné doplnit schématem dle specifikace CSV on the Web [[tabular-data-primer]].
             </p>
@@ -410,12 +411,13 @@
                     Jedná se o nejčistší způsob určení umístění pomocí IRI příslušného geografického objektu.
                 </p>
                 
-                <aside class="example" title="Přímé určení umístění v JSON">
+                <aside class="example" title="Přímé určení umístění v JSON-LD">
                     <p>
-                       <a href="příklady/0.json">JSON soubor</a>, <a href="schémata/umístění.json">JSON soubor schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
+                       <a href="příklady/0.jsonld">JSON-LD soubor</a>, <a href="schémata/umístění.json">JSON schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/umístění/draft/kontexty/umístění.jsonld",
     "typ": "Umístění",
     "iri": "http://publications.europa.eu/resource/authority/continent/ANTARCTICA"
 }</pre>
@@ -488,12 +490,13 @@ http://publications.europa.eu/resource/authority/continent/ANTARCTICA</pre>
                     Pokud je třeba specifikovat umístění názvem nebo geometrií, lze to provést tak jako v následujících příkladech.
                 </p>
                 
-                <aside class="example" title="Umístění s názvem či geometrií v JSON">
+                <aside class="example" title="Umístění s názvem či geometrií v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">JSON soubor</a>, <a href="schémata/umístění.json">JSON soubor schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/umístění.json">JSON schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/umístění/draft/kontexty/umístění.jsonld",
     "typ": "Umístění",
     "název": {
         "cs": "Národní park Šumava"
@@ -579,17 +582,20 @@ Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
                     Oproti přímému použití adresy bez mezikroku v podobě Umístění lze specifikovat dodatečná data týkající se umístění, například název.
                 </p>
                 
-                <aside class="example" title="Umístění adresou v JSON">
+                <aside class="example" title="Umístění adresou v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">JSON soubor</a>, <a href="schémata/umístění.json">JSON soubor schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/umístění.json">JSON schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
                     </p>
                 
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/umístění/draft/kontexty/umístění.jsonld",
+    "typ": "Umístění",
     "název": {
         "cs": "Samota u lesa"
     },
     "adresa": {
+        "typ": "Adresa",
         "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
     }
 }</pre>

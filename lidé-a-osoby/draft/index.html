@@ -56,7 +56,7 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je sdílenou specifikací pro zveřejňování informací o lidech a osobách pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Specifikace je ilustrována příklady dat ve formátech CSV [[rfc4180]], JSON [[ECMA-404]], XML [[xml]] a RDF [[rdf11-concepts]].
+                Specifikace je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]] a CSV [[rfc4180]].
             </p>
         </section>
 
@@ -401,9 +401,10 @@
             <h2>Příklady</h2>
 
             <p>
-                V této sekci jsou uvedeny příklady reprezentace lidí.
-                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
+                V této sekci jsou uvedeny příklady reprezentace lidí a osob ve formátech JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]] a CSV [[!rfc4180]] a v různých úrovních detailu.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů.
                 Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/člověk.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/člověk-či-osoba.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
+                Pro formát JSON-LD [[!json-ld11]] je k dispozici <a href="kontexty/člověk-či-osoba.jsonld">kontext</a>.
                 Lze také použít zápis v CSV. 
                 Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
             </p>
@@ -420,13 +421,14 @@
                     Úplný příklad jména člověka.
                 </p>
                 
-                <aside class="example" title="Člověk v JSON">
+                <aside class="example" title="Člověk v JSON-LD">
                     <p>
-                        <a href="příklady/3.json">JSON soubor</a>, <a href="schémata/člověk.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/člověk.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
                     </p>
                 
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/lidé-a-osoby/draft/kontexty/člověk-či-osoba.jsonld",
     "typ": "Člověk",
     "jméno": {
         "cs": "Jakub"
@@ -542,12 +544,13 @@ Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D."</pre>
                     V následujících příkladech jsou nad rámec standardu přidán atribut <code>poznámka</code>.
                 </p>
                 
-                <aside class="example" title="Člověk s vlastním atributem v JSON">
+                <aside class="example" title="Člověk s vlastním atributem v JSON-LD">
                     <p>
-                        <a href="příklady/4.json">JSON soubor</a>, <a href="schémata/člověk.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/4.jsonld">JSON-LD soubor</a>, <a href="schémata/člověk.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/lidé-a-osoby/draft/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
     "typ": "Člověk",
     "jméno": {
         "cs": "Jakub"
@@ -681,13 +684,14 @@ Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D.","Kamarád"</pre>
                     Příklad identifikace tuzemské právnické osoby.
                 </p>
                 
-                <aside class="example" title="Osoba v JSON">
+                <aside class="example" title="Osoba v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">JSON soubor</a>, <a href="schémata/osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
                     </p>
                 
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/lidé-a-osoby/draft/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
     "typ": "Osoba",
     "ičo": "00112233",
     "název": {
@@ -769,20 +773,21 @@ ičo,název_cs,název_en
                 </aside>
             </section>
 
-            <section id="příklady-osoba-vlastní-atribut">
-                <h3>Osoba s přidaným vlastním atributem</h3>
+            <section id="příklady-zahraniční-osoba-vlastní-atribut">
+                <h3>Zahraniční osoba s přidaným vlastním atributem</h3>
                 <p>
                     Do schématu si lze v případě potřeby přidávat další atributy.
                     V následujících příkladech jsou nad rámec standardu přidán atribut <code>poznámka</code>.
                     Také je ukázán příklad identifikace právnické osoby z jiné země.
                 </p>
                 
-                <aside class="example" title="Osoba s vlastním atributem v JSON">
+                <aside class="example" title="Zahraniční osoba s vlastním atributem v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">JSON soubor</a>, <a href="schémata/osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/lidé-a-osoby/draft/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
     "typ": "Zahraniční osoba",
     "název": {
         "cs": "MojeFirma s.r.o.",
@@ -893,13 +898,14 @@ ičo,název_cs,název_en,poznámka
                     Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/člověk-či-osoba.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/člověk-či-osoba.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
                 </p>
                 
-                <aside class="example" title="Člověk či osoba v JSON">
+                <aside class="example" title="Člověk či osoba v JSON-LD">
                     <p>
-                        <a href="příklady/5.json">JSON soubor</a>, <a href="schémata/člověk-či-osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/5.jsonld">JSON-LD soubor</a>, <a href="schémata/člověk-či-osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
                     </p>
                 
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/lidé-a-osoby/draft/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
     "typ": "Člověk",
     "jméno": {
         "cs": "Jakub"

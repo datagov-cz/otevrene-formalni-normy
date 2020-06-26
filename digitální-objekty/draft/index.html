@@ -67,7 +67,7 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je sdílenou specifikací pro digitální objekty a jejich podmínky užití pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Specifikace je ilustrována příklady dat ve formátu JSON [[ECMA-404]].
+                Specifikace je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]].
             </p>
         </section>
 
@@ -880,7 +880,7 @@
             <h2>Příklady</h2>
 
             <p>
-                V této sekci je uvedene příklad reprezantace digitálního objektu. 
+                V této sekci je uvedene příklad reprezantace digitálního objektu ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
             </p>
             
             <section id="příklady-digitální-objekt-jednoduchý">
@@ -890,12 +890,13 @@
                     Příklad ukazuje, jak lze prezentovat digitální objekt s minimálními položkami k publikaci.
                 </p>
 
-                <aside class="example" title="Jednoduchý digitální objekt v JSON">
+                <aside class="example" title="Jednoduchý digitální objekt v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">JSON soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/digitální-objekty/draft/kontexty/digitální-objekt.jsonld",
     "typ": "Digitální objekt",
     "url": "https://www.brno.cz/fileadmin/user_upload/sprava_mesta/magistrat_mesta_brna/PO/volna_mista/VR_067_20_OUPR_urbanista_-_bydleni_05.docx",
     "autor_díla": [{
@@ -928,12 +929,13 @@
                     Příklad ukazuje, jak lze prezentovat digitální objekt, aby měl jeho potenciální uživatel, co nejvíce informací o daném digitálním objektu (v tomto případě je popisován digitální objekt, který nepodléhá některému z ochranných režimů). Další položky lze přidávat dle potřeby.
                 </p>
 
-                <aside class="example" title="Komplexní digitální objekt v JSON">
+                <aside class="example" title="Komplexní digitální objekt v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">JSON soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/digitální-objekty/draft/kontexty/digitální-objekt.jsonld",
     "typ": "Digitální objekt",
     "url": "https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2Fhttps---kod.brno.cz-api-action-package_show-id-brno-ocima-obyvatel-cr-2013",
     "název": {
@@ -985,12 +987,13 @@
                     Příklad ukazuje, jak lze dále prezentovat digitální objekt (v tomto případě je popisovaná digitální objekt, která podléhá některým ochranným režímům). Další položky lze přidávat dle potřeby.
                 </p>
 
-                <aside class="example" title="Komplexní digitální objekt v JSON">
+                <aside class="example" title="Komplexní digitální objekt v JSON-LD">
                     <p>
-                        <a href="příklady/3.json">JSON soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>
                     </p>
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/digitální-objekty/draft/kontexty/digitální-objekt.jsonld",
     "typ": "Digitální objekt",
     "url": "https://arxiv.org/abs/1910.09513",
     "název": {
@@ -1013,8 +1016,7 @@
         "příjmení": {
             "cs": "Novotná"
         }
-    }],
-    "autor": [{
+    }, {
         "typ": "Člověk",
         "jméno": {
             "cs": "Jakub"
@@ -1031,8 +1033,7 @@
         "příjmení": {
             "cs": "Novotná"
         }
-    }],
-    "poskytovatel": [{
+    }, {
         "typ": "Člověk",
         "jméno": {
             "cs": "Jakub"
