@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Kontakty</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2020-07-01",
+                shortName: "kontakty",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/kontakty/2020-07-01/",
+                latestVersion: "https://ofn.gov.cz/kontakty/",
+                editors: [{
+                  name: "Jakub Klímek",  
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je sdílenou specifikací pro kontakty pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
+                Specifikace je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]] a CSV [[rfc4180]].
+                Ukazuje, jak reprezentovat informace o telefonních číslech, e-mailových adresách a odkazech na webové stránky.
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu kontaktů" src="obrázky/kontakty.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1SaPl-m_r500IzZeHm4hjhNytUUi75t40/view?usp=sharing">
+                        Diagram datového modelu kontaktů
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Vazby bez kardinalit(šipka) reprezentují dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="specifikace">
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány vlastnosti kontaktu.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+            </p>
+
+            <section id="třída-kontakt">
+                <h3>Kontakt</h3>
+                <p>
+                    Kontakt na člověka či společnost. Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-kontakt-druh">
+                    <h4>Druh kontaktu</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>druh</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Druh kontaktu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Druh kontaktu, například <code>Oficiální</code>, <code>Neformální</code>, apod.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Neformální</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-email">
+                    <h4>E-mail</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>email</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> dle [[!rfc6068]].
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            E-mail
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kontaktní e-mailová adresa
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>mailto:otevrenadata@mvcr.cz</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-facebook">
+                    <h4>Facebook</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>facebook</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Účet na Facebooku
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uživatelské jméno na <a href="https://www.facebook.com/">Facebooku</a>.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>MinisterstvoobranyCeskerepubliky</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-idds">
+                    <h4>ID datové schránky</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>idds</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ID datové schránky
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            ID datové schránky.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>abcdef</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-instagram">
+                    <h4>Instagram</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>instagram</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Účet na Instagramu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uživatelské jméno na <a href="https://www.instagram.com/">Instagramu</a>.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>ceskystatistickyurad</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-url">
+                    <h4>Kontaktní URL</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>url</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Adresa na webu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Webová kontaktní adresa: webová stránka či WebID.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.gov.cz/</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-mobil">
+                    <h4>Mobilní telefon</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>mobil</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> dle [[!rfc3966]].
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Mobilní telefon
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Telefonní číslo na mobilní telefon.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>tel:+420123456789</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-telefon">
+                    <h4>Telefon</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>telefon</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> dle [[!rfc3966]].
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Telefon
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Telefonní číslo na pevnou linku.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>tel:+420123456789</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-kontakt-twitter">
+                    <h4>Twitter</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>twitter</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Účet na Twitteru
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uživatelské jméno na <a href="https://twitter.com/">Twitteru</a>.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>vnitro</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-kontakt-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontaktní místo
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Místo, na kterém lze subjekt kontaktovat.
+                        </dd>
+                    </dl>
+
+                </section>  
+
+            </section>
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace kontaktů ve formátech JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]] a CSV [[!rfc4180]] a v různých úrovních detailu.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů.
+                Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/kontakt.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/kontakt.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
+                Pro formát JSON-LD [[!json-ld11]] je k dispozici <a href="kontexty/kontakt.jsonld">kontext</a>.
+                Lze také použít zápis v CSV. 
+                Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
+            </p>
+
+            <p class="note">
+                Pokud je kontakt použit v rámci jiného datového standardu, tak se jména sloupců v CSV tabulce tvoří názvy atributů.
+                Zanořování je řešeno spojením názvu entity z jiného standardu, například <code>kontaktní_osoba</code> a z názvu atributu kontaktu jejich spojením pomocí znaku podtržítka <code>_</code>, například <code>kontaktní_osoba_email</code>.
+            </p>
+
+            <section id="příklady-jednoduchá-adresa">
+                <h3>Kontaktní telefon a e-mail</h3>
+                
+                <aside class="example" title="Telefon a e-mail v JSON-LD">
+                    <p>
+                       <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/kontakty/2020-07-01/kontexty/kontakt.jsonld",
+    "typ": "Kontakt",
+    "telefon": "tel:+420123456789",
+    "email": "mailto:otevrenadata@mvcr.cz"
+}</pre>
+                </aside>
+                <p>
+                    V XML musí být atributy seřazeny dle specifikace.
+                    V případě kontaktu je to dle abecedy:
+                </p>
+                
+                <aside class="example" title="Telefon a e-mail v XML">
+                    <p>
+                       <a href="příklady/1.xml">XML soubor</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01" 
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/2020-07-01 https://ofn.gov.cz/kontakty/2020-07-01/schémata/kontakt.xsd"&gt;
+    &lt;kontakt:email&gt;mailto:otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
+    &lt;kontakt:telefon&gt;tel:+420123456789&lt;/kontakt:telefon&gt;
+&lt;/kontakt:kontakt&gt;
+</pre>
+                </aside>
+                
+                <aside class="example" title="Telefon a e-mail v CSV">
+                    <p>
+                       <a href="příklady/1.csv">CSV soubor</a>
+                    </p>
+
+                    <pre class="csv">
+email,telefon
+mailto:otevrenadata@mvcr.cz,tel:+420123456789</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je třeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
+                    Například pokud se CSV soubor jmenuje <code>kontakt.csv</code>, je s ním publikován i <a href="příklady/1.csv-metadata.json">metadatový soubor</a> <code>kontakt.csv-metadata.json</code>:
+                </p>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/1.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "1.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "email",
+                "titles": "email",
+                "dc:description": "Kontaktní e-mailová adresa",
+                "datatype": "anyURI"
+            }, {
+                "name": "telefon",
+                "titles": "telefon",
+                "dc:description": "Telefonní číslo na pevnou linku",
+                "datatype": "anyURI"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+            
+            </section>
+            
+            <section id="příklady-jednoduchý-kontakt-vlastní-atribut">
+                <h3>Jednoduchý kontakt s přidaným vlastním atributem</h3>
+                <p>
+                    Do schématu si lze v případě potřeby přidávat další atributy.
+                    V následujících příkladech jsou nad rámec standardu přidán atribut <code>telegram</code>.
+                </p>
+                
+                <aside class="example" title="Jednoduchý kontakt s vlastním atributem v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/kontakty/2020-07-01/kontexty/kontakt.jsonld",
+    "typ": "Kontakt",
+    "telefon": "tel:+420123456789",
+    "email": "mailto:otevrenadata@mvcr.cz",
+    "telegram": "jakub_klimek"
+}</pre>
+                </aside>
+                
+                <p>
+                    V XML se vlastní atributy přidávají na závěr kontaktu, do vlastního XML jmenného prostoru (XML namespace [[!xml-names]]).
+                    V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
+                </p>
+                
+                <aside class="example" title="Jednoduchý kontakt s vlastním atributem v XML">
+                    <p>
+                        <a href="příklady/2.xml">XML soubor</a>:
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01"
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xmlns:x="https://příklad.cz"
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/2020-07-01 https://ofn.gov.cz/kontakty/2020-07-01/schémata/kontakt.xsd"&gt;
+    &lt;základ:rozšiřující_položky&gt;
+        &lt;x:telegram&gt;jakub_klimek&lt;/x:telegram&gt;
+    &lt;/základ:rozšiřující_položky&gt;
+    &lt;kontakt:email&gt;mailto:otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
+    &lt;kontakt:telefon&gt;tel:+420123456789&lt;/kontakt:telefon&gt;
+&lt;/kontakt:kontakt&gt;
+</pre>
+                </aside>
+                
+                <p>
+                    Alternativně je možné si nadefinovat celé nové XML schéma, které by vycházelo ze zde uvedeného základního <a href="schémata/kontakt.xsd">XML schématu</a>.
+                </p>
+
+                <aside class="example" title="Jednoduchý kontakt s vlastním atributem v CSV">
+                    <p>
+                       <a href="příklady/2.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+email,telefon,telegram
+mailto:otevrenadata@mvcr.cz,tel:+420123456789,jakub_klimek</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je opět potřeba připojit <a href="příklady/2.csv-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/2.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "2.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "email",
+                "titles": "email",
+                "dc:description": "Kontaktní e-mailová adresa",
+                "datatype": "anyURI"
+            }, {
+                "name": "telefon",
+                "titles": "telefon",
+                "dc:description": "Telefonní číslo na pevnou linku",
+                "datatype": "anyURI"
+            }, {
+                "name": "telegram",
+                "titles": "telegram",
+                "dc:description": "Uživatelské jméno na telegramu",
+                "datatype": "string"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+
+            </section>
+            
+            <section id="příklady-komplexní-kontakt">
+                <h3>Komplexní kontakt</h3>
+                
+                <p>
+                    Kontakty mohou obsahovat různé množství informací.
+                    Některé mohou být detailní.
+                </p>
+                
+                <aside class="example" title="Komplexní kontakt v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/kontakt.json">JSON Schema</a>, <a href="schémata/kontakty.json">JSON Schema pro více kontaktů</a>, <a href="kontexty/kontakt.jsonld">JSON-LD kontext</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/kontakty/2020-07-01/kontexty/kontakt.jsonld",
+    "typ": "Kontakt",
+    "druh": {
+        "cs": "Neformální",
+        "en": "Informal"
+    },
+    "email": "mailto:otevrenadata@mvcr.cz",
+    "idds": "abcdef",
+    "mobil": "tel:+420123456789",
+    "telefon": "tel:+420123456789",
+    "url": "https://data.gov.cz",
+    "umístění": {
+        "typ": "Umístění",
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    }
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Komplexní kontakt v XML">
+                    <p>
+                        <a href="příklady/3.xml">XML soubor</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;kontakt:kontakt xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01"
+xmlns:x="https://příklad.cz"
+xmlns:adresy="https://ofn.gov.cz/adresy/2020-07-01"
+xmlns:umístění="https://ofn.gov.cz/umístění/2020-07-01"
+xsi:schemaLocation="https://ofn.gov.cz/kontakty/2020-07-01 https://ofn.gov.cz/kontakty/2020-07-01/schémata/kontakt.xsd"&gt;
+    &lt;kontakt:druh xml:lang="cs"&gt;Neformální&lt;/kontakt:druh&gt;
+    &lt;kontakt:druh xml:lang="en"&gt;Informal&lt;/kontakt:druh&gt;
+    &lt;kontakt:email&gt;mailto:otevrenadata@mvcr.cz&lt;/kontakt:email&gt;
+    &lt;kontakt:idds&gt;abcdef&lt;/kontakt:idds&gt;
+    &lt;kontakt:mobil&gt;tel:+420123456789&lt;/kontakt:mobil&gt;
+    &lt;kontakt:telefon&gt;tel:+420123456789&lt;/kontakt:telefon&gt;
+    &lt;kontakt:url&gt;https://data.gov.cz&lt;/kontakt:url&gt;
+    &lt;kontakt:umístění&gt;
+        &lt;umístění:adresa&gt;
+            &lt;adresy:adresní_místo&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/adresy:adresní_místo&gt;
+        &lt;/umístění:adresa&gt;
+    &lt;/kontakt:umístění&gt; 
+&lt;/kontakt:kontakt&gt;</pre>
+                </aside>
+                
+                <aside class="example" title="Komplexní kontakt v CSV">
+                    <p>
+                        <a href="příklady/3.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+druh_cs,druh_en,email,idds,mobil,telefon,url,umístětní_adresa_adresní_místo
+Neformální,Informal,mailto:otevrenadata@mvcr.cz,abcdef,tel:+420123456789,tel:+420123456789,https://data.gov.cz,https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
+                <p>
+                    A opět je k souboru CSV potřeba připojit <a href="příklady/3.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+                </aside>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/3.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "3.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "druh_cs",
+                "titles": "druh_cs",
+                "dc:description": "Druh kontaktu (česky)",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "druh_en",
+                "titles": "druh_en",
+                "dc:description": "Druh kontaktu (anglicky)",
+                "datatype": "string",
+                "lang": "en"
+            }, {
+                "name": "email",
+                "titles": "email",
+                "dc:description": "Kontaktní e-mailová adresa",
+                "datatype": "anyURI"
+            }, {
+                "name": "idds",
+                "titles": "idds",
+                "dc:description": "ID datové schránky",
+                "datatype": "string"
+            }, {
+                "name": "mobil",
+                "titles": "mobil",
+                "dc:description": "Telefonní číslo na mobilní telefon.",
+                "datatype": "anyURI"
+            }, {
+                "name": "telefon",
+                "titles": "telefon",
+                "dc:description": "Telefonní číslo na pevnou linku",
+                "datatype": "anyURI"
+            }, {
+                "name": "url",
+                "titles": "url",
+                "dc:description": "Adresa webové stránky pro kontakt",
+                "datatype": "anyURI"
+            }, {
+                "name": "umistetni_adresa_adresni_misto",
+                "titles": "umístětní_adresa_adresní_místo",
+                "dc:description": "Adresa pro kontakt",
+                "datatype": "anyURI"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>

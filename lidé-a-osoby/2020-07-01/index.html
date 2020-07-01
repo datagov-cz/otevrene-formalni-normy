@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Lidé a osoby</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2020-07-01",
+                shortName: "lidé-a-osoby",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/",
+                latestVersion: "https://ofn.gov.cz/lidé-a-osoby/",
+                editors: [{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je sdílenou specifikací pro zveřejňování informací o lidech a osobách pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
+                Specifikace je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]] a CSV [[rfc4180]].
+            </p>
+        </section>
+
+        <section id="přehled">
+
+            <h2>Přehled</h2>
+            <p>
+                Rozlišujeme člověka, tedy fyzickou osobu, a právnickou osobu.
+                Pokud se v některé roli může vyskytovat jak právnická, tak fyzická osoba, což je častý případ, lze použít entitu Člověk či osoba dle této OFN.
+            </p>
+
+            <figure id="model">
+                <img alt="Model člověka či osoby" src="obrázky/člověk-či-osoba.svg"/>
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1r07dWzOYE0HD1mXxMHg729cxn-AJn8Fb">Model člověka či osoby</a>. Vazby bez kardinalit(šipka) reprezentují dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="specifikace">
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány vlastnosti lidí a osob.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+            </p>
+
+            <section id="třída-člověk">
+                <h3>Člověk</h3>
+                <p>
+                    Člověk a jeho jméno. Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-člověk-jméno">
+                    <h4>Jméno</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>jméno</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Jméno
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Křestní jméno.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Jakub</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-člověk-příjmení">
+                    <h4>Příjmení</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>příjmení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Příjmení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Příjmení.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Novák</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-člověk-tituly-před">
+                    <h4>Tituly před jménem</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>tituly_před</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Tituly před jménem
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tituly před jménem.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>RNDr.</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-člověk-tituly-za">
+                    <h4>Tituly za jménem</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>tituly_za</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Tituly za jménem
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tituly za jménem.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Ph.D.</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-člověk-text">
+                    <h4>Celé jméno</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>text</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Celé jméno
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Celé jméno jako jeden řetězec.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>RNDr. Jakub Novák, Ph.D.</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-člověk-pohlaví">
+                    <h4>Vazba: Pohlaví</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>pohlaví</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/datová-sada?iri=https://data.gov.cz/zdroj/datové-sady/MV/706529437/c2b66c6c9d2331a0eb7ffbc9684cc08f">Pohlaví</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Pohlaví
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví">Číselníku pro pohlaví</a> publikovaného jako <a href="https://data.gov.cz/datová-sada?iri=https://data.gov.cz/zdroj/datové-sady/MV/706529437/c2b66c6c9d2331a0eb7ffbc9684cc08f">číselník v Národním katalogu otevřených dat.</a>
+                        </dd>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské</code>
+                        </dd>  
+                    </dl>
+
+                </section>
+                
+            </section>
+            
+            <section id="třída-osoba">
+                <h3>Osoba</h3>
+                <p>
+                    Právnická osoba. Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-osoba-jméno">
+                    <h4>IČO</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>ičo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a> obsahující 8 číslic.
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            IČO
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            IČO
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>00112233</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vazba-osoba-stát-registrace">
+                    <h4>Vazba: Stát registrace</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>stát_registrace</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI státu z evropského <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-concept-scheme/-/resource/authority/country/?target=Browse" title="Evropský číselník zemí">číselníku zemí z EU Vocabularies</a>.
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Stát registrace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Stát registrace právnické osoby z jiné země.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>http://publications.europa.eu/resource/authority/country/SVK</code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+            
+            <section id="třída-člověk-či-osoba">
+                <h3>Člověk či osoba</h3>
+                <p>
+                    Fyzická či právnická osoba.
+                    Cílem existence této třídy je sjednotit způsob, jakým se reprezentuje případ, kdy se v datech může ve stejné roli vyskytnout jak právnická, tak fyzická osoba.
+                    Příkladem může být provozovatel akce.
+                </p>
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace lidí a osob ve formátech JSON-LD [[!json-ld11]] a tedy i JSON [[!ECMA-404]], XML [[!xml]] a CSV [[!rfc4180]] a v různých úrovních detailu.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů.
+                Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/člověk.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/člověk-či-osoba.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
+                Pro formát JSON-LD [[!json-ld11]] je k dispozici <a href="kontexty/člověk-či-osoba.jsonld">kontext</a>.
+                Lze také použít zápis v CSV. 
+                Soubor v CSV je nutné doplnit schématem dle specifikace CSV on the Web [[!tabular-data-primer]].
+            </p>
+
+            <p class="note">
+                Pokud je kontakt použit v rámci jiného datového standardu, tak se jména sloupců v CSV tabulce tvoří názvy atributů.
+                Zanořování je řešeno spojením názvu entity z jiného standardu, například <code>kontaktní_osoba</code> a z názvu atributu člověka jejich spojením pomocí znaku podtržítka <code>_</code>, například <code>kontaktní_osoba_příjmení</code>.
+            </p>
+
+            <section id="příklady-člověk">
+                <h3>Člověk</h3>
+                
+                <p>
+                    Úplný příklad jména člověka.
+                </p>
+                
+                <aside class="example" title="Člověk v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/člověk.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.jsonld",
+    "typ": "Člověk",
+    "jméno": {
+        "cs": "Jakub"
+    },
+    "příjmení": {
+        "cs": "Novák"
+    },
+    "tituly_před": {
+        "cs": "RNDr."
+    },
+    "tituly_za": {
+        "cs": "Ph.D."
+    },
+    "text": {
+        "cs": "RNDr. Jakub Novák, Ph.D."
+    },
+    "pohlaví": "https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské"
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Člověk v XML">
+                    <p>
+                        <a href="příklady/3.xml">XML soubor</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;člověk:člověk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/2020-07-01 https://ofn.gov.cz/lid%C3%A9-a-osoby/2020-07-01/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
+    &lt;člověk:jméno xml:lang="cs"&gt;Jakub&lt;/člověk:jméno&gt;
+    &lt;člověk:příjmení xml:lang="cs"&gt;Novák&lt;/člověk:příjmení&gt;
+    &lt;člověk:tituly_před xml:lang="cs"&gt;RNDr.&lt;/člověk:tituly_před&gt;
+    &lt;člověk:tituly_za xml:lang="cs"&gt;Ph.D.&lt;/člověk:tituly_za&gt;
+    &lt;člověk:pohlaví&gt;https://data.mvcr.gov.cz/zdroj/číselníky/pohlaví/položky/mužské&lt;/člověk:pohlaví&gt;
+    &lt;člověk:text xml:lang="cs"&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
+&lt;/člověk:člověk&gt;
+
+</pre>
+                </aside>
+                
+                <aside class="example" title="Člověk v CSV">
+                    <p>
+                        <a href="příklady/3.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+jméno_cs,příjmení_cs,tituly_před_cs,tituly_za_cs,text_cs
+Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D."</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je potřeba připojit <a href="příklady/3.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/3.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "4.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "jmeno_cs",
+                "titles": "jméno_cs",
+                "dc:description": "Křestní jméno",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "prijmeni_cs",
+                "titles": "příjmení_cs",
+                "dc:description": "Příjmení",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "tituly_pred_cs",
+                "titles": "tituly_před_cs",
+                "dc:description": "Tituly před jménem",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "tituly_za_cs",
+                "titles": "tituly_za_cs",
+                "dc:description": "Tituly za jménem",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "text_cs",
+                "titles": "text_cs",
+                "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
+                "datatype": "string",
+                "lang": "cs"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+            </section>
+
+            <section id="příklady-člověk-vlastní-atribut">
+                <h3>Člověk s přidaným vlastním atributem</h3>
+                <p>
+                    Do schématu si lze v případě potřeby přidávat další atributy.
+                    V následujících příkladech jsou nad rámec standardu přidán atribut <code>poznámka</code>.
+                </p>
+                
+                <aside class="example" title="Člověk s vlastním atributem v JSON-LD">
+                    <p>
+                        <a href="příklady/4.jsonld">JSON-LD soubor</a>, <a href="schémata/člověk.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
+    "typ": "Člověk",
+    "jméno": {
+        "cs": "Jakub"
+    },
+    "příjmení": {
+        "cs": "Novák"
+    },
+    "tituly_před": {
+        "cs": "RNDr."
+    },
+    "tituly_za": {
+        "cs": "Ph.D."
+    },
+    "text": {
+        "cs": "RNDr. Jakub Novák, Ph.D."
+    },
+    "poznámka": "kamarád"
+}</pre>
+                </aside>
+                
+                <p>
+                    V XML se vlastní atributy přidávají na závěr kontaktu, do vlastního XML jmenného prostoru (XML namespace [[!xml-names]]).
+                    V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
+                </p>
+                
+                <aside class="example" title="Člověk s vlastním atributem v XML">
+                    <p>
+                        <a href="příklady/4.xml">XML soubor</a>:
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;člověk:člověk xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:x="http://příklad.cz" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/2020-07-01 https://ofn.gov.cz/lid%C3%A9-a-osoby/2020-07-01/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
+    &lt;základ:rozšiřující_položky&gt;
+        &lt;x:poznámka&gt;Kamarád&lt;/x:poznámka&gt;
+    &lt;/základ:rozšiřující_položky&gt;
+    &lt;člověk:jméno xml:lang="cs"&gt;Jakub&lt;/člověk:jméno&gt;
+    &lt;člověk:příjmení xml:lang="cs"&gt;Novák&lt;/člověk:příjmení&gt;
+    &lt;člověk:tituly_před xml:lang="cs"&gt;RNDr.&lt;/člověk:tituly_před&gt;
+    &lt;člověk:tituly_za xml:lang="cs"&gt;Ph.D.&lt;/člověk:tituly_za&gt;
+    &lt;člověk:text xml:lang="cs"&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
+&lt;/člověk:člověk&gt;
+</pre>
+                </aside>
+                
+                <p>
+                    Alternativně je možné si nadefinovat celé nové XML schéma, které by vycházelo ze zde uvedeného základního <a href="schémata/člověk-či-osoba.xsd">XML schématu</a>.
+                </p>
+
+                <aside class="example" title="Člověk s vlastním atributem v CSV">
+                    <p>
+                       <a href="příklady/4.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+jméno_cs,příjmení_cs,tituly_před_cs,tituly_za_cs,text_cs,poznámka
+Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D.","Kamarád"</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je opět potřeba připojit <a href="příklady/4.csv-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/4.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "4.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "jmeno_cs",
+                "titles": "jméno_cs",
+                "dc:description": "Křestní jméno",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "prijmeni_cs",
+                "titles": "příjmení_cs",
+                "dc:description": "Příjmení",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "tituly_pred_cs",
+                "titles": "tituly_před_cs",
+                "dc:description": "Tituly před jménem",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "tituly_za_cs",
+                "titles": "tituly_za_cs",
+                "dc:description": "Tituly za jménem",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "text_cs",
+                "titles": "text_cs",
+                "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "poznamka",
+                "titles": "poznámka",
+                "dc:description": "Interní poznámka.",
+                "datatype": "string"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+
+            </section>
+            
+            <section id="příklady-osoba">
+                <h3>Osoba</h3>
+                
+                <p>
+                    Příklad identifikace tuzemské právnické osoby.
+                </p>
+                
+                <aside class="example" title="Osoba v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
+    "typ": "Osoba",
+    "ičo": "00112233",
+    "název": {
+        "cs": "MojeFirma s.r.o.",
+        "en": "MojeFirma s.r.o."
+    }
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Osoba v XML">
+                    <p>
+                        <a href="příklady/1.xml">XML soubor</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;osoba:osoba xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace"
+xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/2020-07-01 https://ofn.gov.cz/lid%C3%A9-a-osoby/2020-07-01/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
+    &lt;věc:název xml:lang="cs"&gt;MojeFirma s.r.o.&lt;/věc:název&gt;
+    &lt;věc:název xml:lang="en"&gt;MojeFirma s.r.o.&lt;/věc:název&gt;
+    &lt;osoba:ičo&gt;00112233&lt;/osoba:ičo&gt;
+&lt;/osoba:osoba&gt;
+</pre>
+                </aside>
+                
+                <aside class="example" title="Osoba v CSV">
+                    <p>
+                        <a href="příklady/1.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+ičo,název_cs,název_en
+00112233,"MojeFirma s.r.o.","MojeFirma s.r.o."</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je potřeba připojit <a href="příklady/1.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/1.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "1.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "ico",
+                "titles": "ičo",
+                "dc:description": "IČO",
+                "datatype": "string"
+            }, {
+                "name": "nazev_cs",
+                "titles": "název_cs",
+                "dc:description": "Název právnické osoby.",
+                "lang": "cs",
+                "datatype": "string"
+            }, {
+                "name": "nazev_en",
+                "titles": "název_en",
+                "dc:description": "Název právnické osoby v angličtině.",
+                "lang": "en",
+                "datatype": "string"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+            </section>
+
+            <section id="příklady-zahraniční-osoba-vlastní-atribut">
+                <h3>Zahraniční osoba s přidaným vlastním atributem</h3>
+                <p>
+                    Do schématu si lze v případě potřeby přidávat další atributy.
+                    V následujících příkladech jsou nad rámec standardu přidán atribut <code>poznámka</code>.
+                    Také je ukázán příklad identifikace právnické osoby z jiné země.
+                </p>
+                
+                <aside class="example" title="Zahraniční osoba s vlastním atributem v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
+    "typ": "Zahraniční osoba",
+    "název": {
+        "cs": "MojeFirma s.r.o.",
+        "en": "MojeFirma s.r.o."
+    },
+    "stát_registrace": "http://publications.europa.eu/resource/authority/country/SVK",
+    "poznámka": "Dodavatel"
+}</pre>
+                </aside>
+                
+                <p>
+                    V XML se vlastní atributy přidávají na závěr kontaktu, do vlastního XML jmenného prostoru (XML namespace [[!xml-names]]).
+                    V tomto příkladu jsou nové atributy přidány do XML jmenného prostoru <code>x</code>.
+                </p>
+                
+                <aside class="example" title="Osoba s vlastním atributem v XML">
+                    <p>
+                        <a href="příklady/2.xml">XML soubor</a>:
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;osoba:osoba xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace"
+xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+xmlns:x="https://příklad.cz" 
+xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/2020-07-01 https://ofn.gov.cz/lid%C3%A9-a-osoby/2020-07-01/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
+    &lt;základ:rozšiřující_položky&gt;
+        &lt;x:poznámka&gt;Dodavatel&lt;/x:poznámka&gt;
+    &lt;/základ:rozšiřující_položky&gt;
+    &lt;věc:název xml:lang="cs"&gt;MojeFirma s.r.o.&lt;/věc:název&gt;
+    &lt;věc:název xml:lang="en"&gt;MojeFirma s.r.o.&lt;/věc:název&gt;
+    &lt;osoba:stát_registrace&gt;http://publications.europa.eu/resource/authority/country/SVK&lt;/osoba:stát_registrace&gt;
+&lt;/osoba:osoba&gt;
+</pre>
+                </aside>
+                
+                <p>
+                    Alternativně je možné si nadefinovat celé nové XML schéma, které by vycházelo ze zde uvedeného základního <a href="schémata/člověk-či-osoba.xsd">XML schématu</a>.
+                </p>
+
+                <aside class="example" title="Osoba s vlastním atributem v CSV">
+                    <p>
+                       <a href="příklady/2.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+ičo,název_cs,název_en,poznámka
+00112233,"MojeFirma s.r.o.","MojeFirma s.r.o.",Dodavatel</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je opět potřeba připojit <a href="příklady/2.csv-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/2.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "2.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "ico",
+                "titles": "ičo",
+                "dc:description": "IČO",
+                "datatype": "string"
+            }, {
+                "name": "nazev_cs",
+                "titles": "název_cs",
+                "dc:description": "Název právnické osoby.",
+                "lang": "cs",
+                "datatype": "string"
+            }, {
+                "name": "nazev_en",
+                "titles": "název_en",
+                "dc:description": "Název právnické osoby v angličtině.",
+                "lang": "en",
+                "datatype": "string"
+            }, {
+                "name": "poznamka",
+                "titles": "poznámka",
+                "dc:description": "Poznámka",
+                "datatype": "string"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+
+            </section>
+
+            <section id="příklady-člověk-či-osoba">
+                <h3>Člověk či osoba</h3>
+                
+                <p>
+                    Příklad identifikace člověka tam, kde se může vyskytnout i právnická osoba.
+                    Pro formáty JSON a XML jsou k dispozici příslušná schémata, tedy <a href="schémata/člověk-či-osoba.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[!json-schema]] a <a href="schémata/člověk-či-osoba.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[!xmlschema11-1]].
+                </p>
+                
+                <aside class="example" title="Člověk či osoba v JSON-LD">
+                    <p>
+                        <a href="příklady/5.jsonld">JSON-LD soubor</a>, <a href="schémata/člověk-či-osoba.json">JSON Schema</a>, <a href="kontexty/člověk-či-osoba.jsonld">JSON-LD kontext</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.jsonld",    "typ": "Člověk",
+    "typ": "Člověk",
+    "jméno": {
+        "cs": "Jakub"
+    },
+    "příjmení": {
+        "cs": "Novák"
+    },
+    "tituly_před": {
+        "cs": "RNDr."
+    },
+    "tituly_za": {
+        "cs": "Ph.D."
+    },
+    "text": {
+        "cs": "RNDr. Jakub Novák, Ph.D."
+    }
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Člověk či osoba v XML">
+                    <p>
+                        <a href="příklady/5.xml">XML soubor</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;člověk:člověk_či_osoba xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:člověk="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+xsi:schemaLocation="https://ofn.gov.cz/lidé-a-osoby/2020-07-01 https://ofn.gov.cz/lid%C3%A9-a-osoby/2020-07-01/sch%C3%A9mata/%C4%8Dlov%C4%9Bk-%C4%8Di-osoba.xsd"&gt;
+    &lt;člověk:člověk&gt;
+        &lt;člověk:jméno xml:lang="cs"&gt;Jakub&lt;/člověk:jméno&gt;
+        &lt;člověk:příjmení xml:lang="cs"&gt;Novák&lt;/člověk:příjmení&gt;
+        &lt;člověk:tituly_před xml:lang="cs"&gt;RNDr.&lt;/člověk:tituly_před&gt;
+        &lt;člověk:tituly_za xml:lang="cs"&gt;Ph.D.&lt;/člověk:tituly_za&gt;
+        &lt;člověk:text xml:lang="cs"&gt;RNDr. Jakub Novák, Ph.D.&lt;/člověk:text&gt;
+    &lt;/člověk:člověk&gt;
+&lt;/člověk:člověk_či_osoba&gt;
+</pre>
+                </aside>
+                
+                <aside class="example" title="Člověk či osoba v CSV">
+                    <p>
+                        <a href="příklady/5.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+člověk_jméno_cs,člověk_příjmení_cs,člověk_tituly_před_cs,člověk_tituly_za_cs,člověk_text_cs
+Jakub,Novák,RNDr.,Ph.D.,"RNDr. Jakub Novák, Ph.D."</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je potřeba připojit <a href="příklady/1.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/5.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "url": "5.csv",
+    "header": true,
+    "tableSchema": {
+        "columns": [
+            {
+                "name": "clovek_jmeno_cs",
+                "titles": "člověk_jméno_cs",
+                "dc:description": "Křestní jméno",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "clovek_prijmeni_cs",
+                "titles": "člověk_příjmení_cs",
+                "dc:description": "Příjmení",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "clovek_tituly_pred_cs",
+                "titles": "člověk_tituly_před_cs",
+                "dc:description": "Tituly před jménem",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "clovek_tituly_za_cs",
+                "titles": "člověk_tituly_za_cs",
+                "dc:description": "Tituly za jménem",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "name": "clovek_text_cs",
+                "titles": "člověk_text_cs",
+                "dc:description": "Celé jméno jako jeden řetězec. Použít pokud nelze jméno strukturovat.",
+                "datatype": "string",
+                "lang": "cs"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
