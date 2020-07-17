@@ -147,8 +147,9 @@
                     <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
                     <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
                     <li><code>čas: https://data.gov.cz/zdroj/datová-sada/1/časové-pokrytí</code></li>
-                    <li><code>kurátor: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
+                    <li><code>kontakt: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
                     <li><code>podmínky: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1/podmínky-užití</code></li>
+                    <li><code>správce: https://data.gov.cz/zdroj/katalog/kontaktní-bod</code></li>
                 </ul>
             </section>
 
@@ -303,6 +304,94 @@
                     </dl>
                 </section>
 
+                <section id="položky-katalog-kontaktní-bod">
+                    <h4>Kontaktní bod - jméno a email</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontaktní bod - jméno a email
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita podtypu <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">katalog: dcat:contactPoint správce: .
+
+správce: a vcard:Individual ;
+         vcard:fn "Jan Novák"@cs ;
+         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-katalog-domovská-stránka">
+                    <h4>Domovská stránka</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na domovskou stránku katalogu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na domovskou stránku lokálního katalogu, kam mohou chodit uživatelé.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>domovská_stránka</code>, <code>foaf:homepage</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> webové stránky.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: foaf:homepage &lt;https://data.gov.cz/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="položky-katalog-datová-sada">
                     <h4>Vazba: Datová sada</h4>
                     <dl>
@@ -761,7 +850,7 @@
                     </dl>
                 </section>
                
-                <section id="položky-datová-sada-kurátor">
+                <section id="položky-datová-sada-kontaktní-bod">
                     <h4>Kontaktní bod - jméno a email</h4>
                     <dl>
                         <dt>
@@ -798,9 +887,9 @@
                             Příklad
                         </dt>
                         <dd>
-                            <pre class="turtle">sada: dcat:contactPoint kurátor: .
+                            <pre class="turtle">sada: dcat:contactPoint kontakt: .
 
-kurátor: a vcard:Individual ;
+kontakt: a vcard:Individual ;
          vcard:fn "Jan Novák"@cs ;
          vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
                         </dd>
@@ -1773,8 +1862,6 @@ podmínky: a pu:Specifikace ;
                     </p>
                     <pre class="turtle">
 @prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
-
-@prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix dct:     &lt;http://purl.org/dc/terms/&gt; .
 
 &lt;https://data.gov.cz/lkod/mdcr/katalog&gt; a dcat:Catalog ;
@@ -1782,6 +1869,12 @@ podmínky: a pu:Specifikace ;
     dct:description "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy."@cs;
     dct:description "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."@en ;
     dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; ;
+    foaf:homepage &lt;https://data.gov.cz/datové-sady?poskytovatel=Ministerstvo%20dopravy&gt; ;
+    dcat:contactPoint [
+        a vcard2006:Organization ;
+        vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
+        vcard2006:hasEmail &lt;mailto:sekretariat.190@mdcr.cz&gt;
+    ] ;
     dcat:dataset  &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-zastavky&gt; ,
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld&gt; ,
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-trate&gt; .</pre>
@@ -1789,7 +1882,7 @@ podmínky: a pu:Specifikace ;
                 
                 <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami ve formátu JSON-LD">
                     <p>
-                        <a href="příklady/katalog.jsonld">JSON soubor-LD</a>.
+                        <a href="příklady/katalog.jsonld">JSON-LD</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/katalog</code>.
                     </p>
                     <pre class="json">
@@ -1805,6 +1898,15 @@ podmínky: a pu:Specifikace ;
         "cs": "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy.",
         "en": "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."
     },
+    "kontaktní_bod": {
+        "typ": "Organizace",
+        "jméno": {
+          "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+          "en": "Ministry of Transport"
+        },
+        "e-mail": "sekretariat.190@mdcr.cz"
+    },
+    "domovská_stránka": "https://data.gov.cz/datové-sady?poskytovatel=Ministerstvo%20dopravy",
     "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
     "datová_sada": [
          "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
@@ -1905,7 +2007,7 @@ podmínky: a pu:Specifikace ;
 
                 <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
                     <p>
-                        <a href="příklady/datová-sada.jsonld">JSON soubor-LD</a>.
+                        <a href="příklady/datová-sada.jsonld">JSON-LD</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
                     </p>
                     <pre class="json">
