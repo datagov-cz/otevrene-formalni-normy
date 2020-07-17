@@ -94,7 +94,7 @@
                 <li>Podpora pro specifikaci <a href="#položky-distribuce-kompresní-formát">media typu kompresního formátu</a> distribuce datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-distribuce-balíčkovací-formát">media typu balíčkovacího formátu</a> distribuce datové sady</li>
                 <li>Změna predikátů pro <a href="#položky-datová-sada-časové-pokrytí">časové pokrytí</a> ze <code>schema:startDate</code> a <code>schema:endDate</code> na <code>dcat:startDate</code> a <code>dcat:endDate</code></li>
-                <li>Změna reprezentace <a href="#položky-datová-sada-kurátor">e-mailu kurátora</a> z řetězce na IRI dle <a href="https://www.w3.org/TR/vcard-rdf/#d4e183">vCard Ontology</a></li>
+                <li>Změna reprezentace <a href="#položky-datová-sada-kurátor">e-mailu kontaktního bodu</a> z řetězce na IRI dle <a href="https://www.w3.org/TR/vcard-rdf/#d4e183">vCard Ontology</a></li>
                 <li>Podpora formátu JSON-LD v rozhraní <a href="#dcat-ap-dokumenty">DCAT-AP Dokumenty</a></li>
             </ol>
 
@@ -357,7 +357,7 @@ správce: a vcard:Individual ;
                             Jméno
                         </dt>
                         <dd>
-                            Odkaz na domovskou stránku katalogu
+                            Domovská stránka
                         </dd>
                         <dt>
                             Popis
@@ -976,7 +976,7 @@ kontakt: a vcard:Individual ;
                             Příklad
                         </dt>
                         <dd>
-                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/sběrné-dvory/draft/&gt; .</code>
+                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/turistické-cíle/2020-07-01/&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1419,7 +1419,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>mediaType</code>, <code>dcat:mediaType</code>
+                            <code>typ_média</code>, <code>dcat:mediaType</code>
                         </dd>
                         <dt>
                             Typ
@@ -1504,7 +1504,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>mediaType_komprese</code>, <code>dcat:compressFormat</code>
+                            <code>typ_média_komprese</code>, <code>dcat:compressFormat</code>
                         </dd>
                         <dt>
                             Typ
@@ -1547,7 +1547,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>mediaType_balíčku</code>, <code>dcat:packageFormat</code>
+                            <code>typ_média_balíčku</code>, <code>dcat:packageFormat</code>
                         </dd>
                         <dt>
                             Typ
@@ -1741,7 +1741,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>endpoint</code>, <code>dcat:endpointURL</code>
+                            <code>přístupový_bod</code>, <code>dcat:endpointURL</code>
                         </dd>
                         <dt>
                             Typ
@@ -1783,7 +1783,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>popis_endpointu</code>, <code>dcat:endpointDescription</code>
+                            <code>popis_přístupového_bodu</code>, <code>dcat:endpointDescription</code>
                         </dd>
                         <dt>
                             Typ
@@ -1882,7 +1882,7 @@ podmínky: a pu:Specifikace ;
                 
                 <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami ve formátu JSON-LD">
                     <p>
-                        <a href="příklady/katalog.jsonld">JSON-LD</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
+                        <a href="příklady/katalog.jsonld">JSON-LD</a>, <a href="schémata/katalog.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/katalog</code>.
                     </p>
                     <pre class="json">
@@ -2007,7 +2007,7 @@ podmínky: a pu:Specifikace ;
 
                 <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
                     <p>
-                        <a href="příklady/datová-sada.jsonld">JSON-LD</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
+                        <a href="příklady/datová-sada.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
                     </p>
                     <pre class="json">
@@ -2023,27 +2023,30 @@ podmínky: a pu:Specifikace ;
         "cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu.",
         "en": "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."
     },
-    "poskytovatel": "ovm:66003008",
+    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
     "téma": [
-        "theme:TRAN"
+        "http://publications.europa.eu/resource/authority/data-theme/TRAN"
     ],
     "periodicita_aktualizace": "frequency:WEEKLY_3",
-    "klíčové_slovo": {
-        "cs": [
-          "jízdní řády",
-          "veřejná linková doprava",
-          "autobusy"
-        ],
-        "en": [
-          "public transport",
-          "timetable",
-          "bus"
-        ]
-    },
-    "geografické_území": [
-        "continent:EUROPE"
+    "klíčové_slovo": [{
+            "cs": "jízdní řády",
+            "en": "timetable"
+        },
+        {
+            "cs": "veřejná linková doprava",
+            "en": "public transport"
+        },
+        {
+            "cs": "autobus",
+            "en": "bus"
+        }
     ],
-    "prvek_rúian": "https://linked.cuzk.cz/resource/ruian/stat/1",
+    "geografické_území": [
+        "http://publications.europa.eu/resource/authority/continent/EUROPE"
+    ],
+    "prvek_rúian": [
+        "https://linked.cuzk.cz/resource/ruian/stat/1"
+    ],
     "časové_pokrytí": {
         "typ": "Časový interval",
         "začátek": "2009-01-01",
@@ -2052,20 +2055,19 @@ podmínky: a pu:Specifikace ;
     "kontaktní_bod": {
         "typ": "Organizace",
         "jméno": {
-          "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
-          "en": "Ministry of Transport"
+            "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+            "en": "Ministry of Transport"
         },
         "e-mail": "mailto:sekretariat.190@mdcr.cz"
     },
     "dokumentace": "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy",
     "specifikace": "https://ofn.gov.cz/jízdní-řády/2020-05-01/",
     "koncept_euroVoc": [
-        "euroVoc:4512"
+        "http://eurovoc.europa.eu/4512"
     ],
-    "prostorové_rozlišení_v_metrech": "12.0",
+    "prostorové_rozlišení_v_metrech": 12.0,
     "časové_rozlišení": "P1D",
-    "distribuce": [
-        {
+    "distribuce": [{
             "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv",
             "typ": "Distribuce",
             "podmínky_užití": {
@@ -2077,15 +2079,15 @@ podmínky: a pu:Specifikace ;
             },
             "přístupové_url": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
             "soubor_ke_stažení": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
-            "formát": "format:ZIP",
-            "mediaType": "http://www.iana.org/assignments/media-types/application/json",
+            "formát": "http://publications.europa.eu/resource/authority/file-type/ZIP",
+            "typ_média": "http://www.iana.org/assignments/media-types/application/json",
             "schéma": "https://portal.cisjr.cz/schemata/json-schema.json",
-            "mediaType_komprese": "http://www.iana.org/assignments/media-types/application/zip",
-            "mediaType_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
+            "typ_média_komprese": "http://www.iana.org/assignments/media-types/application/zip",
+            "typ_média_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
             "název": {
                 "en": "JSON distribution in ZIP file",
                 "cs": "JSON distribuce v ZIP soubrou"
-            }  
+            }
         },
         {
             "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql",
@@ -2099,21 +2101,21 @@ podmínky: a pu:Specifikace ;
             },
             "přístupové_url": "https://portal.cisjr.cz/sparql",
             "název": {
-              "en": "SPARQL endpoint for timetables",
-              "cs": "SPARQL endpoint pro jízdní řády"
+                "en": "SPARQL endpoint for timetables",
+                "cs": "SPARQL endpoint pro jízdní řády"
             },
             "přístupová_služba": {
                 "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql",
                 "typ": "Datová služba",
                 "název": {
-                  "cs": "SPARQL endpoint pro jízdní řády",
-                  "en": "SPARQL endpoint for timetables"
+                    "cs": "SPARQL endpoint pro jízdní řády",
+                    "en": "SPARQL endpoint for timetables"
                 },
-                "endpoint": "https://portal.cisjr.cz/sparql",
-                "popis_endpointu": "https://portal.cisjr.cz/sparql"
+                "přístupový_bod": "https://portal.cisjr.cz/sparql",
+                "popis_přístupového_bodu": "https://portal.cisjr.cz/sparql"
             }
         }
-    ] 
+    ]
 }</pre>
                 </aside>
 
