@@ -33,7 +33,6 @@
                 latestVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/",
                 editors: [{
                   name: "Jakub Klímek",
-                  
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
                   companyURL: "https://www.mvcr.cz"
@@ -50,6 +49,7 @@
                         href: "mailto:otevrenadata@mvcr.cz"
                     }]
                 }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
               };
         </script>
     </head>
@@ -61,7 +61,7 @@
                 Stejná specifikace platí i pro datový model NKOD a data poskytovaná z NKOD v podobě souborů ke stažení či SPARQL endpointu.
                 Nejprve je specifikován datový model katalogizačního záznamu.
                 Poté jsou specifikovány 3 varianty rozhraní pro harvestaci.
-                Dvě varianty jsou založeny na standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>, jedna využívá SPARQL endpoint a jedna specifikuje variantu uložení záznamů v souborech, bez použití SPARQL endpointu.
+                Dvě varianty jsou založeny na standardu <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a>, jedna využívá SPARQL endpoint a jedna specifikuje variantu uložení záznamů v souborech, bez použití SPARQL endpointu.
                 Varianta CKAN API je podporována pouze v režimu zpětné kompatibility a neumožňuje vyplnění všech položek záznamu.
             </p>
             
@@ -82,17 +82,19 @@
                 Oproti <a href="../2019-04-04">doporučení ze 4.4.2019</a> jsou v této OFN následující změny:
             </p>
             <ol>
-                <li>Přechod ze standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/12">DCAT-AP 1.2</a> na <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a></li>
+                <li>Přechod ze standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/12">DCAT-AP 1.2</a> na <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a></li>
                 <li>Podpora pro textové položky katalogizačních záznamů jak v češtině, tak v angličtině</li>
                 <li>Podpora pro registraci <a href="#třída-datová-služba">datových služeb</a>, které typicky představují způsob přístupu k datové sadě pomocí API</li>
                 <li>Podpora pro rozšířenou specifikaci <a href="#položky-datová-sada-územní-pokrytí">souvisejícího geografického území</a> datové sady</li>
                 <li>Podpora pro odkaz na <a href="#položky-datová-sada-specifikace">specifikaci</a> datové sady, např. otevřenou formální normu</li>
+                <li>Podpora pro odkaz na <a href="#položky-datová-sada-je-součástí">zastřešující datovou sadu datové série</a></li>
                 <li>Podpora pro specifikaci <a href="#položky-datová-sada-časové-rozlišení">časového rozlišení</a> datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-datová-sada-prostorové-rozlišení-v-metrech">prostorového rozlišení</a> datové sady v metrech</li>
                 <li>Podpora pro specifikaci více <a href="#položky-datová-sada-téma">témat</a> datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-distribuce-kompresní-formát">media typu kompresního formátu</a> distribuce datové sady</li>
                 <li>Podpora pro specifikaci <a href="#položky-distribuce-balíčkovací-formát">media typu balíčkovacího formátu</a> distribuce datové sady</li>
                 <li>Změna predikátů pro <a href="#položky-datová-sada-časové-pokrytí">časové pokrytí</a> ze <code>schema:startDate</code> a <code>schema:endDate</code> na <code>dcat:startDate</code> a <code>dcat:endDate</code></li>
+                <li>Změna reprezentace <a href="#položky-datová-sada-kontaktní-bod">e-mailu kontaktního bodu</a> z řetězce na IRI dle <a href="https://www.w3.org/TR/vcard-rdf/#d4e183">vCard Ontology</a></li>
                 <li>Podpora formátu JSON-LD v rozhraní <a href="#dcat-ap-dokumenty">DCAT-AP Dokumenty</a></li>
             </ol>
 
@@ -103,12 +105,12 @@
             
             <p>
                 V této sekci jsou popsány položky, které mohou být evidované v Národním katalogu otevřených dat (NKOD) pro každou datovou sadu a její distribuci.
-                Položky se řídí standardem <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT Application Profile for data portals in Europe Version 2.0.0 (DCAT-AP 2.0.0)</a>.
+                Položky se řídí standardem <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT Application Profile for data portals in Europe Version 2.0.1 (DCAT-AP 2.0.1)</a>.
                 Jedná se o standard založený na propojených datech, předpokládá se tedy znalost <a href="../../propojená-data/">Otevřené formální normy Propojená data</a>.
             </p>
             
             <p>
-                DCAT-AP 2.0.0 rozlišuje tři základní typy entit.
+                DCAT-AP 2.0.1 rozlišuje tři základní typy entit.
                 Datovou sadu, její distribuci a datovou službu.
                 Metadata datové sady ji popisují bez ohledu na konkrétní reprezentaci jejích dat.
                 Ta je popsána jako distribuce datové sady, která reprezentuje buď soubor ke stažení, nebo odkazuje na datovou službu, přes kterou jsou data k dispozici.
@@ -145,8 +147,9 @@
                     <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
                     <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
                     <li><code>čas: https://data.gov.cz/zdroj/datová-sada/1/časové-pokrytí</code></li>
-                    <li><code>kurátor: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
+                    <li><code>kontakt: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
                     <li><code>podmínky: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1/podmínky-užití</code></li>
+                    <li><code>správce: https://data.gov.cz/zdroj/katalog/kontaktní-bod</code></li>
                 </ul>
             </section>
 
@@ -301,6 +304,94 @@
                     </dl>
                 </section>
 
+                <section id="položky-katalog-kontaktní-bod">
+                    <h4>Kontaktní bod - jméno a email</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontaktní bod - jméno a email
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita podtypu <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">katalog: dcat:contactPoint správce: .
+
+správce: a vcard:Individual ;
+         vcard:fn "Jan Novák"@cs ;
+         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-katalog-domovská-stránka">
+                    <h4>Domovská stránka</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Domovská stránka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na domovskou stránku lokálního katalogu, kam mohou chodit uživatelé.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>domovská_stránka</code>, <code>foaf:homepage</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> webové stránky.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: foaf:homepage &lt;https://data.gov.cz/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="položky-katalog-datová-sada">
                     <h4>Vazba: Datová sada</h4>
                     <dl>
@@ -758,8 +849,8 @@
                         </dd>
                     </dl>
                 </section>
-
-                <section id="položky-datová-sada-kurátor">
+               
+                <section id="položky-datová-sada-kontaktní-bod">
                     <h4>Kontaktní bod - jméno a email</h4>
                     <dl>
                         <dt>
@@ -796,11 +887,11 @@
                             Příklad
                         </dt>
                         <dd>
-                            <pre class="turtle">sada: dcat:contactPoint kurátor: .
+                            <pre class="turtle">sada: dcat:contactPoint kontakt: .
 
-kurátor: a vcard:Individual ;
+kontakt: a vcard:Individual ;
          vcard:fn "Jan Novák"@cs ;
-         vcard:hasEmail "jan.novak@organizace.cz" .</pre>
+         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
                         </dd>
                     </dl>
                 </section>
@@ -885,7 +976,7 @@ kurátor: a vcard:Individual ;
                             Příklad
                         </dt>
                         <dd>
-                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/sběrné-dvory/draft/&gt; .</code>
+                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/turistické-cíle/2020-07-01/&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1019,6 +1110,48 @@ kurátor: a vcard:Individual ;
                     </dl>
                 </section>
 
+                <section id="položky-datová-sada-je-součástí">
+                    <h4>Vazba: Je součástí</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Je součástí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na zastřešující datovou sadu datové série, jejíž je tato datová sada součástí.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>je_součástí</code>, <code>dct:isPartOf</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> zastřešující datové sady.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>sada: dct:isPartOf &lt;https://datový.katalog.cz/zdroj/datové-sady/zastřešující&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="položky-datová-sada-distribuce">
                     <h4>Vazba: Distribuce datové sady</h4>
                     <dl>
@@ -1050,7 +1183,7 @@ kurátor: a vcard:Individual ;
                             Povinnost
                         </dt>
                         <dd>
-                            Povinná
+                            Povinná, pokud se nejedná o zastřešující datovou sadu datové série.
                         </dd>
                         <dt>
                             Příklad
@@ -1286,7 +1419,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>mediaType</code>, <code>dcat:mediaType</code>
+                            <code>typ_média</code>, <code>dcat:mediaType</code>
                         </dd>
                         <dt>
                             Typ
@@ -1371,7 +1504,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>mediaType_komprese</code>, <code>dcat:compressFormat</code>
+                            <code>typ_média_komprese</code>, <code>dcat:compressFormat</code>
                         </dd>
                         <dt>
                             Typ
@@ -1414,7 +1547,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>mediaType_balíčku</code>, <code>dcat:packageFormat</code>
+                            <code>typ_média_balíčku</code>, <code>dcat:packageFormat</code>
                         </dd>
                         <dt>
                             Typ
@@ -1608,7 +1741,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>endpoint</code>, <code>dcat:endpointURL</code>
+                            <code>přístupový_bod</code>, <code>dcat:endpointURL</code>
                         </dd>
                         <dt>
                             Typ
@@ -1650,7 +1783,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>popis_endpointu</code>, <code>dcat:endpointDescription</code>
+                            <code>popis_přístupového_bodu</code>, <code>dcat:endpointDescription</code>
                         </dd>
                         <dt>
                             Typ
@@ -1683,7 +1816,7 @@ podmínky: a pu:Specifikace ;
             
             <p>
                 Toto rozhraní předpokládá, že metadata datových sad dle této specifikace jsou uložena a přístupná ve SPARQL endpointu.
-                Po registraci tohoto SPARQL endpointu se na něm NKOD zeptá nejprve na seznam instancí třídy <code>dcat:Dataset</code>, a poté se po skupinách bude ptát na povinné, nepovinné i další položky jednotlivých datových sad dle této specifikace a specifikace <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>.
+                Po registraci tohoto SPARQL endpointu se na něm NKOD zeptá nejprve na seznam instancí třídy <code>dcat:Dataset</code>, a poté se po skupinách bude ptát na povinné, nepovinné i další položky jednotlivých datových sad dle této specifikace a specifikace <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a>.
                 Jedná se o nejjednodušší způsob registrace lokálního katalogu otevřených dat.
             </p>
 
@@ -1710,7 +1843,7 @@ podmínky: a pu:Specifikace ;
 
             <p>
                 Tato varianta rozhraní je určena pro instituce, které nechtějí nebo nemohou provozovat pro účely harvestace metadat o datových sadách do NKOD SPARQL endpoint.
-                Počítá se serializací metadat o datových sadách do statických souborů umístěných na web podobně, jako varianta <a href="#ckan-api">CKAN API</a>, ale s využitím standardu DCAT-AP 2.0.0.
+                Počítá se serializací metadat o datových sadách do statických souborů umístěných na web podobně, jako varianta <a href="#ckan-api">CKAN API</a>, ale s využitím standardu DCAT-AP 2.0.1.
                 Jako indexový soubor pak poslouží soubor obsahující instanci třídy <code>dcat:Catalog</code>, která pomocí vlastnosti <code>dcat:dataset</code> ukazuje na URL jednotlivých datových sad.
                 Při přístupu na tato URL datových sad NKOD předpokládá, že v odpovědi dostane kompletní katalogizační záznam pro danou datovou sadu, včetně jejích distribucí a datových služeb.
             </p>
@@ -1729,8 +1862,6 @@ podmínky: a pu:Specifikace ;
                     </p>
                     <pre class="turtle">
 @prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
-
-@prefix dcat:    &lt;http://www.w3.org/ns/dcat#&gt; .
 @prefix dct:     &lt;http://purl.org/dc/terms/&gt; .
 
 &lt;https://data.gov.cz/lkod/mdcr/katalog&gt; a dcat:Catalog ;
@@ -1738,6 +1869,12 @@ podmínky: a pu:Specifikace ;
     dct:description "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy."@cs;
     dct:description "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."@en ;
     dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; ;
+    foaf:homepage &lt;https://data.gov.cz/datové-sady?poskytovatel=Ministerstvo%20dopravy&gt; ;
+    dcat:contactPoint [
+        a vcard2006:Organization ;
+        vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
+        vcard2006:hasEmail &lt;mailto:sekretariat.190@mdcr.cz&gt;
+    ] ;
     dcat:dataset  &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-zastavky&gt; ,
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld&gt; ,
                   &lt;https://data.gov.cz/lkod/mdcr/datové-sady/seznam-trate&gt; .</pre>
@@ -1745,12 +1882,12 @@ podmínky: a pu:Specifikace ;
                 
                 <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami ve formátu JSON-LD">
                     <p>
-                        <a href="příklady/katalog.jsonld">JSON soubor-LD</a>.
+                        <a href="příklady/katalog.jsonld">JSON-LD</a>, <a href="schémata/katalog.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/katalog</code>.
                     </p>
                     <pre class="json">
 {
-    "@context": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
     "iri": "https://data.gov.cz/lkod/mdcr/katalog",
     "typ": "Katalog",
     "název": {
@@ -1761,6 +1898,15 @@ podmínky: a pu:Specifikace ;
         "cs": "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy.",
         "en": "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."
     },
+    "kontaktní_bod": {
+        "typ": "Organizace",
+        "jméno": {
+          "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+          "en": "Ministry of Transport"
+        },
+        "e-mail": "mailto:sekretariat.190@mdcr.cz"
+    },
+    "domovská_stránka": "https://data.gov.cz/datové-sady?poskytovatel=Ministerstvo%20dopravy",
     "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
     "datová_sada": [
          "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
@@ -1818,7 +1964,7 @@ podmínky: a pu:Specifikace ;
     dcat:contactPoint [
         a vcard2006:Organization ;
         vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
-        vcard2006:hasEmail "sekretariat.190@mdcr.cz"
+        vcard2006:hasEmail &lt;mailto:sekretariat.190@mdcr.cz&gt;
     ] ;
     foaf:page &lt;https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy&gt; ;
     dct:conformsTo &lt;https://ofn.gov.cz/jízdní-řády/2020-05-01/&gt; ;
@@ -1861,12 +2007,12 @@ podmínky: a pu:Specifikace ;
 
                 <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
                     <p>
-                        <a href="příklady/datová-sada.jsonld">JSON soubor-LD</a>.
+                        <a href="příklady/datová-sada.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
                     </p>
                     <pre class="json">
 {
-    "@context": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/rozhraní-katalogů-otevřených-dat/draft/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
     "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
     "typ": "Datová sada",
     "název": {
@@ -1877,27 +2023,29 @@ podmínky: a pu:Specifikace ;
         "cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu.",
         "en": "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."
     },
-    "poskytovatel": "ovm:66003008",
+    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
     "téma": [
-        "theme:TRAN"
+        "http://publications.europa.eu/resource/authority/data-theme/TRAN"
     ],
-    "periodicita_aktualizace": "frequency:WEEKLY_3",
+    "periodicita_aktualizace": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3",
     "klíčové_slovo": {
         "cs": [
-          "jízdní řády",
-          "veřejná linková doprava",
-          "autobusy"
+            "jízdní řády",
+            "veřejná linková doprava",
+            "autobus"
         ],
         "en": [
-          "public transport",
-          "timetable",
-          "bus"
+            "timetable",
+            "public transport",
+            "bus"
         ]
     },
     "geografické_území": [
-        "continent:EUROPE"
+        "http://publications.europa.eu/resource/authority/continent/EUROPE"
     ],
-    "prvek_rúian": "https://linked.cuzk.cz/resource/ruian/stat/1",
+    "prvek_rúian": [
+        "https://linked.cuzk.cz/resource/ruian/stat/1"
+    ],
     "časové_pokrytí": {
         "typ": "Časový interval",
         "začátek": "2009-01-01",
@@ -1906,20 +2054,19 @@ podmínky: a pu:Specifikace ;
     "kontaktní_bod": {
         "typ": "Organizace",
         "jméno": {
-          "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
-          "en": "Ministry of Transport"
+            "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+            "en": "Ministry of Transport"
         },
-        "e-mail": "sekretariat.190@mdcr.cz"
+        "e-mail": "mailto:sekretariat.190@mdcr.cz"
     },
     "dokumentace": "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy",
     "specifikace": "https://ofn.gov.cz/jízdní-řády/2020-05-01/",
     "koncept_euroVoc": [
-        "euroVoc:4512"
+        "http://eurovoc.europa.eu/4512"
     ],
-    "prostorové_rozlišení_v_metrech": "12.0",
+    "prostorové_rozlišení_v_metrech": 12.0,
     "časové_rozlišení": "P1D",
-    "distribuce": [
-        {
+    "distribuce": [{
             "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv",
             "typ": "Distribuce",
             "podmínky_užití": {
@@ -1931,15 +2078,15 @@ podmínky: a pu:Specifikace ;
             },
             "přístupové_url": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
             "soubor_ke_stažení": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
-            "formát": "format:ZIP",
-            "mediaType": "http://www.iana.org/assignments/media-types/application/json",
+            "formát": "http://publications.europa.eu/resource/authority/file-type/ZIP",
+            "typ_média": "http://www.iana.org/assignments/media-types/application/json",
             "schéma": "https://portal.cisjr.cz/schemata/json-schema.json",
-            "mediaType_komprese": "http://www.iana.org/assignments/media-types/application/zip",
-            "mediaType_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
+            "typ_média_komprese": "http://www.iana.org/assignments/media-types/application/zip",
+            "typ_média_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
             "název": {
                 "en": "JSON distribution in ZIP file",
                 "cs": "JSON distribuce v ZIP soubrou"
-            }  
+            }
         },
         {
             "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql",
@@ -1953,21 +2100,21 @@ podmínky: a pu:Specifikace ;
             },
             "přístupové_url": "https://portal.cisjr.cz/sparql",
             "název": {
-              "en": "SPARQL endpoint for timetables",
-              "cs": "SPARQL endpoint pro jízdní řády"
+                "en": "SPARQL endpoint for timetables",
+                "cs": "SPARQL endpoint pro jízdní řády"
             },
             "přístupová_služba": {
                 "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql",
                 "typ": "Datová služba",
                 "název": {
-                  "cs": "SPARQL endpoint pro jízdní řády",
-                  "en": "SPARQL endpoint for timetables"
+                    "cs": "SPARQL endpoint pro jízdní řády",
+                    "en": "SPARQL endpoint for timetables"
                 },
-                "endpoint": "https://portal.cisjr.cz/sparql",
-                "popis_endpointu": "https://portal.cisjr.cz/sparql"
+                "přístupový_bod": "https://portal.cisjr.cz/sparql",
+                "popis_přístupového_bodu": "https://portal.cisjr.cz/sparql"
             }
         }
-    ] 
+    ]
 }</pre>
                 </aside>
 
@@ -1986,13 +2133,13 @@ podmínky: a pu:Specifikace ;
             
             <p class="warning">
                 Rozhraní CKAN API je podporováno již jen v režimu zpětné kompatibility, což znamená, že se již nebude rozšiřovat o nové položky či funkcionality.
-                Doporučujeme tedy použít jedno z ostatních rozhraní LKOD založených na standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>.
+                Doporučujeme tedy použít jedno z ostatních rozhraní LKOD založených na standardu <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a>.
             </p>
             
             <p>
                 Rozhraní CKAN API bylo pro NKOD rozšířeno o některé metadatové položky inspirované standardem DCAT-AP.
                 Jsou k dispozici vzorová <a href="https://github.com/jakubklimek/ckanext-odczdataset">rozšíření pro CKAN</a> a <a href="https://github.com/jakubklimek/dkanext-nkod">rozšíření pro DKAN</a>, která lze využít pro předávání metadatových záznamů tímto rozhraním.
-                Ani s tímto rozšířením ovšem nebude záznam úplný, jelikož se toto rozhraní nepřizpůsobuje standardu <a href="https://joinup.ec.europa.eu/solution/dcat-application-profile-data-portals-europe/release/200">DCAT-AP 2.0.0</a>.
+                Ani s tímto rozšířením ovšem nebude záznam úplný, jelikož se toto rozhraní nepřizpůsobuje standardu <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a>.
             </p>
             
             <section id="ckan-api-package-list">
@@ -2294,7 +2441,7 @@ podmínky: a pu:Specifikace ;
                     </section>
 
                     <section id="ckan-api-package-show-dataset-maintainer_email">
-                        <h5>Email Kurátora dat</h5>
+                        <h5>E-mail Kurátora dat</h5>
                         <dl>
                             <dt>
                                 Vlastnost
@@ -2312,7 +2459,7 @@ podmínky: a pu:Specifikace ;
                                 Jméno
                             </dt>
                             <dd>
-                                Email Kurátora dat
+                                E-mail Kurátora dat
                             </dd>
                             <dt>
                                 Povinnost

@@ -1,0 +1,71 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/rozhraní-katalogů-otevřených-dat/draft/schémata/katalog.json",
+	"type": "object",
+	"title": "Katalog",
+	"required": ["typ", "iri", "název", "popis", "poskytovatel", "datová_sada"],
+	"properties": {
+		"typ": {
+			"const": "Katalog"
+		},
+		"iri": {
+			"type": "string",
+			"format": "iri",
+			"title": "Identifikátor",
+			"examples": [
+				"https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+			]
+		},
+		"název": {
+			"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+		},
+		"popis": {
+			"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+		},
+		"poskytovatel": {
+			"type": "string",
+			"format": "iri",
+			"title": "Poskytovatel",
+			"examples": [
+				"https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008"
+			]
+		},
+		"kontaktní_bod": {
+			"type": "object",
+			"required": [ "typ" ],
+			"properties": {
+				"typ": {
+					"type": "string",
+					"examples": [ "Organizace" ]
+				},
+				"jméno": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+				},
+				"e-mail": {
+					"type": "string",
+					"format": "iri",
+					"pattern": "^mailto\\:",
+					"examples": [
+						"mailto:sekretariat.190@mdcr.cz"
+					]
+				}
+			}
+		},
+		"domovská_stránka": {
+			"type": "string",
+			"format": "iri",
+			"title": "Domovská stránka",
+			"examples": [
+				"https://data.gov.cz/"
+			]
+		},
+		"datová_sada": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"format": "iri",
+				"title": "Datová sada"
+			}
+		}
+	}
+}
