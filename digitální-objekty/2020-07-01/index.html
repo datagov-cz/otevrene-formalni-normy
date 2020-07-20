@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Digitální objekty</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2020-07-01",
+                shortName: "digitální-objekty",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/digitální-objekty/2020-07-01/",
+                latestVersion: "https://ofn.gov.cz/digitální-objekty/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  orcid: "0000-0003-2132-762X",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je sdílenou specifikací pro digitální objekty a jejich podmínky užití pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
+                Specifikace je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu digitálního objektu a podmínek užití" src="obrázky/digitální-objekt.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1q798nXDQcHX6o6nU6cRYPBSRi4CfZv3N/view?usp=sharing">Diagram datového modelu digitálního objektu a podmínek užití</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis digitálních objektů.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-digitální-objekt">
+                <h3>Digitální objekt</h3>
+                <p>
+                    Tato třída reprezentuje digitální objekt.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </p>
+
+                <section id="vlastnost-digitální-objekt-url-ke-stažení">
+                    <h4>URL ke stažení</h4>
+
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>url</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            URL ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            URL digitálního objektu ke stažení. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://www.brno.cz/fileadmin/user_upload/sprava_mesta/magistrat_mesta_brna/PO/volna_mista/VR_067_20_OUPR_urbanista_-_bydleni_05.docx</code>
+                        </dd>                     
+                    </dl>
+                    
+                </section>
+
+                <section id="vazba-digitální-objekt-poskytovatel">
+                    <h4>Vazba: Poskytovatel</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>poskytovatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poskytovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytovatel digitálního objektu je člověk či osoba, která datovou sadu nebo databázi poskytuje.
+                            Může, ale nemusí disponovat některým z níže specifikovaných práv, resp. na daný digitální objekt se nemusí vztahovat některý z ochranných režimů uvedených dále v této specifikaci.
+                            Každý digitální objekt tedy má svého poskytovatele.
+                            Typicky se jedná o člověka či osobu, která se rozhodla digitální objekt, tj. obrázek, datovou sadu, databázi, atd., poskytnout.
+                        </dd> 
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            Statutární město Brno
+                        </dd>  
+                    </dl>
+                    
+                </section>
+
+
+                <section id="vazba-digitální-objekt-kurátor">
+                    <h4>Vazba: Kurátor</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>kurátor</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kurátor
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kurátor digitálního objektu je osoba, která např. datovou sadu nebo databázi spravuje.
+                            Může, ale nemusí disponovat některým z níže specifikovaných práv, resp. na daný digitální objekt se nemusí vztahovat některý z ochranných režimů uvedených dále v této specifikaci.
+                            Každý digitální objekt tedy má svého kurátora.
+                            Typicky se jedná o člověka či osobu, která s digitálním objektem, tj. obrázkem, datovou sadou, databází, atd., pracuje a podrobně &quot;se vyzná&quot; v její struktuře a obsahu.
+                        </dd> 
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            Martin Dvořák, Statutární město Brno
+                        </dd>  
+                    </dl>
+                    
+                </section>
+
+                <section id="vazba-digitální-objekt-autor">
+                    <h4>Vazba: Autor díla</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>autor_díla</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk">Člověk</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Autor díla
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Autor daného díla dle § 5 zákona č. 121/2000 Sb, autorský zákon.
+                        </dd> 
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            František Svoboda
+                        </dd>  
+                    </dl>
+                    
+                </section>
+
+                <section id="vazba-digitální-objekt-vykonavatel-majetkových-práv-autorských-u-autorského-díla">
+                    <h4>Vazba: Vykonavatel majetkových práv autorských u autorského díla</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vykonavatel_autorské_dílo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vykonavatel majetkových práv autorských u autorského díla, které není originální databází
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vykonavatele majetkových práv autorských daného/daných díla/děl.
+                            Typicky se bude jednat o zaměstnavatele autora (§ 58 zákona č. 121/2000 Sb, autorský zákon).
+                        </dd>
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            Univerzita Karlova
+                        </dd> 
+                    </dl>
+
+                </section>
+
+                <section id="vazba-digitální-objekt-autor-originální-databáze">
+                    <h4>Vazba: Autor originální databáze</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>autor_originální_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk">Člověk</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Autor originální databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Autor dané originální databáze dle § 5 zákona č. 121/2000 Sb, autorský zákon.
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            František Novák
+                        </dd> 
+                    </dl>
+                    
+                </section>
+
+                <section id="vazba-digitální-objekt-vykonavatel-majetkových-práv-autorských-u-originální-databáze">
+                    <h4>Vazba: Vykonavatel majetkových práv autorských u originální databáze</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vykonavatel_originální_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vykonavatel majetkových práv autorských u originální databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vykonavatele majetkových práv autorských dané originální databáze.
+                            Typicky se bude jednat o zaměstnavatele autora (§ 58 zákona č. 121/2000 Sb, autorský zákon).
+                        </dd>
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            Masarykova univerzita
+                        </dd> 
+                    </dl>
+                    
+                </section>
+
+                <section id="vazba-digitální-objekt-pořizovatel-databáze">
+                    <h4>Vazba: Pořizovatel databáze</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>pořizovatel_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Pořizovatel databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Pořizovatel dané databáze dle § 89 zákona č. 121/2000 Sb, autorský zákon. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            František Novotný 
+                        </dd>                     
+                    </dl>
+                    
+                </section>
+
+                <section id="vazba-digitální-objekt-správce-osobních-údajů">
+                    <h4>Vazba: Správce osobních údajů</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>správce_osobních_údajů</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Správce osobních údajů
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Správce daných osobních údajů dle čl. 4 odst. 7 Nařízení Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů a o zrušení směrnice 95/46/ES (obecné nařízení o ochraně osobních údajů - GDPR).
+                        </dd>
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            Mendelova univerzita v Brně
+                        </dd>                      
+                    </dl>
+                    
+                </section>  
+
+                <section id="vazba-digitální-objekt-zpracovatel-osobních-údajů">
+                    <h4>Vazba: Zpracovatel osobních údajů</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>zpracovatel_osobních_údajů</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zpracovatel osobních údajů
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Zpracovatel daných osobních údajů dle čl. 4 odst. 8 Nařízení Evropského parlamentu a Rady (EU) 2016/679 ze dne 27. dubna 2016 o ochraně fyzických osob v souvislosti se zpracováním osobních údajů a o volném pohybu těchto údajů a o zrušení směrnice 95/46/ES (obecné nařízení o ochraně osobních údajů - GDPR).
+                        </dd>                     
+                        <dt>   
+                            Příklad
+                        </dt>
+                        <dd>
+                            Firma, která se zabývá zpracováním osobních údajů. 
+                        </dd>                      
+                    </dl>
+                    
+                </section> 
+                
+                <section id="vazba-digitální-objekt-typ-média">
+                    <h4>Vazba: Typ média</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ_média</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">Typ média</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ média
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Číselník pro typy médií vycházející ze specifikace <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">číselníku typu médií</a>.
+                            V příkladu je uvedena reprezentace typu média pro soubor <code>tiff</code>.
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>http://www.iana.org/assignments/media-types/image/tiff</code>
+                        </dd>                            
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-digitální-objekt-podmínky-užití">
+                    <h4>Vazba: Podmínky užití</h4>
+
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>podmínky_užití</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../podmínky-užití/2020-07-01/#třída-podmínky-užití">Podmínky užití</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Podmínky užití
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Možnosti podmínek užití a jejich identifikátory. 
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-podmínky-užití">
+                <h3>Podmínky užití</h3>
+                <p>
+                    Tato třída reprezentuje podmínky užití pro daný digitální objekt.
+                    Při stanovování podmínek užití digitálních objektů se lze inspirovat <a href="https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti">návodem pro stanovení podmínek užití otevřených dat</a>.
+                </p>
+
+                <section id="vlastnost-podmínky-užití-obsahuje-autorské-dílo">
+                    <h4>Obsahuje autorské dílo</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obsahuje_autorské_dílo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obsahuje autorské dílo
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vyjádření, zda daný digitální objekt je či nění autorským dílem, které není originální databází.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-podmínky-užití-více-autorských-děl">
+                    <h4>Obsahuje více autorských děl</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obsahuje_více_autorských_děl</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obsahuje více autorských děl
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vyjádření, že daný digitální objekt obsahuje více autorských děl, která nejsou originální databází.
+                            V takovém případě se má za to, že podmínky užití jednotlivých děl jsou upraveny uvnitř digitálního objektu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>false</code>
+                        </dd>
+                    </dl>
+
+                </section>                        
+
+                <section id="vlastnost-podmínky-užití-licence-autorského-díla">
+                    <h4>Licence autorského díla</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>licence_autorského_díla</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Licence autorského díla
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Licence autorského díla, které není originální databází.
+                            Při nastavení podmínek užití doporučujeme řídit se dle <a href="https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti">těchto doporučení pro Stanovení podmínek užití otevřených dat</a>.
+                            Lze využít i vlastní licenci, která musí být uvedena odkazem na tuto licenci.
+                            Tato praxe je ale výrazně nedoporučována s ohledem na zajištění interoperability digitálních objektů.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://creativecommons.org/licenses/by/4.0/</code>
+                        </dd>
+                    </dl>
+
+                </section>                 
+                
+                <section id="vlastnost-podmínky-užití-originální-databáze">
+                    <h4>Originální databáze</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>originální_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Originální databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vyjádření, zda daný digitální objekt je či není originální (autorskoprávně chráněnou) databází.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>    
+                
+                <section id="vlastnost-podmínky-užití-licence-originální-databáze">
+                    <h4>Licence originální databáze</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>licence_originální_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Licence originální databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Licence originální databáze.
+                            Při nastavení podmínek užití doporučujeme řídit se dle <a href="https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti">těchto doporučení pro Stanovení podmínek užití otevřených dat</a>.
+                            Lze využít i vlastní licenci, která musí být uvedena odkazem na tuto licenci.
+                            Tato praxe je ale výrazně nedoporučována s ohledem na zajištění interoperability digitálních objektů.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://creativecommons.org/licenses/by/4.0/</code>
+                        </dd>
+                    </dl>
+
+                </section>                            
+
+                <section id="vlastnost-podmínky-užití-databáze-chráněná-zvláštními-právy-pořizovatele-databáze">
+                    <h4>Databáze chráněná zvláštními právy pořizovatele databáze</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>ochrana_zvláštními_právy_pořizovatele_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Databáze chráněná zvláštními právy pořizovatele databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vyjádření, zda daný digitální objekt je či není chráněn zvláštními právy pořizovatele databáze.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>        
+                
+                <section id="vlastnost-podmínky-užití-licence-databáze-chráněné-zvláštními-právy-pořizovatele-databáze">
+                    <h4>Licence pro databázi chráněnou zvláštními právy pořizovatele databáze</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>licence_databáze_chráněné_zvláštními_právy_pořizovatele_databáze</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Licence pro databázi chráněnou zvláštními právy pořizovatele databáze
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Licence pro databázi chráněnou zvláštními právy pořizovatele databáze.
+                            Při nastavení podmínek užití doporučujeme řídit se dle <a href="https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti">těchto doporučení pro Stanovení podmínek užití otevřených dat</a>.
+                            Lze využít i vlastní licenci, která musí být uvedena odkazem na tuto licenci.
+                            Tato praxe je ale výrazně nedoporučována s ohledem na zajištění interoperability digitálních objektů.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://creativecommons.org/publicdomain/zero/1.0/</code>
+                        </dd>
+                    </dl>
+
+                </section>   
+
+                <section id="vlastnost-podmínky-užití-obsahuje-osobní-údaje">
+                    <h4>Obsahuje osobní údaje</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>obsahuje_osobní_údaje</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Obsahuje osobní údaje
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vyjádření, zda daný digitální objekt obsahuje či neobsahuje osobní údaje.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>
+            
+        </section>        
+
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci je uvedene příklad reprezantace digitálního objektu ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
+            </p>
+            
+            <section id="příklady-digitální-objekt-jednoduchý">
+                <h3>Jednoduchý příklad digitálního objektu</h3>
+
+                <p>
+                    Příklad ukazuje, jak lze prezentovat digitální objekt s minimálními položkami k publikaci.
+                </p>
+
+                <aside class="example" title="Jednoduchý digitální objekt v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/digitální-objekty/2020-07-01/kontexty/digitální-objekt.jsonld",
+    "typ": "Digitální objekt",
+    "url": "https://www.brno.cz/fileadmin/user_upload/sprava_mesta/magistrat_mesta_brna/PO/volna_mista/VR_067_20_OUPR_urbanista_-_bydleni_05.docx",
+    "autor_díla": [{
+        "typ": "Člověk",
+        "jméno": {
+            "cs": "Jan"
+        },
+        "příjmení": {
+            "cs": "Novák"
+        }
+    }],
+    "typ_média": "http://www.iana.org/assignments/media-types/image/tiff",
+    "podmínky_užití": {
+        "typ": "Podmínky užití",
+        "obsahuje_autorské_dílo": true,
+        "obsahuje_více_autorských_děl": false,
+        "licence_autorského_díla": "https://creativecommons.org/licenses/by/4.0/",
+        "originální_databáze": false,
+        "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+        "obsahuje_osobní_údaje": false
+    }
+}</pre>
+                </aside>
+            </section>
+
+            <section id="příklady-digitální-objekt-komplexní">
+                <h3>Komplexní příklad digitálního objektu</h3>
+
+                <p>
+                    Příklad ukazuje, jak lze prezentovat digitální objekt, aby měl jeho potenciální uživatel co nejvíce informací o daném digitálním objektu (v tomto případě je popisován digitální objekt, který nepodléhá některému z ochranných režimů). Další položky lze přidávat dle potřeby.
+                </p>
+
+                <aside class="example" title="Komplexní digitální objekt v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/digitální-objekty/2020-07-01/kontexty/digitální-objekt.jsonld",
+    "typ": "Digitální objekt",
+    "url": "https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2Fhttps---kod.brno.cz-api-action-package_show-id-brno-ocima-obyvatel-cr-2013",
+    "název": {
+        "cs": "Brno očima obyvatel ČR 2013",
+        "en": "Citizents view of Brno 2013"
+    },
+    "popis": {
+        "cs": "Reprezentativní sociologický průzkum na cílové populaci dospělých osob ve věku 18 a více let ČR je opakované, tzv. omnibusové šetření, jehož cílem je postihnout obraz města Brna v očích obyvatel ČR (tzv. vnější image). První vlna se uskutečnila v roce 2009, druhá vlna v roce 2013, která je předmětem této datové sady, a třetí vlna v roce 2017. Hlavní výzkumné okruhy jsou: 1. Identifikace intenzity znalosti města Brna v dospělé populaci ČR, 2. Zjištění úrovně sympatií k městu Brnu, 3. Analýza image města Brna. 4. Analýza asociací obyvatel ČR s městem Brnem. Výzkum byl realizován jako terénní dotazníkové šetření na reprezentativním vzorku české populace ve věku 18 a více let. Sběr byl realizován na základě kvótního výběru. Stanovenými kvótními znaky byly pohlaví, věk, nejvyšší dosažené vzdělání, velikost sídla a kraj bydliště respondenta.\n Velikost výběrového souboru: N = 1022. Způsob výběru vzorku: kvótní výběr (dle kvót ČSÚ 2010). Termín sběru dat: 8. - 14. října 2013. Nástroj sběru dat - dotazník, doba vyplnění: průměrně 13 minut, metodika sběru dat: CAPI – osobní dotazování F2F vyškolených tazatelů s elektronickým dotazníkem.",
+        "en": "A representative sociological survey of the target population of adults aged 18 and over in the Czech Republic is a repeated, so-called omnibus investigation into whether it is possible to draw a picture of the city of Brno in the eyes of the Czech population (the so-called external picture). The first wave will take place in 2009, the second wave in 2013, which has this data set, and the third wave in 2017. The main research areas are: 1. Identification of the intensity of information of the city of Brno in the adult population of the Czech Republic, 2. Determination of the level of sympathy for of the city of Brno, 3. Analysis of the image of the city of Brno. 4. Analysis of associations of the population of the Czech Republic with the city of Brno. The research was carried out as a field questionnaire survey on a representative sample of the Czech population aged 18 and over. The collection was carried out on the basis of quantum selection. Determined quantum traits, gender, highest educational attainment, size of residence and region of residence of the respondent. \n Sampling size: N = 1022. Sampling method: quantitative sampling (according to CZSO 2010 issues). Date of data collection: October 8 - 14, 2013. Data collection tool - questionnaire, completion time: 13 minutes on average, data collection methodology: CAPI - personal interviewing of F2F trained interviewers with an electronic questionnaire."
+    },
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2013-09-27T09:30:00+02:00"
+    },
+    "poskytovatel": [{
+        "typ": "Osoba",
+        "název": {
+            "cs": "Statutární město Brno"
+        },
+        "ičo": "44992785",
+        "stát": "http://publications.europa.eu/resource/authority/country/CZE"
+    }],
+    "kurátor": [{
+        "typ": "Člověk",
+        "jméno": {
+            "cs": "Eva"
+        },
+        "příjmení": {
+            "cs": "Gregorová"
+        }
+    }],
+    "typ_média": "http://www.iana.org/assignments/media-types/image/tiff",
+    "podmínky_užití": {
+        "typ": "Podmínky užití",
+        "obsahuje_autorské_dílo": false,
+        "obsahuje_více_autorských_děl": false,
+        "originální_databáze": false,
+        "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+        "obsahuje_osobní_údaje": false
+    }
+}</pre>
+                </aside>
+            </section>
+        
+            <section id="příklady-digitální-objekt-další">
+                <h3>Další příklad digitálního objektu</h3>
+
+                <p>
+                    Příklad ukazuje, jak lze dále prezentovat digitální objekt (v tomto případě je popisovaná digitální objekt, která podléhá některým ochranným režímům). Další položky lze přidávat dle potřeby.
+                </p>
+
+                <aside class="example" title="Komplexní digitální objekt v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/digitální-objekt.json">JSON Schema</a>, <a href="schémata/digitální-objekty.json">JSON Schema seznamu digitálních objektů</a>, <a href="kontexty/digitální-objekt.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/digitální-objekty/2020-07-01/kontexty/digitální-objekt.jsonld",
+    "typ": "Digitální objekt",
+    "url": "https://arxiv.org/abs/1910.09513",
+    "název": {
+        "cs": "Rozhodovací praxe českých soudů - korpus: Dostupnost jako první krok",
+        "en": "The Czech Court Decisions Corpus (CzCDC): Availability as the First Step"
+    },
+    "popis": {
+        "cs": "V tomto článku popisujeme Korpus rozhodování českého soudu (CzCDC). CzCDC je datový soubor 237 723 rozhodnutí zveřejňovaných českými vrcholovými (nebo nejvyššími) soudy, jmenovitě Nejvyšší soud, Nejvyšší správní soud a Ústavní soud. Všechna rozhodnutí byla zveřejněna v období od 1. ledna 1993 do 30. září 2018. Rozhodnutí soudu jsou k dispozici na webových stránkách příslušných soudů nebo prostřednictvím komerčních databází právních informací. To často vede výzkumníky, kteří se zajímají o tato rozhodnutí, k rozhodnutí buď k příslušnému soudu, nebo ke komerčnímu poskytovateli. To vede ke zpožděním a dalším nákladům. Ty jsou dále prohlubovány nedostatečným mezioborovým standardem, pokud jde o formát údajů, ve kterém soudy vydávají svá rozhodnutí. V databázích soudů navíc často chybí řádná dokumentace. Naším cílem je zpřístupnit datový soubor soudních rozhodnutí volně online v konzistentním (jednoduchém) formátu, aby se snížily náklady spojené se získáváním údajů pro budoucí výzkum. Věříme, že zjednodušený přístup k soudním rozhodnutím prostřednictvím CzCDC by mohl být přínosem pro další vědce. V tomto článku popisujeme zpracování rozhodnutí před jejich zařazením do CzCDC a základní statistiky datového souboru. Tento dataset obsahuje prosté texty soudních rozhodnutí a tyto texty nejsou anotovány pro žádné gramatické nebo syntaktické rysy.",
+        "en": "In this paper, we describe the Czech Court Decision Corpus (CzCDC). CzCDC is a dataset of 237,723 decisions published by the Czech apex (or top-tier) courts, namely the Supreme Court, the Supreme Administrative Court and the Constitutional Court. All the decisions were published between 1st January 1993 and 30th September 2018. Court decisions are available on the webpages of the respective courts or via commercial databases of legal information. This often leads researchers interested in these decisions to reach either to respective court or to commercial provider. This leads to delays and additional costs. These are further exacerbated by a lack of inter-court standard in the terms of the data format in which courts provide their decisions. Additionally, courts' databases often lack proper documentation. Our goal is to make the dataset of court decisions freely available online in consistent (plain) format to lower the cost associated with obtaining data for future research. We believe that simplified access to court decisions through the CzCDC could benefit other researchers. In this paper, we describe the processing of decisions before their inclusion into CzCDC and basic statistics of the dataset. This dataset contains plain texts of court decisions and these texts are not annotated for any grammatical or syntactical features."
+    },
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2013-09-27T09:30:00+02:00"
+    },
+    "autor": [{
+        "typ": "Člověk",
+        "jméno": {
+            "cs": "Tereza"
+        },
+        "příjmení": {
+            "cs": "Novotná"
+        }
+    }, {
+        "typ": "Člověk",
+        "jméno": {
+            "cs": "Jakub"
+        },
+        "příjmení": {
+            "cs": "Harašta"
+        }
+    }],
+    "poskytovatel": [{
+        "typ": "Člověk",
+        "jméno": {
+            "cs": "Tereza"
+        },
+        "příjmení": {
+            "cs": "Novotná"
+        }
+    }, {
+        "typ": "Člověk",
+        "jméno": {
+            "cs": "Jakub"
+        },
+        "příjmení": {
+            "cs": "Harašta"
+        }
+    }],
+    "typ_média": "http://www.iana.org/assignments/media-types/application/pdf",
+    "podmínky_užití": {
+        "typ": "Podmínky užití",
+        "obsahuje_autorské_dílo": true,
+        "licence_autorské_dílo": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+        "obsahuje_více_autorských_děl": false,
+        "originální_databáze": false,
+        "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+        "obsahuje_osobní_údaje": false
+    }
+}</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
+
+

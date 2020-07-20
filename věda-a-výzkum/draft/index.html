@@ -31,7 +31,6 @@
                 latestVersion: "https://ofn.gov.cz/věda-a-výzkum/",
                 editors: [{
                   name: "Jakub Klímek",
-                  
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
                   companyURL: "https://www.mvcr.cz"
@@ -48,6 +47,7 @@
                         href: "mailto:otevrenadata@mvcr.cz"
                     }]
                 }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
               };
         </script>
     </head>
@@ -56,21 +56,18 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je sdílenou specifikací pro sdílené části v oblasti vědy a výzkumu pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
-                Specifikace je ilustrována příklady dat ve formátu JSON [[ECMA-404]].
+                Specifikace je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]].
             </p>
         </section>
 
         <section id="přehled">
-
             <h2>Přehled</h2>
-            <p>
-                V této OFN jsou modelovány společné entity pro vědu a výzkum.
-            </p>
 
             <figure id="model">
-                <img alt="Model člověka či osoby" src="obrázky/věda-a-výzkum.svg"/>
+                <img alt="Model sdílených částí pro vědu a výzkum" src="obrázky/věda-a-výzkum.svg"/>
                 <figcaption>
-                    <a href="https://drive.google.com/file/d/1_jKfDxUI7nh_eQp_AOIY7XS_ewumnA1e">Model OFN Věda a výzkum</a>.
+                    <a href="https://drive.google.com/file/d/1_jKfDxUI7nh_eQp_AOIY7XS_ewumnA1e">Model společných částí Vědy a výzkumu</a>.
+                        Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
                 </figcaption>
             </figure>
 
@@ -78,7 +75,6 @@
 
         <section id="specifikace">
             <h2>Specifikace</h2>
-
             <p>
                 V této sekci jsou definovány společné entity v oblasti vědy a výzkumu.
                 Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
@@ -88,7 +84,7 @@
                 <h3>Výzkumník</h3>
                 <p>
                     Výzkumník.
-                    Jedná se o <a href="../../lidé-a-osoby/#třída-člověk">člověka</a>, který má navíc vědecké identifikátory.
+                    Jedná se o <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk">člověka</a>, který má navíc vědecké identifikátory.
                 </p>
 
                 <section id="vlastnost-výzkumník-orcid">
@@ -104,7 +100,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
@@ -140,7 +136,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -176,7 +172,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -200,6 +196,212 @@
                 </section>
                 
             </section>
+
+            <section id="třída-projekt">
+                <h3>Projekt</h3>
+                
+                <p>
+                    Tato třída reprezentuje projekt.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-projekt-kód">
+                    <h4>Kód</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kód</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kód
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Oficiální kód projektu (předpokládají se projekty VaVaI).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>GA19-01641S</code>
+                        </dd>
+                    </dl>
+
+                </section>    
+
+            </section>
+
+            <section id="třída-publikace">
+                <h3>Publikace</h3>
+                <p>
+                    Tato třída reprezentuje publikaci.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">Digitální objekt</a>.
+                </p>
+              
+                <section id="vlastnost-publikace-doi">
+                    <h4>DOI</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>doi</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            DOI
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            DOI publikace
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>10.4067/S0718-18762017000100003</code>
+                        </dd>
+                    </dl>
+
+                </section>
+            
+            </section>
+                
+            <section id="třída-pracoviště">
+                <h3>Pracoviště</h3>
+                <p>
+                    Tato třída reprezentuje pracoviště.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+               
+                <section id="vlastnost-pracoviště-orjk">
+                    <h4>ORJK</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>orjk</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            ORJK
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kód organizační jednotky (ORJK), který se využívá např. v systému ISVaV a ve statistikách MŠMT. Používá se pro identifikaci jednotek, které nemají IČO, např. fakulty v rámci univerzity.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>11320</code>
+                        </dd>
+                    </dl>
+
+                </section>          
+
+                <section id="vazba-pracoviště-provozovatel">
+                    <h4>Vazba: Provozovatel</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>provozovatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Provozovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Instituce či člověk, který provozuje pracoviště, na kterém bude dizertace zpracovávána.
+                        </dd>
+                    </dl>
+
+                </section>  
+
+                <section id="vazba-pracoviště-součást">
+                    <h4>Vazba: Je součástí</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>je_součástí</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-pracoviště">Pracoviště</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Je součástí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vztah mezi organizačně propojenými pracovišti (např. katedra-fakulta, fakulta-univerzita).
+                        </dd>
+                    </dl>
+
+                </section>  
+                
+            </section>
             
         </section>
         
@@ -218,17 +420,18 @@
                 <h3>Výzkumník</h3>
                 
                 <p>
-                    Úplný příklad reprezentace vědce.
-                    Pro formát JSON je k dispozici <a href="schémata/výzkumník.json">Schéma pro výzkumníka ve formátu JSON v jazyce JSON Schema</a> [[!json-schema]].
+                    Úplný příklad reprezentace výzkumníka.
                 </p>
                 
-                <aside class="example" title="Výzkumník v JSON">
+                <aside class="example" title="Výzkumník v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">Stáhnout JSON</a>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/výzkumník.json">JSON Schema</a>, <a href="kontexty/věda-a-výzkum.jsonld">JSON-LD kontext</a>
                     </p>
                 
                     <pre class="json">
 {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/věda-a-výzkum/kontexty/věda-a-výzkum.jsonld",
+    "typ": "Výzkumník",
     "jméno": {
         "cs": "Jakub"
     },
@@ -252,7 +455,7 @@
                 
                 <aside class="example" title="Výzkumník v XML">
                     <p>
-                        <a href="příklady/1.xml">Stáhnout XML</a>
+                        <a href="příklady/1.xml">XML soubor</a>
                     </p>
                 
                     <pre class="xml">
@@ -276,7 +479,7 @@ xsi:schemaLocation="https://ofn.gov.cz/věda-a-výzkum/2020-07-01 https://ofn.go
                 
                 <aside class="example" title="Výzkumník v CSV">
                     <p>
-                        <a href="příklady/1.csv">Stáhnout CSV</a>
+                        <a href="příklady/1.csv">CSV soubor</a>
                     </p>
                 
                     <pre class="csv">
@@ -290,7 +493,7 @@ Jakub,Klímek,RNDr.,Ph.D.,"RNDr. Jakub Klímek, Ph.D.",https://orcid.org/0000-00
                 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
-                       <a href="příklady/1.csv-metadata.json">Stáhnout deskriptor</a>
+                       <a href="příklady/1.csv-metadata.json">Deskriptor</a>
                     </p>
                 
                     <pre class="json">
@@ -349,6 +552,8 @@ Jakub,Klímek,RNDr.,Ph.D.,"RNDr. Jakub Klímek, Ph.D.",https://orcid.org/0000-00
 }</pre>
                 </aside>
             </section>
+        
         </section>
+    
     </body>
 </html>

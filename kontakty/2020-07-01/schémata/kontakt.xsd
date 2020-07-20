@@ -1,0 +1,24 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:kontakt="https://ofn.gov.cz/kontakty/2020-07-01" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" xmlns:věc="https://ofn.gov.cz/věc/2020-07-01" xmlns:umístění="https://ofn.gov.cz/umístění/2020-07-01" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="https://ofn.gov.cz/kontakty/2020-07-01" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:import namespace="https://ofn.gov.cz/základní-datové-typy/2020-07-01" schemaLocation="https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/základní-datové-typy.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/umístění/2020-07-01" schemaLocation="https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/věc/2020-07-01" schemaLocation="https://ofn.gov.cz/věc/2020-07-01/schémata/věc.xsd"/>
+	<xs:complexType name="kontakt">
+		<xs:complexContent>
+			<xs:extension base="věc:věc">
+				<xs:sequence minOccurs="0" maxOccurs="1">
+					<xs:element name="druh" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="email" type="xs:anyURI" minOccurs="0"/>
+					<xs:element name="facebook" type="xs:string" minOccurs="0"/>
+					<xs:element name="idds" type="xs:string" minOccurs="0"/>
+					<xs:element name="instagram" type="xs:string" minOccurs="0"/>
+					<xs:element name="mobil" type="xs:anyURI" minOccurs="0"/>
+					<xs:element name="telefon" type="xs:anyURI" minOccurs="0"/>
+					<xs:element name="twitter" type="xs:string" minOccurs="0"/>
+					<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+					<xs:element name="umístění" type="umístění:umístění" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="kontakt" type="kontakt:kontakt"/>
+</xs:schema>

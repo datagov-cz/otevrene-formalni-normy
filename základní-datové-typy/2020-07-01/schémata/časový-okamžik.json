@@ -1,0 +1,55 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json",
+	"title": "Časový okamžik",
+	"type": "object",
+	"description": "Časový okamžik - datum, datum a čas nebo nespecifikovaný.",
+	"oneOf": [{
+			"required": ["typ", "datum"],
+			"properties": {
+				"typ": {
+					"const": "Časový okamžik"
+				},
+				"datum": {
+					"type": "string",
+					"format": "date",
+					"title": "Datum okamžiku.",
+					"examples": [
+						"2019-01-01+01:00"
+					]
+				}
+			}
+		},
+		{
+			"required": ["typ", "datum_a_čas"],
+			"properties": {
+				"typ": {
+					"const": "Časový okamžik"
+				},
+				"datum_a_čas": {
+					"type": "string",
+					"format": "date-time",
+					"title": "Datum a čas okamžiku.",
+					"examples": [
+						"2019-01-01T09:30:10.5+01:00"
+					]
+				}
+			}
+		},
+		{
+			"required": ["typ", "nespecifikovaný"],
+			"properties": {
+				"typ": {
+					"const": "Časový okamžik"
+				},
+				"nespecifikovaný": {
+					"type": "boolean",
+					"title": "Nespecifikovaný okamžik",
+					"examples": [
+						true
+					]
+				}
+			}
+		}
+	]
+}
