@@ -159,6 +159,111 @@
                 </section>
 
             </section>
+
+            <section id="třída-platové-podmínky">
+                <h3>Platové podmínky</h3>
+                <p>
+                    Tato třída reprezentuje platové podmínky.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vazba-platové-podmínky-plat">
+                    <h4>Vazba: Plat</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>plat</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#částka">Částka</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Plat
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Nabízený plat.
+                        </dd>
+                    </dl>
+
+                </section>           
+            
+                <section id="vazba-platové-podmínky-minimum">
+                    <h4>Vazba: Minimum</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>minimum</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#částka">Částka</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Minimální plat
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Nabízený minimální plat.
+                        </dd>
+                    </dl>
+
+                </section>           
+            
+                <section id="vazba-platové-podmínky-maximum">
+                    <h4>Vazba: Maximum</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>maximum</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#částka">Částka</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Maximální plat
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Nabízený maximální plat.
+                        </dd>
+                    </dl>
+
+                </section>           
+            
+            </section>
                 
             <section id="třída-pracoviště">
                 <h3>Pracoviště</h3>
@@ -297,14 +402,27 @@
                     <pre class="json">
 {
     "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/práce/kontexty/práce.jsonld",
-    "typ": "Kvalifikace"
+    "typ": "Kvalifikace",
+    "název": {
+        "cs": "Angličtina",
+        "en": "English"
+    },
+    "délka": {
+        "typ": "Množství",
+        "hodnota": 2,
+        "jednotka": "ANN"
+    },
+    "doklad": {
+        "cs": "Certifikát TOEFL",
+        "en": "TOEFL certificate"
+    }
 }</pre>
                 </aside>
         
             </section>
 
             <section id="příklady-pracoviště">
-                <h3>Kvalifikace</h3>
+                <h3>Pracoviště</h3>
                 
                 <p>
                     Úplný příklad reprezentace pracoviště.
@@ -318,12 +436,69 @@
                     <pre class="json">
 {
     "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/práce/kontexty/práce.jsonld",
-    "typ": "Pracoviště"
+    "typ": "Pracoviště",
+    "název": {
+        "cs": "Katedra softwarového inženýrství",
+        "en": "Department of software engineering"
+    },
+    "je_součástí": {
+        "typ": "Pracoviště",
+        "název": {
+            "cs": "Matematicko-fyzikální fakulta",
+            "en": "Faculty of mathematics and physics"
+        },
+        "orjk": "11320",
+        "provozovatel": {
+            "typ": "Osoba",
+            "název": {
+                "cs": "Univerzita Karlova",
+                "en": "Charles University"
+            },
+            "ičo": "00216208"
+        }
+    }
 }</pre>
                 </aside>
         
             </section>
 
+            <section id="příklady-platové-podmínky">
+                <h3>Platové podmínky</h3>
+                
+                <p>
+                    Příklad reprezentace platových podmínek.
+                </p>
+                
+                <aside class="example" title="Platové podmínky v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/platové-podmínky.json">JSON Schema</a>, <a href="kontexty/práce.jsonld">JSON-LD kontext</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/práce/kontexty/práce.jsonld",
+    "typ": "Platové podmínky",
+    "název": {
+        "cs": "Nástupní plat",
+        "en": "Starting salary"
+    },
+    "minimum": {
+        "typ": "Jednotková částka",
+        "výše": 25000,
+        "měna": "http://publications.europa.eu/resource/authority/currency/CZK",
+        "jednotka": "MON"
+    },
+    "maximum": {
+        "typ": "Jednotková částka",
+        "výše": 35000,
+        "měna": "http://publications.europa.eu/resource/authority/currency/CZK",
+        "jednotka": "MON"
+    }
+}</pre>
+                </aside>
+        
+            </section>
+        
         </section>
     
     </body>
