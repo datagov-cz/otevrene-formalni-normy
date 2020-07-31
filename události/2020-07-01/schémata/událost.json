@@ -6,10 +6,19 @@
 	"required": ["typ"],
 	"properties": {
 		"typ": {
-			"const": "Událost"
+			"oneOf": [{
+				"const": "Událost"
+				},{
+				"type": "array",
+				"contains": {
+					"const": "Událost"
+				},
+				"items": {
+					"type": "string"
+				}
+			}]
 		},
 		"iri": {
-
 			"type": "string",
 			"format": "iri",
 			"title": "Identifikátor",
@@ -105,7 +114,6 @@
 		"téma": {
 			"type": "array",
 			"items": {
-
 				"type": "string",
 				"format": "iri",
 				"pattern": "^https\\:\/\/data\\.mvcr\\.gov\\.cz\/zdroj\/číselníky\/témata-událostí\/položky\/.*$",

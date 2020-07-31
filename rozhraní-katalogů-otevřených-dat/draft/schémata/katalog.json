@@ -6,7 +6,17 @@
 	"required": ["typ", "iri", "název", "popis", "poskytovatel", "datová_sada"],
 	"properties": {
 		"typ": {
-			"const": "Katalog"
+			"oneOf": [{
+				"const": "Katalog"
+				},{
+				"type": "array",
+				"contains": {
+					"const": "Katalog"
+				},
+				"items": {
+					"type": "string"
+				}
+			}]
 		},
 		"iri": {
 			"type": "string",

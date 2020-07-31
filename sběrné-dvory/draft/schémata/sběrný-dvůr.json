@@ -5,10 +5,19 @@
     "title": "Sběrný dvůr",
     "properties": {
         "typ": {
-            "const": "Sběrný dvůr"
+            "oneOf": [{
+                "const": "Sběrný dvůr"
+                },{
+                "type": "array",
+                "contains": {
+                    "const": "Sběrný dvůr"
+                },
+                "items": {
+                    "type": "string"
+                }
+            }]
         },
         "iri": {
-
             "type": "string",
             "format": "iri",
             "title": "Identifikátor",
@@ -50,16 +59,13 @@
             "$ref": "https://ofn.gov.cz/časová-specifikace/draft/schémata/seznam-časových-specifikací.json"
         },
         "kontejner": {
-
             "type": "array",
             "title": "Kontejner",
             "items": {
-
                 "type": "object",
                 "title": "Kontejner",
                 "properties": {
                     "typ_odpadu": {
-
                         "type": "array",
                         "format": "iri",
                         "title": "Typ odpadu",
@@ -71,11 +77,9 @@
                         "$ref":"https://ofn.gov.cz/základní-datové-typy/draft/schémata/množství.json"
                     },
                     "poplatek": {
-
                         "type": "array",
                         "title": "Poplatek",
                         "items": {
-
                             "type": "object",
                             "title": "Poplatek",
                             "properties": {

@@ -5,9 +5,19 @@
 	"title": "Časová specifikace",
 	"required": ["typ"],
 	"properties": {
-		"typ": {
-			"const": "Časová specifikace"
-		},
+        "typ": {
+            "oneOf": [{
+				"const": "Časová specifikace"
+                },{
+                "type": "array",
+                "contains": {
+					"const": "Časová specifikace"
+                },
+                "items": {
+                    "type": "string"
+                }
+            }]
+        },
 		"iri": {
 			"type": "string",
 			"format": "iri",
@@ -107,7 +117,17 @@
 						"required": ["typ", "čas"],
 						"properties": {
 							"typ": {
-								"const": "Časová doba"
+								"oneOf": [{
+									"const": "Časová doba"
+									},{
+									"type": "array",
+									"contains": {
+										"const": "Časová doba"
+									},
+									"items": {
+										"type": "string"
+									}
+								}]
 							},
 							"čas": {
 								"type": "string",
@@ -124,7 +144,17 @@
 						"required": ["typ", "od", "do"],
 						"properties": {
 							"typ": {
-								"const": "Časová doba"
+								"oneOf": [{
+									"const": "Časová doba"
+									},{
+									"type": "array",
+									"contains": {
+										"const": "Časová doba"
+									},
+									"items": {
+										"type": "string"
+									}
+								}]
 							},
 							"od": {
 								"type": "string",
@@ -156,7 +186,17 @@
 				"required": ["typ"],
 				"properties": {
 					"typ": {
-						"const": "Specifická frekvence"
+						"oneOf": [{
+							"const": "Specifická frekvence"
+							},{
+							"type": "array",
+							"contains": {
+								"const": "Specifická frekvence"
+							},
+							"items": {
+								"type": "string"
+							}
+						}]
 					},
 					"minuta": {
 						"type": "integer",

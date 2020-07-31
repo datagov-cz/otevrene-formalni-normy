@@ -5,9 +5,19 @@
 	"description": "Poštovní nebo elektronická adresa organizace, osoby, místa nebo události.",
 	"required": ["typ"],
 	"properties": {
-		"typ": {
-			"const": "Adresa"
-		},
+        "typ": {
+            "oneOf": [{
+				"const": "Adresa"
+                },{
+                "type": "array",
+                "contains": {
+					"const": "Adresa"
+                },
+                "items": {
+                    "type": "string"
+                }
+            }]
+        },
 		"adresní_místo": {
 			"type": "string",
 			"format": "iri",
