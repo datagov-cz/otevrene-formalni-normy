@@ -60,7 +60,28 @@
 			"požadované_dokumenty": {
 				"type": "array",
 				"items": {
-					"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+					"type": "object",
+					"title": "Požadovaný dokument",
+					"required": ["typ"],
+					"allOf": [{
+						"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+					}, {
+						"properties": {
+							"typ": {
+								"oneOf": [{
+									"const": "Požadovaný dokument"
+								}, {
+									"type": "array",
+									"contains": {
+										"const": "Požadovaný dokument"
+									},
+									"items": {
+										"type": "string"
+									}
+								}]
+							}
+						}
+					}]
 				}
 			},
 			"kontakt": {
