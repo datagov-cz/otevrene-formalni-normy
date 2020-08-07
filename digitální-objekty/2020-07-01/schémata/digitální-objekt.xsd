@@ -2,108 +2,106 @@
 			xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
 			xmlns:digitální-objekty="https://ofn.gov.cz/digitální-objekty/2020-07-01" 
 			xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01"
+			xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
 			xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" 
 			targetNamespace="https://ofn.gov.cz/digitální-objekty/2020-07-01"
 			elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:import namespace="https://ofn.gov.cz/základní-datové-typy/2020-07-01" schemaLocation="https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/základní-datové-typy.xsd"/>
 	<xs:import namespace="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" schemaLocation="https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk-či-osoba.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/věc/2020-07-01" schemaLocation="https://ofn.gov.cz/věc/2020-07-01/schémata/věc.xsd"/>
 	<xs:complexType name="digitální_objekt">
-		<xs:sequence minOccurs="0" maxOccurs="1">
-			<xs:element ref="základ:rozšiřující_položky" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="iri" type="xs:anyURI" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="název" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="popis" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
-			<xs:element name="vytvořeno" type="základ:časový_okamžik" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="aktualizováno" type="základ:časový_okamžik" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="relevantní_do" type="základ:časový_okamžik" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="zneplatněno" type="základ:časový_okamžik" minOccurs="0" maxOccurs="1"/>
-			<xs:element name="přílohy" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="příloha" minOccurs="0" maxOccurs="unbounded" type="digitální-objekty:digitální_objekt"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="poskytovatelé" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="poskytovatel" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="kurátoři" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="kurátor" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="autoři_díla" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="autor_díla" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="vykonavatelé_autorské_dílo" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="vykonavatel_autorské_dílo" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="autoři_originální_databáze" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="autor_originální_databáze" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="pořizovatelé_databáze" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="pořizovatel_databáze" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="vykonavatelé_originální_databáze" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="vykonavatel_originální_databáze" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="správci_osobních_údajů" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="správce_osobních_údajů" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="zpracovatelé_osobních_údajů" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="zpracovatel_osobních_údajů" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-			<xs:element name="typ_média" type="xs:anyURI" minOccurs="0"/>
-			<xs:element name="podmínky_užití" minOccurs="0">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element name="obsahuje_autorské_dílo" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="obsahuje_více_autorských_děl" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="licence_autorského_díla" type="xs:anyURI" minOccurs="0"/>
-						<xs:element name="originální_databáze" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="licence_originální_databáze" type="xs:anyURI" minOccurs="0"/>
-						<xs:element name="ochrana_zvláštními_právy_pořizovatele_databáze" type="xs:boolean" minOccurs="0"/>
-						<xs:element name="licence_databáze_chráněné_zvláštními_právy_pořizovatele_databáze" type="xs:anyURI" minOccurs="0"/>
-						<xs:element name="obsahuje_osobní_údaje" type="xs:boolean" minOccurs="0"/>
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="věc:věc">
+				<xs:sequence minOccurs="0" maxOccurs="1">
+					<xs:element ref="digitální-objekty:přílohy"/>
+					<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
+					<xs:element name="poskytovatelé" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="poskytovatel" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="kurátoři" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="kurátor" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="autoři_díla" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="autor_díla" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vykonavatelé_autorské_dílo" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="vykonavatel_autorské_dílo" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="autoři_originální_databáze" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="autor_originální_databáze" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="pořizovatelé_databáze" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="pořizovatel_databáze" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vykonavatelé_originální_databáze" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="vykonavatel_originální_databáze" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="správci_osobních_údajů" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="správce_osobních_údajů" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="zpracovatelé_osobních_údajů" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="zpracovatel_osobních_údajů" minOccurs="0" maxOccurs="unbounded" type="osoba:člověk_či_osoba"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="typ_média" type="xs:anyURI" minOccurs="0"/>
+					<xs:element name="podmínky_užití" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="obsahuje_autorské_dílo" type="xs:boolean" minOccurs="0"/>
+								<xs:element name="obsahuje_více_autorských_děl" type="xs:boolean" minOccurs="0"/>
+								<xs:element name="licence_autorského_díla" type="xs:anyURI" minOccurs="0"/>
+								<xs:element name="originální_databáze" type="xs:boolean" minOccurs="0"/>
+								<xs:element name="licence_originální_databáze" type="xs:anyURI" minOccurs="0"/>
+								<xs:element name="ochrana_zvláštními_právy_pořizovatele_databáze" type="xs:boolean" minOccurs="0"/>
+								<xs:element name="licence_databáze_chráněné_zvláštními_právy_pořizovatele_databáze" type="xs:anyURI" minOccurs="0"/>
+								<xs:element name="obsahuje_osobní_údaje" type="xs:boolean" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:element name="digitální_objekt" type="digitální-objekty:digitální_objekt"/>
+	<xs:complexType name="přílohy">
+		<xs:sequence>
+			<xs:element name="příloha" type="digitální-objekty:digitální_objekt" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="přílohy" type="digitální-objekty:přílohy"/>
 </xs:schema>
