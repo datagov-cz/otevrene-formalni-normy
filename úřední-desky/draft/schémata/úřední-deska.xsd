@@ -8,6 +8,7 @@
 		<xs:complexContent>
 			<xs:extension base="věc:věc">
 				<xs:sequence maxOccurs="unbounded">
+					<xs:element ref="digitální-objekty:přílohy"/>
 					<xs:element name="stránka" type="xs:anyURI" minOccurs="0"/>
 					<xs:element name="provozovatel" type="osoba:osoba" minOccurs="0"/>
 					<xs:element name="umístění" type="umístění:umístění" minOccurs="0" maxOccurs="unbounded"/>
@@ -34,11 +35,12 @@
 					<xs:element name="subjekty" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="subjekt" maxOccurs="unbounded">
+								<xs:element name="subjekt" minOccurs="0" maxOccurs="unbounded">
 									<xs:complexType>
 										<xs:complexContent>
 											<xs:extension base="věc:věc">
 												<xs:sequence>
+													<xs:element ref="digitální-objekty:přílohy"/>
 													<xs:element name="člověk_či_osoba" type="osoba:člověk_či_osoba" minOccurs="0"/>
 													<xs:element name="umístění" type="umístění:umístění" minOccurs="0"/>
 												</xs:sequence>
@@ -52,15 +54,7 @@
 					<xs:element name="dokumenty" minOccurs="0">
 						<xs:complexType>
 							<xs:sequence>
-								<xs:element name="dokument" maxOccurs="unbounded">
-									<xs:complexType>
-										<xs:sequence minOccurs="0">
-											<xs:element name="název" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
-											<xs:element name="url" type="xs:anyURI" minOccurs="0"/>
-											<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
-										</xs:sequence>
-									</xs:complexType>
-								</xs:element>
+								<xs:element name="dokument" minOccurs="0" maxOccurs="unbounded" type="digitální-objekty:digitální_objekt"/>
 							</xs:sequence>
 						</xs:complexType>
 					</xs:element>
@@ -71,6 +65,9 @@
 									<xs:complexType>
 										<xs:complexContent>
 											<xs:extension base="věc:věc">
+												<xs:sequence>
+													<xs:element ref="digitální-objekty:přílohy"/>
+												</xs:sequence>
 											</xs:extension>
 										</xs:complexContent>
 									</xs:complexType>
