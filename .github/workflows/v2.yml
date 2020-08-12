@@ -1,0 +1,16 @@
+name: Validator2
+
+on:
+  push:
+  pull_request:
+    branches: [ master ]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Data validator
+      uses: skodapetr/data-validator/github@master
+      with:
+        configuration: http://skoda.projekty.ms.mff.cuni.cz/www/temp/data-validator-configuration.ttl
