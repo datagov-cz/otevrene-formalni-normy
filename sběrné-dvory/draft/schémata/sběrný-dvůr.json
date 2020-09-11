@@ -76,29 +76,49 @@
                                 "items": {
                                     "type": "object",
                                     "title": "Poplatek",
-                                    "properties": {
-                                        "odpad": {
-
-                                            "type": "array",
-                                            "format": "iri",
-                                            "title": "Odpad",
-                                            "examples": [
-                                                "https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky"
+                                    "required": ["typ"],
+                                    "allOf": [{
+                                        "$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+                                    }, {
+                                        "properties": {
+                                            "typ": {
+                                                "oneOf": [{
+                                                    "const": "Poplatek"
+                                                }, {
+                                                    "type": "array",
+                                                    "contains": {
+                                                        "const": "Poplatek"
+                                                    },
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }]
+                                            },
+                                            "odpad": {
+                                                "type": "array",
+                                                "format": "iri",
+                                                "title": "Odpad",
+                                                "examples": [
+                                                    "https://data.mvcr.gov.cz/zdroj/číselníky/typy-odpadů/položky/pneumatiky"
+                                                ]
+                                            },
+                                            "cena": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/částka.json"
+                                                            }
+                                                        }
+                                                    }
+                                                }
                                             ]
-                                        },
-                                        "cena": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/částka.json"
-                                            }
                                         }
                                     }
                                 }
-                            }
-                        }
-                    }]
+                            } 
+                        ]
+                    }
                 }
             }
-        }
-    }]
-}
+        }    
+    ]
+}   
