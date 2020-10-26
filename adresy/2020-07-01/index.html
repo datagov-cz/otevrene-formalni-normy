@@ -1348,24 +1348,32 @@ https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
 
                     <pre class="json">
 {
+    "@id": "https://ofn.gov.cz/adresy/2020-07-01/příklady/0.csv-metadata.json",
     "@context": [
         "http://www.w3.org/ns/csvw",
         {"@language": "cs"}
     ],
+    "@type": "Table",
     "url": "0.csv",
-    "header": true,
     "tableSchema": {
+        "@type": "Schema",
         "columns": [
             {
+                "@type": "Column",
                 "titles": "adresní_místo",
-                "dc:description": "Adresní místo v RÚIAN ve formě IRI",
+                "propertyUrl": "http://www.w3.org/ns/locn#addressId",
+                "dc:description": "Adresní místo v RÚIAN ve formě URI.",
                 "datatype": "anyURI",
                 "required": true
+            }, {
+                "@type": "Column",
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/ns/locn#Address"
             }
         ]
     }
-}
-</pre>
+}</pre>
                 </aside>
 
             </section>
@@ -1455,50 +1463,64 @@ Hlavni,Horní Datová,12,č.p.,33101,dole u řeky</pre>
 
                     <pre class="json">
 {
+    "@id": "https://ofn.gov.cz/adresy/2020-07-01/příklady/2.csv-metadata.json",
     "@context": [
         "http://www.w3.org/ns/csvw",
         {"@language": "cs"}
     ],
+    "@type": "Table",
     "url": "2.csv",
-    "header": true,
     "tableSchema": {
+        "@type": "Schema",
         "columns": [
             {
+                "@type": "Column",
                 "name": "nazev_ulice_cs",
                 "titles": "název_ulice_cs",
+                "propertyUrl": "http://www.w3.org/ns/locn#thoroughfare",
                 "dc:description": "Název ulice, která je navázána na adresní místo. Může být vyplněn pouze u obcí, které mají zavedenu uliční síť.",
                 "datatype": "string",
                 "lang": "cs"
             }, {
+                "@type": "Column",
                 "name": "nazev_obce_cs",
                 "titles": "název_obce_cs",
+                "propertyUrl": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-obce-nebo-vojenského-újezdu",
                 "dc:description": "Název obce.",
                 "datatype": "string",
                 "lang": "cs"
             }, {
+                "@type": "Column",
                 "name": "cislo_domovni",
                 "titles": "číslo_domovní",
+                "propertyUrl": "http://www.w3.org/ns/locn#locatorDesignator",
                 "dc:description": "Číslo popisné nebo číslo evidenční, podle rozlišeného typu stavebního objektu.",
                 "datatype": "integer"
             }, {
+                "@type": "Column",
                 "name": "typ_cisla_domovniho",
                 "titles": "typ_čísla_domovního",
+                "propertyUrl": "http://www.w3.org/ns/locn#locatorDesignator",
                 "dc:description": "Typ čísla domovního, může nabývat hodnot: č.p.- číslo popisné, č.ev.- číslo evidenční.",
-                "datatype": "string",
-                "enum": [
-                        "č.p.",
-                        "č.ev."
-                ]
+                "datatype": "string"
             }, {
+                "@type": "Column",
                 "name": "psc",
                 "titles": "psč",
+                "propertyUrl": "http://www.w3.org/ns/locn#postCode",
                 "dc:description": "Poštovní směrovací číslo",
                 "datatype": "string"
             }, {
+                "@type": "Column",
                 "name": "poznamka",
                 "titles": "poznámka",
                 "dc:description": "Poznámka.",
                 "datatype": "string"
+            }, {
+                "@type": "Column",
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/ns/locn#Address"
             }
         ]
     }
@@ -1562,8 +1584,8 @@ Hlavni,Horní Datová,12,č.p.,33101,dole u řeky</pre>
                     </p>
 
                     <pre class="csv">
-                      text_cs
-                      Pod Panskou strání 262/12, Chvojkonosy, 33205 Lysostírky</pre>
+text_cs
+"Pod Panskou strání 262/12, Chvojkonosy, 33205 Lysostírky"</pre>
                 </aside>
 
                 <p>
@@ -1577,18 +1599,22 @@ Hlavni,Horní Datová,12,č.p.,33101,dole u řeky</pre>
 
                     <pre class="json">
 {
+    "@id": "https://ofn.gov.cz/adresy/2020-07-01/příklady/3.csv-metadata.json",
     "@context": [
         "http://www.w3.org/ns/csvw",
         {
             "@language": "cs"
         }
     ],
+    "@type": "Table",
     "url": "3.csv",
-    "header": true,
     "tableSchema": {
+        "@type": "Schema",
         "columns": [{
+            "@type": "Column",
             "name": "text_cs",
             "titles": "text_cs",
+            "propertyUrl": "http://www.w3.org/ns/locn#fullAddress",
             "dc:description": "Celá adresa jako jeden řetězec podle Přílohy č. 1 k vyhlášce č. 359/2011 Sb., o základním registru územní identifikace, adres anemovitostí.",
             "datatype": "string",
             "lang": "cs"
