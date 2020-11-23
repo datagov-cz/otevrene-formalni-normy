@@ -1,0 +1,35 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/vstupné/2020-07-01/schémata/vstupné.json",
+	"type": "object",
+	"title": "Vstupné",
+	"required": ["typ"],
+	"allOf": [{
+		"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+	}, {
+		"properties": {
+			"typ": {
+				"oneOf": [{
+					"const": "Vstupné"
+				}, {
+					"type": "array",
+					"contains": {
+						"const": "Vstupné"
+					},
+					"items": {
+						"type": "string"
+					}
+				}]
+			},
+			"podmínka": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+			},
+			"platnost": {
+				"$ref": "https://ofn.gov.cz/časová-specifikace/2020-07-01/schémata/seznam-časových-specifikací.json"
+			},
+			"cena": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/částka.json"
+			}
+		}
+	}]
+}

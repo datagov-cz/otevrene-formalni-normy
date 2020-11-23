@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="https://ofn.gov.cz/základní-datové-typy/2020-07-01" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
+	<xs:element name="rozšiřující_položky">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:any namespace="##other" processContents="skip" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="časový_okamžik">
+		<xs:choice>
+			<xs:element name="datum" type="xs:date"/>
+			<xs:element name="datum_a_čas" type="xs:dateTimeStamp"/>
+			<xs:element name="nespecifikovaný" type="xs:boolean"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="časový_interval">
+		<xs:sequence>
+			<xs:element name="začátek" type="základ:časový_okamžik" minOccurs="0"/>
+			<xs:element name="konec" type="základ:časový_okamžik" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="text">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute ref="xml:lang" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="částka">
+		<xs:sequence>
+			<xs:element name="výše" type="xs:decimal"/>
+			<xs:element name="měna" type="xs:anyURI"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="množství">
+		<xs:sequence>
+			<xs:element name="hodnota" type="xs:decimal"/>
+			<xs:element name="jendotka" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,147 +1,161 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "https://ofn.gov.cz/úřední-desky/draft/schémata/úřední-deska.json",
-    "name": "Oznámení na úřední desce",
-    "type": "object",
-    "description": "Seznam všech oznámení na úřední desce (informace o platnosti, obsahu a odkazy na konkrétní dokumenty).",
-    "properties": {
-        "url": {
-            "type": "string",
-            "format": "iri",
-            "title": "URL úřední desky",
-            "description": "URL úřední desky",
-            "examples": [
-                "https://example.com/uredni_deska"
-            ]
-        },
-        "provozovatel": {
-            "$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/osoba.json"
-        },
-        "umístění": {
-            "$ref": "https://ofn.gov.cz/umístění/draft/schémata/umístění.json"
-        },
-        "oznámení": {
-            "type": "array",
-            "name": "Oznámení",
-            "description": "Oznámení na úřední desce",
-            "items": {
-                "properties": {
-                    "identifikátor": {
-                        "type": "string",
-                        "title": "Identifikátor",
-                        "description": "Jednoznačný identifikátor dokumentu tvořícího oznámení, např. vlastní číselná řada.",
-                        "examples": [
-                            "P2018-13"
-                        ]
-                    },
-                    "url": {
-                        "type": "string",
-                        "format": "iri",
-                        "title": "URL oznámení",
-                        "description": "URL oznámení (s lidsky čitelnou zprávou)",
-                        "examples": [
-                            "https://example.com/uredni_deska/2018-1"
-                        ]
-                    },
-                    "název": {
-                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-                    },
-                    "anotace": {
-                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-                    },
-                    "zveřejněno": {
-                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-interval.json"
-                    },
-                    "schváleno": {
-                        "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/časový-okamžik.json"
-                    },
-                    "značka": {
-                        "type": "string",
-                        "title": "Spisová značka",
-                        "description": "Spisová značka oznámení.",
-                        "examples": [
-                            "OV/13/2018-Tisj"
-                        ]
-                    },
-                    "číslo_jednací": {
-                        "type": "string",
-                        "title": "Číslo jednací",
-                        "description": "Číslo jednací oznámení.",
-                        "examples": [
-                            "OV/666/18 Tisj"
-                        ]
-                    },
-                    "revize": {
-                        "type": "string",
-                        "title": "Revize",
-                        "description": "Označení revize/verze oznámení.",
-                        "examples": [
-                            "20180101"
-                        ]
-                    },
-                    "autor": {
-                        "$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
-                    },
-                    "subjekt": {
-                        "type": "array",
-                        "title": "Subjekty oznámení",
-                        "description": "Osoby, organizace a místa, kterých se oznámení týká.",
-                        "items": {
-                            "type": "object",
-                            "title": "Subjekt oznámení",
-                            "description": "Osoby, organizace nebo místa, kterého se oznámení týká.",
-                            "properties": {
-                                "název": {
-                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-                                },
-                                "člověk_či_osoba": {
-                                    "$ref": "https://ofn.gov.cz/lidé-a-osoby/draft/schémata/člověk-či-osoba.json"
-                                },
-                                "umístění": {
-                                    "$ref": "https://ofn.gov.cz/umístění/draft/schémata/umístění.json"
-                                }
-                            }
-                        }
-                    },
-                    "dokument": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "title": "Další dokumenty",
-                            "description": "Další dokumenty k oznámení. Přílohy.",
-                            "properties": {
-                                "název": {
-                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-                                },
-                                "url": {
-                                    "type": "string",
-                                    "format": "iri",
-                                    "title": "URL",
-                                    "description": "Další dokument/y. URL dokumentu.",
-                                    "examples": [
-                                        "https://example.com/uredni_deska/2018-1/priloha1.odt", "https://example.com/uredni_deska/2018-1/priloha2.jpg"
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "agenda": {
-                        "type": "array",
-                        "title": "Agenda",
-                        "description": "Agendy, kategorie, správní činnosti, pod které spadá oznámení.",
-                        "items": {
-                            "type": "object",
-                            "title": "Agenda",
-                            "description": "Agenda, kategorie, správní činnost, pod které spadá oznámení.",
-                            "properties": {
-                                "název": {
-                                    "$ref": "https://ofn.gov.cz/základní-datové-typy/draft/schémata/text.json"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/úřední-desky/draft/schémata/úřední-deska.json",
+	"name": "Úřední deska",
+	"type": "object",
+	"description": "Seznam všech oznámení na úřední desce (informace o platnosti, obsahu a odkazy na konkrétní dokumenty).",
+	"required": [ "typ" ],
+	"allOf": [ { 
+		"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+	}, {
+		"properties": {
+			"typ": {
+				"oneOf": [{
+					"const": "Úřední deska"
+				}, {
+					"type": "array",
+					"contains": {
+						"const": "Úřední deska"
+					},
+					"items": {
+						"type": "string"
+					}
+				}]
+			},
+			"stránka": {
+				"type": "string",
+				"format": "iri",
+				"title": "URL stránky úřední desky",
+				"description": "URL stránky úřední desky",
+				"examples": [
+					"https://example.com/uredni_deska"
+				]
+			},
+			"provozovatel": {
+				"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/osoba.json"
+			},
+			"umístění": {
+				"$ref": "https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.json"
+			},
+			"oznámení": {
+				"type": "array",
+				"name": "Oznámení",
+				"description": "Oznámení na úřední desce",
+				"required": [ "typ" ],
+				"items": {
+					"allOf": [ { 
+						"$ref": "https://ofn.gov.cz/digitální-objekty/2020-07-01/schémata/digitální-objekt.json"
+					}, {
+						"properties": {
+							"typ": {
+								"type": "array",
+								"contains": {
+									"const": "Oznámení na úřední desce"
+								}
+							},
+							"zveřejněno": {
+								"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+							},
+							"schváleno": {
+								"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+							},
+							"značka": {
+								"type": "string",
+								"title": "Spisová značka",
+								"description": "Spisová značka oznámení.",
+								"examples": [
+									"OV/13/2018-Tisj"
+								]
+							},
+							"číslo_jednací": {
+								"type": "string",
+								"title": "Číslo jednací",
+								"description": "Číslo jednací oznámení.",
+								"examples": [
+									"OV/666/18 Tisj"
+								]
+							},
+							"revize": {
+								"type": "string",
+								"title": "Revize",
+								"description": "Označení revize/verze oznámení.",
+								"examples": [
+									"20180101"
+								]
+							},
+							"subjekt": {
+								"type": "array",
+								"title": "Subjekty oznámení",
+								"description": "Osoby, organizace a místa, kterých se oznámení týká.",
+								"items": {
+									"type": "object",
+									"title": "Subjekt oznámení",
+									"description": "Osoby, organizace nebo místa, kterého se oznámení týká.",
+									"required": [ "typ" ],
+									"allOf": [ { 
+										"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+									}, {
+										"properties": {
+											"typ": {
+												"oneOf": [{
+													"const": "Subjekt oznámení"
+												}, {
+													"type": "array",
+													"contains": {
+														"const": "Subjekt oznámení"
+													},
+													"items": {
+														"type": "string"
+													}
+												}]
+											},
+											"člověk_či_osoba": {
+												"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk-či-osoba.json"
+											},
+											"umístění": {
+												"$ref": "https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.json"
+											}
+										}
+									}]
+								}
+							},
+							"dokument": {
+								"$ref": "https://ofn.gov.cz/digitální-objekty/2020-07-01/schémata/digitální-objekty.json"
+							},
+							"agenda": {
+								"type": "array",
+								"title": "Agenda",
+								"description": "Agendy, kategorie, správní činnosti, pod které spadá oznámení.",
+								"items": {
+									"type": "object",
+									"title": "Agenda",
+									"description": "Agenda, kategorie, správní činnost, pod které spadá oznámení.",
+									"required": [ "typ" ],
+									"allOf": [ { 
+										"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+									}, {
+										"properties": {
+											"typ": {
+												"oneOf": [{
+													"const": "Agenda"
+												}, {
+													"type": "array",
+													"contains": {
+														"const": "Agenda"
+													},
+													"items": {
+														"type": "string"
+													}
+												}]
+											}
+										}
+									}]									
+								}
+							}
+						}
+					}]
+				}
+			}
+		}
+	}]
 }

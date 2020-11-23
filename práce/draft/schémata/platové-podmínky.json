@@ -1,0 +1,35 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/práce/draft/schémata/platové-podmínky.json",
+	"name": "Platové podmínky",
+	"description": "Platové podmínky",
+	"required": ["typ"],
+	"allOf": [{
+		"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+	}, {
+		"properties": {
+			"typ": {
+				"oneOf": [{
+					"const": "Platové podmínky"
+					},{
+					"type": "array",
+					"contains": {
+						"const": "Platové podmínky"
+					},
+					"items": {
+						"type": "string"
+					}
+				}]
+			},
+			"plat": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/jednotková-částka.json"
+			},
+			"minimum": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/jednotková-částka.json"
+			},
+			"maximum": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/jednotková-částka.json"
+			}
+		}
+	}]
+}

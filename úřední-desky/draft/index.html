@@ -26,18 +26,15 @@
             var respecConfig = {
                 specStatus: "ED",
                 shortName: "úřední-desky",
-                showPreviousVersion: true,
-                prevVersion: "https://opendata.gov.cz/datova-sada:uredni-deska",
+                showPreviousVersion: false,
                 thisVersion: "https://ofn.gov.cz/úřední-desky/draft/",
                 latestVersion: "https://ofn.gov.cz/úřední-desky/",
                 editors: [{
                   name: "Michal Škop",
-                  url: "https://skop.eu/",
                   company:    "Ministerstvo vnitra",
                   companyURL: "https://www.mvcr.cz"
                 },{
                   name: "Jakub Klímek",
-                  url: "https://jakub.klímek.com/#me",
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
                   companyURL: "https://www.mvcr.cz"
@@ -54,6 +51,7 @@
                         href: "mailto:otevrenadata@mvcr.cz"
                     }]
                 }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
               };
         </script>
     </head>
@@ -64,7 +62,7 @@
                 Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o oznámeních z úředních desek.
                 Ukazuje, jak reprezentovat informace o oznámeních, vystavených dokumentech, publikujících organizacích a další.
                 Je výsledkem diskuze jak s poskytovateli dat o úředních deskách, tak s tvůrci aplikací, které s těmito daty pracují.
-                Norma je ilustrována příklady dat z úředních desek ve formátech CSV [[rfc4180]], JSON [[ECMA-404]] a XML [[xml]].
+                Norma je ilustrována příklady dat z úředních desek ve formátech JSON-LD [[JSON-LD11]] a tedy i JSON [[ECMA-404]], CSV [[rfc4180]] a XML [[xml]].
             </p>
         </section>
 
@@ -80,6 +78,8 @@
             <figure id="model"><img alt="Model úředních desek" src="obrázky/úřední-deska.svg">
                 <figcaption>
                     <a href="https://drive.google.com/file/d/1E4YDOsDcrDaHFFZEivNjQBcZlfttdppT/view?usp=sharing">Model oznámení na úřední desce</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a> a třídy <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">Digitální objekt</a>.
                 </figcaption>
             </figure>
 
@@ -97,42 +97,37 @@
             <section id="třída-úřední-deska">
                 <h3>Úřední deska</h3>
                 <p>
-                    Tato třída reprezentuje úřední desku. Může jít o její jednu část v případě, že jedna organizace má úřední desku rozdělenou na více částí (např. na více url).
+                    Tato třída reprezentuje úřední desku.
+                    Může jít o její jednu část v případě, že jedna organizace má úřední desku rozdělenou na více částí (např. na více url).
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
-                <dl>
-                    <dt>
-                        Označení
-                    </dt>
-                    <dd>
-                        úřední_deska
-                    </dd>
-                </dl>
+                
                 <section id="vlastnost-úřední-deska-url">
-                    <h4>URL úřední desky</h4>
+                    <h4>Stránka úřední desky</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>url</code>
+                            <code>stránka</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            URL úřední desky
+                            URL stránky úřední desky
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            URL úřední desky
+                            URL stránky úřední desky
                         </dd>
                         <dt>
                             Příklad
@@ -142,6 +137,7 @@
                         </dd>
                     </dl>
                 </section>
+
                 <section id="vazba-úřední-deska-provozovatel">
                     <h4>Vazba: Provozovatel</h4>
                     <dl>
@@ -155,7 +151,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../osoby/#třída-osoba">Osoba</a>
+                            <a href="../../osoby/2020-07-01/#třída-osoba">Osoba</a>
                         </dd>
                         <dt>
                             Jméno
@@ -185,7 +181,7 @@
                                 Typ
                             </dt>
                             <dd>
-                                <a href="../../umístění/#třída-umístění">Umístění</a>
+                                <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
                             </dd>
                             <dt>
                                 Jméno
@@ -238,160 +234,8 @@
                 <h3>Oznámení na úřední desce</h3>
                 <p>
                     Tato třída reprezentuje samotné oznámení na úřední desce.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Digitální objekt, která je specifikována <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">otevřenou formální normou Digitální objekty</a>.
                 </p>
-                <dl>
-                    <dt>
-                        Označení
-                    </dt>
-                    <dd>
-                        Oznámení
-                    </dd>
-                </dl>
-
-                <section id="vlastnost-oznámení-identifikátor">
-                    <h4>Identifikátor</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>identifikátor</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Identifikátor
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Jednoznačný identifikátor dokumentu tvořícího oznámení, např. vlastní číselná řada.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>P2018-13</code>
-                        </dd>
-                    </dl>
-
-                </section>
-
-                <section id="vlastnost-oznámení-url-oznámení">
-                    <h4>URL oznámení</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>url</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            URL oznámení
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            URL oznámení (s lidsky čitelnou zprávou)
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://example.com/uredni_deska/2018-1</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlastnost-oznámení-název">
-                    <h4>Název</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název oznámení
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Dotační program Hasiči 2018</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vlastnost-oznámení-anotace">
-                    <h4>Anotace</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>anotace</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Anotace
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Krátké shrnutí oznámení, anotace, abstrakt.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Program na podporu dobrovolných hasičů v roce 2018</code>
-                        </dd>
-                    </dl>
-                </section>
 
                 <section id="vlastnost-oznámení-zveřejněno">
                     <h4>Zveřejněno</h4>
@@ -406,7 +250,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#časový-interval">Časový interval</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
                         </dd>
                         <dt>
                             Jméno
@@ -418,7 +262,7 @@
                             Popis
                         </dt>
                         <dd>
-                            Časový interval zveřejnění oznámení na úřední desce.
+                            Časový okamžik zveřejnění oznámení na úřední desce.
                         </dd>
                     </dl>
                 </section>
@@ -436,7 +280,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#časový-okamžik">Časový okamžik</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
                         </dd>
                         <dt>
                             Jméno
@@ -466,7 +310,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -502,7 +346,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -538,7 +382,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
                         </dd>
                         <dt>
                             Jméno
@@ -557,36 +401,6 @@
                         </dt>
                         <dd>
                             <code>20180101</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="vazba-oznámení-autor">
-                    <h4>Vazba: Autor</h4>
-                    <dl>
-                        <dt>
-                            Vazba
-                        </dt>
-                        <dd>
-                            <code>autor</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../lidé-a-osoby/#třída-člověk-či-osoba">Člověk či osoba</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Autor
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Původní autor oznámení.
                         </dd>
                     </dl>
                 </section>
@@ -634,7 +448,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="#třída-dokument">Dokument</a>
+                            <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">Digitální objekt</a>
                         </dd>
                         <dt>
                             Jméno
@@ -686,51 +500,8 @@
                 <h4>Agenda oznámení</h4>
                 <p>
                     Tato třída reprezentuje agendy, kategorie, správní činnosti, pod které spadá oznámení.
+                    U této třídy je možné použít vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
-                <dl>
-                    <dt>
-                        Označení
-                    </dt>
-                    <dd>
-                        Agenda
-                    </dd>
-                </dl>
-
-                <section id="vlastnost-agenda-název">
-                    <h4>Název</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název agendy
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název agendy, kategorie, správní činnosti, pod které spadá oznámení.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>dotace</code>, <code>přenesená působnost</code>
-                        </dd>
-                    </dl>
-                </section>
 
             </section>
 
@@ -738,51 +509,8 @@
                 <h4>Subjekt oznámení</h4>
                 <p>
                     Tato třída popisuje osoby, organizace a místa, kterých se oznámení týká.
+                    U této třídy je možné použít vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
-                <dl>
-                    <dt>
-                        Označení
-                    </dt>
-                    <dd>
-                        subjekt
-                    </dd>
-                </dl>
-
-                <section id="vlastnost-subjekt-název">
-                    <h4>Název</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název subjektu, kterého se oznámení týká.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Sbor dobrovolných hasičů Dolní Datová</code>, <code>ulice Vinice</code>
-                        </dd>
-                    </dl>
-                </section>
 
                 <section id="vazba-subjekt-člověk-či-osoba">
                     <h4>Vazba: Člověk či osoba</h4>
@@ -797,7 +525,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../lidé-a-osoby/#třída-člověk-či-osoba">Člověk či osoba</a>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
                         </dd>
                         <dt>
                             Jméno
@@ -827,7 +555,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../umístění/#třída-umístění">Umístění</a>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
                         </dd>
                         <dt>
                             Jméno
@@ -845,91 +573,6 @@
                 </section>
             </section>
 
-            <section id="třída-dokument">
-                <h3>Další dokumenty</h3>
-                <p>
-                    Tato třída popisuje další dokumenty k oznámení, jako jsou přílohy.
-                </p>
-                <dl>
-                    <dt>
-                        Označení
-                    </dt>
-                    <dd>
-                        dokument
-                    </dd>
-                </dl>
-
-                <section id="vlastnost-dokument-název">
-                    <h4>Název</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název dokumentu.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Příloha 1</code>
-                        </dd>
-                    </dl>
-                </section>
-                <section id="vlastnost-dokument-url">
-                    <h4>URL</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>url</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            URL
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            URL dokumentu.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://example.com/uredni_deska/2018-1/priloha1.odt</code>
-                        </dd>
-                    </dl>
-                </section>
-            </section>
 
         </section>
 
@@ -963,29 +606,33 @@
                     Ačkoliv jsou všechny atributy nepovinné, bez těchto základních atributů publikace dat prakticky ztrácí smysl, jelikož by je nebylo jak použít.
                 </p>
 
-                <aside class="example" title="Jednoduché oznámení v JSON">
+                <aside class="example" title="Jednoduché oznámení v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">Stáhnout JSON</a>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 {
-    "url": "https://example.com/uredni_deska/",
-    "organizace": {
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/úřední-desky/draft/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://example.com/uredni_deska/",
+    "stránka": "https://example.com/uredni_deska/",
+    "provozovatel": {
+        "typ": "Osoba",
         "ičo": "00258245"
     },
     "oznámení": [{
-        "identifikátor": "2018-13",
-        "url": "https://example.com/uredni_deska/2018-2",
+        "typ": ["Digitální objekt", "Oznámení na úřední desce"],
+        "iri": "https://example.com/uredni_deska/2018-13",
         "název": {
             "cs": "Podpora spolkového života ve městě"
         },
         "zveřejněno": {
-            "začátek": {
-                "datum": "2018-01-20"
-            },
-            "konec": {
-                "datum": "2019-02-20"
-            }
+            "typ": "Časový okamžik",
+            "datum": "2018-01-20"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum": "2019-02-20"
         }
     }]
 }</pre>
@@ -993,33 +640,34 @@
 
                 <aside class="example" title="Jednoduché oznámení v XML">
                     <p>
-                        <a href="příklady/1.xml">Stáhnout XML</a>:
+                        <a href="příklady/1.xml">XML soubor</a>, <a href="schémata/úřední-deska.xsd">XML Schema</a>
                     </p>
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;deska:úřední_deska xmlns="http://opendata.gov.cz/schema/xsd/typy/" 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xmlns:deska="https://ofn.gov.cz/úřední-desky/" 
-xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/" 
-xmlns:základ="https://ofn.gov.cz/základní-datové-typy/" 
-xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
+xmlns:deska="https://ofn.gov.cz/úřední-desky/2020-07-01" 
+xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+xmlns:digitální-objekty="https://ofn.gov.cz/digitální-objekty/2020-07-01"
+xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/2020-07-01
                     https://ofn.gov.cz/úřední-desky/draft/schémata/úřední-deska.xsd"&gt;
-    &lt;deska:url&gt;https://example.com/uredni_deska/&lt;/deska:url&gt;
+    &lt;věc:iri&gt;https://example.com/uredni_deska/&lt;/věc:iri&gt;
+    &lt;deska:stránka&gt;https://example.com/uredni_deska/&lt;/deska:stránka&gt;
     &lt;deska:provozovatel&gt;
         &lt;osoba:ičo&gt;00258245&lt;/osoba:ičo&gt;
     &lt;/deska:provozovatel&gt;
     &lt;deska:oznámení&gt;
         &lt;deska:oznámení&gt;
-            &lt;deska:identifikátor&gt;2018-13&lt;/deska:identifikátor&gt;
-            &lt;deska:url&gt;https://example.com/uredni_deska/2018-2&lt;/deska:url&gt;
-            &lt;deska:název xml:lang="cs"&gt;Podpora spolkového života ve městě&lt;/deska:název&gt;
+            &lt;věc:iri&gt;https://example.com/uredni_deska/2018-13&lt;/věc:iri&gt;
+            &lt;věc:název xml:lang="cs"&gt;Podpora spolkového života ve městě&lt;/věc:název&gt;
+            &lt;věc:relevantní_do&gt;
+                &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
+            &lt;/věc:relevantní_do&gt;
+            &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-13&lt;/digitální-objekty:url&gt;
             &lt;deska:zveřejněno&gt;
-                &lt;základ:začátek&gt;
-                    &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
-                &lt;/základ:začátek&gt;
-                &lt;základ:konec&gt;
-                    &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
-                &lt;/základ:konec&gt;
+                &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
             &lt;/deska:zveřejněno&gt;
         &lt;/deska:oznámení&gt;
     &lt;/deska:oznámení&gt;
@@ -1028,10 +676,10 @@ xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
 
                 <aside class="example" title="Jednoduché oznámení v CSV">
                     <p>
-                        <a href="příklady/1.csv">Stáhnout CSV</a>:
+                        <a href="příklady/1.csv">CSV soubor</a>:
                     </p>
                     <pre class="csv">
-url,provozovatel_ičo,oznámení_identifikátor,oznámení_url,oznámení_název_cs,oznámení_zveřejněno_začátek_datum,oznámení_zveřejněno_konec_datum
+iri,provozovatel_ičo,oznámení_identifikátor,oznámení_url,oznámení_název_cs,oznámení_zveřejněno_začátek_datum,oznámení_zveřejněno_konec_datum
 https://example.com/uredni_deska/,00258245,2018-13,https://example.com/uredni_deska/2018-2,Podpora spolkového života ve městě,2018-01-20,2018-02-20
                     </pre>
                 </aside>
@@ -1043,7 +691,7 @@ https://example.com/uredni_deska/,00258245,2018-13,https://example.com/uredni_de
 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
-                        <a href="příklady/1.csv-metadata.json">Stáhnout deskriptor</a>:
+                        <a href="příklady/1.csv-metadata.json">Deskriptor</a>:
                     </p>
 
                     <pre class="json">
@@ -1057,9 +705,9 @@ https://example.com/uredni_deska/,00258245,2018-13,https://example.com/uredni_de
     "tableSchema": {
         "columns": [
             {
-                "name": "url",
-                "titles": "url",
-                "dc:description": "URL úřední desky",
+                "name": "iri",
+                "titles": "iri",
+                "dc:description": "IRI úřední desky",
                 "datatype": "anyURI"
             }, {
                 "titles": "provozovatel_ičo",
@@ -1106,30 +754,35 @@ https://example.com/uredni_deska/,00258245,2018-13,https://example.com/uredni_de
                     V následujících příkladech je nad rámec normy přidán atribut <code>odbor</code>.
                 </p>
 
-                <aside class="example" title="Jednoduché oznámení s vlastními atributy v JSON">
+                <aside class="example" title="Jednoduché oznámení s vlastními atributy v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">Stáhnout JSON</a>:
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
                     </p>
 
                     <pre class="json">
 {
-    "url": "https://example.com/uredni_deska/",
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/úřední-desky/draft/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://example.com/uredni_deska/",
+    "stránka": "https://example.com/uredni_deska/",
     "provozovatel": {
+        "typ": "Osoba",
         "ičo": "00258245"
     },
     "oznámení": [{
-        "identifikátor": "2018-14",
-        "url": "https://example.com/uredni_deska/2018-3",
+        "typ": ["Digitální objekt", "Oznámení na úřední desce"],
+        "iri": "https://example.com/uredni_deska/2018-14",
+        "url": "https://example.com/uredni_deska/2018-14",
         "název": {
             "cs": "Podpora spolkového života ve městě II"
         },
         "zveřejněno": {
-            "začátek": {
-                "datum": "2018-01-20"
-            },
-            "konec": {
-                "datum": "2019-02-20"
-            }
+            "typ": "Časový okamžik",
+            "datum": "2018-01-20"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum": "2019-02-20"
         },
         "odbor": "VD"
     }]
@@ -1143,37 +796,40 @@ https://example.com/uredni_deska/,00258245,2018-13,https://example.com/uredni_de
 
                 <aside class="example" title="Jednoduché oznámení s vlastními atributy v XML">
                     <p>
-                        <a href="příklady/2.xml">Stáhnout XML</a>:
+                        <a href="příklady/2.xml">XML soubor</a>, <a href="schémata/úřední-deska.xsd">XML Schema</a>
                     </p>
 
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;deska:úřední_deska xmlns="http://opendata.gov.cz/schema/xsd/typy/" 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xmlns:deska="https://ofn.gov.cz/úřední-desky/" 
-xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/" 
-xmlns:základ="https://ofn.gov.cz/základní-datové-typy/" 
+xmlns:deska="https://ofn.gov.cz/úřední-desky/2020-07-01" 
+xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+xmlns:digitální-objekty="https://ofn.gov.cz/digitální-objekty/2020-07-01"
 xmlns:x="https://příklad.cz"
-xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
+xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/2020-07-01
         https://ofn.gov.cz/úřední-desky/draft/schémata/úřední-deska.xsd"&gt;
-    &lt;deska:url&gt;https://example.com/uredni_deska/&lt;/deska:url&gt;
+    &lt;věc:iri&gt;https://example.com/uredni_deska/&lt;/věc:iri&gt;
+    &lt;deska:stránka&gt;https://example.com/uredni_deska/&lt;/deska:stránka&gt;
     &lt;deska:provozovatel&gt;
         &lt;osoba:ičo&gt;00258245&lt;/osoba:ičo&gt;
     &lt;/deska:provozovatel&gt;
     &lt;deska:oznámení&gt;
         &lt;deska:oznámení&gt;
-            &lt;deska:identifikátor&gt;2018-14&lt;/deska:identifikátor&gt;
-            &lt;deska:url&gt;https://example.com/uredni_deska/2018-3&lt;/deska:url&gt;
-            &lt;deska:název xml:lang="cs"&gt;Podpora spolkového života ve městě II&lt;/deska:název&gt;
+            &lt;základ:rozšiřující_položky&gt;
+                &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
+            &lt;/základ:rozšiřující_položky&gt;
+            &lt;věc:iri&gt;https://example.com/uredni_deska/2018-14&lt;/věc:iri&gt;
+            &lt;věc:název xml:lang="cs"&gt;Podpora spolkového života ve městě II&lt;/věc:název&gt;
+            &lt;věc:relevantní_do&gt;
+                &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
+            &lt;/věc:relevantní_do&gt;
+            &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-14&lt;/digitální-objekty:url&gt;
             &lt;deska:zveřejněno&gt;
-                &lt;základ:začátek&gt;
-                    &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
-                &lt;/základ:začátek&gt;
-                &lt;základ:konec&gt;
-                    &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
-                &lt;/základ:konec&gt;
+                &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
             &lt;/deska:zveřejněno&gt;
-            &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
         &lt;/deska:oznámení&gt;
     &lt;/deska:oznámení&gt;
 &lt;/deska:úřední_deska&gt;</pre>
@@ -1185,7 +841,7 @@ xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
 
                 <aside class="example" title="Jednoduché oznámení s vlastními atributy v CSV">
                     <p>
-                       <a href="příklady/2.csv">Stáhnout CSV</a>
+                       <a href="příklady/2.csv">CSV soubor</a>
                     </p>
 
                     <pre class="csv">
@@ -1200,7 +856,7 @@ https://example.com/uredni_deska/,00258245,2018-14,https://example.com/uredni_de
 
                 <aside class="example" title="CSV on the Web JSON-LD deskriptor">
                     <p>
-                       <a href="příklady/2.csv-metadata.json">Stáhnout deskriptor</a>
+                       <a href="příklady/2.csv-metadata.json">Deskriptor</a>
                     </p>
                     <pre class="json">
 {
@@ -1267,45 +923,51 @@ https://example.com/uredni_deska/,00258245,2018-14,https://example.com/uredni_de
                     Typicky bude ale úřední deska obsahovat více oznámení.
                 </p>
 
-                <aside class="example" title="Více oznámení v JSON">
+                <aside class="example" title="Více oznámení v JSON-LD">
                     <p>
-                        <a href="příklady/3.json">Stáhnout JSON</a>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
                     </p>
 
                     <pre class="json">
 {
-    "url": "https://example.com/uredni_deska/",
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/úřední-desky/draft/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://example.com/uredni_deska/",
+    "stránka": "https://example.com/uredni_deska/",
     "provozovatel": {
+        "typ": "Osoba",
         "ičo": "00258245"
     },
     "oznámení": [{
-            "identifikátor": "2018-13",
-            "url": "https://example.com/uredni_deska/2018-2",
+            "typ": ["Digitální objekt", "Oznámení na úřední desce"],
+            "iri": "https://example.com/uredni_deska/2018-13",
+            "url": "https://example.com/uredni_deska/2018-13",
             "název": {
                 "cs": "Podpora spolkového života ve městě"
             },
             "zveřejněno": {
-                "začátek": {
-                    "datum": "2018-01-20"
-                },
-                "konec": {
-                    "datum": "2019-02-20"
-                }
+                "typ": "Časový okamžik",
+                "datum": "2018-01-20"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum": "2019-02-20"
             }
         },
         {
-            "identifikátor": "2018-14",
-            "url": "https://example.com/uredni_deska/2018-3",
+            "typ": ["Digitální objekt", "Oznámení na úřední desce"],
+            "iri": "https://example.com/uredni_deska/2018-14",
+            "url": "https://example.com/uredni_deska/2018-14",
             "název": {
                 "cs": "Podpora spolkového života ve městě II"
             },
             "zveřejněno": {
-                "začátek": {
-                    "datum": "2018-01-20"
-                },
-                "konec": {
-                    "datum": "2019-02-20"
-                }
+                "typ": "Časový okamžik",
+                "datum": "2018-01-20"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum": "2019-02-20"
             },
             "odbor": "VD"
         }
@@ -1315,50 +977,51 @@ https://example.com/uredni_deska/,00258245,2018-14,https://example.com/uredni_de
 
                 <aside class="example" title="Více oznámení v XML">
                     <p>
-                        <a href="příklady/3.xml">Stáhnout XML</a>
+                        <a href="příklady/3.xml">XML soubor</a>, <a href="schémata/úřední-deska.xsd">XML Schema</a>
                     </p>
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;deska:úřední_deska 
 xmlns="http://opendata.gov.cz/schema/xsd/typy/" 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xmlns:deska="https://ofn.gov.cz/úřední-desky/" 
-xmlns:základ="https://ofn.gov.cz/základní-datové-typy/" 
+xmlns:deska="https://ofn.gov.cz/úřední-desky/2020-07-01" 
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" 
+xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+xmlns:digitální-objekty="https://ofn.gov.cz/digitální-objekty/2020-07-01"
+xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
 xmlns:x="https://příklad.cz"
-xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/" 
-xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
+xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/2020-07-01
         https://ofn.gov.cz/úřední-desky/draft/schémata/úřední-deska.xsd" &gt;
-    &lt;deska:url&gt;https://example.com/uredni_deska/&lt;/deska:url&gt;
+    &lt;věc:iri&gt;https://example.com/uredni_deska/&lt;/věc:iri&gt;
+    &lt;deska:stránka&gt;https://example.com/uredni_deska/&lt;/deska:stránka&gt;
     &lt;deska:provozovatel&gt;
         &lt;osoba:ičo&gt;00258245&lt;/osoba:ičo&gt;
     &lt;/deska:provozovatel&gt;
     &lt;deska:oznámení&gt;
         &lt;deska:oznámení&gt;
-            &lt;deska:identifikátor&gt;2018-13&lt;/deska:identifikátor&gt;
-            &lt;deska:url&gt;https://example.com/uredni_deska/2018-2&lt;/deska:url&gt;
-            &lt;deska:název xml:lang="cs"&gt;Podpora spolkového života ve městě&lt;/deska:název&gt;
+            &lt;věc:iri&gt;https://example.com/uredni_deska/2018-13&lt;/věc:iri&gt;
+            &lt;věc:název xml:lang="cs"&gt;Podpora spolkového života ve městě&lt;/věc:název&gt;
+            &lt;věc:relevantní_do&gt;
+                &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
+            &lt;/věc:relevantní_do&gt;
+            &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-13&lt;/digitální-objekty:url&gt;
             &lt;deska:zveřejněno&gt;
-                &lt;základ:začátek&gt;
-                    &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
-                &lt;/základ:začátek&gt;
-                &lt;základ:konec&gt;
-                    &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
-                &lt;/základ:konec&gt;
+                &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
             &lt;/deska:zveřejněno&gt;
         &lt;/deska:oznámení&gt;
         &lt;deska:oznámení&gt;
-            &lt;deska:identifikátor&gt;2018-14&lt;/deska:identifikátor&gt;
-            &lt;deska:url&gt;https://example.com/uredni_deska/2018-3&lt;/deska:url&gt;
-            &lt;deska:název xml:lang="cs"&gt;Podpora spolkového života ve městě II&lt;/deska:název&gt;
+            &lt;základ:rozšiřující_položky&gt;
+                &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
+            &lt;/základ:rozšiřující_položky&gt;
+            &lt;věc:iri&gt;https://example.com/uredni_deska/2018-14&lt;/věc:iri&gt;
+            &lt;věc:název xml:lang="cs"&gt;Podpora spolkového života ve městě II&lt;/věc:název&gt;
+            &lt;věc:relevantní_do&gt;
+                &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
+            &lt;/věc:relevantní_do&gt;
+            &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-14&lt;/digitální-objekty:url&gt;
             &lt;deska:zveřejněno&gt;
-                &lt;základ:začátek&gt;
-                    &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
-                &lt;/základ:začátek&gt;
-                &lt;základ:konec&gt;
-                    &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
-                &lt;/základ:konec&gt;
+                &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
             &lt;/deska:zveřejněno&gt;
-            &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
         &lt;/deska:oznámení&gt;
     &lt;/deska:oznámení&gt;
 &lt;/deska:úřední_deska&gt;</pre>
@@ -1366,7 +1029,7 @@ xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
 
                 <aside class="example" title="Více oznámení v CSV">
                     <p>
-                        <a href="příklady/3.csv">Stáhnout CSV</a>
+                        <a href="příklady/3.csv">CSV soubor</a>
                     </p>
                     <pre class="csv">
 url,organizace_ičo,oznámení_identifikátor,oznámení_url,oznámení_název_cs,oznámení_zveřejněno_začátek_datum,oznámení_zveřejněno_konec_datum,oznámení_odbor
@@ -1388,203 +1051,235 @@ https://example.com/uredni_deska/,00258245,2018-14,https://example.com/uredni_de
                     Některá mohou být jednoduchá a některá mohou obsahovat velké množství informací, např. o původním autorovi oznámení nebo o místě, kterého se oznámení týká.
                 </p>
 
-                <aside class="example" title="Jednoduché a komplexní oznámení v JSON">
+                <aside class="example" title="Jednoduché a komplexní oznámení v JSON-LD">
                     <p>
-                        <a href="příklady/4.json">Stáhnout JSON</a>
+                        <a href="příklady/4.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
                     </p>
 
                     <pre class="json">
 {
-    "url": "https://example.com/uredni_deska/",
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/úřední-desky/draft/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://example.com/uredni_deska/",
+    "stránka": "https://example.com/uredni_deska/",
     "provozovatel": {
-        "název": "Město Horní Datová",
+        "typ": "Osoba",
         "ičo": "00258245"
     },
     "umístění": {
+        "typ": "Umístění",
         "adresa": {
+            "typ": "Adresa",
             "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/696285"
         },
-        "budova": "HD Gate",
-        "místnost": "Místnost 4001"
+        "budova": {
+            "cs": "HD Gate"
         },
+        "místnost": {
+            "cs": "Místnost 4001"
+        }
+    },
     "oznámení": [{
-            "identifikátor": "2018-13",
-            "url": "https://example.com/uredni_deska/2018-2",
-            "název": {
-                "cs": "Podpora spolkového života ve městě"
+        "typ": ["Digitální objekt", "Oznámení na úřední desce"],
+        "iri": "https://example.com/uredni_deska/2018-13",
+        "url": "https://example.com/uredni_deska/2018-13",
+        "název": {
+            "cs": "Podpora spolkového života ve městě"
+        },
+        "zveřejněno": {
+            "typ": "Časový okamžik",
+            "datum": "2018-01-20"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum": "2019-02-20"
+        }
+    }, {
+        "typ": ["Digitální objekt", "Oznámení na úřední desce"],
+        "iri": "https://example.com/uredni_deska/2018-14",
+        "url": "https://example.com/uredni_deska/2018-14",
+        "autor_díla": [{
+            "typ": "Člověk",
+            "jméno": {
+                "cs": "Mirek"
             },
-            "zveřejněno": {
-                "začátek": {
-                    "datum": "2018-01-20"
+            "příjmení": {
+                "cs": "Starosta"
+            }
+        }],
+        "název": {
+            "cs": "Podpora spolkového života ve městě II"
+        },
+        "popis": {
+            "cs": "Program na podporu dobrovolných hasičů v roce 2018"
+        },
+        "zveřejněno": {
+            "typ": "Časový okamžik",
+            "datum": "2018-01-20"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum": "2019-02-20"
+        },
+        "schváleno": {
+            "typ": "Časový okamžik",
+            "datum": "2017-12-31"
+        },
+        "značka": "OV/13/2018-Tisj",
+        "číslo_jednací": "OV/666/18 Tisj",
+        "revize": "20180101",
+        "agenda": [{
+            "typ": "Agenda",
+            "název": {
+                "cs": "dotace"
+            }
+        }, {
+            "typ": "Agenda",
+            "název": {
+                "cs": "přenesená působnost"
+            }
+        }],
+        "dokument": [{
+            "typ": "Digitální objekt",
+            "název": {
+                "cs": "Příloha 1"
+            },
+            "url": "https://example.com/uredni_deska/2018-1/priloha1.odt"
+        }, {
+            "typ": "Digitální objekt",
+            "název": {
+                "cs": "Příloha 2"
+            },
+            "url": "https://example.com/uredni_deska/2018-1/priloha2.jpg"
+        }],
+        "subjekt": [{
+            "typ": "Subjekt oznámení",
+            "člověk_či_osoba": {
+                "typ": "Osoba",
+                "název": {
+                    "cs": "Sbor dobrovolných hasičů Dolní Datová"
                 },
-                "konec": {
-                    "datum": "2019-02-20"
+                "ičo": "00258267"
+            },
+            "umístění": {
+                "typ": "Umístění",
+                "geometrie": {
+                    "type": "Point",
+                    "coordinates": [
+                        13.4247552,
+                        52.5118998
+                    ],
+                    "crs": {
+                        "type": "name",
+                        "properties": {
+                            "name": "urn:ogc:def:crs:EPSG::4326"
+                        }
+                    }
                 }
             }
-        },
-        {
-            "identifikátor": "2018-14",
-            "autor": {
-                "osoba": {
-                    "název": "Obec Dolní Datová",
-                    "ičo": "00258245"
-                }
-            },
-            "url": "https://example.com/uredni_deska/2018-3",
-            "název": {
-                "cs": "Podpora spolkového života ve městě II"
-            },
-            "anotace": {
-                "cs": "Program na podporu dobrovolných hasičů v roce 2018"
-            },
-            "zveřejněno": {
-                "začátek": {
-                    "datum": "2018-01-20"
+        }, {
+            "typ": "Subjekt oznámení",
+            "člověk_či_osoba": {
+                "typ": "Osoba",
+                "název": {
+                    "cs": "Spolek dobrovolných požárníků Dolní Datová"
                 },
-                "konec": {
-                    "datum": "2019-02-20"
-                }
+                "ičo": "00258256"
             },
-            "schváleno": {
-                "datum": "2017-12-31"
-            },
-            "značka": "OV/13/2018-Tisj",
-            "číslo_jednací": "OV/666/18 Tisj",
-            "revize": "20180101",
-            "agenda": [{
-                    "název": {
-                        "cs": "dotace"
-                    }
-                },
-                {
-                    "název": {
-                        "cs": "přenesená působnost"
+            "umístění": {
+                "typ": "Umístění",
+                "adresa": {
+                    "typ": "Adresa",
+                    "obec": "https://linked.cuzk.cz/resource/ruian/obec/559352",
+                    "název_obce": {
+                        "cs": "Dolní Datová"
+                    },
+                    "část_obce": "https://linked.cuzk.cz/resource/ruian/cast-obce/121544",
+                    "název_ulice": {
+                        "cs": "Hasičská"
+                    },
+                    "typ_so": "č.p.",
+                    "číslo_domovní": 666,
+                    "psč": "33101",
+                    "okres": "https://linked.cuzk.cz/resource/ruian/okres/3407",
+                    "název_okresu": {
+                        "cs": "Plzeň-sever"
+                    },
+                    "vúsc": "https://linked.cuzk.cz/resource/ruian/vúsc/43",
+                    "název_vúsc": {
+                        "cs": "Plzeňský kraj"
                     }
                 }
-            ],
-            "dokument": [{
-                    "název": {
-                        "cs": "Příloha 1"
-                    },
-                    "url": "https://example.com/uredni_deska/2018-1/priloha1.odt"
-                },
-                {
-                    "název": {
-                        "cs": "Příloha 2"
-                    },
-                    "url": "https://example.com/uredni_deska/2018-1/priloha2.jpg"
-                }
-            ],
-            "subjekt": [{
-                    "člověk_či_osoba": {
-                        "osoba": {
-                            "název": "Sbor dobrovolných hasičů Dolní Datová",
-                            "ičo": "00258267"
-                        }
-                    },
-                    "umístění": {
-                        "geometrie": {
-                            "type": "Point",
-                            "coordinates": [
-                                13.4247552,
-                                52.5118998
-                            ],
-                            "crs": {
-                                "type": "name",
-                                "properties": {
-                                    "name": "urn:ogc:def:crs:EPSG::4326"
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    "člověk_či_osoba": {
-                        "osoba": {
-                            "název": "Spolek dobrovolných požárníků Dolní Datová",
-                            "ičo": "00258256"
-                        }
-                    },
-                    "umístění": {
-                        "adresa": {
-                            "kód_obce": "CZ0325 559352",
-                            "název_obce": "Dolní Datová",
-                            "kód_části_obce": "121544",
-                            "název_ulice": "Hasičská",
-                            "typ_so": "č.p.",
-                            "číslo_domovní": 666,
-                            "psč": "33101",
-                            "kód_okresu": "CZ032",
-                            "název_okresu": "Plzeň-sever",
-                            "kód_kraje": "CZ032",
-                            "název_kraje": "Plzeňský kraj",
-                            "url": "https://super-hasici-dolni.datova",
-                            "email": "hori@super-hasici-dolni.datova"
-                        }
-                    }
-                }
-            ],
-            "odbor": "VD"
-        }
-    ]
+            }
+        }],
+        "odbor": "VD"
+    }]
 }</pre>
                 </aside>
 
                 <aside class="example" title="Jednoduché a komplexní oznámení v XML">
                     <p>
-                        <a href="příklady/4.xml">Stáhnout XML</a>
+                        <a href="příklady/4.xml">XML soubor</a>, <a href="schémata/úřední-deska.xsd">XML Schema</a>
                     </p>
 
                     <pre class="xml">
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;deska:úřední_deska 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-xmlns:deska="https://ofn.gov.cz/úřední-desky/" 
-xmlns:adresa="https://ofn.gov.cz/adresy/" 
-xmlns:umístění="https://ofn.gov.cz/umístění/" 
-xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/" 
-xmlns:základ="https://ofn.gov.cz/základní-datové-typy/"  
+xmlns:deska="https://ofn.gov.cz/úřední-desky/2020-07-01" 
+xmlns:věc="https://ofn.gov.cz/věc/2020-07-01" 
+xmlns:adresa="https://ofn.gov.cz/adresy/2020-07-01" 
+xmlns:umístění="https://ofn.gov.cz/umístění/2020-07-01" 
+xmlns:osoba="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" 
+xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01"  
+xmlns:digitální-objekty="https://ofn.gov.cz/digitální-objekty/2020-07-01"
 xmlns:x="https://příklad.cz" 
-xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
+xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/2020-07-01
         https://ofn.gov.cz/úřední-desky/draft/schémata/úřední-deska.xsd"&gt;
-    &lt;deska:url&gt;https://example.com/uredni_deska/&lt;/deska:url&gt;
+    &lt;věc:iri&gt;https://example.com/uredni_deska/&lt;/věc:iri&gt;
+    &lt;deska:stránka&gt;https://example.com/uredni_deska/&lt;/deska:stránka&gt;
     &lt;deska:provozovatel&gt;
+        &lt;věc:název xml:lang="cs"&gt;Město Horní Datová&lt;/věc:název&gt;
         &lt;osoba:ičo&gt;00258245&lt;/osoba:ičo&gt;
-        &lt;osoba:název&gt;Město Horní Datová&lt;/osoba:název&gt;
     &lt;/deska:provozovatel&gt;
     &lt;deska:umístění&gt;
         &lt;umístění:adresa&gt;
-            &lt;adresa:budova&gt;HD Gate&lt;/adresa:budova&gt;
-            &lt;adresa:iri_adresního_místa&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/696285&lt;/adresa:iri_adresního_místa&gt;
-            &lt;adresa:místnost&gt;Místnost 4001&lt;/adresa:místnost&gt;
+            &lt;adresa:adresní_místo&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/696285&lt;/adresa:adresní_místo&gt;
         &lt;/umístění:adresa&gt;
+        &lt;umístění:budova xml:lang="cs"&gt;HD Gate&lt;/umístění:budova&gt;
+        &lt;umístění:místnost xml:lang="cs"&gt;Místnost 4001&lt;/umístění:místnost&gt;
     &lt;/deska:umístění&gt;
     &lt;deska:oznámení&gt;
         &lt;deska:oznámení&gt;
-            &lt;deska:identifikátor&gt;2018-13&lt;/deska:identifikátor&gt;
-            &lt;deska:url&gt;https://example.com/uredni_deska/2018-2&lt;/deska:url&gt;
-            &lt;deska:název xml:lang="cs"&gt;Podpora spolkového života ve městě&lt;/deska:název&gt;
+            &lt;věc:iri&gt;https://example.com/uredni_deska/2018-13&lt;/věc:iri&gt;
+            &lt;věc:název xml:lang="cs"&gt;Podpora spolkového života ve městě&lt;/věc:název&gt;
+            &lt;věc:relevantní_do&gt;
+                &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
+            &lt;/věc:relevantní_do&gt;
+            &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-13&lt;/digitální-objekty:url&gt;
             &lt;deska:zveřejněno&gt;
-                &lt;základ:začátek&gt;
-                    &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
-                &lt;/základ:začátek&gt;
-                &lt;základ:konec&gt;
-                    &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
-                &lt;/základ:konec&gt;
+                &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
             &lt;/deska:zveřejněno&gt;
         &lt;/deska:oznámení&gt;
         &lt;deska:oznámení&gt;
-            &lt;deska:identifikátor&gt;2018-14&lt;/deska:identifikátor&gt;
-            &lt;deska:url&gt;https://example.com/uredni_deska/2018-3&lt;/deska:url&gt;
-            &lt;deska:název xml:lang="cs"&gt;Podpora spolkového života ve městě II&lt;/deska:název&gt;
-            &lt;deska:anotace xml:lang="cs"&gt;Program na podporu dobrovolných hasičů v roce 2018&lt;/deska:anotace&gt;
+            &lt;základ:rozšiřující_položky&gt;
+                &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
+            &lt;/základ:rozšiřující_položky&gt;
+            &lt;věc:iri&gt;https://example.com/uredni_deska/2018-3&lt;/věc:iri&gt;
+            &lt;věc:název xml:lang="cs"&gt;Podpora spolkového života ve městě II&lt;/věc:název&gt;
+            &lt;věc:popis xml:lang="cs"&gt;Program na podporu dobrovolných hasičů v roce 2018&lt;/věc:popis&gt;
+            &lt;věc:relevantní_do&gt;
+                &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
+            &lt;/věc:relevantní_do&gt;
+            &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-3&lt;/digitální-objekty:url&gt;
+            &lt;digitální-objekty:autoři_díla&gt;
+                &lt;digitální-objekty:autor_díla&gt;
+                    &lt;osoba:jméno xml:lang="cs"&gt;Mirek&lt;/osoba:jméno&gt;
+                    &lt;osoba:příjmení xml:lang="cs"&gt;Starosta&lt;/osoba:příjmení&gt;
+                &lt;/digitální-objekty:autor_díla&gt;
+            &lt;/digitální-objekty:autoři_díla&gt;
             &lt;deska:zveřejněno&gt;
-                &lt;základ:začátek&gt;
-                    &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
-                &lt;/základ:začátek&gt;
-                &lt;základ:konec&gt;
-                    &lt;základ:datum&gt;2019-02-20&lt;/základ:datum&gt;
-                &lt;/základ:konec&gt;
+                &lt;základ:datum&gt;2018-03-20&lt;/základ:datum&gt;
             &lt;/deska:zveřejněno&gt;
             &lt;deska:schváleno&gt;
                 &lt;základ:datum&gt;2017-12-31&lt;/základ:datum&gt;
@@ -1592,76 +1287,52 @@ xsi:schemaLocation="https://ofn.gov.cz/úřední-desky/
             &lt;deska:značka&gt;OV/13/2018-Tisj&lt;/deska:značka&gt;
             &lt;deska:číslo_jednací&gt;OV/666/18 Tisj&lt;/deska:číslo_jednací&gt;
             &lt;deska:revize&gt;20180101&lt;/deska:revize&gt;
-            &lt;deska:autor&gt;
-                &lt;osoba:osoba&gt;
-                    &lt;osoba:ičo&gt;00258245&lt;/osoba:ičo&gt;
-                    &lt;osoba:název&gt;Obec Dolní Datová&lt;/osoba:název&gt;
-                &lt;/osoba:osoba&gt;
-            &lt;/deska:autor&gt;
             &lt;deska:subjekty&gt;
                 &lt;deska:subjekt&gt;
-                    &lt;deska:název xml:lang="cs"&gt;Sbor dobrovolných hasičů Dolní Datová&lt;/deska:název&gt;
-                    &lt;x:ičo&gt;00258267&lt;/x:ičo&gt;
-                    &lt;x:adresa&gt;
-                        &lt;adresa:číslo_domovní&gt;13&lt;/adresa:číslo_domovní&gt;
-                        &lt;adresa:email&gt;hori@fajni-hasici-dolni.datova&lt;/adresa:email&gt;
-                        &lt;adresa:kód_části_obce&gt;121544&lt;/adresa:kód_části_obce&gt;
-                        &lt;adresa:kód_kraje&gt;CZ032&lt;/adresa:kód_kraje&gt;
-                        &lt;adresa:kód_obce&gt;CZ0325 559352&lt;/adresa:kód_obce&gt;
-                        &lt;adresa:kód_okresu&gt;CZ032&lt;/adresa:kód_okresu&gt;
-                        &lt;adresa:kód_rúian&gt;694185&lt;/adresa:kód_rúian&gt;
-                        &lt;adresa:název_kraje&gt;Plzeňský kraj&lt;/adresa:název_kraje&gt;
-                        &lt;adresa:název_obce&gt;Dolní Datová&lt;/adresa:název_obce&gt;
-                        &lt;adresa:název_okresu&gt;Plzeň-sever&lt;/adresa:název_okresu&gt;
-                        &lt;adresa:název_ulice&gt;Hasičská&lt;/adresa:název_ulice&gt;
-                        &lt;adresa:psč&gt;33101&lt;/adresa:psč&gt;
-                        &lt;adresa:typ_rúian&gt;stavební objekt&lt;/adresa:typ_rúian&gt;
-                        &lt;adresa:typ_so&gt;č.p.&lt;/adresa:typ_so&gt;
-                        &lt;adresa:url&gt;https://fajni-hasici-dolni.datova&lt;/adresa:url&gt;
-                    &lt;/x:adresa&gt;
-                &lt;/deska:subjekt&gt;
-                &lt;deska:subjekt&gt;
-                    &lt;deska:název xml:lang="cs"&gt;Spolek dobrovolných požárníků Dolní Datová&lt;/deska:název&gt;
-                    &lt;x:ičo&gt;00258256&lt;/x:ičo&gt;
-                    &lt;x:adresa&gt;
-                        &lt;adresa:číslo_domovní&gt;666&lt;/adresa:číslo_domovní&gt;
-                        &lt;adresa:email&gt;hori@super-hasici-dolni.datova&lt;/adresa:email&gt;
-                        &lt;adresa:kód_části_obce&gt;121544&lt;/adresa:kód_části_obce&gt;
-                        &lt;adresa:kód_kraje&gt;CZ032&lt;/adresa:kód_kraje&gt;
-                        &lt;adresa:kód_obce&gt;CZ0325 559352&lt;/adresa:kód_obce&gt;
-                        &lt;adresa:kód_okresu&gt;CZ032&lt;/adresa:kód_okresu&gt;
-                        &lt;adresa:název_kraje&gt;Plzeňský kraj&lt;/adresa:název_kraje&gt;
-                        &lt;adresa:název_obce&gt;Dolní Datová&lt;/adresa:název_obce&gt;
-                        &lt;adresa:název_okresu&gt;Plzeň-sever&lt;/adresa:název_okresu&gt;
-                        &lt;adresa:název_ulice&gt;Hasičská&lt;/adresa:název_ulice&gt;
-                        &lt;adresa:psč&gt;33101&lt;/adresa:psč&gt;
-                        &lt;adresa:typ_so&gt;č.p.&lt;/adresa:typ_so&gt;
-                        &lt;adresa:url&gt;https://super-hasici-dolni.datova&lt;/adresa:url&gt;
-                    &lt;/x:adresa&gt;
+                    &lt;deska:člověk_či_osoba&gt;
+                        &lt;osoba:osoba&gt;
+                            &lt;věc:název xml:lang="cs"&gt;Sbor dobrovolných hasičů Dolní Datová&lt;/věc:název&gt;
+                            &lt;osoba:ičo&gt;00258267&lt;/osoba:ičo&gt;
+                        &lt;/osoba:osoba&gt;
+                    &lt;/deska:člověk_či_osoba&gt;
+                    &lt;deska:umístění&gt;
+                        &lt;umístění:adresa&gt;
+                            &lt;adresa:obec&gt;https://linked.cuzk.cz/resource/ruian/obec/559352&lt;/adresa:obec&gt;
+                            &lt;adresa:část_obce&gt;https://linked.cuzk.cz/resource/ruian/cast-obce/121544&lt;/adresa:část_obce&gt;
+                            &lt;adresa:název_obce xml:lang="cs"&gt;Dolní Datová&lt;/adresa:název_obce&gt;
+                            &lt;adresa:název_ulice xml:lang="cs"&gt;Hasičská&lt;/adresa:název_ulice&gt;
+                            &lt;adresa:číslo_domovní&gt;13&lt;/adresa:číslo_domovní&gt;
+                            &lt;adresa:psč&gt;33101&lt;/adresa:psč&gt;
+                            &lt;adresa:vúsc&gt;https://linked.cuzk.cz/resource/ruian/vúsc/43&lt;/adresa:vúsc&gt;
+                            &lt;adresa:okres&gt;https://linked.cuzk.cz/resource/ruian/okres/3407&lt;/adresa:okres&gt;
+                            &lt;adresa:název_vúsc xml:lang="cs"&gt;Plzeňský kraj&lt;/adresa:název_vúsc&gt;
+                            &lt;adresa:název_okresu xml:lang="cs"&gt;Plzeň-sever&lt;/adresa:název_okresu&gt;
+                        &lt;/umístění:adresa&gt;
+                    &lt;/deska:umístění&gt;                
                 &lt;/deska:subjekt&gt;
             &lt;/deska:subjekty&gt;
             &lt;deska:dokumenty&gt;
                 &lt;deska:dokument&gt;
-                    &lt;deska:název xml:lang="cs"&gt;Příloha 1&lt;/deska:název&gt;
-                    &lt;deska:url&gt;https://example.com/uredni_deska/2018-1/priloha1.odt&lt;/deska:url&gt;
+                    &lt;věc:název xml:lang="cs"&gt;Příloha 1&lt;/věc:název&gt;
+                    &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-1/priloha1.odt&lt;/digitální-objekty:url&gt;
                 &lt;/deska:dokument&gt;
                 &lt;deska:dokument&gt;
-                    &lt;deska:název xml:lang="cs"&gt;Příloha 2&lt;/deska:název&gt;
-                    &lt;deska:url&gt;https://example.com/uredni_deska/2018-1/priloha2.jpg&lt;/deska:url&gt;
+                    &lt;věc:název xml:lang="cs"&gt;Příloha 2&lt;/věc:název&gt;
+                    &lt;digitální-objekty:url&gt;https://example.com/uredni_deska/2018-1/priloha2.jpg&lt;/digitální-objekty:url&gt;
                 &lt;/deska:dokument&gt;
             &lt;/deska:dokumenty&gt;
             &lt;deska:agendy&gt;
                 &lt;deska:agenda&gt;
-                    &lt;deska:název xml:lang="cs"&gt;dotace&lt;/deska:název&gt;
+                    &lt;věc:název xml:lang="cs"&gt;dotace&lt;/věc:název&gt;
                 &lt;/deska:agenda&gt;
                 &lt;deska:agenda&gt;
-                    &lt;deska:název xml:lang="cs"&gt;přenesená působnost&lt;/deska:název&gt;
+                    &lt;věc:název xml:lang="cs"&gt;přenesená působnost&lt;/věc:název&gt;
                 &lt;/deska:agenda&gt;
             &lt;/deska:agendy&gt;
-            &lt;x:odbor&gt;VD&lt;/x:odbor&gt;
         &lt;/deska:oznámení&gt;
     &lt;/deska:oznámení&gt;
-&lt;/deska:úřední_deska&gt;</pre>
+&lt;/deska:úřední_deska&gt;
+</pre>
                 </aside>
 
                 <p>

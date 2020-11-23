@@ -1,0 +1,38 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/částka.json",
+	"type": "object",
+	"title": "Částka",
+	"required": ["typ", "výše", "měna"],
+	"properties": {
+		"typ": {
+			"oneOf": [{
+				"const": "Částka"
+				},{
+				"type": "array",
+				"contains": {
+					"const": "Částka"
+				},
+				"items": {
+					"type": "string"
+				}
+			}]
+		},
+		"výše": {
+			"type": "number",
+			"title": "Výše",
+			"examples": [
+				1000.1
+			]
+		},
+		"měna": {
+			"type": "string",
+			"format": "iri",
+			"pattern": "^http\\:\/\/publications\\.europa\\.eu\/resource\/authority\/currency\/.*$",
+			"title": "Měna",
+			"examples": [
+				"http://publications.europa.eu/resource/authority/currency/CZK"
+			]
+		}
+	}
+}

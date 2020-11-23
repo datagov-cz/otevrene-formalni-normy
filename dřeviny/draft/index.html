@@ -31,10 +31,10 @@
                 latestVersion: "https://ofn.gov.cz/dřeviny/",
                 editors: [{
                   name: "Jakub Klímek",
-                  url: "https://jakub.klímek.com/#me",
+                  
 				  orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
-                  companyURL: "http://www.mvcr.cz"
+                  companyURL: "https://www.mvcr.cz"
                 }],
                 inlineCSS: "true",
                 github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
@@ -66,7 +66,7 @@
             <h2>Úvod</h2>
             <p>
                 Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování dřevin.
-                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+                Norma je ilustrována příklady dat ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
             </p>
         </section>
 
@@ -78,7 +78,7 @@
                     <a href="https://drive.google.com/file/d/160EzxSul6Kt5XmADBVINKpLGY0oGT1Ao/view?usp=sharing">
                         Diagram datového modelu dřevin
                     </a>.
-                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
                 </figcaption>
             </figure>
 
@@ -111,7 +111,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -147,7 +147,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -184,7 +184,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -220,7 +220,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#url">URL</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a>
                         </dd>
                         <dt>
                             Jméno
@@ -256,7 +256,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#url">IRI</a> dle regulárního výrazu <code>^https:\/\/data\.mvcr\.gov\.cz\/zdroj\/číselníky\/typy-dřevin\/položky\/.+$</code>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> dle regulárního výrazu <code>^https:\/\/data\.mvcr\.gov\.cz\/zdroj\/číselníky\/typy-dřevin\/položky\/.+$</code>
                         </dd>
                         <dt>
                             Jméno
@@ -293,7 +293,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#url">IRI</a> dle regulárního výrazu <code>^https:\/\/data\.mvcr\.gov\.cz\/zdroj\/číselníky\/kategorie-územní-ochrany\/položky\/.+$</code>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> dle regulárního výrazu <code>^https:\/\/data\.mvcr\.gov\.cz\/zdroj\/číselníky\/kategorie-územní-ochrany\/položky\/.+$</code>
                         </dd>
                         <dt>
                             Jméno
@@ -330,7 +330,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../umístění/draft/#třída-umístění">Umístění</a>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
                         </dd>
                         <dt>
                             Jméno
@@ -402,9 +402,9 @@
                    Příklad a schéma jsou stále ve vývoji.
                 </p>
 
-                <aside class="example" title="Jednoduchá dřevina v JSON">
+                <aside class="example" title="Jednoduchá dřevina v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/dřeviny.json">JSON Schema</a>
+                        <a href="příklady/1.json">JSON-LD soubor</a>, <a href="schémata/dřeviny.json">JSON Schema</a>
                     </p>
                     <pre class="json">
                       [
@@ -427,9 +427,15 @@
                               "coordinates": [50.22054209714138, 17.128712012726094]
                             },
                             "adresa": {
-                              "název_kraje": "Olomoucký",
-                              "název_okresu": "Jeseník",
-                              "název_obce": "Jeseník"
+                              "název_kraje": {
+								"cs": "Olomoucký"
+							  },
+                              "název_okresu": {
+							    "cs": "Jeseník"
+						      },
+                              "název_obce": {
+							    "cs": "Jeseník"
+						      }
                             }
                           }
                         },
@@ -453,9 +459,15 @@
                               ]
                             },
                             "adresa": {
-                              "název_kraje": "Olomoucký",
-                              "název_okresu": "Jeseník",
-                              "název_obce": "Jeseník"
+                              "název_kraje": {
+								"cs": "Olomoucký"
+							  },
+                              "název_okresu": {
+							    "cs": "Jeseník"
+						      },
+                              "název_obce": {
+							    "cs": "Jeseník"
+						      }
                             }
                           }
                         }
@@ -465,7 +477,7 @@
             </section>
 
             <section id="příklady-komlexní-dřevina">
-                <h3>Komlexní dřevina</h3>
+                <h3>Komplexní dřevina</h3>
                 <p>
                     V druhém příkladu je ukázána složitější oblast dřevin s dvěmi členskými dřevinami.
                 </p>
@@ -474,9 +486,9 @@
                    Příklad a schéma jsou stále ve vývoji.
                 </p>
 
-                <aside class="example" title="Komplexní dřevina v JSON">
+                <aside class="example" title="Komplexní dřevina v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/dřeviny.json">JSON Schema</a>
+                        <a href="příklady/2.json">JSON-LD soubor</a>, <a href="schémata/dřeviny.json">JSON Schema</a>
                     </p>
                     <pre class="json">
                       [
@@ -507,11 +519,17 @@
                                   "type": "Point",
                                   "coordinates": [50.25166931594392, 17.22599651254377]
                                 },
-                                "adresa": {
-                                  "název_kraje": "Olomoucký",
-                                  "název_okresu": "Jeseník",
-                                  "název_obce": "Jeseník"
-                                }
+								"adresa": {
+								  "název_kraje": {
+									"cs": "Olomoucký"
+								  },
+								  "název_okresu": {
+									"cs": "Jeseník"
+								  },
+								  "název_obce": {
+									"cs": "Jeseník"
+								  }
+								}
                               }
                             },
                             {
@@ -531,11 +549,17 @@
                                   "type": "Point",
                                   "coordinates": [50.22054209714138, 17.128712012726094]
                                 },
-                                "adresa": {
-                                  "název_kraje": "Olomoucký",
-                                  "název_okresu": "Jeseník",
-                                  "název_obce": "Jeseník"
-                                }
+								"adresa": {
+								  "název_kraje": {
+									"cs": "Olomoucký"
+								  },
+								  "název_okresu": {
+									"cs": "Jeseník"
+								  },
+								  "název_obce": {
+									"cs": "Jeseník"
+								  }
+								}
                               }
                             }
                           ]

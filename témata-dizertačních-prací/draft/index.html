@@ -26,17 +26,15 @@
             var respecConfig = {
                 specStatus: "ED",
                 shortName: "témata-dizertačních-prací",
-                showPreviousVersion: true,
+                showPreviousVersion: false,
                 thisVersion: "https://ofn.gov.cz/témata-dizertačních-prací/draft/",
                 latestVersion: "https://ofn.gov.cz/témata-dizertačních-prací/",
                 editors: [{
-                  name: "Martin Víta",
-                  url: "https://martinvita.eu/#me",
+                  name: "Martin Víta",                  
                   company:    "Ministerstvo vnitra",
                   companyURL: "https://www.mvcr.cz"
                 },{
-                  name: "Jakub Klímek",
-                  url: "https://jakub.klímek.com/#me",
+                  name: "Jakub Klímek",                  
                   orcid: "0000-0001-7234-3051",
                   company:    "Ministerstvo vnitra",
                   companyURL: "https://www.mvcr.cz"
@@ -53,6 +51,7 @@
                         href: "mailto:otevrenadata@mvcr.cz"
                     }]
                 }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
               };
         </script>
     </head>
@@ -61,14 +60,7 @@
             <h2>Abstrakt</h2>
             <p>
                 Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování témat dizertačních prací.
-            </p>
-        </section>
-
-        <section id="úvod">
-            <h2>Úvod</h2>
-            <p>
-                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování témat dizertačních prací.
-                Norma je ilustrována příklady dat ve formátu JSON [[!ECMA-404]].
+                Otevřená formální norma je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]].
             </p>
         </section>
 
@@ -77,10 +69,9 @@
             
             <figure id="diagram"><img alt="Diagram datového modelu aktualit" src="obrázky/témata-dizertačních-prací.svg">
                 <figcaption>
-                    <a href="https://drive.google.com/file/d/1N_BH0f2IghG2QGHP-LjA--t6aIO3w7jq/view?usp=sharing">
-						Diagram datového modelu témat dizertačních prací
-					</a>.
-					Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami.
+                    <a href="https://drive.google.com/file/d/1N_BH0f2IghG2QGHP-LjA--t6aIO3w7jq/view?usp=sharing">Diagram datového modelu témat dizertačních prací</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
                 </figcaption>
             </figure>
 
@@ -93,135 +84,53 @@
             <p>
                 V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis témat dizertačních prací.
                 Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad.
+                Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
             </p>
 
             <section id="třída-téma-dizertační-práce">
                 <h3>Téma dizertační práce</h3>
                 <p>
                     Tato třída reprezentuje téma dizertační práce.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
 
-                <section id="vlastnost-téma-dizertační-práce-iri">
-                    <h4>Identifikátor</h4>
+                <section id="vlastnost-téma-dizertační-práce-aktuálně-nabízeno">
+                    <h4>Aktuálně nabízeno</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>iri</code>
+                            <code>aktuálně_nabízeno</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#url">IRI</a> 
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Identifikátor
+                            Aktuálně nabízeno
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            IRI daného tématu dizertace.
+                            Indikuje, zda je téma aktuálně nabízeno k zápisu.
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>https://data.mff.cuni.cz/zdroj/téma-dizertační-práce/1234</code>
+                            <code>true</code>
                         </dd>
                     </dl>
 
                 </section>
                 
-                <section id="vlastnost-téma-dizertační-práce-název">
-                    <h4>Název</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název tématu dizertační práce, případně název okruhu dizertační práce.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                          <code>
-                          {
-                            "cs": "Platforma pro exploraci Linked Data",
-                            "en": "Platform for Linked Data Exploration"
-                          }
-                          </code>
-                        </dd>
-                    </dl>
-
-                </section>
-                
-                <section id="vlastnost-téma-dizertační-práce-anotace">
-                    <h4>Anotace</h4>
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>anotace</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Anotace
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Vymezení tématu dizertační práce, zejm. po stránce obsahu práce samotné, dále popis cílů uvažované dizertační práce atp.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>   
-                          <code>
-                          {
-                            "cs": "Publikace dat jako propojitelných otevřených dat (LOD) přitahuje pozornost. (...)",
-                            "en": "The publication of data as Linked Open Data (LOD) gains atraction. There are lots of different datasets published, more vocabularies are becoming W3C Recommendations and with the introduction of DCAT-AP v1.1 and the emergence of the European data portal and a multitude of national open data portals, lots of datasets are discoverable and accessible using their DCAT-AP metadata in RDF. The complexity of data available as LOD has grown so much that it prevents users who are not experts on respective domains from the ability to acquaint themselves in available datasets - their structure, semantics and relationships between them. The purpose of this thesis is to contribute to the field of future Linked Data exploration technologies [1] with novel approaches of computing different kinds of summary, semantics and relationship descriptors of datasets and present them to the user and to help user with better understanding of available datasets."
-                          }
-                          </code>
-                        </dd>
-                    </dl>
-
-                </section>
-
                 <section id="vlastnost-téma-dizertační-práce-klíčová-slova">
                     <h4>Klíčová slova</h4>
                     <dl>
@@ -235,7 +144,7 @@
                             Typ
                         </dt>
                         <dd>
-                            Vícenásobná hodnota, <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            Vícenásobná hodnota, <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -272,7 +181,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -309,7 +218,7 @@
                             Typ
                         </dt>
                         <dd>
-                            Vícenásobná hodnota, <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            Vícenásobná hodnota, <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
                         </dd>
                         <dt>
                             Jméno
@@ -330,9 +239,8 @@
                             Více vícejazyčných textů: např. v JSON: <code>[{"cs": "Fakulty architektury", "en": "Faculties of architecture"},{"cs": "Katedry zaměřené na architekturu stavebních fakult", "en": "Departments oriented on architecture of civil engineering faculties"}]</code>
                         </dd>
                     </dl>
-
                 </section>
-
+               
                 <section id="vazba-dizertační-práce-obor-isvav">
                     <h4>Vazba: Obor ISVaV</h4>
                     
@@ -347,7 +255,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Fd1d34037dd729e537c1149d4ac6184e1">Obor ISVaV</a>
+                            <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2FMV%2F706529437%2Fd1d34037dd729e537c1149d4ac6184e1">Obor ISVaV</a>
                         </dd>
                         <dt>
                             Jméno
@@ -359,7 +267,9 @@
                             Popis
                         </dt>
                         <dd>
-                            Obor tématu dizertační práce v souladu s ISVaV (RIV/CEP). Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/describe/?url=https%3A%2F%2Fdata.mvcr.gov.cz%2Fzdroj%2F%C4%8D%C3%ADseln%C3%ADky%2Fklasifikace-v%C3%BDzkumn%C3%BDch-obor%C5%AF">Číselníku pro obory ISVaV</a> publikovaného jako <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Fd1d34037dd729e537c1149d4ac6184e1">číselník v Národním katalogu otevřených dat</a>. V příkladu je uveden obor "IN - Informatika".
+                            Obor tématu dizertační práce v souladu s ISVaV (RIV/CEP).
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/klasifikace-výzkumných-oborů">Číselníku pro obory ISVaV</a> publikovaného jako <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Fd1d34037dd729e537c1149d4ac6184e1">číselník v Národním katalogu otevřených dat</a>.
+                            V příkladu je uveden obor <code>IN - Informatika</code>.
                         </dd>
                         <dt>
                             Příklad
@@ -369,7 +279,7 @@
                         </dd>
                     </dl>
 
-                </section>  
+                </section>
                 
                 <section id="vazba-dizertační-práce-obor-frascati">
                     <h4>Vazba: Obor Frascati</h4>
@@ -385,7 +295,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="">Obor Frascati</a>
+                            <a href="https://data.gov.cz/datová-sada?iri=https://data.gov.cz/zdroj/datové-sady/MV/706529437/253b216c527f5dfcb084a49fe070406d">Obor Frascati (FORD)</a>
                         </dd>
                         <dt>
                             Jméno
@@ -397,7 +307,9 @@
                             Popis
                         </dt>
                         <dd>
-                            Obor (tématu) dizertační práce podle Frascati manuálu (FORD). Hodnoty této vlastnosti jsou <a href="https://data.mvcr.gov.cz/describe/?url=https%3A%2F%2Fdata.mvcr.gov.cz%2Fzdroj%2F%C4%8D%C3%ADseln%C3%ADky%2Fford">Kódy oborů OECD FORD - Frascati manual</a> publikovaného jako <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2F253b216c527f5dfcb084a49fe070406d">číselník v Národním katalogu otevřených dat</a>. V příkladu je uveden obor "Computer hardware and architecture".
+                            Obor (tématu) dizertační práce podle Frascati manuálu (FORD).
+                            Hodnoty této vlastnosti jsou <a href="https://data.mvcr.gov.cz/zdroj/číselníky/ford">Kódy oborů OECD FORD - Frascati manual</a> publikovaného jako <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2F253b216c527f5dfcb084a49fe070406d">číselník v Národním katalogu otevřených dat</a>.
+                            V příkladu je uveden obor <code>Computer hardware and architecture</code>.
                         </dd>
                         <dt>
                             Příklad
@@ -407,7 +319,7 @@
                         </dd>
                     </dl>
 
-                </section>  
+                </section>
                         
                 <section id="vazba-téma-dizertační-práce-míra-specifikace">
                     <h4>Vazba: Míra specifikace</h4>
@@ -423,7 +335,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/draft/#text">Text</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a>
                         </dd>
                         <dt>
                             Jméno
@@ -435,82 +347,51 @@
                             Popis
                         </dt>
                         <dd>
-                            Popis míry specifikace zadání dizertační práce. V současné době se jedná o text, v budoucích verzích bude pravděpodobně nahrazen číselníkem.
+                            Míra specifikace zadání dizertační práce.
+                            Hodnota této vlastnosti je z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/míra-specifikace-tématu-práce">Číselníku pro míru specifikace tématu práce</a> publikovaného jako <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2FMV%2F706529437%2Fdb1d70adba90b54fd6226ea9af0fedc8">číselník v Národním katalogu otevřených dat</a>.
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>Rámcově vymezený okruh práce, po dohodě s kandidátem bude téma upřesněno.</code> 
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/míra-specifikace-tématu-práce/položky/téma</code> 
                         </dd>
                     </dl>
 
-                </section>  
+                </section>
             
-                <section id="vazba-téma-dizertační-práce-projekt">
-                    <h4>Vazba: Projekt</h4>
+                <section id="vazba-téma-dizertační-práce-studijní-program">
+                    <h4>Vazba: Studijní program</h4>
                     
                     <dl>
                         <dt>
                             Vazba
                         </dt>
                         <dd>
-                            <code>projekt</code>
+                            <code>studijní_program</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="#třída-projekt">Projekt</a>
+                            <a href="../../školství/draft/#třída-studijní-program">Studijní program</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Projekt
+                            Studijní program
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Vazba dizertační práce na projekt, v rámci kterého bude alespoň část dizertace zpracovávána, kterému budou připisovány výsledky, případně ze kterého bude doktorand financován.
+                            Studijní program dle standardu <a href="http://uis.unesco.org/en/topic/international-standard-classification-education-isced">International Standard Classification of Education (ISCED)</a>.
                         </dd>
                     </dl>
 
-                </section>  
-
-                <section id="vazba-téma-dizertační-práce-publikace">
-                    <h4>Vazba: Publikace</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vazba
-                        </dt>
-                        <dd>
-                            <code>publikace</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="#třída-publikace">Publikace</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Publikace
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Publikace, které se vztahují k tématu dizertační práce, publikace, které upřesňují téma výzkumu, případně ilustrují přístupy používané na daném pracovišti.
-                        </dd>
-                    </dl>
-
-                </section>  
-
+                </section>
+                
                 <section id="vazba-téma-dizertační-práce-kvalifikace">
                     <h4>Vazba: Kvalifikace</h4>
                     
@@ -525,7 +406,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="#třída-kvalifikace">Kvalifikace</a>
+                            <a href="../../práce/draft/#třída-kvalifikace">Kvalifikace</a>
                         </dd>
                         <dt>
                             Jméno
@@ -541,67 +422,99 @@
                         </dd>
                     </dl>
 
-                </section>  
-            
-                <section id="vazba-téma-dizertační-práce-pracovní-místo">
-                    <h4>Vazba: Pracovní místo</h4>
+                </section>
+
+                <section id="vazba-téma-dizertační-práce-kontakt">
+                    <h4>Vazba: Kontakt</h4>
                     
                     <dl>
                         <dt>
                             Vazba
                         </dt>
                         <dd>
-                            <code>pracovní_místo</code>
+                            <code>kontakt</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../pracovní-místa/#třída-pracovní-místo">Pracovní místo</a>
+                            <a href="../../kontakty/2020-07-01/#třída-kontakt">Kontakt</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Pracovní místo
+                            Kontakt
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Pracovní pozice, která může být doktorandovi v souvislosti s řešením disertačního výzkumu nabídnuta, tj. úvazek.
+                            Kontakt pro další informace o tématu práce.
                         </dd>
                     </dl>
 
-                </section>  
+                </section>
             
-                <section id="vazba-téma-dizertační-práce-pracoviště">
-                    <h4>Vazba: Pracoviště</h4>
+                <section id="vazba-téma-dizertační-práce-školící-pracoviště">
+                    <h4>Vazba: Školící pracoviště</h4>
                     
                     <dl>
                         <dt>
                             Vazba
                         </dt>
                         <dd>
-                            <code>pracoviště</code>
+                            <code>školící_pracoviště</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="#třída-pracoviště">Pracoviště</a>
+                            <a href="../../věda-a-výzkum/draft/#třída-výzkumné-pracoviště">Výzkumné pracoviště</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Pracoviště
+                            Školící pracoviště
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
                             Pracoviště, na kterém bude dané téma dizertace zpracováváno.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-téma-dizertační-práce-zadávací-pracoviště">
+                    <h4>Vazba: Zadávací pracoviště</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>zadávací_pracoviště</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../věda-a-výzkum/draft/#třída-výzkumné-pracoviště">Výzkumné pracoviště</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zadávací pracoviště
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Pracoviště, na kterém bude dané téma oficiálně zadáno.
                         </dd>
                     </dl>
 
@@ -621,7 +534,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="#třída-pracoviště">Pracoviště</a>
+                            <a href="../../věda-a-výzkum/draft/#třída-výzkumné-pracoviště">Výzkumné pracoviště</a>
                         </dd>
                         <dt>
                             Jméno
@@ -637,7 +550,7 @@
                         </dd>
                     </dl>
 
-                </section>  
+                </section>
 
                 <section id="vazba-dizertační-práce-přihlášení">
                     <h4>Vazba: Přihlášení</h4>
@@ -685,7 +598,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../věda-a-výzkum/#třída-výzkumník">Výzkumník</a>
+                            <a href="../../věda-a-výzkum/draft/#třída-výzkumník">Výzkumník</a>
                         </dd>
                         <dt>
                             Jméno
@@ -701,8 +614,7 @@
                         </dd>
                     </dl>
 
-                </section>  
-              
+                </section>
 
                 <section id="vazba-dizertační-práce-konzultant">
                     <h4>Vazba: Konzultant</h4>
@@ -718,7 +630,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../věda-a-výzkum/#třída-výzkumník">Výzkumník</a>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk">Člověk</a>
                         </dd>
                         <dt>
                             Jméno
@@ -734,755 +646,117 @@
                         </dd>
                     </dl>
 
-                </section>  
+                </section>
             
-            </section>
-
-            <section id="třída-projekt">
-                <h3>Projekt</h3>
-                <p>
-                    Tato třída reprezentuje projekt.
-                </p>
-
-                <section id="vlastnost-projekt-iri">
-                    <h4>IRI</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#URL">IRI</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            IRI projektu
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI projektu (předpokládá se, že se bude jednat o projekty VaVaI).
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://data.mff.cuni.cz/zdroj/projekty/gačr/19-s11</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-
-                <section id="vlastnost-projekt-název">
-                    <h4>Název</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Oficiální název projektu (předpokládají se projekty VaVaI).
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            Více vícejazyčných textů: např. v JSON: <code>[{"cs": "Kontextové podobnostní vyhledávání v otevřených datech
-", "en": "Contextual Similarity Search in Open Data"}]</code>
-                        </dd>
-                    </dl>
-
-                </section>          
-
-              
-                <section id="vlastnost-projekt-kód">
-                    <h4>Kód</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>kód</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Kód
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Oficiální kód projektu (předpokládají se projekty VaVaI).
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>GA19-01641S</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-
-            </section>
-
-            <section id="třída-publikace">
-                <h3>Publikace</h3>
-                <p>
-                    Tato třída reprezentuje publikaci.
-                </p>
-
-                <section id="vlastnost-publikace-iri">
-                    <h4>IRI</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#URL">IRI</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            IRI publikace
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI publikace
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://data.mff.cuni.cz/zdroj/publikace/1234-1234-1344</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-
-                <section id="vlastnost-publikace-název">
-                    <h4>Název</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název publikace
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Evaluating the Quality of Open Data Portals on the National Level</code>
-                        </dd>
-                    </dl>
-
-                </section>          
-
-              
-                <section id="vlastnost-publikace-doi">
-                    <h4>DOI</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>doi</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            DOI
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            DOI publikace
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>10.4067/S0718-18762017000100003</code>
-                        </dd>
-                    </dl>
-
-                </section>     
-
-            </section>
-            
-            <section id="třída-kvalifikace">
-                <h3>Kvalifikace</h3>
-                <p>
-                    Tato třída reprezentuje kvalifikaci.
-                </p>
-
-                <section id="vlastnost-kvalifikace-název">
-                    <h4>Název</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Název kvalifikace
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Anglický jazyk</code>
-                        </dd>
-                    </dl>
-
-                </section>          
-
-                <section id="vlastnost-kvalifikace-popis">
-                    <h4>Popis</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>popis</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Popis
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Popis vyžadované kvalifikace.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Anglický jazyk úrovně minimálně B2</code>
-                        </dd>
-                    </dl>
-
-                </section>          
-
-                <section id="vlastnost-kvalifikace-délka">
-                    <h4>Délka</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>délka</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#množství">Množství</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Délka
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Délka vztahující se k příslušné kvalifikaci (typicky v letech).
-                        </dd>
-                    </dl>
-
-                </section>    
-              
-                <section id="vlastnost-kvalifikace-doklad">
-                    <h4>Doklad</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>doklad</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Doklad
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Typ dokladu příslušející k dané kvalifikaci
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Certifikát TOEFL</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-
-            </section>
-
-            <section id="třída-pracoviště">
-                <h3>Pracoviště</h3>
-                <p>
-                    Tato třída reprezentuje pracoviště.
-                </p>
-
-                <section id="vlastnost-pracoviště-iri">
-                    <h4>IRI</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>iri</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#url">IRI</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            IRI pracoviště
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IRI pracoviště, na kterém bude dizertace zpracovávána.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://www.mff.cuni.cz/cs/informaticka-sekce/pracoviste/ksi</code>
-                        </dd>
-                    </dl>
-
-                </section>   
-                
-                <section id="vlastnost-pracoviště-orjk">
-                    <h4>ORJK</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>orjk</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            ORJK
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Kód organizační jednotky (ORJK), který se využívá např. v systému ISVaV a ve statistikách MŠMT. Používá se pro identifikaci jednotek, které nemají IČ, např. fakulty v rámci univerzity.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>11320</code>
-                        </dd>
-                    </dl>
-
-                </section>          
-
-                <section id="vlastnost-pracoviště-ičo">
-                    <h4>IČO</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>ičo</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#řetězec">Řetězec</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            IČO
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            IČ subjektu, příp. doplněný na 8 míst.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>00216208</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-              
-                <section id="vlastnost-pracoviště-název">
-                    <h4>Název</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Pracoviště, na kterém bude reálně probíhat doktorské studium, v jehož rámci bude téma řešeno.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>Katedra softwarového inženýrství</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-
-                <section id="vazba-pracoviště-provozovatel">
-                    <h4>Vazba: Provozovatel</h4>
+                <section id="vazba-dizertační-práce-školitel-specialista">
+                    <h4>Vazba: Školitel specialista</h4>
                     
                     <dl>
                         <dt>
                             Vazba
                         </dt>
                         <dd>
-                            <code>provozovatel</code>
+                            <code>školitel_specialista</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../lidé-a-osoby/#třída-člověk-či-osoba">Člověk či osoba</a>
+                            <a href="../../věda-a-výzkum/draft/#třída-výzkumník">Výzkumník</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Provozovatel
+                            Školitel specialista
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Instituce či člověk, který provozuje pracoviště, na kterém bude dizertace zpracovávána.
+                            Školitel specialista navrhovaný pro dané téma, tj. další odborník mimo školitele, který je připraven doktorandovi poskytovat konzultace ohledně jeho dizertační práce.
                         </dd>
                     </dl>
 
-                </section>  
-
-                <section id="vazba-pracoviště-součást">
-                    <h4>Vazba: Je součástí</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vazba
-                        </dt>
-                        <dd>
-                            <code>je_součástí</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="#třída-pracoviště">Pracoviště</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Je součástí
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Vztah mezi organizačně propojenými pracovišti (např. katedra-fakulta, fakulta-univerzita).
-                        </dd>
-                    </dl>
-
-                </section>  
+                </section> 
             
             </section>
-
+            
             <section id="třída-způsob-přihlášení">
                 <h3>Způsob přihlášení</h3>
                 <p>
                     Tato třída reprezentuje způsob přihlášení.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
                 </p>
-
-                <section id="vlastnost-způsob-přihlášení-text">
-                    <h4>Text</h4>
-                    
+                               
+                <section id="způsob-přihlášení-termín">
+                    <h4>Termín</h4>
                     <dl>
                         <dt>
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>text</code>
+                            <code>termín</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            Text
+                            Termín
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            Popis způsobu, jak má kandidát postupovat, chce-li se přihlásit k danému tématu, příp. k příslušnému doktorskému studiu.
+                            Časový okamžik, do kdy se lze přihlásit (termín přihlášení, deadline)
                         </dd>
                         <dt>
                             Příklad
                         </dt>
                         <dd>
-                            <code>Uchazeči nejprve prokonzultují téma s potenciálním školitelem, kontaktují jej předem mailem.</code>
+                            <code>2020-04-30T23:59:59+02:00</code>
                         </dd>
                     </dl>
+                </section>
 
-                </section>          
-
-                <section id="vlastnost-způsob-přihlášení-e-mail">
-                    <h4>E-mail</h4>
+                <section id="vazba-způsob-přihlášení-kontakt">
+                    <h4>Vazba: Kontakt</h4>
                     
                     <dl>
                         <dt>
-                            Vlastnost
+                            Vazba
                         </dt>
                         <dd>
-                            <code>e-mail</code>
+                            <code>kontakt</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/#text">Text</a>
+                            <a href="../../kontakty/2020-07-01/#třída-kontakt">Kontakt</a>
                         </dd>
                         <dt>
                             Jméno
                         </dt>
                         <dd>
-                            E-mail
+                            Kontakt
                         </dd>
                         <dt>
                             Popis
                         </dt>
                         <dd>
-                            E-mail příslušející k danému přihlášení se k tématu.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>skolitel@ustav.fakulta.vs.cz</code>
+                            Kontakt pro přihlášení.
                         </dd>
                     </dl>
 
-                </section>    
-              
-                <section id="vlastnost-způsob-přihlášení-url">
-                    <h4>URL</h4>
-                    
-                    <dl>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>url</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/#URL">URL</a>
-                        </dd>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            URL
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Odkaz na přihlašovací formulář, příp. na informace o přihlášení do doktorského studia nebo k danému tématu dizertace.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://is.cuni.cz/form.php</code>
-                        </dd>
-                    </dl>
-
-                </section>    
-
+                </section>
+            
             </section>
 
         </section>
@@ -1491,7 +765,7 @@
             <h2>Příklady</h2>
 
             <p>
-                V této sekci jsou uvedeny příklady reprezantace témat dizertačních prací v různých úrovních detailu. 
+                V této sekci jsou uvedeny příklady reprezantace témat dizertačních prací v různých úrovních detailu, ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
             </p>
             <section id="příklady-jednoduché-téma-dizertační-práce">
                 <h3>Jednoduché téma dizertační práce</h3>
@@ -1504,15 +778,90 @@
                     Příklad a schéma jsou stále ve vývoji.
                  </p>
  
-                <aside class="example" title="Jednoduché téma dizertační práce v JSON">
+                <aside class="example" title="Jednoduché téma dizertační práce v JSON-LD">
                     <p>
-                        <a href="příklady/1.json">Stáhnout JSON</a>, <a href="schémata/témata-dizertačních-prací.json">JSON Schema</a>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/téma-dizertační-práce.json">JSON Schema</a>, <a href="schémata/témata-dizertačních-prací.json">JSON Schema pro více témat dizertačních prací</a>, <a href="kontexty/téma-dizertační-práce.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
-[{
-    "iri": "https://data.mff.cuni.cz/zdroj/témata/téma1"
+{
+    "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/témata-dizertačních-prací/draft/kontexty/téma-dizertační-práce.jsonld",
+    "typ": "Téma dizertační práce",
+    "název": {
+        "cs": "2D nanomateriály pro detekci polutantů v životním prostředí"
+    },
+    "popis": {
+        "cs": "Práce se soustředí na přípravu 2D materiálů, které budou sloužit k odstraňování škodlivin ze životního prostředí. Cílem je vyvinout účinný materiál/katalyzátor k odstranění nitroaromatických a pesticidních látek v podzemních vodách pomocí elektrochemických a fotoelektrochemických metod. Více na www.nanorobots.cz"
+    },
+    "aktuálně_nabízeno": true,
+    "míra_specifikace": "https://data.mvcr.gov.cz/zdroj/číselníky/míra-specifikace-tématu-práce/položky/téma",
+    "školící_pracoviště": {
+        "typ": ["Výzkumné pracoviště", "Pracoviště"],
+        "orjk": "22310",
+        "název": {
+            "cs": "Fakulta chemické technologie"
+        },
+        "provozovatel": {
+            "typ": "Osoba",
+            "ičo": "60461373",
+            "název": {
+                "cs": "Vysoká škola chemicko-technologická v Praze"
+            }
+        }
+    },
+    "zadávací_pracoviště": {
+        "typ": ["Výzkumné pracoviště", "Pracoviště"],
+        "orjk": "22310",
+        "název": {
+            "cs": "Fakulta chemické technologie"
+        },
+        "provozovatel": {
+            "typ": "Osoba",
+            "ičo": "60461373",
+            "název": {
+                "cs": "Vysoká škola chemicko-technologická v Praze"
+            }
+        }
+    },
+    "relevantní_do": {
+        "typ": "Časový okamžik",
+        "datum": "2020-06-15"
+    },
+    "obor_isvav": ["https://data.mvcr.gov.cz/zdroj/číselníky/klasifikace-výzkumných-oborů/položky/CA"],
+    "studijní_program": {
+        "typ": "Studijní program",
+        "kód": "B0314A250001"
+    },
+    "školitel": {
+        "typ": [ "Výzkumník", "Člověk" ],
+        "jméno": {
+            "cs": "Martin"
+        },
+        "příjmení": {
+            "cs": "Pumera"
+        },
+        "tituly_před": {
+            "cs": "doc. RNDr."
+        },
+        "tituly_za": {
+            "cs": "Ph.D."
+        },
+        "orcid": "https://orcid.org/0000-0001-5846-2951",
+        "researcherid": "F-2724-2010"
+    },
+    "kontakt": {
+        "typ": "Kontakt",
+        "url": "https://studuj.vscht.cz/program/D102",
+        "facebook": "vscht"
+    },
+    "přihlášení": {
+        "typ": "Způsob přihlášení",
+        "kontakt": {
+            "typ": "Kontakt",
+            "url": "https://studuj.vscht.cz/"
+        }
 
-}]</pre>
+    }
+}</pre>
                 </aside>
             </section>
             <section id="příklady-komplexní-téma-dizertační-práce">
@@ -1527,9 +876,9 @@
                    Příklad a schéma jsou stále ve vývoji.
                 </p>
 
-                <aside class="example" title="Komplexní aktualita v JSON">
+                <aside class="example" title="Komplexní téma dizertační práce v JSON-LD">
                     <p>
-                        <a href="příklady/2.json">Stáhnout JSON</a>, <a href="schémata/témata-dizertačních-prací.json">JSON Schema</a>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/téma-dizertační-práce.json">JSON Schema</a>, <a href="schémata/témata-dizertačních-prací.json">JSON Schema pro více témat dizertačních prací</a>, <a href="kontexty/téma-dizertační-práce.jsonld">JSON-LD kontext</a>
                     </p>
                     <pre class="json">
 [{
@@ -1538,13 +887,16 @@
                 </aside>
             </section>
         </section>
+        
         <section id="metadata">
             <h2>Předpřipravená metadata</h2>
             <p>
                 Tato sekce obsahuje odkaz na <a href="metadata/témata-dizertačních-prací.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>.
-                Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledat podobné datové sady publikované dle této otevřené formální normy.
+                Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
             </p>
         </section>
+
     </body>
+
 </html>
 

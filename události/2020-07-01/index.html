@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Události</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2020-07-01",
+                shortName: "události",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/události/2020-07-01/",
+                latestVersion: "https://ofn.gov.cz/události/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  orcid: "0000-0003-2132-762X",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování událostí jakéhokoliv druhu a rozsahu - od jednorazových farmářských trhů až po vícedenní festivaly. Norma umožňuje pokrýt události organizované jak soukromým tak veřejným sektorem. 
+                Norma je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu událostí" src="obrázky/událost.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1oZgxJ5R43vW62WQ7H48RUf8jGmuGMoem/view?usp=sharing">Diagram datového modelu událostí</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis událostí.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+            </p>
+
+            <section id="třída-událost">
+                <h3>Událost</h3>
+                <p>
+                    Tato třída reprezentuje samotnou zveřejněnou událost. Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-události-dlouhý-popis">
+                    <h4>Dlouhý popis</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dlouhý_popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Dlouhý popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Podrobný popis události, nad rámec běžně užívaného, stručného a krátkého popisu. Krátký popis pro událost je zachycen vlastností popis, kterou třída událost dědí od třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>První Znojemské historické vinobraní se uskutečnilo již v roce 1966. Jeho autorem a zakladatelem byl František Koukal, který dokázal ve svém scénáři skloubit jak slavnou minulost královského města na řece Dyji, tak i jeho zachovalé historické kulisy a vinařskou tradici.
+
+Ústřední postavou vinobraní se stal král Jan Lucemburský, který do Znojma v roce 1327 přijel zapít zdařilé státnické jednání ve Vratislavi. Město pro něj tehdy připravilo bohatý program, jehož střípky, včetně tradičního předávání práv do rukou konšelů, se divákům nabízejí k zhlédnutí dodnes.
+
+Zatím největší a nejúspěšnější ZHV se konalo v roce 1967. Originální program s téměř 600 účinkujícími zhlédlo na 110 000 návštěvníků. Tradice Znojemského historického vinobraní byla komunistickým režimem přerušena roku 1974 a k jejímu znovuobnovení došlo až v 90. letech minulého století.
+
+Od té doby přiláká každoročně vinobraní do Znojma desetitisíce návštěvníků, kteří sem přijíždějí nejen za vínem a burčákem, ale také za výborným kulturním programem, ve kterém nesmí chybět průvod krále Jana Lucemburského s chotí a dvořany.</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                 <section id="vlastnost-události-vhodné-pro-děti">
+                    <h4>Vhodné pro děti</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vhodné_pro_děti</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vhodné pro děti
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uvádí, zda je událost vhodná pro děti.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-události-vhodné-pro-zvířata">
+                    <h4>Vhodné pro zvířata</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vhodné_pro_zvířata</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vhodné pro zvířata
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uvádí, zda je událost vhodná pro zvířata.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-události-registrace">
+                    <h4>Registrace</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>registrace</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Registrace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vlastnost uvádí zda je nutné regitrovat se. Může mít podobu jednoduchého textového popisu a nebo odkazu na web registrace.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>https://data.brno.cz/zdroj/události/2019/vinobraní/registrace</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                </section>
+
+                <section id="vazba-události-pořadatel">
+                    <h4>Vazba: Pořadatel</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>pořadatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Pořadatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Pořadatel, který událost organizuje.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-hlavní-sponzor">
+                    <h4>Vazba: Hlavní sponzor</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>hlavní_sponzor</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Hlavní sponzor
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Nejdůležitější partner události, který ji sponzoruje. Událost může mít i víc jak jednoho hlavního sponzora.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-sponzor">
+                    <h4>Vazba: Sponzor</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>sponzor</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Sponzor
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Sponzor události.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-mediální-partner">
+                    <h4>Vazba: Mediální partner</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>mediální_partner</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Mediální partner
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Mediální partner události.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-záštita">
+                    <h4>Vazba: Záštita</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>záštita</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Záštita
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Člověk nebo instituce, která převzala záštitu nad danou událostí. 
+                        </dd>
+                    </dl>
+
+                </section>    
+
+                <section id="vazba-události-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění události
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace události.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-typ">
+                    <h4>Vazba: Typ události</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ_události</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Ff0acb50380f29186931447edb5896604">Typ události</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ události
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/typy-událostí">Číselníku pro typy událostí</a> publikovaného jako <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Ff0acb50380f29186931447edb5896604">číselník v Národním katalogu otevřených dat.</a> Typy událostí nabývají několika hodnot. V příkladu je uvedena prezentace muzikálu.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/typy-událostí/položky/muzikál</code>
+                        </dd>
+                        </dd>  
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-téma">
+                    <h4>Vazba: Téma</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>téma</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/datová-sada?iri=https://data.gov.cz/zdroj/datové-sady/MV/706529437/b2ff01ed40020b24ec78425f9fd924cc">Téma události</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Téma události
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/témata-událostí">Číselníku pro témata událostí</a> publikovaného jako <a href="https://data.gov.cz/datov%C3%A1-sada?iri=https://data.gov.cz/zdroj/datov%C3%A9-sady/MV/706529437/b2ff01ed40020b24ec78425f9fd924cc">číselník v Národním katalogu otevřených dat.</a> Témata události nabývají několika hodnot. V příkladu je uvedena prezentace události "Umění a kultura".
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/témata-událostí/položky/umění-a-kultura</code>
+                        </dd>
+                        </dd> 
+                    </dl>
+
+                </section>
+
+                <section id="vazba-sportoviště-bezbariérovost">
+                    <h4>Vazba: Bezbariérovost</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>bezbariérovost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../bezbariérovost/2020-07-01/#třída-bezbariérovost">Bezbariérovost</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Bezbariérovost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis typu bezbariérového přístupu a formy přístupnosti.
+                        </dd>
+                    </dl>
+
+                </section>    
+            
+                <section id="vazba-události-trvání">
+                    <h4>Vazba: Doba trvání</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>doba_trvání</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../časová-specifikace/2020-07-01/#třída-časová_specifikace">Časová specifikace</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Doba trvání
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časové ohraničení doby trvání události.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-vstupné">
+                    <h4>Vazba: Vstupné</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vstupné</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../vstupné/2020-07-01/#třída-vstupné">Vstupné</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vstupné
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Název typu vstupného, podmínka udělení vstupného a celková výše vstupného.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-kontakt">
+                    <h4>Vazba: Kontakt</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>kontakt</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../kontakty/2020-07-01/#třída-kontakt">Kontakt</a>  
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontakt
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kontaktní údaje k dané události. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-dílčí-událost">
+                    <h4>Vazba: Dílčí událost</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>dílčí_událost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../události/2020-07-01/#třída-události">Události</a>  
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Dílčí událost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vedlejší událost pořádána v rámci hlavní události. Obvykle se jedná o různé doprovodné události, jako například souteže a nebo performance show. Příkladem ale může být také jednání pracovní skupiny v rámci konference.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-události-zaštiťující-událost">
+                    <h4>Vazba: Zaštiťující událost</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>zaštiťující_událost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../události/2020-07-01/#třída-události">Události</a>  
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zaštiťující událost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Zaštiťující událost v rámci které se událost koná. Typickým příkladem může být událost Dny Johanna Gregora Mendela konající se po celý rok 2021. Tato často dlouhodobější nebo komplexnější událost může zastřešovat konkrétní událost, kterou chceme publikovat pomocí OFN, jako například koncert na oslavu narození Johanna Gregora Mendela, který je pouze jednou z více akcí v rámci události Dny Johanna Gregora Mendela.
+                        </dd>
+                    </dl>
+
+                </section>          
+            
+            
+            </section>
+
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace událostí v různých úrovních detailu, ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
+            </p>
+            <section id="příklady-jednoduchá-událost">
+                <h3>Jednoduchá událost</h3>
+
+                <p>
+                    Příklad ukazuje, jak lze prezentovat události s minimálními položkami k publikaci. Další položky lze přidávat dle potřeby.
+                </p>
+
+                <aside class="example" title="Jednoduchá událost v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/událost.json">JSON Schema</a>, <a href="schémata/události.json">JSON Schema pro seznam událostí</a>, <a href="kontexty/událost.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/události/2020-07-01/kontexty/událost.jsonld",
+    "typ": "Událost",
+    "iri": "https://data.brno.cz/zdroj/události/2019/vinobraní",
+    "název": {
+        "cs": "Brněnské vinobraní",
+        "en": "Brno Wine Festival"
+    },
+    "popis": {
+        "cs": "Město Brno Vás zve na již 21. vinobraní.",
+        "en": "City of Brno invites you to the 21th Wine Festival."
+    },
+    "pořadatel": [{
+        "typ": "Osoba",
+        "ičo": "44992785",
+        "název": {
+            "cs": "Statutární město Brno"
+        }
+    }],
+    "umístění": [{
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    }],
+    "doba_trvání": [{
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-01T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-07T18:00:00+02:00"
+            }
+        }
+    }, {
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-14T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-20T18:00:00+02:00"
+            }
+        }
+    }]
+}</pre>
+                </aside>
+            </section>
+            <section id="příklady-komplexní-událost">
+                <h3>Komplexní událost</h3>
+                
+                <p>
+                    V komplexním příkladu jsou uvedeny položky, které je vhodné vyplnit, aby měl uživatel co nejlepší představu o dané události. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <aside class="example" title="Komplexní události v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/událost.json">JSON Schema</a>, <a href="schémata/události.json">JSON Schema pro seznam událostí</a>, <a href="kontexty/událost.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/události/2020-07-01/kontexty/událost.jsonld",
+    "typ": "Událost",
+    "iri": "https://data.brno.cz/zdroj/události/2019/vinobraní",
+    "název": {
+        "cs": "Brněnské vinobraní",
+        "en": "Brno Wine Festival"
+    },
+    "popis": {
+        "cs": "Město Brno Vás zve na již 21. vinobraní.",
+        "en": "City of Brno invites you to the 21th Wine Festival."
+    },
+    "dlouhý_popis": {
+        "cs": "První Znojemské historické vinobraní se uskutečnilo již v roce 1966. Jeho autorem a zakladatelem byl František Koukal, který dokázal\nve svém scénáři skloubit jak slavnou minulost královského města na řece Dyji, tak i jeho zachovalé historické kulisy a vinařskou tradici.\nÚstřední postavou vinobraní se stal král Jan Lucemburský, který do Znojma v roce 1327 přijel zapít zdařilé státnické jednání ve Vratislavi.\nMěsto pro něj tehdy připravilo bohatý program, jehož střípky, včetně tradičního předávání práv do rukou konšelů, se divákům nabízejí k zhlédnutí dodnes.\nZatím největší a nejúspěšnější ZHV se konalo v roce 1967. Originální program s téměř 600 účinkujícími zhlédlo na 110 000 návštěvníků.\nTradice Znojemského historického vinobraní byla komunistickým režimem přerušena roku 1974 a k jejímu znovuobnovení došlo až v 90. letech minulého století.\nOd té doby přiláká každoročně vinobraní do Znojma desetitisíce návštěvníků, kteří sem přijíždějí nejen za vínem\n a burčákem, ale také za výborným kulturním programem, ve kterém nesmí chybět průvod krále Jana Lucemburského s chotí a dvořany.",
+        "en": "The first historical wine festival in Znojmo took place as early as 1966. The founder of festival was František Koukal, who managed \n to combine both the glorious past of the royal town on the Dyje River, as well as its well-preserved historical background and wine tradition. \nThe central figure of the wine festival was King John of Luxembourg, who came to Znojmo in 1327 to celebrate successful state meeting in Wroclaw. \nThe city prepared for him a rich program, including traditional handing of rights over to the councilors, which as a reenactment is part of the festival program to this day. \nThe largest and most successful wine festival took place in 1967. The original program with almost 600 performers saw 110,000 visitors. \nThe tradition of Znojmo's historic wine festival was interrupted by the Communist regime in 1974 and was not re-established until the 1990s. \nSince then, festival attracts tens of thousands of visitors who come here not only for wine \n or half-fermented wine, but also for an excellent cultural program, including the parade of King John of Luxembourg with his wife and courtiers."
+    },
+    "vhodné_pro_děti": true,
+    "vhodné_pro_zvířata": true,
+    "registrace": {
+        "cs": "https://data.brno.cz/zdroj/události/2019/vinobraní/registrace",
+        "en": "https://data.brno.cz/zdroj/události/2019/vinobraní/registrace/en"
+    },
+    "pořadatel": [{
+        "typ": "Osoba",
+        "ičo": "44992785",
+        "název": {
+            "cs": "Statutární město Brno"
+        }
+    }],
+    "hlavní_sponzor": [{
+        "typ": "Osoba",
+        "ičo": "44992785",
+        "název": {
+            "cs": "Vinařství Vinam"
+        }
+    }],
+    "sponzor": [{
+        "typ": "Osoba",
+        "ičo": "35922742",
+        "název": {
+            "cs": "Vinařství Znovín"
+        }
+    }, {
+        "typ": "Osoba",
+        "ičo": "65885514",
+        "název": {
+            "cs": "Vinařství Valtice"
+        }
+    }],
+    "mediální_partner": [{
+        "typ": "Osoba",
+        "ičo": "56485227",
+        "název": {
+            "cs": "Brněnský deník"
+        }
+    }],
+    "záštita": [{
+        "typ": "Osoba",
+        "ičo": "91495277",
+        "název": {
+            "cs": "František Novák"
+        }
+    }],
+    "umístění": [{
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    }],
+    "typ_události": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-událostí/položky/muzikál"
+    ],
+    "téma": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/témata-událostí/položky/umění-a-kultura"
+    ],
+    "bezbariérovost": {
+        "typ": "Bezbariérovost",
+        "popis": {
+            "cs": "Vinobraní se koná na stadionu FC Zbrojovka vedle parku Lužánky v Brně. Pro bezbariérový přístup zvolte boční vchod, při kterém je rampa a výtah.",
+            "en": "Wine festival takes place at the FC Zbrojovka football team staium next to Lužánky park in Brno. Use the secondary entrance from Drobného street for the barrier-free entry."
+        },
+        "datum_mapování": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2018-09-27T08:30:00+02:00"
+        },
+        "mapující_subjekt": [{
+            "typ": "Osoba",
+            "ičo": "44992785",
+            "název": {
+                "cs": "Město Brno"
+            }
+        }],
+        "mapování_dle_metodiky": false,
+        "fotografie": [
+            "https://www.vozejkmap.cz/85524-verejny-bocni-vstup-pro-vozickare"
+        ],
+        "tělesně_postižení_toaleta_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "tělesně_postižení_objekt_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "objekt_vyhrazené_parkování": true,
+        "vstup_hlavní_nájezd": false,
+        "vstup_hlavní_plošina": false,
+        "vstup_hlavní_výtah": false
+    },
+    "doba_trvání": [{
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-01T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-07T18:00:00+02:00"
+            }
+        }
+    }, {
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-14T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-20T18:00:00+02:00"
+            }
+        }
+    }],
+    "kontakt": [{
+        "typ": "Kontakt",
+        "druh": {
+            "cs": "Oficiální",
+            "en": "Official"
+        },
+        "email": "mailto:akce@brno.cz",
+        "mobil": "tel:+420123456789",
+        "facebook": "ChytreBrno",
+        "instagram": "chytrebrno",
+        "twitter": "chytrebrno",
+        "url": "https://data.brno.cz"
+    }],
+    "vstupné": [{
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Pro dospělé ve vybrané dny a časy.",
+            "en": "Adults - selected days and times."
+        },
+        "podmínka": {
+            "cs": "Občané starší 18 let, kteří nevyuživají slevy (ZTP, studenti).",
+            "en": "Adults older 18 years, cannot be combined with other discounts."
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 219.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }, {
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Pro děti",
+            "en": "Children's admission"
+        },
+        "podmínka": {
+            "cs": "Osoby mladší 18 let",
+            "en": "Person must be younger than 18"
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 180.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }],
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2018-01-20T18:00:00+02:00"
+    },
+    "aktualizováno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2019-01-19T15:00:00+02:00"
+    },
+    "relevantní_do": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2019-01-20T18:00:00+02:00"
+    },
+    "příloha": [{
+        "typ": "Digitální objekt",
+        "url": "https://brno.cz/vinobrani.jpg",
+        "autor_díla": [{
+            "typ": "Člověk",
+            "jméno": {
+                "cs": "Jan"
+            },
+            "příjmení": {
+                "cs": "Novák"
+            }
+        }],
+        "typ_média": "http://www.iana.org/assignments/media-types/image/jpeg",
+        "podmínky_užití": {
+            "typ": "Podmínky užití",
+            "obsahuje_autorské_dílo": true,
+            "obsahuje_více_autorských_děl": false,
+            "licence_autorského_díla": "https://creativecommons.org/licenses/by/4.0/",
+            "originální_databáze": false,
+            "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+            "obsahuje_osobní_údaje": false
+        }
+    }],
+    "dílčí_událost": [{
+        "typ": "Událost",
+        "iri": "https://data.brno.cz/zdroj/události/2019/vinobraní/soutež",
+        "název": {
+            "cs": "Brněnské vinobraní - soutež v pití vína",
+            "en": "Brno Wine Festival"
+        },
+        "popis": {
+            "cs": "Soutež v pití vína na rychlost. Doprovodná akce pořádáná v rámci Brněnského vinobraní.",
+            "en": "Wine drinking competition. Accompanying event organized as part of the Brno Wine Festival."
+        },
+        "pořadatel": [{
+            "typ": "Osoba",
+            "ičo": "58851247",
+            "název": {
+                "cs": "Vinařství Burian"
+            }
+        }],
+        "umístění": [{
+            "typ": "Umístění",
+            "geometrie": {
+                "type": "Point",
+                "coordinates": [15.9715114, 48.8366829]
+            },
+            "adresa": {
+                "typ": "Adresa",
+                "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135665"
+            }
+        }],
+        "doba_trvání": [{
+            "typ": "Časová specifikace",
+            "časový_interval": {
+                "typ": "Časový interval",
+                "začátek": {
+                    "typ": "Časový okamžik",
+                    "datum_a_čas": "2019-01-01T14:00:00+02:00"
+                },
+                "konec": {
+                    "typ": "Časový okamžik",
+                    "datum_a_čas": "2019-01-01T16:00:00+02:00"
+                }
+            }
+        }],
+        "vytvořeno": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2018-09-27T15:30:00+02:00"
+        },
+        "aktualizováno": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2019-12-28T10:00:00+02:00"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2019-01-01T15:30:00+02:00"
+        }
+    }],
+    "zaštiťující_událost": [{
+            "typ": "Událost",
+            "iri": "https://data.brno.cz/zdroj/události/2019/vinobraní/kdo-je-to-vinař",
+            "název": {
+                "cs": "Kdo je to vinař? - aneb role vinarství v současné společnosti.",
+                "en": "Who is a winemaker - the role of viticulture in contemporary society."
+            },
+            "popis": {
+                "cs": "Seminář o podmínkách současného vinařství v rámci jednotného trhu EU. Doprovodní akce Brněnského vinobraní.",
+                "en": "Seminar on the conditions of contemporary winemaking within the EU single market. Accompanying event organized as part of the Brno Wine Festival."
+            },
+            "pořadatel": [{
+                "typ": "Osoba",
+                "ičo": "66253877",
+                "název": {
+                    "cs": "Cech vinařů"
+                }
+            }],
+            "umístění": [{
+                "typ": "Umístění",
+                "geometrie": {
+                    "type": "Point",
+                    "coordinates": [15.9715114, 48.8266829]
+                },
+                "adresa": {
+                    "typ": "Adresa",
+                    "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135658"
+                }
+            }],
+            "doba_trvání": [{
+                "typ": "Časová specifikace",
+                "časový_interval": {
+                    "typ": "Časový interval",
+                    "začátek": {
+                        "typ": "Časový okamžik",
+                        "datum_a_čas": "2019-01-05T09:30:00+02:00"
+                    },
+                    "konec": {
+                        "typ": "Časový okamžik",
+                        "datum_a_čas": "2019-01-05T11:30:00+02:00"
+                    }
+                }
+            }],
+            "vytvořeno": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2017-01-05T09:30:00+02:00"
+            },
+            "aktualizováno": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-04T09:30:00+02:00"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-05T09:30:00+02:00"
+            }
+        },
+        {
+            "typ": "Událost",
+            "iri": "https://data.brno.cz/zdroj/události/2021/DnyMendela",
+            "název": {
+                "cs": "Dny Gregore Johanna Mendela",
+                "en": "Johann Gregor Mendel Days"
+            },
+            "popis": {
+                "cs": "Celoroční festival na oslavu přínosu Gregora Johanna Mendela k světové věde.",
+                "en": "A year-long festival to celebrate the contribution of Gregor Johann Mendel to science."
+            },
+            "pořadatel": [{
+                "typ": "Osoba",
+                "ičo": "44992785",
+                "název": {
+                    "cs": "Město Brno"
+                }
+            }],
+            "umístění": [{
+                "typ": "Umístění",
+                "adresa": {
+                    "typ": "Adresa",
+                    "obec": "https://linked.cuzk.cz/resource/ruian/obec/582786"
+                }
+            }],
+            "doba_trvání": [{
+                "typ": "Časová specifikace",
+                "časový_interval": {
+                    "typ": "Časový interval",
+                    "začátek": {
+                        "typ": "Časový okamžik",
+                        "datum_a_čas": "2021-01-01T12:00:00+02:00"
+                    },
+                    "konec": {
+                        "typ": "Časový okamžik",
+                        "datum_a_čas": "2021-01-01T16:00:00+02:00"
+                    }
+                }
+            }],
+            "vytvořeno": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2018-01-01T12:00:00+02:00"
+            },
+            "aktualizováno": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2020-01-01T12:00:00+02:00"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2021-01-01T12:00:00+02:00"
+            }
+        }
+    ]
+}</pre>
+                </aside>
+            </section>
+            <section id="příklady-více-událostí">
+                <h3>Více událostí</h3>
+                
+                <p>
+                    V příkladu je uveden seznam prezentující více událostí. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <aside class="example" title="Více událostí v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/události.json">JSON Schema pro seznam událostí</a>, <a href="kontexty/událost.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+[{
+    "@context": "https://ofn.gov.cz/události/2020-07-01/kontexty/událost.jsonld",
+    "typ": "Událost",
+    "iri": "https://data.brno.cz/zdroj/události/2019/vinobraní",
+    "název": {
+        "cs": "Brněnské vinobraní",
+        "en": "Brno Wine Festival"
+    },
+    "popis": {
+        "cs": "Město Brno Vás zve na již 21. vinobraní.",
+        "en": "City of Brno invites you to the 21th Wine Festival."
+    },
+    "pořadatel": [{
+        "typ": "Osoba",
+        "ičo": "44992785",
+        "název": {
+            "cs": "Statutární město Brno"
+        }
+    }],
+    "umístění": [{
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    }],
+    "doba_trvání": [{
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-01T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-07T18:00:00+02:00"
+            }
+        }
+    }, {
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-14T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-20T18:00:00+02:00"
+            }
+        }
+    }]
+},
+{
+    "@context": "https://ofn.gov.cz/události/2020-07-01/kontexty/událost.jsonld",
+    "typ": "Událost",
+    "iri": "https://znojmo.cz/zdroj/události/2017/denznojma",
+    "název": {
+        "cs": "Den Znojma",
+        "en": "Day of the Znojmo city"
+    },
+    "popis": {
+        "cs": "Město Znojmo Vás zve na již 2 ročník Dnu Znojma.",
+        "en": "City of Znojmo invites you to the 2nd Day fo the Znojmo city."
+    },
+    "pořadatel": [{
+        "typ": "Osoba",
+        "ičo": "44992485",
+        "název": {
+            "cs": "Město Znojmo"
+        }
+    }],
+    "umístění": [{
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [16.1078167, 48.9103528]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16455661"
+        }
+    }],
+    "doba_trvání": [{
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-01T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-07T18:00:00+02:00"
+            }
+        }
+    }, {
+        "typ": "Časová specifikace",
+        "časový_interval": {
+            "typ": "Časový interval",
+            "začátek": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-14T09:30:00+02:00"
+            },
+            "konec": {
+                "typ": "Časový okamžik",
+                "datum_a_čas": "2019-01-20T18:00:00+02:00"
+            }
+        }
+    }]
+}
+]
+                        </pre>
+                </aside>
+            </section>
+        </section>
+        <section id="metadata">
+            <h2>Předpřipravená metadata</h2>
+            <p>
+                Tato sekce obsahuje odkaz na <a href="metadata/události.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>.
+                Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
+            </p>
+        </section>
+    </body>
+</html>
+

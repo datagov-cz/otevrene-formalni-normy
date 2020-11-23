@@ -1,0 +1,56 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/aktuality/2020-07-01/schémata/aktualita.json",
+	"type": "object",
+	"title": "Aktualita",
+	"required": ["typ"],
+	"allOf": [{
+		"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+	}, {
+		"properties": {
+			"typ": {
+				"oneOf": [{
+					"const": "Aktualita"
+				}, {
+					"type": "array",
+					"contains": {
+						"const": "Aktualita"
+					},
+					"items": {
+						"type": "string"
+					}
+				}]
+			},
+			"informuje_o": {
+				"type": "string",
+				"format": "iri",
+				"title": "Informuje o",
+				"examples": [
+					"https://data.brno.cz/zdroj/akce/2019/vinobraní"
+				]
+			},
+			"geografické_území": {
+				"type": "array",
+				"title": "Související geografické území",
+				"items": {
+					"$ref": "https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.json"
+				}
+			},
+			"téma": {
+				"type": "array",
+				"items": {
+					"type": "string",
+					"format": "iri",
+					"pattern": "^https\\:\/\/data\\.mvcr\\.gov\\.cz\/zdroj\/číselníky\/témata-událostí\/položky\/.*$",
+					"title": "Téma aktuality",
+					"examples": [
+						"https://data.mvcr.gov.cz/zdroj/číselníky/témata-událostí/položky/doprava"
+					]
+				}
+			},
+			"oznamovatel": {
+				"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk-či-osoba.json"
+			}
+		}
+	}]
+}

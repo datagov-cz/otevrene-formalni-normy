@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Sportoviště</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2020-07-01",
+                shortName: "sportoviště",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/sportoviště/2020-07-01/",
+                latestVersion: "https://ofn.gov.cz/sportoviště/",
+                editors: [{
+                  name: "Martin Dvořák",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  orcid: "0000-0003-2132-762X",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o dostupných sportovištích jakéhokoliv druhu - od posiloven, přes bazény až po víceúčelové haly. Norma umožňuje pokrýt soukromé i veřejné sportoviště.
+                Norma je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu sportovišť" src="obrázky/sportoviště.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1S7QGMfE3BQX_3ynpilVxqW6n5DNATwW6/view?usp=sharing">Diagram datového modelu sportovišť</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis sportovišť.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+            </p>
+
+            <section id="třída-sportoviště">
+                <h3>Sportoviště</h3>
+                <p>
+                    Tato třída reprezentuje samotné zveřejněné sportoviště. Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-sportoviště-podmínky-užívání">
+                    <h4>Podmínky užívání</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>podmínky_užívání</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Podmínky užívání
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Podmínky užívání sportoviště.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>HULK GYM je dostupná po celý rok po zaplacení vstupného.</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-sportoviště-provozní-řád">
+                    <h4>Provozní řád</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>provozní_řád</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Provozní řád
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Provozní řád sportoviště.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>Provozní řád HULK GYM:...</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-sportoviště-provozovatel">
+                    <h4>Vazba: Provozovatel</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>provozovatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Provozovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Provozovatel sportoviště.
+                        </dd>
+                    </dl>
+
+                </section>  
+                
+                <section id="vazba-sportoviště-vlastník">
+                    <h4>Vazba: Vlastník</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vlastník</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vlastník
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Vlastník sportoviště.
+                        </dd>
+                    </dl>
+
+                </section>  
+                
+
+                <section id="vazba-sportoviště-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění sportoviště.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace sportoviště.
+                        </dd>
+                    </dl>
+
+                </section>  
+            
+                <section id="vazba-sportoviště-kontakt">
+                    <h4>Vazba: Kontakt</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>kontakt</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../kontakty/2020-07-01/#třída-kontakt">Kontakt</a>  
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontakt
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kontaktní údaje na provozovatele sportoviště.
+                        </dd>
+                    </dl>
+
+                </section>          
+
+                <section id="vazba-sportoviště-bezbariérovost">
+                    <h4>Vazba: Bezbariérovost</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>bezbariérovost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../bezbariérovost/2020-07-01/#třída-bezbariérovost">Bezbariérovost</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Bezbariérovost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis typu bezbariérového přístupu a formy přístupnosti.
+                        </dd>
+                    </dl>
+
+                </section>
+            
+                <section id="vazba-sportoviště-vstupné">
+                    <h4>Vazba: Vstupné</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>vstupné</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../vstupné/2020-07-01/#třída-vstupné">Vstupné</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vstupné
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Specifikace vstupného na dané sportoviště.
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vazba-sportoviště-otevírací-doba">
+                    <h4>Vazba: Otevírací doba</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>otevírací_doba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../časová-specifikace/2020-07-01/#třída-časová-specifikace">Časová specfikace</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Otevírací doba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Otevírací doba konkrétního objektu (sportoviště).
+                        </dd>
+                    </dl>
+
+                </section>                
+
+                <section id="vazba-sportoviště-doplňkové-služby">
+                    <h4>Vazba: Doplňková služba</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>doplňková_služba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-služba">Služba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Doplňková služba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Druhy doplňkových služeb, které se nacházejí v areálu sportoviště.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Masáže, kadeřnictví, pedikůra,...</code>
+                        </dd>                        
+                    </dl>
+
+                </section>   
+
+                <section id="vazba-sportoviště-sporty">
+                    <h4>Vazba: Sport</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>sport</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/datová-sada?iri=https://data.gov.cz/zdroj/datov%C3%A9-sady/MV/706529437/061ca3fee077a5f0633f755fc38837f1">Sport</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Sport
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/sporty">Číselníku pro sporty</a> publikovaného jako <a href="https://data.gov.cz/datová-sada?iri=https://data.gov.cz/zdroj/datov%C3%A9-sady/MV/706529437/061ca3fee077a5f0633f755fc38837f1">číselník v Národním katalogu otevřených dat.</a> Číselník nabývá několika hodnot, v příkladu je uvedena prezentace atletiky.
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/atletika</code>
+                        </dd>                            
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-sportoviště-typ">
+                    <h4>Vazba: Typ sportoviště</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ_sportoviště</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Fdd03d7b10a246f6a854b7a190ab0d641">Typ sportoviště</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnoty této vlastnosti jsou z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť">Číselníku pro typy sportovišť</a> publikovaného jako <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2FMV%2F706529437%2Fdd03d7b10a246f6a854b7a190ab0d641">číselník v Národním katalogu otevřených dat.</a> Číselník nabývá několika hodnot, zde je uvedena prezentace bazénu. 
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/bazén</code>
+                        </dd>                            
+                        </dd>
+                    </dl>
+
+                </section>                     
+
+            </section>
+
+            <section id="třída-služba">
+                <h3>Služba</h3>
+                <p>
+                    Tato třída reprezentuje informace o dostupných službách v daném sportovišti.
+                    Jedná se například o masáže, kosmetiku, obchod, apod.
+                    Třída dědí vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>, skrze které umožňuje popsat jednotlivé dostupné služby.
+                    Typicky se bude jednat o atributy <code>název</code> a <code>popis</code>.
+                </p>
+                
+        </section>
+    </section>    
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace sportovišť v různých úrovních detailu, ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
+            </p>
+
+            <section id="příklady-jednoduché-sportoviště">
+                <h3>Jednoduché sportoviště</h3>
+                
+                <p>
+                    Příklad ukazuje, jak lze prezentovat sportoviště s minimálními položkami k publikaci. 
+                </p>
+                
+                <aside class="example" title="Jednoduché sportoviště v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/sportoviště.json">JSON Schema</a>, <a href="schémata/seznam-sportovišť.json">JSON Schema pro seznam sportovišť</a>, <a href="kontexty/sportoviště.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/sportoviště/2020-07-01/kontexty/sportoviště.jsonld",
+    "typ": "Sportoviště",
+    "iri": "http://www.hulkgym.cz/zdroj/gym/pardubice/",
+    "název": {
+        "cs": "HULK GYM",
+        "en": "HULK GYM"
+    },
+    "umístění": {
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    },
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+    },
+    "otevírací_doba": [{
+        "typ": "Časová specifikace",
+        "název": {
+            "cs": "letní otevírací doba",
+            "en": "summer opening hours"
+        },
+        "popis": {
+            "cs": "Otevírací doba během měsíců červen, červenec, srpen",
+            "en": "Opening hours during June, July and August"
+        },
+        "časová_doba": [{
+            "typ": "Časová doba",
+            "od": "06:00:00",
+            "do": "22:00:00"
+        }],
+        "časová_platnost": [{
+            "typ": "Časová specifikace",
+            "časové_období": [
+                "http://publications.europa.eu/resource/authority/timeperiod/JUN",
+                "http://publications.europa.eu/resource/authority/timeperiod/JUL",
+                "http://publications.europa.eu/resource/authority/timeperiod/AUG"
+            ]
+        }]
+    }],
+    "sport": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/plavání",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/fotbal"
+    ]
+}</pre>
+                </aside>
+            </section>
+            <section id="příklady-komplexní-sportoviště">
+                <h3>Komplexní sportoviště</h3>
+                
+                <p>
+                    V komplexním příkladu jsou uvedeny položky, které je vhodné vyplnit, aby měl uživatel co nejlepší představu o daném sportovišti. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <aside class="example" title="Komplexní sportoviště v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/sportoviště.json">JSON Schema</a>, <a href="schémata/seznam-sportovišť.json">JSON Schema pro seznam sportovišť</a>, <a href="kontexty/sportoviště.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/sportoviště/2020-07-01/kontexty/sportoviště.jsonld",
+    "typ": "Sportoviště",
+    "iri": "http://www.hulkgym.cz/zdroj/gym/pardubice/",
+    "název": {
+        "cs": "HULK GYM",
+        "en": "HULK GYM"
+    },
+    "popis": {
+        "cs": "Jsme posilovna s největší cvičební plochou v Brně, která si zakládá na kvalitním strojním vybavení k procvičení všech partií těla.",
+        "en": "We are a gym with the largest training area in Brno. We pride ourselfs on quality equipment to excercise all parts of the body."
+    },
+    "podmínky_užívání": {
+        "cs": "HULK GYM je dostupná po celý rok po zaplacení vstupného.",
+        "en": "HULK GYM is accessible all over the year after paying the fee."
+    },
+    "provozní_řád": {
+        "cs": "Provozní řád HULK GYM:....",
+        "en": "Operating ruls of the HULK GYM ..."
+    },
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+    },
+    "vlastník": [{
+
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+
+    }],
+    "umístění": {
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    },
+    "kontakt": [{
+        "typ": "Kontakt",
+        "druh": {
+            "cs": "Oficiální",
+            "en": "Official"
+        },
+        "email": "mailto:brno@hulk.cz",
+        "mobil": "tel:+420123456789",
+        "facebook": "HulkBrno",
+        "instagram": "HulkBrno",
+        "twitter": "hulkbrno",
+        "url": "https://hulk.brno.cz"
+    }],
+    "bezbariérovost": {
+        "typ": "Bezbariérovost",
+        "popis": {
+            "cs": "Posilovna leží v Brně v Židenicích. Pro bezbariérový přístup zvolte boční vchod, při kterém je výtah.",
+            "en": "The gym is located in the Židenice district. For the barrier-free access use the lift nearby the side entrance."
+        },
+        "datum_mapování": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2019-09-27T09:30:00+02:00"
+        },
+        "mapující_subjekt": [{
+            "typ": "Osoba",
+            "ičo": "44992785",
+            "název": {
+                "cs": "Město Brno"
+            }
+
+        }],
+        "mapování_dle_metodiky": false,
+        "fotografie": [
+            "https://www.vozejkmap.cz/83465-verejny-zachody-pro-vozickare"
+        ],
+        "tělesně_postižení_toaleta_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "tělesně_postižení_objekt_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "objekt_vyhrazené_parkování": true,
+        "vstup_hlavní_nájezd": false,
+        "vstup_hlavní_plošina": false,
+        "vstup_hlavní_výtah": true
+    },
+    "vstupné": [{
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Základní vstupné",
+            "en": "Basic admission"
+        },
+        "podmínka": {
+            "cs": "Občané, kteří nevyuživají slevy(ZTP, studenti).",
+            "en": "Visitors without any applicable discounts."
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 219.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }, {
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Pro děti",
+            "en": "Children"
+        },
+        "podmínka": {
+            "cs": "Občané mladší 12 let",
+            "en": "Children under 12 years"
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 180.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }],
+    "otevírací_doba": [{
+        "typ": "Časová specifikace",
+        "název": {
+            "cs": "letní otevírací doba",
+            "en": "summer opening hours"
+        },
+        "popis": {
+            "cs": "Otevírací doba během měsíců červen, červenec, srpen",
+            "en": "Opening hours during June, July and August"
+        },
+        "časová_doba": [{
+            "typ": "Časová doba",
+            "od": "06:00:00",
+            "do": "22:00:00"
+        }],
+        "časová_platnost": [{
+            "typ": "Časová specifikace",
+            "časové_období": [
+                "http://publications.europa.eu/resource/authority/timeperiod/JUN",
+                "http://publications.europa.eu/resource/authority/timeperiod/JUL",
+                "http://publications.europa.eu/resource/authority/timeperiod/AUG"
+            ]
+        }]
+    }],
+    "doplňková_služba": [{
+        "typ": "Služba",
+        "název": {
+            "cs": "masáže",
+            "en": "massages"
+        }
+    }, {
+        "typ": "Služba",
+        "název": {
+            "cs": "kadeřnictví",
+            "en": "hairdresser"
+        }
+    }],
+    "sport": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/plavání",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/fotbal"
+    ],
+    "typ_sportoviště": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/bazén",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/hřiště"
+    ],
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2019-09-27T09:30:00+02:00"
+    },
+    "aktualizováno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2020-10-28T09:00:00+02:00"
+    },
+    "zneplatněno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2021-11-27T09:00:00+02:00"
+    },
+    "příloha": [{
+        "typ": "Digitální objekt",
+        "url": "https://lh4.googleusercontent.com/-coBNWHyjNxM/U0vvFoBJ5_I/AAAAAAAAAOM/kfD5TgF6sl4/w724-h407-no/lu%25C5%25BE%25C3%25A1nky.PNG",
+        "autor_díla": [{
+            "typ": "Člověk",
+            "jméno": {
+                "cs": "Jan"
+            },
+            "příjmení": {
+                "cs": "Novák"
+            }
+        }],
+        "typ_média": "http://www.iana.org/assignments/media-types/image/png",
+        "podmínky_užití": {
+            "typ": "Podmínky užití",
+            "obsahuje_autorské_dílo": true,
+            "obsahuje_více_autorských_děl": false,
+            "licence_autorského_díla": "https://creativecommons.org/licenses/by/4.0/",
+            "originální_databáze": false,
+            "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+            "obsahuje_osobní_údaje": false
+        }
+    }]
+}</pre>
+                </aside>
+            </section>
+
+            <section id="příklady-více-sportovišť">
+                <h3>Více sportovišť</h3>
+                
+                <p>
+                    V příkladu je uveden seznam prezentující více sportovišť. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <aside class="example" title="Více sportovišť v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/seznam-sportovišť.json">JSON Schema pro seznam sportovišť</a>, <a href="kontexty/sportoviště.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+[{
+    "@context": "https://ofn.gov.cz/sportoviště/2020-07-01/kontexty/sportoviště.jsonld",
+    "typ": "Sportoviště",
+    "iri": "http://www.hulkgym.cz/zdroj/gym/pardubice/",
+    "název": {
+        "cs": "HULK GYM",
+        "en": "HULK GYM"
+    },
+    "popis": {
+        "cs": "Jsme posilovna s největší cvičební plochou v Brně, která si zakládá na kvalitním strojním vybavení k procvičení všech partií těla.",
+        "en": "We are a gym with the largest training area in Brno. We pride ourselfs on quality equipment to excercise all parts of the body."
+    },
+    "podmínky_užívání": {
+        "cs": "HULK GYM je dostupná po celý rok po zaplacení vstupného.",
+        "en": "HULK GYM is accessible all over the year after paying the fee."
+    },
+    "provozní_řád": {
+        "cs": "Provozní řád HULK GYM:....",
+        "en": "Operating ruls of the HULK GYM ..."
+    },
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+    },
+    "vlastník": [{
+
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+
+    }],
+    "umístění": {
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [15.9915114, 48.8566829]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    },
+    "kontakt": [{
+        "typ": "Kontakt",
+        "druh": {
+            "cs": "Oficiální",
+            "en": "Official"
+        },
+        "email": "mailto:akce@brno.cz",
+        "mobil": "tel:+420123456789",
+        "facebook": "ChytreBrno",
+        "instagram": "chytrebrno",
+        "twitter": "chytrebrno",
+        "url": "https://data.brno.cz"
+    }],
+    "bezbariérovost": {
+        "typ": "Bezbariérovost",
+        "popis": {
+            "cs": "Posilovna leží v Brně v Židenicích. Pro bezbariérový přístup zvolte boční vchod, při kterém je výtah.",
+            "en": "The gym is located in the Židenice district. For the barrier-free access use the lift nearby the side entrance."
+        },
+        "datum_mapování": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2019-09-27T09:30:00+02:00"
+        },
+        "mapující_subjekt": [{
+            "typ": "Osoba",
+            "ičo": "44992785",
+            "název": {
+                "cs": "Město Brno"
+            }
+
+        }],
+        "mapování_dle_metodiky": false,
+        "fotografie": [
+            "https://www.vozejkmap.cz/83465-verejny-zachody-pro-vozickare"
+        ],
+        "tělesně_postižení_toaleta_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "tělesně_postižení_objekt_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "objekt_vyhrazené_parkování": true,
+        "vstup_hlavní_nájezd": false,
+        "vstup_hlavní_plošina": false,
+        "vstup_hlavní_výtah": true
+    },
+    "vstupné": [{
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Základní vstupné",
+            "en": "Basic admission"
+        },
+        "podmínka": {
+            "cs": "Občané, kteří nevyuživají slevy(ZTP, studenti).",
+            "en": "Visitors without any applicable discounts."
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 219.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }, {
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Pro děti",
+            "en": "Children"
+        },
+        "podmínka": {
+            "cs": "Občané mladší 12 let",
+            "en": "Children under 12 years"
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 180.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }],
+    "otevírací_doba": [{
+        "typ": "Časová specifikace",
+        "název": {
+            "cs": "letní otevírací doba",
+            "en": "summer opening hours"
+        },
+        "popis": {
+            "cs": "Otevírací doba během měsíců červen, červenec, srpen",
+            "en": "Opening hours during June, July and August"
+        },
+        "časová_doba": [{
+            "typ": "Časová doba",
+            "od": "06:00:00",
+            "do": "22:00:00"
+        }],
+        "časová_platnost": [{
+            "typ": "Časová specifikace",
+            "časové_období": [
+                "http://publications.europa.eu/resource/authority/timeperiod/JUN",
+                "http://publications.europa.eu/resource/authority/timeperiod/JUL",
+                "http://publications.europa.eu/resource/authority/timeperiod/AUG"
+            ]
+        }]
+    }],
+    "doplňková_služba": [{
+        "typ": "Služba",
+        "název": {
+            "cs": "masáže",
+            "en": "massages"
+        }
+    }, {
+        "typ": "Služba",
+        "název": {
+            "cs": "kadeřnictví",
+            "en": "hairdresser"
+        }
+    }],
+    "sport": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/plavání",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/fotbal"
+    ],
+    "typ_sportoviště": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/bazén",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/hřiště"
+    ],
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2019-09-27T09:30:00+02:00"
+    },
+    "aktualizováno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2020-10-28T09:00:00+02:00"
+    },
+    "zneplatněno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2021-11-27T09:00:00+02:00"
+    },
+    "příloha": [{
+        "typ": "Digitální objekt",
+        "url": "https://lh4.googleusercontent.com/-coBNWHyjNxM/U0vvFoBJ5_I/AAAAAAAAAOM/kfD5TgF6sl4/w724-h407-no/lu%25C5%25BE%25C3%25A1nky.PNG",
+        "autor_díla": [{
+            "typ": "Člověk",
+            "jméno": {
+                "cs": "Jan"
+            },
+            "příjmení": {
+                "cs": "Novák"
+            }
+        }],
+        "typ_média": "http://www.iana.org/assignments/media-types/image/png",
+        "podmínky_užití": {
+            "typ": "Podmínky užití",
+            "obsahuje_autorské_dílo": true,
+            "obsahuje_více_autorských_děl": false,
+            "licence_autorského_díla": "https://creativecommons.org/licenses/by/4.0/",
+            "originální_databáze": false,
+            "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+            "obsahuje_osobní_údaje": false
+        }
+    }]
+},
+{
+      "@context": "https://ofn.gov.cz/sportoviště/2020-07-01/kontexty/sportoviště.jsonld",
+    "typ": "Sportoviště",
+    "iri": "http://www.hulkgym.cz/zdroj/gym/praha/",
+    "název": {
+        "cs": "HULK GYM Praha",
+        "en": "HULK GYM Prague"
+    },
+    "popis": {
+        "cs": "Jsme posilovna s největší cvičební plochou v Praze, která si zakládá na kvalitním strojním vybavení k procvičení všech partií těla.",
+        "en": "We are a gym with the largest training area in Prague. We pride ourselfs on quality equipment to excercise all parts of the body."
+    },
+    "podmínky_užívání": {
+        "cs": "HULK GYM je dostupná po celý rok po zaplacení vstupného.",
+        "en": "HULK GYM is accessible all over the year after paying the fee."
+    },
+    "provozní_řád": {
+        "cs": "Provozní řád HULK GYM:....",
+        "en": "Operating ruls of the HULK GYM ..."
+    },
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+    },
+    "vlastník": [{
+
+        "typ": "Osoba",
+        "ičo": "29287944",
+        "název": {
+            "cs": "HULK GYM"
+        }
+
+    }],
+    "umístění": {
+        "typ": "Umístění",
+        "geometrie": {
+            "type": "Point",
+            "coordinates": [14.428014, 50.064779]
+        },
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+        }
+    },
+    "kontakt": [{
+        "typ": "Kontakt",
+        "druh": {
+            "cs": "Oficiální",
+            "en": "Official"
+        },
+        "email": "mailto:praha@hulk.cz",
+        "mobil": "tel:+420123456789",
+        "facebook": "HulkPraha",
+        "instagram": "HulkPraha",
+        "twitter": "hulkpraha",
+        "url": "https://hulk.praha.cz"
+    }],
+    "bezbariérovost": {
+        "typ": "Bezbariérovost",
+        "popis": {
+            "cs": "Posilovna leží v Praze Nuslích. Pro bezbariérový přístup zvolte boční vchod, při kterém je výtah.",
+            "en": "The gym is located in the Nusle district in Prague. For the barrier-free access use the lift nearby the side entrance."
+        },
+        "datum_mapování": {
+            "typ": "Časový okamžik",
+            "datum_a_čas": "2019-09-27T09:30:00+02:00"
+        },
+        "mapující_subjekt": [{
+            "typ": "Osoba",
+            "ičo": "44992785",
+            "název": {
+                "cs": "Město Praha"
+            }
+
+        }],
+        "mapování_dle_metodiky": false,
+        "fotografie": [
+            "https://www.vozejkmap.cz/83465-verejny-zachody-pro-vozickare"
+        ],
+        "tělesně_postižení_toaleta_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "tělesně_postižení_objekt_přístupnost": "https://data.mvcr.gov.cz/zdroj/číselníky/stupně-přístupnosti/položky/přístupný",
+        "objekt_vyhrazené_parkování": true,
+        "vstup_hlavní_nájezd": false,
+        "vstup_hlavní_plošina": false,
+        "vstup_hlavní_výtah": true
+    },
+    "vstupné": [{
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Základní vstupné",
+            "en": "Basic admission"
+        },
+        "podmínka": {
+            "cs": "Občané, kteří nevyuživají slevy(ZTP, studenti).",
+            "en": "Visitors without any applicable discounts."
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 259.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }, {
+        "typ": "Vstupné",
+        "název": {
+            "cs": "Pro děti",
+            "en": "Children"
+        },
+        "podmínka": {
+            "cs": "Občané mladší 12 let",
+            "en": "Children under 12 years"
+        },
+        "cena": {
+            "typ": "Částka",
+            "výše": 190.90,
+            "měna": "http://publications.europa.eu/resource/authority/currency/CZK"
+        }
+    }],
+    "otevírací_doba": [{
+        "typ": "Časová specifikace",
+        "název": {
+            "cs": "letní otevírací doba",
+            "en": "summer opening hours"
+        },
+        "popis": {
+            "cs": "Otevírací doba během měsíců červen, červenec, srpen",
+            "en": "Opening hours during June, July and August"
+        },
+        "časová_doba": [{
+            "typ": "Časová doba",
+            "od": "06:00:00",
+            "do": "22:00:00"
+        }],
+        "časová_platnost": [{
+            "typ": "Časová specifikace",
+            "časové_období": [
+                "http://publications.europa.eu/resource/authority/timeperiod/JUN",
+                "http://publications.europa.eu/resource/authority/timeperiod/JUL",
+                "http://publications.europa.eu/resource/authority/timeperiod/AUG"
+            ]
+        }]
+    }],
+    "doplňková_služba": [{
+        "typ": "Služba",
+        "název": {
+            "cs": "masáže",
+            "en": "massages"
+        }
+    }, {
+        "typ": "Služba",
+        "název": {
+            "cs": "kadeřnictví",
+            "en": "hairdresser"
+        }
+    }],
+    "sport": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/plavání",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/sporty/položky/fotbal"
+    ],
+    "typ_sportoviště": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/bazén",
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-sportovišť/položky/hřiště"
+    ],
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2019-09-27T09:30:00+02:00"
+    },
+    "aktualizováno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2020-10-28T09:00:00+02:00"
+    },
+    "zneplatněno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2021-11-27T09:00:00+02:00"
+    },
+    "příloha": [{
+        "typ": "Digitální objekt",
+        "url": "https://lh4.googleusercontent.com/-coBNWHyjNxM/U0vvFoBJ5_I/AAAAAAAAAOM/kfD5TgF6sl4/w724-h407-no/lu%25C5%25BE%25C3%25A1nky.PNG",
+        "autor_díla": [{
+            "typ": "Člověk",
+            "jméno": {
+                "cs": "Jan"
+            },
+            "příjmení": {
+                "cs": "Novák"
+            }
+        }],
+        "typ_média": "http://www.iana.org/assignments/media-types/image/png",
+        "podmínky_užití": {
+            "typ": "Podmínky užití",
+            "obsahuje_autorské_dílo": true,
+            "obsahuje_více_autorských_děl": false,
+            "licence_autorského_díla": "https://creativecommons.org/licenses/by/4.0/",
+            "originální_databáze": false,
+            "ochrana_zvláštními_právy_pořizovatele_databáze": false,
+            "obsahuje_osobní_údaje": false
+        }
+    }]
+}]</pre>
+                </aside>
+            </section>
+        </section>
+    </section>
+        <section id="metadata">
+            <h2>Předpřipravená metadata</h2>
+            <p>
+                Tato sekce obsahuje odkaz na <a href="metadata/sportoviště.jsonld.txt">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>.
+                Registrace pomocí tohoto předpřipraveného záznamu umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
+            </p>
+        </section>
+    </body>
+</html>
+

@@ -1,0 +1,45 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/jednotková-částka.json",
+	"type": "object",
+	"title": "Jednotková částka",
+	"required": ["typ", "výše", "měna", "jednotka"],
+	"properties": {
+		"typ": {
+			"oneOf": [{
+				"const": "Jednotková částka"
+				},{
+				"type": "array",
+				"contains": {
+					"const": "Jednotková částka"
+				},
+				"items": {
+					"type": "string"
+				}
+			}]
+		},
+		"výše": {
+			"type": "number",
+			"title": "Výše",
+			"examples": [
+				1000.1
+			]
+		},
+		"měna": {
+			"type": "string",
+			"format": "iri",
+			"pattern": "^http\\:\/\/publications\\.europa\\.eu\/resource\/authority\/currency\/.*$",
+			"title": "Měna",
+			"examples": [
+				"http://publications.europa.eu/resource/authority/currency/CZK"
+			]
+		},
+		"jednotka": {
+			"type": "string",
+			"title": "Jednotka",
+			"examples": [
+				"KGM"
+			]
+		}
+	}
+}

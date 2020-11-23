@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:digitální-objekty="https://ofn.gov.cz/digitální-objekty/2020-07-01" xmlns:umístění="https://ofn.gov.cz/umístění/2020-07-01" xmlns:věc="https://ofn.gov.cz/věc/2020-07-01" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" xmlns:adresa="https://ofn.gov.cz/adresy/2020-07-01" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="https://ofn.gov.cz/umístění/2020-07-01" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:import namespace="https://ofn.gov.cz/základní-datové-typy/2020-07-01" schemaLocation="https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/základní-datové-typy.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/adresy/2020-07-01" schemaLocation="https://ofn.gov.cz/adresy/2020-07-01/schémata/adresa.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/věc/2020-07-01" schemaLocation="https://ofn.gov.cz/věc/2020-07-01/schémata/věc.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/digitální-objekty/2020-07-01" schemaLocation="https://ofn.gov.cz/digitální-objekty/2020-07-01/schémata/digitální-objekt.xsd"/>
+	<xs:complexType name="umístění">
+		<xs:complexContent>
+			<xs:extension base="věc:věc">
+				<xs:sequence minOccurs="0" maxOccurs="1">
+					<xs:element ref="digitální-objekty:přílohy" minOccurs="0"/>
+					<xs:element name="geometrie" type="xs:string" minOccurs="0"/>
+					<xs:element name="adresa" type="adresa:adresa" minOccurs="0"/>
+					<xs:element name="budova" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="patro" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="místnost" type="základ:text" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="zahraniční_adresa_text" type="základ:text" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="umístění" type="umístění:umístění"/>
+</xs:schema>

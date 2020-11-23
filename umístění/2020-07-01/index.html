@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Umístění</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2020-07-01",
+                shortName: "umístění",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/umístění/2020-07-01/",
+                latestVersion: "https://ofn.gov.cz/umístění/",
+                editors: [{
+                  name: "Jakub Klímek",                  
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je sdílenou specifikací pro umístění pro použití v otevřeých formálních normách ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>.
+                Specifikace obsahuje schémata a je ilustrována příklady dat ve formátech JSON-LD [[json-ld11]] a tedy i JSON [[ECMA-404]], XML [[xml]] a CSV [[rfc4180]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu umístění" src="obrázky/umístění.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1J2Fvz2WJpGsMtUcwbKwQPZDL54Zp_Ef4/view?usp=sharing">Diagram datového modelu umístění</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="specifikace">
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé položky, které lze použít k určení umístění v poskytovaných datech.
+                Umístění může být specifikováno jako adresa, globálně identifikovaný objekt a nebo jako geometrický útvar. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+            </p>
+                        
+            <p>                             
+                Tato otevřená formální norma strukturuje umístění v souladu s <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+            </p>
+            
+            <section id="třída-umístění">
+                <h3>Umístění</h3>
+                <p>
+                    Umístění může být specifikováno jako adresa, globálně identifikovaný objekt a nebo jako geometrický útvar.
+                    Příkladem umístění může být louka, na které se koná festival, adresa sídla společnosti, či prodaná parcela na Měsíci.
+                    Tato třída odpovídá třídě <a href="http://purl.org/dc/terms/Location">Location</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a> a <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/">Dublin Core Metadata Initiative</a>.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+                <section id="vlastnost-umístění-identifikátor">
+                    <h4>Geografický identifikátor</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>iri</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Geografický identifikátor
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Geografický identifikátor objektu.
+                            Použije se tam, kde existuje IRI pro dané místo, například z databáze <a href="http://www.geonames.org/">Geonames</a>, <a href="https://www.wikidata.org/wiki/Wikidata:Main_Page">Wikidata</a>, <a href="https://wiki.dbpedia.org/">DBpedia</a> nebo z evropských číselníků <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/place">míst</a>, <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/country">zemí</a> či <a href="https://publications.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/continent">kontinentů</a>.
+                            Tato vlastnost odpovídá vlastnosti <a href="https://www.w3.org/ns/locn#rdfs:seeAlso">geographic identifier</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a> a slovníku RDF Schema [[rdf-schema]].
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>http://publications.europa.eu/resource/authority/continent/ANTARCTICA</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-umístění-název">
+                    <h4>Geografický název</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Geografický název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Geografický název objektu.
+                            Tato vlastnost odpovídá vlastnosti <a href="http://www.w3.org/ns/locn#geographicName">geographicName</a> z <a href="https://joinup.ec.europa.eu/release/core-location-vocabulary/100">ISA<sup>2</sup> Core Location Vocabulary</a>.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Krušné hory</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-umístění-popis">
+                    <h4>Popis umístění</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis umístění
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Popis umístění objektu.
+                            Popis lze použít jako upřesňující text k jiným formám umístění.
+                            Pokud nelze k umístění objektu použít identifikátor, adresní místo, geometrii, ani název, lze pomocí popisu umístění popsat slovně.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>U východu ze stanice metra A Můstek do vestibulu v půli Václavského náměstí</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-umístění-geometrie">
+                    <h4>Geometrie</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>geometrie</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../prostorová-data/2019-08-22/#standardy">Geometrický objekt</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Geometrie
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Geometrický objekt specifikující umístění.
+                            Použije se tam, kde umístění nelze specifikovat <a href="#vlastnost-umístění-adresa">adresou</a> či <a href="#vlastnost-umístění-identifikátor">identifikátorem</a>.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>{ "type": "Point", "coordinates": [15.9915114, 48.8566829] }</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-umístění-budova">
+                    <h5>Budova</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>budova</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Budova
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Označení budovy jejím názvem, číslem apod.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>HD Gate</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-umístění-patro">
+                    <h5>Patro</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>patro</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Patro
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Číslo patra nebo jiné označení patra.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>4.patro</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-umístění-místnost">
+                    <h5>Místnost</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>místnost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Místnost
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Číslo místnosti nebo jiné označení místnosti.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>Místnost 4001</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-umístění-zahraniční-adresa-text">
+                    <h5>Zahraniční adresa - text</h5>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>zahraniční_adresa_text</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Zahraniční adresa - text
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Zahraniční adresa textem.
+                            Adresy v zahraničí se řídí místními pravidly.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>
+České centrum<br/>
+Velvyslanectví České republiky v Londýně<br/>
+30 Kensington Palace Gardens<br/>
+Londýn W8 4QY<br/>
+                            </code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-umístění-adresa">
+                    <h4>Vazba: Adresa</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>adresa</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../adresy/2020-07-01/#třída-adresa">Adresa</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Adresa
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Použije se tam, kde je dostatečné označit umístění pomocí adresního místa či jiných územních prvků z RÚIAN.
+                        </dd>
+                    </dl>
+                </section>
+                
+            </section>
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+            
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace umístění v různých formátech a v různých úrovních detailu.
+                Datová schémata, která jsou použita v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
+                Pro formáty JSON [[!ECMA-404]] a XML [[!xml]] jsou k dispozici příslušná schémata, tedy <a href="schémata/umístění.json">Schéma pro formát JSON v jazyce JSON Schema</a> [[json-schema]] a <a href="schémata/umístění.xsd">Schéma pro formát XML v jazyce XML Schema</a> [[xmlschema11-1]].
+                Pro formát JSON-LD [[!json-ld11]] je k dispozici <a href="kontexty/umístění.jsonld">kontext</a>.
+                Lze také použít zápis v CSV. 
+                Soubor v CSV [[!rfc4180]] je nutné doplnit schématem dle specifikace CSV on the Web [[tabular-data-primer]].
+            </p>
+
+            <p class="note">
+                Pokud je umístění použito v rámci jiného datového standardu, tak se jména sloupců v CSV tabulce tvoří názvy atributů.
+                Zanořování je řešeno spojením názvu entity z jiného standardu, například <code>lokace</code>, a z názvu atributu adresy jejich spojením pomocí znaku podtržítka <code>_</code>, například <code>lokace_geometrie</code>.
+            </p>
+
+            <section id="příklady-identifikátor">
+                <h3>Specifikace umístění identifikátorem</h3>
+                
+                <p>
+                    Jedná se o nejčistší způsob určení umístění pomocí IRI příslušného geografického objektu.
+                </p>
+                
+                <aside class="example" title="Přímé určení umístění v JSON-LD">
+                    <p>
+                       <a href="příklady/0.jsonld">JSON-LD soubor</a>, <a href="schémata/umístění.json">JSON schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.jsonld",
+    "typ": "Umístění",
+    "iri": "http://publications.europa.eu/resource/authority/continent/ANTARCTICA"
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Přímé určení umístění v XML">
+                    <p>
+                       <a href="příklady/0.xml">XML soubor</a>, <a href="schémata/umístění.xsd">XML soubor schéma</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;umístění
+    xmlns="https://ofn.gov.cz/umístění/2020-07-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+    xsi:schemaLocation="https://ofn.gov.cz/umístění/2020-07-01 
+                        https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.xsd"&gt;
+    &lt;věc:iri&gt;http://publications.europa.eu/resource/authority/continent/ANTARCTICA&lt;/věc:iri&gt;
+&lt;/umístění&gt;</pre>
+                </aside>
+                
+                <aside class="example" title="Přímé určení umístění CSV">
+                    <p>
+                       <a href="příklady/0.csv">CSV soubor</a>
+                    </p>
+
+                    <pre class="csv">
+iri
+http://publications.europa.eu/resource/authority/continent/ANTARCTICA</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je třeba připojit metadata dle standardu CSV on the Web [[tabular-data-primer]].
+                    Například pokud se CSV soubor jmenuje <code>0.csv</code>, je s ním publikován i <a href="příklady/0.csv-metadata.json">metadatový soubor</a> <code>0.csv-metadata.json</code>:
+                </p>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/0.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@id": "https://ofn.gov.cz/umístění/2020-07-01/příklady/0.csv-metadata.json",
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "@type": "Table",
+    "url": "0.csv",
+    "tableSchema": {
+        "@type": "Schema",
+        "aboutUrl": "{+iri}",
+        "columns": [
+            {
+                "@type": "Column",
+                "titles": "iri",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://purl.org/dc/terms/Location",
+                "dc:description": "Geografický identifikátor",
+                "datatype": "anyURI",
+                "required": true
+            }
+        ]
+    }
+}</pre>
+                </aside>
+                
+            </section>
+            
+            <section id="příklady-umístění-název-geometrie">
+                <h3>Specifikace umístění názvem či geometrií</h3>
+                <p>
+                    Pokud je třeba specifikovat umístění názvem nebo geometrií, lze to provést tak jako v následujících příkladech.
+                </p>
+                
+                <aside class="example" title="Umístění s názvem či geometrií v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/umístění.json">JSON schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.jsonld",
+    "typ": "Umístění",
+    "název": {
+        "cs": "Národní park Šumava"
+    },
+    "geometrie": {
+        "type": "Point",
+        "coordinates": [13.6309462, 48.9720309]
+    }
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Umístění s názvem či geometrií v XML">
+                    <p>
+                        <a href="příklady/1.xml">XML soubor</a>, <a href="schémata/umístění.xsd">XML soubor schéma</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;umístění
+    xmlns="https://ofn.gov.cz/umístění/2020-07-01"
+    xmlns:xml="http://www.w3.org/XML/1998/namespace"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+    xsi:schemaLocation="https://ofn.gov.cz/umístění/2020-07-01 
+                        https://ofn.gov.cz/um%C3%ADst%C4%9Bn%C3%AD/2020-07-01/sch%C3%A9mata/um%C3%ADst%C4%9Bn%C3%AD.xsd"&gt;
+    &lt;věc:název xml:lang="cs"&gt;Národní park Šumava&lt;/věc:název&gt;
+    &lt;geometrie&gt;POINT(48.9720274 13.6309462)&lt;/geometrie&gt;
+&lt;/umístění&gt;</pre>
+                </aside>
+                
+                <aside class="example" title="Umístění s názvem či geometrií v CSV">
+                    <p>
+                       <a href="příklady/1.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+název_cs,geometrie
+Národní park Šumava,POINT(48.9720274 13.6309462)</pre>
+                </aside>
+                
+                <p>
+                    K souboru CSV je opět potřeba připojit <a href="příklady/1.csv-metadata.json">metadatový popsiek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/1.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@id": "https://ofn.gov.cz/umístění/2020-07-01/příklady/1.csv-metadata.json",
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "@type": "Table",
+    "url": "1.csv",
+    "tableSchema": {
+        "@type": "Schema",
+        "columns": [
+            {
+                "@type": "Column",
+                "name": "nazev_cs",
+                "titles": "název_cs",
+                "propertyUrl": "http://www.w3.org/ns/locn#geographicName",
+                "dc:description": "Geografický název",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "@type": "Column",
+                "titles": "geometrie",
+                "propertyUrl": "http://www.w3.org/ns/locn#geometry",
+                "dc:description": "Geometrie",
+                "datatype": "string"
+            }, {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://purl.org/dc/terms/Location"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+
+            </section>
+            
+            <section id="příklady-umístění-adresa">
+                <h3>Umístění formou adresy</h3>
+                
+                <p>
+                    Umístění může být specifikováno adresou.
+                    Oproti přímému použití adresy bez mezikroku v podobě Umístění lze specifikovat dodatečná data týkající se umístění, například název.
+                </p>
+                
+                <aside class="example" title="Umístění adresou v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/umístění.json">JSON schéma</a>, <a href="kontexty/umístění.jsonld">JSON-LD kontext</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.jsonld",
+    "typ": "Umístění",
+    "název": {
+        "cs": "Samota u lesa"
+    },
+    "adresa": {
+        "typ": "Adresa",
+        "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+    }
+}</pre>
+                </aside>
+                
+                <aside class="example" title="Umístění adresou v XML">
+                    <p>
+                        <a href="příklady/2.xml">XML soubor</a>, <a href="schémata/umístění.xsd">XML soubor schéma</a>
+                    </p>
+                
+                    <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;umístění
+    xmlns="https://ofn.gov.cz/umístění/2020-07-01"
+    xmlns:adresa="https://ofn.gov.cz/adresy/2020-07-01"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:věc="https://ofn.gov.cz/věc/2020-07-01"
+    xsi:schemaLocation="https://ofn.gov.cz/umístění/2020-07-01 
+                        https://ofn.gov.cz/um%C3%ADst%C4%9Bn%C3%AD/2020-07-01/sch%C3%A9mata/um%C3%ADst%C4%9Bn%C3%AD.xsd"&gt;
+    &lt;věc:název xml:lang="cs"&gt;Samota u lesa&lt;/věc:název&gt;
+    &lt;adresa&gt;
+        &lt;adresa:adresní_místo&gt;https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661&lt;/adresa:adresní_místo&gt;
+    &lt;/adresa&gt;
+&lt;/umístění&gt;</pre>
+                </aside>
+                
+                <aside class="example" title="Umístění adresou v CSV">
+                    <p>
+                        <a href="příklady/2.csv">CSV soubor</a>
+                    </p>
+                
+                    <pre class="csv">
+název_cs,adresa_adresní_místo
+Samota u lesa,https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661</pre>
+                </aside>
+                
+                <p>
+                    A opět je k souboru CSV potřeba připojit <a href="příklady/2.csv-metadata.json">metadatový popisek dle standardu CSV on the Web</a> [[!tabular-data-primer]]:
+                </p>
+                
+                <aside class="example" title="CSV on the Web JSON-LD deskriptor">
+                    <p>
+                       <a href="příklady/2.csv-metadata.json">Deskriptor</a>
+                    </p>
+                
+                    <pre class="json">
+{
+    "@id": "https://ofn.gov.cz/umístění/2020-07-01/příklady/2.csv-metadata.json",
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {"@language": "cs"}
+    ],
+    "@type": "Table",
+    "url": "2.csv",
+    "tableSchema": {
+        "@type": "Schema",
+        "columns": [
+            {
+                "@type": "Column",
+                "name": "nazev_cs",
+                "titles": "název_cs",
+                "propertyUrl": "http://www.w3.org/ns/locn#geographicName",
+                "dc:description": "Geografický název",
+                "datatype": "string",
+                "lang": "cs"
+            }, {
+                "@type": "Column",
+                "name": "adresa_adresni_misto",
+                "titles": "adresa_adresní_místo",
+                "propertyUrl": "http://www.w3.org/ns/locn#addressId",
+                "dc:description": "Adresní místo",
+                "datatype": "anyURI"
+            }, {
+                "virtual": true,
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://purl.org/dc/terms/Location"
+            }
+        ]
+    }
+}</pre>
+                </aside>
+            </section>
+        </section>
+    </body>
+</html>
