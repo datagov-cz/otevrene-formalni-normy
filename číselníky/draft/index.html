@@ -71,16 +71,17 @@
           <h2>Úvod</h2>
 
           <p>
-            Číselníkem se ve smyslu <a href="https://www.zakonyprolidi.cz/cs/2000-365#p2-1-i">§ 2 písm. i) zákona č. 365/2000 Sb. o informačních systémech veřejné správy</a> rozumí seznam přípustných hodnot datového prvku obvykle ve formě dvojic, to znamená kódovaného údaje a hodnoty jeho kódu.
-            Takto chápe základní podobu číselníku i tato otevřená formální norma.
+            V datových sadách často potřebujeme specifikovat, že daný atribut nebo daná vlastnost (např. pohlaví osoby, měna finanční částky nebo barva vozidla) může nabývat pouze hodnot z určitého předem daného seznamu.
+            Seznam přípustných hodnot definujeme pomocí číselníku.
+            Číselník nedefinuje pouze samotné hodnoty, ale každé hodnotě přiřazuje také její kód.
+            V datových sadách potom neuvádíme přímo hodnoty, ale kódy určené číselníkem.
+            Číselník je tedy v základní podobě seznamem položek, kde každá položka má definován svůj kód a samotnou hodnotu kódovanou tímto kódem.
+            Hodnotou je obvykle název položky.
+            V řadě případů ale může být hodnota širším vlastnostní položky než pouze jejím názvem.
           </p>
           
           <p>
-            Datovým prvkem rozumíme pro účely této otevřené formální normy jakýkoliv atribut či vlastnost určitého typu entit (např. pohlaví osoby, barva vozidla nebo měna finanční částky).
-            Číselník pak omezuje přípustné hodnoty datového prvku konečným výčtem (seznamem) kódovaných hodnot.
-            Kódovanou hodnotou rozumíme právě dvojici (kód, hodnota) a nazýváme ji prvek číselníku. 
-            Kód je obvykle vyjádřen jako kladné celé číslo, které položku v rámci číselníku identifikuje.
-            Hodnota je obvykle tvořena názvem položky číselníku.
+            Následující příklad ukazuje příklad základní podoby číselníku měn.
           </p>
           
           <aside class="example" title="Číselník měn - základní podoba" id="příklad-číselník-měn-základní-podoba">
@@ -123,146 +124,154 @@
               Diagram konceptuálního modelu číselníků je zobrazen na následujícím obrázku.
           </p>
           
-          <figure id="model"><img alt="Diagram konceptuálního modelu číselníků" src="./schémata/konceptuální-model-číselníků.svg">
+          <figure id="model"><img alt="Diagram konceptuálního modelu číselníků" src="./schémata/konceptuální-model-číselníků.png">
               <figcaption>
-                  <a href="./schémata/konceptuální-model-číselníků.svg">Diagram konceptuálního modelu číselníků.</a>
+                  <a href="./schémata/konceptuální-model-číselníků.png">Diagram konceptuálního modelu číselníků.</a>
               </figcaption>
           </figure>
             
-          <section id="sekce-třída-číselník">
+          <section id="sekce-číselník">
               
-              <h3>Třída <code><dfn id="třída-číselník">Číselník</dfn></code></h3>
+              <h3>Třída <code><dfn id="číselník">Číselník</dfn></code></h3>
               
               <p>
-                  Číselník je seznam přípustných hodnot datového prvku kódovaný v podobě kódu a kódované strukturované hodnoty.
+                  Číselník je seznam přípustných hodnot vyjádřených jako položky číselníku, kde každá položka má definován svůj kód a samotnou hodnotu kódovanou tímto kódem.
               </p>
               
-              <section id="sekce-číselník-název">
+              <section id="sekce-název-číselníku">
                   
-                  <h4>Vlastnost <code><dfn id="číselník-název">Název číselníku</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="název-číselníku">Název číselníku</dfn></code></h4>
                   
                   <p>
-                      Název číselníku, který je též použit pro pojmenování datové sady s číselníkem v katalogizačním záznamu v <a href="https://data.gov.cz">Národním katalogu otevřených dat</a>.
-                      Název je uveden v jednom nebo více jazycích.
+                    Název číselníku je unikátním pojmenováním číselníku, ze kterého vyplývá, jaké položky číselník tvoří. Např. "číselník biologických pohlaví" nebo "číselník světových měn". Může být uveden ve více jazycích.
                   </p>
                   
               </section>
               
-              <section id="sekce-číselník-popis">
+              <section id="sekce-popis-číselníku">
                   
-                  <h4>Vlastnost <code><dfn id="číselník-popis">Popis číselníku</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="popis-číselníku">Popis číselníku</dfn></code></h4>
                   
                   <p>
-                      Popis číselníku, který blíže vysvětluje obsah či způsob užití číselníku. Popis je uveden v jednom nebo více jazycích.
+                    Popis číselníku rozvíjí název číselníku a ve větším detailu specifikuje, jaké položky číselník tvoří. Může být uveden ve více jazycích.
                   </p>
                   
               </section>
               
-              <section id="sekce-číselník-platnost"> 
+              <section id="sekce-má-platnost-číselníku"> 
                   
-                  <h4>Vlastnost <code><dfn id="číselník-platnost">Platnost číselníku</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="má-platnost-číselníku">Má platnost číselníku</dfn></code></h4>
                   
                   <p>
-                      Časový interval, ve kterém je číselník platný.
-                      Platnost číselníku určuje, v jakém časovém období byl, je nebo bude číselník platný.
-                      Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky.
-                      Je doporučeno platnost položek uvést přímo pro jednotlivé položky.
-                      Viz <a>Platnost položky</a>.
+                    Přiřazuje číselníku časový interval, ve kterém je číselník platný.
+                    Platnost číselníku určuje, v jakém časovém období byl, je nebo bude číselník platný.
+                    Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky.
+                    Je doporučeno platnost položek uvést přímo pro jednotlivé položky.
                   </p>
                   
               </section>
               
-              <section id="sekce-číselník-obsahuje-položku"> 
+              <section id="sekce-eviduje-položku-číselníku"> 
               <!-- v souladu se směrem vazby skos:inScheme bych to viděl jako vlastnost Položky -->
                   
-                  <h4>Vlastnost <code><dfn id="číselník-obsahuje-položku">Obsahuje položku</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="eviduje-položku-číselníku">Eviduje položku číselníku</dfn></code></h4>
                   
                   <p>
-                      Zařazuje do číselníku jeho položku.
+                    Přiřazuje číselníku jeho položku, která kóduje jednu přípustnou hodnotu specifikovanou číselníkem.
                   </p>
               
               </section>
           
           </section>
 
-          <section id="sekce-třída-položka">
+          <section id="sekce-položka-číselníku">
           
-              <h3>Třída <code><dfn id="třída-položka">Položka</dfn></code></h3>
+              <h3>Třída <code><dfn id="položka-číselníku">Položka číselníku</dfn></code></h3>
               
               <p>
-                  Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
+                Položka číselníku reprezentuje jednu přípustnou hodnotu specifikovanou číselníkem.
               </p>
               
-              <section id="sekce-položka-kód">
+              <section id="sekce-kód-položky-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-kód">Kód položky</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="kód-položky-číselníku">Kód položky číselníku</dfn></code></h4>
                   
                   <p>
-                      Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.
+                    Kód položky číselníku je unikátní v rámci všech položek v číselníku a je používán.
                   </p>
                   
               </section>
               
-              <section id="sekce-položka-název">
+              <section id="sekce-název-položky-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-název">Název položky</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="název-položky-číselníku">Název položky číselníku</dfn></code></h4>
                   
                   <p>
-                      Název (hodnota) položky číselníku v jednom nebo více jazycích.
+                    Název položky číselníku v podobě krátkého textu.
+                    Odpovídá pojmenování položky používané v běžném jazyku lidí a je pokud možno unikátní v rámci všech položek číselníku.
+                    Stručně charakterizuje význam položky.
+                    Je součástí hodnoty kódované položkou číselníku.
+                    Může být uveden v různých jazycích.
                   </p>
                   
               </section>
               
-              <section id="sekce-položka-alternativní-název">
+              <section id="sekce-alternativní-název-položky-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-alternativní-název">Alternativní název položky</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="alternativní-název-položky-číselníku">Alternativní název položky číselníku</dfn></code></h4>
                   
                   <p>
-                      Alternativní název (hodnota) položky číselníku v jednom nebo více jazycích.
+                    Alternativní název položky číselníku v podobě krátkého textu.
+                    Odpovídá dalšímu možnému pojmenování položky používané v běžném jazyku lidí.
+                    Je součástí hodnoty kódované položkou číselníku.
+                    Může být uveden v různých jazycích.
                   </p>
                   
               </section>
                              
-              <section id="sekce-položka-definice">
+              <section id="sekce-definice-položky-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-definice">Definice položky</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="definice-položky-číselníku">Definice položky číselníku</dfn></code></h4>
                   
                   <p>
-                      Textová definice položky číselníku v jednom nebo více jazycích.
+                    Text jednoznačně definující význam položky číselníku.
+                    Je součástí hodnoty kódované položkou číselníku.
+                    Může být uvedena v různých jazycích.
                   </p>
                   
               </section>
               
-              <section id="sekce-položka-popis">
+              <section id="sekce-popis-položky-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-popis">Popis položky</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="popis-položky-číselníku">Popis položky číselníku</dfn></code></h4>
                   
                   <p>
-                      Popis položky číselníku, který blíže vysvětluje položku číselníku.
-                      Popis je uveden v jednom nebo více jazycích. Oproti definici je méně formální a více vysvětlující.
+                    Text dále upřesňující význam položky číselníku nad rámec definice méně formálním a více vysvětlujícím způsobem.
+                    Může uvádět i příklady použití položky číselníku v datech.
+                    Je součástí hodnoty kódované položkou číselníku.
+                    Může být uveden v různých jazycích.
                   </p>
                   
               </section>
               
-              <section id="sekce-položka-platnost">
+              <section id="sekce-má-platnost-položky-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-platnost">Platnost položky</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="má-platnost-položky-číselníku">Má platnost položky číselníku</dfn></code></h4>
                   
                   <p>
-                      Časový interval, ve kterém je položka číselníku platná.
-                      Platnost položky číselníku určuje, v jakém časovém období byla, je nebo bude položka platná.
-                      Pro snazší strojové zpracování není platnost položky číselníku nijak odvozována z uvedené platnosti číselníku.
-                      Viz <a>Platnost číselníku</a>.
+                    Přiřazuje položce číselníku časový interval, ve kterém je položka platná.
+                    Platnost položky určuje, v jakém časovém období byla, je nebo bude položka číselníku platná.
                   </p>
                   
               </section>
               
-              <section id="sekce-položka-reference">
+              <section id="sekce-má-sémantický-vztah-k-položce-číselníku">
               
-                  <h4>Vlastnost <code><dfn id="položka-reference">Referencovaná položka</dfn></code></h4>
+                  <h4>Vlastnost <code><dfn id="má-sémantický-vztah-k-položce-číselníku">Má semantický vztah k položce číselníku</dfn></code></h4>
                   
                   <p>
-                      Identifikace referencovan0 položky z jiného (externího) číselníku v podobě jejího jednoznačného IRI.
+                    Specifikuje existenci nějakého sémantického (významového) vztahu mezi dvěma položkami stejného nebo různých číselníků.
+                    Může se jednat o vztah sémantické podobnosti, asociativní vztah nebo vztah v podobě nadřazenosti či podřazenosti položek.
                   </p>
                   
               </section>
@@ -308,19 +317,19 @@
                 <ul>
                    <li>Vlastnost <a>Název číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#prefLabel">prefLabel</a> ze slovníku SKOS</li>
                    <li>Vlastnost <a>Popis číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#node">note</a> ze slovníku SKOS</li>
-                   <li>Vlastnost <a>Platnost číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core a hodnota odpovídá základnímu datovému typu <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">časový interval</a> dle otevřené formální normy <a href="https://ofn.gov.cz/základní-datové-typy/">Základní datové typy</a></li>
-                   <li>Vlastnost <a>Obsahuje položku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#inScheme">inScheme</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Má platnost číselníku</a> odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core a hodnota odpovídá základnímu datovému typu <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">časový interval</a> dle otevřené formální normy <a href="https://ofn.gov.cz/základní-datové-typy/">Základní datové typy</a></li>
+                   <li>Vlastnost <a>Eviduje položku číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#inScheme">inScheme</a> ze slovníku SKOS</li>
                 </ul>
              </li>
-             <li>Třída <a>Položka</a> odpovídá SKOS třídě <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept</a>
+             <li>Třída <a>Položka číselníku</a> odpovídá SKOS třídě <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept</a>
                 <ul>
-                   <li>Vlastnost <a>Kód položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#notation">notation</a> ze slovníku SKOS</li>
-                   <li>Vlastnost <a>Název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#prefLabel">prefLabel</a> ze slovníku SKOS</li>
-                   <li>Vlastnost <a>Alternativní název položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#altLabel">altLabel</a> ze slovníku SKOS</li>
-                   <li>Vlastnost <a>Definice položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#definition">definition</a> ze slovníku SKOS</li>
-                   <li>Vlastnost <a>Popis položky</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#node">note</a> ze slovníku SKOS</li>
-                   <li>Vlastnost <a>Platnost položky</a> odpovídá vlastnosti odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
-                   <li>Vlastnost <a>Referencovaná položka</a> odpovídá <a href="https://www.w3.org/TR/skos-primer/#secmapping">vlastnostem pro mapování položek mezi různými číselníky</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Kód položky číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#notation">notation</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Název položky číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#prefLabel">prefLabel</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Alternativní název položky číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#altLabel">altLabel</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Definice položky číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#definition">definition</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Popis položky číselníku</a> odpovídá vlastnosti <a href="http://www.w3.org/2004/02/skos/core#node">note</a> ze slovníku SKOS</li>
+                   <li>Vlastnost <a>Má platnost položky číselníku</a> odpovídá vlastnosti odpovídá vlastnosti <a href="http://purl.org/dc/terms/temporal">temporal</a> ze slovníku Dublin Core</li>
+                   <li>Vlastnost <a>Má semantický vztah k položce číselníku</a> odpovídá <a href="https://www.w3.org/TR/skos-primer/#secmapping">vlastnostem pro mapování položek mezi různými číselníky</a> ze slovníku SKOS</li>
                 </ul>
              </li>
             </ul>
