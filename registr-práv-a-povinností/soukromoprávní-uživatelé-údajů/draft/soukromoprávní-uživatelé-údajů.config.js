@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-soukromoprávní-uživatelé-údajů",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/soukromoprávní-uživatelé-údajů/2019-04-03/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/soukromoprávní-uživatelé-údajů/2021-01-11/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/soukromoprávní-uživatelé-údajů/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/soukromoprávní-uživatelé-údajů/",
 	editors: [{

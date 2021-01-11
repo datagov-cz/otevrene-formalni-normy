@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-působnost-v-agendách",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/2019-04-03/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/2021-01-11/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/",
 	editors: [{

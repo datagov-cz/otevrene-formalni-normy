@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/dokumenty-převodu-agend/2021-01-11/dokumenty-převodu-agend.schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "dokument-převodu-agend",
+            "pattern": "^dokument-převodu-agend$"
+          },
+          "id": {
+            "type": "string",
+            "examples": [
+              "dokument-převodu-agend/RPA544"
+            ],
+            "pattern": "^dokument-převodu-agend/.+$"
+          },
+          "identifikátor": {
+            "type": "string",
+            "examples": [
+              "RPA544"
+            ]
+          },
+          "uzavření": {
+            "type": "string",
+            "examples": [
+              "2019-02-04"
+            ],
+            "format": "date"
+          },
+          "ukončení": {
+            "type": "string",
+            "examples": [
+              "2022-12-31"
+            ],
+            "format": "date"
+          },
+          "na-dobu-neurčitou": {
+            "type": "boolean",
+            "default": true,
+            "examples": [
+              false
+            ]
+          },
+          "rozhodnutí-o-předání": {
+            "$ref": "#/definitions/rozhodnutí-založení"
+          },
+          "rozhodnutí-o-převzetí": {
+            "$ref": "#/definitions/rozhodnutí-založení"
+          },
+          "rozhodnutí-o-schválení": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "default": "rozhodnutí-schválení",
+                "pattern": "^rozhodnutí-schválení$"
+              },
+              "id": {
+                "type": "string",
+                "examples": [
+                  "rozhodnutí/KUKHK-6788%2FOP-2019-2"
+                ],
+                "pattern": "^rozhodnutí/.+$"
+              },
+              "číslo-jednací": {
+                "$ref": "#/definitions/číslo-jednací"
+              },
+              "datum": {
+                "$ref": "#/definitions/datum"
+              },
+              "typ-rozhodnutí-schválení": {
+                "type": "string",
+                "examples": [
+                  "typ-rozhodnutí-schválení/KRAJ"
+                ],
+                "pattern": "^typ-rozhodnutí-schválení/.+$"
+              }
+            }
+          },
+          "schvaluje": {
+            "type": "string",
+            "examples": [
+              "orgán-veřejné-moci/70889546"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]+(\\.[0-9]+)?$"
+          },
+          "převádí": {
+            "type": "string",
+            "examples": [
+              "orgán-veřejné-moci/00271853"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]+(\\.[0-9]+)?$"
+          },
+          "přebírá": {
+            "type": "string",
+            "examples": [
+              "orgán-veřejné-moci/00271632"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]+(\\.[0-9]+)?$"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "rozhodnutí-založení": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "rozhodnutí-založení",
+          "pattern": "^rozhodnutí-založení$"
+        },
+        "id": {
+          "type": "string",
+          "examples": [
+            "rozhodnutí/2%2F2018-2022"
+          ],
+          "pattern": "^rozhodnutí/.+$"
+        },
+        "číslo-jednací": {
+          "$ref": "#/definitions/číslo-jednací"
+        },
+        "datum": {
+          "$ref": "#/definitions/datum"
+        },
+        "typ-rozhodnutí-založení": {
+          "type": "string",
+          "examples": [
+            "typ-rozhodnutí-založení/ZASTUP"
+          ],
+          "pattern": "^typ-rozhodnutí-založení/.+$"
+        }
+      }
+    },
+    "číslo-jednací": {
+      "type": "string",
+      "examples": [
+        "2/2018-2022"
+      ]
+    },
+    "datum": {
+      "type": "string",
+      "examples": [
+        "2018-12-17"
+      ],
+      "format": "date"
+    }
+  }
+}

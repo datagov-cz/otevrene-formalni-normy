@@ -6,6 +6,12 @@
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   version="3.0" expand-text="yes">
 
+  <xsl:character-map name="amp">
+    <xsl:output-character character="&#38;" string="&amp;"/>
+  </xsl:character-map>
+
+  <xsl:output method="xhtml" use-character-maps="amp"/>
+
   <xsl:import href="../../../json-schema-to-html/json-schema-to-html.xslt" />
 
   <xsl:template match="db:article">

@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-oprávnění-k-přístupu-k-údajům",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2019-04-03/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2021-01-11/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/",
 	editors: [{

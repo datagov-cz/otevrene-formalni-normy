@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách.schema.json",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/draft/působnost-v-agendách.schema.json",
   "type": "object",
   "required": [
     "položky"
@@ -19,7 +19,7 @@
           "id": {
             "type": "string",
             "examples": [
-              "působnost/A397/00509671"
+              "působnost/A1153/75092107"
             ],
             "pattern": "^působnost/A[0-9]+/[0-9]+(\\.[0-9]+)?$"
           },
@@ -27,79 +27,89 @@
             "type": "object",
             "examples": [
               {
-                "agenda" : "agenda/A397",
-                "ovm" : "orgán-veřejné-moci/00509671",
-                "datum" : "2018-06-04"
+                "agenda" : "agenda/A1153",
+                "ovm" : "orgán-veřejné-moci/75092107",
+                "datum" : "2019-12-17"
               }
             ],
             "properties": {
               "agenda": {
                 "type": "string",
                 "examples": [
-                  "agenda/A397"
+                  "agenda/A1153"
                 ],
                 "pattern": "^agenda/A[0-9]+$"
               },
               "ovm": {
                 "type": "string",
                 "examples": [
-                  "orgán-veřejné-moci/00509671"
+                  "orgán-veřejné-moci/75092107"
                 ],
                 "pattern": "^orgán-veřejné-moci/[0-9]+(\\.[0-9]+)?$"
               },
               "spuú": {
                 "type": "string",
                 "examples": [
-                  "soukromoprávní-uživatel-údajů/60192402.9999"
+                  "soukromoprávní-uživatel-údajů/28195604.9999"
                 ],
                 "pattern": "^soukromoprávní-uživatel-údajů/[0-9]+(\\.[0-9]+)?$"
               },
               "datum": {
                 "type": "string",
                 "examples": [
-                  "2018-06-04"
+                  "2020-12-28"
                 ],
-                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                "format": "date"
               }
             }
           },
           "činnosti": {
             "type": "array",
             "examples": [
-              "činnost/A397/CR1001"
+              "činnost/A1153/CR7947"
             ],
             "items": {
               "type": "string",
               "pattern": "^činnost/A[0-9]+/CR[0-9]+$"
             }
           },
-          "úkony": {
+          "služby": {
             "type": "array",
             "examples": [
               {
-                "úkon" : "úkon/U7",
-                "pracoviště" : "pracoviště/9958"
+                "služba" : "služba/S1113",
+                "pracoviště" : [ "pracoviště/60253" ]
+              },{
+                "služba" : "služba/S1113",
+                "důvod-neuvedení-pracovišť" : "Službu VS neposkytuji"
               }
             ],
             "items": {
               "type": "object",
               "properties": {
-                "úkon": {
+                "služba": {
                   "type": "string",
                   "examples": [
-                    "úkon/U7"
+                    "služba/S1113"
                   ],
-                  "pattern": "^úkon/U[0-9]+$"
+                  "pattern": "^služba/S[0-9]+$"
                 },
                 "pracoviště": {
                   "type": "array",
                   "examples": [
-                    "pracoviště/9958"
+                    "pracoviště/60253"
                   ],
                   "items": {
                     "type": "string",
                     "pattern": "^pracoviště/[0-9]+$"
                   }
+                },
+                "důvod-neuvedení-pracovišť": {
+                  "type": "string",
+                  "examples": [
+                    "Službu VS neposkytuji"
+                  ],
+                  "pattern": "^služba/S[0-9]+$"
                 }
               }
             }

@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-údaje",
 	showPreviousVersion: true,
-	tpreviousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/údaje/2019-04-03/",
+	tpreviousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/údaje/2021-01-11/",
 	"https://ofn.gov.cz/registr-práv-a-povinností/údaje/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/údaje/",
 	editors: [{
