@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/působnost-v-agendách/2021-01-12/působnost-v-agendách.schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "působnost",
+            "pattern": "^působnost$"
+          },
+          "id": {
+            "type": "string",
+            "examples": [
+              "působnost/A1153/75092107"
+            ],
+            "pattern": "^působnost/A[0-9]+/[0-9]+(\\.[0-9]+)?$"
+          },
+          "registrace": {
+            "type": "object",
+            "examples": [
+              {
+                "agenda" : "agenda/A1153",
+                "ovm" : "orgán-veřejné-moci/75092107",
+                "datum" : "2019-12-17"
+              }
+            ],
+            "properties": {
+              "agenda": {
+                "type": "string",
+                "examples": [
+                  "agenda/A1153"
+                ],
+                "pattern": "^agenda/A[0-9]+$"
+              },
+              "ovm": {
+                "type": "string",
+                "examples": [
+                  "orgán-veřejné-moci/75092107"
+                ],
+                "pattern": "^orgán-veřejné-moci/[0-9]+(\\.[0-9]+)?$"
+              },
+              "spuú": {
+                "type": "string",
+                "examples": [
+                  "soukromoprávní-uživatel-údajů/28195604.9999"
+                ],
+                "pattern": "^soukromoprávní-uživatel-údajů/[0-9]+(\\.[0-9]+)?$"
+              },
+              "datum": {
+                "type": "string",
+                "examples": [
+                  "2020-12-28"
+                ],
+                "format": "date"
+              }
+            }
+          },
+          "činnosti": {
+            "type": "array",
+            "examples": [
+              "činnost/A1153/CR7947"
+            ],
+            "items": {
+              "type": "string",
+              "pattern": "^činnost/A[0-9]+/CR[0-9]+$"
+            }
+          },
+          "služby": {
+            "type": "array",
+            "examples": [
+              {
+                "služba" : "služba/S1113",
+                "pracoviště" : [ "pracoviště/60253" ]
+              },{
+                "služba" : "služba/S1113",
+                "důvod-neuvedení-pracovišť" : "Službu VS neposkytuji"
+              }
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "služba": {
+                  "type": "string",
+                  "examples": [
+                    "služba/S1113"
+                  ],
+                  "pattern": "^služba/S[0-9]+$"
+                },
+                "pracoviště": {
+                  "type": "array",
+                  "examples": [
+                    "pracoviště/60253"
+                  ],
+                  "items": {
+                    "type": "string",
+                    "pattern": "^pracoviště/[0-9]+$"
+                  }
+                },
+                "důvod-neuvedení-pracovišť": {
+                  "type": "string",
+                  "examples": [
+                    "Službu VS neposkytuji"
+                  ],
+                  "pattern": "^služba/S[0-9]+$"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
