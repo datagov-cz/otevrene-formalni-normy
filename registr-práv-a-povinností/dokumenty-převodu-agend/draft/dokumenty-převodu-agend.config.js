@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-dokumenty-převodu-agend",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/dokumenty-převodu-agend/2021-01-11/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/dokumenty-převodu-agend/2021-01-12/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/dokumenty-převodu-agend/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/dokumenty-převodu-agend/",
 	editors: [{

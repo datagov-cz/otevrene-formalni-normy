@@ -1,0 +1,300 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/2021-01-12/orgány-veřejné-moci.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "orgán-veřejné-moci",
+            "examples": [
+              "orgán-veřejné-moci"
+            ],
+            "pattern": "^orgán-veřejné-moci$"
+          },
+          "id": {
+            "type": "string",
+            "examples": [
+              "orgán-veřejné-moci/00007064"
+            ],
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}(\\.[0-9]+)?$"
+          },
+          "identifikátor": {
+            "type": "string",
+            "examples": [
+              "00007064"
+            ],
+            "pattern": "^[0-9]{8}(\\.[0-9]+)?$"
+          },
+          "název": {
+            "type": "object",
+            "examples": [
+              {
+                "cs": "Ministerstvo vnitra"
+              }
+            ],
+            "properties": {
+              "cs": {
+                "type": "string"
+              }
+            }
+          },
+          "vnitřní-organizační-jednotka": {
+            "type": "boolean",
+            "examples": [
+              false
+            ]
+          },
+          "ičo": {
+            "type": "string",
+            "examples": [
+              "00007064"
+            ],
+            "pattern": "^[0-9]{8}$"
+          },
+          "datové-schránky": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "datová-schránka",
+                  "pattern": "^datová-schránka$"
+                },
+                "id": {
+                  "type": "string",
+                  "examples": [
+                    "datová-schránka/6bnaawp"
+                  ],
+                  "pattern": "^datová-schránka/[0-9a-z]{7}$"
+                },
+                "typ-ds": {
+                  "type": "string",
+                  "examples": [
+                    "typ-datové-schránky/OVM"
+                  ],
+                  "pattern": "^typ-datové-schránky/[A-Z]+$"
+                },
+                "identifikátor-ds": {
+                  "type": "string",
+                  "examples": [
+                    "6bnaawp"
+                  ],
+                  "pattern": "^[0-9a-z]{7}$"
+                }
+              }
+            }
+          },
+          "ustanovení": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "ustanovení-právního-předpisu",
+                  "pattern": "^ustanovení-právního-předpisu$"
+                },
+                "označení": {
+                  "type": "string",
+                  "examples": [
+                    "§ 7 odst. 5 zákona č. 561/2004 Sb. - Školský zákon"
+                  ]
+                }
+              }
+            }
+          },
+          "seznam-kategorií": {
+            "type": "array",
+            "examples": [
+              {
+                "kategorie" : "kategorie-ovm/KO197",
+                "zařazení-od" : "2011-01-01"
+              }
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "kategorie": {
+                  "type": "string",
+                  "examples": [
+                    "kategorie-ovm/KO197"
+                  ],
+                  "pattern": "^kategorie-ovm/KO[0-9]+$"
+                },
+                "zařazení-od": {
+                  "type": "string",
+                  "examples": [
+                    "2011-01-01"
+                  ],
+                  "format": "date"
+                },
+                "zařazení-do": {
+                  "type": "string",
+                  "examples": [
+                    "2014-02-18"
+                  ],
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "adresa-místa-pobytu": {
+            "$ref": "#/definitions/adresní-místo"
+          },
+          "adresa-sídla": {
+            "$ref": "#/definitions/adresní-místo"
+          },
+          "osoba-v-čele": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "osoba",
+                  "pattern": "^osoba$"
+                },
+                "jméno": {
+                  "type": "string",
+                  "pattern": "^.*$"
+                }
+              }
+            }
+          },
+          "zahájení": {
+            "type": "string",
+            "examples": [
+              "2011-01-01"
+            ],
+            "format": "date"
+          },
+          "ukončení": {
+            "type": "string",
+            "examples": [
+              "2018-03-14"
+            ],
+            "format": "date"
+          },
+          "pozastavení-od": {
+            "type": "string",
+            "examples": [
+              "2011-01-01"
+            ],
+            "format": "date"
+          },
+          "pozastavení-do": {
+            "type": "string",
+            "examples": [
+              "2018-03-14"
+            ],
+            "format": "date"
+          },
+          "přerušení-od": {
+            "type": "string",
+            "examples": [
+              "2011-01-01"
+            ],
+            "format": "date"
+          },
+          "přerušení-do": {
+            "type": "string",
+            "examples": [
+              "2018-03-14"
+            ],
+            "format": "date"
+          },
+          "pracoviště-ovm": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "pracoviště",
+                  "pattern": "^pracoviště$"
+                },
+                "id": {
+                  "type": "string",
+                  "examples": [
+                    "pracoviště/5953"
+                  ],
+                  "pattern": "^pracoviště/[0-9]+$"
+                },
+                "adresa-pr": {
+                  "$ref": "#/definitions/adresní-místo"
+                },
+                "adresa-pr-txt": {
+                  "type": "string",
+                  "examples": [
+                    "Military Road 169, Sydney, NSW 2030"
+                  ]
+                },
+                "stát-pr": {
+                  "type": "string",
+                  "examples": [
+                    "stát/818"
+                  ],
+                  "pattern": "^stát/[0-9]+$"
+                },
+                "otevření": {
+                  "type": "string",
+                  "examples": [
+                    "2011-01-01"
+                  ],
+                  "format": "date"
+                },
+                "uzavření": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "právní-forma": {
+            "type": "string",
+            "examples": [
+              "právní-forma/325"
+            ],
+            "pattern": "^právní-forma/[0-9]$"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "adresní-místo": {
+      "type": "object",
+      "examples": [
+        {
+          "id" : "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190",
+          "kód" : "22305190"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "examples": [
+            "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
+          ],
+          "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+        },
+        "kód": {
+          "type": "string",
+          "examples": [
+            "22305190"
+          ],
+          "pattern": "^[0-9]{8}$"
+        }
+      }
+    }
+  }
+}

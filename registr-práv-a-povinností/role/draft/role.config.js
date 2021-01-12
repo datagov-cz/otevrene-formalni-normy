@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-role",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/role/2021-01-11/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/role/2021-01-12/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/role/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/role/",
 	editors: [{

@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-kategorie-orgánů-veřejné-moci",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/2021-01-11/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/2021-01-12/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-orgánů-veřejné-moci/",
 	editors: [{

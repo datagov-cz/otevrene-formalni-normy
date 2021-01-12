@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-orgány-veřejné-moci",
 	showPreviousVersion: true,
-    previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/2021-01-11/",
+    previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/2021-01-12/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/orgány-veřejné-moci/",
 	editors: [{

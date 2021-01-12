@@ -1,0 +1,151 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/údaje/2021-01-12/údaje.schema.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "objekt-subjekt",
+            "pattern": "^objekt-subjekt$"
+          },
+          "id": {
+            "type": "string",
+            "examples": [
+              "objekt-subjekt/101-1"
+            ],
+            "pattern": "^objekt-subjekt/[0-9]+-[0-9]+$"
+          },
+          "kód": {
+            "type": "string",
+            "examples": [
+              "101-1"
+            ],
+            "pattern": "^[0-9]+-[0-9]+$"
+          },
+          "název": {
+            "type": "object",
+            "examples": [
+              {"cs" : "Obyvatel"}
+            ],
+            "properties": {
+              "cs": {
+                "type": "string"
+              }
+            }
+          },
+          "popis": {
+            "type": "object",
+            "examples": [
+              {"cs" : "Údaje osoby  ROB"}
+            ],
+            "properties": {
+              "cs": {
+                "type": "string"
+              }
+            }
+          },
+          "ustanovení": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ustanovení-právního-předpisu"
+            }
+          },
+          "agenda": {
+            "type": "string",
+            "examples": [
+              "agenda/A101"
+            ],
+            "pattern": "^agenda/A[0-9]+$"
+          },
+          "údaje": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "údaj",
+                  "pattern": "^údaj$"
+                },
+                "id": {
+                  "type": "string",
+                  "examples": [
+                    "údaj/101-1-1"
+                  ],
+                  "pattern": "^údaj/[0-9]+-[0-9]+-[0-9]+$"
+                },
+                "kód-údaje": {
+                  "type": "string",
+                  "examples": [
+                    "101-1-1"
+                  ],
+                  "pattern": "^[0-9]+-[0-9]+-[0-9]+$"
+                },
+                "název-údaje": {
+                  "type": "object",
+                  "examples": [
+                    {"cs" : "Příjmení"}
+                  ],
+                  "properties": {
+                    "cs": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "popis-údaje": {
+                  "type": "object",
+                  "examples": [
+                    {"cs" : "Příjmení"}
+                  ],
+                  "properties": {
+                    "cs": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "typ-údaje": {
+                  "type": "string",
+                  "examples": [
+                    "REFERENCNI"
+                  ]
+                },
+                "ustanovení-údaje": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ustanovení-právního-předpisu"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ustanovení-právního-předpisu": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "default": "ustanovení-právního-předpisu",
+          "pattern": "^ustanovení-právního-předpisu$"
+        },
+        "označení": {
+          "type": "string",
+          "examples": [
+            "§ 18 odst. 1 písm. a zákona č. 111/2009 Sb. - o základních registrech"
+          ]
+        }
+      }
+    }
+  }
+}

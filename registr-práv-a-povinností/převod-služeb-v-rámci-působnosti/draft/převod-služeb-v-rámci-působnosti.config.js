@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-převod-služeb-v-rámci-působnosti",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/převod-služeb-v-rámci-působnosti/2021-01-11/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/převod-služeb-v-rámci-působnosti/2021-01-12/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/převod-služeb-v-rámci-působnosti/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/převod-služeb-v-rámci-působnosti/",
 	editors: [{

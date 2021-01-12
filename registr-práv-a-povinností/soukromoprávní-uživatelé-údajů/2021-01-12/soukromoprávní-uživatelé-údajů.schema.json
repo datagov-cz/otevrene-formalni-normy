@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/soukromoprávní-uživatelé-údajů/2021-01-12/soukromoprávní-uživatelé-údajů.json",
+  "required": [
+    "položky"
+  ],
+  "type": "object",
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "soukromoprávní-uživatel-údajů",
+            "pattern": "^soukromoprávní-uživatel-údajů$"
+          },
+          "id": {
+            "type": "string",
+            "examples": [
+              "soukromoprávní-uživatel-údajů/28195604.9999"
+            ],
+            "pattern": "^soukromoprávní-uživatel-údajů/[0-9]{8}\\.[0-9]+$"
+          },
+          "identifikátor": {
+            "type": "string",
+            "examples": [
+              "28195604.9999"
+            ],
+            "pattern": "^[0-9]{8}\\.[0-9]+$"
+          },
+          "název": {
+            "type": "object",
+            "examples": [
+              {"cs" : "AXA pojišťovna a.s."}
+            ],
+            "properties": {
+              "cs": {
+                "type": "string"
+              }
+            }
+          },
+          "ičo": {
+            "type": "string",
+            "examples": [
+              "28195604"
+            ],
+            "pattern": "^[0-9]{8}$"
+          },
+          "datové-schránky": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "datová-schránka",
+                  "pattern": "^datová-schránka$"
+                },
+                "id": {
+                  "type": "string",
+                  "examples": [
+                    "datová-schránka/wriczed"
+                  ],
+                  "pattern": "^datová-schránka/[0-9a-z]{7}$"
+                },
+                "typ-ds": {
+                  "type": "string",
+                  "examples": [
+                    "typ-datové-schránky/PO"
+                  ],
+                  "pattern": "^typ-datové-schránky/[A-Z]+$"
+                },
+                "identifikátor-ds": {
+                  "type": "string",
+                  "examples": [
+                    "wriczed"
+                  ],
+                  "pattern": "^[0-9a-z]{7}$"
+                }
+              }
+            }
+          },
+          "ustanovení": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "default": "ustanovení-právního-předpisu",
+                  "pattern": "^ustanovení-právního-předpisu$"
+                },
+                "označení": {
+                  "type": "string",
+                  "examples": [
+                    "§ 129 zákona č. 277/2009 Sb. - Zákon o pojišťovnictví"
+                  ]
+                }
+              }
+            }
+          },
+          "seznam-kategorií": {
+            "type": "array",
+            "examples": [
+              {
+                "kategorie" : "kategorie-spuú/KU4",
+                "zařazení-od" : "2018-06-15"
+              }
+            ],
+            "items": {
+              "type": "object",
+              "properties": {
+                "kategorie": {
+                  "type": "string",
+                  "examples": [
+                    "kategorie-spuú/KU4"
+                  ],
+                  "pattern": "^kategorie-spuú/KU[0-9]+$"
+                },
+                "zařazení-od": {
+                  "type": "string",
+                  "examples": [
+                    "2018-06-15"
+                  ],
+                  "format": "date"
+                },
+                "zařazení-do": {
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "adresa-sídla": {
+            "$ref": "#/definitions/adresní-místo"
+          },
+          "adresa-místa-podnikání": {
+            "$ref": "#/definitions/adresní-místo"
+          },
+          "vznik": {
+            "type": "string",
+            "examples": [
+              "2018-06-15"
+            ],
+            "format": "date"
+          },
+          "zánik": {
+            "type": "string",
+            "format": "date"
+          },
+          "pozastavení-od": {
+            "type": "string",
+            "format": "date"
+          },
+          "pozastavení-do": {
+            "type": "string",
+            "format": "date"
+          },
+          "přerušení-od": {
+            "type": "string",
+            "format": "date"
+          },
+          "přerušení-do": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "adresní-místo": {
+      "type": "object",
+      "examples": [
+        {
+          "id" : "https://linked.cuzk.cz/resource/ruian/adresni-misto/21727694",
+          "kód" : "22305190"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "examples": [
+            "https://linked.cuzk.cz/resource/ruian/adresni-misto/21727694"
+          ],
+          "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]{8}$"
+        },
+        "kód": {
+          "type": "string",
+          "examples": [
+            "21727694"
+          ],
+          "pattern": "^[0-9]{8}$"
+        }
+      }
+    }
+  }
+}

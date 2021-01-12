@@ -35,7 +35,7 @@
   </head>
   <body>
     <xsl:apply-templates mode="abstrakt" />
-    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/služby/2021-01-11/služby.schema.json', '../registr-práv-a-povinností/služby/2021-01-11/služby.context.jsonld')"/>
+    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/služby/2021-01-12/služby.schema.json', '../registr-práv-a-povinností/služby/2021-01-12/služby.context.jsonld')"/>
     <xsl:apply-templates mode="příklady" />
   </body>
 </html>

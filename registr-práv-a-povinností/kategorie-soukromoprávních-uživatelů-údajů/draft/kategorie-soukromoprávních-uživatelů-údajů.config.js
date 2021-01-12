@@ -2,7 +2,7 @@ var respecConfig = {
 	specStatus: "ED",
 	shortName: "rpp-kategorie-soukromoprávních-uživatelů-údajů",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/2021-01-11/",
+	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/2021-01-12/",
 	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/draft/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/kategorie-soukromoprávních-uživatelů-údajů/",
 	editors: [{
