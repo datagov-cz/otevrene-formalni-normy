@@ -2,8 +2,7 @@ var respecConfig = {
 	specStatus: "REC",
 	shortName: "rpp-služby",
 	showPreviousVersion: true,
-	previousVersion: "https://ofn.gov.cz/registr-práv-a-povinností/služby/2019-04-03/",
-	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/služby/draft/",
+	thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/služby/2021-01-11/",
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/služby/",
 	publishDate: "2021-01-11",
 	editors: [{

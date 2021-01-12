@@ -11,7 +11,7 @@
   <xsl:template match="db:article">
 <html lang="cs">
   <head>
-    <title>Registr práv a povinností - úkony</title>
+    <title>Registr práv a povinností - služby veřejné správy</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta name="theme-color" content="#057fa5" />
     <meta name="msapplication-TileColor" content="#057fa5" />
@@ -31,11 +31,11 @@
     <link rel="manifest" href="../../../static/favicons/manifest.json" />
     <link rel="stylesheet" type="text/css" href="../../../static/css/ssp.css" />
     <script class="remove" src="../../../static/js/respec-odcz.js" />
-    <script class="remove" src="úkony.config.js" />
+    <script class="remove" src="služby.config.js" />
   </head>
   <body>
     <xsl:apply-templates mode="abstrakt" />
-    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/služby/draft/služby.schema.json', '../registr-práv-a-povinností/služby/draft/služby.context.jsonld')"/>
+    <xsl:sequence select="gen:generujDokumentaciPrvků('../registr-práv-a-povinností/služby/2021-01-11/služby.schema.json', '../registr-práv-a-povinností/služby/2021-01-11/služby.context.jsonld')"/>
     <xsl:apply-templates mode="příklady" />
   </body>
 </html>
