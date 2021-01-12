@@ -48,7 +48,7 @@
 			<h2>
 				<dfn>JSON struktura</dfn>
 			</h2>
-			<p>V této sekci je popsána struktura JSON distribuce datové sady. Struktura je též popsána v <a href="{fn:replace($schema, '^.*/([^/]+)$', '$1')}">JSON schématu</a></p>
+			<p>V této sekci je popsána struktura JSON distribuce datové sady. Struktura je též popsána v <a href="{fn:replace($schema, '^.*/([^/]+)$', '$1')}">JSON schématu</a>.</p>
 			<xsl:sequence select="gen:generujJSONPřehled($source)"/>
 			<xsl:sequence select="gen:generujJSONSpecifikaci($source)"/>
 		</section>
@@ -766,11 +766,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 					</xsl:variable>
 					<p>
-						<a target="_blank">
+						<!--<a target="_blank">
 							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 						<xsl:text> | </xsl:text>
 						<a target="_blank">
-							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+						<a target="_blank">
+							<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 					</p>
 					<pre class="sparql">
 						<xsl:value-of select="$query"/>
@@ -808,11 +810,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 							</xsl:variable>
 							<p>
-								<a target="_blank">
+								<!--<a target="_blank">
 									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 								<xsl:text> | </xsl:text>
 								<a target="_blank">
-									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+								<a target="_blank">
+									<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 							</p>
 							<pre class="sparql">
 								<xsl:value-of select="$query"/>
@@ -842,11 +846,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 								</xsl:variable>
 								<p>
-									<a target="_blank">
+									<!--<a target="_blank">
 										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 									<xsl:text> | </xsl:text>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+									<a target="_blank">
+										<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 								</p>
 								<pre class="sparql">
 									<xsl:value-of select="$query"/>
@@ -884,11 +890,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 								</xsl:variable>
 								<p>
-									<a target="_blank">
+									<!--<a target="_blank">
 										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 									<xsl:text> | </xsl:text>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+									<a target="_blank">
+										<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 								</p>
 								<pre class="sparql">
 									<xsl:value-of select="$query"/>
@@ -1055,7 +1063,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 		<xsl:variable name="popis" select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:definition', false(), true(), false())[1]"/>
 		<xsl:choose>
 			<xsl:when test="fn:contains($popis[1], 'CHYBA: ')">
-				<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'dc:description', false(), true(), false())[1]"/>
+				<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojmů($item, 'skos:scopeNote', false(), true(), false())[1]"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$popis"/>
@@ -1075,7 +1083,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 		<xsl:variable name="localName" select="fn:substring-after($qName, ':')"/>
 		<xsl:variable name="iriPrefix" select="$context/fn:string[@key = $prefix]/text()"/>
 		<xsl:variable name="iri" select="fn:concat($iriPrefix, $localName)"/>
-		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 		<xsl:try>
 			<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 			<xsl:choose>
@@ -1121,7 +1129,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 					<xsl:variable name="parentlocalName" select="fn:substring-after($parentqName, ':')"/>
 					<xsl:variable name="parentiriPrefix" select="$context/fn:string[@key = $parentprefix]/text()"/>
 					<xsl:variable name="parentiri" select="fn:concat($parentiriPrefix, $parentlocalName)"/>
-					<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0ACONSTRUCT%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D%20WHERE%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3Adomain%20%3C',fn:encode-for-uri($parentiri), '%3E%20%3B%0A%20%20%20%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+					<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0ACONSTRUCT%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D%20WHERE%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3Adomain%20%3C',fn:encode-for-uri($parentiri), '%3E%20%3B%0A%20%20%20%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 					<xsl:try>
 						<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 						<xsl:variable name="hodnota" select="gen:generujHodnotuVlastnostiPrvkuSIRIVSémantickémSlovníkuPojmů($semVocTypeXMLDocument//rdf:Description/@rdf:about, $property, $asLink, $isDatatype)"/>
@@ -1212,7 +1220,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 		<xsl:variable name="localName" select="fn:substring-after($qName, ':')"/>
 		<xsl:variable name="iriPrefix" select="$context/fn:string[@key = $prefix]/text()"/>
 		<xsl:variable name="iri" select="fn:concat($iriPrefix, $localName)"/>
-		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 		<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 		<xsl:choose>
 			<xsl:when test="$semVocTypeXMLDocument//skos:inScheme">
@@ -1226,7 +1234,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 				<xsl:variable name="parentlocalName" select="fn:substring-after($parentqName, ':')"/>
 				<xsl:variable name="parentiriPrefix" select="$context/fn:string[@key = $parentprefix]/text()"/>
 				<xsl:variable name="parentiri" select="fn:concat($parentiriPrefix, $parentlocalName)"/>
-				<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0ACONSTRUCT%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D%20WHERE%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3Adomain%20%3C',fn:encode-for-uri($parentiri), '%3E%20%3B%0A%20%20%20%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+				<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=PREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0A%0ACONSTRUCT%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D%20WHERE%20%7B%0A%20%20%3Ftypvlastnosti%20rdfs%3Adomain%20%3C',fn:encode-for-uri($parentiri), '%3E%20%3B%0A%20%20%20%20rdfs%3AsubClassOf%20%3C',fn:encode-for-uri($iri), '%3E%20.%0A%7D', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 				<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 				<xsl:value-of select="$semVocTypeXMLDocument//rdf:Description/@rdf:about"/>
 			</xsl:otherwise>
@@ -1241,14 +1249,14 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 		<xsl:variable name="localName" select="fn:substring-after($qName, ':')"/>
 		<xsl:variable name="iriPrefix" select="$context/fn:string[@key = $prefix]/text()"/>
 		<xsl:variable name="iri" select="fn:concat($iriPrefix, $localName)"/>
-		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+		<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 		<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 		<xsl:value-of select="$iri"/>
 	</xsl:function>
 	<xsl:function name="gen:generujOdkazNaPrvekSIRIVSémantickémSlovníkuPojmů" as="node()*">
 		<xsl:param name="iri" as="xs:string"/>
 		<xsl:try>
-			<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+			<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 			<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 			<xsl:choose>
 				<xsl:when test="$semVocTypeXMLDocument//skos:prefLabel">
@@ -1277,7 +1285,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 		<xsl:variable name="popis" select="gen:generujHodnotuVlastnostiPrvkuSIRIVSémantickémSlovníkuPojmů($iri, 'skos:definition', false(), true())[1]"/>
 		<xsl:choose>
 			<xsl:when test="fn:contains($popis[1], 'CHYBA: ')">
-				<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuSIRIVSémantickémSlovníkuPojmů($iri, 'dc:description', false(), true())[1]"/>
+				<xsl:value-of select="gen:generujHodnotuVlastnostiPrvkuSIRIVSémantickémSlovníkuPojmů($iri, 'skos:scopeNote', false(), true())[1]"/>
 			</xsl:when>
 			<xsl:otherwise>
 				<xsl:value-of select="$popis"/>
@@ -1302,7 +1310,7 @@ fn:substring-after(gen:generujHodnotuVlastnostiPrvkuVSémantickémSlovníkuPojm�
 		<xsl:param name="asLink" as="xs:boolean"/>
 		<xsl:param name="isDatatype" as="xs:boolean"/>
 		<xsl:try>
-			<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?default-graph-uri=https%3A%2F%2Fslovn%C3%ADk.gov.cz%2Fisvs', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
+			<xsl:variable name="semVocTypeXMLDocumentIRI" select="fn:concat('https://xn--slovnk-7va.gov.cz/sparql?', '&#38;', 'query=define%20sql%3Adescribe-mode%20%22CBD%22%20%20DESCRIBE%20%3C',fn:encode-for-uri($iri), '%3E', '&#38;', 'output=application%2Frdf%2Bxml')"/>
 			<xsl:variable name="semVocTypeXMLDocument" select="fn:doc($semVocTypeXMLDocumentIRI)"/>
 			<xsl:choose>
 				<xsl:when test="$isDatatype and $semVocTypeXMLDocument//.[fn:name() = $property]">
