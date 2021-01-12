@@ -48,7 +48,7 @@
 			<h2>
 				<dfn>JSON struktura</dfn>
 			</h2>
-			<p>V této sekci je popsána struktura JSON distribuce datové sady. Struktura je též popsána v <a href="{fn:replace($schema, '^.*/([^/]+)$', '$1')}">JSON schématu</a></p>
+			<p>V této sekci je popsána struktura JSON distribuce datové sady. Struktura je též popsána v <a href="{fn:replace($schema, '^.*/([^/]+)$', '$1')}">JSON schématu</a>.</p>
 			<xsl:sequence select="gen:generujJSONPřehled($source)"/>
 			<xsl:sequence select="gen:generujJSONSpecifikaci($source)"/>
 		</section>
@@ -766,11 +766,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 					</xsl:variable>
 					<p>
-						<a target="_blank">
+						<!--<a target="_blank">
 							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 						<xsl:text> | </xsl:text>
 						<a target="_blank">
-							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+							<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+						<a target="_blank">
+							<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 					</p>
 					<pre class="sparql">
 						<xsl:value-of select="$query"/>
@@ -808,11 +810,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 							</xsl:variable>
 							<p>
-								<a target="_blank">
+								<!--<a target="_blank">
 									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 								<xsl:text> | </xsl:text>
 								<a target="_blank">
-									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+									<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+								<a target="_blank">
+									<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 							</p>
 							<pre class="sparql">
 								<xsl:value-of select="$query"/>
@@ -842,11 +846,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 								</xsl:variable>
 								<p>
-									<a target="_blank">
+									<!--<a target="_blank">
 										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 									<xsl:text> | </xsl:text>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+									<a target="_blank">
+										<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 								</p>
 								<pre class="sparql">
 									<xsl:value-of select="$query"/>
@@ -884,11 +890,13 @@ WHERE {{</xsl:text>
 LIMIT 100</xsl:text>
 								</xsl:variable>
 								<p>
-									<a target="_blank">
+									<!--<a target="_blank">
 										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fhtml', '&#38;', 'timeout=0')"/>Spustit dotaz (HTML)</a>
 									<xsl:text> | </xsl:text>
 									<a target="_blank">
-										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>
+										<xsl:attribute name="href" select="fn:concat($sparqlEndpointURL, '?query=', fn:encode-for-uri($query), '&#38;', 'format=text%2Fcsv', '&#38;', 'timeout=0')"/>Spustit dotaz (CSV)</a>-->
+									<a target="_blank">
+										<xsl:attribute name="href" select="fn:concat('https://yasgui.triply.cc/#query=', fn:encode-for-uri($query), '&#38;endpoint=', $sparqlEndpointURL, '&#38;requestMethod=POST&#38;tabTitle=RPP&#38;headers=%7B%7D&#38;contentTypeConstruct=text%2Fturtle%2C*%2F*%3Bq%3D0.9&#38;contentTypeSelect=application%2Fsparql-results%2Bjson%2C*%2F*%3Bq%3D0.9&#38;outputFormat=table')"/>Spustit dotaz</a>
 								</p>
 								<pre class="sparql">
 									<xsl:value-of select="$query"/>
