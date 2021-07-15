@@ -3,10 +3,11 @@
 		"@version": 1.1,
 		"@import": "https://ofn.gov.cz/věc/2020-07-01/kontexty/věc.ssp.jsonld",
 		"@propagate": true,
-		"nedefinováno": "https://slovník.gov.cz/nedefinováno/",
+		"desky": "https://slovník.gov.cz/datový/ofn-úřední-desky/pojem/",
+		"sb504-2004": "https://slovník.gov.cz/legislativní/sbírka/500/2004/pojem/",
 		"Umístění": "https://slovník.gov.cz/veřejný-sektor/pojem/prostorový-objekt",
 		"Úřední deska": {
-			"@id": "nedefinováno:úřední-deska",
+			"@id": "desky:úřední-deska",
 			"@context": [
 				"https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.ssp.jsonld",
 				{
@@ -14,72 +15,86 @@
 					"@import": "https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.ssp.jsonld",
 					"@propagate": true,
 					"stránka": {
-						"@id": "foaf:page",
+						"@id": "desky:má-stránku",
 						"@type": "@id"
 					},
 					"provozovatel": {
-						"@id": "nedefinováno:má-provozovatele",
+						"@reverse": "sb504-2004:zřizuje",
 						"@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.ssp.jsonld"
 					},
 					"umístění": "@nest",
-					"oznámení": {
-						"@id": "nedefinováno:oznámení",
+					"informace": {
+						"@id": "sb504-2004:obsahuje-informaci",
 						"@context": [
 							"https://ofn.gov.cz/digitální-objekty/2020-07-01/kontexty/digitální-objekt.ssp.jsonld",
 							{
 								"@version": 1.1,
-								"Oznámení na úřední desce": {
-									"@id": "nedefinováno:oznámení-na-úřední-desce",
+								"Informace na úřední desce": {
+									"@id": "desky:informace-zveřejněná-na-úřední-desce",
 									"@context": {
 										"@version": 1.1,
-										"zveřejněno": {
-											"@id": "dcterms:published",
+										"vyvěšení": {
+											"@id": "sb504-2004:vyvěšení-informace",
 											"@context": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/kontexty/časový-okamžik.ssp.jsonld"
 										},
-										"schváleno": {
-											"@id": "nedefinováno:schváleno",
+										"schválení": {
+											"@id": "desky:schválení-informace",
 											"@context": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/kontexty/časový-okamžik.ssp.jsonld"
 										},
-										"značka": {
-											"@id": "nedefinováno:spisová-značka",
-											"@type": "xsd:string"
+										"relevantní_do": {
+											"@id": "desky:relevantní-do",
+											"@context": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/kontexty/časový-okamžik.ssp.jsonld"
+										},
+										"sejmutí": {
+											"@id": "desky:sejmutí-informace",
+											"@context": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/kontexty/časový-okamžik.ssp.jsonld"
 										},
 										"číslo_jednací": {
-											"@id": "nedefinováno:číslo-jednací",
+											"@id": "desky:číslo-jednací",
 											"@type": "xsd:string"
 										},
 										"revize": {
-											"@id": "nedefinováno:revize",
+											"@id": "desky:označení-revize",
 											"@type": "xsd:string"
 										},
 										"subjekt": {
-											"@id": "nedefinováno:má-subjekt-oznámení",
+											"@id": "desky:týká-se-subjektu-informace",
+											"@context": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.ssp.jsonld"
+										},						
+										"umístění": {
+											"@id": "desky:týká-se-místa-informace",
 											"@context": {
 												"@version": 1.1,
-												"Subjekt oznámení": {
-													"@id": "nedefinováno:subjekt-oznámení",
-													"@context": [
-														"https://ofn.gov.cz/lidé-a-osoby/2020-07-01/kontexty/člověk-či-osoba.ssp.jsonld",
-														"https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.ssp.jsonld",
-														{
-															"@version": 1.1,
-															"člověk_či_osoba": "@nest",
-															"umístění": "@nest"
-														}
-													]
-												}
+												"@import": "https://ofn.gov.cz/umístění/2020-07-01/kontexty/umístění.ssp.jsonld",
+												"Umístění": "https://slovník.gov.cz/veřejný-sektor/pojem/prostorový-objekt"
 											}
 										},
 										"dokument": {
-											"@id": "nedefinováno:dokument",
+											"@id": "desky:má-další-dokument",
 											"@context": "https://ofn.gov.cz/digitální-objekty/2020-07-01/kontexty/digitální-objekt.ssp.jsonld"
 										},
+										"spis": {
+											"@id": "desky:vložena-do-spisu",
+											"@context": {
+												"@version": 1.1,
+												"Spis": {
+													"@id": "desky:spis",
+													"@context": {
+														"@version": 1.1,
+														"značka": {
+															"@id": "desky:spisová-značka",
+															"@type": "xsd:string"
+														}
+													}
+												}
+											}
+										},
 										"agenda": {
-											"@id": "nedefinováno:má-agendu",
+											"@id": "desky:spadá-pod-agendu",
 											"@context": {
 												"@version": 1.1,
 												"Agenda": {
-													"@id": "nedefinováno:agenda"
+													"@id": "desky:agenda"
 												}
 											}
 										}
