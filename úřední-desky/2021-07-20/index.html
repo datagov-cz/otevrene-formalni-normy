@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Úřední desky</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2021-07-20",
+                shortName: "úřední-desky",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/úřední-desky/2021-07-20/",
+                latestVersion: "https://ofn.gov.cz/úřední-desky/",
+                editors: [{
+                  name: "Michal Škop",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací z úředních desek.
+                Je výsledkem diskuze jak s poskytovateli dat o úředních deskách, tak s tvůrci aplikací, které s těmito daty pracují.
+                Norma je ilustrována příklady dat z úředních desek ve formátu JSON-LD [[JSON-LD11]] a tedy i JSON [[ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+
+            <h2>Přehled</h2>
+            <p>
+                Data z úředních desek lze publikovat v různých úrovních detailu, podle toho co umožňují systémy poskytovatele obsahující zdrojová data.
+                Aby ovšem byla publikovaná data alespoň nějak použitelná, je třeba je publikovat alespoň v minimálním rozsahu.
+                Ten zahrnuje identifikátor úřední desky ve formě IRI, stránku úřední desky, organizaci, která úřední desku provozuje, identifikátor informace ve formě IRI, URL informace ke stažení, název, datum vyvěšení a datum relevance, tj. plánovaného sejmutí.
+            </p>
+
+            <figure id="model"><img alt="Model úředních desek" src="obrázky/úřední-deska.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1E4YDOsDcrDaHFFZEivNjQBcZlfttdppT/view?usp=sharing">Model informace na úřední desce</a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník.
+                    Šipka reprezentuje dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a> a třídy <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">Digitální objekt</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis informace na úřední desce.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit v datech, její název, datový typ, popis a příklad.
+            </p>
+
+            <section id="třída-úřední-deska">
+                <h3>Úřední deska</h3>
+                <p>
+                    Tato třída reprezentuje úřední desku.
+                    Může jít o její jednu část v případě, že jedna organizace má úřední desku rozdělenou na více částí (např. na více url).
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+                
+                <section id="vlastnost-úřední-deska-url">
+                    <h4>Stránka úřední desky</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>stránka</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            URL stránky úřední desky
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            URL stránky úřední desky
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://example.com/uredni_deska</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-úřední-deska-provozovatel">
+                    <h4>Vazba: Provozovatel</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>provozovatel</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-osoba">Osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Provozovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Provozovatel úřední desky
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vazba-úřední-deska-umístění">
+                        <h4>Vazba: Umístění</h4>
+                        <dl>
+                            <dt>
+                                Vazba
+                            </dt>
+                            <dd>
+                                <code>umístění</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Umístění úřední desky
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Místo, na kterém je úřední deska veřejně přístupná.
+                            </dd>
+                        </dl>
+                </section>              
+                
+                <section id="vazba-úřední-deska-informace">
+                    <h4>Vazba: Informace</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>informace</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-informace">Informace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Informace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Informace, která je vyvěšena na úřední desce.
+                        </dd>
+                    </dl>
+                </section>
+            
+            </section>
+
+            <section id="třída-informace">
+                <h3>Informace na úřední desce</h3>
+                <p>
+                    Tato třída reprezentuje samotnou informaci na úřední desce.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Digitální objekt, která je specifikována <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">otevřenou formální normou Digitální objekty</a>.
+                </p>
+
+                <section id="vlastnost-informace-vyvěšení">
+                    <h4>Vyvěšení</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>vyvěšení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Vyvěšení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Časový okamžik vyvěšení informace na úřední desce.
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-informace-schválení">
+                    <h4>Schválení</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>schválení</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Schválení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Okamžik vydání/schválení informace.
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-informace-relevantní-do">
+                    <h4>Relevantní do</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>relevantní_do</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Relevantní do
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Okamžik, do kterého je informace relevantní.
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="vlastnost-informace-číslo-jednací">
+                    <h4>Číslo jednací</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>číslo_jednací</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Číslo jednací
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Číslo jednací informace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>OV/666/18 Tisj</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-informace-spisová-značka">
+                    <h4>Spisová značka</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>spisová_značka</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Spisová značka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Spisová značka spisu, ve kterém je zapsána informace vyvěšená na úřední desce.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>OV/13/2018-Tisj</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vlastnost-informace-revize">
+                    <h4>Revize</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>revize</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Revize
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Označení revize/verze informace.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>20180101</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-informace-subjekt">
+                    <h4>Vazba: Subjekt</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>subjekt</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Subjekt
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Subjekt informace.
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-informace-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Umístění, kterého se informace týká.
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-informace-další-dokument">
+                    <h4>Vazba: Další dokument</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>dokument</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../digitální-objekty/2020-07-01/#třída-digitální-objekt">Digitální objekt</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Další dokument
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Další dokument informace (např. příloha).
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="vazba-informace-agenda">
+                    <h4>Vazba: Agenda</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>agenda</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-agenda">Agenda</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Agenda
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Agenda informace.
+                        </dd>
+                    </dl>
+                </section>
+            </section>
+
+            <section id="třída-agenda">
+                <h4>Agenda informace</h4>
+                <p>
+                    Tato třída reprezentuje agendy, kategorie, správní činnosti, pod které spadá informace.
+                    U této třídy je možné použít vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>.
+                </p>
+
+            </section>
+
+        </section>
+
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace informace na úřední desce v různých úrovních detailu.
+                <a href="schémata/úřední-deska.json">Datové schéma</a>, které je použito v příkladech, lze přímo použít a zahrnout do publikačních plánů, případně rozšířit dle vlastních potřeb.
+            </p>
+
+            <section id="příklady-jednoduchá-informace">
+                <h3>Jednoduchá informace</h3>
+
+                <p>
+                    V prvním příkladu je ukázána informace na úřední desce v minimálním rozsahu.
+                    Ačkoliv jsou všechny atributy nepovinné, bez těchto základních atributů publikace dat prakticky ztrácí smysl, jelikož by je nebylo jak použít.
+                </p>
+
+                <aside class="example" title="Jednoduchá informace v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/úřední-desky/2021-07-20/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://data.mojeobec.cz/zdroj/úřední-deska",
+    "stránka": "https://web.mojeobec.cz/úřední_deska/",
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "00258245"
+    },
+    "informace": [{
+        "typ": ["Digitální objekt", "Informace na úřední desce"],
+        "iri": "https://data.mojeobec.cz/zdroj/úřední-deska/informace/2018-13",
+        "url": "https://web.mojeobec.cz/úřední_deska/2018-13",
+        "název": {
+            "cs": "Podpora spolkového života ve městě"
+        },
+        "vyvěšení": {
+            "typ": "Časový okamžik",
+            "datum": "2018-01-20"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum": "2019-02-20"
+        }
+    }]
+}</pre>
+                </aside>
+
+            </section>
+
+            <section id="příklady-jednoduchá-informace-vlastní-atributy">
+                <h3>Jednoduchá informace s přidanými vlastními atributy</h3>
+
+                <p>
+                    Do schémat si lze v případě potřeby přidávat další atributy.
+                    V následujících příkladech je nad rámec normy přidán atribut <code>odbor</code>.
+                </p>
+
+                <aside class="example" title="Jednoduchá informace s vlastními atributy v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
+                    </p>
+
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/úřední-desky/2021-07-20/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://data.mojeobec.cz/zdroj/úřední-deska",
+    "stránka": "https://web.mojeobec.cz/úřední_deska/",
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "00258245"
+    },
+    "informace": [{
+        "typ": ["Digitální objekt", "Informace na úřední desce"],
+        "iri": "https://data.mojeobec.cz/zdroj/úřední-deska/informace/2018-14",
+        "url": "https://web.mojeobec.cz/úřední_deska/2018-14",
+        "název": {
+            "cs": "Podpora spolkového života ve městě II"
+        },
+        "vyvěšení": {
+            "typ": "Časový okamžik",
+            "datum": "2018-01-20"
+        },
+        "relevantní_do": {
+            "typ": "Časový okamžik",
+            "datum": "2019-02-20"
+        },
+        "odbor": "VD"
+    }]
+}</pre>
+                </aside>
+
+            </section>
+
+            <section id="příklady-více-informací">
+                <h3>Více informací - úřední deska</h3>
+
+                <p>
+                    V minulých příkladech byla vždy ukázána jedna informace na úřední desce.
+                    Typicky bude ale úřední deska obsahovat více informací.
+                </p>
+
+                <aside class="example" title="Více informací v JSON-LD">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
+                    </p>
+
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/úřední-desky/2021-07-20/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://data.mojeobec.cz/zdroj/úřední-deska",
+    "stránka": "https://web.mojeobec.cz/úřední_deska/",
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "00258245"
+    },
+    "informace": [{
+            "typ": ["Digitální objekt", "Informace na úřední desce"],
+            "iri": "https://data.mojeobec.cz/zdroj/úřední-deska/informace/2018-13",
+            "url": "https://web.mojeobec.cz/úřední_deska/2018-13",
+            "název": {
+                "cs": "Podpora spolkového života ve městě"
+            },
+            "vyvěšení": {
+                "typ": "Časový okamžik",
+                "datum": "2018-01-20"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum": "2019-02-20"
+            }
+        },
+        {
+            "typ": ["Digitální objekt", "Informace na úřední desce"],
+            "iri": "https://data.mojeobec.cz/zdroj/úřední-deska/informace/2018-14",
+            "url": "https://web.mojeobec.cz/úřední_deska/2018-14",
+            "název": {
+                "cs": "Podpora spolkového života ve městě II"
+            },
+            "vyvěšení": {
+                "typ": "Časový okamžik",
+                "datum": "2018-01-20"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum": "2019-02-20"
+            },
+            "odbor": "VD"
+        }
+    ]
+}</pre>
+                </aside>
+
+            </section>
+
+            <section id="příklady-komplexní-informace">
+                <h3>Komplexní informace</h3>
+
+                <p>
+                    Různé informace na jedné úřední desce mohou obsahovat různé množství informací.
+                    Některé mohou být jednoduché a některé mohou obsahovat velké množství informací, např. o původním autorovi informace nebo o místě, kterého se informace týká.
+                </p>
+
+                <aside class="example" title="Jednoduchá a komplexní informace v JSON-LD">
+                    <p>
+                        <a href="příklady/4.jsonld">JSON-LD soubor</a>, <a href="schémata/úřední-deska.json">JSON Schema</a>, <a href="kontexty/úřední-deska.jsonld">JSON-LD kontext</a>
+                    </p>
+
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/úřední-desky/2021-07-20/kontexty/úřední-deska.jsonld",
+    "typ": "Úřední deska",
+    "iri": "https://data.mojeobec.cz/zdroj/úřední-deska",
+    "stránka": "https://web.mojeobec.cz/úřední_deska/",
+    "provozovatel": {
+        "typ": "Osoba",
+        "ičo": "00258245"
+    },
+    "umístění": {
+        "typ": "Umístění",
+        "adresa": {
+            "typ": "Adresa",
+            "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/696285"
+        },
+        "budova": {
+            "cs": "HD Gate"
+        },
+        "místnost": {
+            "cs": "Místnost 4001"
+        }
+    },
+    "informace": [
+        {
+            "typ": [
+                "Digitální objekt",
+                "Informace na úřední desce"
+            ],
+            "iri": "https://data.mojeobec.cz/zdroj/úřední-deska/informace/2018-13",
+            "url": "https://web.mojeobec.cz/úřední_deska/2018-13",
+            "název": {
+                "cs": "Podpora spolkového života ve městě"
+            },
+            "vyvěšení": {
+                "typ": "Časový okamžik",
+                "datum": "2018-01-20"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum": "2019-02-20"
+            }
+        },
+        {
+            "typ": [
+                "Digitální objekt",
+                "Informace na úřední desce"
+            ],
+            "iri": "https://data.mojeobec.cz/zdroj/úřední-deska/informace/2018-14",
+            "url": "https://web.mojeobec.cz/úřední_deska/2018-14",
+            "autor_díla": [
+                {
+                    "typ": "Člověk",
+                    "jméno": {
+                        "cs": "Mirek"
+                    },
+                    "příjmení": {
+                        "cs": "Starosta"
+                    }
+                }
+            ],
+            "název": {
+                "cs": "Podpora spolkového života ve městě II"
+            },
+            "popis": {
+                "cs": "Program na podporu dobrovolných hasičů v roce 2018"
+            },
+            "vyvěšení": {
+                "typ": "Časový okamžik",
+                "datum": "2018-01-20"
+            },
+            "relevantní_do": {
+                "typ": "Časový okamžik",
+                "datum": "2019-02-20"
+            },
+            "schválení": {
+                "typ": "Časový okamžik",
+                "datum": "2017-12-31"
+            },
+            "číslo_jednací": "OV/666/18 Tisj",
+            "spisová_značka":  "OV/13/2018-Tisj",
+            "revize": "20180101",
+            "agenda": [
+                {
+                    "typ": "Agenda",
+                    "název": {
+                        "cs": "dotace"
+                    }
+                },
+                {
+                    "typ": "Agenda",
+                    "název": {
+                        "cs": "přenesená působnost"
+                    }
+                }
+            ],
+            "dokument": [
+                {
+                    "typ": "Digitální objekt",
+                    "název": {
+                        "cs": "Příloha 1"
+                    },
+                    "url": "https://web.mojeobec.cz/úřední_deska/2018-14/přílohy/příloha1.odt"
+                },
+                {
+                    "typ": "Digitální objekt",
+                    "název": {
+                        "cs": "Příloha 2"
+                    },
+                    "url": "https://web.mojeobec.cz/úřední_deska/2018-14/přílohy/příloha2.odt"
+                }
+            ],
+            "subjekt": [
+                {
+                    "typ": "Osoba",
+                    "název": {
+                        "cs": "Sbor dobrovolných hasičů Dolní Datová"
+                    },
+                    "ičo": "00258267"
+                },
+                {
+                    "typ": "Osoba",
+                    "název": {
+                        "cs": "Spolek dobrovolných požárníků Dolní Datová"
+                    },
+                    "ičo": "00258256"
+                }
+            ],
+            "umístění": [
+                {
+                    "typ": "Umístění",
+                    "geometrie": {
+                        "type": "Point",
+                        "coordinates": [
+                            13.4247552,
+                            52.5118998
+                        ],
+                        "crs": {
+                            "type": "name",
+                            "properties": {
+                                "name": "urn:ogc:def:crs:EPSG::4326"
+                            }
+                        }
+                    }
+                },
+                {
+                    "typ": "Umístění",
+                    "adresa": {
+                        "typ": "Adresa",
+                        "obec": "https://linked.cuzk.cz/resource/ruian/obec/559352",
+                        "název_obce": {
+                            "cs": "Dolní Datová"
+                        },
+                        "část_obce": "https://linked.cuzk.cz/resource/ruian/cast-obce/121544",
+                        "název_ulice": {
+                            "cs": "Hasičská"
+                        },
+                        "typ_so": "č.p.",
+                        "číslo_domovní": 666,
+                        "psč": "33101",
+                        "okres": "https://linked.cuzk.cz/resource/ruian/okres/3407",
+                        "název_okresu": {
+                            "cs": "Plzeň-sever"
+                        },
+                        "vúsc": "https://linked.cuzk.cz/resource/ruian/vusc/43",
+                        "název_vúsc": {
+                            "cs": "Plzeňský kraj"
+                        }
+                    }
+                }
+            ],
+            "odbor": "VD"
+        }
+    ]
+}</pre>
+                </aside>
+
+            </section>
+
+        </section>
+
+        <section id="metadata">
+            <h2>Předpřipravená metadata</h2>
+            <p>
+                Tato sekce obsahuje odkaz na <a href="metadata/úřední-desky.jsonld">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>.
+                <a href="https://data.gov.cz/formulář/registrace-datové-sady?file=https%3A%2F%2Fofn.gov.cz%2Fúřední-desky%2F2021-07-20%2Fmetadata%2Fúřední-desky.jsonld">Registrace pomocí tohoto předpřipraveného záznamu</a> umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
+            </p>
+
+            <p>
+                Pro zajištění nalezitelnosti datové sady v NKOD řádně vyplňte metadatový záznam datové sady.
+                Jak ukazuje <a href="https://data.gov.cz/formulář/registrace-datové-sady?file=https%3A%2F%2Fofn.gov.cz%2Fúřední-desky%2F2021-07-20%2Fmetadata%2Fúřední-desky.jsonld">předpřipravený záznam</a>, pro registraci datové sady s úřední deskou v NKOD vyplňte kromě <a href="../../rozhraní-katalogů-otevřených-dat/#položky-metadatového-záznamu">povinných údajů</a> zejména
+            </p>
+            <ol>
+                <li>URL této OFN a její aktuální verze, tj. <code>https://ofn.gov.cz/úřední-desky/</code> a <code>https://ofn.gov.cz/úřední-desky/2021-07-20/</code> do položky <code>Odkaz na specifikaci</code></li>
+                <li><a href="schémata/úřední-deska.json">JSON schéma</a> definované touto OFN jako <code>Odkaz na strojově čitelné schéma souboru ke stažení</code> u JSON-LD distribuce datové sady</li>
+            </ol>
+        </section>
+
+    </body>
+</html>

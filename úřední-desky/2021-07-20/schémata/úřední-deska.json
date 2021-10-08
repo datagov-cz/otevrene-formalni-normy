@@ -1,0 +1,147 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/úřední-desky/2021-07-20/schémata/úřední-deska.json",
+	"name": "Úřední deska",
+	"type": "object",
+	"description": "Seznam všech informací na úřední desce (informace o platnosti, obsahu a odkazy na konkrétní dokumenty).",
+	"required": [ "@context","typ", "iri", "stránka", "provozovatel", "informace" ],
+	"allOf": [ { 
+		"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+	}, {
+		"properties": {
+			"@context": {
+				"const": "https://ofn.gov.cz/úřední-desky/2021-07-20/kontexty/úřední-deska.jsonld"
+			},
+			"typ": {
+				"oneOf": [{
+					"const": "Úřední deska"
+				}, {
+					"type": "array",
+					"contains": {
+						"const": "Úřední deska"
+					},
+					"items": {
+						"type": "string"
+					}
+				}]
+			},
+			"stránka": {
+				"type": "string",
+				"format": "iri",
+				"title": "URL stránky úřední desky",
+				"description": "URL stránky úřední desky",
+				"examples": [
+					"https://example.com/uredni_deska"
+				]
+			},
+			"provozovatel": {
+				"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/osoba.json"
+			},
+			"umístění": {
+				"$ref": "https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.json"
+			},
+			"informace": {
+				"type": "array",
+				"name": "Oznámení",
+				"description": "Informace na úřední desce",
+				"items": {
+					"required": [ "typ", "iri", "název", "vyvěšení", "relevantní_do" ],
+					"allOf": [ { 
+						"$ref": "https://ofn.gov.cz/digitální-objekty/2020-07-01/schémata/digitální-objekt.json"
+					}, {
+						"properties": {
+							"typ": {
+								"type": "array",
+								"contains": {
+									"const": "Informace na úřední desce"
+								}
+							},
+							"vyvěšení": {
+								"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+							},
+							"schválení": {
+								"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+							},
+							"relevantní_do": {
+								"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+							},
+							"číslo_jednací": {
+								"type": "string",
+								"title": "Číslo jednací",
+								"description": "Číslo jednací informace.",
+								"examples": [
+									"OV/666/18 Tisj"
+								]
+							},
+							"spisová_značka": {
+								"type": "string",
+								"title": "Spisová značka",
+								"description": "Spisová značka spisu, do kterého je vložena informace.",
+								"examples": [
+									"OV/13/2018-Tisj"
+								]
+							},
+							"revize": {
+								"type": "string",
+								"title": "Revize",
+								"description": "Označení revize/verze informace.",
+								"examples": [
+									"20180101"
+								]
+							},
+							"subjekt": {
+								"type": "array",
+								"title": "Subjekty informace",
+								"description": "Lidá a osoby, kterých se informace týká.",
+								"items": {
+									"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk-či-osoba.json"
+								}
+							},
+							"umístění": {
+								"type": "array",
+								"title": "Umístění informace",
+								"description": "Místa, kterých se informace týká.",
+								"items": {
+									"$ref": "https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.json"
+								}
+							},
+							"dokument": {
+								"$ref": "https://ofn.gov.cz/digitální-objekty/2020-07-01/schémata/digitální-objekty.json"
+							},
+							"agenda": {
+								"type": "array",
+								"title": "Agenda",
+								"description": "Agendy, kategorie, správní činnosti, pod které spadá informace.",
+								"items": {
+									"type": "object",
+									"title": "Agenda",
+									"description": "Agenda, kategorie, správní činnost, pod které spadá informace.",
+									"required": [ "typ" ],
+									"allOf": [ { 
+										"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+									}, {
+										"properties": {
+											"typ": {
+												"oneOf": [{
+													"const": "Agenda"
+												}, {
+													"type": "array",
+													"contains": {
+														"const": "Agenda"
+													},
+													"items": {
+														"type": "string"
+													}
+												}]
+											}
+										}
+									}]									
+								}
+							}
+						}
+					}]
+				}
+			}
+		}
+	}]
+}

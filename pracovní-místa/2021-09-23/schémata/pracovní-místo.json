@@ -1,0 +1,122 @@
+{
+	"$schema": "https://json-schema.org/draft/2019-09/schema",
+	"$id": "https://ofn.gov.cz/pracovní-místa/2021-09-23/schémata/pracovní-místo.json",
+	"name": "Pracovní místo",
+	"description": "Pracovní místo",
+	"required": ["typ"],
+	"allOf": [{
+		"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+	}, {
+		"properties": {
+			"typ": {
+				"oneOf": [{
+					"const": "Pracovní místo"
+					},{
+					"type": "array",
+					"contains": {
+						"const": "Pracovní místo"
+					},
+					"items": {
+						"type": "string"
+					}
+				}]
+			},
+			"id": {
+				"type": "string",
+				"title": "Interní ID",
+				"examples": [
+					"aaaa123"
+				]
+			},
+			"url": {
+				"type": "string",
+				"format": "iri",
+				"title": "Webová stránka",
+				"examples": [
+					"https://www.mff.cuni.cz/cs/fakulta/pracovni-prilezitosti/vyberova-rizeni/lektor-na-katedre-didaktiky-fyziky-termin-prihlasek-21-6-2020"
+				]
+			},
+			"nástup_dle_dohody": {
+				"type": "boolean",
+				"title": "Nástup dle dohody",
+				"examples": [true, false]
+			},
+			"nástup_ihned": {
+				"type": "boolean",
+				"title": "Nástup ihned",
+				"examples": [true, false]
+			},
+			"počet_hodin_týdně": {
+				"type": "number",
+				"title": "Počet hodin týdně",
+				"examples": [
+					20,
+					40
+				]
+			},
+			"doba_trvání": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/množství.json"
+			},
+			"požadované_dokumenty": {
+				"type": "array",
+				"items": {
+					"type": "object",
+					"title": "Požadovaný dokument",
+					"required": ["typ"],
+					"allOf": [{
+						"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+					}, {
+						"properties": {
+							"typ": {
+								"oneOf": [{
+									"const": "Požadovaný dokument"
+								}, {
+									"type": "array",
+									"contains": {
+										"const": "Požadovaný dokument"
+									},
+									"items": {
+										"type": "string"
+									}
+								}]
+							}
+						}
+					}]
+				}
+			},
+			"kontakt": {
+				"$ref": "https://ofn.gov.cz/kontakty/2020-07-01/schémata/kontakty.json"
+			},
+			"platové_podmínky": {
+				"$ref": "https://ofn.gov.cz/práce/2021-09-23/schémata/platové-podmínky.json"
+			},
+			"pracoviště": {
+				"$ref": "https://ofn.gov.cz/práce/2021-09-23/schémata/pracoviště.json"
+			},
+			"nástup": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+			},
+			"termín_podání": {
+				"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-okamžik.json"
+			},
+			"kvalifikace": {
+				"type": "array",
+				"items": {
+					"$ref": "https://ofn.gov.cz/práce/2021-09-23/schémata/kvalifikace.json"
+				}
+			},
+			"typ_pracovního_vztahu": {
+				"type": "array",
+				"items": {
+					"type": "string",
+					"format": "iri",
+					"pattern": "^https\\:\/\/data\\.mvcr\\.gov\\.cz\/zdroj\/číselníky\/typy-pracovních-vztahů\/položky\/.*$",
+					"title": "Typ pracovního vztahu",
+					"examples": [
+						"https://data.mvcr.gov.cz/zdroj/číselníky/typy-pracovních-vztahů/položky/plný-úvazek"
+					]
+				}
+			}
+		}
+	}]
+}
