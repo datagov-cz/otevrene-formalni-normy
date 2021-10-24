@@ -206,596 +206,980 @@
           </section>
         </section>
         
-        <section id="serializace-jsonld">
+        <section id="jsonld">
           <h2>Serializace JSON-LD</h2>
           
           <p>
             V této sekci je specifikována reprezentace ve formátu JSON-LD.
             Reprezentace je definována v <a href="schémata/jsonld/číselník.json">JSON schématu</a> a <a href="kontexty/číselník.jsonld">JSON-LD kontextu</a>.
           </p>
-                      
-          <section id="jsonld-třída-číselník">
-            <h3>Číselník</h3>
-            <dl>
-              <dt>Popis</dt>
-              <dd>Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...).</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="json">
-{
-  "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
-  "typ": "Číselník",
-  "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny"
-}</pre>
-              </dd>
-            </dl>
-            <section id="jsonld-vlastnost-číselník-název">
-              <h4>název</h4>
+          
+          <section id="jsonld-struktura">
+            <h3>Struktura</h3>
+            <section id="jsonld-třída-číselník">
+              <h4>Číselník</h4>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>název</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
-                <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
+                <dd>Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...).</dd>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="json">
-{
-  "název": {
-    "cs":  "Číselník měn"
-  }
-}</pre>
+  {
+    "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
+    "typ": "Číselník",
+    "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny"
+  }</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="jsonld-vlastnost-číselník-akronym">
-              <h4>akronym</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>akronym</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
-                <dt>Popis</dt>
-                <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "akronym": "CISCUR"
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-číselník-definice">
-              <h4>definice</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>definice</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "definice": {
-    "cs":  "Číselník měn se všemi světovými měnami, které jsou aktuálně používány."
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-číselník-popis">
-              <h4>popis</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>popis</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "popis": {
-    "cs":  "Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly."
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vazba-číselník-platnost">
-              <h4>Vazba: platnost</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>platnost</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-                <dt>Popis</dt>
-                <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
-                <dt>Příklad</dt>
-                <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-              </dl>
-             </section>
-            <section id="jsonld-vazba-eviduje">
-              <h4>Vazba: eviduje</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>položky</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="#model-třída-položka-číselníku">Položka</a></dd>
-                <dt>Popis</dt>
-                <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "položky": []
-}</pre>
-                </dd>
-              </dl>
-             </section>
-          </section>
-          <section id="jsonld-třída-položka">
-            <h3>Položka</h3>
-            <dl>
-              <dt>Popis</dt>
-              <dd>Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="json">
-{
-  "typ": "Položka",
-  "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064"
-}</pre>
-              </dd>
-            </dl>
-            <section id="jsonld-vlastnost-položka-kód">
-              <h4>kód</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>kód</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
-                <dt>Popis</dt>
-                <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "kód": "064"
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-položka-název">
-              <h4>název</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>název</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Název (hodnota) položky číselníku.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "název": {
-    "cs":  "bhútánský ngultrum"
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-položka-alt_název">
-              <h4>alternativní název</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>alt_název</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Alternativní název (hodnota) položky číselníku.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "alt_název": {
-    "cs":  "ngultrum"
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-položka-zkr_název">
-              <h4>zkrácený název</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>zkr_název</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Zkrácený název (hodnota) položky číselníku.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "zkr_název": {
-    "cs":  "BTN"
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-položka-definice">
-              <h4>definice</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>definice</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "definice": {
-    "cs":  "1 ngultrum=100 chhetrum"
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vlastnost-položka-popis">
-              <h4>popis</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>popis</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-                <dt>Popis</dt>
-                <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
-                <dt>Příklad</dt>
-                <dd>
-                  <pre class="json">
-{
-  "popis": {
-    "cs":  "Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN."
-  }
-}</pre>
-                </dd>
-              </dl>
-             </section>
-            <section id="jsonld-vazba-položka-platnost">
-              <h4>Vazba: platnost</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd><code>platnost</code></dd>
-                <dt>Typ</dt>
-                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-                <dt>Popis</dt>
-                <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
-                <dt>Příklad</dt>
-                <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-              </dl>
-             </section>
-          </section>
-        </section>
-
-        <section id="příklady-jsonld">
-          <h3>Příklady v serializaci JSON-LD</h3>
-
-          <p>
-            V této sekci jsou uvedeny příklady reprezentace číselniku měn v různých úrovních detailu, ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
-          </p>
-                      
-          <section id="příklad-číselník-měn-základní-podoba-jsonld">
-            <h3>Číselník měn - základní podoba</h3>
-            
-            <p>
-                Příklad ukazuje reprezentaci číselníku měn v základní podobě. 
-            </p>
-            
-            <aside class="example" title="Číselník měn - základní podoba - JSON-LD">
-                <p>
-                    <a href="příklady/číselník-měn-základní-podoba.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
-                </p>
-                <pre class="json">
-{
-  "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
-  "typ": "Číselník",
-  "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
-  "název": {
-    "cs":  "Číselník měn"
-  },
-  "položky": [
-    {
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
-      "kód": "064",
-      "název": {
-        "cs": "bhútánský ngultrum"
-      }
-    },{
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
-      "kód": "068",
-      "název": {
-        "cs": "bolivijské boliviano"
-      }
-    }
-  ]
-}</pre>
-                </aside>
-                  
-              </section>
-              
-              <section id="příklad-číselník-měn-různé-jazyky-jsonld">
-                <h3>Číselník měn - různé jazyky</h3>
-                
-                <p>
-                    Příklad ukazuje reprezentaci číselníku měn v různých jazycích. 
-                </p>
-                
-                <aside class="example" title="Číselník měn - různé jazyky - JSON-LD">
-                    <p>
-                       <a href="příklady/číselník-měn-různé-jazyky.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
-                    </p>
+              <section id="jsonld-vlastnost-číselník-název">
+                <h5>název</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
                     <pre class="json">
-{
-  "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
-  "typ": "Číselník",
-  "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
-  "název": {
-    "cs":  "Číselník měn",
-    "en":  "Codelist of currencies"
-  },
-  "položky": [
-    {
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
-      "kód": "064",
-      "název": {
-        "cs": "bhútánský ngultrum",
-        "en": "bhutanese ngultrum"
-      }
-    },{
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
-      "kód": "068",
-      "název": {
-        "cs": "bolivijské boliviano",
-        "en": "bolivian boliviano"
-      }
+  {
+    "název": {
+      "cs":  "Číselník měn"
     }
-  ]
-}</pre>
-                </aside>
-                  
+  }</pre>
+                  </dd>
+                </dl>
               </section>
-
-              <section id="příklad-číselník-měn-platnosti-jsonld">
-                <h3>Číselník měn - platnosti</h3>
-                
-                <p>
-                    Příklad ukazuje reprezentaci číselníku měn s platnostmi položek číselníku a platností číselníku jako takového. 
-                </p>
-                
-                <aside class="example" title="Číselník měn - platnosti - JSON-LD">
-                    <p>
-                       <a href="příklady/číselník-měn-platnosti.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
-                    </p>
+              <section id="jsonld-vlastnost-číselník-akronym">
+                <h5>akronym</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>akronym</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
                     <pre class="json">
-{
-  "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
-  "typ": "Číselník",
-  "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
-  "název": {
-    "cs":  "Číselník měn",
-    "en":  "Codelist of currencies"
-  },
-  "platnost": {
-    "typ": "Časový interval",
-    "začátek": {
-      "typ": "Časový okamžik",
-      "datum": "2009-01-01"
-    },
-    "konec": {
-      "typ": "Časový okamžik",
-      "datum": "2020-12-31"
-    }
-  },
-  "položky": [
-    {
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
-      "kód": "064",
-      "název": {
-        "cs": "bhútánský ngultrum",
-        "en": "bhutanese ngultrum"
-      },
-      "platnost": {
-        "typ": "Časový interval",
-        "začátek": {
-          "typ": "Časový okamžik",
-          "datum": "2009-01-01"
-        },
-        "konec": {
-          "typ": "Časový okamžik",
-          "datum": "2020-06-30"
-        }
-      }
-    },{
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
-      "kód": "068",
-      "název": {
-        "cs": "bolivijské boliviano",
-        "en": "bolivian boliviano"
-      },
-      "platnost": {
-        "typ": "Časový interval",
-        "začátek": {
-          "typ": "Časový okamžik",
-          "datum": "2009-01-01"
-        },
-        "konec": {
-          "typ": "Časový okamžik",
-          "nespecifikovaný": true
-        }
-      }
-    }
-  ]
-}</pre>
-                </aside>
-                  
+  {
+    "akronym": "CISCUR"
+  }</pre>
+                  </dd>
+                </dl>
               </section>
-              
-              <section id="příklad-číselník-měn-jsonld">
-                <h3>Číselník měn - kompletní popis</h3>
-                
-                <p>
-                    Příklad ukazuje reprezentaci číselníku měn s alternativním pojmenováním a dalšími atributy měn. 
-                </p>
-                
-                <aside class="example" title="Číselník měn - kompletní - JSON-LD">
-                    <p>
-                       <a href="příklady/číselník-měn.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
-                    </p>
+              <section id="jsonld-vlastnost-číselník-definice">
+                <h5>definice</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>definice</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
                     <pre class="json">
-{
-  "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
-  "typ": "Číselník",
-  "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
-  "název": {
-    "cs":  "Číselník měn",
-    "en":  "Codelist of currencies"
-  },
-  "akronym": "CISCUR",
-  "definice": {
-    "cs":  "Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",
-    "en":  "A codelist of currencies with all world currencies currently in use."
-  },
-  "popis": {
-    "cs":  "Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.",
-    "en":  "A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included."
-  },
-  "platnost": {
-    "typ": "Časový interval",
-    "začátek": {
-      "typ": "Časový okamžik",
-      "datum": "2009-01-01"
-    },
-    "konec": {
-      "typ": "Časový okamžik",
-      "datum": "2020-12-31"
+  {
+    "definice": {
+      "cs":  "Číselník měn se všemi světovými měnami, které jsou aktuálně používány."
     }
-  },
-  "položky": [
-    {
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
-      "kód": "064",
-      "název": {
-        "cs": "bhútánský ngultrum",
-        "en": "bhutanese ngultrum"
-      },
-      "alt_název": {
-        "cs": "ngultrum",
-        "en": "ngultrum"
-      },
-      "zkr_název": {
-        "cs":  "BTN",
-        "en":  "BTN"
-      },
-      "definice": {
-        "cs": "1 ngultrum=100 chhetrum",
-        "en": "1 ngultrum=100 chhetrum"
-      },
-      "popis": {
-        "cs": "Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.",
-        "en": "The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN."
-      },
-      "platnost": {
-        "typ": "Časový interval",
-        "začátek": {
-          "typ": "Časový okamžik",
-          "datum": "2009-01-01"
-        },
-        "konec": {
-          "typ": "Časový okamžik",
-          "datum": "2020-06-30"
-        }
-      }
-    },{
-      "typ": "Položka",
-      "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
-      "kód": "068",
-      "název": {
-        "cs": "bolivijské boliviano",
-        "en": "bolivian boliviano"
-      },
-      "alt_název": {
-        "cs": "boliviano",
-        "en": "boliviano"
-      },
-      "zkr_název": {
-        "cs":  "BOB",
-        "en":  "BOB"
-      },
-      "definice": {
-        "cs": "1 boliviano=100 centavo",
-        "en": "1 boliviano=100 centavo"
-      },
-      "popis": {
-        "cs": "Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.",
-        "en": "The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB."
-      },
-      "platnost": {
-        "typ": "Časový interval",
-        "začátek": {
-          "typ": "Časový okamžik",
-          "datum": "2009-01-01"
-        },
-        "konec": {
-          "typ": "Časový okamžik",
-          "nespecifikovaný": true
-        }
-      }
-    }
-  ]
-}</pre>
-                </aside>
-                  
+  }</pre>
+                  </dd>
+                </dl>
               </section>
-            
+              <section id="jsonld-vlastnost-číselník-popis">
+                <h5>popis</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>popis</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "popis": {
+      "cs":  "Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly."
+    }
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vazba-číselník-platnost">
+                <h5>Vazba: platnost</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>platnost</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
+                  <dt>Příklad</dt>
+                  <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                </dl>
+              </section>
+              <section id="jsonld-vazba-eviduje">
+                <h5>Vazba: eviduje</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>položky</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="#model-třída-položka-číselníku">Položka</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "položky": []
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
             </section>
-            
+            <section id="jsonld-třída-položka">
+              <h4>Položka</h4>
+              <dl>
+                <dt>Popis</dt>
+                <dd>Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.</dd>
+                <dt>Příklad</dt>
+                <dd>
+                  <pre class="json">
+  {
+    "typ": "Položka",
+    "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064"
+  }</pre>
+                </dd>
+              </dl>
+              <section id="jsonld-vlastnost-položka-kód">
+                <h5>kód</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>kód</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "kód": "064"
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vlastnost-položka-název">
+                <h5>název</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Název (hodnota) položky číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "název": {
+      "cs":  "bhútánský ngultrum"
+    }
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vlastnost-položka-alt_název">
+                <h5>alternativní název</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>alt_název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Alternativní název (hodnota) položky číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "alt_název": {
+      "cs":  "ngultrum"
+    }
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vlastnost-položka-zkr_název">
+                <h5>zkrácený název</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>zkr_název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Zkrácený název (hodnota) položky číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "zkr_název": {
+      "cs":  "BTN"
+    }
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vlastnost-položka-definice">
+                <h5>definice</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>definice</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "definice": {
+      "cs":  "1 ngultrum=100 chhetrum"
+    }
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vlastnost-položka-popis">
+                <h5>popis</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>popis</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "popis": {
+      "cs":  "Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN."
+    }
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="jsonld-vazba-položka-platnost">
+                <h5>Vazba: platnost</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>platnost</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
+                  <dt>Příklad</dt>
+                  <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                </dl>
+              </section>
+            </section>
           </section>
-            
+
+          <section id="jsonld-příklady">
+            <h3>Příklady v serializaci JSON-LD</h3>
+
+            <p>
+              V této sekci jsou uvedeny příklady serializace dle této otevřené formální normy ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
+            </p>
+                        
+            <section id="jsonld-příklady-číselník-měn-základní-podoba">
+              <h4>Číselník měn - základní podoba</h4>
+              
+              <p>
+                  Příklad ukazuje reprezentaci číselníku měn v základní podobě. 
+              </p>
+              
+              <aside class="example" title="Číselník měn - základní podoba - JSON-LD">
+                  <p>
+                      <a href="příklady/číselník-měn-základní-podoba.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
+                  </p>
+                  <pre class="json">
+  {
+    "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
+    "typ": "Číselník",
+    "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
+    "název": {
+      "cs":  "Číselník měn"
+    },
+    "položky": [
+      {
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
+        "kód": "064",
+        "název": {
+          "cs": "bhútánský ngultrum"
+        }
+      },{
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
+        "kód": "068",
+        "název": {
+          "cs": "bolivijské boliviano"
+        }
+      }
+    ]
+  }</pre>
+                  </aside>
+                    
+                </section>
+                
+                <section id="jsonld-příklady-číselník-měn-různé-jazyky">
+                  <h4>Číselník měn - různé jazyky</h4>
+                  
+                  <p>
+                      Příklad ukazuje reprezentaci číselníku měn v různých jazycích. 
+                  </p>
+                  
+                  <aside class="example" title="Číselník měn - různé jazyky - JSON-LD">
+                      <p>
+                        <a href="příklady/číselník-měn-různé-jazyky.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
+                      </p>
+                      <pre class="json">
+  {
+    "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
+    "typ": "Číselník",
+    "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
+    "název": {
+      "cs":  "Číselník měn",
+      "en":  "Codelist of currencies"
+    },
+    "položky": [
+      {
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
+        "kód": "064",
+        "název": {
+          "cs": "bhútánský ngultrum",
+          "en": "bhutanese ngultrum"
+        }
+      },{
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
+        "kód": "068",
+        "název": {
+          "cs": "bolivijské boliviano",
+          "en": "bolivian boliviano"
+        }
+      }
+    ]
+  }</pre>
+                  </aside>
+                    
+                </section>
+
+                <section id="jsonld-příklady-číselník-měn-platnosti">
+                  <h4>Číselník měn - platnosti</h4>
+                  
+                  <p>
+                      Příklad ukazuje reprezentaci číselníku měn s platnostmi položek číselníku a platností číselníku jako takového. 
+                  </p>
+                  
+                  <aside class="example" title="Číselník měn - platnosti - JSON-LD">
+                      <p>
+                        <a href="příklady/číselník-měn-platnosti.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
+                      </p>
+                      <pre class="json">
+  {
+    "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
+    "typ": "Číselník",
+    "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
+    "název": {
+      "cs":  "Číselník měn",
+      "en":  "Codelist of currencies"
+    },
+    "platnost": {
+      "typ": "Časový interval",
+      "začátek": {
+        "typ": "Časový okamžik",
+        "datum": "2009-01-01"
+      },
+      "konec": {
+        "typ": "Časový okamžik",
+        "datum": "2020-12-31"
+      }
+    },
+    "položky": [
+      {
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
+        "kód": "064",
+        "název": {
+          "cs": "bhútánský ngultrum",
+          "en": "bhutanese ngultrum"
+        },
+        "platnost": {
+          "typ": "Časový interval",
+          "začátek": {
+            "typ": "Časový okamžik",
+            "datum": "2009-01-01"
+          },
+          "konec": {
+            "typ": "Časový okamžik",
+            "datum": "2020-06-30"
+          }
+        }
+      },{
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
+        "kód": "068",
+        "název": {
+          "cs": "bolivijské boliviano",
+          "en": "bolivian boliviano"
+        },
+        "platnost": {
+          "typ": "Časový interval",
+          "začátek": {
+            "typ": "Časový okamžik",
+            "datum": "2009-01-01"
+          },
+          "konec": {
+            "typ": "Časový okamžik",
+            "nespecifikovaný": true
+          }
+        }
+      }
+    ]
+  }</pre>
+                  </aside>
+                    
+                </section>
+                
+                <section id="jsonld-příklady-číselník-měn">
+                  <h4>Číselník měn - kompletní popis</h4>
+                  
+                  <p>
+                      Příklad ukazuje reprezentaci číselníku měn s alternativním pojmenováním a dalšími atributy měn. 
+                  </p>
+                  
+                  <aside class="example" title="Číselník měn - kompletní - JSON-LD">
+                      <p>
+                        <a href="příklady/číselník-měn.jsonld">JSON-LD soubor</a>, <a href="schémata/jsonld/číselník.json">JSON Schema</a>, <a href="kontexty/číselník.jsonld">JSON-LD kontext</a>
+                      </p>
+                      <pre class="json">
+  {
+    "@context": "https://ofn.gov.cz/číselníky/draft/kontexty/číselník.jsonld",
+    "typ": "Číselník",
+    "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
+    "název": {
+      "cs":  "Číselník měn",
+      "en":  "Codelist of currencies"
+    },
+    "akronym": "CISCUR",
+    "definice": {
+      "cs":  "Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",
+      "en":  "A codelist of currencies with all world currencies currently in use."
+    },
+    "popis": {
+      "cs":  "Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.",
+      "en":  "A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included."
+    },
+    "platnost": {
+      "typ": "Časový interval",
+      "začátek": {
+        "typ": "Časový okamžik",
+        "datum": "2009-01-01"
+      },
+      "konec": {
+        "typ": "Časový okamžik",
+        "datum": "2020-12-31"
+      }
+    },
+    "položky": [
+      {
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064",
+        "kód": "064",
+        "název": {
+          "cs": "bhútánský ngultrum",
+          "en": "bhutanese ngultrum"
+        },
+        "alt_název": {
+          "cs": "ngultrum",
+          "en": "ngultrum"
+        },
+        "zkr_název": {
+          "cs":  "BTN",
+          "en":  "BTN"
+        },
+        "definice": {
+          "cs": "1 ngultrum=100 chhetrum",
+          "en": "1 ngultrum=100 chhetrum"
+        },
+        "popis": {
+          "cs": "Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.",
+          "en": "The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN."
+        },
+        "platnost": {
+          "typ": "Časový interval",
+          "začátek": {
+            "typ": "Časový okamžik",
+            "datum": "2009-01-01"
+          },
+          "konec": {
+            "typ": "Časový okamžik",
+            "datum": "2020-06-30"
+          }
+        }
+      },{
+        "typ": "Položka",
+        "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068",
+        "kód": "068",
+        "název": {
+          "cs": "bolivijské boliviano",
+          "en": "bolivian boliviano"
+        },
+        "alt_název": {
+          "cs": "boliviano",
+          "en": "boliviano"
+        },
+        "zkr_název": {
+          "cs":  "BOB",
+          "en":  "BOB"
+        },
+        "definice": {
+          "cs": "1 boliviano=100 centavo",
+          "en": "1 boliviano=100 centavo"
+        },
+        "popis": {
+          "cs": "Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.",
+          "en": "The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB."
+        },
+        "platnost": {
+          "typ": "Časový interval",
+          "začátek": {
+            "typ": "Časový okamžik",
+            "datum": "2009-01-01"
+          },
+          "konec": {
+            "typ": "Časový okamžik",
+            "nespecifikovaný": true
+          }
+        }
+      }
+    ]
+  }</pre>
+                  </aside>
+                    
+                </section>
+              
+              </section>
+              
+            </section>
+              
+          </section>
+
         </section>
 
-        <section id="serializace-denormalizované-csv">
+        <section id="denormalizované-csv">
           <h2>Serializace CSV - denormalizovaná podoba</h2>
           
           <p>
             V této sekci je specifikována reprezentace ve formátu CSV v podobě jedné denormalizované tabulky.
             Reprezentace je definována v <a href="schémata/csv/číselník-denormalizovaná-podoba.json">CSVW schématu</a>.
           </p>
-                      
-          <section id="denormalizované-csv-třída-číselník">
-            <h3>Číselník</h3>
+
+          <section id="denormalizované-csv-struktura">
+            <h3>Struktura</h3>
+            <section id="denormalizované-csv-třída-číselník">
+              <h4>Číselník</h4>
+              <p>
+                Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...).
+                Instance třídy Číselník je reprezentována jako součást řádku tabulky reprezentované v CSV formátu dle <a href="schémata/csv/číselník-denormalizovaná-podoba.json">CSVW schématu</a> popisující denormalizovanou reprezentaci.
+              </p>
+              <section id="denormalizované-csv-vlastnost-číselník-iri">
+                <h5>IRI</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Identifikace instance třídy Číselník v podobě jejího IRI.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+    číselník
+    https://data.poskytovatel.cz/zdroj/číselník/měny</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-číselník-název">
+                <h5>název</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+  číselník,číselník_název_cs
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-číselník-akronym">
+                <h5>akronym</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_akronym</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník,číselník_akronym
+                      https://data.poskytovatel.cz/zdroj/číselník/měny,CISCUR</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-číselník-definice">
+                <h5>definice</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_definice</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník,číselník_definice_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn se všemi světovými měnami, které jsou aktuálně používány.</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-číselník-popis">
+                <h5>popis</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_popis</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník,číselník_popis_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn se všemi světovými měnami, které jsou aktuálně používány.</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vazba-číselník-platnost">
+                <h5>Vazba: platnost</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_platnost</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
+                  <dt>Příklad</dt>
+                  <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vazba-eviduje">
+                <h5>Vazba: eviduje</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd>viz <a href="#denormalizované-csv-vlastnost-položka-iri">Položka</a></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="#denormalizované-csv-vlastnost-položka-iri">Položka</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
+                  <dt>Příklad</dt>
+                  <dd>viz <a href="#denormalizované-csv-vlastnost-položka-iri">Položka</a></dd>
+                </dl>
+              </section>
+            </section>
+            <section id="denormalizované-csv-třída-položka">
+              <h4>Položka</h4>
+              <p>
+                Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
+                Instance třídy Položka je reprezentována jako součást řádku tabulky reprezentované v CSV formátu dle <a href="schémata/csv/číselník-denormalizovaná-podoba.json">CSVW schématu</a> popisující denormalizovanou reprezentaci.
+              </p>
+              <section id="denormalizované-csv-vlastnost-položka-iri">
+                <h5>IRI</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Identifikace instance třídy Položka v podobě jejího IRI.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
+                    </pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-položka-kód">
+                <h5>kód</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_kód</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka,číselník_položka_kód
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064
+                    </pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-položka-název">
+                <h5>název</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Název (hodnota) položky číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka,číselník_položka_název_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,bhútánský ngultrum</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-položka-alt_název">
+                <h5>alternativní název</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_alt_název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Alternativní název (hodnota) položky číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka,číselník_položka_alt_název_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,ngultrum</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-položka-zkr_název">
+                <h5>zkrácený název</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_zkr_název</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Zkrácený název (hodnota) položky číselníku.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka,číselník_položka_zkr_název_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,BTN</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-položka-definice">
+                <h5>definice</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_definice</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka,číselník_položka_definice_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,1 ngultrum=100 chhetrum</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vlastnost-položka-popis">
+                <h5>popis</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_popis</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+                      číselník_položka,číselník_položka_popis_cs
+                      https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="denormalizované-csv-vazba-položka-platnost">
+                <h5>Vazba: platnost</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_položka_platnost</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
+                  <dt>Příklad</dt>
+                  <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
+                </dl>
+              </section>
+            </section>
+          </section>
+              
+
+          <section id="denormalizované-csv-příklady">
+            <h3>Příklady v serializaci CSV - denormalizovaná podoba</h3>
+
+            <p>
+              V této sekci jsou uvedeny příklady serializace dle této otevřené formální normy v podobě jedné denormalizované tabulky ve formátu CSV [[!rfc4180]].
+              Pro konkrétní datovou sadu musí poskytovatel vytvořit vlastní CSVW schéma.
+              Jako základ může zvolit <a href="schémata/csv/číselník.json">předpřipravené CSVW schéma</a>, které si upraví pro svoje potřeby.
+              Úprava typicky znamená vymázání těch definici sloupců z CSVW schématu, které v CSV serializaci poskytovatel nepoužije.
+            </p>
+                        
+            <section id="denormalizované-csv-příklady-číselník-měn-základní-podoba">
+              <h4>Číselník měn - základní podoba</h4>
+              
+              <p>
+                  Příklad ukazuje reprezentaci číselníku měn v základní podobě. 
+              </p>
+              
+              <aside class="example" title="Číselník měn - základní podoba - CSV">
+                  <p>
+                      <a href="příklady/číselník-měn-základní-podoba.csv">CSV soubor</a>.
+                  </p>
+                  <pre class="csv">
+  číselník,číselník_název_cs,číselník_položka,číselník_položka_kód,číselník_položka_název_cs
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano
+  </pre>
+                </aside>
+                  
+              </section>
+                
+              <section id="denormalizované-csv-příklady-číselník-měn-různé-jazyky">
+                <h4>Číselník měn - různé jazyky</h4>
+                  
+                <p>
+                    Příklad ukazuje reprezentaci číselníku měn v různých jazycích. 
+                </p>
+                
+                <aside class="example" title="Číselník měn - různé jazyky - CSV">
+                  <p>
+                      <a href="příklady/číselník-měn-různé-jazyky.csv">CSV soubor</a>.
+                  </p>
+
+                  <pre class="csv">
+  číselník,číselník_název_cs,číselník_název_en,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano
+  </pre>
+                </aside>
+                    
+              </section>
+              
+              <section id="denormalizované-csv-příklady-číselník-měn-platnosti">
+                <h4>Číselník měn - platnosti</h4>
+                
+                <p>
+                    Příklad ukazuje reprezentaci číselníku měn s platnostmi položek číselníku a platností číselníku jako takového. 
+                </p>
+                
+                <aside class="example" title="Číselník měn - platnosti - CSV">
+                  <p>
+                      <a href="příklady/číselník-měn-platnosti.csv">CSV soubor</a>.
+                  </p>
+
+                  <pre class="csv">
+  číselník,číselník_název_cs,číselník_název_en,číselník_platnost_začátek_datum,číselník_platnost_začátek_nespecifikovaný,číselník_platnost_konec_datum,číselník_platnost_konec_nespecifikovaný,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en,číselník_položka_platnost_začátek_datum,číselník_položka_platnost_začátek_nespecifikovaný,číselník_položka_platnost_konec_datum,číselník_položka_platnost_konec_nespecifikovaný
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,2009-01-01,false,2020-06-30,false
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,2009-01-01,false,,true
+  </pre>
+                </aside>
+                    
+              </section>
+
+              <section id="denormalizované-csv-příklady-číselník-měn">
+                <h4>Číselník měn - kompletní popis</h4>
+                  
+                <p>
+                    Příklad ukazuje reprezentaci číselníku měn s alternativním pojmenováním a dalšími atributy měn. 
+                </p>
+                
+                <aside class="example" title="Číselník měn - kompletní - CSV">
+                  <p>
+                      <a href="příklady/číselník-měn.csv">CSV soubor</a>.
+                  </p>
+
+                  <pre class="csv">
+  číselník,číselník_název_cs,číselník_název_en,číselník_akronym,číselník_definice_cs,číselník_definice_en,číselník_popis_cs,číselník_popis_en,číselník_platnost_začátek_datum,číselník_platnost_začátek_nespecifikovaný,číselník_platnost_konec_datum,číselník_platnost_konec_nespecifikovaný,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en,číselník_položka_alt_název_cs,číselník_položka_alt_název_en,číselník_položka_zkr_název_cs,číselník_položka_zkr_název_en,číselník_položka_definice_cs,číselník_položka_definice_en,číselník_položka_popis_cs,číselník_položka_popis_en,číselník_položka_platnost_začátek_datum,číselník_položka_platnost_začátek_nespecifikovaný,číselník_položka_platnost_konec_datum,číselník_položka_platnost_konec_nespecifikovaný
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",A codelist of currencies with all world currencies currently in use.,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included.",2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,ngultrum,ngultrum,BTN,BTN,1 ngultrum=100 chhetrum,1 ngultrum=100 chhetrum,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.,The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN.,2009-01-01,false,2020-06-30,false
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",A codelist of currencies with all world currencies currently in use.,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included.",2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,boliviano,boliviano,BOB,BOB,1 boliviano=100 centavo,1 boliviano=100 centavo,Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.,The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB.,2009-01-01,false,,true
+  </pre>
+                </aside>
+                  
+              </section>
+              
+            </section>
+              
+          </section>
+
+        </section>
+            
+      </section>
+
+      <section id="normalizované-csv">
+        <h2>Serializace CSV - normalizovaná podoba</h2>
+        
+        <p>
+          V této sekci je specifikována reprezentace ve formátu CSV v podobě normalizovaných tabulek.
+          Reprezentace sestává ze 3 CSV souborů:
+        </p>
+        <ul>
+          <li>CSV soubor pro instance třídy <a href="#normalizované-csv-třída-číselník">Číselník</a> ve struktuře definováné v <a href="schémata/csv/číselník-normalizovaná-podoba.json">CSVW schématu</a> pro třídu <a href="#normalizované-csv-třída-číselník">Číselník</a>.</li>
+          <li>CSV soubor pro instance třídy <a href="#normalizované-csv-třída-položka">Položka</a> ve struktuře definováné v <a href="schémata/csv/položka-normalizovaná-podoba.json">CSVW schématu</a> pro třídu <a href="#normalizované-csv-třída-položka">Položka</a>.</li>
+          <li>CSV soubor pro vazby typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a> mezi instancemi tříd <a href="#normalizované-csv-třída-číselník">Číselník</a> a <a href="#normalizované-csv-třída-položka">Položka</a> ve struktuře definováné v <a href="schémata/csv/eviduje-normalizovaná-podoba.json">CSVW schématu</a> pro typ vazby <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.</li>
+        </ul>
+                    
+        <section id="normalizované-csv-struktura">
+          <h3>Struktura</h3>
+          <section id="normalizované-csv-třída-číselník">
+            <h4>Číselník</h4>
             <p>
               Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...).
-              Instance třídy Číselník je reprezentována jako součást řádku tabulky reprezentované v CSV formátu dle <a href="schémata/csv/číselník-denormalizovaná-podoba.json">CSVW schématu</a> popisující denormalizovanou reprezentaci.
+              Instance třídy Číselník je reprezentována jako jeden řádek tabulky reprezentované v CSV formátu dle <a href="schémata/csv/číselník-normalizovaná-podoba.json">CSVW schématu</a> popisující normalizovanou reprezentaci.
             </p>
-            <section id="denormalizované-csv-vlastnost-číselník-iri">
-              <h4>IRI</h4>
+            <section id="normalizované-csv-vlastnost-číselník-iri">
+              <h5>IRI</h5>
               <dl>
                 <dt>Název sloupce</dt>
                 <dd><code>číselník</code></dd>
@@ -810,12 +1194,12 @@
   https://data.poskytovatel.cz/zdroj/číselník/měny</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-číselník-název">
-              <h4>název</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-číselník-název">
+              <h5>název</h5>
               <dl>
                 <dt>Název sloupce</dt>
-                <dd><code>číselník_název</code></dd>
+                <dd><code>název</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -823,16 +1207,16 @@
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-číselník,číselník_název_cs
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
+  číselník,název_cs
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-číselník-akronym">
-              <h4>akronym</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-číselník-akronym">
+              <h5>akronym</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_akronym</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>akronym</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
                 <dt>Popis</dt>
@@ -840,16 +1224,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník,číselník_akronym
+                    číselník,akronym
                     https://data.poskytovatel.cz/zdroj/číselník/měny,CISCUR</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-číselník-definice">
-              <h4>definice</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-číselník-definice">
+              <h5>definice</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_definice</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>definice</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -857,16 +1241,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník,číselník_definice_cs
+                    číselník,definice_cs
                     https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn se všemi světovými měnami, které jsou aktuálně používány.</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-číselník-popis">
-              <h4>popis</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-číselník-popis">
+              <h5>popis</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_popis</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>popis</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -874,16 +1258,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník,číselník_popis_cs
+                    číselník,popis_cs
                     https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn se všemi světovými měnami, které jsou aktuálně používány.</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vazba-číselník-platnost">
-              <h4>Vazba: platnost</h4>
+            </section>
+            <section id="normalizované-csv-vazba-číselník-platnost">
+              <h5>Vazba: platnost</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_platnost</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>platnost</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                 <dt>Popis</dt>
@@ -891,32 +1275,19 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vazba-eviduje">
-              <h4>Vazba: eviduje</h4>
-              <dl>
-                <dt>Klíč</dt>
-                <dd>viz <a href="#denormalizované-csv-vlastnost-položka-iri">Položka</a></dd>
-                <dt>Typ</dt>
-                <dd><a href="#denormalizované-csv-vlastnost-položka-iri">Položka</a></dd>
-                <dt>Popis</dt>
-                <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
-                <dt>Příklad</dt>
-                <dd>viz <a href="#denormalizované-csv-vlastnost-položka-iri">Položka</a></dd>
-              </dl>
-             </section>
+            </section>
           </section>
-          <section id="denormalizované-csv-třída-položka">
-            <h3>Položka</h3>
+          <section id="normalizované-csv-třída-položka">
+            <h4>Položka</h4>
             <p>
               Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
-              Instance třídy Položka je reprezentována jako součást řádku tabulky reprezentované v CSV formátu dle <a href="schémata/csv/číselník-denormalizovaná-podoba.json">CSVW schématu</a> popisující denormalizovanou reprezentaci.
+              Instance třídy Položka je reprezentována jako jeden řádek tabulky reprezentované v CSV formátu dle <a href="schémata/csv/položka-normalizovaná-podoba.json">CSVW schématu</a> popisující normalizovanou reprezentaci.
             </p>
-            <section id="denormalizované-csv-vlastnost-položka-iri">
-              <h4>IRI</h4>
+            <section id="normalizované-csv-vlastnost-položka-iri">
+              <h5>IRI</h5>
               <dl>
                 <dt>Název sloupce</dt>
-                <dd><code>číselník_položka</code></dd>
+                <dd><code>položka</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
                 <dt>Popis</dt>
@@ -924,17 +1295,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka
-                    https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
-                  </pre>
+  položka
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-položka-kód">
-              <h4>kód</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-položka-kód">
+              <h5>kód</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_kód</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>kód</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
                 <dt>Popis</dt>
@@ -942,17 +1312,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka,číselník_položka_kód
-                    https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064
-                  </pre>
+                    položka,kód
+                    https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-položka-název">
-              <h4>název</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-položka-název">
+              <h5>název</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_název</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>název</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -960,16 +1329,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka,číselník_položka_název_cs
+                    položka,název_cs
                     https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,bhútánský ngultrum</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-položka-alt_název">
-              <h4>alternativní název</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-položka-alt_název">
+              <h5>alternativní název</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_alt_název</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>alt_název</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -977,16 +1346,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka,číselník_položka_alt_název_cs
+                    položka,název_cs
                     https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,ngultrum</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-položka-zkr_název">
-              <h4>zkrácený název</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-položka-zkr_název">
+              <h5>zkrácený název</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_zkr_název</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>zkr_název</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -994,16 +1363,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka,číselník_položka_zkr_název_cs
+                    položka,zkr_název_cs
                     https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,BTN</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-položka-definice">
-              <h4>definice</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-položka-definice">
+              <h5>definice</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_definice</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>definice</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -1011,16 +1380,16 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka,číselník_položka_definice_cs
+                    položka,definice_cs
                     https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,1 ngultrum=100 chhetrum</pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vlastnost-položka-popis">
-              <h4>popis</h4>
+            </section>
+            <section id="normalizované-csv-vlastnost-položka-popis">
+              <h5>popis</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_popis</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>popis</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
                 <dt>Popis</dt>
@@ -1028,16 +1397,17 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>
                   <pre class="csv">
-                    číselník_položka,číselník_položka_popis_cs
-                    https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.</pre>
+                    položka,popis_cs
+                    https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.
+                  </pre>
                 </dd>
               </dl>
-             </section>
-            <section id="denormalizované-csv-vazba-položka-platnost">
-              <h4>Vazba: platnost</h4>
+            </section>
+            <section id="normalizované-csv-vazba-položka-platnost">
+              <h5>Vazba: platnost</h5>
               <dl>
-                <dt>Klíč</dt>
-                <dd><code>číselník_položka_platnost</code></dd>
+                <dt>Název sloupce</dt>
+                <dd><code>platnost</code></dd>
                 <dt>Typ</dt>
                 <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                 <dt>Popis</dt>
@@ -1045,100 +1415,207 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
                 <dt>Příklad</dt>
                 <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
               </dl>
-             </section>
+            </section>
+          </section>
+          <section id="normalizované-csv-vazba-eviduje">
+            <h4>Vazba: eviduje</h4>
+            <p>
+              Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.
+            </p>
+            <section id="normalizované-csv-vazba-eviduje-číselník">
+              <h5>Číselník</h5>
+              <dl>
+                <dt>Název sloupce</dt>
+                <dd><code>číselník</code></dd>
+                <dt>Typ</dt>
+                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
+                <dt>Popis</dt>
+                <dd>Identifikace instance třídy Číselník v podobě jejího IRI.</dd>
+                <dt>Příklad</dt>
+                <dd>
+                  <pre class="csv">
+                    číselník
+                    https://data.poskytovatel.cz/zdroj/číselník/měny
+                  </pre>
+                </dd>
+              </dl>
+            </section>
+            <section id="normalizované-csv-vazba-eviduje-položka">
+              <h5>Položka</h5>
+              <dl>
+                <dt>Název sloupce</dt>
+                <dd><code>položka</code></dd>
+                <dt>Typ</dt>
+                <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
+                <dt>Popis</dt>
+                <dd>Identifikace instance třídy Položka v podobě jejího IRI.</dd>
+                <dt>Příklad</dt>
+                <dd>
+                  <pre class="csv">
+                    položka
+                    https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
+                  </pre>
+                </dd>
+              </dl>
+            </section>
           </section>
         </section>
             
 
-        <section id="příklady-csv">
-          <h3>Příklady v serializaci CSV - denormalizovaná podoba</h3>
-
+        <section id="normalizované-csv-příklady">
+          <h4>Příklady v serializaci CSV - normalizovaná podoba</h4>
+          
           <p>
-            V této sekci jsou uvedeny příklady reprezentace číselniku měn v různých úrovních detailu, ve formátu CSV [[!rfc4180]].
-            Pro datové sady reprezentované dle této otevřené formální normy v serializaci CSV je nutno vytvořit vlastní CSVW schéma.
-            Jako základ lze zvolit <a href="schémata/csv/číselník.json">předpřipravené CSVW schéma</a>, které si poskytovatel datové sady upraví pro svoje potřeby.
-            Úprava typicky znamená vymázání těch definici sloupců z CSVW schématu, které v CSV serializaci poskytovatel nepoužije.
+            V této sekci jsou uvedeny příklady serializace dle této otevřené formální normy v podobě normalizovaných tabulek ve formátu CSV [[!rfc4180]].
+            Pro konkrétní datovou sadu musí poskytovatel vytvořit vlastní CSVW schémata.
+            Jako základ může zvolit předpřipravená CSVW schémata:
           </p>
-                      
-          <section id="příklad-číselník-měn-základní-podoba-csv">
-            <h3>Číselník měn - základní podoba</h3>
+          <ul>
+            <li><a href="schémata/csv/číselník-normalizovaná-podoba.json">CSVW schéma</a> pro třídu <a href="#normalizované-csv-třída-číselník">Číselník</a>.</li>
+            <li><a href="schémata/csv/položka-normalizovaná-podoba.json">CSVW schéma</a> pro třídu <a href="#normalizované-csv-třída-položka">Položka</a>.</li>
+            <li><a href="schémata/csv/eviduje-normalizovaná-podoba.json">CSVW schéma</a> pro typ vazby <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.</li>
+          </ul>
+          <p>
+            Ta si upraví pro svoje potřeby.
+            Úprava typicky znamená vymázání těch definici sloupců z CSVW schémat, které v CSV serializaci poskytovatel nepoužije.
+          </p>
+
+          <section id="normalizované-csv-příklady-číselník-měn-základní-podoba">
+            <h4>Číselník měn - základní podoba</h4>
             
             <p>
-                Příklad ukazuje reprezentaci číselníku měn v základní podobě. 
+                Příklad ukazuje normalizovanou reprezentaci číselníku měn v základní podobě. 
             </p>
             
-            <aside class="example" title="Číselník měn - základní podoba - CSV">
+            <aside class="example" title="Číselník měn - základní podoba - normalizované CSV">
                 <p>
-                    <a href="příklady/číselník-měn-základní-podoba.csv">CSV soubor</a>.
+                  <a href="příklady/číselník-měn-základní-podoba-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
                 </p>
                 <pre class="csv">
-číselník,číselník_název_cs,číselník_položka,číselník_položka_kód,číselník_položka_název_cs
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano
-</pre>
-              </aside>
+  číselník,název_cs
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-základní-podoba-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
+                </p>
+                <pre class="csv">
+  položka,položka_kód,položka_název_cs
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-základní-podoba-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
+                </p>              
+                <pre class="csv">
+  číselník,položka
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
+                </pre>
+            </aside>
                 
-            </section>
+          </section>
               
-            <section id="příklad-číselník-měn-různé-jazyky-csv">
-              <h3>Číselník měn - různé jazyky</h3>
+            <section id="normalizované-csv-příklady-číselník-měn-různé-jazyky">
+              <h4>Číselník měn - různé jazyky</h4>
                 
               <p>
-                  Příklad ukazuje reprezentaci číselníku měn v různých jazycích. 
+                  Příklad ukazuje normalizovanou reprezentaci číselníku měn v různých jazycích. 
               </p>
               
-              <aside class="example" title="Číselník měn - různé jazyky - CSV">
+              <aside class="example" title="Číselník měn - různé jazyky - normalizované CSV">
                 <p>
-                    <a href="příklady/číselník-měn-různé-jazyky.csv">CSV soubor</a>.
+                  <a href="příklady/číselník-měn-různé-jazyky-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
                 </p>
-
                 <pre class="csv">
-číselník,číselník_název_cs,číselník_název_en,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano
-</pre>
+  číselník,název_cs,název_en
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-různé-jazyky-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
+                </p>
+                <pre class="csv">
+  položka,kód,název_cs,název_en
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-různé-jazyky-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
+                </p> 
+                <pre class="csv">
+  číselník,položka
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
+                </pre>
               </aside>
                   
             </section>
             
-            <section id="příklad-číselník-měn-platnosti-csv">
-              <h3>Číselník měn - platnosti</h3>
+            <section id="normalizované-csv-příklady-číselník-měn-platnosti">
+              <h4>Číselník měn - platnosti</h4>
               
               <p>
                   Příklad ukazuje reprezentaci číselníku měn s platnostmi položek číselníku a platností číselníku jako takového. 
               </p>
               
-              <aside class="example" title="Číselník měn - platnosti - CSV">
+              <aside class="example" title="Číselník měn - platnosti - normalizované CSV">
                 <p>
-                    <a href="příklady/číselník-měn-platnosti.csv">CSV soubor</a>.
+                  <a href="příklady/číselník-měn-platnosti-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
                 </p>
-
                 <pre class="csv">
-číselník,číselník_název_cs,číselník_název_en,číselník_platnost_začátek_datum,číselník_platnost_začátek_nespecifikovaný,číselník_platnost_konec_datum,číselník_platnost_konec_nespecifikovaný,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en,číselník_položka_platnost_začátek_datum,číselník_položka_platnost_začátek_nespecifikovaný,číselník_položka_platnost_konec_datum,číselník_položka_platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,2009-01-01,false,2020-06-30,false
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,2009-01-01,false,,true
-</pre>
+  číselník,název_cs,název_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,2009-01-01,false,2020-12-31,false
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-platnosti-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
+                </p>
+                <pre class="csv">
+  položka,kód,název_cs,název_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,2009-01-01,false,2020-06-30,false
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,2009-01-01,false,,true
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-platnosti-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
+                </p> 
+                <pre class="csv">
+  číselník,položka
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
+                </pre>
               </aside>
                   
             </section>
 
-            <section id="příklad-číselník-měn-csv">
-              <h3>Číselník měn - kompletní popis</h3>
+            <section id="normalizované-csv-příklady-číselník-měn">
+              <h4>Číselník měn - kompletní popis</h4>
                 
               <p>
                   Příklad ukazuje reprezentaci číselníku měn s alternativním pojmenováním a dalšími atributy měn. 
               </p>
               
-              <aside class="example" title="Číselník měn - kompletní - CSV">
+              <aside class="example" title="Číselník měn - kompletní - normalizované CSV">
                 <p>
-                    <a href="příklady/číselník-měn.csv">CSV soubor</a>.
+                  <a href="příklady/číselník-měn-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
                 </p>
-
                 <pre class="csv">
-číselník,číselník_název_cs,číselník_název_en,číselník_akronym,číselník_definice_cs,číselník_definice_en,číselník_popis_cs,číselník_popis_en,číselník_platnost_začátek_datum,číselník_platnost_začátek_nespecifikovaný,číselník_platnost_konec_datum,číselník_platnost_konec_nespecifikovaný,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en,číselník_položka_alt_název_cs,číselník_položka_alt_název_en,číselník_položka_zkr_název_cs,číselník_položka_zkr_název_en,číselník_položka_definice_cs,číselník_položka_definice_en,číselník_položka_popis_cs,číselník_položka_popis_en,číselník_položka_platnost_začátek_datum,číselník_položka_platnost_začátek_nespecifikovaný,číselník_položka_platnost_konec_datum,číselník_položka_platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",A codelist of currencies with all world currencies currently in use.,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included.",2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,ngultrum,ngultrum,BTN,BTN,1 ngultrum=100 chhetrum,1 ngultrum=100 chhetrum,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.,The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN.,2009-01-01,false,2020-06-30,false
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",A codelist of currencies with all world currencies currently in use.,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included.",2009-01-01,false,2020-12-31,false,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,boliviano,boliviano,BOB,BOB,1 boliviano=100 centavo,1 boliviano=100 centavo,Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.,The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB.,2009-01-01,false,,true
-</pre>
+  číselník,název_cs,název_en,akronym,definice_cs,definice_en,popis_cs,popis_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
+  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",A codelist of currencies with all world currencies currently in use.,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included.",2009-01-01,false,2020-12-31,false
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
+                </p>
+                <pre class="csv">
+  položka,kód,název_cs,název_en,alt_název_cs,název_en,zkr_název_cs,zkr_název_en,definice_cs,definice_en,popis_cs,popis_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,ngultrum,ngultrum,BTN,BTN,1 ngultrum=100 chhetrum,1 ngultrum=100 chhetrum,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.,The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN.,2009-01-01,false,2020-06-30,false
+  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,boliviano,boliviano,BOB,BOB,1 boliviano=100 centavo,1 boliviano=100 centavo,Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.,The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB.,2009-01-01,false,,true
+                </pre>
+                <p>
+                  <a href="příklady/číselník-měn-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
+                </p> 
+                <pre class="csv">
+  číselník,položka
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
+  https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
+                </pre>
               </aside>
                 
             </section>
@@ -1146,457 +1623,7 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist o
           </section>
             
         </section>
-            
-      </section>
 
-      <section id="serializace-normalizované-csv">
-        <h2>Serializace CSV - normalizovaná podoba</h2>
-        
-        <p>
-          V této sekci je specifikována reprezentace ve formátu CSV v podobě normalizovaných tabulek.
-          Reprezentace sestává ze 3 CSV souborů:
-        </p>
-        <ul>
-          <li>CSV soubor pro instance třídy <a href="#normalizované-csv-třída-číselník">Číselník</a> ve struktuře definováné v <a href="schémata/csv/číselník-normalizovaná-podoba.json">CSVW schématu</a> pro třídu <a href="#normalizované-csv-třída-číselník">Číselník</a>.</li>
-          <li>CSV soubor pro instance třídy <a href="#normalizované-csv-třída-položka">Položka</a> ve struktuře definováné v <a href="schémata/csv/položka-normalizovaná-podoba.json">CSVW schématu</a> pro třídu <a href="#normalizované-csv-třída-položka">Položka</a>.</li>
-          <li>CSV soubor pro vazby typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a> mezi instancemi tříd <a href="#normalizované-csv-třída-číselník">Číselník</a> a <a href="#normalizované-csv-třída-položka">Položka</a> ve struktuře definováné v <a href="schémata/csv/eviduje-normalizovaná-podoba.json">CSVW schématu</a> pro typ vazby <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.</li>
-        </ul>
-                    
-        <section id="normalizované-csv-třída-číselník">
-          <h3>Číselník</h3>
-          <p>
-            Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...).
-            Instance třídy Číselník je reprezentována jako jeden řádek tabulky reprezentované v CSV formátu dle <a href="schémata/csv/číselník-normalizovaná-podoba.json">CSVW schématu</a> popisující normalizovanou reprezentaci.
-          </p>
-          <section id="normalizované-csv-vlastnost-číselník-iri">
-            <h4>IRI</h4>
-            <dl>
-              <dt>Název sloupce</dt>
-              <dd><code>číselník</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
-              <dt>Popis</dt>
-              <dd>Identifikace instance třídy Číselník v podobě jejího IRI.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-číselník
-https://data.poskytovatel.cz/zdroj/číselník/měny</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-číselník-název">
-            <h4>název</h4>
-            <dl>
-              <dt>Název sloupce</dt>
-              <dd><code>název</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-číselník,název_cs
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-číselník-akronym">
-            <h4>akronym</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>akronym</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
-              <dt>Popis</dt>
-              <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  číselník,akronym
-                  https://data.poskytovatel.cz/zdroj/číselník/měny,CISCUR</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-číselník-definice">
-            <h4>definice</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>definice</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  číselník,definice_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn se všemi světovými měnami, které jsou aktuálně používány.</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-číselník-popis">
-            <h4>popis</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>popis</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  číselník,popis_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn se všemi světovými měnami, které jsou aktuálně používány.</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vazba-číselník-platnost">
-            <h4>Vazba: platnost</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>platnost</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-              <dt>Popis</dt>
-              <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
-              <dt>Příklad</dt>
-              <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-            </dl>
-           </section>
-        </section>
-        <section id="normalizované-csv-třída-položka">
-          <h3>Položka</h3>
-          <p>
-            Položka číselníku reprezentuje jednu přípustnou hodnotu datového prvku z množiny všech přípustných hodnot, které jsou kódovány číselníkem, do kterého položka patří.
-            Instance třídy Položka je reprezentována jako jeden řádek tabulky reprezentované v CSV formátu dle <a href="schémata/csv/položka-normalizovaná-podoba.json">CSVW schématu</a> popisující normalizovanou reprezentaci.
-          </p>
-          <section id="normalizované-csv-vlastnost-položka-iri">
-            <h4>IRI</h4>
-            <dl>
-              <dt>Název sloupce</dt>
-              <dd><code>položka</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
-              <dt>Popis</dt>
-              <dd>Identifikace instance třídy Položka v podobě jejího IRI.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-položka
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-položka-kód">
-            <h4>kód</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>kód</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="http://www.w3.org/2001/XMLSchema#string">http://www.w3.org/2001/XMLSchema#string</a></dd>
-              <dt>Popis</dt>
-              <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka,kód
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-položka-název">
-            <h4>název</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>název</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Název (hodnota) položky číselníku.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka,název_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,bhútánský ngultrum</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-položka-alt_název">
-            <h4>alternativní název</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>alt_název</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Alternativní název (hodnota) položky číselníku.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka,název_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,ngultrum</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-položka-zkr_název">
-            <h4>zkrácený název</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>zkr_název</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Zkrácený název (hodnota) položky číselníku.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka,zkr_název_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,BTN</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-položka-definice">
-            <h4>definice</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>definice</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka,definice_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,1 ngultrum=100 chhetrum</pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vlastnost-položka-popis">
-            <h4>popis</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>popis</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a></dd>
-              <dt>Popis</dt>
-              <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka,popis_cs
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.
-                </pre>
-              </dd>
-            </dl>
-           </section>
-          <section id="normalizované-csv-vazba-položka-platnost">
-            <h4>Vazba: platnost</h4>
-            <dl>
-              <dt>Klíč</dt>
-              <dd><code>platnost</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-              <dt>Popis</dt>
-              <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
-              <dt>Příklad</dt>
-              <dd>viz <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
-            </dl>
-          </section>
-        </section>
-        <section id="normalizované-csv-vazba-eviduje">
-          <h3>Vazba: eviduje</h3>
-          <p>
-            Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.
-          </p>
-          <section id="normalizované-csv-vazba-eviduje-číselník">
-            <h4>Číselník</h4>
-            <dl>
-              <dt>Název sloupce</dt>
-              <dd><code>číselník</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
-              <dt>Popis</dt>
-              <dd>Identifikace instance třídy Číselník v podobě jejího IRI.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  číselník
-                  https://data.poskytovatel.cz/zdroj/číselník/měny
-                </pre>
-              </dd>
-            </dl>
-          </section>
-          <section id="normalizované-csv-vazba-eviduje-položka">
-            <h4>Položka</h4>
-            <dl>
-              <dt>Název sloupce</dt>
-              <dd><code>položka</code></dd>
-              <dt>Typ</dt>
-              <dd><a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#url">IRI</a></dd>
-              <dt>Popis</dt>
-              <dd>Identifikace instance třídy Položka v podobě jejího IRI.</dd>
-              <dt>Příklad</dt>
-              <dd>
-                <pre class="csv">
-                  položka
-                  https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
-                </pre>
-              </dd>
-            </dl>
-          </section>
-        </section>
-      </section>
-          
-
-      <section id="příklady-csv">
-        <h3>Příklady v serializaci CSV - normalizovaná podoba</h3>
-                    
-        <section id="příklad-číselník-měn-základní-podoba-normalizované-csv">
-          <h3>Číselník měn - základní podoba</h3>
-          
-          <p>
-              Příklad ukazuje normalizovanou reprezentaci číselníku měn v základní podobě. 
-          </p>
-          
-          <aside class="example" title="Číselník měn - základní podoba - normalizované CSV">
-              <p>
-                <a href="příklady/číselník-měn-základní-podoba-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
-              </p>
-              <pre class="csv">
-číselník,název_cs
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-základní-podoba-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
-              </p>
-              <pre class="csv">
-položka,položka_kód,položka_název_cs
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-základní-podoba-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
-              </p>              
-              <pre class="csv">
-číselník,položka
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
-              </pre>
-          </aside>
-              
-        </section>
-            
-          <section id="příklad-číselník-měn-různé-jazyky-normalizované-csv">
-            <h3>Číselník měn - různé jazyky</h3>
-              
-            <p>
-                Příklad ukazuje normalizovanou reprezentaci číselníku měn v různých jazycích. 
-            </p>
-            
-            <aside class="example" title="Číselník měn - různé jazyky - normalizované CSV">
-              <p>
-                <a href="příklady/číselník-měn-různé-jazyky-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
-              </p>
-              <pre class="csv">
-číselník,název_cs,název_en
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-různé-jazyky-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
-              </p>
-              <pre class="csv">
-položka,kód,název_cs,název_en
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-různé-jazyky-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
-              </p> 
-              <pre class="csv">
-číselník,položka
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
-              </pre>
-            </aside>
-                
-          </section>
-          
-          <section id="příklad-číselník-měn-platnosti-normalizované-csv">
-            <h3>Číselník měn - platnosti</h3>
-            
-            <p>
-                Příklad ukazuje reprezentaci číselníku měn s platnostmi položek číselníku a platností číselníku jako takového. 
-            </p>
-            
-            <aside class="example" title="Číselník měn - platnosti - normalizované CSV">
-              <p>
-                <a href="příklady/číselník-měn-platnosti-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
-              </p>
-              <pre class="csv">
-číselník,název_cs,název_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,2009-01-01,false,2020-12-31,false
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-platnosti-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
-              </p>
-              <pre class="csv">
-položka,kód,název_cs,název_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,2009-01-01,false,2020-06-30,false
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,2009-01-01,false,,true
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-platnosti-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
-              </p> 
-              <pre class="csv">
-číselník,položka
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
-              </pre>
-            </aside>
-                
-          </section>
-
-          <section id="příklad-číselník-měn-normalizované-csv">
-            <h3>Číselník měn - kompletní popis</h3>
-              
-            <p>
-                Příklad ukazuje reprezentaci číselníku měn s alternativním pojmenováním a dalšími atributy měn. 
-            </p>
-            
-            <aside class="example" title="Číselník měn - kompletní - normalizované CSV">
-              <p>
-                <a href="příklady/číselník-měn-třída-číselník.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-číselník">Číselník</a>.
-              </p>
-              <pre class="csv">
-číselník,název_cs,název_en,akronym,definice_cs,definice_en,popis_cs,popis_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn se všemi světovými měnami, které jsou aktuálně používány.",A codelist of currencies with all world currencies currently in use.,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisitng world currency. Hence, historically used that have disappeared are not included.",2009-01-01,false,2020-12-31,false
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-třída-položka.csv">CSV soubor</a> s instancemi třídy <a href="#normalizované-csv-třída-položka">Položka</a>.
-              </p>
-              <pre class="csv">
-položka,kód,název_cs,název_en,alt_název_cs,název_en,zkr_název_cs,zkr_název_en,definice_cs,definice_en,popis_cs,popis_en,platnost_začátek_datum,platnost_začátek_nespecifikovaný,platnost_konec_datum,platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,ngultrum,ngultrum,BTN,BTN,1 ngultrum=100 chhetrum,1 ngultrum=100 chhetrum,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.,The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN.,2009-01-01,false,2020-06-30,false
-https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,boliviano,boliviano,BOB,BOB,1 boliviano=100 centavo,1 boliviano=100 centavo,Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.,The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB.,2009-01-01,false,,true
-              </pre>
-              <p>
-                <a href="příklady/číselník-měn-vazba-eviduje.csv">CSV soubor</a> s vazbami typu <a href="#normalizované-csv-vazba-eviduje">eviduje</a>.
-              </p> 
-              <pre class="csv">
-číselník,položka
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064
-https://data.poskytovatel.cz/zdroj/číselník/měny,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068
-              </pre>
-            </aside>
-              
-          </section>
-          
-        </section>
-          
       </section>
           
     </section>
