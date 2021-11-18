@@ -1,0 +1,383 @@
+{
+    "@context": [
+        "http://www.w3.org/ns/csvw",
+        {
+            "@language": "cs"
+        }
+    ],
+    "url": "číselník-měn.csv",
+    "tableSchema": {
+        "@type": "Schema",
+        "columns": [
+            {
+                "@type": "Column",
+                "name": "ciselnik",
+                "titles": "číselník",
+                "dc:description": "Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...). Hodnota je uvedena jako IRI.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:ConceptScheme",
+                "required": true,
+                "datatype": "anyURI"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_nazev_cs",
+                "titles": "číselník_název_cs",
+                "dc:description": "Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:prefLabel",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_nazev_en",
+                "titles": "číselník_název_en",
+                "dc:description": "Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:prefLabel",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_akronym",
+                "titles": "číselník_akronym",
+                "dc:description": "Akronym číselníku je zkratka číselníku používaná i jako jeho identifikátor.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:notation",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_definice_cs",
+                "titles": "číselník_definice_cs",
+                "dc:description": "Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:definition",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_definice_en",
+                "titles": "číselník_definice_en",
+                "dc:description": "Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:definition",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_popis_cs",
+                "titles": "číselník_popis_cs",
+                "dc:description": "Popis číselníku blíže vysvětluje obsah či způsob užití číselníku. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:note",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_popis_en",
+                "titles": "číselník_popis_en",
+                "dc:description": "Popis číselníku blíže vysvětluje obsah či způsob užití číselníku. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "skos:note",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_platnost_zacatek_datum",
+                "titles": "číselník_platnost_začátek_datum",
+                "dc:description": "Hodnota vlastnosti platnost > začátek > datum. platnost:Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude číselník platný. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky. > začátek:Okamžik začátku intervalu. > datum:Datum okamžiku.",
+                "aboutUrl": "{+ciselnik}/platnost/beginning",
+                "propertyUrl": "http://www.w3.org/2006/time#inXSDDate",
+                "datatype": {
+                    "base": "date",
+                    "format": "yyyy-MM-dd"
+                }
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_platnost_zacatek_nespecifikovany",
+                "titles": "číselník_platnost_začátek_nespecifikovaný",
+                "dc:description": "Hodnota vlastnosti platnost > začátek > nespecifikovaný. platnost:Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude číselník platný. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky. > začátek:Okamžik začátku intervalu. > nespecifikovaný:Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
+                "aboutUrl": "{+ciselnik}/platnost/beginning",
+                "propertyUrl": "https://slovník.gov.cz/generický/čas/pojem/je-nespecifikovaný",
+                "datatype": "boolean"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_platnost_konec_datum",
+                "titles": "číselník_platnost_konec_datum",
+                "dc:description": "Hodnota vlastnosti platnost > konec > datum. platnost:Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude číselník platný. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky. > konec:Okamžik konce intervalu. > datum:Datum okamžiku.",
+                "aboutUrl": "{+ciselnik}/platnost/end",
+                "propertyUrl": "http://www.w3.org/2006/time#inXSDDate",
+                "datatype": {
+                    "base": "date",
+                    "format": "yyyy-MM-dd"
+                }
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_platnost_konec_nespecifikovany",
+                "titles": "číselník_platnost_konec_nespecifikovaný",
+                "dc:description": "Hodnota vlastnosti platnost > konec > nespecifikovaný. platnost:Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude číselník platný. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky. > konec:Okamžik konce intervalu. > nespecifikovaný:Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
+                "aboutUrl": "{+ciselnik}/platnost/end",
+                "propertyUrl": "https://slovník.gov.cz/generický/čas/pojem/je-nespecifikovaný",
+                "datatype": "boolean"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka",
+                "titles": "číselník_položka",
+                "dc:description": "Položka číselníku reprezentuje jednu přípustnou hodnotu z množiny všech přípustných hodnot definovaných číselníkem. Hodnota je uvedena jako IRI.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "skos:Concept",
+                "datatype": "anyURI"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_kod",
+                "titles": "číselník_položka_kód",
+                "dc:description": "Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:notation",
+                "required": true,
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_nazev_cs",
+                "titles": "číselník_položka_název_cs",
+                "dc:description": "Název (hodnota) položky číselníku. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:prefLabel",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_nazev_en",
+                "titles": "číselník_položka_název_en",
+                "dc:description": "Název (hodnota) položky číselníku. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:prefLabel",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_alt_nazev_cs",
+                "titles": "číselník_položka_alt_název_cs",
+                "dc:description": "Alternativní název (hodnota) položky číselníku. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:altLabel",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_alt_nazev_en",
+                "titles": "číselník_položka_alt_název_en",
+                "dc:description": "Alternativní název (hodnota) položky číselníku. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:altLabel",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_zkr_nazev_cs",
+                "titles": "číselník_položka_zkr_název_cs",
+                "dc:description": "Zkrácený název (hodnota) položky číselníku. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:altLabel",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_zkr_nazev_en",
+                "titles": "číselník_položka_zkr_název_en",
+                "dc:description": "Zkrácený název (hodnota) položky číselníku. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:altLabel",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_definice_cs",
+                "titles": "číselník_položka_definice_cs",
+                "dc:description": "Textová definice položky číselníku. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:definition",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_definice_en",
+                "titles": "číselník_položka_definice_en",
+                "dc:description": "Textová definice položky číselníku. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:definition",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_popis_cs",
+                "titles": "číselník_položka_popis_cs",
+                "dc:description": "Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující. Hodnota je uvedena v češtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:note",
+                "lang": "cs",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_popis_en",
+                "titles": "číselník_položka_popis_en",
+                "dc:description": "Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující. Hodnota je uvedena v angličtině.",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:note",
+                "lang": "en",
+                "datatype": "string"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_platnost_zacatek_datum",
+                "titles": "číselník_položka_platnost_začátek_datum",
+                "dc:description": "Hodnota vlastnosti platnost > začátek > datum. platnost:Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude položka platná. > začátek:Okamžik začátku intervalu. > datum:Datum okamžiku.",
+                "aboutUrl": "{+ciselnik_polozka}/platnost/beginning",
+                "propertyUrl": "http://www.w3.org/2006/time#inXSDDate",
+                "datatype": {
+                    "base": "date",
+                    "format": "yyyy-MM-dd"
+                }
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_platnost_zacatek_nespecifikovany",
+                "titles": "číselník_položka_platnost_začátek_nespecifikovaný",
+                "dc:description": "Hodnota vlastnosti platnost > začátek > nespecifikovaný. platnost:Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude položka platná. > začátek:Okamžik začátku intervalu. > nespecifikovaný:Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
+                "aboutUrl": "{+ciselnik_polozka}/platnost/beginning",
+                "propertyUrl": "https://slovník.gov.cz/generický/čas/pojem/je-nespecifikovaný",
+                "datatype": "boolean"
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_platnost_konec_datum",
+                "titles": "číselník_položka_platnost_konec_datum",
+                "dc:description": "Hodnota vlastnosti platnost > konec > datum. platnost:Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude položka platná. > konec:Okamžik konce intervalu. > datum:Datum okamžiku.",
+                "aboutUrl": "{+ciselnik_polozka}/platnost/end",
+                "propertyUrl": "http://www.w3.org/2006/time#inXSDDate",
+                "datatype": {
+                    "base": "date",
+                    "format": "yyyy-MM-dd"
+                }
+            },
+            {
+                "@type": "Column",
+                "name": "ciselnik_polozka_platnost_konec_nespecifikovany",
+                "titles": "číselník_položka_platnost_konec_nespecifikovaný",
+                "dc:description": "Hodnota vlastnosti platnost > konec > nespecifikovaný. platnost:Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude položka platná. > konec:Okamžik konce intervalu. > nespecifikovaný:Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
+                "aboutUrl": "{+ciselnik_polozka}/platnost/end",
+                "propertyUrl": "https://slovník.gov.cz/generický/čas/pojem/je-nespecifikovaný",
+                "datatype": "boolean"
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik_polozka}",
+                "propertyUrl": "skos:inScheme",
+                "valueUrl": "{+ciselnik}",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik}",
+                "propertyUrl": "dc:temporal",
+                "valueUrl": "{+ciselnik}/platnost",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik}/platnost",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/2006/time#ProperInterval",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik}/platnost",
+                "propertyUrl": "http://www.w3.org/2006/time#hasBeginning",
+                "valueUrl": "{+ciselnik}/platnost/beginning",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik}/platnost",
+                "propertyUrl": "http://www.w3.org/2006/time#hasEnd",
+                "valueUrl": "{+ciselnik}/platnost/end",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik}/platnost/beginning",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/2006/time#Instant",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik}/platnost/end",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/2006/time#Instant",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik_polozka}/platnost",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/2006/time#ProperInterval",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik_polozka}/platnost",
+                "propertyUrl": "http://www.w3.org/2006/time#hasBeginning",
+                "valueUrl": "{+ciselnik_polozka}/platnost/beginning",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik_polozka}/platnost",
+                "propertyUrl": "http://www.w3.org/2006/time#hasEnd",
+                "valueUrl": "{+ciselnik_polozka}/platnost/end",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik_polozka}/platnost/beginning",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/2006/time#Instant",
+                "virtual": true
+            },
+            {
+                "@type": "Column",
+                "aboutUrl": "{+ciselnik_polozka}/platnost/end",
+                "propertyUrl": "rdf:type",
+                "valueUrl": "http://www.w3.org/2006/time#Instant",
+                "virtual": true
+            }
+        ],
+        "primaryKey": "ciselnik_polozka"
+    }
+}
