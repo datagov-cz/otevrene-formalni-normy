@@ -61,7 +61,7 @@
             <h2>Abstrakt</h2>
             <p>
               Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování číselníků.
-              Norma popisuje konceptuální model číselníků a stanovuje podobu jejich reprezentace ve strojově čítelné podobě ve formátech JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]], a CSV [[rfc4180]] v denormalizované i normalizované podobě.
+              Norma popisuje konceptuální model číselníků a stanovuje podobu jejich reprezentace ve strojově čitelné podobě ve formátech JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]], a CSV [[rfc4180]].
               Jednotlivé způsoby reprezentace číselníků také demonstruje na příkladech.
             </p>
         </section>
@@ -82,6 +82,17 @@
           <section id="model-třída-číselník">
             <h3>Číselník</h3>
             <p>Číselník je seznam přípustných hodnot (vlastnosti, datového prvku, ...).</p>
+            <section id="model-vlastnost-číselník-kód">
+              <h4>kód</h4>
+              <dl>
+                  <dt>Typ</dt>
+                  <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Kód číselníku identifikuje číselník v rámci sady číselníků spravovaných daným správcem. Nejedná se tedy o globálně jednoznačnou identifikaci číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
+              </dl>
+             </section>
             <section id="model-vlastnost-číselník-název">
               <h4>název</h4>
               <dl>
@@ -89,6 +100,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-číselník-akronym">
@@ -97,7 +110,9 @@
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
                   <dt>Popis</dt>
-                  <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
+                  <dd>Zkrácené označení číselníku používané i jako jeho identifikátor v rámci sady číselníků spravovaných daným správcem. Nejedná se tedy o globálně jednoznačnou identifikaci číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-číselník-definice">
@@ -107,6 +122,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-číselník-popis">
@@ -116,6 +133,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vztah-číselník-platnost">
@@ -125,6 +144,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                   <dt>Popis</dt>
                   <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vztah-eviduje">
@@ -134,6 +155,8 @@
                   <dd><a href="#model-třída-položka">Položka</a></dd>
                   <dt>Popis</dt>
                   <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
           </section>
@@ -147,15 +170,19 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
                   <dt>Popis</dt>
                   <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
               </dl>
              </section>
-            <section id="model-vlastnost-položka-název">
-              <h4>název</h4>
+            <section id="model-vlastnost-položka-plný-název">
+              <h4>plný název</h4>
               <dl>
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
-                  <dd>Název (hodnota) položky číselníku.</dd>
+                  <dd>Plný (tj. úplný) název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-položka-alternativní-název">
@@ -165,6 +192,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Alternativní název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-položka-zkrácený-název">
@@ -174,6 +203,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Zkrácený název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-položka-definice">
@@ -182,7 +213,9 @@
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
-                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
+                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vlastnost-položka-popis">
@@ -192,6 +225,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
             <section id="model-vztah-položka-platnost">
@@ -201,6 +236,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                   <dt>Popis</dt>
                   <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
               </dl>
              </section>
           </section>
@@ -234,6 +271,26 @@
   }</pre>
                 </dd>
               </dl>
+              <section id="jsonld-vlastnost-číselník-kód">
+                <h5>kód</h5>
+                <dl>
+                  <dt>Klíč</dt>
+                  <dd><code>kód</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Kód číselníku identifikuje číselník v rámci sady číselníků spravovaných daným správcem. Nejedná se tedy o globálně jednoznačnou identifikaci číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="json">
+  {
+    "kód": "745"
+  }</pre>
+                  </dd>
+                </dl>
+              </section>
               <section id="jsonld-vlastnost-číselník-název">
                 <h5>název</h5>
                 <dl>
@@ -243,6 +300,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -262,7 +321,9 @@
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
                   <dt>Popis</dt>
-                  <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
+                  <dd>Zkrácené označení číselníku používané i jako jeho identifikátor v rámci sady číselníků spravovaných daným správcem. Nejedná se tedy o globálně jednoznačnou identifikaci číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -281,6 +342,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -301,6 +364,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -321,6 +386,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                   <dt>Popis</dt>
                   <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>viz <a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                 </dl>
@@ -334,6 +401,8 @@
                   <dd><a href="#jsonld-třída-položka">Položka</a></dd>
                   <dt>Popis</dt>
                   <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -367,6 +436,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
                   <dt>Popis</dt>
                   <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -376,15 +447,17 @@
                   </dd>
                 </dl>
               </section>
-              <section id="jsonld-vlastnost-položka-název">
-                <h5>název</h5>
+              <section id="jsonld-vlastnost-položka-plný-název">
+                <h5>plný název</h5>
                 <dl>
                   <dt>Klíč</dt>
                   <dd><code>název</code></dd>
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
-                  <dd>Název (hodnota) položky číselníku.</dd>
+                  <dd>Plný (tj. úplný) název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -405,6 +478,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Alternativní název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -425,6 +500,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Zkrácený název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -444,7 +521,9 @@
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
-                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
+                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -465,6 +544,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="json">
@@ -485,6 +566,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                   <dt>Popis</dt>
                   <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>viz <a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                 </dl>
@@ -666,6 +749,7 @@
   "@context": "https://pod-test.mvcr.gov.cz/otevřené-formální-normy/číselníky/draft/kontexty/číselník.jsonld",
   "typ": "Číselník",
   "iri": "https://data.poskytovatel.cz/zdroj/číselník/měny",
+  "kód": "745",
   "název": {
     "cs":  "Číselník měn",
     "en":  "Codelist of currencies"
@@ -804,11 +888,32 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#url">IRI</a></dd>
                   <dt>Popis</dt>
                   <dd>Identifikace instance třídy Číselník v podobě jejího IRI.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
     číselník
     https://data.poskytovatel.cz/zdroj/číselník/měny</pre>
+                  </dd>
+                </dl>
+              </section>
+              <section id="csv-vlastnost-číselník-kód">
+                <h5>kód</h5>
+                <dl>
+                  <dt>Název sloupce</dt>
+                  <dd><code>číselník_kód</code></dd>
+                  <dt>Typ</dt>
+                  <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
+                  <dt>Popis</dt>
+                  <dd>Kód číselníku identifikuje číselník v rámci sady číselníků spravovaných daným správcem. Nejedná se tedy o globálně jednoznačnou identifikaci číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
+                  <dt>Příklad</dt>
+                  <dd>
+                    <pre class="csv">
+  číselník,číselník_kód
+  https://data.poskytovatel.cz/zdroj/číselník/měny,745</pre>
                   </dd>
                 </dl>
               </section>
@@ -821,6 +926,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Název číselníku krátce charakterizuje význam jeho obsahu a jeho položek.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -837,7 +944,9 @@
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
                   <dt>Popis</dt>
-                  <dd>Zkratka číselníku používaná i jako jeho identifikátor.</dd>
+                  <dd>Zkrácené označení číselníku používané i jako jeho identifikátor v rámci sady číselníků spravovaných daným správcem. Nejedná se tedy o globálně jednoznačnou identifikaci číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -855,6 +964,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Delší text přesně definující číselník a jeho obsah. Pokud není možné poskytnout přesnou definici, lze využít popis číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -872,6 +983,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Popis číselníku blíže vysvětluje obsah či způsob užití číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -889,6 +1002,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                   <dt>Popis</dt>
                   <dd>Přiřazuje číselníku časový interval, ve kterém byl, je nebo bude platný. Použití položek číselníku mimo časový kontext tohoto intervalu nedává smysl. Pro snazší strojové zpracování se doporučuje nespoléhat na to, že uživatel aplikuje platnost číselníku i na jednotlivé položky. Je doporučeno platnost položek uvést přímo pro jednotlivé položky.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>viz <a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                 </dl>
@@ -902,6 +1017,8 @@
                   <dd><a href="#csv-vlastnost-položka-iri">Položka</a></dd>
                   <dt>Popis</dt>
                   <dd>Zařazuje položku do číselníku. Číselník může obsahovat více různých položek. Položka může patřit do více číselníků.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>viz <a href="#csv-vlastnost-položka-iri">Položka</a></dd>
                 </dl>
@@ -922,6 +1039,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#url">IRI</a></dd>
                   <dt>Popis</dt>
                   <dd>Identifikace instance třídy Položka v podobě jejího IRI.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -940,6 +1059,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#řetězec">Řetězec</a></dd>
                   <dt>Popis</dt>
                   <dd>Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -949,15 +1070,17 @@
                   </dd>
                 </dl>
               </section>
-              <section id="csv-vlastnost-položka-název">
-                <h5>název</h5>
+              <section id="csv-vlastnost-položka-plný-název">
+                <h5>plný název</h5>
                 <dl>
                   <dt>Název sloupce</dt>
                   <dd><code>číselník_položka_název</code></dd>
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
-                  <dd>Název (hodnota) položky číselníku.</dd>
+                  <dd>Plný (tj. úplný) název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Povinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -975,6 +1098,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Alternativní název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -992,6 +1117,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Zkrácený název (hodnota) položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -1008,7 +1135,9 @@
                   <dt>Typ</dt>
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
-                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis k opisu jejího významu.</dd>
+                  <dd>Definice položky číselníku přesně specifikuje její význam. Pokud není možné poskytnout přesnou definici položky, je možné využít popis položky číselníku.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -1026,6 +1155,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#text">Text</a></dd>
                   <dt>Popis</dt>
                   <dd>Popis položky číselníku, který blíže vysvětluje položku číselníku. Oproti definici je méně formální a více vysvětlující.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>
                     <pre class="csv">
@@ -1043,6 +1174,8 @@
                   <dd><a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                   <dt>Popis</dt>
                   <dd>Přiřazuje položce číselníku časový interval, ve kterém byla, je nebo bude platná. Použití položky číselníku mimo časový kontext tohoto intervalu nedává smysl.</dd>
+                  <dt>Povinnost</dt>
+                  <dd>Nepovinná</dd>
                   <dt>Příklad</dt>
                   <dd>viz <a href="../../základní-datové-typy/2020-07-01/#časový-interval">Časový interval</a></dd>
                 </dl>
@@ -1137,9 +1270,9 @@ https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist o
                   </p>
 
                   <pre class="csv">
-číselník,číselník_název_cs,číselník_název_en,číselník_akronym,číselník_definice_cs,číselník_definice_en,číselník_popis_cs,číselník_popis_en,číselník_platnost_začátek_datum,číselník_platnost_začátek_nespecifikovaný,číselník_platnost_konec_datum,číselník_platnost_konec_nespecifikovaný,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en,číselník_položka_alt_název_cs,číselník_položka_alt_název_en,číselník_položka_zkr_název_cs,číselník_položka_zkr_název_en,číselník_položka_definice_cs,číselník_položka_definice_en,číselník_položka_popis_cs,číselník_položka_popis_en,číselník_položka_platnost_začátek_datum,číselník_položka_platnost_začátek_nespecifikovaný,číselník_položka_platnost_konec_datum,číselník_položka_platnost_konec_nespecifikovaný
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.","Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.",2009-01-01,,2020-12-31,,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,ngultrum,ngultrum,BTN,BTN,1 ngultrum=100 chhetrum,1 ngultrum=100 chhetrum,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.,The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN.,2009-01-01,,2020-06-30,
-https://data.poskytovatel.cz/zdroj/číselník/měny,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.","Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.",2009-01-01,,2020-12-31,,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,boliviano,boliviano,BOB,BOB,1 boliviano=100 centavo,1 boliviano=100 centavo,Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.,The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB.,2009-01-01,,,true</pre>
+číselník,číselník_kód,číselník_název_cs,číselník_název_en,číselník_akronym,číselník_definice_cs,číselník_definice_en,číselník_popis_cs,číselník_popis_en,číselník_platnost_začátek_datum,číselník_platnost_začátek_nespecifikovaný,číselník_platnost_konec_datum,číselník_platnost_konec_nespecifikovaný,číselník_položka,číselník_položka_kód,číselník_položka_název_cs,číselník_položka_název_en,číselník_položka_alt_název_cs,číselník_položka_alt_název_en,číselník_položka_zkr_název_cs,číselník_položka_zkr_název_en,číselník_položka_definice_cs,číselník_položka_definice_en,číselník_položka_popis_cs,číselník_položka_popis_en,číselník_položka_platnost_začátek_datum,číselník_položka_platnost_začátek_nespecifikovaný,číselník_položka_platnost_konec_datum,číselník_položka_platnost_konec_nespecifikovaný
+https://data.poskytovatel.cz/zdroj/číselník/měny,745,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.","Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.",2009-01-01,,2020-12-31,,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/064,064,bhútánský ngultrum,bhutanese ngultrum,ngultrum,ngultrum,BTN,BTN,1 ngultrum=100 chhetrum,1 ngultrum=100 chhetrum,Bhútánský ngultrum je měnou asijského království Bhútán. Jeho ISO 4217 kód je BTN.,The ngultrum is the currency of the Kingdom of Bhutan. Its ISO 4217 code is BTN.,2009-01-01,,2020-06-30,
+https://data.poskytovatel.cz/zdroj/číselník/měny,745,Číselník měn,Codelist of currencies,CISCUR,"Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.","Číselník měn obsahuje položku pro každou existující světovou měnu. Nejsou zde tedy historicky používané měny, které již zanikly.","A codelist of currencies contains an item for each exisiting world currency. Hence, historically used that have disappeared are not included.",2009-01-01,,2020-12-31,,https://data.poskytovatel.cz/zdroj/číselník/měny/položka/068,068,bolivijské boliviano,bolivian boliviano,boliviano,boliviano,BOB,BOB,1 boliviano=100 centavo,1 boliviano=100 centavo,Boliviano (množné číslo bolivianos) je zákonným platidlem jihoamerického státu Bolívie. Jeho ISO 4217 kód je BOB.,The boliviano is the currency of the south american state Bolivia. Its ISO 4217 code is BOB.,2009-01-01,,,true</pre>
                 </aside>
                   
               </section>
