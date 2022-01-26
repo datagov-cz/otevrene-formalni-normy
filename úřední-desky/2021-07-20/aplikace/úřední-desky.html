@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <title>Jednoduché zobrazení úředních desek pomocí Otevřené formální normy a Národního katalogu otevřených dat</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Jednoduché zobrazení úředních desek pomocí Otevřené formální normy a Národního katalogu otevřených dat</h1>
+        <p>
+            Tato velmi jednoduchá aplikace najde v <a href="https://data.gov.cz/datové-sady">Národním katalogu otevřených dat</a> (NKOD) datové sady publikované dle <a href="https://ofn.gov.cz/úřední-desky/2021-07-20/">Otevřené formální normy Úřední desky</a>, a zobrazí základní údaje až prvních 100 na nich vystavených informací.
+            Aplikace vznikla za cca 3 hodiny práce a běží ve vašem prohlížeči.
+            Její zdrojový kód naleznete ve zdrojovém kódu této stránky (<code>ctrl+u</code>).
+            Spíše než dokonalou funkcionalitu ukazuje princip snadného použití Otevřených formálních norem a publikace datových sad jim odpovídajících v Národním katalogu otevřených dat.
+        </p>
+        <p>
+            Pokud ani den po registraci datové sady s úřední deskou v NKOD zde informace z ní nevidíte, něco je špatně.
+        </p>
+        <ol>
+            <li>Pokud se v seznamu nevidíte (zkuste hledat pomocí <code>ctrl+f</code>), aplikace vás nenalezla v NKOD. Ujistěte se, že indikujete soulad s OFN v katalogizačním záznamu, viz <a href="https://ofn.gov.cz/úřední-desky/2021-07-20/#metadata">Předpřipravená metadata</a></li>
+            <li>Pokud se v seznamu vidíte, ale nejsou u vás data, zkontrolujte, že jsou <a href="https://www.jsonschemavalidator.net/">validní</a> podle <a href="https://ofn.gov.cz/úřední-desky/2021-07-20/#příklady">JSON schématu v OFN</a></li>
+            <li>Pokud u sebe vidíte chybu <code>TypeError: Failed to fetch</code>, pravděpodobně váš webový server <a href="https://opendata.gov.cz/špatná-praxe:chybějící-cors">nepodporuje CORS</a></li>
+        </ol>
+        <div id="content-list">            
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script>
+        window.addEventListener("load", initialize);
+
+        async function initialize() {
+            const datasets = await fetchDatasets();
+            renderDatasets(datasets.data.datasets.data);
+        }
+
+        async function fetchDatasets() {
+            // TODO Remove query and 
+            const query = "{\"query\":\"query { datasets ( limit: 100 filters: { conformsTo: \\\"https://ofn.gov.cz/úřední-desky/2021-07-20/\\\" } ) { data { iri title { cs } publisher { title { cs } } distribution { accessURL format } } pagination { totalCount } }}\",\"variables\":null}";
+            const response = await fetch("https://data.gov.cz/graphql?", {
+                "headers": {
+                    "accept": "application/json",
+                    "content-type": "application/json",
+                },
+                "body": query,
+                "method": "POST",
+            });
+            return await response.json();
+        }
+
+        function renderDatasets(datasets) {
+            const contentElement = document.getElementById("content-list");
+            for (const item of datasets) {
+                const datasetIri = item.iri;
+                const label = item.title.cs;
+                const publisher = item.publisher.title.cs;                
+                const accessUrl = item.distribution[0]?.accessURL;
+                renderDataset(datasetIri, contentElement, label, publisher, accessUrl);
+            }
+        }
+
+        function renderDataset(datasetIri, parent, label, publisherTitle, accessUrl) {
+            
+            const headingElement = document.createElement("h2");
+            headingElement.innerText = `${publisherTitle}: ${label}`;
+            
+            const icon = document.createElement("i");
+            icon.classList.add(...["bi", "bi-box-arrow-up-right", "px-2"]);
+            
+            const dereference = document.createElement("a");
+            dereference.setAttribute("href", "https://data.gov.cz/datov%C3%A1-sada?iri=" + datasetIri);
+            dereference.setAttribute("target", "_blank");
+            dereference.setAttribute("rel", "noopener noreferrer");
+            dereference.appendChild(icon);
+            
+            headingElement.appendChild(dereference);
+
+            const contentElement = document.createElement("div");
+            contentElement.classList.add("w-100");
+            contentElement.innerText = "Načítám data ...";
+
+            const wrapperElement = document.createElement("div");
+            wrapperElement.classList.add(...["ms-2", "me-auto", "w-100"]);
+            wrapperElement.appendChild(headingElement);
+            wrapperElement.appendChild(contentElement);
+
+            const separator = document.createElement("hr");
+            wrapperElement.appendChild(separator);
+    
+            parent.appendChild(wrapperElement);
+
+            renderDistribution(contentElement, publisherTitle, accessUrl);
+        }
+
+        async function renderDistribution(parent, publisherTitle, url) {
+            let content;
+            try {
+                const response = await fetch(url);
+                content = await response.json();
+            } catch (error) {
+                parent.innerText = "";
+                const errorElement = createDistributionErrorElement(error);
+                parent.appendChild(errorElement);
+                return;
+            }
+            parent.innerText = "";
+            const listElement = document.createElement("ul");
+            listElement.classList.add(...["px-2", "w-100"]);
+            parent.appendChild(listElement);
+            const limit = Math.min(3, content.informace.length);
+            let offset = limit;
+            for (let index = 0; index < limit; ++index) {
+                const entry = content.informace[index];
+                const element = createEntryElement(entry);
+                listElement.appendChild(element);
+            }
+            const visibleElement = document.createElement("div");
+            visibleElement.innerText = 
+                createVisibleCounterText(offset, content.informace.length);
+
+            if (limit < content.informace.length) {                
+                const buttonElement = document.createElement("button");
+                buttonElement.setAttribute("type", "button");
+                buttonElement.classList.add(...["btn", "btn-primary", "m-2", "btn-sm"]);
+                buttonElement.innerText = "Další informace z úřední desky " + publisherTitle;
+                parent.appendChild(buttonElement);
+
+                buttonElement.addEventListener("click", () => {
+                    const start = offset;
+                    offset = Math.min(offset + 5, content.informace.length);
+                    for (let index = start; index < offset; ++index) {
+                        const entry = content.informace[index];
+                        const element = createEntryElement(entry);
+                        listElement.appendChild(element);
+                    }
+                    if (offset === content.informace.length) {
+                        buttonElement.remove();
+                    }
+                    visibleElement.innerText = 
+                        createVisibleCounterText(offset, content.informace.length);
+                });
+            }
+
+            parent.appendChild(visibleElement);
+        }
+
+        function createDistributionErrorElement(error) {
+            const content = document.createElement("div");
+            content.classList.add(...["alert", "alert-danger", "w-100"]);
+            content.innerText = error;
+            return content;
+        }
+
+        function createEntryElement(entry) {
+            const label = entry["název"]?.cs;
+            const description = entry["popis"]?.cs;
+            const from = entry["vyvěšení"].datum;
+            const to  = entry["relevantní_do"].datum;
+            const agenda = entry["agenda"]
+                ?.map(item => item["název"]?.cs) ?? [];
+            const documents = entry["dokument"]
+                ?.map(item => ({
+                    "label": item["název"]?.cs,
+                    "url": item["url"]
+                })) ?? [];
+            
+            // console.log(
+            //     label,"\n",
+            //     description,"\n",
+            //     from,"\n",
+            //     to,"\n",
+            //     agenda,"\n",
+            //     documents
+            // );
+
+            const headingElement = document.createElement("h4");
+            headingElement.innerText = label;
+
+            if (Array.isArray(documents) && documents.length) {
+                const icon = document.createElement("i");
+                icon.classList.add(...["bi", "bi-box-arrow-up-right", "px-2"]);
+                
+                const dereference = document.createElement("a");
+                dereference.setAttribute("href", documents[0].url);
+                dereference.setAttribute("target", "_blank");
+                dereference.setAttribute("rel", "noopener noreferrer");
+                dereference.appendChild(icon);
+                
+                headingElement.appendChild(dereference);
+            }
+
+            const validElement = document.createElement("div");
+            validElement.innerText = 
+                `${from ?? "neuvedeno"} - ${to ?? "neuvedeno"}`;
+
+            const wrapperElement = document.createElement("div");
+            wrapperElement.classList.add(...["ms-2", "me-auto"]);
+            wrapperElement.appendChild(headingElement);
+            wrapperElement.appendChild(validElement);
+            
+            const listItemElement = document.createElement("li");
+            listItemElement.classList.add(...[
+                    "list-group-item",
+                    "d-flex",
+                    "justify-content-between",
+                    "align-items-start"
+                ]);
+            listItemElement.appendChild(wrapperElement);
+
+            return listItemElement;
+        }
+    
+        function createVisibleCounterText(count, total) {
+            return `Zobrazuji ${count} z ${total}`;
+        }
+
+    </script>
+  </body>
+</html>
+
+
