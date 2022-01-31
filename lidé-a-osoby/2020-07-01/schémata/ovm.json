@@ -1,0 +1,53 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/ovm.json",
+    "name": "Orgán veřejné moci",
+    "type": "object",
+    "description": "Orgán veřejné moci a jeho identifikace",
+    "required": [
+        "typ",
+        "identifikátor_ovm"
+    ],
+    "allOf": [
+        {
+            "$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+        },
+        {
+            "properties": {
+                "typ": {
+                    "oneOf": [
+                        {
+                            "const": "Orgán veřejné moci"
+                        },
+                        {
+                            "type": "array",
+                            "contains": {
+                                "const": "Orgán veřejné moci"
+                            },
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "identifikátor_ovm": {
+                    "type": "string",
+                    "title": "Identifikátor OVM",
+                    "description": "Identifikátor OVM",
+                    "examples": [
+                        "06216111"
+                    ]
+                },
+                "ičo": {
+                    "type": "string",
+                    "title": "IČO",
+                    "pattern": "^[0-9]{8}$",
+                    "description": "IČO",
+                    "examples": [
+                        "00112233"
+                    ]
+                }
+            }
+        }
+    ]
+}
