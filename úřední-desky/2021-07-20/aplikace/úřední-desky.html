@@ -238,12 +238,22 @@
             "url": item["url"]
           })) ?? [];
 
-        const headingElement = document.createElement("h4");
+        const infoUrl = entry["url"];
+        const headingElement = infoUrl
+          ? document.createElement("a")
+          : document.createElement("span");
+        if (infoUrl) {
+          headingElement.classList.add("text-decoration-none");
+          headingElement.setAttribute("target", "_blank");
+          headingElement.setAttribute("href", infoUrl);
+        }
+
+        headingElement.classList.add("h4");
         headingElement.innerText = label;
 
         if (Array.isArray(documents) && documents.length) {
           const icon = document.createElement("i");
-          icon.classList.add(...["bi", "bi-box-arrow-up-right", "px-2"]);
+          icon.classList.add(...["bi", "bi-paperclip", "px-2"]);
 
           const dereference = document.createElement("a");
           dereference.classList.add("dereference");
