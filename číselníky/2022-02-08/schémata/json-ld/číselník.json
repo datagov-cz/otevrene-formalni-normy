@@ -1,0 +1,113 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://ofn.gov.cz/číselníky/2022-02-08/schémata/json-ld/číselník.json",
+	"type": "object",
+	"title": "Číselník",
+	"required": [
+		"iri",
+		"typ",
+		"název",
+		"položky"
+	],
+	"allOf": [
+		{
+			"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+		},
+		{
+			"properties": {
+				"typ": {
+					"oneOf": [
+						{
+							"const": "Číselník"
+						},
+						{
+							"type": "array",
+							"contains": {
+								"const": "Číselník"
+							},
+							"items": {
+								"type": "string"
+							}
+						}
+					]
+				},
+				"kód": {
+					"type": "string"
+				},
+				"název": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+				},
+				"akronym": {
+					"type": "string"
+				},
+				"definice": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+				},
+				"popis": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+				},
+				"platnost": {
+					"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-interval.json"
+				},
+				"položky": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"required": [
+							"iri",
+							"typ",
+							"kód",
+							"název"
+						],
+						"allOf": [
+							{
+								"$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+							},
+							{
+								"properties": {
+									"typ": {
+										"oneOf": [
+											{
+												"const": "Položka"
+											},
+											{
+												"type": "array",
+												"contains": {
+													"const": "Položka"
+												},
+												"items": {
+													"type": "string"
+												}
+											}
+										]
+									},
+									"kód": {
+										"type": "string"
+									},
+									"název": {
+										"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+									},
+									"alt_název": {
+										"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+									},
+									"zkr_název": {
+										"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+									},
+									"definice": {
+										"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+									},
+									"popis": {
+										"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+									},
+									"platnost": {
+										"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/časový-interval.json"
+									}
+								}
+							}
+						]
+					}
+				}
+			}
+		}
+	]
+}
