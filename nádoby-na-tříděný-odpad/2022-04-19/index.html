@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Nádoby na tříděný odpad</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "REC",
+                publishDate: "2022-04-19",
+                shortName: "nádoby-na-tříděný-odpad",
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/nádoby-na-tříděný-odpad/2022-04-19/",
+                latestVersion: "https://ofn.gov.cz/nádoby-na-tříděný-odpad/",
+                editors: [{
+                  name: "Martin Dvořák",                  
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz/"
+                },{
+                  name: "Robert Spál",                  
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jiří Marek",
+                  orcid: "0000-0003-2132-762X",                  
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                },{
+                  name: "Jakub Klímek",                  
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Ministerstvo vnitra",
+                  companyURL: "https://www.mvcr.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál otevřených dat",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@mvcr.cz"
+                    }]
+                }],
+                thanks: "Tento dokument vznikl v rámci projektu OPZ č. CZ.03.4.74/0.0/0.0/15_025/0013983."
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.zakonyprolidi.cz/cs/1999-106#p3-9">§ 3 odst. 9 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování nádob na tříděný odpad.
+                Norma je ilustrována příklady dat ve formátu JSON-LD [[json-ld11]], a tedy i JSON [[ECMA-404]].
+            </p>
+        </section>
+
+        <section id="přehled">
+            <h2>Přehled</h2>
+            
+            <figure id="diagram"><img alt="Diagram datového modelu nádob na tříděný odpad" src="obrázky/nádoby-na-tříděný-odpad.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1siWurfe4pv6V8RhoucV3iE9o585KUMUu/view?usp=sharing">
+                        Diagram datového modelu nádob na tříděný odpad. 
+                    </a>.
+                    Šedě podbarvené části jsou specifikovány jinými otevřenými formálními normami, nebo se jedná o číselník. Vazby bez kardinalit (šipka) reprezentují dědění vlastností a vazeb třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+                </figcaption>
+            </figure>
+
+        </section>
+        
+        <section id="specifikace">
+
+            <h2>Specifikace</h2>
+
+            <p>
+                V této sekci jsou definovány jednotlivé třídy a jejich vlastnosti potřebné pro popis nádob na tříděný odpad.
+                Pro každou vlastnost je uveden její identifikátor, který je pro její reprezentaci použit ve všech datových formátech, její název, datový typ, popis a příklad. Všechny třídy, které nejsou specifikovány jinou otevřenou formální normou nebo číselníkem, dědí vlastnosti a vazby třídy <a href="../../věc/2020-07-01/#třída-věc">Věc</a>.
+            </p>
+
+            <section id="třída-nádoba-na-odpad">
+                <h3>Nádoba na odpad</h3>
+                <p>
+                    Tato třída reprezentuje nádobu na odpad.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>. 
+                </p>
+
+                <section id="vlastnost-nádoba-na-odpad-typ-nádoby">
+                    <h4>Typ nádoby</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ_nádoby</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#text">Text</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ nádoby
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Technický typ nádoby.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>ASA 200i</code>
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-nádoba-na-odpad-objem">
+                    <h4>Objem</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>objem</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#množství">Množství</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Objem.
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Kapacita dané nádoby.
+                        </dd>
+                    </dl>
+
+                </section>
+                
+                <section id="vlastnost-nádoba-na-odpad-nejbližší-vývoz">
+                    <h4>Nejbližší vývoz</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>nejbližší_vývoz</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#časový-okamžik">Časový okamžik</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Nejbližší vývoz
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datum a čas nejbližšího vývozu. 
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>2020-09-27T09:30:00</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-nádoba-na-odpad-stanoviště-pro-nádoby">
+                    <h4>Vazba: Stanoviště pro nádoby</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>stanoviště_pro_nádoby</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="třída-stanoviště-pro-nádoby">Stanoviště pro nádoby</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Stanoviště pro nádoby
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Místo sdružující více nádob na tříděný odpad.
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-nádoba-správce">
+                    <h4>Vazba: Správce</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>správce</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Správce
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Subjekt, který má nádoby na starost. Nemusí být totožný se správcem stanoviště pro nádoby či správcem svozové oblasti. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-nádoba-na-odpad-typ">
+                    <h4>Vazba: Typ tříděného odpadu</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>typ_tříděného_odpadu</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděných-odpadů">Typy tříděného odpadu</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Typ
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Hodnota této vlastnosti je z <a href="https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděných-odpadů">číselníku pro Typy tříděného odpadu</a> publikovaného jako <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2F00007064%2Fa0279bdff2195d7d7789ed10a26db41e">číselník v Národním katalogu otevřených dat</a>. Typy tříděného odpadu nabývají několika hodnot. V příkladu je uvedena prezentace plastového tříděného odpadu. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-nádoba-na-odpad-časy-vývozu">
+                    <h4>Vazba: Časy vývozu</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>časy_vývozu</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../časová-specifikace/2020-07-01/#třída-časová-specifikace">Časová specifikace</a>
+                        </dd>
+                        <dt> 
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časy vývozu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uvádí časy, ve kterých dochází k vývozu nádob. Zahrnuje dny v týdnu a frekvenci. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>  
+
+            <section id="třída-stanoviště-pro-nádoby">
+                <h3>Stanoviště pro nádoby</h3>
+                <p>
+                    Tato třída reprezentuje stanoviště pro nádoby.
+                    Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>. 
+                </p>
+
+                <section id="vlastnost-stanoviště-pro-nádoby-veřejná-přístupnost">
+                    <h4>Veřejná přístupnost</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>veřejná_přístupnost</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#boolean">Boolean</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Veřejná přístupnost.  
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Určuje, zda je stanoviště pro nádoby veřejně přístupné. 
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>true</code>
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vlastnost-stanoviště-pro-nádoby-počet-nádob">
+                    <h4>Počet nádob</h4>
+                    <dl>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>počet_nádob</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#množství">Množství</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Počet nádob.  
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Uvádí počet nádob na tříděný odpad v daném místě. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+                <section id="vazba-stanoviště-pro-nádoby-umístění">
+                    <h4>Vazba: Umístění</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>umístění</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Umístění stanoviště pro nádoby. 
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Prostorová lokalizace stanoviště pro nádoby.
+                        </dd>
+                    </dl>
+
+                </section>  
+            
+                <section id="vazba-stanoviště-pro-nádoby-otevírací-doba">
+                    <h4>Vazba: Otevírací doba</h4>
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>otevírací_doba</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../časová-specifikace/2020-07-01/#třída-časová-specifikace">Časová specifikace</a>
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Otevírací doba. 
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Otevírací doba stanoviště pro nádoby.
+                        </dd>
+                    </dl>
+
+                </section>  
+
+                <section id="vazba-stanoviště-pro-nádoby-svozová-oblast">
+                    <h4>Vazba: Svozová oblast</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>svozová_oblast</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-svozová-oblast">Svozová oblast</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Svozová oblast
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Oblast, do které stanoviště pro nádoby spadá. 
+                        </dd>
+                    </dl>
+
+                </section> 
+            
+
+                <section id="vazba-stanoviště-pro-nádoby-správce">
+                    <h4>Vazba: Správce</h4>
+                    
+                    <dl>
+                        <dt>
+                            Vazba
+                        </dt>
+                        <dd>
+                            <code>správce</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a> 
+                        </dd>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Správce
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Subjekt, který má stanoviště pro nádoby na starost. Nemusí být totožný se správcem nádob či správcem svozové oblasti. 
+                        </dd>
+                    </dl>
+
+                </section>
+
+            </section>
+
+                <section id="třída-svozová-oblast">
+                    <h3>Svozová oblast</h3>
+                    <p>
+                        Tato třída reprezentuje svozovou oblast.
+                        Kromě níže specifikovaných vlastností a vazeb je možné u této třídy použít také vlastnosti a vazby třídy Věc, která je specifikována <a href="../../věc/2020-07-01/#třída-věc">otevřenou formální normou Věc</a>. 
+                    </p>
+
+                    <section id="vazba-svozová-oblast-vymezení">
+                        <h4>Vazba: Vymezení</h4>
+                        <dl>
+                            <dt>
+                                Vlastnost
+                            </dt>
+                            <dd>
+                                <code>vymezení</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../umístění/2020-07-01/#třída-umístění">Umístění</a> 
+                            </dd>
+                            <dt>
+                                Jméno
+                            </dt>
+                            <dd>
+                                Vymezení
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Vymezení svozové oblasti
+                            </dd>
+                            <dt>
+                                Příklad
+                            </dt>
+                            <dd>
+                                <code>Polygon (50.088131 14.402751,50.088105 14.402749, 50.088104 14.402738, 50.088099 14.402742, 50.088089 14.402746, 50.088082 14.402751, 50.088079 14.402744, 50.088075 14.40275, 50.088053 14.402748, 50.088053 14.402742, 50.088044 14.402748, 50.088041 14.402744, 50.08804 14.402739, 50.088033 14.402732, 50.088032 14.402739, 50.088021 14.402733, 50.08801 14.402728, 50.088002 14.402746, 50.087994 14.402749, 50.08799 14.402751, 50.087988 14.402746, 50.087984 14.402752, 50.087954 14.402749, 50.087951 14.402754, 50.087945 14.40275, 50.087943 14.402743)</code>
+                            </dd>
+                        </dl>
+    
+                    </section>
+
+                    <section id="vazba-svozová-oblast-správce">
+                        <h4>Vazba: Správce</h4>
+                        <dl>
+                            <dt>
+                                Vazba
+                            </dt>
+                            <dd>
+                                <code>správce</code>
+                            </dd>
+                            <dt>
+                                Typ
+                            </dt>
+                            <dd>
+                                <a href="../../lidé-a-osoby/2020-07-01/#třída-člověk-či-osoba">Člověk či osoba</a>
+                            </dd>
+                            <dt> 
+                                Jméno
+                            </dt>
+                            <dd>
+                                Správce
+                            </dd>
+                            <dt>
+                                Popis
+                            </dt>
+                            <dd>
+                                Subjekt, který má svozovou oblast na starost.
+                                Nemusí být totožný se správcem stanoviště pro nádoby či správcem nádob. 
+                            </dd>
+                        </dl>
+    
+                    </section>
+                    
+                </section>
+            
+            </section>
+
+            
+        </section>
+        
+        <section id="příklady">
+            <h2>Příklady</h2>
+
+            <p>
+                V této sekci jsou uvedeny příklady reprezentace nádob na tříděný odpad v různých úrovních detailu, ve formátu JSON-LD [[!json-ld11]], a tedy i JSON [[!ECMA-404]].
+            </p>
+            <section id="příklady-nádoba-na-tříděný-odpad">
+                <h3>Nádoba na tříděný odpad</h3>
+
+                <p>
+                    Příklad ukazuje, jak lze prezentovat nádoba na tříděný odpad s minimálními položkami, tj. typ tříděného odpadu (plast) a poloha nádob. Další položky lze přidávat dle potřeby.
+                </p>
+
+                <aside class="example" title="nádoba na tříděný odpad v JSON-LD">
+                    <p>
+                        <a href="příklady/1.jsonld">JSON-LD soubor</a>, <a href="schémata/nádoba-na-tříděný-odpad.json">JSON Schema</a>, <a href="schémata/nádoby-na-tříděný-odpad.json">JSON Schema pro více nádob</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/nádoby-na-tříděný-odpad/2022-04-19/kontexty/nádoby-na-tříděný-odpad.jsonld",
+    "typ": "Nádoba na tříděný odpad",
+    "iri": "https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/nádoba/Brno2458/",
+    "typ_tříděného_odpadu": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast"
+    ],
+    "stanoviště_pro_nádoby": [
+        {
+            "typ": "Stanoviště pro nádoby na tříděný odpad",
+            "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/stanoviště-pro-nádoby/Brno387/",
+            "umístění": {
+                "typ": "Umístění",
+                "geometrie": {
+                    "type": "Point",
+                    "coordinates": [
+                        16.5995939,
+                        49.1944522
+                    ]
+                },
+                "adresa": {
+                    "typ": "Adresa",
+                    "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+                }
+            }
+        }
+    ]
+}</pre>
+                </aside>
+            </section>
+            <section id="příklady-komplexní-nádoba-na-tříděný-odpad">
+                <h3>Komplexní nádoba na tříděný odpad</h3>
+                
+                <p>
+                    V komplexním příkladu jsou uvedeny položky, které je vhodné vyplnit, aby měl uživatel co nejlepší představu o místě s nádoby. Další položky lze přidávat dle potřeby. 
+                </p>
+                
+                <aside class="example" title="Komplexní nádoba na tříděný odpad v JSON-LD">
+                    <p>
+                        <a href="příklady/2.jsonld">JSON-LD soubor</a>, <a href="schémata/nádoba-na-tříděný-odpad.json">JSON Schema</a>, <a href="schémata/nádoby-na-tříděný-odpad.json">JSON Schema pro více nádob</a>
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/nádoby-na-tříděný-odpad/2022-04-19/kontexty/nádoby-na-tříděný-odpad.jsonld",
+    "typ": "Nádoba na tříděný odpad",
+    "iri": "https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/nádoba/Brno2458/",
+    "popis": {
+        "cs": "Nádoba má poškozené držadlo. Dbejte zvýšené opatrnosti při nakládání.",
+        "en": "The container has a damaged handle. Use caution when handling."
+    },
+    "typ_nádoby": "ASA-200i",
+    "objem": {
+        "typ": "Množství",
+        "hodnota": 1000,
+        "jednotka": "LTR"
+    },
+    "nejbližší_vývoz": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2020-09-27T09:30:00+02:00"
+    },
+    "správce": {
+        "typ": "Osoba",
+        "ičo": "60713470",
+        "název": {
+            "cs": "SAKO Brno, a.s."
+        }
+    },
+    "typ_tříděného_odpadu": [
+        "https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast"
+    ],
+    "časy_vývozu": [
+        {
+        "typ": "Časová specifikace",
+            "den_v_týdnu": [
+                "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí",
+                "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/úterý"
+            ],
+            "frekvence": [
+                "http://publications.europa.eu/resource/authority/frequency/BIWEEKLY"
+            ]
+        }
+    ],
+    "stanoviště_pro_nádoby": [
+        {
+            "typ": "Stanoviště pro nádoby na tříděný odpad",
+            "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/stanoviště-pro-nádoby/Brno387/",
+            "název": {
+                "cs": "Tilhonova 58-60",
+                "en": "Tilhonova 58-60"
+            },
+            "popis": {
+                "cs": "Stanoviště pro nádoby leží v blízkosti ulice Tilhonova.",
+                "en": "Container space is located near Tilhonova street."
+            },
+            "veřejná_přístupnost": true,
+            "počet_nádob": {
+                "typ": "Množství",
+                "hodnota": 4,
+                "jednotka": "C62"
+            },
+            "otevírací_doba": [
+                {
+                    "typ": "Časová specifikace",
+                    "název": {
+                        "cs": "Letní otevírací doba",
+                        "en": "Summer opening hours"
+                    },
+                    "popis": {
+                        "cs": "Letní otevírací doba platí vždy od 1.5. do 31.10.",
+                        "en": "Summer opening hours begins on the 1st May and lasts till 31st of October."
+                    },
+                    "časový_interval": {
+                        "typ": "Časový interval",
+                        "začátek": {
+                            "typ": "Časový okamžik",
+                            "datum": "2019-05-01"
+                        },
+                        "konec": {
+                            "typ": "Časový okamžik",
+                            "datum": "2020-05-01"
+                        }
+                    },
+                    "den_v_týdnu": [
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/pondělí",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/úterý",
+                        "https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu/položky/středa"
+                    ],
+                    "časová_platnost": [
+                        {
+                            "typ": "Časová specifikace",
+                            "časový_interval": {
+                                "typ": "Časový interval",
+                                "začátek": {
+                                    "typ": "Časový okamžik",
+                                    "datum": "2019-05-01"
+                                },
+                                "konec": {
+                                    "typ": "Časový okamžik",
+                                    "datum": "2030-10-31"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            "umístění": {
+                "typ": "Umístění",
+                "geometrie": {
+                    "type": "Point",
+                    "coordinates": [
+                        16.5995939,
+                        49.1944522
+                    ]
+                },
+                "adresa": {
+                    "typ": "Adresa",
+                    "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+                }
+            },
+            "správce": {
+                "typ": "Osoba",
+                "ičo": "60713470",
+                "název": {
+                    "cs": "SAKO Brno, a.s."
+                }
+            }
+        }
+    ],
+    "svozová_oblast": [
+        {
+            "typ": "Svozová oblast",
+            "iri": "https://www.sako.cz/oblast/Brno_1/",
+            "název": {
+                "cs": "Brno 1"
+            },
+            "vymezení": [{
+                "typ": "Umístění",
+                "geometrie": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                -97.06138,
+                                32.837
+                            ],
+                            [
+                                -97.06133,
+                                32.836
+                            ],
+                            [
+                                -97.06124,
+                                32.834
+                            ],
+                            [
+                                -97.06127,
+                                32.832
+                            ],
+                            [
+                                -97.06138,
+                                32.837
+                            ]
+                        ],
+                        [
+                            [
+                                -97.06326,
+                                32.759
+                            ],
+                            [
+                                -97.06298,
+                                32.755
+                            ],
+                            [
+                                -97.06153,
+                                32.749
+                            ],
+                            [
+                                -97.06326,
+                                32.759
+                            ]
+                        ]
+                    ]
+                },
+                "adresa": {
+                    "typ": "Adresa",
+                    "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+                }
+            }]
+        }
+    ]
+}</pre>
+                </aside>
+            </section>
+            <section id="příklady-více-nádob">
+                <h3>Více nádob</h3>
+                
+                <p>
+                    V příkladu je uveden seznam prezentací více nádob. Další položky lze přidávat dle potřeby.
+                </p>
+                
+                <aside class="example" title="Více nádob">
+                    <p>
+                        <a href="příklady/3.jsonld">JSON-LD soubor</a>, <a href="schémata/nádoba-na-tříděný-odpad.json">JSON Schema</a>, <a href="schémata/nádoby-na-tříděný-odpad.json">JSON Schema pro více nádob</a>
+                    </p>
+                    <pre class="json">
+[
+    {
+        "@context": "https://ofn.gov.cz/nádoby-na-tříděný-odpad/2022-04-19/kontexty/nádoby-na-tříděný-odpad.jsonld",
+        "typ": "Nádoba na tříděný odpad",
+        "iri": "https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/nádoba/Brno2458/",
+        "typ_tříděného_odpadu": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/plast",
+        "stanoviště_pro_nádoby": [
+            {
+                "typ": "Stanoviště pro nádoby na tříděný odpad",
+                "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/stanoviště-pro-nádoby/Brno387/",
+                "umístění": {
+                    "geometrie": {
+                        "type": "Point",
+                        "coordinates": [
+                            16.5995939,
+                            49.1944522
+                        ]
+                    },
+                    "adresa": {
+                        "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19095732"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "@context": "https://ofn.gov.cz/nádoby-na-tříděný-odpad/2022-04-19/kontexty/nádoby-na-tříděný-odpad.jsonld",
+        "typ": "Nádoba na tříděný odpad",
+        "iri": "https://www.sako.cz/zdroj/sberna-strediska-a-kontejnery/nádoba/Brno2489/",
+        "typ_tříděného_odpadu": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-tříděného-odpadu/položky/textil",
+        "stanoviště_pro_nádoby": [
+            {
+                "typ": "Stanoviště pro nádoby na tříděný odpad",
+                "iri": "https://www.sako.cz/sberna-strediska-a-kontejnery/stanoviště-pro-nádoby/Brno381/",
+                "umístění": {
+                    "geometrie": {
+                        "type": "Point",
+                        "coordinates": [
+                            16.5995539,
+                            49.1932522
+                        ]
+                    },
+                    "adresa": {
+                        "adresní_místo": "https://linked.cuzk.cz/resource/ruian/adresni-misto/19547501"
+                    }
+                }
+            }
+        ]
+    }
+]</pre>
+                </aside>
+            </section>
+        </section>
+        <section id="metadata">
+            <h2>Předpřipravená metadata</h2>
+            <p>
+                Tato sekce obsahuje odkaz na <a href="metadata/nádoby-na-tříděný-odpad.jsonld">vzorový metadatový záznam datové sady</a> použitelný pro <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>.
+				<a href="https://data.gov.cz/formulář/registrace-datové-sady?file=https%3A%2F%2Fofn.gov.cz%2Fnádoby-na-tříděný-odpad%2F2022-04-19%2Fmetadata%2Fnádoby-na-tříděný-odpad.jsonld">Registrace pomocí tohoto předpřipraveného záznamu</a> umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
+            </p>
+        </section>
+    </body>
+</html>
+
