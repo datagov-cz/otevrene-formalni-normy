@@ -202,7 +202,7 @@
                 {
                     "type": "number",
                     "title": "Prostorové rozlišení v metrech",
-					"description": "Prostorové rozlišení v metrech jako JSON číslo pro zpětnou kompatibilitu. Způsobuje problémy s datovým typem xsd:decimal.",
+                    "description": "Prostorové rozlišení v metrech jako JSON číslo pro zpětnou kompatibilitu. Způsobuje problémy s datovým typem xsd:decimal.",
                     "examples": [
                         0.5
                     ]
@@ -210,7 +210,7 @@
                 {
                     "type": "string",
                     "title": "Prostorové rozlišení v metrech",
-					"description": "Prostorové rozlišení v metrech jako JSON řetězec. Preferovaná varianta pro kompatibilitu s datovým typem xsd:decimal.",
+                    "description": "Prostorové rozlišení v metrech jako JSON řetězec. Preferovaná varianta pro kompatibilitu s datovým typem xsd:decimal.",
                     "examples": [
                         "0.5"
                     ]
@@ -443,17 +443,31 @@
                                 ]
                             },
                             "specifikace": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string",
-                                    "format": "iri",
-                                    "title": "Specifikace",
-                                    "minLength": 8,
-                                    "pattern": "^https://",
-                                    "examples": [
-                                        "https://www.w3.org/TR/sparql11-protocol/"
-                                    ]
-                                }
+                                "oneOf": [
+                                    {
+                                        "type": "string",
+                                        "format": "iri",
+                                        "title": "Specifikace",
+                                        "minLength": 8,
+                                        "pattern": "^https://",
+                                        "examples": [
+                                            "https://www.w3.org/TR/sparql11-protocol/"
+                                        ]
+                                    },
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "iri",
+                                            "title": "Specifikace",
+                                            "minLength": 8,
+                                            "pattern": "^https://",
+                                            "examples": [
+                                                "https://www.w3.org/TR/sparql11-protocol/"
+                                            ]
+                                        }
+                                    }
+                                ]
                             },
                             "popis_přístupového_bodu": {
                                 "type": "string",
