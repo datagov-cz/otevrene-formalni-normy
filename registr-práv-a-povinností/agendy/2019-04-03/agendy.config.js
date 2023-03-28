@@ -6,10 +6,7 @@ var respecConfig = {
 	latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/agendy/",
   publishDate: "2019-04-03",
 	editors: [{
-	  name: "Martin Nečaský",
-	  url: "https://martin.necasky.solid.community/profile/card#me",
-	  company:    "Ministerstvo vnitra",
-	  companyURL: "http://www.mvcr.cz"
+	  name: "Martin Nečaský"
 	}],
 	inlineCSS: "true",
 	github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
