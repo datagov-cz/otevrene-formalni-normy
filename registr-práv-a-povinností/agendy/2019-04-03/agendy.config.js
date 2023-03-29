@@ -9,7 +9,7 @@ var respecConfig = {
 	  name: "Martin Nečaský"
 	}],
 	inlineCSS: "true",
-	github: "https://github.com/opendata-mvcr/otevrene-formalni-normy/",
+	github: "https://github.com/datagov-cz/otevrene-formalni-normy/",
 	otherLinks: [{
 		key: "Odkazy",
 		data: [{

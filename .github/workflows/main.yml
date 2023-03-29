@@ -11,9 +11,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Get all files
-      uses: opendata-mvcr/lkod-github-actions/list-files@master
+      uses: datagov-cz/lkod-github-actions/list-files@master
     - name: Filter files
-      uses: opendata-mvcr/lkod-github-actions/filter-files@master
+      uses: datagov-cz/lkod-github-actions/filter-files@master
       with:
         input-file: ./files.json
         filter-json: >-
@@ -23,22 +23,22 @@ jobs:
           }
     - run: touch ${HOME}/report.json
     - name: Validate JSON syntax
-      uses: opendata-mvcr/lkod-github-actions/validate-json-syntax@master
+      uses: datagov-cz/lkod-github-actions/validate-json-syntax@master
       with:
         input-file: ./files-json.json
         output-file: ./report.json
     - name: Validate JSON-LD JSON syntax
-      uses: opendata-mvcr/lkod-github-actions/validate-json-syntax@master
+      uses: datagov-cz/lkod-github-actions/validate-json-syntax@master
       with:
         input-file: ./files-jsonld.json
         output-file: ./report.json
 #    - name: Validate JSON-LD not empty
-#      uses: opendata-mvcr/lkod-github-actions/validate-jsonld-not-empty@master
+#      uses: datagov-cz/lkod-github-actions/validate-jsonld-not-empty@master
 #      with:
 #        input-file: ./files-jsonld.json
 #        output-file: ./report.json
     - name: Push annotations
-      uses: opendata-mvcr/lkod-github-actions/push-annotations@master
+      uses: datagov-cz/lkod-github-actions/push-annotations@master
       with:
         annotations-file: ./report.json
       env:
