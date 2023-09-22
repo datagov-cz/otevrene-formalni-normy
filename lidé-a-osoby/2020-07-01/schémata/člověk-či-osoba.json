@@ -1,14 +1,41 @@
 {
-	"$schema": "https://json-schema.org/draft/2019-09/schema",
-	"$id": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk-či-osoba.json",
-	"name": "Člověk či Osoba",
-	"type": "object",
-	"description": "Člověk či právnická osoba",
-	"oneOf": [{
-		"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk.json"
-	}, {
-		"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/osoba.json"
-	}, {
-		"$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/ovm.json"
-	}]
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk-či-osoba.json",
+    "name": "Člověk či Osoba",
+    "type": "object",
+    "description": "Člověk či právnická osoba",
+    "allOf": [
+        {
+            "oneOf": [
+                {
+                    "$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/člověk.json"
+                },
+                {
+                    "$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/osoba.json"
+                },
+                {
+                    "$ref": "https://ofn.gov.cz/lidé-a-osoby/2020-07-01/schémata/ovm.json"
+                }
+            ]
+        },
+        {
+            "properties": {
+                "dič": {
+                    "type": "string",
+                    "title": "IČO",
+                    "description": "DIČ",
+                    "examples": [
+                        "CZ00112233"
+                    ]
+                },
+                "umístění": {
+                    "type": "array",
+                    "title": "Umístění fyzické či právnické osoby",
+                    "items": {
+                        "$ref": "https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.json"
+                    }
+                }
+            }
+        }
+    ]
 }

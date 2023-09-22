@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:osoby="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" xmlns:věc="https://ofn.gov.cz/věc/2020-07-01" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:osoby="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" xmlns:základ="https://ofn.gov.cz/základní-datové-typy/2020-07-01" xmlns:věc="https://ofn.gov.cz/věc/2020-07-01" xmlns:umístění="https://ofn.gov.cz/umístění/2020-07-01" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="https://ofn.gov.cz/lidé-a-osoby/2020-07-01" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
 	<xs:import namespace="https://ofn.gov.cz/základní-datové-typy/2020-07-01" schemaLocation="https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/základní-datové-typy.xsd"/>
 	<xs:import namespace="https://ofn.gov.cz/věc/2020-07-01" schemaLocation="https://ofn.gov.cz/věc/2020-07-01/schémata/věc.xsd"/>
+	<xs:import namespace="https://ofn.gov.cz/umístění/2020-07-01" schemaLocation="https://ofn.gov.cz/umístění/2020-07-01/schémata/umístění.xsd"/>
 	<xs:complexType name="člověk">
 		<xs:complexContent>
 			<xs:extension base="věc:věc">
@@ -12,7 +13,9 @@
 					<xs:element name="tituly_za" type="základ:text" maxOccurs="unbounded" minOccurs="0"/>
 					<xs:element name="pohlaví" type="xs:anyURI" minOccurs="0"/>
 					<xs:element name="text" type="základ:text" maxOccurs="unbounded" minOccurs="0"/>
-				</xs:sequence>
+					<xs:element name="dič" type="xs:string"/>
+					<xs:element name="umístění" type="umístění:umístění"/>			
+			</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -24,6 +27,8 @@
 					<xs:choice minOccurs="1">
 						<xs:element name="ičo" type="xs:string"/>
 						<xs:element name="stát_registrace" type="xs:anyURI"/>
+						<xs:element name="dič" type="xs:string"/>
+						<xs:element name="umístění" type="umístění:umístění"/>			
 					</xs:choice>
 				</xs:sequence>
 			</xs:extension>
@@ -36,7 +41,9 @@
 				<xs:sequence>
 					<xs:element name="ičo" type="xs:string" minOccurs="0"/>
 					<xs:element name="identifikátor_ovm" type="xs:string"/>
-				</xs:sequence>
+					<xs:element name="dič" type="xs:string"/>
+					<xs:element name="umístění" type="umístění:umístění"/>			
+			</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
