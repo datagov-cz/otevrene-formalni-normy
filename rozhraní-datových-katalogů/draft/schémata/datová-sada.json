@@ -1,6 +1,6 @@
 {
-    "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "$id": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2021-01-11/schémata/datová-sada.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/rozhraní-datových-katalogů/draft/schémata/datová-sada.json",
     "type": "object",
     "title": "Datová sada",
     "required": [
@@ -13,11 +13,12 @@
         "téma",
         "periodicita_aktualizace",
         "klíčové_slovo",
-        "prvek_rúian"
+        "prvek_rúian",
+        "právní_předpis"
     ],
     "properties": {
         "@context": {
-			"const": "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2021-01-11/kontexty/rozhraní-katalogů-otevřených-dat.jsonld"
+			"const": "https://ofn.gov.cz/rozhraní-datových-katalogů/draft/kontexty/rozhraní-datových-katalogů.jsonld"
 		},
         "typ": {
             "oneOf": [
@@ -25,9 +26,21 @@
                     "const": "Datová sada"
                 },
                 {
+                    "const": "Datová série"
+                },
+                {
                     "type": "array",
                     "contains": {
                         "const": "Datová sada"
+                    },
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "type": "array",
+                    "contains": {
+                        "const": "Datová série"
                     },
                     "items": {
                         "type": "string"
@@ -245,6 +258,37 @@
                 "https://lkod.mvcr.cz/zdroj/datové-sady/12345"
             ]
         },
+        "právní_předpis": {
+            "type": "array",
+            "contains": {
+                "oneOf": [
+                    {
+                        "const": "http://data.europa.eu/eli/dir/2019/1024/oj"
+                    },
+                    {
+                        "const": "http://data.europa.eu/eli/reg/2022/868/oj"
+                    }
+                ]
+            },
+            "items": {
+                "type": "string",
+                "format": "iri",
+                "example": [
+                    "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                ]        
+            }
+        },
+        "kategorie_hvd": {
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^http\\://data\\.europa\\.eu/bna/c_.*$",
+                "example": [
+                    "http://data.europa.eu/bna/c_164e0bf5"
+                ]
+            }
+        },
         "distribuce": {
             "type": "array",
             "items": {
@@ -411,6 +455,16 @@
                     "název": {
                         "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
                     },
+                    "právní_předpis": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri",
+                            "example": [
+                                "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                            ]
+                        }
+                    },            
                     "přístupová_služba": {
                         "type": "object",
                         "required": [
@@ -491,7 +545,17 @@
                                 "examples": [
                                     "http://www.iana.org/assignments/media-types/image/tiff"
                                 ]
-                            }
+                            },
+                            "právní_předpis": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri",
+                                    "example": [
+                                        "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                                    ]
+                                }
+                            }                    
                         }
                     }
                 }
