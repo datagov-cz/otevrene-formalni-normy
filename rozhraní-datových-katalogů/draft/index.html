@@ -95,7 +95,7 @@
                     Přechod ze standardu <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a> na <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/">DCAT-AP 3.0.0</a>
                     <ol>
                         <li>Změna predikátu pro indikaci členství v datové sérii z <code>dct:partOf</code> na <code>dcat:inSeries</code></li>
-                        <li>Specifikace způsobu označení datové série <code>dcat:DatasetSeries</code></li>
+                        <li>Změna typu datové série z <code>dcat:Dataset</code> na <code>dcat:DatasetSeries</code> a přidání JSON schématu pro datovou sérii</li>
                         <li>Prolinkování specifikace na DCAT-AP 3.0.0 místo DCAT 2</li>
                     </ol>
                 </li>
@@ -157,6 +157,7 @@
                 
                 <ul>
                     <li><code>sada: https://data.gov.cz/zdroj/datová-sada/1</code></li>
+                    <li><code>série: https://data.gov.cz/zdroj/datová-série/1</code></li>
                     <li><code>katalog: https://data.gov.cz/zdroj/katalog/1</code></li>
                     <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
                     <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
@@ -1255,7 +1256,7 @@ kontakt: a vcard:Individual ;
                             Popis
                         </dt>
                         <dd>
-                            Tato vlastnost odkazuje na zastřešující datovou sadu datové série, jejíž je tato datová sada součástí.
+                            Tato vlastnost odkazuje na datovou sérii, jejíž je tato datová sada součástí.
                             Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DatasetmemberofaDatasetSeries.inseries">dcat:inSeries</a>.
                         </dd>
                         <dt>
@@ -1268,19 +1269,19 @@ kontakt: a vcard:Individual ;
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> zastřešující datové sady.
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> entity typu <a href="třída-datová-série">Datové série</a>.
                         </dd>
                         <dt>
                             Povinnost
                         </dt>
                         <dd>
-                            Nepovinná
+                            Povinná pro datové sady v datové sérii
                         </dd>
                         <dt>
                             Příklady
                         </dt>
                         <dd>
-                            <code>sada: dct:isPartOf &lt;https://datový.katalog.cz/zdroj/datové-sady/zastřešující&gt; .</code>
+                            <code>sada: dcat:inSeries &lt;https://datový.katalog.cz/zdroj/datové-sady/série1&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -2091,6 +2092,39 @@ podmínky: a pu:Specifikace ;
 
             </section>
 
+            <section id="třída-datová-série">
+                <h3>Třída: Datová série</h3>
+
+                <p>
+                    Datová série zastřešuje související datové sady a série.
+                    Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému).
+                    Datová série je podtřídou <a href="#třída-datová-sada">Datové sady</a>, ale nemá vlastní distribuce.
+                    <a href="https://github.com/SEMICeu/DCAT-AP/issues/249">Související DCAT-AP issue o typech datových sérií</a>.
+                </p>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Datová série
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Třída reprezentující datovou sérii.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DatasetSeries">dcat:DatasetSeries</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>série: a dcat:DatasetSeries .</code>
+                    </dd>
+                </dl>
+            </section>
+
         </section>
 
         <section id="dcat-ap-sparql-endpoint">
@@ -2098,7 +2132,8 @@ podmínky: a pu:Specifikace ;
             
             <p>
                 Toto rozhraní předpokládá, že metadata datových sad dle této specifikace jsou uložena a přístupná ve SPARQL endpointu.
-                Po registraci tohoto SPARQL endpointu se na něm NKD zeptá nejprve na seznam instancí třídy <code>dcat:Dataset</code>, a poté se po skupinách bude ptát na povinné, nepovinné i další položky jednotlivých datových sad dle této specifikace a specifikace <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/">DCAT-AP 3.0.0</a>.
+                Obsah záznamů je identický k rozhraní <a href="#dcat-ap-dokumenty">DCAT-AP Dokumenty</a>.
+                Po registraci tohoto SPARQL endpointu se na něm NKD zeptá nejprve na seznam instancí tříd <code>dcat:Dataset</code> a <code>dcat:DatasetSeries</code>, a poté se po skupinách bude ptát na povinné, nepovinné i další položky jednotlivých datových sad dle této specifikace a specifikace <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/">DCAT-AP 3.0.0</a>.
                 Jedná se o nejjednodušší způsob registrace lokálního katalogu otevřených dat.
             </p>
 
@@ -2175,7 +2210,7 @@ podmínky: a pu:Specifikace ;
                 
                 <aside class="example" title="Vzorový soubor katalogu se třemi datovými sadami ve formátu JSON-LD">
                     <p>
-                        <a href="příklady/katalog.jsonld">JSON-LD</a>, <a href="schémata/katalog.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
+                        <a href="příklady/katalog.jsonld">JSON-LD</a>, <a href="schémata/katalog.json">JSON schéma</a>, <a href="kontexty/rozhraní-datových-katalogů.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/katalog</code>.
                     </p>
                     <pre class="json">
@@ -2305,7 +2340,7 @@ podmínky: a pu:Specifikace ;
 
                 <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
                     <p>
-                        <a href="příklady/datová-sada.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
+                        <a href="příklady/datová-sada.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-datových-katalogů.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
                     </p>
                     <pre class="json">
@@ -2438,6 +2473,7 @@ podmínky: a pu:Specifikace ;
                 <p>
                     Na URL specifikovaných v souboru katalogu pak NKD očekává soubory v RDF serializaci <a href="../../propojená-data/draft/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/draft/#serializace-JSON-LD">JSON-LD</a> obsahující kompletní metadatový záznam datové sady, včetně distribucí.
                     Pro HVD je třeba specifikovat nejen že na datovou sadu se vztahuje HVD IR, ale i na které její distribuce a datové služby, jelikož to nemusí být na všechny.
+                    V každém případě je to indikováno pomocí hodnoty <code>dcatap:applicableLegislation</code> (RDF Turtle) či <code>právní_předpis</code> (JSON-LD) s hodnotou <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code>.
                 </p>
                 
                 <aside class="example" title="Vzorový soubor s metadaty datové sady HVD v RDF Turtle">
@@ -2531,7 +2567,7 @@ podmínky: a pu:Specifikace ;
 
                 <aside class="example" title="Vzorový soubor s metadaty datové sady HVD v JSON-LD">
                     <p>
-                        <a href="příklady/datová-sada-hvd.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
+                        <a href="příklady/datová-sada-hvd.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-datových-katalogů.jsonld">JSON-LD kontext</a>.
                         Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
                     </p>
                     <pre class="json">
@@ -2660,6 +2696,246 @@ podmínky: a pu:Specifikace ;
                 ],		
                 "přístupový_bod": "https://portal.cisjr.cz/sparql",
                 "popis_přístupového_bodu": "https://portal.cisjr.cz/sparql"
+            }
+        }
+    ]
+}</pre>
+                </aside>
+
+            </section>
+
+            <section id="dcat-ap-dokumenty-datová-série">
+                <h3>Soubor datové série a datové sady v sérii</h3>
+                
+                <p>
+                    Na URL specifikovaných v souboru katalogu pak NKD očekává soubory v RDF serializaci <a href="../../propojená-data/draft/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/draft/#serializace-JSON-LD">JSON-LD</a> obsahující kompletní metadatový záznam datové sady nebo datové série.
+                    Datová sada v sérii ukazuje na URL datové série pomocí <code>dcat:inSeries</code> (RDF Turtle) či <code>je_součástí</code> (JSON-LD).
+                </p>
+                
+                <aside class="example" title="Vzorový soubor s metadaty datové série RDF Turtle">
+                    <p>
+                        <a href="příklady/datová-série.ttl">Stáhnout RDF Turtle</a>.
+                        Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-série/rozpočet</code>.
+                    </p>
+                    <pre class="turtle">
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix vcard2006: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+@prefix filetype: &lt;http://publications.europa.eu/resource/authority/file-type/&gt; .
+@prefix application: &lt;http://www.iana.org/assignments/media-types/application/&gt; .
+@prefix freq: &lt;http://publications.europa.eu/resource/authority/frequency/&gt; .
+@prefix theme: &lt;http://publications.europa.eu/resource/authority/data-theme/&gt; .
+@prefix continent: &lt;http://publications.europa.eu/resource/authority/continent/&gt; .
+@prefix ruian_ST: &lt;https://linked.cuzk.cz/resource/ruian/stat/&gt; .
+@prefix euroVoc: &lt;http://eurovoc.europa.eu/&gt; .
+@prefix dcatap: &lt;http://data.europa.eu/r5r/&gt; .
+
+@prefix pu: &lt;https://data.gov.cz/slovník/podmínky-užití/&gt; .
+
+&lt;https://data.gov.cz/lkod/mdcr/datové-série/rozpočet&gt; a dcat:DatasetSeries ;
+    dct:title "Rozpočet Ministerstva dopravy"@cs, "Budget of the Ministry of Transport"@en;
+    dct:description "Rozpočet Ministerstva dopravy"@cs, "Budget of the Ministry of Transport"@en;
+    dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; ;
+    dcat:theme theme:TRAN ;
+    dct:accrualPeriodicity freq:ANNUAL ;
+    dcat:keyword "rozpočet"@cs, "budget"@en ;
+    dct:spatial ruian_ST:1, continent:EUROPE ;
+    dcat:contactPoint [
+        a vcard2006:Organization ;
+        vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
+        vcard2006:hasEmail "sekretariat.190@mdcr.cz"
+    ] ;
+    foaf:page &lt;https://www.mdcr.cz/rozpočet&gt; ;
+    dcat:theme euroVoc:4512 ;
+    dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt; .</pre>
+                </aside>
+
+                <aside class="example" title="Vzorový soubor s metadaty datové série v JSON-LD">
+                    <p>
+                        <a href="příklady/datová-série.jsonld">JSON-LD</a>, <a href="schémata/datová-série.json">JSON schéma</a>, <a href="kontexty/rozhraní-datových-katalogů.jsonld">JSON-LD kontext</a>.
+                        Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-série/rozpočet</code>.
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/rozhraní-datových-katalogů/draft/kontexty/rozhraní-datových-katalogů.jsonld",
+    "iri": "https://data.gov.cz/lkod/mdcr/datové-série/rozpočet",
+    "typ": "Datová série",
+    "název": {
+        "cs": "Rozpočet Ministerstva dopravy",
+        "en": "Budget of the Ministry of Transport"
+    },
+    "popis": {
+        "cs": "Rozpočet Ministerstva dopravy",
+        "en": "Budget of the Ministry of Transport"
+    },
+    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
+    "téma": [
+        "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+    ],
+    "periodicita_aktualizace": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3",
+    "klíčové_slovo": {
+        "cs": [
+            "rozpočet"
+        ],
+        "en": [
+            "budget"
+        ]
+    },
+    "geografické_území": [
+        "http://publications.europa.eu/resource/authority/continent/EUROPE"
+    ],
+    "prvek_rúian": [
+        "https://linked.cuzk.cz/resource/ruian/stat/1"
+    ],
+    "kontaktní_bod": {
+        "typ": "Organizace",
+        "jméno": {
+            "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+            "en": "Ministry of Transport"
+        },
+        "e-mail": "mailto:sekretariat.190@mdcr.cz"
+    },
+    "dokumentace": "https://www.mdcr.cz/rozpočet",
+    "koncept_euroVoc": [
+        "http://eurovoc.europa.eu/4512"
+    ],
+    "právní_předpis": [
+        "http://data.europa.eu/eli/dir/2019/1024/oj"
+    ]
+}</pre>
+                </aside>
+
+                <aside class="example" title="Vzorový soubor s metadaty datové sady v datové sérii v RDF Turtle">
+                    <p>
+                        <a href="příklady/datová-sada-v-sérii.ttl">Stáhnout RDF Turtle</a>.
+                        Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019</code>.
+                    </p>
+                    <pre class="turtle">
+@prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+@prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix vcard2006: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
+@prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+
+@prefix filetype: &lt;http://publications.europa.eu/resource/authority/file-type/&gt; .
+@prefix application: &lt;http://www.iana.org/assignments/media-types/application/&gt; .
+@prefix freq: &lt;http://publications.europa.eu/resource/authority/frequency/&gt; .
+@prefix theme: &lt;http://publications.europa.eu/resource/authority/data-theme/&gt; .
+@prefix continent: &lt;http://publications.europa.eu/resource/authority/continent/&gt; .
+@prefix ruian_ST: &lt;https://linked.cuzk.cz/resource/ruian/stat/&gt; .
+@prefix euroVoc: &lt;http://eurovoc.europa.eu/&gt; .
+@prefix dcatap: &lt;http://data.europa.eu/r5r/&gt; .
+
+@prefix pu: &lt;https://data.gov.cz/slovník/podmínky-užití/&gt; .
+
+&lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019&gt; a dcat:Dataset ;
+    dct:title "Rozpočet Ministerstva dopravy 2019"@cs, "Budget of the Ministry of Transport 2019"@en;
+    dct:description "Rozpočet Ministerstva dopravy 2019"@cs, "Budget of the Ministry of Transport 2019"@en;
+    dcat:inSeries &lt;https://data.gov.cz/lkod/mdcr/datové-série/rozpočet&gt; ;
+    # Ostatní položky ...
+    dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/distribuce/csv&gt; .
+
+&lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/distribuce/sparql&gt; a dcat:Distribution ;
+    pu:specifikace [ a pu:Specifikace ;
+                    pu:autorské-dílo &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt; ;
+                    pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
+                    pu:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
+                    pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; ] ;
+    dcat:accessURL &lt;https://rozpočty.cz/sparql&gt; ;
+    dct:title "SPARQL endpoint pro rozpočty"@cs, "SPARQL endpoint for budget"@en ;
+    dcat:accessService &lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2020/služba/sparql&gt; .
+
+&lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/služba/sparql&gt; a dcat:DataService ;
+    dct:title "SPARQL endpoint pro rozpočty"@cs, "SPARQL endpoint for budget"@en ;
+    dcat:endpointURL &lt;https://rozpočty.cz/sparql&gt; ;
+    dcat:endpointDescription &lt;https://rozpočty.cz/sparql&gt; ;
+    dct:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; .</pre>
+                </aside>
+
+                <aside class="example" title="Vzorový soubor s metadaty datové sady v datové sérii v JSON-LD">
+                    <p>
+                        <a href="příklady/datová-sada-v-sérii.jsonld">JSON-LD</a>, <a href="schémata/datová-sada.json">JSON schéma</a>, <a href="kontexty/rozhraní-datových-katalogů.jsonld">JSON-LD kontext</a>.
+                        Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019</code>.
+                    </p>
+                    <pre class="json">
+{
+    "@context": "https://ofn.gov.cz/rozhraní-datových-katalogů/draft/kontexty/rozhraní-datových-katalogů.jsonld",
+    "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019",
+    "typ": "Datová sada",
+    "název": {
+        "cs": "Rozpočet Ministerstva dopravy 2019",
+        "en": "Budget of the Ministry of Transport 2019"
+    },
+    "popis": {
+        "cs": "Rozpočet Ministerstva dopravy 2019",
+        "en": "Budget of the Ministry of Transport 2019"
+    },
+    "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
+    "je_součástí": "https://data.gov.cz/lkod/mdcr/datové-série/rozpočet",
+    "téma": [
+        "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+    ],
+    "periodicita_aktualizace": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3",
+    "klíčové_slovo": {
+        "cs": [
+            "rozpočet"
+        ],
+        "en": [
+            "budget"
+        ]
+    },
+    "geografické_území": [
+        "http://publications.europa.eu/resource/authority/continent/EUROPE"
+    ],
+    "prvek_rúian": [
+        "https://linked.cuzk.cz/resource/ruian/stat/1"
+    ],
+    "kontaktní_bod": {
+        "typ": "Organizace",
+        "jméno": {
+            "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+            "en": "Ministry of Transport"
+        },
+        "e-mail": "mailto:sekretariat.190@mdcr.cz"
+    },
+    "dokumentace": "https://www.mdcr.cz/rozpočet",
+    "koncept_euroVoc": [
+        "http://eurovoc.europa.eu/4512"
+    ],
+    "právní_předpis": [
+        "http://data.europa.eu/eli/dir/2019/1024/oj"
+    ],
+    "distribuce": [
+        {
+            "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/distribuce/sparql",
+            "typ": "Distribuce",
+            "podmínky_užití": {
+                "typ": "Specifikace podmínek užití",
+                "autorské_dílo": "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                "databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                "databáze_jako_autorské_dílo": "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                "osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
+            },
+            "přístupové_url": "https://rozpočty.cz/sparql",
+            "název": {
+                "en": "SPARQL endpoint for budget",
+                "cs": "SPARQL endpoint pro rozpočty"
+            },
+            "přístupová_služba": {
+                "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql",
+                "typ": "Datová služba",
+                "název": {
+                    "cs": "SPARQL endpoint pro rozpočty",
+                    "en": "SPARQL endpoint for budget"
+                },
+                "specifikace": [
+                    "https://www.w3.org/TR/sparql11-protocol/"
+                ],
+                "přístupový_bod": "https://rozpočty.cz/sparql",
+                "popis_přístupového_bodu": "https://rozpočty.cz/sparql"
             }
         }
     ]
