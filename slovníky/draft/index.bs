@@ -1,0 +1,116 @@
+<pre class='metadata'>
+Title: Slovníky
+Shortname: slovníky
+Boilerplate: conformance no, copyright no
+Logo: 
+Repository: https://github.com/datagov-cz/otevrene-formalni-normy
+Markup Shorthands: markdown yes
+Level: 1
+Status: LS
+Group: data.gov.cz
+URL: https://ofn.gov.cz/slovníky
+Editor: Jakub Klímek, Digitální a informační agentura, jakub.klimek@dia.gov.cz
+Abstract: Cílem tohoto dokumentu je specifikovat strukturu pro výměnu slovníků pro popis dat.
+</pre>
+
+Úvod {#úvod}
+============
+Cílem tohoto dokumentu je specifikovat strukturu pro výměnu slovníků pro popis dat.
+Struktura popisuje 3 úrovně komplexity slovníku.
+Předpokladem je znalost problematiky propojených dat, minimálně pak [Pravidla pro tvorbu IRI](../../propojená-data/draft/#pravidla-pro-tvorbu-IRI).
+
+Konceptuální model slovníku {#konceptuální-model}
+============================================================
+1. Žlutě je vyznačena nejnižší úroveň komplexity - seznam pojmů.
+2. Zeleně pak rozšíření o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
+3. Oranžové rozšíření dále specifikuje typy tříd na ty reprezentující
+    - Osoby (subjekty údajů)
+    - Věci (objekty údajů)
+    - Fáze
+    - Role
+    - Činnosti a
+    - Události.
+
+<figure>
+    <img alt="Konceptuálný model slovníku" src="obrázky/slovník.svg">
+    <figcaption>Konceptuální model slovníku ve třech úrovních komplexity</figcaption>
+</figure>
+
+Popis slovníku {#slovník}
+============================================================
+Nezávisle na zvolené úrovni komplexity je třeba popsat samotný slovník.
+Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
+
+Popis položek
+-------------
+
+### Slovník ### {#třída-slovník}
+: Popis
+:: Slovník
+: Povinnost
+:: Povinná
+
+#### Název slovníku
+: Popis
+:: Název slovníku
+: Povinnost
+:: Povinná
+: Příklad
+:: ```"Datový slovník registru silničních vozidel"```
+
+#### Popis slovníku
+: Popis
+:: Název slovníku
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```"Datový slovník registru silničních vozidel slouží v rámci příkladu pro OFN Slovníky"```
+
+Příklady a schémata
+--------
+Příkladem je slovník s IRI `https://slovník.gov.cz/datový/registr-silničních-vozidel`
+
+### JSON-LD
+[Slovník v JSON-LD](příklady/slovník.jsonld)
+```json
+{
+    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/seznam-pojmů.jsonld",
+    "iri": "https://slovník.gov.cz/datový/registr-silničních-vozidel",
+    "typ": ["Seznam pojmů"],
+    "název": {
+        "cs": "Datový slovník registru silničních vozidel"
+    },
+    "popis": {
+        "cs": "Datový slovník registru silničních vozidel slouží v rámci příkladu pro OFN Slovníky"
+    }
+}
+```
+
+### RDF Turtle
+[Slovník v RDF Turtle](příklady/slovník.ttl)
+```turtle
+@prefix skos: <http://www.w3.org/2004/02/skos/core> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://slovník.gov.cz/datový/registr-silničních-vozidel> a skos:ConceptScheme ;
+    skos:prefLabel "Datový slovník registru silničních vozidel"@cs;
+    dcterms:description "Datový slovník registru silničních vozidel vznikl v rámci příkladu pro OFN Slovníky"@cs .
+```
+
+### CSV on the Web
+[Slovník v CSV](příklady/slovník.csv), [CSV on the Web deskriptor](příklady/slovník.csv-metadata.json)
+```
+slovník,slovník_název_cs,slovník_popis_cs
+https://slovník.gov.cz/datový/registr-silničních-vozidel,Datový slovník registru silničních vozidel,Datový slovník registru silničních vozidel vznikl v rámci příkladu pro OFN Slovníky
+```
+
+Úroveň komplexity 1 - seznam pojmů {#seznam-pojmů}
+============================================================
+Nejzákladnějším typem slovníku je seznam pojmů, které se v datech vyskytují.
+O každém pojmu je třeba uvést alespoň jeho identifikátor, název a definici.
+
+Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-slovník}
+============================================================
+
+Úroveň komplexity 3 - detailní členění {#ssp-light}
+============================================================
