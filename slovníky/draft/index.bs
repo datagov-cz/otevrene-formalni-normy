@@ -46,14 +46,14 @@ Popis položek {#slovník-popis-položek}
 ### Slovník ### {#třída-slovník}
 : Popis
 :: Slovník
-: Povinnost
-:: Povinná
 
 #### Název slovníku #### {#slovník-název}
 : Popis
 :: Název slovníku
 : Povinnost
 :: Povinná
+: Datový typ
+:: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Příklad
 :: ```"Slovník turistických cílů"```
 
@@ -62,6 +62,8 @@ Popis položek {#slovník-popis-položek}
 :: Název slovníku
 : Povinnost
 :: Nepovinná
+: Datový typ
+:: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Příklad
 :: ```"Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"```
 
@@ -114,24 +116,22 @@ Popis položek {#seznam-pojmů-popis-položek}
 ### Slovník ### {#třída-slovník-seznam-pojmů}
 : Popis
 :: Slovník
-: Povinnost
-:: Povinná
 
 #### Vazba: Obshauje pojem #### {#vazba-slovník-pojem}
 : Popis
 :: Vazba propojující pojem a slovník, ve kterém je pojem definován
-: Povinnost
-:: Povinná
+: Obor hodnot
+:: [Pojem](#třída-pojem)
 
 ### Pojem ### {#třída-pojem}
 : Popis
 :: Pojem
-: Povinnost
-:: Povinná
 
 #### Název pojmu #### {#pojem-název}
 : Popis
 :: Název pojmu
+: Datový typ
+:: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Povinnost
 :: Povinná
 : Příklad
@@ -140,6 +140,8 @@ Popis položek {#seznam-pojmů-popis-položek}
 #### Definice pojmu #### {#pojem-definice}
 : Popis
 :: Definice pojmu
+: Datový typ
+:: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Povinnost
 :: Povinná
 : Příklad
@@ -148,10 +150,16 @@ Popis položek {#seznam-pojmů-popis-položek}
 #### Související legislativa #### {#pojem-související-legislativa}
 : Popis
 :: Související legislativa
+: Datový typ
+:: \[URL](../../základní-datové-typy/2020-07-01/#url)
 : Povinnost
 :: Nepovinná
 : Příklad
 :: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
+
+<p class="issue">
+Přidat příklad pojmu se související legislativou
+</p>
 
 Příklady a schémata {#seznam-pojmů-příklady}
 --------
@@ -222,12 +230,155 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 ### CSV on the Web ### {#seznam-pojmů-příklady-csvw}
 [Seznam pojmů v CSV](příklady/seznam-pojmů.csv), [CSV on the Web deskriptor](příklady/seznam-pojmů.csv-metadata.json)
 ```
-slovník,slovník_název_cs,slovník_popis_cs
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky
+slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,Turistický cíl,Samostatný turistický cíl.
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,Typ turistického cíle,Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů.
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle,má typ turistického cíle,"Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
 ```
 
-Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-slovník}
+Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-model}
 ============================================================
+Na této úrovni rozlišujeme pojmy, které reprezentují
+- třídy, nebo také typy věcí,
+- vztahy mezi dvěma věcmi,
+- vlastnosti věcí.
 
-Úroveň komplexity 3 - detailní členění {#ssp-light}
+Popis položek {#základní-model-popis-položek}
+-------------
+
+### Třída ### {#třída-základní-model-třída}
+: Popis
+:: Pojem reprezentující třídu, nebo typ věci. Třída pak může mít instance - konkrétní věci reprezentovaného typu.
+: Příklad
+:: `Hrad Karštejn` je instancí třídy `Turistický cíl`.
+
+#### Vazba: Nadřazená třída #### {#vazba-základní-model-třída-nadřazená-třída}
+: Popis
+:: Významově širší třída
+: Obor hodnot
+:: [Třída](#třída-základní-model-třída)
+: Povinnost
+:: Nepovinná
+: Příklady
+:: Třída `Hrad` má nadřazenou třídu `Turistický cíl`
+:: Třída `Zámek` má nadřazenou třídu `Turistický cíl`
+:: Třída `Zámek` má nadřazenou třídu `Rezidenční objekt`
+:: Třída `Bytový dům` má nadřazenou třídu `Rezidenční objekt`
+
+<p class="issue">
+Zvážit, zda nadřazenost nezadefinovat už pro Pojem.
+To by umožnilo mít kromě seznamu pojmů i hierarchii pojmů, a taky hierarchie vlastností.
+</p>
+
+### Vztah ### {#třída-základní-model-vztah}
+: Popis
+:: Pojem reprezentující vztah, do kterým mohou být propojeny instance dvou tříd, nebo dvě instance stejné třídy.
+
+#### Vazba: Definiční obor vztahu #### {#vazba-základní-model-vztah-definiční-obor}
+: Popis
+:: Definiční obor vztahu. Určuje třídu věcí, kterým mohou být v tomto vztahu přiřazovány jiné věci, instance oboru hodnot.
+: Obor hodnot
+:: [Třída](#třída-základní-model-třída)
+: Povinnost
+:: Povinná
+
+#### Vazba: Obor hodnot vztahu #### {#vazba-základní-model-vztah-obor-hodnot}
+: Popis
+:: Obor hodnot vztahu. Určuje třídu věcí, které mohou být v tomto vztahu přiřazovány jiným věcem, instancím definičního oboru.
+: Obor hodnot
+:: [Třída](#třída-základní-model-třída)
+: Povinnost
+:: Povinná
+
+### Vlastnost ### {#třída-základní-model-vlastnost}
+: Popis
+:: Pojem reprezenutjící vlastnost, kterou může mít instance nějaké třídy.
+
+#### Vazba: Definiční obor vlastnosti #### {#vazba-základní-model-vlastnost-definiční-obor}
+: Popis
+:: Definiční obor vlastnosti. Určuje třídu věcí, které mají danou vlastnost.
+: Obor hodnot
+:: [Třída](#třída-základní-model-třída)
+: Povinnost
+:: Povinná
+
+#### Vazba: Datový typ vlastnosti #### {#vazba-základní-model-vlastnost-datový-typ}
+: Popis
+:: Datový typ vlastnosti. Určuje datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
+: Obor hodnot
+:: [Datový typ](#třída-základní-model-datový-typ)
+: Povinnost
+:: Povinná
+
+### Datový typ ### {#třída-základní-model-datový-typ}
+: Popis
+:: Datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
+: Příklady instancí, tj. konkrétních datových typů
+:: ```Datum a čas```
+:: ```Celé číslo```
+:: ```Text```
+
+Příklady a schémata {#základní-model-příklady}
+--------
+
+Úroveň komplexity 3 - detailní členění {#ssp-model}
 ============================================================
+Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
+- Osoby (subjekty údajů)
+- Věci (objekty údajů)
+- Události
+- Fáze
+- Role
+- Činnosti
+
+<p class="issue">
+Zde volím definice dle C2V11 strana 6. Nevím, zda je to vhodné.
+</p>
+
+Popis položek {#ssp-model-popis-položek}
+-------------
+
+### Osoba ### {#třída-ssp-model-osoba}
+: Popis
+:: Subjekty práv nebo povinností v agendě.
+: Příklad
+:: `Fyzická osoba`
+
+### Věc ### {#třída-ssp-model-věc}
+: Popis
+:: Předměty (objekty) práv a povinností v agendě.
+: Příklad
+:: `Technický průkaz`
+
+### Událost ### {#třída-ssp-model-událost}
+: Popis
+:: Pro danou agendu relevantní událost, která nějakým způsobem
+    ovlivňuje osoby nebo věci, o kterých v agendě úřadujeme, nebo kterých se nějakým
+    způsobem týkají.
+: Příklad
+:: `Havárie silničního vozidla`
+
+### Fáze ### {#třída-ssp-model-fáze}
+: Popis
+:: Fáze osob nebo věcí, tj. konkrétní specifické stavy osob nebo věcí.
+: Příklad
+:: `Zničené silniční vozidlo`
+
+### Role ### {#třída-ssp-model-role}
+: Popis
+:: Role osob. Role věcí neuvažujeme, nemohou konat a "brát na sebe" role.
+: Příklad
+:: `Vlastník vozidla`
+
+### Činnost ### {#třída-ssp-model-činnost}
+: Popis
+:: Konání, chování, úkony v rámci agendy nebo relevantní pro agendu.
+: Příklad
+:: `Vyřazování silničního vozidla z provozu`
+
+<p class="issue">
+Původně v C2V11 byla činnost `Vyřazení silničního vozidla z provozu`, což mi přišlo jako událost. Činnost je pak vyřazování.
+<p>
+
+Příklady a schémata {#ssp-model-příklady}
+--------
