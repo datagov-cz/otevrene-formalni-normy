@@ -208,6 +208,16 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
             "definice": {
                 "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
             }
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
+            "typ": ["Pojem"],
+            "název": {
+                "cs": "kouření povoleno"
+            },
+            "definice": {
+                "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
+            }
         }
     ]
 }
@@ -216,27 +226,35 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 ### RDF Turtle ### {#seznam-pojmů-příklady-rdf-turtle}
 [Seznam pojmů v RDF Turtle](příklady/seznam-pojmů.ttl)
 ```turtle
-@prefix skos: <http://www.w3.org/2004/02/skos/core> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme ;
+@prefix tc:      <https://slovník.gov.cz/datový/turistické-cíle> .
+@prefix tcpojmy: <https://slovník.gov.cz/datový/turistické-cíle/pojem/> .
+
+tc: a skos:ConceptScheme ;
     skos:prefLabel "Slovník turistických cílů"@cs;
     dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
 
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept ;
+tcpojmy:turistický-cíl a skos:Concept ;
     skos:prefLabel "Turistický cíl"@cs;
     skos:definition "Samostatný turistický cíl."@cs ;
-    skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle> .
+    skos:inScheme tc: .
 
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept ;
+tcpojmy:typ-turistického-cíle a skos:Concept ;
     skos:prefLabel "Typ turistického cíle"@cs;
     skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs ;
-    skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle> .
+    skos:inScheme tc: .
 
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept ;
+tcpojmy:má-typ-turistického-cíle a skos:Concept ;
     skos:prefLabel "má typ turistického cíle"@cs;
     skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs ;
-    skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle> .
+    skos:inScheme tc: .
+
+tcpojmy:kouření-povoleno a skos:Concept ;
+    skos:prefLabel "kouření povoleno"@cs;
+    skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs ;
+    skos:inScheme tc: .
 ```
 
 ### CSV on the Web ### {#seznam-pojmů-příklady-csvw}
@@ -246,6 +264,7 @@ slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_náz
 https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,Turistický cíl,Samostatný turistický cíl.
 https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,Typ turistického cíle,Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů.
 https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle,má typ turistického cíle,"Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno,kouření povoleno,"Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
 ```
 
 Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-model}
@@ -332,6 +351,116 @@ To by umožnilo mít kromě seznamu pojmů i hierarchii pojmů, a taky hierarchi
 
 Příklady a schémata {#základní-model-příklady}
 --------
+
+### JSON-LD ### {#základní-model-příklady-json-ld}
+[Základní model v JSON-LD](příklady/základní-model.jsonld)
+```json
+{
+    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
+    "iri": "https://slovník.gov.cz/datový/turistické-cíle",
+    "typ": ["Seznam pojmů"],
+    "název": {
+        "cs": "Slovník turistických cílů"
+    },
+    "popis": {
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"
+    },
+    "pojmy": [
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "typ": ["Pojem", "Třída"],
+            "název": {
+                "cs": "Turistický cíl"
+            },
+            "definice": {
+                "cs": "Samostatný turistický cíl."
+            }
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+            "typ": ["Pojem", "Třída"],
+            "název": {
+                "cs": "Typ turistického cíle"
+            },
+            "definice": {
+                "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
+            }
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
+            "typ": ["Pojem", "Vztah"],
+            "název": {
+                "cs": "má typ turistického cíle"
+            },
+            "definice": {
+                "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
+            },
+            "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle"
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
+            "typ": ["Pojem", "Vlastnost"],
+            "název": {
+                "cs": "kouření povoleno"
+            },
+            "definice": {
+                "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
+            },
+            "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "datový-typ": "xsd:boolean"
+        }
+    ]
+}
+```
+
+### RDF Turtle ### {#základní-model-příklady-rdf-turtle}
+[Základní model v RDF Turtle](příklady/základní-model.ttl)
+```turtle
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix tc:      <https://slovník.gov.cz/datový/turistické-cíle> .
+@prefix tcpojmy: <https://slovník.gov.cz/datový/turistické-cíle/pojem/> .
+
+tc: a skos:ConceptScheme, owl:Ontology ;
+    skos:prefLabel "Slovník turistických cílů"@cs;
+    dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
+
+tcpojmy:turistický-cíl a skos:Concept, owl:Class ;
+    skos:prefLabel "Turistický cíl"@cs;
+    skos:definition "Samostatný turistický cíl."@cs ;
+    skos:inScheme tc: .
+
+tcpojmy:typ-turistického-cíle a skos:Concept, owl:Class ;
+    skos:prefLabel "Typ turistického cíle"@cs;
+    skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs ;
+    skos:inScheme tc: .
+
+tcpojmy:má-typ-turistického-cíle a skos:Concept, owl:ObjectProperty ;
+    skos:prefLabel "má typ turistického cíle"@cs;
+    skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs ;
+    skos:inScheme tc: ;
+    rdfs:domain tcpojmy:turistický-cíl ;
+    rdfs:range tcpojmy:typ-turistického-cíle .
+
+tcpojmy:kouření-povoleno a skos:Concept, owl:DatatypeProperty ;
+    skos:prefLabel "kouření povoleno"@cs;
+    skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs ;
+    skos:inScheme tc: ;
+    rdfs:domain tcpojmy:turistický-cíl ;
+    rdfs:range xsd:boolean .
+```
+
+### CSV on the Web ### {#základní-model-příklady-csvw}
+[Základní model v CSV](příklady/základní-model.csv), [CSV on the Web deskriptor](příklady/základní-model.csv-metadata.json)
+```
+a
+```
 
 Úroveň komplexity 3 - detailní členění {#ssp-model}
 ============================================================

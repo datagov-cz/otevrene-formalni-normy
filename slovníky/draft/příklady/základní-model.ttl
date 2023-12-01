@@ -1,29 +1,37 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 @prefix skos:    <http://www.w3.org/2004/02/skos/core> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
 @prefix tc:      <https://slovník.gov.cz/datový/turistické-cíle> .
 @prefix tcpojmy: <https://slovník.gov.cz/datový/turistické-cíle/pojem/> .
 
-tc: a skos:ConceptScheme ;
+tc: a skos:ConceptScheme, owl:Ontology ;
     skos:prefLabel "Slovník turistických cílů"@cs;
     dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
 
-tcpojmy:turistický-cíl a skos:Concept ;
+tcpojmy:turistický-cíl a skos:Concept, owl:Class ;
     skos:prefLabel "Turistický cíl"@cs;
     skos:definition "Samostatný turistický cíl."@cs ;
     skos:inScheme tc: .
 
-tcpojmy:typ-turistického-cíle a skos:Concept ;
+tcpojmy:typ-turistického-cíle a skos:Concept, owl:Class ;
     skos:prefLabel "Typ turistického cíle"@cs;
     skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs ;
     skos:inScheme tc: .
 
-tcpojmy:má-typ-turistického-cíle a skos:Concept ;
+tcpojmy:má-typ-turistického-cíle a skos:Concept, owl:ObjectProperty ;
     skos:prefLabel "má typ turistického cíle"@cs;
     skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs ;
-    skos:inScheme tc: .
+    skos:inScheme tc: ;
+    rdfs:domain tcpojmy:turistický-cíl ;
+    rdfs:range tcpojmy:typ-turistického-cíle .
 
-tcpojmy:kouření-povoleno a skos:Concept ;
+tcpojmy:kouření-povoleno a skos:Concept, owl:DatatypeProperty ;
     skos:prefLabel "kouření povoleno"@cs;
     skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs ;
-    skos:inScheme tc: .
+    skos:inScheme tc: ;
+    rdfs:domain tcpojmy:turistický-cíl ;
+    rdfs:range xsd:boolean .
