@@ -560,83 +560,86 @@ Navíc však u tříd specifikujeme jejich další druh.
 [SSP model v JSON-LD](příklady/ssp-model.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
-    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
-    "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
-    "typ": ["Seznam pojmů"],
-    "název": {
-        "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
-    },
-    "popis": {
-        "cs": "Slovník slouží v rámci příkladu pro OFN Slovníky"
-    },
-    "pojmy": [
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Věc"],
-            "název": {
-                "cs": "Silniční vozidlo"
-            },
-            "definice": {
-                "cs": "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."
-            },
-            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p2-1",
-            "nadřazená-třída": "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"
-        },
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
-            "typ": ["Pojem", "Třída", "Role"],
-            "název": {
-                "cs": "Vlastník vozidla"
-            },
-            "definice": {
-                "cs": "Vlastník vozidla"
-            },
-            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"
-        },
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
-            "typ": ["Pojem", "Vztah"],
-            "název": {
-                "cs": "má vlastníka vozidla"
-            },
-            "definice": {
-                "cs": "má vlastníka vozidla"
-            },
-            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a",
-            "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
-            "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"
-        },
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
-            "typ": ["Pojem", "Třída", "Událost"],
-            "název": {
-                "cs": "Havárie silničního vozidla"
-            },
-            "definice": {
-                "cs": "Havárie silničního vozidla"
-            }
-        },
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Fáze"],
-            "název": {
-                "cs": "Zničené silniční vozidlo"
-            },
-            "definice": {
-                "cs": "Zničené silniční vozidlo"
-            }
-        },
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vyřazování-silničního-vozidla-z-provozu",
-            "typ": ["Pojem", "Třída", "Činnost"],
-            "název": {
-                "cs": "Vyřazování silničního vozidla z provozu"
-            },
-            "definice": {
-                "cs": "Vyřazování silničního vozidla z provozu"
-            }
-        }
-    ]
+	"@context": {
+		"@version": 1.1,
+		"owl": "http://www.w3.org/2002/07/owl#",
+		"zsgov": "https://slovník.gov.cz/základní/pojem/mixin-rolí",
+		"@import": "https://ofn.gov.cz/věc/2020-07-01/kontexty/věc.jsonld",
+		"@propagate": true,
+		"Seznam pojmů": {
+			"@id": "skos:ConceptScheme",
+			"@context": {
+				"@version": 1.1,
+				"název": {
+					"@id": "skos:prefLabel",
+					"@container": "@language"
+				},
+				"definice": {
+					"@id": "skos:definition",
+					"@container": "@language"
+				},
+				"pojmy": {
+					"@reverse": "skos:inScheme",
+					"@context": {
+						"Pojem": {
+							"@id": "skos:Concept",
+							"@context": {
+								"název": {
+									"@id": "skos:prefLabel",
+									"@container": "@language"
+								},
+								"definice": {
+									"@id": "skos:definition",
+									"@container": "@language"
+								}		
+							}
+						},
+						"Třída": {
+							"@id": "owl:Class",
+							"@context": {
+								"nadřazená-třída": {
+									"@id": "rdfs:subClassOf",
+									"@type": "@id"
+								}
+							}
+						},
+						"Vlastnost": {
+							"@id": "owl:DatatypeProperty",
+							"@context": {
+								"definiční-obor": {
+									"@id": "rdfs:domain",
+									"@type": "@id"
+								},
+								"datový-typ": {
+									"@id": "rdfs:range",
+									"@type": "@id"
+								}
+							}
+						},
+						"Vztah": {
+							"@id": "owl:ObjectProperty",
+							"@context": {
+								"definiční-obor": {
+									"@id": "rdfs:domain",
+									"@type": "@id"
+								},
+								"obor-hodnot": {
+									"@id": "rdfs:range",
+									"@type": "@id"
+								}
+							}
+						},
+						"Osoba": "https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva",
+						"Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva",
+						"Role": "zsgov:mixin-rolí",
+						"Fáze": "zsgov:mixin-fází",
+						"Činnost": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost",
+						"Událost": "zsgov:událost"
+					}
+				}
+			}
+		}
+    }
 }
 ```
 
