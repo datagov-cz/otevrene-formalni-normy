@@ -2,7 +2,6 @@
 Title: Slovníky
 Shortname: slovníky
 Boilerplate: conformance no, copyright no
-Logo: 
 Repository: https://github.com/datagov-cz/otevrene-formalni-normy
 Markup Shorthands: markdown yes
 Level: 1
@@ -41,7 +40,7 @@ Popis slovníku {#slovník}
 Nezávisle na zvolené úrovni komplexity je třeba popsat samotný slovník.
 Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
 
-Popis položek
+Popis položek {#slovník-popis-položek}
 -------------
 
 ### Slovník ### {#třída-slovník}
@@ -50,64 +49,182 @@ Popis položek
 : Povinnost
 :: Povinná
 
-#### Název slovníku
+#### Název slovníku #### {#slovník-název}
 : Popis
 :: Název slovníku
 : Povinnost
 :: Povinná
 : Příklad
-:: ```"Datový slovník registru silničních vozidel"```
+:: ```"Slovník turistických cílů"```
 
-#### Popis slovníku
+#### Popis slovníku #### {#slovník-popis}
 : Popis
 :: Název slovníku
 : Povinnost
 :: Nepovinná
 : Příklad
-:: ```"Datový slovník registru silničních vozidel slouží v rámci příkladu pro OFN Slovníky"```
+:: ```"Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"```
 
-Příklady a schémata
+Příklady a schémata {#slovník-příklady}
 --------
-Příkladem je slovník s IRI `https://slovník.gov.cz/datový/registr-silničních-vozidel`
+Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle`
 
-### JSON-LD
+### JSON-LD ### {#slovník-příklady-json-ld}
 [Slovník v JSON-LD](příklady/slovník.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/seznam-pojmů.jsonld",
-    "iri": "https://slovník.gov.cz/datový/registr-silničních-vozidel",
+    "iri": "https://slovník.gov.cz/datový/turistické-cíle",
     "typ": ["Seznam pojmů"],
     "název": {
-        "cs": "Datový slovník registru silničních vozidel"
+        "cs": "Slovník turistických cílů"
     },
     "popis": {
-        "cs": "Datový slovník registru silničních vozidel slouží v rámci příkladu pro OFN Slovníky"
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"
     }
 }
 ```
 
-### RDF Turtle
+### RDF Turtle ### {#slovník-příklady-rdf-turtle}
 [Slovník v RDF Turtle](příklady/slovník.ttl)
 ```turtle
 @prefix skos: <http://www.w3.org/2004/02/skos/core> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 
-<https://slovník.gov.cz/datový/registr-silničních-vozidel> a skos:ConceptScheme ;
-    skos:prefLabel "Datový slovník registru silničních vozidel"@cs;
-    dcterms:description "Datový slovník registru silničních vozidel vznikl v rámci příkladu pro OFN Slovníky"@cs .
+<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme ;
+    skos:prefLabel "Slovník turistických cílů"@cs;
+    dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
 ```
 
-### CSV on the Web
+### CSV on the Web  ### {#slovník-příklady-csvw}
 [Slovník v CSV](příklady/slovník.csv), [CSV on the Web deskriptor](příklady/slovník.csv-metadata.json)
 ```
 slovník,slovník_název_cs,slovník_popis_cs
-https://slovník.gov.cz/datový/registr-silničních-vozidel,Datový slovník registru silničních vozidel,Datový slovník registru silničních vozidel vznikl v rámci příkladu pro OFN Slovníky
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky
 ```
 
 Úroveň komplexity 1 - seznam pojmů {#seznam-pojmů}
 ============================================================
 Nejzákladnějším typem slovníku je seznam pojmů, které se v datech vyskytují.
 O každém pojmu je třeba uvést alespoň jeho identifikátor, název a definici.
+
+Popis položek {#seznam-pojmů-popis-položek}
+-------------
+
+### Slovník ### {#třída-slovník-seznam-pojmů}
+: Popis
+:: Slovník
+: Povinnost
+:: Povinná
+
+#### Vazba: Obshauje pojem #### {#vazba-slovník-pojem}
+: Popis
+:: Vazba propojující pojem a slovník, ve kterém je pojem definován
+: Povinnost
+:: Povinná
+
+### Pojem ### {#třída-pojem}
+: Popis
+:: Pojem
+: Povinnost
+:: Povinná
+
+#### Název pojmu #### {#pojem-název}
+: Popis
+:: Název pojmu
+: Povinnost
+:: Povinná
+: Příklad
+:: ```"Turistický cíl"```
+
+#### Definice pojmu #### {#pojem-definice}
+: Popis
+:: Definice pojmu
+: Povinnost
+:: Povinná
+: Příklad
+:: ```"Samostatný turistický cíl."```
+
+#### Související legislativa #### {#pojem-související-legislativa}
+: Popis
+:: Související legislativa
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
+
+Příklady a schémata {#seznam-pojmů-příklady}
+--------
+Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
+
+### JSON-LD ### {#seznam-pojmů-příklady-json-ld}
+[Seznam pojmů v JSON-LD](příklady/seznam-pojmů.jsonld)
+```json
+{
+    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
+    "iri": "https://slovník.gov.cz/datový/turistické-cíle",
+    "typ": ["Seznam pojmů"],
+    "název": {
+        "cs": "Slovník turistických cílů"
+    },
+    "popis": {
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"
+    },
+    "pojmy": [
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "typ": ["Pojem"],
+            "název": "Turistický cíl",
+            "definice": "Samostatný turistický cíl."
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+            "typ": ["Pojem"],
+            "název": "Typ turistického cíle",
+            "definice": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
+            "typ": ["Pojem"],
+            "název": "má typ turistického cíle",
+            "definice": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
+        }
+    ]
+}
+```
+
+### RDF Turtle ### {#seznam-pojmů-příklady-rdf-turtle}
+[Seznam pojmů v RDF Turtle](příklady/seznam-pojmů.ttl)
+```turtle
+@prefix skos: <http://www.w3.org/2004/02/skos/core> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme ;
+    skos:prefLabel "Slovník turistických cílů"@cs;
+    dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept ;
+    skos:prefLabel "Turistický cíl"@cs;
+    skos:definition "Samostatný turistický cíl."@cs ;
+    skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle> .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept ;
+    skos:prefLabel "Typ turistického cíle"@cs;
+    skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs ;
+    skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle> .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept ;
+    skos:prefLabel "má typ turistického cíle"@cs;
+    skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs ;
+    skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle> .
+```
+
+### CSV on the Web ### {#seznam-pojmů-příklady-csvw}
+[Seznam pojmů v CSV](příklady/seznam-pojmů.csv), [CSV on the Web deskriptor](příklady/seznam-pojmů.csv-metadata.json)
+```
+slovník,slovník_název_cs,slovník_popis_cs
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky
+```
 
 Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-slovník}
 ============================================================
