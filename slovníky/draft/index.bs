@@ -560,100 +560,163 @@ Navíc však u tříd specifikujeme jejich další druh.
 [SSP model v JSON-LD](příklady/ssp-model.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
-	"@context": {
-		"@version": 1.1,
-		"owl": "http://www.w3.org/2002/07/owl#",
-		"zsgov": "https://slovník.gov.cz/základní/pojem/mixin-rolí",
-		"@import": "https://ofn.gov.cz/věc/2020-07-01/kontexty/věc.jsonld",
-		"@propagate": true,
-		"Seznam pojmů": {
-			"@id": "skos:ConceptScheme",
-			"@context": {
-				"@version": 1.1,
-				"název": {
-					"@id": "skos:prefLabel",
-					"@container": "@language"
-				},
-				"definice": {
-					"@id": "skos:definition",
-					"@container": "@language"
-				},
-				"pojmy": {
-					"@reverse": "skos:inScheme",
-					"@context": {
-						"Pojem": {
-							"@id": "skos:Concept",
-							"@context": {
-								"název": {
-									"@id": "skos:prefLabel",
-									"@container": "@language"
-								},
-								"definice": {
-									"@id": "skos:definition",
-									"@container": "@language"
-								}		
-							}
-						},
-						"Třída": {
-							"@id": "owl:Class",
-							"@context": {
-								"nadřazená-třída": {
-									"@id": "rdfs:subClassOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Vlastnost": {
-							"@id": "owl:DatatypeProperty",
-							"@context": {
-								"definiční-obor": {
-									"@id": "rdfs:domain",
-									"@type": "@id"
-								},
-								"datový-typ": {
-									"@id": "rdfs:range",
-									"@type": "@id"
-								}
-							}
-						},
-						"Vztah": {
-							"@id": "owl:ObjectProperty",
-							"@context": {
-								"definiční-obor": {
-									"@id": "rdfs:domain",
-									"@type": "@id"
-								},
-								"obor-hodnot": {
-									"@id": "rdfs:range",
-									"@type": "@id"
-								}
-							}
-						},
-						"Osoba": "https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva",
-						"Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva",
-						"Role": "zsgov:mixin-rolí",
-						"Fáze": "zsgov:mixin-fází",
-						"Činnost": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost",
-						"Událost": "zsgov:událost"
-					}
-				}
-			}
-		}
-    }
+    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
+    "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
+    "typ": ["Seznam pojmů"],
+    "název": {
+        "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
+    },
+    "popis": {
+        "cs": "Slovník slouží v rámci příkladu pro OFN Slovníky"
+    },
+    "pojmy": [
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+            "typ": ["Pojem", "Třída", "Věc"],
+            "název": {
+                "cs": "Silniční vozidlo"
+            },
+            "definice": {
+                "cs": "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."
+            },
+            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p2-1",
+            "nadřazená-třída": "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
+            "typ": ["Pojem", "Třída", "Role"],
+            "název": {
+                "cs": "Vlastník vozidla"
+            },
+            "definice": {
+                "cs": "Vlastník vozidla"
+            },
+            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
+            "typ": ["Pojem", "Vztah"],
+            "název": {
+                "cs": "má vlastníka vozidla"
+            },
+            "definice": {
+                "cs": "má vlastníka vozidla"
+            },
+            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a",
+            "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+            "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
+            "typ": ["Pojem", "Vlastnost"],
+            "název": {
+                "cs": "registrační značka"
+            },
+            "definice": {
+                "cs": "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."
+            },
+            "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou",
+            "datový-typ": "xsd:string"
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
+            "typ": ["Pojem", "Třída", "Událost"],
+            "název": {
+                "cs": "Havárie silničního vozidla"
+            },
+            "definice": {
+                "cs": "Havárie silničního vozidla"
+            }
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
+            "typ": ["Pojem", "Třída", "Fáze"],
+            "název": {
+                "cs": "Zničené silniční vozidlo"
+            },
+            "definice": {
+                "cs": "Zničené silniční vozidlo"
+            }
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vyřazování-silničního-vozidla-z-provozu",
+            "typ": ["Pojem", "Třída", "Činnost"],
+            "název": {
+                "cs": "Vyřazování silničního vozidla z provozu"
+            },
+            "definice": {
+                "cs": "Vyřazování silničního vozidla z provozu"
+            }
+        }
+    ]
 }
 ```
 
 ### RDF Turtle ### {#ssp-model-příklady-rdf-turtle}
 [SSP model v RDF Turtle](příklady/ssp-model.ttl)
 ```turtle
-@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix zsgov:   <https://slovník.gov.cz/základní/pojem/> .
+@prefix slovník: <https://slovník.gov.cz/legislativní/sbírka/56/2001> .
+@prefix pojmy:   <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/> .
+
+slovník: a skos:ConceptScheme ;
+  dcterms:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs ;
+  skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
+
+pojmy:havárie-silničního-vozidla a skos:Concept, owl:Class, zsgov:událost ;
+  skos:prefLabel "Havárie silničního vozidla"@cs ;
+  skos:definition "Havárie silničního vozidla"@cs ;
+  skos:inScheme slovník: .
+
+pojmy:má-vlastníka-vozidla a skos:Concept, owl:ObjectProperty ;
+  skos:prefLabel "má vlastníka vozidla"@cs ;
+  skos:definition "má vlastníka vozidla"@cs ;
+  rdfs:domain pojmy:silniční-vozidlo ;
+  rdfs:range pojmy:vlastník-vozidla ;
+  skos:inScheme slovník: .
+
+pojmy:registrační-značka a skos:Concept, owl:DatatypeProperty ;
+  skos:prefLabel "registrační značka"@cs ;
+  skos:definition "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."@cs ;
+  rdfs:domain pojmy:tabulka-s-přidělenou-registrační-značkou ;
+  rdfs:range xsd:string ;
+  skos:inScheme slovník: .
+
+pojmy:vyřazování-silničního-vozidla-z-provozu a skos:Concept, owl:Class, zsgov:činnost ;
+  skos:prefLabel "Vyřazování silničního vozidla z provozu"@cs ;
+  skos:definition "Vyřazování silničního vozidla z provozu"@cs ;
+  skos:inScheme slovník: .
+
+pojmy:zničené-silniční-vozidlo a skos:Concept, owl:Class, zsgov:mixin-fází ;
+  skos:prefLabel "Zničené silniční vozidlo"@cs ;
+  skos:definition "Zničené silniční vozidlo"@cs ;
+  skos:inScheme slovník: .
+
+pojmy:silniční-vozidlo a skos:Concept, owl:Class, zsgov:objekt-práva ;
+  skos:prefLabel "Silniční vozidlo"@cs ;
+  skos:definition "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."@cs ;
+  rdfs:subClassOf <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo>;
+  skos:inScheme slovník: .
+
+pojmy:vlastník-vozidla a skos:Concept, owl:Class, zsgov:mixin-rolí ;
+  skos:prefLabel "Vlastník vozidla"@cs ;
+  skos:definition "Vlastník vozidla"@cs ;
+  skos:inScheme slovník: .
 ```
 
 ### CSV on the Web ### {#ssp-model-příklady-csvw}
 [SSP model v CSV](příklady/ssp-model.csv), [CSV on the Web deskriptor](příklady/ssp-model.csv-metadata.json), [CSV on the Web schéma](příklady/ssp-model.csv-schema.json)
 
 ```
-s
+slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs,slovník_pojem_typ_pojmu,slovník_pojem_ssp_typ_pojmu,slovník_třída_nadřazená_třída,slovník_vztah_definiční_obor,slovník_vztah_obor_hodnot,slovník_vlastnost_definiční_obor,slovník_vlastnost_datový_typ
+
 ```
 
 <p class="issue">
