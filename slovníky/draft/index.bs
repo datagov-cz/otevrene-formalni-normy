@@ -42,6 +42,9 @@ Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
 
 Popis položek {#slovník-popis-položek}
 -------------
+<p class="issue">
+Podpora pro angličtinu v příkladech?
+</p>
 
 ### Slovník ### {#třída-slovník}
 : Popis
@@ -72,7 +75,7 @@ Příklady a schémata {#slovník-příklady}
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle`
 
 ### JSON-LD ### {#slovník-příklady-json-ld}
-[Slovník v JSON-LD](příklady/slovník.jsonld)
+[Slovník v JSON-LD](příklady/slovník.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/seznam-pojmů.jsonld",
@@ -99,7 +102,7 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 ```
 
 ### CSV on the Web  ### {#slovník-příklady-csvw}
-[Slovník v CSV](příklady/slovník.csv), [CSV on the Web deskriptor](příklady/slovník.csv-metadata.json)
+[Slovník v CSV](příklady/slovník.csv), [CSV on the Web deskriptor](příklady/slovník.csv-metadata.json), [CSV on the Web schéma](příklady/slovník.csv-schema.json)
 ```
 slovník,slovník_název_cs,slovník_popis_cs
 https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky
@@ -166,7 +169,7 @@ Příklady a schémata {#seznam-pojmů-příklady}
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
 
 ### JSON-LD ### {#seznam-pojmů-příklady-json-ld}
-[Seznam pojmů v JSON-LD](příklady/seznam-pojmů.jsonld)
+[Seznam pojmů v JSON-LD](příklady/seznam-pojmů.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
@@ -258,7 +261,7 @@ tcpojmy:kouření-povoleno a skos:Concept ;
 ```
 
 ### CSV on the Web ### {#seznam-pojmů-příklady-csvw}
-[Seznam pojmů v CSV](příklady/seznam-pojmů.csv), [CSV on the Web deskriptor](příklady/seznam-pojmů.csv-metadata.json)
+[Seznam pojmů v CSV](příklady/seznam-pojmů.csv), [CSV on the Web deskriptor](příklady/seznam-pojmů.csv-metadata.json), [CSV on the Web schéma](příklady/seznam-pojmů.csv-schema.json)
 ```
 slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs
 https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,Turistický cíl,Samostatný turistický cíl.
@@ -344,6 +347,7 @@ To by umožnilo mít kromě seznamu pojmů i hierarchii pojmů, a taky hierarchi
 ### Datový typ ### {#třída-základní-model-datový-typ}
 : Popis
 :: Datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
+    Jejich přehled spolu s užitím v jednotlivých datových formátech je v [OFN Základní datové typy](../../základní-datové-typy/2020-07-01/).
 : Příklady instancí, tj. konkrétních datových typů
 :: ```Datum a čas```
 :: ```Celé číslo```
@@ -351,9 +355,12 @@ To by umožnilo mít kromě seznamu pojmů i hierarchii pojmů, a taky hierarchi
 
 Příklady a schémata {#základní-model-příklady}
 --------
+Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
+Dále každému pojmu přiděluje jeho typ z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost.
+V závislosti na typu pojmu je pak daný pojem dále popsán.
 
 ### JSON-LD ### {#základní-model-příklady-json-ld}
-[Základní model v JSON-LD](příklady/základní-model.jsonld)
+[Základní model v JSON-LD](příklady/základní-model.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
@@ -459,9 +466,16 @@ tcpojmy:kouření-povoleno a skos:Concept, owl:DatatypeProperty ;
 ```
 
 ### CSV on the Web ### {#základní-model-příklady-csvw}
-[Základní model v CSV](příklady/základní-model.csv), [CSV on the Web deskriptor](příklady/základní-model.csv-metadata.json)
+[Základní model v CSV](příklady/základní-model.csv), [CSV on the Web deskriptor](příklady/základní-model.csv-metadata.json), [CSV on the Web schéma](příklady/základní-model.csv-schema.json)
+<p class="issue">
+Tohle je maximum čeho lze dosáhnout pomocí standardního CSVW. Je to hodne IRI na uživatele Excelu. Kdybychom to chtěli zjednodušit, tak by to zahrnoval custom mapování.
+</p>
 ```
-a
+slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs,slovník_pojem_typ_pojmu,slovník_třída_nadřazená_třída,slovník_vztah_definiční_obor,slovník_vztah_obor_hodnot,slovník_vlastnost_definiční_obor,slovník_vlastnost_datový_typ
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,Turistický cíl,Samostatný turistický cíl.,http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo,,,,
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,Typ turistického cíle,Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů.,http://www.w3.org/2002/07/owl#Class,,,,,
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle,má typ turistického cíle,"Určuje, zda se jedná o přírodní nebo kulturní turistický cíl.",http://www.w3.org/2002/07/owl#ObjectProperty,,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,,
+https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno,kouření povoleno,"Určuje, zda je možné v turistickém cíli kouření tabákových výrobků.",http://www.w3.org/2002/07/owl#DatatypeProperty,,,,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,http://www.w3.org/2001/XMLSchema#boolean
 ```
 
 Úroveň komplexity 3 - detailní členění {#ssp-model}
