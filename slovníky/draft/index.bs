@@ -15,8 +15,15 @@ Abstract: Cílem tohoto dokumentu je specifikovat strukturu pro výměnu slovní
 Úvod {#úvod}
 ============
 Cílem tohoto dokumentu je specifikovat strukturu pro výměnu slovníků pro popis dat.
+Nejedná se o metodiku pro tvorbu slovníků.
+Cílovou skupinou jsou techničtí pracovníci implementující publikaci či konzumaci slovníků, nikoliv tvůrci slovníků.
 Struktura popisuje 3 úrovně komplexity slovníku.
 Předpokladem je znalost problematiky propojených dat, minimálně pak [Pravidla pro tvorbu IRI](../../propojená-data/draft/#pravidla-pro-tvorbu-IRI).
+
+<p class="issue">
+Upřesnit pro koho OFN je, pro koho OFN není, že OFN není metodika, ale předpis pro publikaci slovníku.
+</p>
+
 
 Konceptuální model slovníku {#konceptuální-model}
 ============================================================
@@ -35,6 +42,28 @@ Konceptuální model slovníku {#konceptuální-model}
     <figcaption>Konceptuální model slovníku ve třech úrovních komplexity</figcaption>
 </figure>
 
+<p class="issue">
+Podpora pro angličtinu v příkladech? Ano.
+</p>
+
+<p class="issue">
+Rozlišit typy slovníků - Glosář, Konceptuální model, Ontologie
+</p>
+
+
+<p class="issue">
+Osobu a věc změnit a přesunout na zelenou úroveň
+</p>
+
+<p class="issue">
+přidat subproperties
+</p>
+
+<p class="issue">
+přidat typ vztahu
+</p>
+
+
 Popis slovníku {#slovník}
 ============================================================
 Nezávisle na zvolené úrovni komplexity je třeba popsat samotný slovník.
@@ -42,9 +71,6 @@ Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
 
 Popis položek {#slovník-popis-položek}
 -------------
-<p class="issue">
-Podpora pro angličtinu v příkladech?
-</p>
 
 ### Slovník ### {#třída-slovník}
 : Popis
@@ -62,7 +88,7 @@ Podpora pro angličtinu v příkladech?
 
 #### Popis slovníku #### {#slovník-popis}
 : Popis
-:: Název slovníku
+:: Popis slovníku
 : Povinnost
 :: Nepovinná
 : Datový typ
@@ -79,9 +105,6 @@ Chybí JSON schémata
 </p>
 
 ### JSON-LD ### {#slovník-příklady-json-ld}
-<p class="issue">
-Je třeba rozlišovat typ/komplexitu slovníku typem instance? Tedy např. typ: ["Slovník", "Seznam pojmů"]?
-</p>
 [Slovník v JSON-LD](příklady/slovník.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
@@ -267,16 +290,6 @@ tcpojmy:kouření-povoleno a skos:Concept ;
     skos:inScheme tc: .
 ```
 
-### CSV on the Web ### {#seznam-pojmů-příklady-csvw}
-[Seznam pojmů v CSV](příklady/seznam-pojmů.csv), [CSV on the Web deskriptor](příklady/seznam-pojmů.csv-metadata.json), [CSV on the Web schéma](příklady/seznam-pojmů.csv-schema.json)
-```
-slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,Turistický cíl,Samostatný turistický cíl.
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,Typ turistického cíle,Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů.
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle,má typ turistického cíle,"Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno,kouření povoleno,"Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
-```
-
 Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-model}
 ============================================================
 Na této úrovni rozlišujeme pojmy, které reprezentují
@@ -305,11 +318,6 @@ Popis položek {#základní-model-popis-položek}
 :: Třída `Zámek` má nadřazenou třídu `Turistický cíl`
 :: Třída `Zámek` má nadřazenou třídu `Rezidenční objekt`
 :: Třída `Bytový dům` má nadřazenou třídu `Rezidenční objekt`
-
-<p class="issue">
-Zvážit, zda nadřazenost nezadefinovat už pro Pojem.
-To by umožnilo mít kromě seznamu pojmů i hierarchii pojmů, a taky hierarchie vlastností.
-</p>
 
 ### Vztah ### {#třída-základní-model-vztah}
 : Popis
@@ -472,19 +480,6 @@ tcpojmy:kouření-povoleno a skos:Concept, owl:DatatypeProperty ;
     rdfs:range xsd:boolean .
 ```
 
-### CSV on the Web ### {#základní-model-příklady-csvw}
-[Základní model v CSV](příklady/základní-model.csv), [CSV on the Web deskriptor](příklady/základní-model.csv-metadata.json), [CSV on the Web schéma](příklady/základní-model.csv-schema.json)
-<p class="issue">
-Tohle je maximum čeho lze dosáhnout pomocí standardního CSVW. Je to hodne IRI na uživatele Excelu. Kdybychom to chtěli zjednodušit, tak by to zahrnoval custom mapování.
-</p>
-```
-slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs,slovník_pojem_typ_pojmu,slovník_třída_nadřazená_třída,slovník_vztah_definiční_obor,slovník_vztah_obor_hodnot,slovník_vlastnost_definiční_obor,slovník_vlastnost_datový_typ
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,Turistický cíl,Samostatný turistický cíl.,http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo,,,,
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,Typ turistického cíle,Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů.,http://www.w3.org/2002/07/owl#Class,,,,,
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle,má typ turistického cíle,"Určuje, zda se jedná o přírodní nebo kulturní turistický cíl.",http://www.w3.org/2002/07/owl#ObjectProperty,,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle,,
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno,kouření povoleno,"Určuje, zda je možné v turistickém cíli kouření tabákových výrobků.",http://www.w3.org/2002/07/owl#DatatypeProperty,,,,https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl,http://www.w3.org/2001/XMLSchema#boolean
-```
-
 Úroveň komplexity 3 - detailní členění {#ssp-model}
 ============================================================
 Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
@@ -496,7 +491,7 @@ Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
 - Činnosti
 
 <p class="issue">
-Zde volím definice dle C2V11 strana 6. Nevím, zda je to vhodné.
+Vyjasnit si definice Události a Činnosti
 </p>
 
 Popis položek {#ssp-model-popis-položek}
@@ -540,27 +535,11 @@ Popis položek {#ssp-model-popis-položek}
 : Příklad
 :: `Vyřazování silničního vozidla z provozu`
 
-<p class="issue">
-Původně v C2V11 byla činnost `Vyřazení silničního vozidla z provozu`, což mi přišlo jako událost. Činnost je pak vyřazování.
-<p>
-
-<p class="issue">
-Nějak se vztáhnout k původní OFN pro SSP (např. že ta popisuje výstup výrobní linky? Nebo ji nějak zjednodušit...? Stejně je to draft.)
-<p>
-
 Příklady a schémata {#ssp-model-příklady}
 --------
 <p class="issue">
 Tady už turistické cíle nestačí - resp. mohly by, kdybychom chtěli a nějak je uměle rozšířili.
 Zatim používám příklad C2V11 - on je taky napůl fejkový
-</p>
-
-<p class="issue">
-Stále nepodporujeme typy vazeb a jejich vlastnosti - pokud by bylo potřeba, lze přidat v další verzi jako úroveň 4.
-</p>
-
-<p class="issue">
-C2V11 také s vlastnostmi vazeb počítá - my je tu tedy nemáme
 </p>
 
 Příkladem je slovník _Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb._ s IRI `https://slovník.gov.cz/legislativní/sbírka/56/2001`.
@@ -720,20 +699,6 @@ pojmy:vlastník-vozidla a skos:Concept, owl:Class, zsgov:mixin-rolí ;
   skos:prefLabel "Vlastník vozidla"@cs ;
   skos:definition "Vlastník vozidla"@cs ;
   skos:inScheme slovník: .
-```
-
-### CSV on the Web ### {#ssp-model-příklady-csvw}
-[SSP model v CSV](příklady/ssp-model.csv), [CSV on the Web deskriptor](příklady/ssp-model.csv-metadata.json), [CSV on the Web schéma](příklady/ssp-model.csv-schema.json)
-
-```
-slovník,slovník_název_cs,slovník_popis_cs,slovník_pojem,slovník_pojem_název_cs,slovník_pojem_definice_cs,slovník_pojem_typ_pojmu,slovník_pojem_ssp_typ_pojmu,slovník_třída_nadřazená_třída,slovník_vztah_definiční_obor,slovník_vztah_obor_hodnot,slovník_vlastnost_definiční_obor,slovník_vlastnost_datový_typ
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla,Havárie silničního vozidla,Havárie silničního vozidla,http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/základní/pojem/událost,,,,,
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla,má vlastníka vozidla,má vlastníka vozidla,http://www.w3.org/2002/07/owl#ObjectProperty,,,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla,,
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka,registrační značka,Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic.,http://www.w3.org/2002/07/owl#DatatypeProperty,,,,,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou,http://www.w3.org/2001/XMLSchema#string
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vyřazování-silničního-vozidla-z-provozu,Vyřazování silničního vozidla z provozu,Vyřazování silničního vozidla z provozu,http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/základní/pojem/činnost,,,,,
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo,Zničené silniční vozidlo,Zničené silniční vozidlo,http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/základní/pojem/mixin-fází,,,,,
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo,Silniční vozidlo,"Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí.",http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/základní/pojem/objekt-práva,https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo,,,,
-https://slovník.gov.cz/legislativní/sbírka/56/2001,"Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.",Slovník slouží v rámci příkladu pro OFN Slovníky,https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla,Vlastník vozidla,Vlastník vozidla,http://www.w3.org/2002/07/owl#Class,https://slovník.gov.cz/základní/pojem/mixin-rolí,,,,,
 ```
 
 Předpřipravená metadata {#předpřipravená-metadata}
