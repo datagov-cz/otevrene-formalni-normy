@@ -27,15 +27,14 @@ Upřesnit pro koho OFN je, pro koho OFN není, že OFN není metodika, ale před
 
 Konceptuální model slovníku {#konceptuální-model}
 ============================================================
-1. Žlutě je vyznačena nejnižší úroveň komplexity - seznam pojmů.
-2. Zeleně pak rozšíření o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
-3. Oranžové rozšíření dále specifikuje typy tříd na ty reprezentující
-    - Osoby (subjekty údajů)
-    - Věci (objekty údajů)
-    - Fáze
-    - Role
-    - Činnosti a
-    - Události.
+1. Žlutě je vyznačena nejnižší úroveň komplexity - glosář.
+2. Zeleně pak konceptuální model, rozšíření o glosáře o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
+3. Oranžové rozšíření, ontologie, dále specifikuje typy tříd na ty reprezentující
+    - Typy fází,
+    - Typy rolí,
+    - Typy činností,
+    - Typy událostí a
+    - Typy vztahů.
 
 <figure>
     <img alt="Konceptuálný model slovníku" src="obrázky/slovník.svg">
@@ -46,31 +45,13 @@ Konceptuální model slovníku {#konceptuální-model}
 Podpora pro angličtinu v příkladech? Ano.
 </p>
 
-<p class="issue">
-Rozlišit typy slovníků - Glosář, Konceptuální model, Ontologie
-</p>
-
-
-<p class="issue">
-Osobu a věc změnit a přesunout na zelenou úroveň
-</p>
-
-<p class="issue">
-přidat subproperties
-</p>
-
-<p class="issue">
-přidat typ vztahu
-</p>
-
-
 Popis slovníku {#slovník}
-============================================================
+================================================================
 Nezávisle na zvolené úrovni komplexity je třeba popsat samotný slovník.
 Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
 
 Popis položek {#slovník-popis-položek}
--------------
+--------------------------------------
 
 ### Slovník ### {#třída-slovník}
 : Popis
@@ -108,9 +89,9 @@ Chybí JSON schémata
 [Slovník v JSON-LD](příklady/slovník.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
-    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/seznam-pojmů.jsonld",
+    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/glosář.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Seznam pojmů"],
+    "typ": ["Glosář"],
     "název": {
         "cs": "Slovník turistických cílů"
     },
@@ -131,34 +112,27 @@ Chybí JSON schémata
     dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
 ```
 
-### CSV on the Web  ### {#slovník-příklady-csvw}
-[Slovník v CSV](příklady/slovník.csv), [CSV on the Web deskriptor](příklady/slovník.csv-metadata.json), [CSV on the Web schéma](příklady/slovník.csv-schema.json)
-```
-slovník,slovník_název_cs,slovník_popis_cs
-https://slovník.gov.cz/datový/turistické-cíle,Slovník turistických cílů,Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky
-```
-
-Úroveň komplexity 1 - seznam pojmů {#seznam-pojmů}
+Úroveň komplexity 1 - glosář {#glosář}
 ============================================================
-Nejzákladnějším typem slovníku je seznam pojmů, které se v datech vyskytují.
+Nejjednodušším typem slovníku je glosář obsahující pojmy, které se v datech vyskytují.
 O každém pojmu je třeba uvést alespoň jeho identifikátor, název a definici.
 
-Popis položek {#seznam-pojmů-popis-položek}
--------------
+Popis položek {#glosář-popis-položek}
+-------------------------------------
 
-### Slovník ### {#třída-slovník-seznam-pojmů}
+### Glosář ### {#třída-glosář}
 : Popis
-:: Slovník
+:: Glosář je nejjednodušším typem [slovníku](#třída-slovník).
 
-#### Vazba: Obshauje pojem #### {#vazba-slovník-pojem}
+#### Vazba: Obshauje pojem #### {#vazba-glosář-pojem}
 : Popis
-:: Vazba propojující pojem a slovník, ve kterém je pojem definován
+:: Vazba propojující pojem a glosář, ve kterém je pojem definován
 : Obor hodnot
 :: [Pojem](#třída-pojem)
 
 ### Pojem ### {#třída-pojem}
 : Popis
-:: Pojem
+:: Pojem v glosáři
 
 #### Název pojmu #### {#pojem-název}
 : Popis
@@ -194,17 +168,17 @@ Popis položek {#seznam-pojmů-popis-položek}
 Přidat příklad pojmu se související legislativou
 </p>
 
-Příklady a schémata {#seznam-pojmů-příklady}
+Příklady a schémata {#glosář-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
 
-### JSON-LD ### {#seznam-pojmů-příklady-json-ld}
-[Seznam pojmů v JSON-LD](příklady/seznam-pojmů.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
+### JSON-LD ### {#glosář-příklady-json-ld}
+[Glosář v JSON-LD](příklady/glosář.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Seznam pojmů"],
+    "typ": ["Slovník", "Glosář"],
     "název": {
         "cs": "Slovník turistických cílů"
     },
@@ -256,8 +230,8 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 }
 ```
 
-### RDF Turtle ### {#seznam-pojmů-příklady-rdf-turtle}
-[Seznam pojmů v RDF Turtle](příklady/seznam-pojmů.ttl)
+### RDF Turtle ### {#glosář-příklady-rdf-turtle}
+[Glosář v RDF Turtle](příklady/glosář.ttl)
 ```turtle
 @prefix skos:    <http://www.w3.org/2004/02/skos/core> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -296,6 +270,14 @@ Na této úrovni rozlišujeme pojmy, které reprezentují
 - třídy, nebo také typy věcí,
 - vztahy mezi dvěma věcmi,
 - vlastnosti věcí.
+
+<p class="issue">
+Osobu a věc změnit a přesunout na zelenou úroveň
+</p>
+
+<p class="issue">
+přidat subproperties
+</p>
 
 Popis položek {#základní-model-popis-položek}
 -------------
@@ -380,7 +362,7 @@ V závislosti na typu pojmu je pak daný pojem dále popsán.
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Seznam pojmů"],
+    "typ": ["Slovník", "Glosář", "Konceptuální model"],
     "název": {
         "cs": "Slovník turistických cílů"
     },
@@ -483,16 +465,19 @@ tcpojmy:kouření-povoleno a skos:Concept, owl:DatatypeProperty ;
 Úroveň komplexity 3 - detailní členění {#ssp-model}
 ============================================================
 Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
-- Osoby (subjekty údajů)
-- Věci (objekty údajů)
-- Události
-- Fáze
-- Role
-- Činnosti
+- Typy fází,
+- Typy rolí,
+- Typy činností,
+- Typy událostí a
+- Typy vztahů.
 
 <p class="issue">
 Vyjasnit si definice Události a Činnosti
 </p>
+<p class="issue">
+přidat typ vztahu
+</p>
+
 
 Popis položek {#ssp-model-popis-položek}
 -------------
@@ -552,7 +537,7 @@ Navíc však u tříd specifikujeme jejich další druh.
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
-    "typ": ["Seznam pojmů"],
+    "typ": ["Slovník", "Glosář", "Konceptuální model", "Ontologie"],
     "název": {
         "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
     },

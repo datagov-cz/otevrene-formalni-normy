@@ -4,7 +4,7 @@
 		"owl": "http://www.w3.org/2002/07/owl#",
 		"@import": "https://ofn.gov.cz/věc/2020-07-01/kontexty/věc.jsonld",
 		"@propagate": true,
-		"Seznam pojmů": {
+		"Slovník": {
 			"@id": "skos:ConceptScheme",
 			"@context": {
 				"@version": 1.1,
@@ -12,14 +12,19 @@
 					"@id": "skos:prefLabel",
 					"@container": "@language"
 				},
-				"definice": {
-					"@id": "skos:definition",
+				"popis": {
+					"@id": "dcterms:description",
 					"@container": "@language"
-				},
+				}
+			}
+		},
+		"Glosář": {
+			"@id": "skos:ConceptScheme",
+			"@context": {
+				"@version": 1.1,
 				"pojmy": {
 					"@reverse": "skos:inScheme",
 					"@context": {
-						"zsgov": "https://slovník.gov.cz/základní/pojem/mixin-rolí",
 						"Pojem": {
 							"@id": "skos:Concept",
 							"@context": {
@@ -30,9 +35,24 @@
 								"definice": {
 									"@id": "skos:definition",
 									"@container": "@language"
-								}		
+								},
+								"související-legislativa": {
+									"@id": "dcterms:relation",
+									"@type": "@id"
+								}
 							}
-						},
+						}
+					}
+				}
+			}
+		},
+		"Konceptuální model": {
+			"@id": "skos:ConceptScheme",
+			"@context": {
+				"@version": 1.1,
+				"pojmy": {
+					"@reverse": "skos:inScheme",
+					"@context": {
 						"Třída": {
 							"@id": "owl:Class",
 							"@context": {
@@ -52,6 +72,10 @@
 								"datový-typ": {
 									"@id": "rdfs:range",
 									"@type": "@id"
+								},
+								"nadřazená-vlastnost": {
+									"@id": "rdfs:subPropertyOf",
+									"@type": "@id"
 								}
 							}
 						},
@@ -65,15 +89,39 @@
 								"obor-hodnot": {
 									"@id": "rdfs:range",
 									"@type": "@id"
+								},
+								"nadřazený-vztah": {
+									"@id": "rdfs:subPropertyOf",
+									"@type": "@id"
 								}
 							}
 						},
 						"Osoba": "https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva",
-						"Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva",
-						"Role": "https://slovník.gov.cz/základní/pojem/mixin-rolí",
-						"Fáze": "https://slovník.gov.cz/základní/pojem/mixin-fází",
-						"Činnost": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost",
-						"Událost": "https://slovník.gov.cz/základní/pojem/událost"
+						"Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva"
+					}
+				}
+			}
+		},
+		"Ontologie": {
+			"@id": "skos:ConceptScheme",
+			"@context": {
+				"@version": 1.1,
+				"pojmy": {
+					"@reverse": "skos:inScheme",
+					"@context": {
+						"Typ role": "https://slovník.gov.cz/základní/pojem/role",
+						"Typ fáze": "https://slovník.gov.cz/základní/pojem/fáze",
+						"Typ činnosti": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost",
+						"Typ události": "https://slovník.gov.cz/základní/pojem/událost",
+						"Typ vztahu": {
+							"@id": "https://slovník.gov.cz/základní/pojem/vztah",
+							"@context": {
+								"@version": 1.1,
+								"odvozený z": {
+									"@reverse": "http://purl.org/nemo/gufo#isDerivedFrom"
+								}
+							}
+						}
 					}
 				}
 			}
