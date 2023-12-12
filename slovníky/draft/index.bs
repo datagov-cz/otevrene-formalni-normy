@@ -9,23 +9,20 @@ Status: LS
 Group: data.gov.cz
 URL: https://ofn.gov.cz/slovníky
 Editor: Jakub Klímek, Digitální a informační agentura, jakub.klimek@dia.gov.cz
-Abstract: Cílem tohoto dokumentu je specifikovat strukturu pro výměnu slovníků pro popis dat.
+Abstract: Cílem této otevřené formální normy je specifikovat strukturu pro výměnu slovníků pro popis dat. Nejedná se o metodiku pro tvorbu slovníků samotných.
 </pre>
 
 Úvod {#úvod}
 ============
-Cílem tohoto dokumentu je specifikovat strukturu pro výměnu slovníků pro popis dat.
-Nejedná se o metodiku pro tvorbu slovníků.
+Cílem této otevřené formální normy (OFN) je specifikovat strukturu pro výměnu slovníků pro popis dat.
+Nejedná se tedy o metodiku pro tvorbu slovníků samotných.
 Cílovou skupinou jsou techničtí pracovníci implementující publikaci či konzumaci slovníků, nikoliv tvůrci slovníků.
 Struktura popisuje 3 úrovně komplexity slovníku.
-Předpokladem je znalost problematiky propojených dat, minimálně pak [Pravidla pro tvorbu IRI](../../propojená-data/draft/#pravidla-pro-tvorbu-IRI).
 
-<p class="issue">
-Upřesnit pro koho OFN je, pro koho OFN není, že OFN není metodika, ale předpis pro publikaci slovníku.
-</p>
+Předpokladem pro alespoň základní aplikaci této OFN je znalost minimálně [Pravidel pro tvorbu IRI](../../propojená-data/draft/#pravidla-pro-tvorbu-IRI), syntaxe JSON [[!JSON]] a validace pomocí JSON Schema [[!JSON-SCHEMA-2020-12]].
+Pro hlubší porozumění je však také potřebná znalost problematiky propojených dat, konkrétně specifikací RDF [[!RDF11-CONCEPTS]], RDF Turtle 1.1 [[!TURTLE]], JSON-LD 1.1 [[!JSON-LD11]], SKOS [[!SKOS-REFERENCE]], RDF Schema [[!RDF-SCHEMA]], OWL2 [[!OWL2-RDF-BASED-SEMANTICS]] a znalost metodiky pro tvorbu sémantických slovníků pojmů.
 
-
-Konceptuální model slovníku {#konceptuální-model}
+Konceptuální model slovníku {#konceptuální-model-slovníku}
 ============================================================
 1. Žlutě je vyznačena nejnižší úroveň komplexity - glosář.
 2. Zeleně pak konceptuální model, rozšíření o glosáře o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
@@ -40,10 +37,6 @@ Konceptuální model slovníku {#konceptuální-model}
     <img alt="Konceptuálný model slovníku" src="obrázky/slovník.svg">
     <figcaption>Konceptuální model slovníku ve třech úrovních komplexity</figcaption>
 </figure>
-
-<p class="issue">
-Podpora pro angličtinu v příkladech? Ano.
-</p>
 
 Popis slovníku {#slovník}
 ================================================================
@@ -85,18 +78,24 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 Chybí JSON schémata
 </p>
 
+<p class="issue">
+Podpora pro angličtinu v příkladech? Ano.
+</p>
+
 ### JSON-LD ### {#slovník-příklady-json-ld}
 [Slovník v JSON-LD](příklady/slovník.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
-    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/glosář.jsonld",
+    "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Glosář"],
+    "typ": ["Slovník"],
     "název": {
-        "cs": "Slovník turistických cílů"
+        "cs": "Slovník turistických cílů",
+        "en": "Vocabulary of tourist points of interest"
     },
     "popis": {
-        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
+        "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
     }
 }
 ```
@@ -104,15 +103,18 @@ Chybí JSON schémata
 ### RDF Turtle ### {#slovník-příklady-rdf-turtle}
 [Slovník v RDF Turtle](příklady/slovník.ttl)
 ```turtle
-@prefix skos: <http://www.w3.org/2004/02/skos/core> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme ;
-    skos:prefLabel "Slovník turistických cílů"@cs;
-    dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
+  skos:prefLabel "Slovník turistických cílů"@cs ,
+    "Vocabulary of tourist points of interest"@en ;
+  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs ,
+    "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en .
 ```
 
-Úroveň komplexity 1 - glosář {#glosář}
+Úroveň 1 - Glosář {#glosář}
 ============================================================
 Nejjednodušším typem slovníku je glosář obsahující pojmy, které se v datech vyskytují.
 O každém pojmu je třeba uvést alespoň jeho identifikátor, název a definici.
@@ -164,13 +166,10 @@ Popis položek {#glosář-popis-položek}
 : Příklad
 :: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
 
-<p class="issue">
-Přidat příklad pojmu se související legislativou
-</p>
-
 Příklady a schémata {#glosář-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
+Příklad související legislativy je pouze příklad použití, u glosáře, který není založen nebo vztažen k legislativě nedává smysl.
 
 ### JSON-LD ### {#glosář-příklady-json-ld}
 [Glosář v JSON-LD](příklady/glosář.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
@@ -180,27 +179,35 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
     "typ": ["Slovník", "Glosář"],
     "název": {
-        "cs": "Slovník turistických cílů"
+        "cs": "Slovník turistických cílů",
+        "en": "Vocabulary of tourist points of interest"
     },
     "popis": {
-        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
+        "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
     },
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
             "typ": ["Pojem"],
             "název": {
-                "cs": "Turistický cíl"
+                "cs": "Turistický cíl",
+                "en": "Tourist point of interest"
             },
             "definice": {
-                "cs": "Samostatný turistický cíl."
-            }
+                "cs": "Samostatný turistický cíl.",
+                "en": "Tourist point of interest"
+            },
+            "související-legislativa": [
+                "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
+            ]
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
             "typ": ["Pojem"],
             "název": {
-                "cs": "Typ turistického cíle"
+                "cs": "Typ turistického cíle",
+                "en": "Type of the tourist point of interest"
             },
             "definice": {
                 "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
@@ -210,7 +217,8 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
             "typ": ["Pojem"],
             "název": {
-                "cs": "má typ turistického cíle"
+                "cs": "má typ turistického cíle",
+                "en": "has type of tourist point of interest"
             },
             "definice": {
                 "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
@@ -220,7 +228,8 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
             "typ": ["Pojem"],
             "název": {
-                "cs": "kouření povoleno"
+                "cs": "kouření povoleno",
+                "en": "smoking allowed"
             },
             "definice": {
                 "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
@@ -233,66 +242,70 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 ### RDF Turtle ### {#glosář-příklady-rdf-turtle}
 [Glosář v RDF Turtle](příklady/glosář.ttl)
 ```turtle
-@prefix skos:    <http://www.w3.org/2004/02/skos/core> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-@prefix tc:      <https://slovník.gov.cz/datový/turistické-cíle> .
-@prefix tcpojmy: <https://slovník.gov.cz/datový/turistické-cíle/pojem/> .
+<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme;
+  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
+    "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
+  skos:prefLabel "Slovník turistických cílů"@cs ,
+    "Vocabulary of tourist points of interest"@en .
 
-tc: a skos:ConceptScheme ;
-    skos:prefLabel "Slovník turistických cílů"@cs;
-    dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept;
+  dcterms:relation <https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q>;
+  skos:definition "Samostatný turistický cíl."@cs,
+    "Tourist point of interest"@en;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Turistický cíl"@cs,
+    "Tourist point of interest"@en .
 
-tcpojmy:turistický-cíl a skos:Concept ;
-    skos:prefLabel "Turistický cíl"@cs;
-    skos:definition "Samostatný turistický cíl."@cs ;
-    skos:inScheme tc: .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept;
+  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "má typ turistického cíle"@cs,
+    "has type of tourist point of interest"@en .
 
-tcpojmy:typ-turistického-cíle a skos:Concept ;
-    skos:prefLabel "Typ turistického cíle"@cs;
-    skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs ;
-    skos:inScheme tc: .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept;
+  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Typ turistického cíle"@cs,
+    "Type of the tourist point of interest"@en .
 
-tcpojmy:má-typ-turistického-cíle a skos:Concept ;
-    skos:prefLabel "má typ turistického cíle"@cs;
-    skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs ;
-    skos:inScheme tc: .
-
-tcpojmy:kouření-povoleno a skos:Concept ;
-    skos:prefLabel "kouření povoleno"@cs;
-    skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs ;
-    skos:inScheme tc: .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a skos:Concept;
+  skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "kouření povoleno"@cs,
+    "smoking allowed"@en .
 ```
 
-Úroveň komplexity 2 - třídy, vztahy, vlastnosti {#základní-model}
+Úroveň 2 - Konceptuální model {#konceptuální-model}
 ============================================================
 Na této úrovni rozlišujeme pojmy, které reprezentují
-- třídy, nebo také typy věcí,
-- vztahy mezi dvěma věcmi,
-- vlastnosti věcí.
+- třídy, nebo také typy,
+- vztahy mezi dvěma instancemi tříd,
+- vlastnosti instancí tříd.
 
-<p class="issue">
-Osobu a věc změnit a přesunout na zelenou úroveň
-</p>
-
-<p class="issue">
-přidat subproperties
-</p>
-
-Popis položek {#základní-model-popis-položek}
+Popis položek {#konceptuální-model-popis-položek}
 -------------
 
-### Třída ### {#třída-základní-model-třída}
+### Konceptuální model ### {#třída-konceptuální-model}
+: Popis
+:: Konceptuální model je rozšířením [glosáře](#třída-glosář) o specifikaci, které pojmy definují [třídy](#třída-konceptuální-model-třída), [vlastnosti](#třída-konceptuální-model-vlastnost) a [vztahy](#třída-konceptuální-model-vztah), včetně jejich souvislostí.
+    Pro vlastnosti obsahuje definici jejich datových typů.
+    Zavádí také dvě konkrétní třídy důležité pro veřejnou správu, a to Osobu (subjekt údajů) a Věc (objekt údajů).
+
+### Třída ### {#třída-konceptuální-model-třída}
 : Popis
 :: Pojem reprezentující třídu, nebo typ věci. Třída pak může mít instance - konkrétní věci reprezentovaného typu.
 : Příklad
 :: `Hrad Karštejn` je instancí třídy `Turistický cíl`.
 
-#### Vazba: Nadřazená třída #### {#vazba-základní-model-třída-nadřazená-třída}
+#### Vazba: Nadřazená třída #### {#vazba-konceptuální-model-třída-nadřazená-třída}
 : Popis
 :: Významově širší třída
 : Obor hodnot
-:: [Třída](#třída-základní-model-třída)
+:: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
 :: Nepovinná
 : Příklady
@@ -301,47 +314,91 @@ Popis položek {#základní-model-popis-položek}
 :: Třída `Zámek` má nadřazenou třídu `Rezidenční objekt`
 :: Třída `Bytový dům` má nadřazenou třídu `Rezidenční objekt`
 
-### Vztah ### {#třída-základní-model-vztah}
+#### Konkrétní třída: Osoba (subjekt údajů) #### {#konceptuální-model-osoba}
+: Identifikátor
+:: `https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva`
+: Popis
+:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují osoby - subjekty údajů.
+: Příklad
+:: Třída `Řidič vozidla` bude podtřídou třídy `Osoba`
+
+<p class="issue">
+Má to tu být subjekt práva, subjekt údajů, osoba? V SSP je Osoba podtřídou subjektu práva.
+</p>
+
+#### Konkrétní třída: Věc (objekt údajů) #### {#konceptuální-model-věc}
+: Identifikátor
+:: `https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva`
+: Popis
+:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují věci - objekty údajů.
+: Příklad
+:: Třída `Řidičský průkaz` bude podtřídou třídy `Věc`
+
+<p class="issue">
+Má to tu být objekt práva, objekt údajů, něco jiného?
+</p>
+
+### Vztah ### {#třída-konceptuální-model-vztah}
 : Popis
 :: Pojem reprezentující vztah, do kterým mohou být propojeny instance dvou tříd, nebo dvě instance stejné třídy.
 
-#### Vazba: Definiční obor vztahu #### {#vazba-základní-model-vztah-definiční-obor}
+#### Vazba: Definiční obor vztahu #### {#vazba-konceptuální-model-vztah-definiční-obor}
 : Popis
 :: Definiční obor vztahu. Určuje třídu věcí, kterým mohou být v tomto vztahu přiřazovány jiné věci, instance oboru hodnot.
 : Obor hodnot
-:: [Třída](#třída-základní-model-třída)
+:: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
 :: Povinná
 
-#### Vazba: Obor hodnot vztahu #### {#vazba-základní-model-vztah-obor-hodnot}
+#### Vazba: Obor hodnot vztahu #### {#vazba-konceptuální-model-vztah-obor-hodnot}
 : Popis
 :: Obor hodnot vztahu. Určuje třídu věcí, které mohou být v tomto vztahu přiřazovány jiným věcem, instancím definičního oboru.
 : Obor hodnot
-:: [Třída](#třída-základní-model-třída)
+:: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
 :: Povinná
 
-### Vlastnost ### {#třída-základní-model-vlastnost}
+#### Vazba: Nadřazený vztah #### {#vazba-konceptuální-model-vztah-nadřazený-vztah}
+: Popis
+:: Významově širší vztah
+: Obor hodnot
+:: [Vztah](#třída-konceptuální-model-vztah)
+: Povinnost
+:: Nepovinná
+: Příklady
+:: Vztah `správce hradu` má nadřazený vztah `správce turistického cíle`
+
+### Vlastnost ### {#třída-konceptuální-model-vlastnost}
 : Popis
 :: Pojem reprezenutjící vlastnost, kterou může mít instance nějaké třídy.
 
-#### Vazba: Definiční obor vlastnosti #### {#vazba-základní-model-vlastnost-definiční-obor}
+#### Vazba: Definiční obor vlastnosti #### {#vazba-konceptuální-model-vlastnost-definiční-obor}
 : Popis
 :: Definiční obor vlastnosti. Určuje třídu věcí, které mají danou vlastnost.
 : Obor hodnot
-:: [Třída](#třída-základní-model-třída)
+:: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
 :: Povinná
 
-#### Vazba: Datový typ vlastnosti #### {#vazba-základní-model-vlastnost-datový-typ}
+#### Vazba: Datový typ vlastnosti #### {#vazba-konceptuální-model-vlastnost-datový-typ}
 : Popis
 :: Datový typ vlastnosti. Určuje datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
 : Obor hodnot
-:: [Datový typ](#třída-základní-model-datový-typ)
+:: [Datový typ](#třída-konceptuální-model-datový-typ)
 : Povinnost
 :: Povinná
 
-### Datový typ ### {#třída-základní-model-datový-typ}
+#### Vazba: Nadřazená vlastnost #### {#vazba-konceptuální-model-vlastnost-nadřazená-vlastnost}
+: Popis
+:: Významově širší vlastnost
+: Obor hodnot
+:: [Vlastnost](#třída-konceptuální-model-vlastnost)
+: Povinnost
+:: Nepovinná
+: Příklady
+:: Vlastnost `název hradu` má nadřazenou vlastnost `název turistického cíle`
+
+### Datový typ ### {#třída-konceptuální-model-datový-typ}
 : Popis
 :: Datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
     Jejich přehled spolu s užitím v jednotlivých datových formátech je v [OFN Základní datové typy](../../základní-datové-typy/2020-07-01/).
@@ -350,42 +407,55 @@ Popis položek {#základní-model-popis-položek}
 :: ```Celé číslo```
 :: ```Text```
 
-Příklady a schémata {#základní-model-příklady}
+Příklady a schémata {#konceptuální-model-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
 Dále každému pojmu přiděluje jeho typ z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost.
 V závislosti na typu pojmu je pak daný pojem dále popsán.
+U třídy `Turistický cíl` je ukázáno použití [konkrétní třídy Věc](#konceptuální-model-věc).
+U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vztahu](#vazba-konceptuální-model-vztah-nadřazený-vztah).
 
-### JSON-LD ### {#základní-model-příklady-json-ld}
-[Základní model v JSON-LD](příklady/základní-model.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
+### JSON-LD ### {#konceptuální-model-příklady-json-ld}
+[Konceptuální model v JSON-LD](příklady/konceptuální-model.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
     "typ": ["Slovník", "Glosář", "Konceptuální model"],
     "název": {
-        "cs": "Slovník turistických cílů"
+        "cs": "Slovník turistických cílů",
+        "en": "Vocabulary of tourist points of interest"
     },
     "popis": {
-        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
+        "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
     },
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
             "typ": ["Pojem", "Třída"],
             "název": {
-                "cs": "Turistický cíl"
+                "cs": "Turistický cíl",
+                "en": "Tourist point of interest"
             },
             "definice": {
-                "cs": "Samostatný turistický cíl."
+                "cs": "Samostatný turistický cíl.",
+                "en": "Tourist point of interest"
             },
-            "nadřazená-třída": "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo"
+            "související-legislativa": [
+                "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
+            ],
+            "nadřazená-třída": [
+                "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo",
+                "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva"
+            ]
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
             "typ": ["Pojem", "Třída"],
             "název": {
-                "cs": "Typ turistického cíle"
+                "cs": "Typ turistického cíle",
+                "en": "Type of the tourist point of interest"
             },
             "definice": {
                 "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
@@ -395,19 +465,24 @@ V závislosti na typu pojmu je pak daný pojem dále popsán.
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
             "typ": ["Pojem", "Vztah"],
             "název": {
-                "cs": "má typ turistického cíle"
+                "cs": "má typ turistického cíle",
+                "en": "has type of tourist point of interest"
             },
             "definice": {
                 "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
             },
             "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
-            "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle"
+            "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+            "nadřazený-vztah": [
+                "https://slovník.gov.cz/datový/číselníky/pojem/položka-číselníku"
+            ]
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
             "typ": ["Pojem", "Vlastnost"],
             "název": {
-                "cs": "kouření povoleno"
+                "cs": "kouření povoleno",
+                "en": "smoking allowed"
             },
             "definice": {
                 "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
@@ -419,50 +494,62 @@ V závislosti na typu pojmu je pak daný pojem dále popsán.
 }
 ```
 
-### RDF Turtle ### {#základní-model-příklady-rdf-turtle}
-[Základní model v RDF Turtle](příklady/základní-model.ttl)
+### RDF Turtle ### {#konceptuální-model-příklady-rdf-turtle}
+[Konceptuální model v RDF Turtle](příklady/konceptuální-model.ttl)
 ```turtle
-@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix skos:    <http://www.w3.org/2004/02/skos/core> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-@prefix tc:      <https://slovník.gov.cz/datový/turistické-cíle> .
-@prefix tcpojmy: <https://slovník.gov.cz/datový/turistické-cíle/pojem/> .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a skos:Concept,
+    owl:DatatypeProperty;
+  rdfs:domain <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl>;
+  rdfs:range xsd:boolean;
+  skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "kouření povoleno"@cs,
+    "smoking allowed"@en .
 
-tc: a skos:ConceptScheme, owl:Ontology ;
-    skos:prefLabel "Slovník turistických cílů"@cs;
-    dcterms:description "Slovník turistických cílů vznikl v rámci příkladu pro OFN Slovníky"@cs .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept,
+    owl:ObjectProperty;
+  rdfs:domain <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl>;
+  rdfs:range <https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle>;
+  rdfs:subPropertyOf <https://slovník.gov.cz/datový/číselníky/pojem/položka-číselníku>;
+  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "má typ turistického cíle"@cs,
+    "has type of tourist point of interest"@en .
 
-tcpojmy:turistický-cíl a skos:Concept, owl:Class ;
-    skos:prefLabel "Turistický cíl"@cs;
-    skos:definition "Samostatný turistický cíl."@cs ;
-    rdfs:subClassOf <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo> ;
-    skos:inScheme tc: .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept,
+    owl:Class;
+  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Typ turistického cíle"@cs,
+    "Type of the tourist point of interest"@en .
 
-tcpojmy:typ-turistického-cíle a skos:Concept, owl:Class ;
-    skos:prefLabel "Typ turistického cíle"@cs;
-    skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs ;
-    skos:inScheme tc: .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept,
+    owl:Class;
+  dcterms:relation <https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q>;
+  rdfs:subClassOf <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo>,
+    <https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva>;
+  skos:definition "Samostatný turistický cíl."@cs,
+    "Tourist point of interest"@en;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Turistický cíl"@cs,
+    "Tourist point of interest"@en .
 
-tcpojmy:má-typ-turistického-cíle a skos:Concept, owl:ObjectProperty ;
-    skos:prefLabel "má typ turistického cíle"@cs;
-    skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs ;
-    skos:inScheme tc: ;
-    rdfs:domain tcpojmy:turistický-cíl ;
-    rdfs:range tcpojmy:typ-turistického-cíle .
-
-tcpojmy:kouření-povoleno a skos:Concept, owl:DatatypeProperty ;
-    skos:prefLabel "kouření povoleno"@cs;
-    skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs ;
-    skos:inScheme tc: ;
-    rdfs:domain tcpojmy:turistický-cíl ;
-    rdfs:range xsd:boolean .
+<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme,
+    owl:Ontology;
+  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
+    "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
+  skos:prefLabel "Slovník turistických cílů"@cs,
+    "Vocabulary of tourist points of interest"@en .
 ```
 
-Úroveň komplexity 3 - detailní členění {#ssp-model}
+Úroveň 3 - Ontologie {#ontologie}
 ============================================================
 Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
 - Typy fází,
@@ -474,27 +561,15 @@ Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
 <p class="issue">
 Vyjasnit si definice Události a Činnosti
 </p>
-<p class="issue">
-přidat typ vztahu
-</p>
 
-
-Popis položek {#ssp-model-popis-položek}
+Popis položek {#ontologie-popis-položek}
 -------------
 
-### Osoba ### {#třída-ssp-model-osoba}
+### Ontologie ### {#třída-ontologie}
 : Popis
-:: Subjekty práv nebo povinností v agendě.
-: Příklad
-:: `Fyzická osoba`
+:: Ontologie je rozšířením [konceptuálního modelu](#třída-konceptuální-model) o bližší specifikaci druhů tříd.
 
-### Věc ### {#třída-ssp-model-věc}
-: Popis
-:: Předměty (objekty) práv a povinností v agendě.
-: Příklad
-:: `Technický průkaz`
-
-### Událost ### {#třída-ssp-model-událost}
+### Typ události ### {#třída-ontologie-typ-události}
 : Popis
 :: Pro danou agendu relevantní událost, která nějakým způsobem
     ovlivňuje osoby nebo věci, o kterých v agendě úřadujeme, nebo kterých se nějakým
@@ -502,26 +577,44 @@ Popis položek {#ssp-model-popis-položek}
 : Příklad
 :: `Havárie silničního vozidla`
 
-### Fáze ### {#třída-ssp-model-fáze}
+### Typ fáze ### {#třída-ontologie-typ-fáze}
 : Popis
 :: Fáze osob nebo věcí, tj. konkrétní specifické stavy osob nebo věcí.
 : Příklad
 :: `Zničené silniční vozidlo`
 
-### Role ### {#třída-ssp-model-role}
+### Typ role ### {#třída-ontologie-typ-role}
 : Popis
 :: Role osob. Role věcí neuvažujeme, nemohou konat a "brát na sebe" role.
 : Příklad
 :: `Vlastník vozidla`
 
-### Činnost ### {#třída-ssp-model-činnost}
+### Typ činnosti ### {#třída-ontologie-typ-činnosti}
 : Popis
 :: Konání, chování, úkony v rámci agendy nebo relevantní pro agendu.
 : Příklad
 :: `Vyřazování silničního vozidla z provozu`
 
-Příklady a schémata {#ssp-model-příklady}
---------
+### Typ vztahu ### {#třída-ontologie-typ-vztahu}
+: Popis
+:: Vztahy mezi osobami nebo osobami a věcmi, které jsou pro danou agendu relevantní a o kterých jsou vedeny agendové údaje.
+    Slouží pro detailnější modelování vztahů, které například mohou mít další své vlastnosti.
+    Pro jednodušší vztahy stačí použít [Vztah z úrovně konceptuálního modelu](#třída-konceptuální-model-vztah).
+: Příklad
+:: `Vlastnictví vozidla`
+
+#### Vazba: Je odvozen z #### {#třída-ontologie-typ-vztahu-je-odvozen-z}
+: Popis
+:: [Jednodušší vztah z konceptuálního modelu](#třída-konceptuální-model-vztah), který je odvozen z podrobnější definice [Typu vztahu na úrovni ontologie](#třída-ontologie-typ-vztahu).
+: Příklad
+:: `Vlastník vozidla`
+
+<p class="issue">
+Zřejmě nemusí vždy ke složitějšímu vztahu existovat i ten jednodušší?
+</p>
+
+Příklady a schémata {#ontologie-příklady}
+-----------------------------------------
 <p class="issue">
 Tady už turistické cíle nestačí - resp. mohly by, kdybychom chtěli a nějak je uměle rozšířili.
 Zatim používám příklad C2V11 - on je taky napůl fejkový
@@ -531,8 +624,16 @@ Příkladem je slovník _Slovník zákona č. 56/2001 Sb. o podmínkách provozu
 Tak jako v základním modelu obsahuje pojmy a jejich typy z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost a v závislosti na typu pojmu je pak daný pojem dále popsán.
 Navíc však u tříd specifikujeme jejich další druh.
 
-### JSON-LD ### {#ssp-model-příklady-json-ld}
-[SSP model v JSON-LD](příklady/ssp-model.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
+<p class="issue">
+přidat typ vztahu do příkladů
+</p>
+
+<p class="issue">
+Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otázka je, jestli to nebudeme chtít nějak upřesnit.
+</p>
+
+### JSON-LD ### {#ontologie-příklady-json-ld}
+[Ontologie v JSON-LD](příklady/ontologie.jsonld), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/kontexty/slovníky.jsonld",
@@ -582,6 +683,20 @@ Navíc však u tříd specifikujeme jejich další druh.
             "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"
         },
         {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
+            "typ": ["Pojem", "Třída", "Typ vztahu"],
+            "název": {
+                "cs": "Vlastnicvtí vozidla"
+            },
+            "definice": {
+                "cs": "Vlastnicvtí vozidla"
+            },
+            "související-legislativa": "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a",
+            "odvozený-vztah": [
+                "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla"
+            ]
+        },
+        {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
             "typ": ["Pojem", "Vlastnost"],
             "název": {
@@ -627,8 +742,8 @@ Navíc však u tříd specifikujeme jejich další druh.
 }
 ```
 
-### RDF Turtle ### {#ssp-model-příklady-rdf-turtle}
-[SSP model v RDF Turtle](příklady/ssp-model.ttl)
+### RDF Turtle ### {#ontologie-příklady-rdf-turtle}
+[Ontologie v RDF Turtle](příklady/ontologie.ttl)
 ```turtle
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl:     <http://www.w3.org/2002/07/owl#> .
