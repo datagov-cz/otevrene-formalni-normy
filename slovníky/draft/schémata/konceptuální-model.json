@@ -1,0 +1,102 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/schémata/konceptuální-model.json",
+    "name": "Konceptuální model",
+    "description": "Konceptuální model",
+    "allOf": [
+        {
+            "$ref": "https://pod-test.dia.gov.cz/otevřené-formální-normy/slovníky/draft/schémata/glosář.json"
+        },
+        {
+            "properties": {
+                "typ": {
+                    "type": "array",
+                    "contains": {
+                        "const": "Konceptuální model"
+                    }
+                },
+                "pojmy": {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "properties": {
+                                    "typ": {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Pojem"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "properties": {
+                                    "typ": {
+                                        "contains": {
+                                            "const": "Třída"
+                                        }
+                                    },
+                                    "nadřazená-třída": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "iri"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "properties": {
+                                    "typ": {
+                                        "contains": {
+                                            "const": "Vztah"
+                                        }
+                                    },
+                                    "definiční-obor": {
+                                        "type": "string",
+                                        "format": "iri"
+                                    },
+                                    "obor-hodnot": {
+                                        "type": "string",
+                                        "format": "iri"
+                                    },
+                                    "nadřazený-vztah": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "iri"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "properties": {
+                                    "typ": {
+                                        "contains": {
+                                            "const": "Vlastnost"
+                                        }
+                                    },
+                                    "definiční-obor": {
+                                        "type": "string",
+                                        "format": "iri"
+                                    },
+                                    "datový-typ": {
+                                        "type": "string",
+                                        "format": "iri"
+                                    },
+                                    "nadřazená-vlastnost": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "iri"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
