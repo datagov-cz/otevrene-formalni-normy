@@ -1238,15 +1238,14 @@ Possible extra rowspan handling
 			grid-column: 2;
 			width: auto;
 			margin-right: 1rem;
-			border-bottom: 3px solid transparent;
-			margin-bottom: -3px;
 		}
 		#toc .content:hover,
 		#toc .content:focus {
 			background: rgba(75%, 75%, 75%, .25);
 			background: var(--a-hover-bg);
-			border-bottom-color: #054572;
-			border-bottom-color: var(--toclink-underline);
+			border-bottom: 3px solid #054572;
+			border-bottom: 3px solid var(--toclink-underline);
+			margin-bottom: -3px;
 		}
 		#toc li li li .content {
 			margin-left: 1rem;
@@ -1488,9 +1487,10 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
+  <meta content="Bikeshed version 37b7e7e68, updated Fri May 27 15:08:11 2022 -0700" name="generator">
   <link href="https://ofn.gov.cz/slovníky" rel="canonical">
-<style>/* Boilerplate: style-autolinks */
+<style>/* style-autolinks */
+
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
     font-size: inherit;
@@ -1550,17 +1550,8 @@ pre .property::before, pre .property::after {
 
 [data-link-type=biblio] {
     white-space: pre;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --selflink-text: black;
-        --selflink-bg: silver;
-        --selflink-hover-text: white;
-    }
-}
-</style>
-<style>/* Boilerplate: style-colors */
+}</style>
+<style>/* style-colors */
 
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
@@ -1668,7 +1659,168 @@ pre .property::before, pre .property::after {
     --outdated-shadow: red;
 
     --editedrec-bg: darkorange;
+}</style>
+<style>/* style-counters */
+
+body {
+    counter-reset: example figure issue;
 }
+.issue {
+    counter-increment: issue;
+}
+.issue:not(.no-marker)::before {
+    content: "Issue " counter(issue);
+}
+
+.example {
+    counter-increment: example;
+}
+.example:not(.no-marker)::before {
+    content: "Example " counter(example);
+}
+.invalid.example:not(.no-marker)::before,
+.illegal.example:not(.no-marker)::before {
+    content: "Invalid Example" counter(example);
+}
+
+figcaption {
+    counter-increment: figure;
+}
+figcaption:not(.no-marker)::before {
+    content: "Figure " counter(figure) " ";
+}</style>
+<style>/* style-issues */
+
+a[href].issue-return {
+    float: right;
+    float: inline-end;
+    color: var(--issueheading-text);
+    font-weight: bold;
+    text-decoration: none;
+}
+</style>
+<style>/* style-md-lists */
+
+/* This is a weird hack for me not yet following the commonmark spec
+   regarding paragraph and lists. */
+[data-md] > :first-child {
+    margin-top: 0;
+}
+[data-md] > :last-child {
+    margin-bottom: 0;
+}</style>
+<style>/* style-selflinks */
+
+:root {
+    --selflink-text: white;
+    --selflink-bg: gray;
+    --selflink-hover-text: black;
+}
+.heading, .issue, .note, .example, li, dt {
+    position: relative;
+}
+a.self-link {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * (3.5rem - 26px));
+    width: calc(3.5rem - 26px);
+    height: 2em;
+    text-align: center;
+    border: none;
+    transition: opacity .2s;
+    opacity: .5;
+}
+a.self-link:hover {
+    opacity: 1;
+}
+.heading > a.self-link {
+    font-size: 83%;
+}
+li > a.self-link {
+    left: calc(-1 * (3.5rem - 26px) - 2em);
+}
+dfn > a.self-link {
+    top: auto;
+    left: auto;
+    opacity: 0;
+    width: 1.5em;
+    height: 1.5em;
+    background: var(--selflink-bg);
+    color: var(--selflink-text);
+    font-style: normal;
+    transition: opacity .2s, background-color .2s, color .2s;
+}
+dfn:hover > a.self-link {
+    opacity: 1;
+}
+dfn > a.self-link:hover {
+    color: var(--selflink-hover-text);
+}
+
+a.self-link::before            { content: "¶"; }
+.heading > a.self-link::before { content: "§"; }
+dfn > a.self-link::before      { content: "#"; }
+</style>
+<style>/* style-syntax-highlighting */
+
+code.highlight { padding: .1em; border-radius: .3em; }
+pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
+
+.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
+c-[a] { color: #990055 } /* Keyword.Declaration */
+c-[b] { color: #990055 } /* Keyword.Type */
+c-[c] { color: #708090 } /* Comment */
+c-[d] { color: #708090 } /* Comment.Multiline */
+c-[e] { color: #0077aa } /* Name.Attribute */
+c-[f] { color: #669900 } /* Name.Tag */
+c-[g] { color: #222222 } /* Name.Variable */
+c-[k] { color: #990055 } /* Keyword */
+c-[l] { color: #000000 } /* Literal */
+c-[m] { color: #000000 } /* Literal.Number */
+c-[n] { color: #0077aa } /* Name */
+c-[o] { color: #999999 } /* Operator */
+c-[p] { color: #999999 } /* Punctuation */
+c-[s] { color: #a67f59 } /* Literal.String */
+c-[t] { color: #a67f59 } /* Literal.String.Single */
+c-[u] { color: #a67f59 } /* Literal.String.Double */
+c-[cp] { color: #708090 } /* Comment.Preproc */
+c-[c1] { color: #708090 } /* Comment.Single */
+c-[cs] { color: #708090 } /* Comment.Special */
+c-[kc] { color: #990055 } /* Keyword.Constant */
+c-[kn] { color: #990055 } /* Keyword.Namespace */
+c-[kp] { color: #990055 } /* Keyword.Pseudo */
+c-[kr] { color: #990055 } /* Keyword.Reserved */
+c-[ld] { color: #000000 } /* Literal.Date */
+c-[nc] { color: #0077aa } /* Name.Class */
+c-[no] { color: #0077aa } /* Name.Constant */
+c-[nd] { color: #0077aa } /* Name.Decorator */
+c-[ni] { color: #0077aa } /* Name.Entity */
+c-[ne] { color: #0077aa } /* Name.Exception */
+c-[nf] { color: #0077aa } /* Name.Function */
+c-[nl] { color: #0077aa } /* Name.Label */
+c-[nn] { color: #0077aa } /* Name.Namespace */
+c-[py] { color: #0077aa } /* Name.Property */
+c-[ow] { color: #999999 } /* Operator.Word */
+c-[mb] { color: #000000 } /* Literal.Number.Bin */
+c-[mf] { color: #000000 } /* Literal.Number.Float */
+c-[mh] { color: #000000 } /* Literal.Number.Hex */
+c-[mi] { color: #000000 } /* Literal.Number.Integer */
+c-[mo] { color: #000000 } /* Literal.Number.Oct */
+c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
+c-[sc] { color: #a67f59 } /* Literal.String.Char */
+c-[sd] { color: #a67f59 } /* Literal.String.Doc */
+c-[se] { color: #a67f59 } /* Literal.String.Escape */
+c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
+c-[si] { color: #a67f59 } /* Literal.String.Interpol */
+c-[sx] { color: #a67f59 } /* Literal.String.Other */
+c-[sr] { color: #a67f59 } /* Literal.String.Regex */
+c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
+c-[vc] { color: #0077aa } /* Name.Variable.Class */
+c-[vg] { color: #0077aa } /* Name.Variable.Global */
+c-[vi] { color: #0077aa } /* Name.Variable.Instance */
+c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
+</style>
+<style>/* style-darkmode */
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -1781,174 +1933,13 @@ pre .property::before, pre .property::after {
        which is quite common in practice... */
     img { background: white; }
 }
-</style>
-<style>/* Boilerplate: style-counters */
-body {
-    counter-reset: example figure issue;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --selflink-text: black;
+        --selflink-bg: silver;
+        --selflink-hover-text: white;
+    }
 }
-.issue {
-    counter-increment: issue;
-}
-.issue:not(.no-marker)::before {
-    content: "Issue " counter(issue);
-}
-
-.example {
-    counter-increment: example;
-}
-.example:not(.no-marker)::before {
-    content: "Example " counter(example);
-}
-.invalid.example:not(.no-marker)::before,
-.illegal.example:not(.no-marker)::before {
-    content: "Invalid Example" counter(example);
-}
-
-figcaption {
-    counter-increment: figure;
-}
-figcaption:not(.no-marker)::before {
-    content: "Figure " counter(figure) " ";
-}
-</style>
-<style>/* Boilerplate: style-issues */
-a[href].issue-return {
-    float: right;
-    float: inline-end;
-    color: var(--issueheading-text);
-    font-weight: bold;
-    text-decoration: none;
-}
-</style>
-<style>/* Boilerplate: style-md-lists */
-/* This is a weird hack for me not yet following the commonmark spec
-   regarding paragraph and lists. */
-[data-md] > :first-child {
-    margin-top: 0;
-}
-[data-md] > :last-child {
-    margin-bottom: 0;
-}
-</style>
-<style>/* Boilerplate: style-selflinks */
-
-:root {
-    --selflink-text: white;
-    --selflink-bg: gray;
-    --selflink-hover-text: black;
-}
-.heading, .issue, .note, .example, li, dt {
-    position: relative;
-}
-a.self-link {
-    position: absolute;
-    top: 0;
-    left: calc(-1 * (3.5rem - 26px));
-    width: calc(3.5rem - 26px);
-    height: 2em;
-    text-align: center;
-    border: none;
-    transition: opacity .2s;
-    opacity: .5;
-}
-a.self-link:hover {
-    opacity: 1;
-}
-.heading > a.self-link {
-    font-size: 83%;
-}
-.example > a.self-link,
-.note > a.self-link,
-.issue > a.self-link {
-    /* These blocks are overflow:auto, so positioning outside
-       doesn't work. */
-    left: auto;
-    right: 0;
-}
-li > a.self-link {
-    left: calc(-1 * (3.5rem - 26px) - 2em);
-}
-dfn > a.self-link {
-    top: auto;
-    left: auto;
-    opacity: 0;
-    width: 1.5em;
-    height: 1.5em;
-    background: var(--selflink-bg);
-    color: var(--selflink-text);
-    font-style: normal;
-    transition: opacity .2s, background-color .2s, color .2s;
-}
-dfn:hover > a.self-link {
-    opacity: 1;
-}
-dfn > a.self-link:hover {
-    color: var(--selflink-hover-text);
-}
-
-a.self-link::before            { content: "¶"; }
-.heading > a.self-link::before { content: "§"; }
-dfn > a.self-link::before      { content: "#"; }
-</style>
-<style>/* Boilerplate: style-syntax-highlighting */
-
-code.highlight { padding: .1em; border-radius: .3em; }
-pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
-
-.highlight:not(.idl) { background: rgba(0, 0, 0, .03); }
-c-[a] { color: #990055 } /* Keyword.Declaration */
-c-[b] { color: #990055 } /* Keyword.Type */
-c-[c] { color: #708090 } /* Comment */
-c-[d] { color: #708090 } /* Comment.Multiline */
-c-[e] { color: #0077aa } /* Name.Attribute */
-c-[f] { color: #669900 } /* Name.Tag */
-c-[g] { color: #222222 } /* Name.Variable */
-c-[k] { color: #990055 } /* Keyword */
-c-[l] { color: #000000 } /* Literal */
-c-[m] { color: #000000 } /* Literal.Number */
-c-[n] { color: #0077aa } /* Name */
-c-[o] { color: #999999 } /* Operator */
-c-[p] { color: #999999 } /* Punctuation */
-c-[s] { color: #a67f59 } /* Literal.String */
-c-[t] { color: #a67f59 } /* Literal.String.Single */
-c-[u] { color: #a67f59 } /* Literal.String.Double */
-c-[cp] { color: #708090 } /* Comment.Preproc */
-c-[c1] { color: #708090 } /* Comment.Single */
-c-[cs] { color: #708090 } /* Comment.Special */
-c-[kc] { color: #990055 } /* Keyword.Constant */
-c-[kn] { color: #990055 } /* Keyword.Namespace */
-c-[kp] { color: #990055 } /* Keyword.Pseudo */
-c-[kr] { color: #990055 } /* Keyword.Reserved */
-c-[ld] { color: #000000 } /* Literal.Date */
-c-[nc] { color: #0077aa } /* Name.Class */
-c-[no] { color: #0077aa } /* Name.Constant */
-c-[nd] { color: #0077aa } /* Name.Decorator */
-c-[ni] { color: #0077aa } /* Name.Entity */
-c-[ne] { color: #0077aa } /* Name.Exception */
-c-[nf] { color: #0077aa } /* Name.Function */
-c-[nl] { color: #0077aa } /* Name.Label */
-c-[nn] { color: #0077aa } /* Name.Namespace */
-c-[py] { color: #0077aa } /* Name.Property */
-c-[ow] { color: #999999 } /* Operator.Word */
-c-[mb] { color: #000000 } /* Literal.Number.Bin */
-c-[mf] { color: #000000 } /* Literal.Number.Float */
-c-[mh] { color: #000000 } /* Literal.Number.Hex */
-c-[mi] { color: #000000 } /* Literal.Number.Integer */
-c-[mo] { color: #000000 } /* Literal.Number.Oct */
-c-[sb] { color: #a67f59 } /* Literal.String.Backtick */
-c-[sc] { color: #a67f59 } /* Literal.String.Char */
-c-[sd] { color: #a67f59 } /* Literal.String.Doc */
-c-[se] { color: #a67f59 } /* Literal.String.Escape */
-c-[sh] { color: #a67f59 } /* Literal.String.Heredoc */
-c-[si] { color: #a67f59 } /* Literal.String.Interpol */
-c-[sx] { color: #a67f59 } /* Literal.String.Other */
-c-[sr] { color: #a67f59 } /* Literal.String.Regex */
-c-[ss] { color: #a67f59 } /* Literal.String.Symbol */
-c-[vc] { color: #0077aa } /* Name.Variable.Class */
-c-[vg] { color: #0077aa } /* Name.Variable.Global */
-c-[vi] { color: #0077aa } /* Name.Variable.Instance */
-c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -2017,7 +2008,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Slovníky</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-12-13">13 December 2023</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Living Standard, <time class="dt-updated" datetime="2023-12-14">14 December 2023</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2164,8 +2155,8 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
 Nejedná se tedy o metodiku pro tvorbu slovníků samotných.
 Cílovou skupinou jsou techničtí pracovníci implementující publikaci či konzumaci slovníků, nikoliv tvůrci slovníků.
 Struktura popisuje 3 úrovně komplexity slovníku. 
-   <p>Předpokladem pro alespoň základní aplikaci této OFN je znalost minimálně <a href="../../propojená-data/draft/#pravidla-pro-tvorbu-IRI">Pravidel pro tvorbu IRI</a>, syntaxe JSON <a data-link-type="biblio" href="#biblio-json" title="The JavaScript Object Notation (JSON) Data Interchange Format">[JSON]</a> a validace pomocí JSON Schema <a data-link-type="biblio" href="#biblio-json-schema-2020-12" title="JSON Schema: A Media Type for Describing JSON Documents. Draft 2020-12">[JSON-SCHEMA-2020-12]</a>.
-Pro hlubší porozumění je však také potřebná znalost problematiky propojených dat, konkrétně specifikací RDF <a data-link-type="biblio" href="#biblio-rdf11-concepts" title="RDF 1.1 Concepts and Abstract Syntax">[RDF11-CONCEPTS]</a>, RDF Turtle 1.1 <a data-link-type="biblio" href="#biblio-turtle" title="RDF 1.1 Turtle">[TURTLE]</a>, JSON-LD 1.1 <a data-link-type="biblio" href="#biblio-json-ld11" title="JSON-LD 1.1">[JSON-LD11]</a>, SKOS <a data-link-type="biblio" href="#biblio-skos-reference" title="SKOS Simple Knowledge Organization System Reference">[SKOS-REFERENCE]</a>, RDF Schema <a data-link-type="biblio" href="#biblio-rdf-schema" title="RDF Schema 1.1">[RDF-SCHEMA]</a>, OWL2 <a data-link-type="biblio" href="#biblio-owl2-rdf-based-semantics" title="OWL 2 Web Ontology Language RDF-Based Semantics (Second Edition)">[OWL2-RDF-BASED-SEMANTICS]</a> a znalost metodiky pro tvorbu sémantických slovníků pojmů.</p>
+   <p>Předpokladem pro alespoň základní aplikaci této OFN je znalost minimálně <a href="../../propojená-data/draft/#pravidla-pro-tvorbu-IRI">Pravidel pro tvorbu IRI</a>, syntaxe JSON <a data-link-type="biblio" href="#biblio-json">[JSON]</a> a validace pomocí JSON Schema <a data-link-type="biblio" href="#biblio-json-schema-2020-12">[JSON-SCHEMA-2020-12]</a>.
+Pro hlubší porozumění je však také potřebná znalost problematiky propojených dat, konkrétně specifikací RDF <a data-link-type="biblio" href="#biblio-rdf11-concepts">[RDF11-CONCEPTS]</a>, RDF Turtle 1.1 <a data-link-type="biblio" href="#biblio-turtle">[TURTLE]</a>, JSON-LD 1.1 <a data-link-type="biblio" href="#biblio-json-ld11">[JSON-LD11]</a>, SKOS <a data-link-type="biblio" href="#biblio-skos-reference">[SKOS-REFERENCE]</a>, RDF Schema <a data-link-type="biblio" href="#biblio-rdf-schema">[RDF-SCHEMA]</a>, OWL2 <a data-link-type="biblio" href="#biblio-owl2-rdf-based-semantics">[OWL2-RDF-BASED-SEMANTICS]</a> a znalost metodiky pro tvorbu sémantických slovníků pojmů.</p>
    <h2 class="heading settled" data-level="2" id="konceptuální-model-slovníku"><span class="secno">2. </span><span class="content">Konceptuální model slovníku</span><a class="self-link" href="#konceptuální-model-slovníku"></a></h2>
    <ol>
     <li data-md>
@@ -2233,7 +2224,6 @@ Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
    </dl>
    <h3 class="heading settled" data-level="3.2" id="slovník-příklady"><span class="secno">3.2. </span><span class="content">Příklady a schémata</span><a class="self-link" href="#slovník-příklady"></a></h3>
     Příkladem je slovník s IRI <code>https://slovník.gov.cz/datový/turistické-cíle</code> 
-   <p class="issue" id="issue-e94869e7"><a class="self-link" href="#issue-e94869e7"></a> Chybí JSON schémata </p>
    <h4 class="heading settled" data-level="3.2.1" id="slovník-příklady-json-ld"><span class="secno">3.2.1. </span><span class="content">JSON-LD</span><a class="self-link" href="#slovník-příklady-json-ld"></a></h4>
     <a href="příklady/slovník.jsonld">Slovník v JSON-LD</a>, <a href="schémata/slovník.jsonld">JSON Schema</a>, <a href="kontexty/slovníky.jsonld">JSON-LD kontext</a> 
 <pre class="language-json highlight"><c- p>{</c->
@@ -2843,7 +2833,6 @@ Tak jako v základním modelu obsahuje pojmy a jejich typy z hlediska modelu, tj
 Navíc však u tříd specifikujeme jejich další druh.</p>
    <p class="issue" id="issue-313c9566"><a class="self-link" href="#issue-313c9566"></a> Potřebujeme ten Kind pro "normální" třídy? </p>
    <p class="issue" id="issue-d8072b1e"><a class="self-link" href="#issue-d8072b1e"></a> Jak konceptuální model, tak ontologie je v RDF instance <code>owl:Ontology</code> - otázka je, jestli to nebudeme chtít nějak upřesnit. </p>
-   <p class="issue" id="issue-fb20d68c"><a class="self-link" href="#issue-fb20d68c"></a> Díky gufo:isDerivedFrom je třeba použít JSON-LD @reverse, což nefunguje s polem odkazů - je třeba pole objektů s iri - je to trochu nesystematické, ale asi se nedá nic dělat, ledaže bychom ten odkaz dali ke Vztahu a ne k Typu vztahu. </p>
    <h4 class="heading settled" data-level="6.2.1" id="ontologie-příklady-json-ld"><span class="secno">6.2.1. </span><span class="content">JSON-LD</span><a class="self-link" href="#ontologie-příklady-json-ld"></a></h4>
     <a href="příklady/ontologie.jsonld">Ontologie v JSON-LD</a>, <a href="schémata/ontologie.jsonld">JSON Schema</a>, <a href="kontexty/slovníky.jsonld">JSON-LD kontext</a> 
 <pre class="language-json highlight"><c- p>{</c->
@@ -2867,8 +2856,12 @@ Navíc však u tříd specifikujeme jejich další druh.</p>
             <c- f>"definice"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"cs"</c-><c- p>:</c-> <c- u>"Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."</c->
             <c- p>},</c->
-            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p2-1"</c-><c- p>,</c->
-            <c- f>"nadřazená-třída"</c-><c- p>:</c-> <c- u>"https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"</c->
+            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- p>[</c->
+                <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p2-1"</c->
+            <c- p>],</c->
+            <c- f>"nadřazená-třída"</c-><c- p>:</c-> <c- p>[</c->
+                <c- u>"https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"</c->
+            <c- p>]</c->
         <c- p>},</c->
         <c- p>{</c->
             <c- f>"iri"</c-><c- p>:</c-> <c- u>"https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"</c-><c- p>,</c->
@@ -2880,7 +2873,9 @@ Navíc však u tříd specifikujeme jejich další druh.</p>
             <c- f>"definice"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"cs"</c-><c- p>:</c-> <c- u>"Vlastník vozidla"</c->
             <c- p>},</c->
-            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"</c->
+            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- p>[</c->
+                <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"</c->
+            <c- p>]</c->
         <c- p>},</c->
         <c- p>{</c->
             <c- f>"iri"</c-><c- p>:</c-> <c- u>"https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla"</c-><c- p>,</c->
@@ -2891,7 +2886,9 @@ Navíc však u tříd specifikujeme jejich další druh.</p>
             <c- f>"definice"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"cs"</c-><c- p>:</c-> <c- u>"má vlastníka vozidla"</c->
             <c- p>},</c->
-            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"</c-><c- p>,</c->
+            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- p>[</c->
+                <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"</c->
+            <c- p>],</c->
             <c- f>"definiční-obor"</c-><c- p>:</c-> <c- u>"https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo"</c-><c- p>,</c->
             <c- f>"obor-hodnot"</c-><c- p>:</c-> <c- u>"https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"</c->
         <c- p>},</c->
@@ -2904,11 +2901,11 @@ Navíc však u tříd specifikujeme jejich další druh.</p>
             <c- f>"definice"</c-><c- p>:</c-> <c- p>{</c->
                 <c- f>"cs"</c-><c- p>:</c-> <c- u>"Vlastnictví vozidla"</c->
             <c- p>},</c->
-            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"</c-><c- p>,</c->
+            <c- f>"související-legislativa"</c-><c- p>:</c-> <c- p>[</c->
+                <c- u>"https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"</c->
+            <c- p>],</c->
             <c- f>"odvozený-vztah"</c-><c- p>:</c-> <c- p>[</c-> 
-                <c- p>{</c->
-                    <c- f>"iri"</c-><c- p>:</c-> <c- u>"https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla"</c->
-                <c- p>}</c->
+                <c- u>"https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla"</c->
             <c- p>]</c->
         <c- p>},</c->
         <c- p>{</c->
@@ -3174,23 +3171,22 @@ Navíc však u tříd specifikujeme jejich další druh.</p>
    <dt id="biblio-json">[JSON]
    <dd>T. Bray, Ed.. <a href="https://www.rfc-editor.org/rfc/rfc8259"><cite>The JavaScript Object Notation (JSON) Data Interchange Format</cite></a>. December 2017. Internet Standard. URL: <a href="https://www.rfc-editor.org/rfc/rfc8259">https://www.rfc-editor.org/rfc/rfc8259</a>
    <dt id="biblio-json-ld11">[JSON-LD11]
-   <dd>Gregg Kellogg; Pierre-Antoine Champin; Dave Longley. <a href="https://w3c.github.io/json-ld-syntax/"><cite>JSON-LD 1.1</cite></a>. URL: <a href="https://w3c.github.io/json-ld-syntax/">https://w3c.github.io/json-ld-syntax/</a>
+   <dd>Gregg Kellogg; Pierre-Antoine Champin; Dave Longley. <a href="https://www.w3.org/TR/json-ld11/"><cite>JSON-LD 1.1</cite></a>. 16 July 2020. REC. URL: <a href="https://www.w3.org/TR/json-ld11/">https://www.w3.org/TR/json-ld11/</a>
    <dt id="biblio-json-schema-2020-12">[JSON-SCHEMA-2020-12]
-   <dd>Austin Wright; et al. <a href="https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-00"><cite>JSON Schema: A Media Type for Describing JSON Documents. Draft 2020-12</cite></a>. URL: <a href="https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-00">https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-00</a>
+   <dd>Austin Wright; et al. <a href="https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-00"><cite>JSON Schema: A Media Type for Describing JSON Documents. Draft 2020-12</cite></a>. 8 December 2020. Internet-Draft. URL: <a href="https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-00">https://datatracker.ietf.org/doc/html/draft-bhutton-json-schema-00</a>
    <dt id="biblio-owl2-rdf-based-semantics">[OWL2-RDF-BASED-SEMANTICS]
    <dd>Michael Schneider. <a href="https://www.w3.org/TR/owl2-rdf-based-semantics/"><cite>OWL 2 Web Ontology Language RDF-Based Semantics (Second Edition)</cite></a>. 11 December 2012. REC. URL: <a href="https://www.w3.org/TR/owl2-rdf-based-semantics/">https://www.w3.org/TR/owl2-rdf-based-semantics/</a>
    <dt id="biblio-rdf-schema">[RDF-SCHEMA]
-   <dd>Dan Brickley; Ramanathan Guha. <a href="https://w3c.github.io/rdf-schema/spec/"><cite>RDF Schema 1.1</cite></a>. URL: <a href="https://w3c.github.io/rdf-schema/spec/">https://w3c.github.io/rdf-schema/spec/</a>
+   <dd>Dan Brickley; Ramanathan Guha. <a href="https://www.w3.org/TR/rdf-schema/"><cite>RDF Schema 1.1</cite></a>. 25 February 2014. REC. URL: <a href="https://www.w3.org/TR/rdf-schema/">https://www.w3.org/TR/rdf-schema/</a>
    <dt id="biblio-rdf11-concepts">[RDF11-CONCEPTS]
-   <dd>Richard Cyganiak; David Wood; Markus Lanthaler. <a href="https://w3c.github.io/rdf-concepts/spec/"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. URL: <a href="https://w3c.github.io/rdf-concepts/spec/">https://w3c.github.io/rdf-concepts/spec/</a>
+   <dd>Richard Cyganiak; David Wood; Markus Lanthaler. <a href="https://www.w3.org/TR/rdf11-concepts/"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. 25 February 2014. REC. URL: <a href="https://www.w3.org/TR/rdf11-concepts/">https://www.w3.org/TR/rdf11-concepts/</a>
    <dt id="biblio-skos-reference">[SKOS-REFERENCE]
    <dd>Alistair Miles; Sean Bechhofer. <a href="https://www.w3.org/TR/skos-reference/"><cite>SKOS Simple Knowledge Organization System Reference</cite></a>. 18 August 2009. REC. URL: <a href="https://www.w3.org/TR/skos-reference/">https://www.w3.org/TR/skos-reference/</a>
    <dt id="biblio-turtle">[TURTLE]
-   <dd>Eric Prud'hommeaux; Gavin Carothers. <a href="https://w3c.github.io/rdf-turtle/spec/"><cite>RDF 1.1 Turtle</cite></a>. URL: <a href="https://w3c.github.io/rdf-turtle/spec/">https://w3c.github.io/rdf-turtle/spec/</a>
+   <dd>Eric Prud'hommeaux; Gavin Carothers. <a href="https://www.w3.org/TR/turtle/"><cite>RDF 1.1 Turtle</cite></a>. 25 February 2014. REC. URL: <a href="https://www.w3.org/TR/turtle/">https://www.w3.org/TR/turtle/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="issues-index"><span class="content">Issues Index</span><a class="self-link" href="#issues-index"></a></h2>
   <div style="counter-reset:issue">
-   <div class="issue"> Chybí JSON schémata <a class="issue-return" href="#issue-e94869e7" title="Jump to section">↵</a></div>
    <div class="issue"> Má to tu být subjekt práva, subjekt údajů, osoba? V SSP je Osoba podtřídou subjektu práva. <a class="issue-return" href="#issue-0a0a951a" title="Jump to section">↵</a></div>
    <div class="issue"> Má to tu být objekt práva, objekt údajů, něco jiného? <a class="issue-return" href="#issue-3d245d14" title="Jump to section">↵</a></div>
    <div class="issue"> Vyjasnit si definice Události a Činnosti <a class="issue-return" href="#issue-c3e44056" title="Jump to section">↵</a></div>
@@ -3199,5 +3195,4 @@ Navíc však u tříd specifikujeme jejich další druh.</p>
 Zatim používám příklad C2V11 - on je taky napůl fejkový <a class="issue-return" href="#issue-4f3e6519" title="Jump to section">↵</a></div>
    <div class="issue"> Potřebujeme ten Kind pro "normální" třídy? <a class="issue-return" href="#issue-313c9566" title="Jump to section">↵</a></div>
    <div class="issue"> Jak konceptuální model, tak ontologie je v RDF instance <code>owl:Ontology</code> - otázka je, jestli to nebudeme chtít nějak upřesnit. <a class="issue-return" href="#issue-d8072b1e" title="Jump to section">↵</a></div>
-   <div class="issue"> Díky gufo:isDerivedFrom je třeba použít JSON-LD @reverse, což nefunguje s polem odkazů - je třeba pole objektů s iri - je to trochu nesystematické, ale asi se nedá nic dělat, ledaže bychom ten odkaz dali ke Vztahu a ne k Typu vztahu. <a class="issue-return" href="#issue-fb20d68c" title="Jump to section">↵</a></div>
   </div>
