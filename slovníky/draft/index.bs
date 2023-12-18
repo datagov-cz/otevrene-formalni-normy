@@ -48,7 +48,11 @@ Popis položek {#slovník-popis-položek}
 
 ### Slovník ### {#třída-slovník}
 : Popis
-:: Slovník
+:: Datový slovník – je popisem struktury a významu dat v informačních systémech veřejné správy spravovaných správci dat v podobě pojmů, které reprezentují typy subjektů a objektů práva, jejich vlastnosti a vztahy mezi nimi.
+
+<p class="issue">
+Sladit se zákonem o správě dat až bude finální
+</p>
 
 #### Název slovníku #### {#slovník-název}
 : Popis
@@ -118,7 +122,7 @@ Popis položek {#glosář-popis-položek}
 : Popis
 :: Glosář je nejjednodušším typem [slovníku](#třída-slovník).
 
-#### Vazba: Obshauje pojem #### {#vazba-glosář-pojem}
+#### Vazba: Obsahuje pojem #### {#vazba-glosář-pojem}
 : Popis
 :: Vazba propojující pojem a glosář, ve kterém je pojem definován
 : Obor hodnot
@@ -126,7 +130,7 @@ Popis položek {#glosář-popis-položek}
 
 ### Pojem ### {#třída-pojem}
 : Popis
-:: Pojem v glosáři
+:: Pojem, reprezentuje typy subjektu a objektu práva, vlastnost nebo vztah
 
 #### Název pojmu #### {#pojem-název}
 : Popis
@@ -148,9 +152,9 @@ Popis položek {#glosář-popis-položek}
 : Příklad
 :: ```"Samostatný turistický cíl."```
 
-#### Související legislativa #### {#pojem-související-legislativa}
+#### Související ustanovení právního předpisu #### {#pojem-související-ustanovení-právního-předpisu}
 : Popis
-:: Související legislativa
+:: Ustanovení právního předpisu, ve kterém je pojem definován, charakterizován nebo popsán
 : Datový typ
 :: \[URL](../../základní-datové-typy/2020-07-01/#url)
 : Povinnost
@@ -161,7 +165,7 @@ Popis položek {#glosář-popis-položek}
 Příklady a schémata {#glosář-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
-Příklad související legislativy je pouze příklad použití, u glosáře, který není založen nebo vztažen k legislativě nedává smysl.
+Příklad souvisejícího ustanovení právního předpisu je pouze příklad použití, u glosáře, který není založen nebo vztažen k legislativě nedává smysl.
 
 ### JSON-LD ### {#glosář-příklady-json-ld}
 [Glosář v JSON-LD](příklady/glosář.jsonld), [JSON Schema](schémata/glosář.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
@@ -190,7 +194,7 @@ Příklad související legislativy je pouze příklad použití, u glosáře, k
                 "cs": "Samostatný turistický cíl.",
                 "en": "Tourist point of interest"
             },
-            "související-legislativa": [
+            "související-ustanovení-právního-předpisu": [
                 "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
             ]
         },
@@ -274,9 +278,9 @@ Příklad související legislativy je pouze příklad použití, u glosáře, k
 Úroveň 2 - Konceptuální model {#konceptuální-model}
 ============================================================
 Na této úrovni rozlišujeme pojmy, které reprezentují
-- třídy, nebo také typy,
-- vztahy mezi dvěma instancemi tříd,
-- vlastnosti instancí tříd.
+- třídy reprezentující typy subjektů a objektů práva,
+- vztahy mezi dvěma subjekty či objekty práva,
+- vlastnosti subjektů a objektů práva.
 
 Popis položek {#konceptuální-model-popis-položek}
 -------------
@@ -285,17 +289,20 @@ Popis položek {#konceptuální-model-popis-položek}
 : Popis
 :: Konceptuální model je rozšířením [glosáře](#třída-glosář) o specifikaci, které pojmy definují [třídy](#třída-konceptuální-model-třída), [vlastnosti](#třída-konceptuální-model-vlastnost) a [vztahy](#třída-konceptuální-model-vztah), včetně jejich souvislostí.
     Pro vlastnosti obsahuje definici jejich datových typů.
-    Zavádí také dvě konkrétní třídy důležité pro veřejnou správu, a to Osobu (subjekt údajů) a Věc (objekt údajů).
+    Zavádí také dvě konkrétní třídy důležité pro veřejnou správu, a to Subjekt práva a Objekt práva.
 
 ### Třída ### {#třída-konceptuální-model-třída}
 : Popis
-:: Pojem reprezentující třídu, nebo typ věci. Třída pak může mít instance - konkrétní věci reprezentovaného typu.
+:: Pojem reprezentující typ subjektu nebo objektu práva.
+    Třída pak může mít instance - konkrétní subjekty či objekty práva.
 : Příklad
 :: `Hrad Karštejn` je instancí třídy `Turistický cíl`.
 
 #### Vazba: Nadřazená třída #### {#vazba-konceptuální-model-třída-nadřazená-třída}
 : Popis
-:: Významově širší třída
+:: Významově širší třída.
+    Platí, že každá instance třídy je také instancí nadřazené třídy.
+    Tj. každá instance třídy `Hrad` je také instancí třídy `Turistický cíl`.
 : Obor hodnot
 :: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
@@ -306,37 +313,30 @@ Popis položek {#konceptuální-model-popis-položek}
 :: Třída `Zámek` má nadřazenou třídu `Rezidenční objekt`
 :: Třída `Bytový dům` má nadřazenou třídu `Rezidenční objekt`
 
-#### Konkrétní třída: Osoba (subjekt údajů) #### {#konceptuální-model-osoba}
+#### Konkrétní třída: Subjekt práva #### {#konceptuální-model-subjekt-práva}
 : Identifikátor
 :: `https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva`
 : Popis
-:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují osoby - subjekty údajů.
+:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují subjekty práva.
 : Příklad
-:: Třída `Řidič vozidla` bude podtřídou třídy `Osoba`
+:: Třída `Řidič vozidla` bude podtřídou třídy `Subjekt údajů`
 
-<p class="issue">
-Má to tu být subjekt práva, subjekt údajů, osoba? V SSP je Osoba podtřídou subjektu práva.
-</p>
-
-#### Konkrétní třída: Věc (objekt údajů) #### {#konceptuální-model-věc}
+#### Konkrétní třída: Objekt práva #### {#konceptuální-model-objekt-práva}
 : Identifikátor
 :: `https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva`
 : Popis
-:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují věci - objekty údajů.
+:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují objekty práva.
 : Příklad
-:: Třída `Řidičský průkaz` bude podtřídou třídy `Věc`
-
-<p class="issue">
-Má to tu být objekt práva, objekt údajů, něco jiného?
-</p>
+:: Třída `Řidičský průkaz` bude podtřídou třídy `Objekt údajů`
 
 ### Vztah ### {#třída-konceptuální-model-vztah}
 : Popis
-:: Pojem reprezentující vztah, do kterým mohou být propojeny instance dvou tříd, nebo dvě instance stejné třídy.
+:: Pojem reprezentující vztah, kterým mohou být propojeny instance dvou tříd, nebo dvě instance stejné třídy.
 
 #### Vazba: Definiční obor vztahu #### {#vazba-konceptuální-model-vztah-definiční-obor}
 : Popis
-:: Definiční obor vztahu. Určuje třídu věcí, kterým mohou být v tomto vztahu přiřazovány jiné věci, instance oboru hodnot.
+:: Definiční obor vztahu.
+    Určuje třídu, jejímž instancím mohou být tímto vztahem přiřazovány instance jiné třídy - oboru hodnot.
 : Obor hodnot
 :: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
@@ -344,7 +344,8 @@ Má to tu být objekt práva, objekt údajů, něco jiného?
 
 #### Vazba: Obor hodnot vztahu #### {#vazba-konceptuální-model-vztah-obor-hodnot}
 : Popis
-:: Obor hodnot vztahu. Určuje třídu věcí, které mohou být v tomto vztahu přiřazovány jiným věcem, instancím definičního oboru.
+:: Obor hodnot vztahu.
+    Určuje třídu, jejíž instance mohou být tímto vztahem přiřazovány instancím jiné třídy - definičního oboru.
 : Obor hodnot
 :: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
@@ -352,7 +353,9 @@ Má to tu být objekt práva, objekt údajů, něco jiného?
 
 #### Vazba: Nadřazený vztah #### {#vazba-konceptuální-model-vztah-nadřazený-vztah}
 : Popis
-:: Významově širší vztah
+:: Významově širší vztah.
+    Pokud jsou dvě instance tříd propojeny vztahem, pak jsou propojeny i nadřazeným vztahem.
+    Tj. pokud hradu přiřadíme správce pomocí vztahu `správce hradu`, pak je tento správce hradu přiřazen i nadřazeným vztahem `správce turistického cíle`.
 : Obor hodnot
 :: [Vztah](#třída-konceptuální-model-vztah)
 : Povinnost
@@ -366,7 +369,8 @@ Má to tu být objekt práva, objekt údajů, něco jiného?
 
 #### Vazba: Definiční obor vlastnosti #### {#vazba-konceptuální-model-vlastnost-definiční-obor}
 : Popis
-:: Definiční obor vlastnosti. Určuje třídu věcí, které mají danou vlastnost.
+:: Definiční obor vlastnosti.
+    Určuje třídu, jejíž instance mají danou vlastnost.
 : Obor hodnot
 :: [Třída](#třída-konceptuální-model-třída)
 : Povinnost
@@ -374,7 +378,8 @@ Má to tu být objekt práva, objekt údajů, něco jiného?
 
 #### Vazba: Datový typ vlastnosti #### {#vazba-konceptuální-model-vlastnost-datový-typ}
 : Popis
-:: Datový typ vlastnosti. Určuje datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
+:: Datový typ vlastnosti.
+    Určuje datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
 : Obor hodnot
 :: [Datový typ](#třída-konceptuální-model-datový-typ)
 : Povinnost
@@ -382,7 +387,9 @@ Má to tu být objekt práva, objekt údajů, něco jiného?
 
 #### Vazba: Nadřazená vlastnost #### {#vazba-konceptuální-model-vlastnost-nadřazená-vlastnost}
 : Popis
-:: Významově širší vlastnost
+:: Významově širší vlastnost.
+    Pokud je vlastností přiřazena hodnota nějaké instanci třídy, pak je tato hodnota té samé instanci přiřazena i nadřazenou vlastností.
+    Tj. každý `název hradu` lze zároveň inteprentovat jako `název turistického cíle`.
 : Obor hodnot
 :: [Vlastnost](#třída-konceptuální-model-vlastnost)
 : Povinnost
@@ -404,7 +411,7 @@ Příklady a schémata {#konceptuální-model-příklady}
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
 Dále každému pojmu přiděluje jeho typ z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost.
 V závislosti na typu pojmu je pak daný pojem dále popsán.
-U třídy `Turistický cíl` je ukázáno použití [konkrétní třídy Věc](#konceptuální-model-věc).
+U třídy `Turistický cíl` je ukázáno použití [konkrétní třídy Objekt práva](#konceptuální-model-objekt-práva).
 U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vztahu](#vazba-konceptuální-model-vztah-nadřazený-vztah).
 
 ### JSON-LD ### {#konceptuální-model-příklady-json-ld}
@@ -434,7 +441,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
                 "cs": "Samostatný turistický cíl.",
                 "en": "Tourist point of interest"
             },
-            "související-legislativa": [
+            "související-ustanovení-právního-předpisu": [
                 "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
             ],
             "nadřazená-třída": [
@@ -601,10 +608,6 @@ Popis položek {#ontologie-popis-položek}
 : Příklad
 :: `Vlastník vozidla`
 
-<p class="issue">
-Zřejmě nemusí vždy ke složitějšímu vztahu existovat i ten jednodušší? Pak nepoznáme směr.
-</p>
-
 Příklady a schémata {#ontologie-příklady}
 -----------------------------------------
 <p class="issue">
@@ -648,7 +651,7 @@ Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otáz
             "definice": {
                 "cs": "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."
             },
-            "související-legislativa": [
+            "související-ustanovení-právního-předpisu": [
                 "https://www.zakonyprolidi.cz/cs/2001-56#p2-1"
             ],
             "nadřazená-třída": [
@@ -665,7 +668,7 @@ Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otáz
             "definice": {
                 "cs": "Vlastník vozidla"
             },
-            "související-legislativa": [
+            "související-ustanovení-právního-předpisu": [
                 "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"
             ]
         },
@@ -678,7 +681,7 @@ Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otáz
             "definice": {
                 "cs": "má vlastníka vozidla"
             },
-            "související-legislativa": [
+            "související-ustanovení-právního-předpisu": [
                 "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"
             ],
             "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
@@ -693,7 +696,7 @@ Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otáz
             "definice": {
                 "cs": "Vlastnictví vozidla"
             },
-            "související-legislativa": [
+            "související-ustanovení-právního-předpisu": [
                 "https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a"
             ],
             "odvozený-vztah": [ 
