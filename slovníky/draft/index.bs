@@ -24,9 +24,9 @@ Pro hlubší porozumění je však také potřebná znalost problematiky propoje
 
 Konceptuální model slovníku {#konceptuální-model-slovníku}
 ============================================================
-1. Žlutě je vyznačena nejnižší úroveň komplexity - glosář.
-2. Zeleně pak konceptuální model, rozšíření o glosáře o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
-3. Oranžové rozšíření, ontologie, dále specifikuje typy tříd na ty reprezentující
+1. Žlutě je vyznačena základní úroveň komplexity - tezaurus.
+2. Zeleně pak konceptuální model, rozšíření o tezauru o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
+3. Oranžové pak rozšíření, které dále specifikuje typy tříd na ty reprezentující
     - Typy fází,
     - Typy rolí,
     - Typy činností,
@@ -35,7 +35,7 @@ Konceptuální model slovníku {#konceptuální-model-slovníku}
 
 <figure>
     <img alt="Konceptuálný model slovníku" src="obrázky/slovník.svg">
-    <figcaption>Konceptuální model slovníku ve třech úrovních komplexity</figcaption>
+    <figcaption>Konceptuální model slovníku</figcaption>
 </figure>
 
 Popis slovníku {#slovník}
@@ -56,9 +56,10 @@ Sladit se zákonem o správě dat až bude finální
 
 #### Název slovníku #### {#slovník-název}
 : Popis
-:: Název slovníku
+:: Název slovníku.
+    Je unikátní v rámci názvů všech slovníků.
 : Povinnost
-:: Povinná
+:: Povinná v češtině
 : Datový typ
 :: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Příklad
@@ -110,21 +111,21 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
     "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en .
 ```
 
-Úroveň 1 - Glosář {#glosář}
+Tezaurus {#tezaurus}
 ============================================================
-Nejjednodušším typem slovníku je glosář obsahující pojmy, které se v datech vyskytují.
-O každém pojmu je třeba uvést alespoň jeho identifikátor, název a definici.
+Nejjednodušším typem slovníku je tezaurus obsahující pojmy, které se v datech vyskytují.
+O každém pojmu je třeba uvést alespoň jeho identifikátor a název, volitelně pak popis a definici.
 
-Popis položek {#glosář-popis-položek}
+Popis položek {#tezaurus-popis-položek}
 -------------------------------------
 
-### Glosář ### {#třída-glosář}
+### Tezaurus ### {#třída-tezaurus}
 : Popis
-:: Glosář je nejjednodušším typem [slovníku](#třída-slovník).
+:: Tezaurus je nejjednodušším typem [slovníku](#třída-slovník).
 
-#### Vazba: Obsahuje pojem #### {#vazba-glosář-pojem}
+#### Vazba: Obsahuje pojem #### {#vazba-tezaurus-pojem}
 : Popis
-:: Vazba propojující pojem a glosář, ve kterém je pojem definován
+:: Vazba propojující pojem a tezaurus, ve kterém je pojem definován
 : Obor hodnot
 :: [Pojem](#třída-pojem)
 
@@ -134,27 +135,37 @@ Popis položek {#glosář-popis-položek}
 
 #### Název pojmu #### {#pojem-název}
 : Popis
-:: Název pojmu
+:: Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.
 : Datový typ
 :: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Povinnost
-:: Povinná
+:: Povinná v češtině
 : Příklad
 :: ```"Turistický cíl"```
 
-#### Definice pojmu #### {#pojem-definice}
+#### Popis pojmu #### {#pojem-popis}
 : Popis
-:: Definice pojmu
+:: Popis pojmu
 : Datový typ
 :: [Text](../../základní-datové-typy/2020-07-01/#text)
 : Povinnost
-:: Povinná
+:: Nepovinná
 : Příklad
 :: ```"Samostatný turistický cíl."```
 
-#### Související ustanovení právního předpisu #### {#pojem-související-ustanovení-právního-předpisu}
+#### Definice pojmu #### {#pojem-definice}
 : Popis
-:: Ustanovení právního předpisu, ve kterém je pojem definován, charakterizován nebo popsán
+:: Definice pojmu. Je unikátní v rámci definic pojmů ve slovníku.
+: Datový typ
+:: [Text](../../základní-datové-typy/2020-07-01/#text)
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```"Turistický cíl je veřejné místo, které navštěvují zejména turisté."```
+
+#### Definující ustanovení právního předpisu #### {#pojem-definující-ustanovení-právního-předpisu}
+: Popis
+:: Ustanovení právního předpisu, ve kterém je pojem definován.
 : Datový typ
 :: \[URL](../../základní-datové-typy/2020-07-01/#url)
 : Povinnost
@@ -162,18 +173,41 @@ Popis položek {#glosář-popis-položek}
 : Příklad
 :: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
 
-Příklady a schémata {#glosář-příklady}
+#### Související ustanovení právního předpisu #### {#pojem-související-ustanovení-právního-předpisu}
+: Popis
+:: Ustanovení právního předpisu, které s daným pojmem souvisí.
+: Datový typ
+:: \[URL](../../základní-datové-typy/2020-07-01/#url)
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
+
+#### Vazba: Nadřazený pojem #### {#vazba-pojem-nadřazený-pojem}
+: Popis
+:: Významově širší pojem.
+    Může se jednat o specializaci, instanciaci, partonomii, apod.
+: Obor hodnot
+:: [Pojem](#třída-pojem)
+: Povinnost
+:: Nepovinná
+: Příklady
+:: `Správce hradu` má nadřazený pojem `Správce turistického cíle`
+:: `Kočka` má nadřazený pojem `Savec`
+:: `Motor` má nadřazený pojem `Auto`
+
+Příklady a schémata {#tezaurus-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
-Příklad souvisejícího ustanovení právního předpisu je pouze příklad použití, u glosáře, který není založen nebo vztažen k legislativě nedává smysl.
+Příklad souvisejícího ustanovení právního předpisu je pouze příklad použití, u tezauru, který není založen nebo vztažen k legislativě nedává smysl.
 
-### JSON-LD ### {#glosář-příklady-json-ld}
-[Glosář v JSON-LD](příklady/glosář.jsonld), [JSON Schema](schémata/glosář.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
+### JSON-LD ### {#tezaurus-příklady-json-ld}
+[Tezaurus v JSON-LD](příklady/tezaurus.jsonld), [JSON Schema](schémata/tezaurus.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Slovník", "Glosář"],
+    "typ": ["Slovník", "Tezaurus"],
     "název": {
         "cs": "Slovník turistických cílů",
         "en": "Vocabulary of tourist points of interest"
@@ -190,7 +224,7 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
                 "cs": "Turistický cíl",
                 "en": "Tourist point of interest"
             },
-            "definice": {
+            "popis": {
                 "cs": "Samostatný turistický cíl.",
                 "en": "Tourist point of interest"
             },
@@ -235,8 +269,8 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
 }
 ```
 
-### RDF Turtle ### {#glosář-příklady-rdf-turtle}
-[Glosář v RDF Turtle](příklady/glosář.ttl)
+### RDF Turtle ### {#tezaurus-příklady-rdf-turtle}
+[Tezaurus v RDF Turtle](příklady/tezaurus.ttl)
 ```turtle
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -275,7 +309,7 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
     "smoking allowed"@en .
 ```
 
-Úroveň 2 - Konceptuální model {#konceptuální-model}
+Konceptuální model {#konceptuální-model}
 ============================================================
 Na této úrovni rozlišujeme pojmy, které reprezentují
 - třídy reprezentující typy subjektů a objektů práva,
@@ -287,7 +321,7 @@ Popis položek {#konceptuální-model-popis-položek}
 
 ### Konceptuální model ### {#třída-konceptuální-model}
 : Popis
-:: Konceptuální model je rozšířením [glosáře](#třída-glosář) o specifikaci, které pojmy definují [třídy](#třída-konceptuální-model-třída), [vlastnosti](#třída-konceptuální-model-vlastnost) a [vztahy](#třída-konceptuální-model-vztah), včetně jejich souvislostí.
+:: Konceptuální model je rozšířením [tezauru](#třída-tezaurus) o specifikaci, které pojmy definují [třídy](#třída-konceptuální-model-třída), [vlastnosti](#třída-konceptuální-model-vlastnost) a [vztahy](#třída-konceptuální-model-vztah), včetně jejich souvislostí.
     Pro vlastnosti obsahuje definici jejich datových typů.
     Zavádí také dvě konkrétní třídy důležité pro veřejnou správu, a to Subjekt práva a Objekt práva.
 
@@ -312,6 +346,21 @@ Popis položek {#konceptuální-model-popis-položek}
 :: Třída `Zámek` má nadřazenou třídu `Turistický cíl`
 :: Třída `Zámek` má nadřazenou třídu `Rezidenční objekt`
 :: Třída `Bytový dům` má nadřazenou třídu `Rezidenční objekt`
+
+#### Vazba: Ekvivalentní třída #### {#vazba-konceptuální-model-třída-ekvivalentní-třída}
+: Popis
+:: Významově ekvivalentní třída.
+    Platí, že každá instance třídy je také instancí ekvivalentní třídy.
+: Obor hodnot
+:: [Třída](#třída-konceptuální-model-třída)
+: Povinnost
+:: Nepovinná
+: Příklady
+:: 
+
+<p class="issue">
+Doplnit příklad ekvivalentní třídy. Tady to bude složitější o popis toho, že ta třída je typicky z jiného slovníku.
+</p>
 
 #### Konkrétní třída: Subjekt práva #### {#konceptuální-model-subjekt-práva}
 : Identifikátor
@@ -420,7 +469,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
 {
     "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Slovník", "Glosář", "Konceptuální model"],
+    "typ": ["Slovník", "Tezaurus", "Konceptuální model"],
     "název": {
         "cs": "Slovník turistických cílů",
         "en": "Vocabulary of tourist points of interest"
@@ -548,7 +597,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
     "Vocabulary of tourist points of interest"@en .
 ```
 
-Úroveň 3 - Ontologie {#ontologie}
+Rozšíření konceptuálního modelu {#rozšíření}
 ============================================================
 Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
 - Typy fází,
@@ -561,14 +610,10 @@ Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
 Vyjasnit si definice Události a Činnosti
 </p>
 
-Popis položek {#ontologie-popis-položek}
+Popis položek {#rozšíření-popis-položek}
 -------------
 
-### Ontologie ### {#třída-ontologie}
-: Popis
-:: Ontologie je rozšířením [konceptuálního modelu](#třída-konceptuální-model) o bližší specifikaci druhů tříd.
-
-### Typ události ### {#třída-ontologie-typ-události}
+### Typ události ### {#třída-rozšíření-typ-události}
 : Popis
 :: Pro danou agendu relevantní událost, která nějakým způsobem
     ovlivňuje osoby nebo věci, o kterých v agendě úřadujeme, nebo kterých se nějakým
@@ -576,25 +621,25 @@ Popis položek {#ontologie-popis-položek}
 : Příklad
 :: `Havárie silničního vozidla`
 
-### Typ fáze ### {#třída-ontologie-typ-fáze}
+### Typ fáze ### {#třída-rozšíření-typ-fáze}
 : Popis
 :: Fáze osob nebo věcí, tj. konkrétní specifické stavy osob nebo věcí.
 : Příklad
 :: `Zničené silniční vozidlo`
 
-### Typ role ### {#třída-ontologie-typ-role}
+### Typ role ### {#třída-rozšíření-typ-role}
 : Popis
 :: Role osob. Role věcí neuvažujeme, nemohou konat a "brát na sebe" role.
 : Příklad
 :: `Vlastník vozidla`
 
-### Typ činnosti ### {#třída-ontologie-typ-činnosti}
+### Typ činnosti ### {#třída-rozšíření-typ-činnosti}
 : Popis
 :: Konání, chování, úkony v rámci agendy nebo relevantní pro agendu.
 : Příklad
 :: `Vyřazování silničního vozidla z provozu`
 
-### Typ vztahu ### {#třída-ontologie-typ-vztahu}
+### Typ vztahu ### {#třída-rozšíření-typ-vztahu}
 : Popis
 :: Vztahy mezi osobami nebo osobami a věcmi, které jsou pro danou agendu relevantní a o kterých jsou vedeny agendové údaje.
     Slouží pro detailnější modelování vztahů, které například mohou mít další své vlastnosti.
@@ -602,13 +647,13 @@ Popis položek {#ontologie-popis-položek}
 : Příklad
 :: `Vlastnictví vozidla`
 
-#### Vazba: Je odvozen z #### {#třída-ontologie-typ-vztahu-je-odvozen-z}
+#### Vazba: Je odvozen z #### {#třída-rozšíření-typ-vztahu-je-odvozen-z}
 : Popis
-:: [Jednodušší vztah z konceptuálního modelu](#třída-konceptuální-model-vztah), který je odvozen z podrobnější definice [Typu vztahu na úrovni ontologie](#třída-ontologie-typ-vztahu).
+:: [Jednodušší vztah z konceptuálního modelu](#třída-konceptuální-model-vztah), který je odvozen z podrobnější definice [Typu vztahu na úrovni rozšíření](#třída-rozšíření-typ-vztahu).
 : Příklad
 :: `Vlastník vozidla`
 
-Příklady a schémata {#ontologie-příklady}
+Příklady a schémata {#rozšíření-příklady}
 -----------------------------------------
 <p class="issue">
 Tady už turistické cíle nestačí - resp. mohly by, kdybychom chtěli a nějak je uměle rozšířili.
@@ -623,17 +668,13 @@ Navíc však u tříd specifikujeme jejich další druh.
 Potřebujeme ten Kind pro "normální" třídy?
 </p>
 
-<p class="issue">
-Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otázka je, jestli to nebudeme chtít nějak upřesnit.
-</p>
-
-### JSON-LD ### {#ontologie-příklady-json-ld}
-[Ontologie v JSON-LD](příklady/ontologie.jsonld), [JSON Schema](schémata/ontologie.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
+### JSON-LD ### {#rozšíření-příklady-json-ld}
+[Ontologie v JSON-LD](příklady/rozšíření.jsonld), [JSON Schema](schémata/rozšíření.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
-    "typ": ["Slovník", "Glosář", "Konceptuální model", "Ontologie"],
+    "typ": ["Slovník", "Tezaurus", "Konceptuální model", "Ontologie"],
     "název": {
         "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
     },
@@ -749,8 +790,8 @@ Jak konceptuální model, tak ontologie je v RDF instance `owl:Ontology` - otáz
 }
 ```
 
-### RDF Turtle ### {#ontologie-příklady-rdf-turtle}
-[Ontologie v RDF Turtle](příklady/ontologie.ttl)
+### RDF Turtle ### {#rozšíření-příklady-rdf-turtle}
+[Ontologie v RDF Turtle](příklady/rozšíření.ttl)
 ```turtle
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix gufo: <http://purl.org/nemo/gufo#> .
@@ -835,3 +876,7 @@ Předpřipravená metadata {#předpřipravená-metadata}
 ==================================================
 Tato sekce obsahuje odkaz na [vzorový metadatový záznam datové sady](metadata/slovník.jsonld) použitelný pro [registraci datové sady](https://data.gov.cz/formulář/registrace-datové-sady) do [Národního katalogu otevřených dat](https://data.gov.cz).
 [Registrace pomocí tohoto předpřipraveného záznamu](https://data.gov.cz/formulář/registrace-datové-sady?file=https%3A%2F%2Fofn.gov.cz%2Fslovníky%2Fdraft%2Fmetadata%2Fslovník.jsonld) umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
+
+Poděkování {#poděkování}
+==================================================
+Na tvorbě této OFN se podíleli: Alice Binderová, Petr Křemen, Martin Nečaský

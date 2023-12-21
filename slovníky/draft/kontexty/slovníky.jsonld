@@ -1,210 +1,165 @@
 {
-	"@context": {
-		"@version": 1.1,
-		"owl": "http://www.w3.org/2002/07/owl#",
-		"@import": "https://ofn.gov.cz/věc/2020-07-01/kontexty/věc.jsonld",
-		"@propagate": true,
-		"Slovník": {
-			"@id": "skos:ConceptScheme",
-			"@context": {
-				"@version": 1.1,
-				"název": {
-					"@id": "skos:prefLabel",
-					"@container": "@language"
-				},
-				"popis": {
-					"@id": "dcterms:description",
-					"@container": "@language"
-				}
-			}
-		},
-		"Glosář": {
-			"@id": "skos:ConceptScheme",
-			"@context": {
-				"@version": 1.1,
-				"pojmy": {
-					"@reverse": "skos:inScheme",
-					"@context": {
-						"Pojem": {
-							"@id": "skos:Concept",
-							"@context": {
-								"název": {
-									"@id": "skos:prefLabel",
-									"@container": "@language"
-								},
-								"definice": {
-									"@id": "skos:definition",
-									"@container": "@language"
-								},
-								"související-ustanovení-právního-předpisu": {
-									"@id": "dcterms:relation",
-									"@type": "@id"
-								}
-							}
-						}
-					}
-				}
-			}
-		},
-		"Konceptuální model": {
-			"@id": "owl:Ontology",
-			"@context": {
-				"@version": 1.1,
-				"pojmy": {
-					"@reverse": "skos:inScheme",
-					"@context": {
-						"Pojem": {
-							"@id": "skos:Concept",
-							"@context": {
-								"název": {
-									"@id": "skos:prefLabel",
-									"@container": "@language"
-								},
-								"definice": {
-									"@id": "skos:definition",
-									"@container": "@language"
-								},
-								"související-ustanovení-právního-předpisu": {
-									"@id": "dcterms:relation",
-									"@type": "@id"
-								}
-							}
-						},
-						"Třída": {
-							"@id": "owl:Class",
-							"@context": {
-								"nadřazená-třída": {
-									"@id": "rdfs:subClassOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Vlastnost": {
-							"@id": "owl:DatatypeProperty",
-							"@context": {
-								"definiční-obor": {
-									"@id": "rdfs:domain",
-									"@type": "@id"
-								},
-								"datový-typ": {
-									"@id": "rdfs:range",
-									"@type": "@id"
-								},
-								"nadřazená-vlastnost": {
-									"@id": "rdfs:subPropertyOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Vztah": {
-							"@id": "owl:ObjectProperty",
-							"@context": {
-								"definiční-obor": {
-									"@id": "rdfs:domain",
-									"@type": "@id"
-								},
-								"obor-hodnot": {
-									"@id": "rdfs:range",
-									"@type": "@id"
-								},
-								"nadřazený-vztah": {
-									"@id": "rdfs:subPropertyOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Osoba": "https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva",
-						"Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva"
-					}
-				}
-			}
-		},
-		"Ontologie": {
-			"@id": "owl:Ontology",
-			"@context": {
-				"@version": 1.1,
-				"pojmy": {
-					"@reverse": "skos:inScheme",
-					"@context": {
-						"Pojem": {
-							"@id": "skos:Concept",
-							"@context": {
-								"název": {
-									"@id": "skos:prefLabel",
-									"@container": "@language"
-								},
-								"definice": {
-									"@id": "skos:definition",
-									"@container": "@language"
-								},
-								"související-ustanovení-právního-předpisu": {
-									"@id": "dcterms:relation",
-									"@type": "@id"
-								}
-							}
-						},
-						"Třída": {
-							"@id": "owl:Class",
-							"@context": {
-								"nadřazená-třída": {
-									"@id": "rdfs:subClassOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Vlastnost": {
-							"@id": "owl:DatatypeProperty",
-							"@context": {
-								"definiční-obor": {
-									"@id": "rdfs:domain",
-									"@type": "@id"
-								},
-								"datový-typ": {
-									"@id": "rdfs:range",
-									"@type": "@id"
-								},
-								"nadřazená-vlastnost": {
-									"@id": "rdfs:subPropertyOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Vztah": {
-							"@id": "owl:ObjectProperty",
-							"@context": {
-								"definiční-obor": {
-									"@id": "rdfs:domain",
-									"@type": "@id"
-								},
-								"obor-hodnot": {
-									"@id": "rdfs:range",
-									"@type": "@id"
-								},
-								"nadřazený-vztah": {
-									"@id": "rdfs:subPropertyOf",
-									"@type": "@id"
-								}
-							}
-						},
-						"Osoba": "https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva",
-						"Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva",
-						"Typ role": "https://slovník.gov.cz/základní/pojem/role",
-						"Typ fáze": "https://slovník.gov.cz/základní/pojem/fáze",
-						"Typ činnosti": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost",
-						"Typ události": "https://slovník.gov.cz/základní/pojem/událost",
-						"Typ vztahu": {
-							"@id": "https://slovník.gov.cz/základní/pojem/vztah",
-							"@context": {
-								"@version": 1.1,
-								"odvozený-vztah": {
-									"@reverse": "http://purl.org/nemo/gufo#isDerivedFrom",
+    "@context": {
+        "@version": 1.1,
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "@import": "https://ofn.gov.cz/věc/2020-07-01/kontexty/věc.jsonld",
+        "@propagate": true,
+        "Slovník": {
+            "@id": "skos:ConceptScheme",
+            "@context": {
+                "@version": 1.1,
+                "název": {
+                    "@id": "skos:prefLabel",
+                    "@container": "@language"
+                },
+                "popis": {
+                    "@id": "dcterms:description",
+                    "@container": "@language"
+                }
+            }
+        },
+        "Tezaurus": {
+            "@id": "skos:ConceptScheme",
+            "@context": {
+                "@version": 1.1,
+                "pojmy": {
+                    "@reverse": "skos:inScheme",
+                    "@context": {
+                        "Pojem": {
+                            "@id": "skos:Concept",
+                            "@context": {
+                                "název": {
+                                    "@id": "skos:prefLabel",
+                                    "@container": "@language"
+                                },
+                                "popis": {
+                                    "@id": "dcterms:description",
+                                    "@container": "@language"
+                                },
+                                "definice": {
+                                    "@id": "skos:definition",
+                                    "@container": "@language"
+                                },
+                                "související-ustanovení-právního-předpisu": {
+                                    "@id": "dcterms:relation",
                                     "@type": "@id"
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+                                },
+                                "definující-ustanovení-právního-předpisu": {
+                                    "@id": "dcterms:conformsTo",
+                                    "@type": "@id"
+                                },
+                                "nadřazený-pojem": {
+                                    "@id": "skos:broader",
+                                    "@type": "@id"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "Konceptuální model": {
+            "@id": "owl:Ontology",
+            "@context": {
+                "@version": 1.1,
+                "pojmy": {
+                    "@reverse": "skos:inScheme",
+                    "@context": {
+                        "Pojem": {
+                            "@id": "skos:Concept",
+                            "@context": {
+                                "název": {
+                                    "@id": "skos:prefLabel",
+                                    "@container": "@language"
+                                },
+                                "popis": {
+                                    "@id": "dcterms:description",
+                                    "@container": "@language"
+                                },
+                                "definice": {
+                                    "@id": "skos:definition",
+                                    "@container": "@language"
+                                },
+                                "související-ustanovení-právního-předpisu": {
+                                    "@id": "dcterms:relation",
+                                    "@type": "@id"
+                                },
+                                "definující-ustanovení-právního-předpisu": {
+                                    "@id": "dcterms:conformsTo",
+                                    "@type": "@id"
+                                },
+                                "nadřazený-pojem": {
+                                    "@id": "skos:broader",
+                                    "@type": "@id"
+                                }
+                            }
+                        },
+                        "Třída": {
+                            "@id": "owl:Class",
+                            "@context": {
+                                "nadřazená-třída": {
+                                    "@id": "rdfs:subClassOf",
+                                    "@type": "@id"
+                                },
+                                "ekvivalentní-třída": {
+                                    "@id": "owl:equivalentClass",
+                                    "@type": "@id"
+                                }
+                            }
+                        },
+                        "Vlastnost": {
+                            "@id": "owl:DatatypeProperty",
+                            "@context": {
+                                "definiční-obor": {
+                                    "@id": "rdfs:domain",
+                                    "@type": "@id"
+                                },
+                                "datový-typ": {
+                                    "@id": "rdfs:range",
+                                    "@type": "@id"
+                                },
+                                "nadřazená-vlastnost": {
+                                    "@id": "rdfs:subPropertyOf",
+                                    "@type": "@id"
+                                }
+                            }
+                        },
+                        "Vztah": {
+                            "@id": "owl:ObjectProperty",
+                            "@context": {
+                                "definiční-obor": {
+                                    "@id": "rdfs:domain",
+                                    "@type": "@id"
+                                },
+                                "obor-hodnot": {
+                                    "@id": "rdfs:range",
+                                    "@type": "@id"
+                                },
+                                "nadřazený-vztah": {
+                                    "@id": "rdfs:subPropertyOf",
+                                    "@type": "@id"
+                                }
+                            }
+                        },
+                        "Osoba": "https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva",
+                        "Věc": "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva",
+                        "Typ role": "https://slovník.gov.cz/základní/pojem/role",
+                        "Typ fáze": "https://slovník.gov.cz/základní/pojem/fáze",
+                        "Typ činnosti": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost",
+                        "Typ události": "https://slovník.gov.cz/základní/pojem/událost",
+                        "Typ vztahu": {
+                            "@id": "https://slovník.gov.cz/základní/pojem/vztah",
+                            "@context": {
+                                "@version": 1.1,
+                                "odvozený-vztah": {
+                                    "@reverse": "http://purl.org/nemo/gufo#isDerivedFrom",
+                                    "@type": "@id"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

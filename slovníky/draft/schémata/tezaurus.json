@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://ofn.gov.cz/slovníky/draft/schémata/glosář.json",
-    "name": "Glosář",
-    "description": "Glosář",
+    "$id": "https://ofn.gov.cz/slovníky/draft/schémata/tezaurus.json",
+    "name": "Tezaurus",
+    "description": "Tezaurus",
     "allOf": [
         {
             "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json"
@@ -15,7 +15,7 @@
                 "typ": {
                     "type": "array",
                     "contains": {
-                        "const": "Glosář"
+                        "const": "Tezaurus"
                     },
                     "items": {
                         "type": "string"
@@ -28,8 +28,7 @@
                         "required": [
                             "iri",
                             "typ",
-                            "název",
-                            "definice"
+                            "název"
                         ],
                         "properties": {
                             "typ": {
@@ -42,12 +41,29 @@
                                 }
                             },
                             "název": {
-                                "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+                                "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json#/$defs/text-s-povinnou-češtinou"
+                            },
+                            "popis": {
+                                "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json#/$defs/text-s-povinnou-češtinou"
                             },
                             "definice": {
-                                "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+                                "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json#/$defs/text-s-povinnou-češtinou"
                             },
                             "související-ustanovení-právního-předpisu": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri"
+                                }
+                            },
+                            "definující-ustanovení-právního-předpisu": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri"
+                                }
+                            },
+                            "nadřazený-pojem": {
                                 "type": "array",
                                 "items": {
                                     "type": "string",
