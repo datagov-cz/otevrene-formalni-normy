@@ -1,0 +1,128 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/rozhraní-datových-katalogů/draft/schémata/datová-sada-hvd.json",
+    "allOf": [
+        {
+            "$ref": "https://ofn.gov.cz/rozhraní-datových-katalogů/draft/schémata/datová-sada.json"
+        },
+        {
+            "type": "object",
+            "title": "Datová sada",
+            "required": [
+                "právní_předpis",
+                "kategorie_hvd"
+            ],
+            "properties": {
+                "právní_předpis": {
+                    "type": "array",
+                    "contains": {
+                        "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                    }
+                },
+                "kategorie_hvd": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "iri",
+                        "pattern": "^http\\://data\\.europa\\.eu/bna/c_.*$",
+                        "minItems": 1,
+                        "example": [
+                            "http://data.europa.eu/bna/c_164e0bf5"
+                        ]
+                    }
+                },
+                "distribuce": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "přístupové_url",
+                            "právní_předpis"
+                        ],
+                        "properties": {
+                            "právní_předpis": {
+                                "type": "array",
+                                "contains": {
+                                    "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                                }
+                            },
+                            "přístupová_služba": {
+                                "type": "object",
+                                "required": [
+                                    "právní_předpis",
+                                    "kontaktní_bod",
+                                    "dokumentace",
+                                    "kategorie_hvd",
+                                    "přístupový_bod"
+                                ],
+                                "properties": {
+                                    "kategorie_hvd": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "iri",
+                                            "pattern": "^http\\://data\\.europa\\.eu/bna/c_.*$",
+                                            "minItems": 1,
+                                            "example": [
+                                                "http://data.europa.eu/bna/c_164e0bf5"
+                                            ]
+                                        }
+                                    },
+                                    "dokumentace": {
+                                        "oneOf": [
+                                            {
+                                                "type": "string",
+                                                "format": "iri",
+                                                "title": "Dokumentace",
+                                                "minLength": 8,
+                                                "pattern": "^https://"
+                                            },
+                                            {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "format": "iri",
+                                                    "title": "Dokumentace",
+                                                    "minLength": 8,
+                                                    "pattern": "^https://"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "kontaktní_bod": {
+                                        "type": "object",
+                                        "required": [
+                                            "typ"
+                                        ],
+                                        "properties": {
+                                            "typ": {
+                                                "type": "string",
+                                                "examples": [
+                                                    "Organizace"
+                                                ]
+                                            },
+                                            "jméno": {
+                                                "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+                                            },
+                                            "e-mail": {
+                                                "type": "string",
+                                                "format": "iri",
+                                                "pattern": "^mailto\\:"
+                                            }
+                                        }
+                                    },
+                                    "právní_předpis": {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
