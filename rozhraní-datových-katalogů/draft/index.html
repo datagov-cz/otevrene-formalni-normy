@@ -109,6 +109,9 @@
                         <li>Přidání podpory pro označování datových sad dle DGA</li>
                     </ol>
                 </li>
+                <li>
+                    Přidání podpory pro kontaktní bod a dokumentaci datové služby, který jsou povinné pro HVDs.
+                </li>
             </ol>
 
         </section>
@@ -336,7 +339,7 @@
                         </dt>
                         <dd>
                             Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.
-                            Odpovídá vlastnosti <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_contact_point">dcat:contactPoint</a>.
+                            Odpovídá vlastnosti <a href="https://w3c.github.io/dxwg/dcat/#Property:resource_contact_point">dcat:contactPoint</a>.
                         </dd>
                         <dt>
                             Vlastnost
@@ -2001,6 +2004,53 @@ podmínky: a pu:Specifikace ;
                     </dl>
                 </section>
 
+                <section id="položky-datová-služba-kontaktní-bod">
+                    <h4>Kontaktní bod - jméno a email</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontaktní bod - jméno a email
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek k datové službě.
+                            Odpovídá vlastnosti <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_contact_point">dcat:contactPoint</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita podtypu <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná pro datové služby zpřístupňující datové sady s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">služba: dcat:contactPoint správce: .
+
+správce: a vcard:Individual ;
+         vcard:fn "Jan Novák"@cs ;
+         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
+                        </dd>
+                    </dl>
+                </section>
+                
                 <section id="položky-datová-služba-specifikace">
                     <h4>Odkaz na specifikaci</h4>
                     <dl>
@@ -2042,6 +2092,50 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             <code>služba: dct:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-služba-dokumentace">
+                    <h4>Odkaz na dokumentaci</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na dokumentaci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na dokumentaci dále popisující datovou službu.
+                            V kontextu HVDs musí obsahovat dokumentaci kvality služby.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#DataService.documentation">foaf:page</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dokumentace</code>, <code>foaf:page</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL dokumentace.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná pro datové služby zpřístupňující datové sady s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>služba: foaf:page &lt;https://www.data.cz/služba/dokumentace&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -2523,8 +2617,7 @@ podmínky: a pu:Specifikace ;
     dcat:theme euroVoc:4512 ;
     dcat:spatialResolutionInMeters 12.0 ;
     dcat:temporalResolution "P1D"^^xsd:duration ;
-    dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;,
-                                 &lt;http://data.europa.eu/eli/reg_impl/2023/138/oj&gt; ;
+    dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;, &lt;http://data.europa.eu/eli/reg_impl/2023/138/oj&gt; ;
     dcatap:hvdCategory &lt;http://data.europa.eu/bna/c_164e0bf5&gt; ;
     dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv&gt; ;
     dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql&gt; .
@@ -2554,6 +2647,12 @@ podmínky: a pu:Specifikace ;
                     pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; ] ;
     dcat:accessURL &lt;https://portal.cisjr.cz/sparql&gt; ;
     dcatap:applicableLegislation &lt;http://data.europa.eu/eli/reg_impl/2023/138/oj&gt; ;
+    foaf:page &lt;https://www.data.cz/služba/dokumentace&gt; ;
+    dcat:contactPoint [
+        a vcard2006:Organization ;
+        vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
+        vcard2006:hasEmail "sekretariat.190@mdcr.cz"
+    ] ;
     dct:title "SPARQL endpoint pro jízdní řády"@cs, "SPARQL endpoint for timetables"@en ;
     dcat:accessService &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql&gt; .
 
@@ -2691,6 +2790,17 @@ podmínky: a pu:Specifikace ;
                 "specifikace": [
                     "https://www.w3.org/TR/sparql11-protocol/"
                 ],
+                "dokumentace": [
+                    "https://www.data.cz/služba/dokumentace"
+                ],
+                "kontaktní_bod": {
+                    "typ": "Organizace",
+                    "jméno": {
+                        "cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+                        "en": "Ministry of Transport"
+                    },
+                    "e-mail": "mailto:sekretariat.190@mdcr.cz"
+                },			
                 "právní_předpis": [
                     "http://data.europa.eu/eli/reg_impl/2023/138/oj"
                 ],		
