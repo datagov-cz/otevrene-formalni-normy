@@ -26,12 +26,8 @@ Konceptuální model slovníku {#konceptuální-model-slovníku}
 ============================================================
 1. Žlutě je vyznačena základní úroveň komplexity - tezaurus.
 2. Zeleně pak konceptuální model, rozšíření o tezauru o specifikaci, zda pojem reprezentuje třídu, vztah nebo vlastnost.
-3. Oranžové pak rozšíření, které dále specifikuje typy tříd na ty reprezentující
-    - Typy fází,
-    - Typy rolí,
-    - Typy činností,
-    - Typy událostí a
-    - Typy vztahů.
+3. Oranžové pak rozšíření, které dále specifikuje pojmy na ty reprezentující Typ subjektu práva a Typ objektu práva.
+    V případě potřeby je možné v dalších verzích této OFN přidávat na oranžovou úroveň specifičtější typy.
 
 <figure>
     <img alt="Konceptuálný model slovníku" src="obrázky/slovník.svg">
@@ -40,7 +36,7 @@ Konceptuální model slovníku {#konceptuální-model-slovníku}
 
 Popis slovníku {#slovník}
 ================================================================
-Nezávisle na zvolené úrovni komplexity je třeba popsat samotný slovník.
+Nejprve je třeba popsat samotný slovník.
 Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
 
 Popis položek {#slovník-popis-položek}
@@ -48,7 +44,7 @@ Popis položek {#slovník-popis-položek}
 
 ### Slovník ### {#třída-slovník}
 : Popis
-:: Datový slovník – je popisem struktury a významu dat v informačních systémech veřejné správy spravovaných správci dat v podobě pojmů, které reprezentují typy subjektů a objektů práva, jejich vlastnosti a vztahy mezi nimi.
+:: Datový slovník - je popisem struktury a významu dat v informačních systémech veřejné správy spravovaných správci dat v podobě pojmů, které reprezentují typy subjektů a objektů práva, jejich vlastnosti a vztahy mezi nimi.
 
 <p class="issue">
 Sladit se zákonem o správě dat až bude finální
@@ -75,6 +71,26 @@ Sladit se zákonem o správě dat až bude finální
 : Příklad
 :: ```"Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"```
 
+#### Vytvořeno #### {#slovník-vytvořeno}
+: Popis
+:: Okamžik vytvoření
+: Povinnost
+:: Nepovinná
+: Datový typ
+:: [Časový okamžik](../../základní-datové-typy/2020-07-01/#časový-okamžik)
+: Příklad
+:: ```2024-01-15T12:00:00+01:00```
+
+#### Aktualizováno #### {#slovník-aktualizováno}
+: Popis
+:: Okamžik poslední změny
+: Povinnost
+:: Nepovinná
+: Datový typ
+:: [Časový okamžik](../../základní-datové-typy/2020-07-01/#časový-okamžik)
+: Příklad
+:: ```2024-01-15T12:00:00+01:00```
+
 Příklady a schémata {#slovník-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle`
@@ -93,6 +109,14 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
     "popis": {
         "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
         "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
+    },
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum": "2024-01-01"
+    },
+    "aktualizováno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2024-01-15T04:53:21+02:00"
     }
 }
 ```
@@ -100,21 +124,30 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 ### RDF Turtle ### {#slovník-příklady-rdf-turtle}
 [Slovník v RDF Turtle](příklady/slovník.ttl)
 ```turtle
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 
-<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme ;
-  skos:prefLabel "Slovník turistických cílů"@cs ,
+<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme;
+  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
+    "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
+  skos:prefLabel "Slovník turistických cílů"@cs,
     "Vocabulary of tourist points of interest"@en ;
-  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs ,
-    "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en .
+  dcterms:created [
+    a time:Instant;
+    time:inXSDDate "2024-01-01"^^xsd:date
+  ];
+  dcterms:modified [
+    a time:Instant;
+    time:inXSDDateTimeStamp "2024-01-15T04:53:21+02:00"^^xsd:dateTimeStamp
+  ] .
 ```
 
 Tezaurus {#tezaurus}
 ============================================================
 Nejjednodušším typem slovníku je tezaurus obsahující pojmy, které se v datech vyskytují.
-O každém pojmu je třeba uvést alespoň jeho identifikátor a název, volitelně pak popis a definici.
+O každém pojmu je třeba uvést alespoň jeho identifikátor a název, volitelně pak popis, definici, definující a související ustanovení či nadřazené a ekvivalentní pojmy.
 
 Popis položek {#tezaurus-popis-položek}
 -------------------------------------
@@ -163,25 +196,32 @@ Popis položek {#tezaurus-popis-položek}
 : Příklad
 :: ```"Turistický cíl je veřejné místo, které navštěvují zejména turisté."```
 
-#### Definující ustanovení právního předpisu #### {#pojem-definující-ustanovení-právního-předpisu}
+#### Vazba: Definující ustanovení právního předpisu #### {#vazba-pojem-definující-ustanovení-právního-předpisu}
 : Popis
 :: Ustanovení právního předpisu, ve kterém je pojem definován.
 : Datový typ
-:: \[URL](../../základní-datové-typy/2020-07-01/#url)
+:: Datové \[URL](../../základní-datové-typy/2020-07-01/#url) ustanovení v e-sbírce
 : Povinnost
 :: Nepovinná
 : Příklad
-:: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
+:: ```https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3```
 
-#### Související ustanovení právního předpisu #### {#pojem-související-ustanovení-právního-předpisu}
+#### Vazba: Související ustanovení právního předpisu #### {#vazba-pojem-související-ustanovení-právního-předpisu}
 : Popis
 :: Ustanovení právního předpisu, které s daným pojmem souvisí.
 : Datový typ
-:: \[URL](../../základní-datové-typy/2020-07-01/#url)
+:: Datové \[URL](../../základní-datové-typy/2020-07-01/#url) ustanovení v e-sbírce
 : Povinnost
 :: Nepovinná
 : Příklad
-:: ```https://www.zakonyprolidi.cz/cs/1999-106#p3a-3```
+:: ```https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3```
+
+<p class="issue">
+E-sbírka má jiné URL pro "opendata", jiné pro frontend - aktuální znění, jiné pro frontend - konkrétní znění a jiné pro ELI.
+Liší se jen prefixem, např `https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_4c/odst_2`, ale z hlediska použitelnosti je dost rozdíl, které se použije.
+Z "RDF" pohledu se jednoduše na lidsky čitelnou verzi nedostanu, resp. prohlížeč musí mít doménovou znalost o prefixech.
+Z hlediska dat je ale nutné mít URL datové, nikoliv frontendové.
+</p>
 
 #### Vazba: Nadřazený pojem #### {#vazba-pojem-nadřazený-pojem}
 : Popis
@@ -195,6 +235,17 @@ Popis položek {#tezaurus-popis-položek}
 :: `Správce hradu` má nadřazený pojem `Správce turistického cíle`
 :: `Kočka` má nadřazený pojem `Savec`
 :: `Motor` má nadřazený pojem `Auto`
+
+#### Vazba: Ekvivalentní pojem #### {#vazba-pojem-ekvivalentní-pojem}
+: Popis
+:: Významově ekvivalentní pojem.
+    Typicky se jedná o pojem z jiného slovníku, který však má stejný význam.
+: Obor hodnot
+:: [Pojem](#třída-pojem)
+: Povinnost
+:: Nepovinná
+: Příklady
+:: `Správce hradu` ze slovníku Turistických cílů má ekvivalentní pojem `Správce hradu` ze slovníku Hradů a zámků.
 
 Příklady a schémata {#tezaurus-příklady}
 --------
@@ -224,12 +275,12 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
                 "cs": "Turistický cíl",
                 "en": "Tourist point of interest"
             },
-            "popis": {
+            "definice": {
                 "cs": "Samostatný turistický cíl.",
                 "en": "Tourist point of interest"
             },
             "související-ustanovení-právního-předpisu": [
-                "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q"
             ]
         },
         {
@@ -283,7 +334,7 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
     "Vocabulary of tourist points of interest"@en .
 
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept;
-  dcterms:relation <https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q>;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
   skos:definition "Samostatný turistický cíl."@cs,
     "Tourist point of interest"@en;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
@@ -347,40 +398,15 @@ Popis položek {#konceptuální-model-popis-položek}
 :: Třída `Zámek` má nadřazenou třídu `Rezidenční objekt`
 :: Třída `Bytový dům` má nadřazenou třídu `Rezidenční objekt`
 
-#### Vazba: Ekvivalentní třída #### {#vazba-konceptuální-model-třída-ekvivalentní-třída}
+#### Vazba: Instance kódovány číselníkem #### {#vazba-konceptuální-model-třída-číselník}
 : Popis
-:: Významově ekvivalentní třída.
-    Platí, že každá instance třídy je také instancí ekvivalentní třídy.
+:: Číselník, jehož položky jsou instancemi třídy.
 : Obor hodnot
-:: [Třída](#třída-konceptuální-model-třída)
+:: [Číselník](#třída-konceptuální-model-číselník)
 : Povinnost
 :: Nepovinná
 : Příklady
-:: 
-
-<p class="issue">
-Doplnit příklad ekvivalentní třídy. Tady to bude složitější o popis toho, že ta třída je typicky z jiného slovníku.
-</p>
-
-<p class="issue">
-Teď když máme ekvivalentní třídu, tak je otázka, co ekvivalentní pojem, vztah a vlastnost.
-</p>
-
-#### Konkrétní třída: Subjekt práva #### {#konceptuální-model-subjekt-práva}
-: Identifikátor
-:: `https://slovník.gov.cz/veřejný-sektor/pojem/subjekt-práva`
-: Popis
-:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují subjekty práva.
-: Příklad
-:: Třída `Řidič vozidla` bude podtřídou třídy `Subjekt práva`
-
-#### Konkrétní třída: Objekt práva #### {#konceptuální-model-objekt-práva}
-: Identifikátor
-:: `https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva`
-: Popis
-:: Třída připravená k použití jako [nadřazená třída](#vazba-konceptuální-model-třída-nadřazená-třída) takových tříd tvořených ve slovnících, které popisují objekty práva.
-: Příklad
-:: Třída `Řidičský průkaz` bude podtřídou třídy `Objekt práva`
+:: Třída `Typ turistického cíle` má instance kódované číselníkem `Typy turistických cílů`
 
 ### Vztah ### {#třída-konceptuální-model-vztah}
 : Popis
@@ -429,9 +455,9 @@ Teď když máme ekvivalentní třídu, tak je otázka, co ekvivalentní pojem, 
 : Povinnost
 :: Povinná
 
-#### Vazba: Datový typ vlastnosti #### {#vazba-konceptuální-model-vlastnost-datový-typ}
+#### Vazba: Obor hodnot vlastnosti #### {#vazba-konceptuální-model-vlastnost-obor-hodnot}
 : Popis
-:: Datový typ vlastnosti.
+:: Obor hodnot vlastnosti.
     Určuje datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
 : Obor hodnot
 :: [Datový typ](#třída-konceptuální-model-datový-typ)
@@ -459,12 +485,36 @@ Teď když máme ekvivalentní třídu, tak je otázka, co ekvivalentní pojem, 
 :: ```Celé číslo```
 :: ```Text```
 
+### Čísleník ### {#třída-konceptuální-model-číselník}
+: Popis
+:: Číselník
+
+#### Datová sada v NKOD #### {#číselník-datová-sada-v-nkod}
+: Popis
+:: Datová sada v NKOD reprezentující číselník
+: Povinnost
+:: Nepovinná
+: Datový typ
+:: \[URL](../../základní-datové-typy/2020-07-01/#url) datové sady v NKOD
+: Příklad
+:: ```https://data.gov.cz/zdroj/datové-sady/17651921/7cad2125445156d8be24d77b5bb063af```
+
+#### IRI číselníku #### {#číselník-iri-číselníku}
+: Popis
+:: IRI číselníku dle OFN Číselníky
+: Povinnost
+:: Nepovinná
+: Datový typ
+:: \[URL](../../základní-datové-typy/2020-07-01/#url) číselníku
+: Příklad
+:: ```https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu```
+
+
 Příklady a schémata {#konceptuální-model-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
 Dále každému pojmu přiděluje jeho typ z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost.
 V závislosti na typu pojmu je pak daný pojem dále popsán.
-U třídy `Turistický cíl` je ukázáno použití [konkrétní třídy Objekt práva](#konceptuální-model-objekt-práva).
 U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vztahu](#vazba-konceptuální-model-vztah-nadřazený-vztah).
 
 ### JSON-LD ### {#konceptuální-model-příklady-json-ld}
@@ -495,7 +545,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
                 "en": "Tourist point of interest"
             },
             "související-ustanovení-právního-předpisu": [
-                "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q"
             ],
             "nadřazená-třída": [
                 "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo",
@@ -526,7 +576,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
             "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
             "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
             "nadřazený-vztah": [
-                "https://slovník.gov.cz/datový/číselníky/pojem/položka-číselníku"
+                "https://slovník.gov.cz/datový/číselníky/pojem/má-přiřazenu-položku-číselníku"
             ]
         },
         {
@@ -584,7 +634,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
 
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept,
     owl:Class;
-  dcterms:relation <https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q>;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
   rdfs:subClassOf <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo>,
     <https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva>;
   skos:definition "Samostatný turistický cíl."@cs,
@@ -604,58 +654,24 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
 Rozšíření konceptuálního modelu {#rozšíření}
 ============================================================
 Na této úrovni dále rozlišujeme druhy tříd (typů věcí). Rozlišujeme
-- Typy fází,
-- Typy rolí,
-- Typy činností,
-- Typy událostí a
-- Typy vztahů.
-
-<p class="issue">
-Vyjasnit si definice Události a Činnosti
-</p>
+- Typ subjektu práva
+- Typ objektu práva.
 
 Popis položek {#rozšíření-popis-položek}
 -------------
 
-### Typ události ### {#třída-rozšíření-typ-události}
+### Typ subjektu práva ### {#třída-rozšíření-typ-subjektu-práva}
 : Popis
-:: Pro danou agendu relevantní událost, která nějakým způsobem
-    ovlivňuje osoby nebo věci, o kterých v agendě úřadujeme, nebo kterých se nějakým
-    způsobem týkají.
+:: 
 : Příklad
-:: `Havárie silničního vozidla`
+:: `Řidič silničního vozidla`
 
-### Typ fáze ### {#třída-rozšíření-typ-fáze}
+### Typ objektu práva ### {#třída-rozšíření-typ-objektu-práva}
 : Popis
-:: Fáze osob nebo věcí, tj. konkrétní specifické stavy osob nebo věcí.
+:: 
 : Příklad
-:: `Zničené silniční vozidlo`
+:: `Silniční vozidlo`
 
-### Typ role ### {#třída-rozšíření-typ-role}
-: Popis
-:: Role osob. Role věcí neuvažujeme, nemohou konat a "brát na sebe" role.
-: Příklad
-:: `Vlastník vozidla`
-
-### Typ činnosti ### {#třída-rozšíření-typ-činnosti}
-: Popis
-:: Konání, chování, úkony v rámci agendy nebo relevantní pro agendu.
-: Příklad
-:: `Vyřazování silničního vozidla z provozu`
-
-### Typ vztahu ### {#třída-rozšíření-typ-vztahu}
-: Popis
-:: Vztahy mezi osobami nebo osobami a věcmi, které jsou pro danou agendu relevantní a o kterých jsou vedeny agendové údaje.
-    Slouží pro detailnější modelování vztahů, které například mohou mít další své vlastnosti.
-    Pro jednodušší vztahy stačí použít [Vztah z úrovně konceptuálního modelu](#třída-konceptuální-model-vztah).
-: Příklad
-:: `Vlastnictví vozidla`
-
-#### Vazba: Je odvozen z #### {#třída-rozšíření-typ-vztahu-je-odvozen-z}
-: Popis
-:: [Jednodušší vztah z konceptuálního modelu](#třída-konceptuální-model-vztah), který je odvozen z podrobnější definice [Typu vztahu na úrovni rozšíření](#třída-rozšíření-typ-vztahu).
-: Příklad
-:: `Vlastník vozidla`
 
 Příklady a schémata {#rozšíření-příklady}
 -----------------------------------------
@@ -668,84 +684,123 @@ Příkladem je slovník _Slovník zákona č. 56/2001 Sb. o podmínkách provozu
 Tak jako v základním modelu obsahuje pojmy a jejich typy z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost a v závislosti na typu pojmu je pak daný pojem dále popsán.
 Navíc však u tříd specifikujeme jejich další druh.
 
-<p class="issue">
-Potřebujeme ten Kind pro "normální" třídy?
-</p>
-
 ### JSON-LD ### {#rozšíření-příklady-json-ld}
 [Ontologie v JSON-LD](příklady/rozšíření.jsonld), [JSON Schema](schémata/rozšíření.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
-    "iri": "https://slovník.gov.cz/datový/turistické-cíle",
+    "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
     "typ": ["Slovník", "Tezaurus", "Konceptuální model"],
     "název": {
-        "cs": "Slovník turistických cílů",
-        "en": "Vocabulary of tourist points of interest"
+        "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
     },
     "popis": {
-        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
-        "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
+        "cs": "Slovník slouží v rámci příkladu pro OFN Slovníky"
     },
     "pojmy": [
         {
-            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
             "typ": ["Pojem", "Třída"],
             "název": {
-                "cs": "Turistický cíl",
-                "en": "Tourist point of interest"
+                "cs": "Silniční vozidlo",
+                "en": "Road vehicle"
             },
             "definice": {
-                "cs": "Samostatný turistický cíl.",
-                "en": "Tourist point of interest"
+                "cs": "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."
             },
             "související-ustanovení-právního-předpisu": [
-                "https://www.zakonyprolidi.cz/cs/1992-114#p3-1-q"
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1"
             ],
             "nadřazená-třída": [
-                "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo",
-                "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva"
+                "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"
             ]
         },
         {
-            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
-            "typ": ["Pojem", "Třída"],
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
+            "typ": ["Pojem", "Třída", "Typ role"],
             "název": {
-                "cs": "Typ turistického cíle",
-                "en": "Type of the tourist point of interest"
+                "cs": "Vlastník vozidla",
+                "en": "Vehicle owner"
             },
             "definice": {
-                "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
+                "cs": "Vlastník vozidla"
+            },
+            "související-ustanovení-právního-předpisu": [
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+            ]
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
+            "typ": ["Pojem", "Vztah"],
+            "název": {
+                "cs": "má vlastníka vozidla"
+            },
+            "definice": {
+                "cs": "má vlastníka vozidla"
+            },
+            "související-ustanovení-právního-předpisu": [
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+            ],
+            "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+            "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
+            "typ": ["Pojem", "Třída", "Typ vztahu"],
+            "název": {
+                "cs": "Vlastnictví vozidla"
+            },
+            "definice": {
+                "cs": "Vlastnictví vozidla"
+            },
+            "související-ustanovení-právního-předpisu": [
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a"
+            ],
+            "odvozený-vztah": [ 
+                "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla"
+            ]
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
+            "typ": ["Pojem", "Vlastnost"],
+            "název": {
+                "cs": "registrační značka"
+            },
+            "definice": {
+                "cs": "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."
+            },
+            "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou",
+            "datový-typ": "xsd:string"
+        },
+        {
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
+            "typ": ["Pojem", "Třída", "Typ události"],
+            "název": {
+                "cs": "Havárie silničního vozidla"
+            },
+            "definice": {
+                "cs": "Havárie silničního vozidla"
             }
         },
         {
-            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
-            "typ": ["Pojem", "Vztah"],
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
+            "typ": ["Pojem", "Třída", "Typ fáze"],
             "název": {
-                "cs": "má typ turistického cíle",
-                "en": "has type of tourist point of interest"
+                "cs": "Zničené silniční vozidlo"
             },
             "definice": {
-                "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
-            },
-            "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
-            "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
-            "nadřazený-vztah": [
-                "https://slovník.gov.cz/datový/číselníky/pojem/má-přiřazenu-položku-číselníku"
-            ]
+                "cs": "Zničené silniční vozidlo"
+            }
         },
         {
-            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
-            "typ": ["Pojem", "Vlastnost"],
+            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vyřazování-silničního-vozidla-z-provozu",
+            "typ": ["Pojem", "Třída", "Typ činnosti"],
             "název": {
-                "cs": "kouření povoleno",
-                "en": "smoking allowed"
+                "cs": "Vyřazování silničního vozidla z provozu"
             },
             "definice": {
-                "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
-            },
-            "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
-            "datový-typ": "xsd:boolean"
+                "cs": "Vyřazování silničního vozidla z provozu"
+            }
         }
     ]
 }
@@ -771,7 +826,7 @@ Potřebujeme ten Kind pro "normální" třídy?
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla> a skos:Concept,
     owl:ObjectProperty;
-  dc:relation <https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a>;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
   gufo:isDerivedFrom <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla>;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo>;
   rdfs:range <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla>;
@@ -803,7 +858,7 @@ Potřebujeme ten Kind pro "normální" třídy?
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo> a skos:Concept,
     owl:Class;
-  dc:relation <https://www.zakonyprolidi.cz/cs/2001-56#p2-1>;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1>;
   rdfs:subClassOf <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo>;
   skos:definition "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
@@ -813,7 +868,7 @@ Potřebujeme ten Kind pro "normální" třídy?
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla> a skos:Concept,
     owl:Class,
     <https://slovník.gov.cz/základní/pojem/vztah>;
-  dc:relation <https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a>;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
   skos:definition "Vlastnictví vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastnictví vozidla"@cs .
@@ -821,7 +876,7 @@ Potřebujeme ten Kind pro "normální" třídy?
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla> a skos:Concept,
     owl:Class,
     <https://slovník.gov.cz/základní/pojem/role>;
-  dc:relation <https://www.zakonyprolidi.cz/cs/2001-56#p4-2-a>;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
   skos:definition "Vlastník vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastník vozidla"@cs,
@@ -832,6 +887,70 @@ Potřebujeme ten Kind pro "normální" třídy?
   dc:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
   skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
 ```
+
+Anotace pro registr práv a povinností {#rpp}
+============================================================
+Pokud popisujeme subjekty a objekty práva pro jejich následnou reprezentaci v Registru práv a povinností (RPP), je třeba je popsat detailněji.
+
+Popis položek {#rpp-popis-položek}
+--------------------------------------
+
+### Pojem ### {#třída-rpp-pojem}
+: Popis
+:: Pojem, reprezentuje typy subjektu a objektu práva a jejich údaje. 
+    V případě, že pojem reprezentuje údaj subjektu či objektu práva, je třeba stanovit, zda se jedná o věřejný či neveřejný údaj.
+
+#### Je sdílen v PPDF #### {#pojem-je-sdílen-v-ppdf}
+: Popis
+::  
+    - ```true``` - Sdílení údaje v propojeném datovém fondu (= sdílené pomocí ISZR nebo ISSS)
+        - § 5 odst. 5 zákona č. 111/2009 Sb., o základních registrech
+        - § 8 zákona č. 111/2009 Sb., o základních registrech
+    - ```false``` - Pokud je sdílen pomocí proprietárního rozhraní (nebo vůbec)
+: Datový typ
+:: \[Ano či ne](../../základní-datové-typy/2020-07-01/#boolean) položky číselníku
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```true```
+
+#### Agendový informační systém #### {#pojem-agendový-informační-systém}
+: Popis
+:: Agendový informační systém (AIS), pro který jsou údaje subjektu/objektu práva "Agendově vlastní", tj. nepřebírané.
+: Datový typ
+:: \[IRI](../../základní-datové-typy/2020-07-01/#url) [Informačního systému veřejné správy](https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/informační-systém-veřejné-správy) z RPP
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456```
+
+#### Agenda #### {#pojem-agenda}
+: Popis
+:: Agenda, do které subjekt/objekt (resp. jeho údaje) patří (je agendový vlastní, tj. nepřebíraný).
+: Datový typ
+:: \[IRI](../../základní-datové-typy/2020-07-01/#url) [Agendy](https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda) z RPP
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021```
+
+### Veřejný údaj ### {#třída-veřejný-údaj}
+: Popis
+:: Údaj přístupný veřejnosti
+
+### Neveřejný údaj ### {#třída-neveřejný-údaj}
+: Popis
+:: Údaj nepřístupný veřejnosti
+
+#### Ustanovení dokládající neveřejnost #### {#neveřejný-údaj-ustanovení-dokládající-neveřejnost}
+: Popis
+:: U neveřejného údaje je třeba odkázat na ustanovení, ze kterého jeho neveřejnost vyplývá.
+: Datový typ
+:: Datové \[URL](../../základní-datové-typy/2020-07-01/#url) ustanovení v e-sbírce
+: Povinnost
+:: Povinná
+: Příklad
+:: ```https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_4c/odst_2```
 
 Předpřipravená metadata {#předpřipravená-metadata}
 ==================================================
