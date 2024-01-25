@@ -23,6 +23,7 @@
                                 "not": {
                                     "oneOf": [
                                         {
+                                            "type": "object",
                                             "properties": {
                                                 "typ": {
                                                     "type": "array",
@@ -33,6 +34,7 @@
                                             }
                                         },
                                         {
+                                            "type": "object",
                                             "properties": {
                                                 "typ": {
                                                     "type": "array",
@@ -43,6 +45,7 @@
                                             }
                                         },
                                         {
+                                            "type": "object",
                                             "properties": {
                                                 "typ": {
                                                     "type": "array",
@@ -58,149 +61,49 @@
                             {
                                 "oneOf": [
                                     {
-                                        "allOf": [
-                                            {
-                                                "properties": {
-                                                    "typ": {
-                                                        "contains": {
-                                                            "const": "Třída"
-                                                        }
-                                                    },
-                                                    "nadřazená-třída": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "string",
-                                                            "format": "iri"
-                                                        }
-                                                    },
-                                                    "ekvivalentní-třída": {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "string",
-                                                            "format": "iri"
-                                                        }
-                                                    }
+                                        "type": "object",
+                                        "properties": {
+                                            "typ": {
+                                                "contains": {
+                                                    "const": "Třída"
                                                 }
                                             },
-                                            {
-                                                "oneOf": [
-                                                    {
-                                                        "not": {
-                                                            "oneOf": [
-                                                                {
-                                                                    "properties": {
-                                                                        "typ": {
-                                                                            "type": "array",
-                                                                            "contains": {
-                                                                                "const": "Typ vztahu"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "properties": {
-                                                                        "typ": {
-                                                                            "type": "array",
-                                                                            "contains": {
-                                                                                "const": "Typ role"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "properties": {
-                                                                        "typ": {
-                                                                            "type": "array",
-                                                                            "contains": {
-                                                                                "const": "Typ fáze"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "properties": {
-                                                                        "typ": {
-                                                                            "type": "array",
-                                                                            "contains": {
-                                                                                "const": "Typ činnosti"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                {
-                                                                    "properties": {
-                                                                        "typ": {
-                                                                            "type": "array",
-                                                                            "contains": {
-                                                                                "const": "Typ události"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                            ]
+                                            "nadřazená-třída": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string",
+                                                    "format": "iri"
+                                                }
+                                            },
+                                            "instance-definovány-číselníkem": {
+                                                "type": "object",
+                                                "required": [ "typ", "datová-sada-v-nkod", "iri-číselníku"],
+                                                "properties": {
+                                                    "typ": {
+                                                        "type": "array",
+                                                        "contains": {
+                                                            "const": "Číselník"
                                                         }
                                                     },
-                                                    {
-                                                        "oneOf": [
-                                                            {
-                                                                "properties": {
-                                                                    "typ": {
-                                                                        "contains": {
-                                                                            "const": "Typ vztahu"
-                                                                        }
-                                                                    },
-                                                                    "odvozený-vztah": {
-                                                                        "type": "array",
-                                                                        "items": {
-                                                                            "type": "string",
-                                                                            "format": "iri"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            {
-                                                                "properties": {
-                                                                    "typ": {
-                                                                        "contains": {
-                                                                            "const": "Typ události"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            {
-                                                                "properties": {
-                                                                    "typ": {
-                                                                        "contains": {
-                                                                            "const": "Typ fáze"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            {
-                                                                "properties": {
-                                                                    "typ": {
-                                                                        "contains": {
-                                                                            "const": "Typ role"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            },
-                                                            {
-                                                                "properties": {
-                                                                    "typ": {
-                                                                        "contains": {
-                                                                            "const": "Typ činnosti"
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        ]
+                                                    "datová-sada-v-nkod": {
+                                                        "type": "string",
+                                                        "format": "iri",
+                                                        "pattern": "^https\\:\/\/data\\.gov\\.cz\/zdroj\/datové-sady\/.*$"
+                                                    },
+                                                    "iri-číselníku": {
+                                                        "type": "string",
+                                                        "format": "iri"
                                                     }
-                                                ]                                                
+                                                }
                                             }
-                                        ]
+                                        }
                                     },
                                     {
+                                        "type": "object",
+                                        "required": [
+                                            "definiční-obor",
+                                            "obor-hodnot"
+                                        ],
                                         "properties": {
                                             "typ": {
                                                 "contains": {
@@ -225,6 +128,11 @@
                                         }
                                     },
                                     {
+                                        "type": "object",
+                                        "required": [
+                                            "definiční-obor",
+                                            "obor-hodnot"
+                                        ],
                                         "properties": {
                                             "typ": {
                                                 "contains": {
@@ -235,7 +143,7 @@
                                                 "type": "string",
                                                 "format": "iri"
                                             },
-                                            "datový-typ": {
+                                            "obor-hodnot": {
                                                 "type": "string",
                                                 "format": "iri"
                                             },

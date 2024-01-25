@@ -1,0 +1,85 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/slovníky/draft/schémata/rpp.json",
+    "name": "Anotace pro RPP",
+    "description": "Anotace pro RPP",
+    "allOf": [
+        {
+            "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/tezaurus.json"
+        },
+        {
+            "properties": {
+                "pojmy": {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "not": {
+                                    "oneOf": [
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "typ": {
+                                                    "type": "array",
+                                                    "contains": {
+                                                        "const": "Veřejný údaj"
+                                                    }
+                                                }
+                                            }            
+                                        },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "typ": {
+                                                    "type": "array",
+                                                    "contains": {
+                                                        "const": "Neveřejný údaj"
+                                                    }
+                                                }
+                                            }            
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "typ": {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Veřejný údaj"
+                                        }
+                                    }
+                                }            
+                            },
+                            {
+                                "type": "object",
+                                "required": ["ustanovení-dokládající-neveřejnost-údaje"],
+                                "properties": {
+                                    "typ": {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Neveřejný údaj"
+                                        }
+                                    },
+                                    "ustanovení-dokládající-neveřejnost-údaje": {
+                                        "type": "array",
+                                        "minItems": 1,
+                                        "items": {
+                                            "type": "string",
+                                            "format": "iri",
+                                            "pattern": "^https\\:\/\/opendata\\.eselpoint\\.cz\/esel-esb\/eli\/cz\/sb\/.*$",
+                                            "examples": [
+                                                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
+                                            ]
+                                        }        
+                                    }
+                                }            
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
