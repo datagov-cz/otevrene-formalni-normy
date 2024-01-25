@@ -947,6 +947,143 @@ Popis položek {#rpp-popis-položek}
 : Příklad
 :: ```https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_4c/odst_2```
 
+Příklady a schémata {#rpp-příklady}
+--------
+
+### JSON-LD ### {#rpp-příklady-json-ld}
+[Anotace pro RPP v JSON-LD](příklady/rpp.jsonld), [JSON Schema](schémata/rpp.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
+```json
+{
+    "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
+    "iri": "https://slovník.gov.cz/datový/turistické-cíle",
+    "typ": ["Slovník", "Tezaurus", "Konceptuální model"],
+    "název": {
+        "cs": "Slovník turistických cílů",
+        "en": "Vocabulary of tourist points of interest"
+    },
+    "popis": {
+        "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
+        "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
+    },
+    "pojmy": [
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "typ": ["Pojem", "Třída"],
+            "název": {
+                "cs": "Turistický cíl",
+                "en": "Tourist point of interest"
+            },
+            "definice": {
+                "cs": "Samostatný turistický cíl.",
+                "en": "Tourist point of interest"
+            },
+            "související-ustanovení-právního-předpisu": [
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q"
+            ],
+            "nadřazená-třída": [
+                "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo",
+                "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva"
+            ]
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+            "typ": ["Pojem", "Třída"],
+            "název": {
+                "cs": "Typ turistického cíle",
+                "en": "Type of the tourist point of interest"
+            },
+            "definice": {
+                "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
+            }
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
+            "typ": ["Pojem", "Vztah"],
+            "název": {
+                "cs": "má typ turistického cíle",
+                "en": "has type of tourist point of interest"
+            },
+            "definice": {
+                "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
+            },
+            "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+            "nadřazený-vztah": [
+                "https://slovník.gov.cz/datový/číselníky/pojem/má-přiřazenu-položku-číselníku"
+            ]
+        },
+        {
+            "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
+            "typ": ["Pojem", "Vlastnost"],
+            "název": {
+                "cs": "kouření povoleno",
+                "en": "smoking allowed"
+            },
+            "definice": {
+                "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
+            },
+            "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+            "datový-typ": "xsd:boolean"
+        }
+    ]
+}
+```
+
+### RDF Turtle ### {#rpp-příklady-rdf-turtle}
+[Anotace pro RPP v RDF Turtle](příklady/rpp.ttl)
+```turtle
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a skos:Concept,
+    owl:DatatypeProperty;
+  rdfs:domain <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl>;
+  rdfs:range xsd:boolean;
+  skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "kouření povoleno"@cs,
+    "smoking allowed"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept,
+    owl:ObjectProperty;
+  rdfs:domain <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl>;
+  rdfs:range <https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle>;
+  rdfs:subPropertyOf <https://slovník.gov.cz/datový/číselníky/pojem/položka-číselníku>;
+  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "má typ turistického cíle"@cs,
+    "has type of tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept,
+    owl:Class;
+  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Typ turistického cíle"@cs,
+    "Type of the tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept,
+    owl:Class;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
+  rdfs:subClassOf <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo>,
+    <https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva>;
+  skos:definition "Samostatný turistický cíl."@cs,
+    "Tourist point of interest"@en;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Turistický cíl"@cs,
+    "Tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme,
+    owl:Ontology;
+  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
+    "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
+  skos:prefLabel "Slovník turistických cílů"@cs,
+    "Vocabulary of tourist points of interest"@en .
+```
+
 Předpřipravená metadata {#předpřipravená-metadata}
 ==================================================
 Tato sekce obsahuje odkaz na [vzorový metadatový záznam datové sady](metadata/slovník.jsonld) použitelný pro [registraci datové sady](https://data.gov.cz/formulář/registrace-datové-sady) do [Národního katalogu otevřených dat](https://data.gov.cz).
