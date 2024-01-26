@@ -277,6 +277,12 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
             },
             "související-ustanovení-právního-předpisu": [
                 "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q"
+            ],
+            "nadřazený-pojem": [
+                "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo"
+            ],
+            "ekvivalentní-pojem": [
+                "https://schema.org/TouristAttraction"
             ]
         },
         {
@@ -296,6 +302,9 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
             "název": {
                 "cs": "má typ turistického cíle",
                 "en": "has type of tourist point of interest"
+            },
+            "popis": {
+                "cs": "vazba propojuje turistický cíl a jeho typ"
             },
             "definice": {
                 "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
@@ -335,14 +344,17 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
     "Tourist point of interest"@en;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
   skos:prefLabel "Turistický cíl"@cs,
-    "Tourist point of interest"@en .
+    "Tourist point of interest"@en ;
+  skos:broader <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo> ;
+  skos:exactMatch <https://schema.org/TouristAttraction> .
 
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept;
   skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
   skos:prefLabel "má typ turistického cíle"@cs,
-    "has type of tourist point of interest"@en .
-
+    "has type of tourist point of interest"@en ;
+  dcterms:description "vazba propojuje turistický cíl a jeho typ"@cs .
+  
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept;
   skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
@@ -370,7 +382,7 @@ Popis položek {#konceptuální-model-popis-položek}
 : Popis
 :: Konceptuální model je rozšířením [tezauru](#třída-tezaurus) o specifikaci, které pojmy definují [třídy](#třída-konceptuální-model-třída), [vlastnosti](#třída-konceptuální-model-vlastnost) a [vztahy](#třída-konceptuální-model-vztah), včetně jejich souvislostí.
     Pro vlastnosti obsahuje definici jejich datových typů.
-    Zavádí také dvě konkrétní třídy důležité pro veřejnou správu, a to Subjekt práva a Objekt práva.
+    Umožňuje definovat, který číselník je použit pro instance konkrétní třídy.
 
 ### Třída ### {#třída-konceptuální-model-třída}
 : Popis
@@ -506,12 +518,20 @@ Popis položek {#konceptuální-model-popis-položek}
 :: ```https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu```
 
 
+<p class="issue">
+Co by měly být ty typy? Typy z xsd a rdf:langString pro text? Tedy IRI?
+</p>
+
 Příklady a schémata {#konceptuální-model-příklady}
 --------
 Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle` obsahující pojmy.
 Dále každému pojmu přiděluje jeho typ z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost.
 V závislosti na typu pojmu je pak daný pojem dále popsán.
 U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vztahu](#vazba-konceptuální-model-vztah-nadřazený-vztah).
+
+<p class="issue">
+Přidat číselník (typ turistického cíle)
+</p>
 
 ### JSON-LD ### {#konceptuální-model-příklady-json-ld}
 [Konceptuální model v JSON-LD](příklady/konceptuální-model.jsonld), [JSON Schema](schémata/konceptuální-model.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
