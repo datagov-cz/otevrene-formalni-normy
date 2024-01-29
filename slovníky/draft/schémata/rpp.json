@@ -12,22 +12,35 @@
                 "pojmy": {
                     "type": "array",
                     "items": {
-                        "oneOf": [
+                        "allOf": [
                             {
-                                "not": {
-                                    "oneOf": [
-                                        {
-                                            "type": "object",
-                                            "properties": {
-                                                "typ": {
-                                                    "type": "array",
-                                                    "contains": {
-                                                        "const": "Veřejný údaj"
-                                                    }
-                                                }
-                                            }            
-                                        },
-                                        {
+                                "type": "object",
+                                "properties": {
+                                    "je-sdílen-v-ppdf": {
+                                        "type": "boolean"
+                                    },
+                                    "agendový-informační-systém": {
+                                        "type": "string",
+                                        "format": "iri",
+                                        "pattern": "^https\\://rpp-opendata\\.egon\\.gov\\.cz/odrpp/zdroj/isvs/.*$",
+                                        "examples": [
+                                            "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456"
+                                        ]
+                                    },
+                                    "agenda": {
+                                        "type": "string",
+                                        "format": "iri",
+                                        "pattern": "^https\\://rpp-opendata\\.egon\\.gov\\.cz/odrpp/zdroj/agenda/.*$",
+                                        "examples": [
+                                            "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021"
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                "oneOf": [
+                                    {
+                                        "not": {
                                             "type": "object",
                                             "properties": {
                                                 "typ": {
@@ -36,45 +49,34 @@
                                                         "const": "Neveřejný údaj"
                                                     }
                                                 }
-                                            }            
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "typ": {
-                                        "type": "array",
-                                        "contains": {
-                                            "const": "Veřejný údaj"
-                                        }
-                                    }
-                                }            
-                            },
-                            {
-                                "type": "object",
-                                "required": ["ustanovení-dokládající-neveřejnost-údaje"],
-                                "properties": {
-                                    "typ": {
-                                        "type": "array",
-                                        "contains": {
-                                            "const": "Neveřejný údaj"
+                                            }
                                         }
                                     },
-                                    "ustanovení-dokládající-neveřejnost-údaje": {
-                                        "type": "array",
-                                        "minItems": 1,
-                                        "items": {
-                                            "type": "string",
-                                            "format": "iri",
-                                            "pattern": "^https\\:\/\/opendata\\.eselpoint\\.cz\/esel-esb\/eli\/cz\/sb\/.*$",
-                                            "examples": [
-                                                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
-                                            ]
-                                        }        
-                                    }
-                                }            
+                                    {
+                                        "type": "object",
+                                        "required": ["ustanovení-dokládající-neveřejnost-údaje"],
+                                        "properties": {
+                                            "typ": {
+                                                "type": "array",
+                                                "contains": {
+                                                    "const": "Neveřejný údaj"
+                                                }
+                                            },
+                                            "ustanovení-dokládající-neveřejnost-údaje": {
+                                                "type": "array",
+                                                "minItems": 1,
+                                                "items": {
+                                                    "type": "string",
+                                                    "format": "iri",
+                                                    "pattern": "^https\\:\/\/opendata\\.eselpoint\\.cz\/esel-esb\/eli\/cz\/sb\/.*$",
+                                                    "examples": [
+                                                        "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
+                                                    ]
+                                                }        
+                                            }
+                                        }            
+                                    }                
+                                ]
                             }
                         ]
                     }

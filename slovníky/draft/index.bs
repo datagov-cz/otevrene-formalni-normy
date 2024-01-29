@@ -678,27 +678,23 @@ Popis položek {#rozšíření-popis-položek}
 
 ### Typ subjektu práva ### {#třída-rozšíření-typ-subjektu-práva}
 : Popis
-:: 
+:: Typ jehož instance jsou podtřídami Subjektu práva.
 : Příklad
 :: `Řidič silničního vozidla`
 
 ### Typ objektu práva ### {#třída-rozšíření-typ-objektu-práva}
 : Popis
-:: 
+:: Typ jehož instance jsou podtřídami Objektu práva.
 : Příklad
 :: `Silniční vozidlo`
 
 
 Příklady a schémata {#rozšíření-příklady}
 -----------------------------------------
-<p class="issue">
-Tady už turistické cíle nestačí - resp. mohly by, kdybychom chtěli a nějak je uměle rozšířili.
-Zatim používám příklad C2V11 - on je taky napůl fejkový
-</p>
 
 Příkladem je slovník _Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb._ s IRI `https://slovník.gov.cz/legislativní/sbírka/56/2001`.
 Tak jako v základním modelu obsahuje pojmy a jejich typy z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost a v závislosti na typu pojmu je pak daný pojem dále popsán.
-Navíc však u tříd specifikujeme jejich další druh.
+Navíc však u tříd specifikujeme, zda se jedná o Typ subjektu práva nebo Typ objektu práva.
 
 ### JSON-LD ### {#rozšíření-příklady-json-ld}
 [Rozšíření v JSON-LD](příklady/rozšíření.jsonld), [JSON Schema](schémata/rozšíření.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
@@ -986,7 +982,7 @@ Příklady a schémata {#rpp-příklady}
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
-            "typ": ["Pojem", "Třída", "Typ subjektu práva"],
+            "typ": ["Pojem", "Třída", "Typ subjektu práva", "Neveřejný údaj"],
             "název": {
                 "cs": "Vlastník vozidla",
                 "en": "Vehicle owner"
@@ -995,6 +991,12 @@ Příklady a schémata {#rpp-příklady}
                 "cs": "Vlastník vozidla"
             },
             "související-ustanovení-právního-předpisu": [
+                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+            ],
+            "je-sdílen-v-ppdf": true,
+            "agendový-informační-systém": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456",
+            "agenda": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021",
+            "ustanovení-dokládající-neveřejnost-údaje": [
                 "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
             ]
         },
@@ -1011,7 +1013,10 @@ Příklady a schémata {#rpp-příklady}
                 "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
             ],
             "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
-            "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"
+            "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
+            "je-sdílen-v-ppdf": true,
+            "agendový-informační-systém": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456",
+            "agenda": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021"
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
@@ -1042,7 +1047,10 @@ Příklady a schémata {#rpp-příklady}
             "obor-hodnot": "xsd:string",
             "ustanovení-dokládající-neveřejnost-údaje": [
                 "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
-            ]
+            ],
+            "je-sdílen-v-ppdf": true,
+            "agendový-informační-systém": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456",
+            "agenda": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021"
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
@@ -1137,12 +1145,15 @@ Příklady a schémata {#rpp-příklady}
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla> a skos:Concept,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-subjektu-práva>;
+    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-subjektu-práva>,
+    <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/neveřejný-údaj>;
   dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   skos:definition "Vlastník vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastník vozidla"@cs,
-    "Vehicle owner"@en .
+    "Vehicle owner"@en;
+  <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/je-vymezen-ustanovení-stanovujícím-jeho-neveřejnost> <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a> .
+
 ```
 
 Předpřipravená metadata {#předpřipravená-metadata}
