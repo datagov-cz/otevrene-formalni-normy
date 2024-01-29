@@ -701,7 +701,7 @@ Tak jako v základním modelu obsahuje pojmy a jejich typy z hlediska modelu, tj
 Navíc však u tříd specifikujeme jejich další druh.
 
 ### JSON-LD ### {#rozšíření-příklady-json-ld}
-[Ontologie v JSON-LD](příklady/rozšíření.jsonld), [JSON Schema](schémata/rozšíření.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
+[Rozšíření v JSON-LD](příklady/rozšíření.jsonld), [JSON Schema](schémata/rozšíření.json), [JSON-LD kontext](kontexty/slovníky.jsonld)
 ```json
 {
     "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
@@ -716,7 +716,7 @@ Navíc však u tříd specifikujeme jejich další druh.
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
-            "typ": ["Pojem", "Třída"],
+            "typ": ["Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Silniční vozidlo",
                 "en": "Road vehicle"
@@ -733,7 +733,7 @@ Navíc však u tříd specifikujeme jejich další druh.
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
-            "typ": ["Pojem", "Třída", "Typ role"],
+            "typ": ["Pojem", "Třída", "Typ subjektu práva"],
             "název": {
                 "cs": "Vlastník vozidla",
                 "en": "Vehicle owner"
@@ -762,7 +762,7 @@ Navíc však u tříd specifikujeme jejich další druh.
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
-            "typ": ["Pojem", "Třída", "Typ vztahu"],
+            "typ": ["Pojem", "Třída"],
             "název": {
                 "cs": "Vlastnictví vozidla"
             },
@@ -778,7 +778,7 @@ Navíc však u tříd specifikujeme jejich další druh.
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
-            "typ": ["Pojem", "Vlastnost"],
+            "typ": ["Pojem", "Vlastnost", "Typ objektu práva"],
             "název": {
                 "cs": "registrační značka"
             },
@@ -786,11 +786,11 @@ Navíc však u tříd specifikujeme jejich další druh.
                 "cs": "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."
             },
             "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou",
-            "datový-typ": "xsd:string"
+            "obor-hodnot": "xsd:string"
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
-            "typ": ["Pojem", "Třída", "Typ události"],
+            "typ": ["Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Havárie silničního vozidla"
             },
@@ -800,22 +800,12 @@ Navíc však u tříd specifikujeme jejich další druh.
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Typ fáze"],
+            "typ": ["Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Zničené silniční vozidlo"
             },
             "definice": {
                 "cs": "Zničené silniční vozidlo"
-            }
-        },
-        {
-            "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vyřazování-silničního-vozidla-z-provozu",
-            "typ": ["Pojem", "Třída", "Typ činnosti"],
-            "název": {
-                "cs": "Vyřazování silničního vozidla z provozu"
-            },
-            "definice": {
-                "cs": "Vyřazování silničního vozidla z provozu"
             }
         }
     ]
@@ -823,27 +813,30 @@ Navíc však u tříd specifikujeme jejich další druh.
 ```
 
 ### RDF Turtle ### {#rozšíření-příklady-rdf-turtle}
-[Ontologie v RDF Turtle](příklady/rozšíření.ttl)
+[Rozšíření v RDF Turtle](příklady/rozšíření.ttl)
 ```turtle
 @prefix dc: <http://purl.org/dc/terms/> .
-@prefix gufo: <http://purl.org/nemo/gufo#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+<https://slovník.gov.cz/legislativní/sbírka/56/2001> a skos:ConceptScheme,
+    owl:Ontology;
+  dc:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
+  skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
+
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla> a skos:Concept,
     owl:Class,
-    <https://slovník.gov.cz/základní/pojem/událost>;
+    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
   skos:definition "Havárie silničního vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Havárie silničního vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla> a skos:Concept,
     owl:ObjectProperty;
-  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
-  gufo:isDerivedFrom <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla>;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo>;
   rdfs:range <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla>;
   skos:definition "má vlastníka vozidla"@cs;
@@ -851,29 +844,31 @@ Navíc však u tříd specifikujeme jejich další druh.
   skos:prefLabel "má vlastníka vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka> a skos:Concept,
-    owl:DatatypeProperty;
+    owl:DatatypeProperty,
+    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou>;
   rdfs:range xsd:string;
   skos:definition "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "registrační značka"@cs .
 
-<https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vyřazování-silničního-vozidla-z-provozu> a skos:Concept,
-    owl:Class,
-    <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/činnost>;
-  skos:definition "Vyřazování silničního vozidla z provozu"@cs;
+<https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla> a skos:Concept,
+    owl:Class;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
+  skos:definition "Vlastnictví vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
-  skos:prefLabel "Vyřazování silničního vozidla z provozu"@cs .
+  skos:prefLabel "Vlastnictví vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo> a skos:Concept,
     owl:Class,
-    <https://slovník.gov.cz/základní/pojem/fáze>;
+    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
   skos:definition "Zničené silniční vozidlo"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Zničené silniční vozidlo"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo> a skos:Concept,
-    owl:Class;
+    owl:Class,
+    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
   dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1>;
   rdfs:subClassOf <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo>;
   skos:definition "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."@cs;
@@ -881,27 +876,14 @@ Navíc však u tříd specifikujeme jejich další druh.
   skos:prefLabel "Silniční vozidlo"@cs,
     "Road vehicle"@en .
 
-<https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla> a skos:Concept,
-    owl:Class,
-    <https://slovník.gov.cz/základní/pojem/vztah>;
-  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
-  skos:definition "Vlastnictví vozidla"@cs;
-  skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
-  skos:prefLabel "Vlastnictví vozidla"@cs .
-
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla> a skos:Concept,
     owl:Class,
-    <https://slovník.gov.cz/základní/pojem/role>;
-  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
+    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-subjektu-práva>;
+  dc:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   skos:definition "Vlastník vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastník vozidla"@cs,
     "Vehicle owner"@en .
-
-<https://slovník.gov.cz/legislativní/sbírka/56/2001> a skos:ConceptScheme,
-    owl:Ontology;
-  dc:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
-  skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
 ```
 
 Anotace pro registr práv a povinností {#rpp}
