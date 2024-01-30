@@ -471,6 +471,10 @@ Popis položek {#konceptuální-model-popis-položek}
 :: [Datový typ](#třída-konceptuální-model-datový-typ)
 : Povinnost
 :: Povinná
+: Příklady
+:: ```Datum a čas```
+:: ```Celé číslo```
+:: ```Text```
 
 #### Vazba: Nadřazená vlastnost #### {#vazba-konceptuální-model-vlastnost-nadřazená-vlastnost}
 : Popis
@@ -488,39 +492,28 @@ Popis položek {#konceptuální-model-popis-položek}
 : Popis
 :: Datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.
     Jejich přehled spolu s užitím v jednotlivých datových formátech je v [OFN Základní datové typy](../../základní-datové-typy/2020-07-01/).
+    Datové typy jsou identifikovány jejich IRI.
 : Příklady instancí, tj. konkrétních datových typů
-:: ```Datum a čas```
-:: ```Celé číslo```
-:: ```Text```
+:: ```Datum a čas - xsd:dateTimeStamp```
+:: ```Celé číslo - xsd:integer```
+:: ```Text - rdf:langString```
 
 ### Čísleník ### {#třída-konceptuální-model-číselník}
 : Popis
-:: Číselník
-
-#### Datová sada v NKOD #### {#číselník-datová-sada-v-nkod}
-: Popis
-:: Datová sada v NKOD reprezentující číselník
-: Povinnost
-:: Povinná
-: Datový typ
-:: \[URL](../../základní-datové-typy/2020-07-01/#url) datové sady v NKOD
-: Příklad
-:: ```https://data.gov.cz/zdroj/datové-sady/17651921/7cad2125445156d8be24d77b5bb063af```
-
-#### IRI číselníku #### {#číselník-iri-číselníku}
-: Popis
-:: IRI číselníku dle OFN Číselníky
-: Povinnost
-:: Povinná
-: Datový typ
-:: \[URL](../../základní-datové-typy/2020-07-01/#url) číselníku
+:: Číselník. Jeho identifikátorem (IRI) je IRI číselníku dle [OFN Číselníky](../../číselníky/2022-02-08/#model-třída-číselník).
 : Příklad
 :: ```https://data.mvcr.gov.cz/zdroj/číselníky/dny-v-týdnu```
 
-
-<p class="issue">
-Co by měly být ty typy? Typy z xsd a rdf:langString pro text? Tedy IRI?
-</p>
+#### Datová sada v NKOD #### {#číselník-datová-sada-v-nkod}
+: Popis
+:: Zastřešující datová sada v NKOD reprezentující číselník.
+    Je to datová série, jejímiž prvky jsou datové sady reprezentující jednotlivé verze číselníku.
+: Povinnost
+:: Povinná
+: Datový typ
+:: \[URL](../../základní-datové-typy/2020-07-01/#url) zastřešující datové sady v NKOD
+: Příklad
+:: ```https://data.gov.cz/zdroj/datové-sady/17651921/7cad2125445156d8be24d77b5bb063af```
 
 Příklady a schémata {#konceptuální-model-příklady}
 --------
@@ -530,7 +523,7 @@ V závislosti na typu pojmu je pak daný pojem dále popsán.
 U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vztahu](#vazba-konceptuální-model-vztah-nadřazený-vztah).
 
 <p class="issue">
-Přidat číselník (typ turistického cíle)
+Číselník typ turistického cíle uplně nesplňuje to že má zastřešující datovou sadu a pak verze...
 </p>
 
 ### JSON-LD ### {#konceptuální-model-příklady-json-ld}
@@ -577,6 +570,11 @@ Přidat číselník (typ turistického cíle)
             },
             "definice": {
                 "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
+            },
+            "instance-definovány-číselníkem": {
+                "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů",
+                "typ": "Číselník",
+                "datová-sada-v-nkod": "https://data.gov.cz/zdroj/datové-sady/17651921/ff931872553062c9890157ce8615af03"
             }
         },
         {
@@ -606,7 +604,7 @@ Přidat číselník (typ turistického cíle)
                 "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
             },
             "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
-            "datový-typ": "xsd:boolean"
+            "obor-hodnot": "xsd:boolean"
         }
     ]
 }
@@ -908,9 +906,19 @@ Popis položek {#rpp-popis-položek}
 : Příklad
 :: ```true```
 
-#### Agendový informační systém #### {#pojem-agendový-informační-systém}
+<p class="issue">
+MaNe: Do description bychom ale měli vysvětlit, co to znamená, když někdo označí celou třídu jako sdílenou přes PPDF. To znamená, že se sdílí všechny vztahy a vlastnosti, které mají třídu jako domain asi? A může si pak pro třídu označenou jako sdílenou označit konkrétní vlastnost jako nesdílenou (tj. nastavit false?)
+</p>
+
+### Typ subjektu práva ### {#třída-rpp-typ-subjektu-práva}
 : Popis
-:: Agendový informační systém (AIS), pro který jsou údaje subjektu/objektu práva "Agendově vlastní", tj. nepřebírané.
+:: Typ jehož instance jsou podtřídami Subjektu práva.
+: Příklad
+:: `Řidič silničního vozidla`
+
+#### Agendový informační systém #### {#rpp-typ-subjektu-práva-agendový-informační-systém}
+: Popis
+:: Agendový informační systém (AIS), pro který jsou údaje subjektu práva "Agendově vlastní", tj. nepřebírané.
 : Datový typ
 :: \[IRI](../../základní-datové-typy/2020-07-01/#url) [Informačního systému veřejné správy](https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/informační-systém-veřejné-správy) z RPP
 : Povinnost
@@ -918,9 +926,35 @@ Popis položek {#rpp-popis-položek}
 : Příklad
 :: ```https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456```
 
-#### Agenda #### {#pojem-agenda}
+#### Agenda #### {#rpp-typ-subjektu-práva-agenda}
 : Popis
-:: Agenda, do které subjekt/objekt (resp. jeho údaje) patří (je agendový vlastní, tj. nepřebíraný).
+:: Agenda, do které subjekt (resp. jeho údaje) patří (je agendový vlastní, tj. nepřebíraný).
+: Datový typ
+:: \[IRI](../../základní-datové-typy/2020-07-01/#url) [Agendy](https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda) z RPP
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021```
+
+### Typ objektu práva ### {#třída-rpp-typ-objektu-práva}
+: Popis
+:: Typ jehož instance jsou podtřídami Objektu práva.
+: Příklad
+:: `Silniční vozidlo`
+
+#### Agendový informační systém #### {#rpp-typ-objektu-práva-agendový-informační-systém}
+: Popis
+:: Agendový informační systém (AIS), pro který jsou údaje objektu práva "Agendově vlastní", tj. nepřebírané.
+: Datový typ
+:: \[IRI](../../základní-datové-typy/2020-07-01/#url) [Informačního systému veřejné správy](https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/informační-systém-veřejné-správy) z RPP
+: Povinnost
+:: Nepovinná
+: Příklad
+:: ```https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456```
+
+#### Agenda #### {#rpp-typ-objektu-práva-agenda}
+: Popis
+:: Agenda, do které objekt (resp. jeho údaje) patří (je agendový vlastní, tj. nepřebíraný).
 : Datový typ
 :: \[IRI](../../základní-datové-typy/2020-07-01/#url) [Agendy](https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda) z RPP
 : Povinnost
