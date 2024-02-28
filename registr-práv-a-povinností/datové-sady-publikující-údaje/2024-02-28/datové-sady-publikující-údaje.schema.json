@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Veřejný údaj",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "datové-sady"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^údaj/[0-9]+-[0-9]+-[0-9]+$",
+            "examples": [
+              "údaj/1046-13-28",
+              "údaj/115-1-30"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "údaj"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "údaj"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "datové-sady": {
+            "title": "je publikován v datové sadě",
+            "description": "Veřejné údaje jsou publikovány v jednotlivých datových sadách jako otevřená data.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "examples": [
+                "https://data.gov.cz/zdroj/datové-sady/00007064/9c73b802263c5e0ccf5542f10fbc35bb"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
