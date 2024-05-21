@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs">
     <head>
-        <title>Rozhraní katalogů otevřených dat: DCAT-AP-CZ</title>
+        <title>DCAT-AP-CZ: Specifikace pro vyhlášku č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</title>
         <meta content="text/html; charset=utf-8" http-equiv="content-type" />
         <meta content="width=device-width,initial-scale=1" name="viewport" />
         <meta name="theme-color" content="#057fa5">
@@ -25,12 +25,10 @@
         <script class="remove">
             var respecConfig = {
                 specStatus: "ED",
-                shortName: "rozhraní-katalogů-otevřených-dat",               
+                shortName: "dcat-ap-cz-360-2023",               
                 showPreviousVersion: true,
-                prevRecURI: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2021-01-11/",
-                prevVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/2021-01-11/",
-                thisVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/draft/",
-                latestVersion: "https://ofn.gov.cz/rozhraní-katalogů-otevřených-dat/",
+                thisVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/",
+                latestVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/",
                 editors: [{
                   name: "Jakub Klímek",
                   orcid: "0000-0001-7234-3051",
@@ -56,10 +54,10 @@
         <section id="abstract" class="introductory">
             <h2>Abstrakt</h2>
             <p>
-                Cílem tohoto dokumentu je specifikovat rozhraní lokálních katalogů otevřených dat (LKOD) pro jejich harvestování Národním katalogem otevřených dat (NKOD).
-                Stejná specifikace platí i pro datový model NKOD a data poskytovaná z NKOD v podobě souborů ke stažení či SPARQL endpointu.
+                Cílem tohoto dokumentu je poskytnout specifikaci pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>, který říká:
+                <cite>Údaje vedené v informačním systému jsou poskytovány podle otevřené formální normy pro rozhraní katalogů otevřených dat, kterou zveřejňuje Digitální a informační agentura způsobem umožňujícím dálkový přístup.</cite>
                 Nejprve je specifikován datový model katalogizačního záznamu.
-                Poté jsou specifikovány 2 varianty rozhraní pro harvestaci, které jsou založeny na standardu <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/">DCAT-AP 3.0.0</a>, jedna využívá SPARQL endpoint a jedna specifikuje variantu uložení záznamů v souborech, bez použití SPARQL endpointu.
+                Poté jsou specifikovány 2 varianty rozhraní pro harvestaci, jedna využívá SPARQL endpoint a jedna specifikuje variantu uložení záznamů v souborech, bez použití SPARQL endpointu.
             </p>
             
         </section>
@@ -67,74 +65,38 @@
         <section id="úvod">
             <h2>Úvod</h2>
             <p>
-                Provozování lokálního katalogu otevřených dat (LKOD) je <a href="https://opendata.gov.cz/cinnost:rozhodnuti-o-zpusobu-katalogizace-dat">jedním ze způsobů zajištění katalogizace dat v Národním katalogu otevřených dat (NKOD)</a>.
-                Pro otevřená data je registrace v NKOD jedna ze <a href="https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_4c/odst_1">zákonných podmínek pro to, aby data mohla být nazývána otevřenými daty</a>.
-                Tento způsob katalogizace je vhodný pro střední a větší organizace, u kterých se dá předpokládat katalogizace většího množství datových sad či častější aktualizace jejich metadat.
+                
             </p>
-            
-            <figure id="diagram"><img alt="Diagram datového modelu rozhraní katalogů otevřených dat" src="obrázky/rozhraní-katalogů-otevřených-dat.svg">
+
+            <figure id="diagram"><img alt="Diagram datového modelu pro naplnění § 24 odst. 2 vyhlášky č. 360/2023 Sb." src="obrázky/dcat-ap-cz-360-2023.svg">
                 <figcaption>
-                    <a href="https://drive.google.com/file/d/1x-TTPRMhPP68SQqgwP0mNsOt219aafrM">Diagram datového modelu rozhraní katalogů otevřených dat</a>.
+                    <a href="https://drive.google.com/file/d/1x_ODpQMe2RtlaZj2Q5tzutM-s786GbxW">Diagram datového modelu pro naplnění § 24 odst. 2 vyhlášky č. 360/2023 Sb.</a>.
                     Šedě podbarvené části jsou specifikovány číselníky.
-                    Červeně jsou zvýrazněny změny v aktuální verzi OFN.
                 </figcaption>
             </figure>
-
+            
         </section>
 
-
-        <section id="co-je-nového">
-            <h2>Co je nového</h2>
-            <p>
-                Oproti <a href="../2021-01-11">doporučení ze 11.1.2021</a> jsou v této OFN následující změny:
-            </p>
-            <ol>
-                <li>
-                    Úprava verze nadřazeného standardu z <a href="https://joinup.ec.europa.eu/collection/semantic-interoperability-community-semic/solution/dcat-application-profile-data-portals-europe/release/201-0">DCAT-AP 2.0.1</a> na <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/">DCAT-AP 3.0.0</a>
-                    <ol>
-                        <li>Změna predikátu <a href="#položky-datová-sada-je-součástí">vazby <em>je součástí</em></a> pro indikaci členství v datové sérii z <code>dct:partOf</code> na <code>dcat:inSeries</code></li>
-                        <li>Explicitní zavedení typu <a href="#třída-datová-série">datové série</a> a přidání JSON schématu pro datovou sérii</li>
-                        <li>Přidání podpory pro <a href="#položky-datová-sada-příslušný-právní-předpis">indikaci právního předpisu</a>, na základě kterého datová sada vznikla.</li>
-                        <li>Prolinkování specifikace na DCAT-AP 3.0.0 místo DCAT 2</li>
-                        <li>Povinnost uvádět <a href="#položky-distribuce-přístupové-url">přístupové URL</a> na distribuci datové sady</li>        
-                    </ol>
-                </li>
-                <li>
-                    Přidání podpory pro katalogizaci <a href="#hvds">datových sad s vysokou socio-ekonomickou hodnotou</a>, tzv. High Value Datasets (HVDs).
-                    <ol>
-                        <li>Přidání povinnosti indikace právního předpisu <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code> pro označení datové sady s vysokou socio-ekonomickou hodnotou (HVDs)
-                        </li>
-                        <li>
-                            Přidání povinnosti <a href="#hvds-položky-datová-sada-kategorie-hvd">indikace kategorie HVD</a> pro datové sady s vysokou socio-ekonomickou hodnotou (HVDs) a datové služby, které je zpřístupňují.
-                        </li>
-                        <li>
-                            Přidání povinnosti specifikovat <a href="#hvds-položky-datová-služba-kontaktní-bod">kontaktní bod</a> a <a href="#hvds-položky-datová-služba-dokumentace">dokumentaci</a> datové služby zpřístupňující HVDs.
-                        </li>
-                        <li>
-                            Prolinkování specifikace na <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/">DCAT-AP High Value Datasets</a>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-
-        </section>
 
         <section id="položky-metadatového-záznamu">
             <h2>Položky metadatového záznamu</h2>
             
             <p>
-                V této sekci jsou popsány položky, které mohou být evidované v Národním katalogu otevřených dat (NKOD) pro každou datovou sadu a její distribuci.
-                Položky se řídí standardem <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/">DCAT Application Profile for data portals in Europe Version 3.0.0 (DCAT-AP 3.0.0)</a>.
+                V této sekci jsou popsány položky metadatového záznamu relevantní pro naplnění § 24 odst. 2 vyhlášky č. 360/2023 Sb., které vychází ze základní <a href="../../dcat-ap-cz/">OFN DCAT-AP-CZ</a>.
                 Jedná se o standard založený na propojených datech, předpokládá se tedy znalost <a href="../../propojená-data/">Otevřené formální normy Propojená data</a>.
             </p>
             
             <p>
-                DCAT-AP 3.0.0 rozlišuje tři základní typy entit.
-                Datovou sadu, její distribuci a datovou službu.
+                DCAT-AP 3.0.0 rozlišuje čtyři základní typy entit.
+                Datovou sadu, její distribuci, datovou službu a datovou sérii.
                 Metadata datové sady ji popisují bez ohledu na konkrétní reprezentaci jejích dat.
                 Ta je popsána jako distribuce datové sady, která reprezentuje buď soubor ke stažení, nebo odkazuje na datovou službu, přes kterou jsou data k dispozici.
                 Distribucí může mít datová sada více, lišit se ale mohou pouze formátem souboru ke stažení (např. CSV či JSON) či způsobem zpřístupnění (soubor ke stažení či datová služba).
                 Obsahově by distribuce měly být ekvivalentní.
+                Datová série pak reprezentuje skupinu datových sad.
+                Jednotlivé datové sady v sérii se mohou lišit například geograficky, např. datové sady za jednotlivé obce, nebo časově, např. datové sady za jednotlivé roky.
+                Datovou sérii však mohou tvořit například i datové sady z jednoho informačního systému.
+                Datové série nemají vlastní distribuce.
             </p>
             
             <section id="slovníky-prefixy">
@@ -312,7 +274,7 @@
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <a href="../../registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/#organ-verejne-moci">OVM z Registru práv a povinností (RPP)</a>.
+                            Pro OVM je to <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <a href="../../registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/#organ-verejne-moci">OVM z Registru práv a povinností (RPP)</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -343,7 +305,7 @@
                         </dt>
                         <dd>
                             Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.
-                            Odpovídá vlastnosti <a href="https://w3c.github.io/dxwg/dcat/#Property:resource_contact_point">dcat:contactPoint</a>.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.contactpoint">dcat:contactPoint</a>.
                         </dd>
                         <dt>
                             Vlastnost
@@ -1217,7 +1179,7 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Tato vlastnost odkazuje na datovou sérii, jejíž je tato datová sada součástí.
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DatasetmemberofaDatasetSeries.inseries">dcat:inSeries</a>.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.inseries">dcat:inSeries</a>.
                         </dd>
                         <dt>
                             Vlastnost
@@ -1229,7 +1191,7 @@ kontakt: a vcard:Individual ;
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> entity typu <a href="třída-datová-série">Datové série</a>.
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> entity typu <a href="#třída-datová-série">Datové série</a>.
                         </dd>
                         <dt>
                             Povinnost
@@ -1368,49 +1330,6 @@ podmínky: a pu:Specifikace ;
                                         
                 </section>
 
-                <section id="položky-distribuce-url-stažení">
-                    <h4>Odkaz na stažení souboru</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Odkaz na stažení souboru
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost obsahuje URL, které je přímým odkazem na stažitelný soubor v daném formátu.
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.downloadURL">dcat:downloadURL</a>. 
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>soubor_ke_stažení</code>, <code>dcat:downloadURL</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            URL souboru ke stažení.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná pro soubor ke stažení
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:downloadURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
-                        </dd>
-                    </dl>
-                </section>
-
                 <section id="položky-distribuce-přístupové-url">
                     <h4>Přístupové URL</h4>
                     <dl>
@@ -1451,93 +1370,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             <code>distribuce: dcat:accessURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
-                        </dd>
-                    </dl>
-                </section>
-                
-                <section id="položky-distribuce-formát">
-                    <h4>Formát souboru ke stažení</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Formát souboru ke stažení
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost odkazuje na typ souboru s distribucí.
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.format">dct:format</a>.
-                            Dle DCAT-AP 3.0.0 jsou hodnoty z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>formát</code>, <code>dct:format</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            IRI položky z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná pro soubor ke stažení
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; .</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="položky-distribuce-media-type">
-                    <h4>Media type souboru ke stažení</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Media type souboru ke stažení
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost odkazuje na typ média distribuce tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.mediatype">dcat:mediaType</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>typ_média</code>, <code>dcat:mediaType</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná pro soubor ke stažení
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1587,6 +1419,211 @@ podmínky: a pu:Specifikace ;
                                 <li>Pro označení dynamických dat: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6</code></li>
                                 <li>Pro označení dat z veřejných registrů dle § 5a odst. 1 zákona č. 106/1999 Sb.: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1</code></li>
                             </ul>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-název">
+                    <h4>Název distribuce datové sady</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název distribuce datové sady
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název distribuce.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.title">dct:title</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>, <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Text
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení v CSV."@cs, "CSV representation of inspections in the area of social security."@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-distribuce-soubor">
+                <h3>Třída: Distribuce - Soubor ke stažení</h3>
+
+                <p>
+                    Jedná se o variantu třídy <a href="#třída-distribuce">Distribuce</a> pro reprezentaci souboru ke stažení.
+                    Následující položky se používají navíc k těm společným pro všechny distribuce.
+                </p>
+
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Distribuce datové sady - Soubor ke stažení
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Fyzická podoba datové sady v konkrétním formátu.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>distribuce: a dcat:Distribution.</code>
+                    </dd>
+                </dl>
+
+                <section id="položky-distribuce-url-stažení">
+                    <h4>Odkaz na stažení souboru</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na stažení souboru
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL, které je přímým odkazem na stažitelný soubor v daném formátu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.downloadURL">dcat:downloadURL</a>. 
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>soubor_ke_stažení</code>, <code>dcat:downloadURL</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL souboru ke stažení.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:downloadURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-formát">
+                    <h4>Formát souboru ke stažení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Formát souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na typ souboru s distribucí.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.format">dct:format</a>.
+                            Dle DCAT-AP 3.0.0 jsou hodnoty z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>formát</code>, <code>dct:format</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI položky z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-media-type">
+                    <h4>Media type souboru ke stažení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Media type souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na typ média distribuce tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.mediatype">dcat:mediaType</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ_média</code>, <code>dcat:mediaType</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1722,51 +1759,40 @@ podmínky: a pu:Specifikace ;
                     </dl>
                 </section>
 
-                <section id="položky-distribuce-název">
-                    <h4>Název distribuce datové sady</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Název distribuce datové sady
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost obsahuje název distribuce.
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.title">dct:title</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>název</code>, <code>dct:title</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            Text
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení v CSV."@cs, "CSV representation of inspections in the area of social security."@en .</code>
-                        </dd>
-                    </dl>
-                </section>
+            </section>
+            
+            <section id="třída-distribuce-služba">
+                <h3>Třída: Distribuce - Datová služba</h3>
+
+                <p>
+                    Jedná se o variantu třídy <a href="#třída-distribuce">Distribuce</a> pro reprezentaci distribuce pomocí datové služby.
+                    Následující položky se používají navíc k těm společným pro všechny distribuce.
+                </p>
+
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Distribuce datové sady
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Fyzická podoba datové sady jako konkrétní datová služba.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>distribuce: a dcat:Distribution.</code>
+                    </dd>
+                </dl>
 
                 <section id="položky-distribuce-přístupová-služba">
-                    <h4>Vazba: přístupová služba</h4>
+                    <h4>Vazba: Přístupová služba</h4>
                     <dl>
                         <dt>
                             Jméno
@@ -1797,7 +1823,7 @@ podmínky: a pu:Specifikace ;
                             Povinnost
                         </dt>
                         <dd>
-                            Povinná pro datovou službu
+                            Povinná
                         </dd>
                         <dt>
                             Příklad
@@ -1808,8 +1834,8 @@ podmínky: a pu:Specifikace ;
                     </dl>
                 </section>
 
-            </section>          
-            
+            </section>
+
             <section id="třída-datová-služba">
                 <h3>Třída: Datová služba</h3>
                 
@@ -1985,7 +2011,7 @@ podmínky: a pu:Specifikace ;
                             Tato vlastnost odkazuje na specifikaci, jíž se datová služba řídí.
                             Takovou specifikací je například <a href="https://www.w3.org/TR/sparql11-protocol/">SPARQL</a>.
                             Seznam možných hodnot lze nalézt například v <a href="https://github.com/OSGeo/Cat-Interop/blob/master/LinkPropertyLookupTable.csv">seznamu udržovaném Open Source Geospatial Foundation</a>.
-                            Odpovídá vlastnosti <a href="https://www.w3.org/TR/vocab-dcat-2/#Property:resource_conforms_to">dct:conformsTo</a>.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService.conformsto">dct:conformsTo</a>.
                         </dd>
                         <dt>
                             Vlastnost
@@ -2138,424 +2164,6 @@ podmínky: a pu:Specifikace ;
 
         </section>
 
-        <section id="hvds">
-            <h2>Datové sady s vysokou socio-ekonomickou hodnotou (HVDs)</h2>
-
-            <p>
-                Tato sekce popisuje další položky a povinnosti, které se týkají pouze datových sad s vysokou socio-ekonomickou hodnotou, tzv. High Value Datasets (HVDs).
-                Toto rozšíření je založeno na evropském standardu <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/">DCAT-AP High Value Datasets</a> a zavádí položky nutné pro soulad s <a href="https://eur-lex.europa.eu/eli/reg_impl/2023/138/oj?locale=cs#">prováděcím nařízením HVD</a>.
-            </p>
-
-            <p class="note">
-                Součástí požadavků prováděcího nařízení HVD jsou i kvalitativní požadavky na metadatové záznamy.
-                Ty zahrnují mj. perzistenci použitých identifikátorů (IRI) datových sad, datových služeb, podmínek užití, koncových bodů služeb.
-                Detailní informace viz <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#mapping-the-hvd-ir-to-dcat-ap">sekce 10 v DCAT-AP HVD</a>, zejména pak <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#c2">sekce 10.4</a>.
-            </p>
-
-            <figure id="diagram"><img alt="Diagram rozšíření datového modelu pro datové sady s vysokou soci-ekonomickou hodnotou (HVDs)" src="obrázky/hvds.svg">
-                <figcaption>
-                    <a href="https://drive.google.com/file/d/1x-TTPRMhPP68SQqgwP0mNsOt219aafrM">Diagram rozšíření datového modelu pro datové sady s vysokou soci-ekonomickou hodnotou (HVDs)</a>.
-                    Šedě podbarvené části jsou specifikovány číselníky.
-                    Červeně jsou zvýrazněny změny v aktuální verzi OFN.
-                </figcaption>
-            </figure>
-
-            <section id="hvds-třída-datová-sada">
-                <h3>Třída: Datová sada HVD</h3>
-                
-                <dl>
-                    <dt>
-                        Jméno
-                    </dt>
-                    <dd>
-                        Datová sada
-                    </dd>
-                    <dt>
-                        Popis
-                    </dt>
-                    <dd>
-                        Datová sada s vysokou socio-ekonomickou hodnotou (HVD).
-                    </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>sada: a dcat:Dataset .</code>
-                    </dd>
-                </dl>
-
-                <section id="hvds-položky-datová-sada-příslušný-právní-předpis">
-                    <h4>Příslušný právní předpis</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Příslušný právní předpis
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost se používá pro indikaci, že jde o datovou sadu s vysokou socio-ekonomickou hodnotou (HVD).
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            Konstantní <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code>
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná.
-                        </dd>
-                    </dl>
-                </section>
-                
-                <section id="hvds-položky-datová-sada-kategorie-hvd">
-                    <h4>Kategorie HVD</h4>
-                    <p class="note">
-                        V červnu 2024 rozšíří Publications Office použitý číselník o všechna témata datových sad uvedených v <a href="https://eur-lex.europa.eu/eli/reg_impl/2023/138/oj?locale=cs#">prováděcím nařízení HVD</a>.
-                        Nyní jsou k dispozici IRI pouze nejvyšších 6 kategorií.
-                        Je třeba ale počítat s použitím detailních témat.
-                        <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2F17651921%2F2da0fa8c9f57dd9ca2eef3ab868ba6f7">Číselník témat HVD</a> je k dispozici, ovšem pouze pro ilustraci granularity, jelikož povinnost bude používat IRI z rozšířeného evropského číselníku.
-                    </p>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Kategorie HVD
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost se používá pro indikaci kategorií datové sady s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#Dataset.HVDCategory">dcatap:hvdCategory</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>kategorie_hvd</code>, <code>dcatap:hvdCategory</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> položek z evropského číselníku 
-                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/high-value-dataset-category">kategorií HVD</a>.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>http://data.europa.eu/bna/c_164e0bf5</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="hvds-položky-datová-sada-distribuce">
-                    <h4>Vazba: Distribuce datové sady HVD</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Distribuce datové sady
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>distribuce</code>, <code>dcat:distribution</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="#hvds-třída-distribuce">Distribuce datové sady HVD</a>.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná.
-                            Datová sada HVDs musí obsahovat alespoň jednu distribuci splňující povinné položky HVD.
-                            Může však obsahovat i jiné distribuce.
-                        </dd>
-                    </dl>
-                </section>
-
-            </section>
-
-            <section id="hvds-třída-distribuce">
-                <h3>Třída: Distribuce datové sady HVD</h3>
-
-                <section id="hvds-položky-distribuce-příslušný-právní-předpis">
-                    <h4>Příslušný právní předpis</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Příslušný právní předpis
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost se používá pro indikaci, že jde o distribuci datové sady s vysokou socio-ekonomickou hodnotou (HVD).
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            Konstantní <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code>
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná
-                        </dd>
-                    </dl>
-                </section>
-
-            </section>          
-            
-            <section id="hvds-třída-datová-služba">
-                <h3>Třída: Datová služba</h3>
-                
-                <dl>
-                    <dt>
-                        Jméno
-                    </dt>
-                    <dd>
-                        Datová služba
-                    </dd>
-                    <dt>
-                        Popis
-                    </dt>
-                    <dd>
-                        Třída reprezentující datovou službu zpřístupňující data datové sady HVD.
-                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService">dcat:DataService</a>.
-                    </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>služba: a dcat:DataService .</code>
-                    </dd>
-                </dl>
-                
-                <section id="hvds-položky-datová-služba-příslušný-právní-předpis">
-                    <h4>Příslušný právní předpis</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Příslušný právní předpis
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost se používá pro indikaci, že se jedná o datovou službu zpřístupňující datovou sadu s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            Konstantní <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code>
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="hvds-položky-datová-služba-kategorie-hvd">
-                    <h4>Kategorie HVD</h4>
-                    <p class="note">
-                        V červnu 2024 rozšíří Publications Office použitý číselník o všechna témata datových sad uvedených v <a href="https://eur-lex.europa.eu/eli/reg_impl/2023/138/oj?locale=cs#">prováděcím nařízení HVD</a>.
-                        Nyní jsou k dispozici IRI pouze nejvyšších 6 kategorií.
-                        Je třeba ale počítat s použitím detailních témat.
-                        <a href="https://data.gov.cz/datová-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatové-sady%2F17651921%2F2da0fa8c9f57dd9ca2eef3ab868ba6f7">Číselník témat HVD</a> je k dispozici, ovšem pouze pro ilustraci granularity, jelikož povinnost bude používat IRI z rozšířeného evropského číselníku.
-                    </p>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Kategorie HVD
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost se používá pro indikaci kategorií datové služby s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#DataService.HVDcategory">dcatap:hvdCategory</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>kategorie_hvd</code>, <code>dcatap:hvdCategory</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> položek z evropského číselníku 
-                            <a href="https://op.europa.eu/cs/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/high-value-dataset-category">kategorií HVD</a>.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná pro datové služby poskytující datové sady s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>http://data.europa.eu/bna/c_164e0bf5</code>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="hvds-položky-datová-služba-kontaktní-bod">
-                    <h4>Kontaktní bod - jméno a email</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Kontaktní bod - jméno a email
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek k datové službě.
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#DataService.contactpoint">dcat:contactPoint</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            Entita podtypu <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná pro datové služby zpřístupňující datové sady s vysokou socio-ekonomickou hodnotou (high-value dataset - HVD).
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <pre class="turtle">služba: dcat:contactPoint správce: .
-
-    správce: a vcard:Individual ;
-        vcard:fn "Jan Novák"@cs ;
-        vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
-                        </dd>
-                    </dl>
-                </section>
-
-                <section id="hvds-položky-datová-služba-dokumentace">
-                    <h4>Odkaz na dokumentaci</h4>
-                    <dl>
-                        <dt>
-                            Jméno
-                        </dt>
-                        <dd>
-                            Odkaz na dokumentaci
-                        </dd>
-                        <dt>
-                            Popis
-                        </dt>
-                        <dd>
-                            Tato vlastnost odkazuje na dokumentaci kvality služby zpřístupňující datovou sadu HVD.
-                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#DataService.documentation">foaf:page</a>.
-                        </dd>
-                        <dt>
-                            Vlastnost
-                        </dt>
-                        <dd>
-                            <code>dokumentace</code>, <code>foaf:page</code>
-                        </dd>
-                        <dt>
-                            Typ
-                        </dt>
-                        <dd>
-                            URL dokumentace.
-                        </dd>
-                        <dt>
-                            Povinnost
-                        </dt>
-                        <dd>
-                            Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>služba: foaf:page &lt;https://www.data.cz/služba/dokumentace&gt; .</code>
-                        </dd>
-                    </dl>
-                </section>
-
-            </section>
-        
-        </section>
-            
         <section id="rozhraní-lkod">
             <h2>Rozhraní lokálních katalogů</h2>
 
@@ -2569,13 +2177,12 @@ podmínky: a pu:Specifikace ;
                 <p>
                     Tato varianta rozhraní je určena pro instituce, které nechtějí nebo nemohou provozovat pro účely harvestace metadat o datových sadách do NKOD SPARQL endpoint.
                     Počítá se serializací metadat o datových sadách do statických souborů umístěných na web.
-                    Jako indexový soubor pak poslouží soubor obsahující instanci třídy <code>dcat:Catalog</code>, která pomocí vlastnosti <code>dcat:dataset</code> ukazuje na URL jednotlivých datových sad.
-                    Při přístupu na tato URL datových sad NKOD předpokládá, že v odpovědi dostane kompletní katalogizační záznam pro danou datovou sadu, včetně jejích distribucí a datových služeb.
+                    Jako indexový soubor pak poslouží soubor obsahující instanci třídy <code>dcat:Catalog</code>, která pomocí vlastnosti <code>dcat:dataset</code> ukazuje na URL jednotlivých datových sad a datových sérií.
+                    Při přístupu na tato URL datových sad NKOD předpokládá, že v odpovědi dostane kompletní katalogizační záznam pro danou datovou sadu či sérii, včetně jejích distribucí a datových služeb.
                 </p>
 
                 <p>
-                    Datové sady, distribuce a datové služby musí být identifikovány svými IRI, nesmí se jednat o <a href="https://www.w3.org/TR/rdf11-concepts/#section-blank-nodes">RDF blank nody</a>.
-                    Příklady obsahují odkazy na JSON schémata, která lze použít pro validaci příslušných souborů.
+                    Datové sady, datové série, distribuce a datové služby musí být identifikovány svými IRI, nesmí se jednat o <a href="https://www.w3.org/TR/rdf11-concepts/#section-blank-nodes">RDF blank nody</a>.
                 </p>
 
                 <p>
