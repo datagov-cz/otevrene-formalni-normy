@@ -1,0 +1,46 @@
+@startuml
+set namespaceSeparator none
+class "Dokument převodu agend" {
+  "Má identifikátor dokumentu převodu agend": string
+  "Má datum uzavření dokumentu převodu agend": date
+  "Má datum ukončení dokumentu převodu agend": date
+  "Je uzavřen na dobu neurčitou": boolean
+  "Má přílohu": url
+}
+
+class "Rozhodnutí o založení dokumentu převodu agend" {
+}
+
+class "Rozhodnutí" {
+  "číslo jednací rozhodnutí": string
+  "datum vydání rozhodnutí": date
+}
+
+class "Rozhodnutí o schválení předání působnosti" {
+}
+
+class "Orgán veřejné moci" {
+}
+
+class "Typ rozhodnutí o založení dokumentu převodu agend" {
+}
+
+class "Typ rozhodnutí o schválení předání působnosti" {
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+"Rozhodnutí" <|-- "Rozhodnutí o založení dokumentu převodu agend"
+"Rozhodnutí" <|-- "Rozhodnutí o schválení předání působnosti"
+"Dokument převodu agend" -- "0..1" "Rozhodnutí o založení dokumentu převodu agend" :  "Má rozhodnutí o předání působnosti"
+"Dokument převodu agend" -- "0..1" "Rozhodnutí o založení dokumentu převodu agend" :  "Má rozhodnutí o převzetí působnosti"
+"Dokument převodu agend" -- "0..1" "Rozhodnutí o schválení předání působnosti" :  "Má rozhodnutí o schválení předání působnosti"
+"Dokument převodu agend" -- "0..1" "Orgán veřejné moci" :  "Schvaluje předání působnosti"
+"Dokument převodu agend" -- "0..1" "Orgán veřejné moci" :  "Přebírá působnost"
+"Dokument převodu agend" -- "0..1" "Orgán veřejné moci" :  "Převádí působnost"
+"Dokument převodu agend" -- "Ustanovení právního předpisu" :  "má zmocnění pro vytvoření"
+"Dokument převodu agend" -- "Ustanovení právního předpisu" :  "vymezuje rámec rozsahu převodu výkonu agendy"
+"Rozhodnutí o založení dokumentu převodu agend" -- "0..1" "Typ rozhodnutí o založení dokumentu převodu agend" :  "Má typ rozhodnutí o založení dokumentu převodu agend"
+"Rozhodnutí o schválení předání působnosti" -- "0..1" "Typ rozhodnutí o schválení předání působnosti" :  "Má typ rozhodnutí o schválení předání působnosti"
+@enduml

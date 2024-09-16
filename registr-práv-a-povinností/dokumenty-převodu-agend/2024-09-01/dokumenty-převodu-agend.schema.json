@@ -1,0 +1,447 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/dokumenty-převodu-agend/2024-09-01/dokumenty-převodu-agend.schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Dokument převodu agend",
+        "description": "Dokument převodu agend, který zakládá předání působnosti mezi dvěma orgány veřejné moci.",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "identifikátor"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^dokument-převodu-agend/.+$",
+            "examples": [
+              "dokument-převodu-agend/RPA544"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "dokument-převodu-agend"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "dokument-převodu-agend"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "identifikátor": {
+            "title": "Má identifikátor dokumentu převodu agend",
+            "description": "Jednoznačný identifikátor dokumentu převodu agend.",
+            "type": "string",
+            "examples": [
+              "RPA544"
+            ]
+          },
+          "uzavření": {
+            "title": "Má datum uzavření dokumentu převodu agend",
+            "description": "Datum, ke kterému byl dokumentu převodu agend uzavřen a odkdy je platný.",
+            "type": "string",
+            "format": "date"
+          },
+          "ukončení": {
+            "title": "Má datum ukončení dokumentu převodu agend",
+            "description": "Datum, ke kterému bude nebo byl dokument převodu agend ukončen a do kdy je platný.",
+            "type": "string",
+            "format": "date"
+          },
+          "na-dobu-neurčitou": {
+            "title": "Je uzavřen na dobu neurčitou",
+            "description": "Určuje, zda je dokument převodu agend uzavřen na dobu neurčitou.",
+            "type": "boolean"
+          },
+          "rozhodnutí-o-předání": {
+            "title": "Má rozhodnutí o předání působnosti",
+            "description": "Rozhodnutí převádějícího orgánu veřejné moci o předání působnosti. Toto rozhodnutí je pro daný dokument převodu agend vždy právě jedno.",
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "číslo-jednací"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^rozhodnutí/.+$",
+                "examples": [
+                  "rozhodnutí/2/2018-2022"
+                ]
+              },
+              "type": {
+                "oneOf": [
+                  {
+                    "const": "rozhodnutí-založení"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "rozhodnutí-založení"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "číslo-jednací": {
+                "title": "číslo jednací rozhodnutí",
+                "description": "Číslo jednací (zkracováno č. j., čj.) je jednoznačný identifikátor dokumentu. Konkrétní konstruování čj. bylo historicky a i dnes je napříč různými úřady značně odlišné. Současná česká legislativa pro spisovou službu požaduje, aby bylo v čj. uvedeno označení původce (i zkratkou), pořadové číslo dokumentu a období, ke kterému se pořadové číslo vztahuje, jinak ponechává volnost. Odlišná je situace u soudů, kde tvorba čj. vychází ze spisové značky.",
+                "type": "string",
+                "examples": [
+                  "2/2018-2022"
+                ]
+              },
+              "typ-rozhodnutí-založení": {
+                "title": "Má typ rozhodnutí o založení dokumentu převodu agend",
+                "description": "Určuje typ rozhodnutí o založení veřejnoprávní smlouvy z číselníku typů rozhodnutí o založení veřejnoprávní smlouvy.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^typ-rozhodnutí-založení/[A-Z_]+$",
+                "examples": [
+                  "typ-rozhodnutí-založení/RADA"
+                ]
+              },
+              "datum": {
+                "title": "datum vydání rozhodnutí",
+                "description": "Vydáním rozhodnutí se rozumí\n* a) předání stejnopisu písemného vyhotovení rozhodnutí k doručení podle § 19, popřípadě jiný úkon k jeho doručení, provádí-li je správní orgán sám; na písemnosti nebo poštovní zásilce se tato skutečnost vyznačí slovy: „Vypraveno dne:“,\n* b) ústní vyhlášení, pokud má účinky oznámení (§ 72 odst. 1),\n* c) vyvěšení veřejné vyhlášky, je-li doručováno podle § 25,\n* d) poznamenání usnesení do spisu v případě, že se pouze poznamenává do spisu, nebo\n* e) odeslání stejnopisu písemného vyhotovení rozhodnutí do datové schránky kontaktního místa veřejné správy k postupu podle § 19 odst. 3; na písemnosti se tato skutečnost vyznačí slovy: „Vypraveno dne:“.\n\nObsahem atributu je datum, kdy k vydání rozhodnutí došlo.",
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "rozhodnutí-o-převzetí": {
+            "title": "Má rozhodnutí o převzetí působnosti",
+            "description": "Rozhodnutí přebírajícího orgánu veřejné moci o převzetí působnosti. Toto rozhodnutí je pro daný dokument převodu agend vždy právě jeden.",
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "číslo-jednací"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^rozhodnutí/.+$",
+                "examples": [
+                  "rozhodnutí/2/2018-2022"
+                ]
+              },
+              "type": {
+                "oneOf": [
+                  {
+                    "const": "rozhodnutí-založení"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "rozhodnutí-založení"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "číslo-jednací": {
+                "title": "číslo jednací rozhodnutí",
+                "description": "Číslo jednací (zkracováno č. j., čj.) je jednoznačný identifikátor dokumentu. Konkrétní konstruování čj. bylo historicky a i dnes je napříč různými úřady značně odlišné. Současná česká legislativa pro spisovou službu požaduje, aby bylo v čj. uvedeno označení původce (i zkratkou), pořadové číslo dokumentu a období, ke kterému se pořadové číslo vztahuje, jinak ponechává volnost. Odlišná je situace u soudů, kde tvorba čj. vychází ze spisové značky.",
+                "type": "string",
+                "examples": [
+                  "2/2018-2022"
+                ]
+              },
+              "typ-rozhodnutí-založení": {
+                "title": "Má typ rozhodnutí o založení dokumentu převodu agend",
+                "description": "Určuje typ rozhodnutí o založení veřejnoprávní smlouvy z číselníku typů rozhodnutí o založení veřejnoprávní smlouvy.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^typ-rozhodnutí-založení/[A-Z_]+$",
+                "examples": [
+                  "typ-rozhodnutí-založení/RADA"
+                ]
+              },
+              "datum": {
+                "title": "datum vydání rozhodnutí",
+                "description": "Vydáním rozhodnutí se rozumí\n* a) předání stejnopisu písemného vyhotovení rozhodnutí k doručení podle § 19, popřípadě jiný úkon k jeho doručení, provádí-li je správní orgán sám; na písemnosti nebo poštovní zásilce se tato skutečnost vyznačí slovy: „Vypraveno dne:“,\n* b) ústní vyhlášení, pokud má účinky oznámení (§ 72 odst. 1),\n* c) vyvěšení veřejné vyhlášky, je-li doručováno podle § 25,\n* d) poznamenání usnesení do spisu v případě, že se pouze poznamenává do spisu, nebo\n* e) odeslání stejnopisu písemného vyhotovení rozhodnutí do datové schránky kontaktního místa veřejné správy k postupu podle § 19 odst. 3; na písemnosti se tato skutečnost vyznačí slovy: „Vypraveno dne:“.\n\nObsahem atributu je datum, kdy k vydání rozhodnutí došlo.",
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "rozhodnutí-o-schválení": {
+            "title": "Má rozhodnutí o schválení předání působnosti",
+            "description": "Rozhodnutí orgánu veřejné moci schvalujícícho předání působností o schválení předání působnosti mezi dvěma orgány veřejné moci na základě uzavřené veřejnoprávní smlouvy. Toto rozhodnutí je pro daný dokumentu převodu agend vždy právě jedno.",
+            "type": "object",
+            "required": [
+              "id",
+              "type",
+              "číslo-jednací"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^rozhodnutí/.*",
+                "examples": [
+                  "rozhodnutí/čj.B1234567"
+                ]
+              },
+              "type": {
+                "oneOf": [
+                  {
+                    "const": "rozhodnutí-schválení"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "rozhodnutí-schválení"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "číslo-jednací": {
+                "title": "číslo jednací rozhodnutí",
+                "description": "Číslo jednací (zkracováno č. j., čj.) je jednoznačný identifikátor dokumentu. Konkrétní konstruování čj. bylo historicky a i dnes je napříč různými úřady značně odlišné. Současná česká legislativa pro spisovou službu požaduje, aby bylo v čj. uvedeno označení původce (i zkratkou), pořadové číslo dokumentu a období, ke kterému se pořadové číslo vztahuje, jinak ponechává volnost. Odlišná je situace u soudů, kde tvorba čj. vychází ze spisové značky.",
+                "type": "string",
+                "examples": [
+                  "2/2018-2022"
+                ]
+              },
+              "typ-rozhodnutí-schválení": {
+                "title": "Má typ rozhodnutí o schválení předání působnosti",
+                "description": "Určuje typ rozhodnutí o schválení předání působnosti z číselníku typů rozhodnutí o schválení předání působnosti.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^typ-rozhodnutí-schválení/[A-Z_]+$",
+                "examples": [
+                  "typ-rozhodnutí-schválení/MV"
+                ]
+              }
+            }
+          },
+          "schvaluje": {
+            "title": "Schvaluje předání působnosti",
+            "description": "Určuje orgán veřejné moci, který schvaluje předání působnosti mezi převádějícím a přebírajícím orgánem veřejné moci na základě dokumentu převodu agend k předání působnosti.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^orgán-veřejné-moci/[0-9]+$",
+            "examples": [
+              "orgán-veřejné-moci/70889546"
+            ]
+          },
+          "přebírá": {
+            "title": "Přebírá působnost",
+            "description": "Určuje orgán veřejné moci, který přebírá některé působnosti převádějícího orgánu veřejné moci na základě dokumentu převodu agend k předání působnosti.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^orgán-veřejné-moci/[0-9]+$",
+            "examples": [
+              "orgán-veřejné-moci/70889546"
+            ]
+          },
+          "převádí": {
+            "title": "Převádí působnost",
+            "description": "Určuje orgán veřejné moci, který převádí některé své působnosti na přebírající orgán veřejné moci na základě dokumentu převodu agend k předání působnosti.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^orgán-veřejné-moci/[0-9]+$",
+            "examples": [
+              "orgán-veřejné-moci/70889546"
+            ]
+          },
+          "zmocnění-pro-vytvoření-esbírka": {
+            "title": "má zmocnění pro vytvoření",
+            "description": "Vazba na ustanovení právního předpisu, které stanovuje zmocnění uskutečnit převod výkonu agendy (působnosti).",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^/eli/(.*\\/)+.*",
+              "examples": [
+                "/eli/cz/sb/1988/62/2002-06-04/dokument/norma/cast_2/hlava_1/dil_1/oddil_1/par_3/odst_3"
+              ]
+            }
+          },
+          "zmocnění-pro-vytvoření-ostatní": {
+            "title": "má zmocnění pro vytvoření",
+            "description": "Vazba na ustanovení právního předpisu, které stanovuje zmocnění uskutečnit převod výkonu agendy (působnosti).",
+            "type": "array",
+            "items": {
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např. jeho paragraf, odstavec nebo písmeno.",
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "ustanovení-právního-předpisu-ostatní"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "ustanovení-právního-předpisu-ostatní"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "článek": {
+                  "title": "Má článek ustanovení",
+                  "type": "string"
+                },
+                "paragraf": {
+                  "title": "Má paragraf ustanovení",
+                  "description": "Označení paragrafu ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "odstavec": {
+                  "title": "Má odstavec ustanovení",
+                  "description": "Označení odstavce ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "písmeno": {
+                  "title": "Má písmeno ustanovení",
+                  "description": "Označení písmene ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "číslo": {
+                  "title": "Má číslo právního předpisu",
+                  "description": "Číslo právního předpisu v rámci jeho roku vydání uvedeně ve Sbírce zákonů České republiky.",
+                  "type": "string"
+                },
+                "rok": {
+                  "title": "Má rok právního předpisu",
+                  "description": "Rok vydání právního předpisu ve Sbírce zákonů České republiky.\"@cs",
+                  "type": "string",
+                  "pattern": "[0-9]{4}"
+                },
+                "účinnost-znění": {
+                  "title": "Má účinnost znění právního předpisu",
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "vymezuje-rámec-rozsahu-esbírka": {
+            "title": "vymezuje rámec rozsahu převodu výkonu agendy",
+            "description": "Vazba na ustanovení právního předpisu, které stanovuje, jaký výkon agendy (působnost) je převedena.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^/eli/(.*\\/)+.*",
+              "examples": [
+                "/eli/cz/sb/1988/62/2002-06-04/dokument/norma/cast_2/hlava_1/dil_1/oddil_1/par_3/odst_3"
+              ]
+            }
+          },
+          "vymezuje-rámec-rozsahu-ostatní": {
+            "title": "vymezuje rámec rozsahu převodu výkonu agendy",
+            "description": "Vazba na ustanovení právního předpisu, které stanovuje, jaký výkon agendy (působnost) je převedena.",
+            "type": "array",
+            "items": {
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např. jeho paragraf, odstavec nebo písmeno.",
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "ustanovení-právního-předpisu-ostatní"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "ustanovení-právního-předpisu-ostatní"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "článek": {
+                  "title": "Má článek ustanovení",
+                  "type": "string"
+                },
+                "paragraf": {
+                  "title": "Má paragraf ustanovení",
+                  "description": "Označení paragrafu ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "odstavec": {
+                  "title": "Má odstavec ustanovení",
+                  "description": "Označení odstavce ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "písmeno": {
+                  "title": "Má písmeno ustanovení",
+                  "description": "Označení písmene ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "číslo": {
+                  "title": "Má číslo právního předpisu",
+                  "description": "Číslo právního předpisu v rámci jeho roku vydání uvedeně ve Sbírce zákonů České republiky.",
+                  "type": "string"
+                },
+                "rok": {
+                  "title": "Má rok právního předpisu",
+                  "description": "Rok vydání právního předpisu ve Sbírce zákonů České republiky.\"@cs",
+                  "type": "string",
+                  "pattern": "[0-9]{4}"
+                },
+                "účinnost-znění": {
+                  "title": "Má účinnost znění právního předpisu",
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "příloha": {
+            "title": "Má přílohu",
+            "description": "Odkaz na URL, kde je možné přílohu nebo přílohy vymezující převod stáhnout.",
+            "type": "array",
+            "items": {
+              "title": "URI, IRI, URL",
+              "type": "string",
+              "format": "iri",
+              "pattern": "^http.*"
+            }
+          }
+        }
+      }
+    }
+  }
+}
