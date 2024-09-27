@@ -1,0 +1,116 @@
+@startuml
+set namespaceSeparator none
+class "Dokument vytvořený elektronickým formulářem" {
+  "doručit osvědčení do datové schránky": boolean
+  "služba v přenesené působnosti": string
+}
+
+class "Elektronický dokument" {
+  "počet příloh": integer
+}
+
+class "Informační systém veřejné správy" {
+  "Má identifikátor ISVS": string
+  "název ISVS": text
+}
+
+class "Způsob povedení digitálního úkonu" {
+}
+
+class "Položka číselníku" {
+  "kód položky číselníku": string
+  "plný název položky číselníku": text
+}
+
+class "Elektronický formulář" {
+  verze: string
+  "má identifikátor formuláře": string
+  "název formuláře": text
+}
+
+class Dokument {
+  "k rukám": string
+  "stručný obsah dokumentu": text
+}
+
+class "Zastoupení" {
+  "identifikátor oprávnění k zastupování": string
+}
+
+class "Příloha" {
+  "název přílohy": text
+  "obsah přílohy": http://www.w3.org/2001/XMLSchema#base64Binary
+}
+
+class "Jednoznačný identifikátor" {
+  "řetězcová podoba jednoznačného identifikátoru": string
+}
+
+class Dokument {
+}
+
+class "Dokument veřejnoprávního původce" {
+  "číslo jednací": string
+}
+
+class "Jednoznačný identifikátor" {
+}
+
+class Spis {
+  "spisová značka": string
+}
+
+class "Evidenční číslo ze samostatné evidence dokumentů" {
+  "řetězcová podoba evidenčního čísla": string
+}
+
+class "Fyzická osoba jako osoba ve vztahu k dokumentu" {
+}
+
+class "Osoba ve vztahu k dokumentu" {
+}
+
+class "Digitální úkon" {
+}
+
+class "Úkon služby veřejné správy" {
+  "Má identifikátor úkonu služby": string
+  "Má název úkonu služby": text
+}
+
+class "Služba veřejné správy" {
+  "Má identifikátor služby": string
+  "Má název služby": text
+}
+
+class Agenda {
+  "Má kód agendy": string
+  "Má název agendy": text
+}
+
+"Elektronický dokument" <|-- "Dokument vytvořený elektronickým formulářem"
+Dokument <|-- "Elektronický dokument"
+"Položka číselníku" <|-- "Způsob povedení digitálního úkonu"
+Dokument <|-- Dokument
+Dokument <|-- "Dokument veřejnoprávního původce"
+"Jednoznačný identifikátor" <|-- "Jednoznačný identifikátor"
+"Úkon služby veřejné správy" <|-- "Digitální úkon"
+"Dokument vytvořený elektronickým formulářem" -- "1..1" "Informační systém veřejné správy" :  "byl vyplněn v isvs"
+"Dokument vytvořený elektronickým formulářem" -- "1..1" "Způsob povedení digitálního úkonu" :  "má způsob provedení digitálního úkonu"
+"Dokument vytvořený elektronickým formulářem" -- "0..1" "Elektronický formulář" :  "byl vytvořen formulářem"
+"Dokument vytvořený elektronickým formulářem" -- "1..1" "Osoba ve vztahu k dokumentu" :  "uživatel služby"
+"Elektronický dokument" -- "0..1" "Zastoupení" :  "použité zastoupení"
+"Elektronický dokument" -- "Příloha" :  "obsahuje přílohu"
+"Elektronický dokument" -- "1..1" "Osoba ve vztahu k dokumentu" :  "odesílatel"
+"Elektronický dokument" -- "1..1" "Osoba ve vztahu k dokumentu" :  "příjemce"
+"Elektronický formulář" -- "1..1" "Digitální úkon" :  "umožňuje činit úkon"
+"Elektronický formulář" -- "1..1" "Služba veřejné správy" :  "umožňuje činit úkon služby"
+"Elektronický formulář" -- "1..1" Agenda :  "umožňuje činit úkon služby agendy"
+Dokument -- "0..1" Dokument :  "je odpovědí na dokument"
+Dokument -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
+"Zastoupení" -- "1..1" "Fyzická osoba jako osoba ve vztahu k dokumentu" :  "opravňuje zastupovat"
+"Zastoupení" -- "1..1" "Osoba ve vztahu k dokumentu" :  "opravňuje být zastoupen"
+"Dokument veřejnoprávního původce" -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
+"Dokument veřejnoprávního původce" -- "0..1" Spis :  "je zařazen do spisu"
+"Dokument veřejnoprávního původce" -- "0..1" "Evidenční číslo ze samostatné evidence dokumentů" :  "má evidenční číslo ze samostatné evidence dokumentů"
+@enduml
