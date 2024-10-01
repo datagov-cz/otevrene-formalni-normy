@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="https://ofn.gov.cz/jmenný-prostor/podání/osoby" xmlns:osoby="https://ofn.gov.cz/jmenný-prostor/podání/osoby" xmlns:místa="https://ofn.gov.cz/jmenný-prostor/podání/místa" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
-  <xs:import namespace="https://ofn.gov.cz/jmenný-prostor/podání/místa" schemaLocation="https://pod-test.dia.gov.cz/otevřené-formální-normy/dokumenty-z-formulářů-ZoPDS/draft/společné-specifikace/místo/schema.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby" xmlns:osoby="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby" xmlns:místa="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
+  <xs:import namespace="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa" schemaLocation="../místa/místo.xsd"/>
   <xs:complexType name="podnikající_fyzická_osoba_zapsaná_v_or" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/podnikající-fyzická-osoba-zapsaná-v-obchodním-rejstříku-jako-osoba-ve-vztahu-k-dokumentu">
     <xs:annotation>
       <xs:documentation>Význam: https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/podnikající-fyzická-osoba-zapsaná-v-obchodním-rejstříku-jako-osoba-ve-vztahu-k-dokumentu
 Název (cs): Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="obchodní_firma" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/obchodní-firma">
+      <xs:element name="obchodní_firma" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/obchodní-firma">
         <xs:annotation>
           <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/obchodní-firma
 Název (cs): obchodní firma</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="ičo" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby">
+      <xs:element name="ičo" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby">
         <xs:annotation>
           <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby
 Název (cs): identifikační číslo osoby
 Popis (cs): Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.</xs:documentation>
         </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}"/>
+          </xs:restriction>
+        </xs:simpleType>
       </xs:element>
       <xs:sequence minOccurs="0">
         <xs:element name="datová_schránka" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikátor-datové-schránky">
@@ -29,7 +34,7 @@ Popis (cs): Jednoznačný identifikátor datové schránky.</xs:documentation>
           </xs:annotation>
         </xs:element>
       </xs:sequence>
-      <xs:sequence minOccurs="0">
+      <xs:sequence>
         <xs:element name="trvalé_bydliště" type="místa:místo" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-bydliště">
           <xs:annotation>
             <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-bydliště
@@ -45,5 +50,9 @@ Název (cs): doručovací místo</xs:documentation>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="podnikající_fyzická_osoba_zapsaná_v_or" type="osoby:podnikající_fyzická_osoba_zapsaná_v_or"/>
+  <xs:complexType name="pfo_z_or">
+    <xs:choice>
+      <xs:element name="podnikající_fyzická_osoba_zapsaná_v_or" type="osoby:podnikající_fyzická_osoba_zapsaná_v_or"/>
+    </xs:choice>
+  </xs:complexType>
 </xs:schema>

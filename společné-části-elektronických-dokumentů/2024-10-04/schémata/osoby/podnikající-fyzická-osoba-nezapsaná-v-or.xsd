@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="https://ofn.gov.cz/jmenný-prostor/podání/osoby" xmlns:osoby="https://ofn.gov.cz/jmenný-prostor/podání/osoby" xmlns:místa="https://ofn.gov.cz/jmenný-prostor/podání/místa" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby" xmlns:osoby="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby" xmlns:místa="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
-  <xs:import namespace="https://ofn.gov.cz/jmenný-prostor/podání/místa" schemaLocation="https://pod-test.dia.gov.cz/otevřené-formální-normy/dokumenty-z-formulářů-ZoPDS/draft/společné-specifikace/místo/schema.xsd"/>
+  <xs:import namespace="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa" schemaLocation="../místa/místo.xsd"/>
   <xs:complexType name="langString">
     <xs:simpleContent>
       <xs:extension base="xs:string">
@@ -28,26 +28,35 @@ Popis (cs): Jméno člověka je jeho osobní jméno a příjmení, popřípadě 
 Název (cs): další jméno fyzické osoby</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="příjmení" type="xs:anySimpleType" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/příjmení-fyzické-osoby">
+      <xs:element name="příjmení" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/příjmení-fyzické-osoby">
         <xs:annotation>
           <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/příjmení-fyzické-osoby
 Název (cs): příjmení fyzické osoby</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="datum_narození" type="xs:date" sawsdl:modelReference="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/datum-narození">
+      <xs:element name="datum_narození" type="xs:date" sawsdl:modelReference="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/datum-narození">
         <xs:annotation>
           <xs:documentation>Význam: https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/datum-narození
 Název (cs): datum narození
 Popis (cs): </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element name="dodatek" type="osoby:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/dodatky-charakterizující-blíže-osobu-podnikatele-nebo-obchodní-závod">
+      <xs:element name="dodatky" type="osoby:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/dodatky-charakterizující-blíže-osobu-podnikatele-nebo-obchodní-závod">
         <xs:annotation>
           <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/dodatky-charakterizující-blíže-osobu-podnikatele-nebo-obchodní-závod
 Název (cs): dodatky charakterizující blíže osobu podnikatele nebo obchodní závod</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:sequence minOccurs="0">
+        <xs:element name="datová_schránka" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikátor-datové-schránky">
+          <xs:annotation>
+            <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikátor-datové-schránky
+Název (cs): Má identifikátor datové schránky
+Popis (cs): Jednoznačný identifikátor datové schránky.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:sequence>
         <xs:element name="trvalé_bydliště" type="místa:místo" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-bydliště">
           <xs:annotation>
             <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-bydliště
@@ -61,16 +70,11 @@ Název (cs): má místo bydliště</xs:documentation>
 Název (cs): doručovací místo</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:sequence minOccurs="0">
-        <xs:element name="datová_schránka" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikátor-datové-schránky">
-          <xs:annotation>
-            <xs:documentation>Význam: https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikátor-datové-schránky
-Název (cs): Má identifikátor datové schránky
-Popis (cs): Jednoznačný identifikátor datové schránky.</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-      </xs:sequence>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="podnikající_fyzická_osoba_nezapsaná_v_or" type="osoby:podnikající_fyzická_osoba_nezapsaná_v_or"/>
+  <xs:complexType name="pfo_nz_or">
+    <xs:choice>
+      <xs:element name="podnikající_fyzická_osoba_nezapsaná_v_or" type="osoby:podnikající_fyzická_osoba_nezapsaná_v_or"/>
+    </xs:choice>
+  </xs:complexType>
 </xs:schema>

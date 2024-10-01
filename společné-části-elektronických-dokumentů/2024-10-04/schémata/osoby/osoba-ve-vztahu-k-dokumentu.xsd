@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby" xmlns:osoby="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby" xmlns:místa="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa" xmlns:sawsdl="http://www.w3.org/ns/sawsdl" xmlns:eidas-np="http://eidas.europa.eu/attributes/naturalperson" xmlns:eidas-lp="http://eidas.europa.eu/attributes/legalperson">
+  <xs:import namespace="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa" schemaLocation="../místa/místo.xsd"/>
+  <xs:include schemaLocation="fyzická-osoba.xsd"/>
+  <xs:include schemaLocation="právnická-osoba.xsd"/>
+  <xs:include schemaLocation="podnikající-fyzická-osoba-nezapsaná-v-or.xsd"/>
+  <xs:include schemaLocation="podnikající-fyzická-osoba-zapsaná-v-or.xsd"/>
+  <xs:import namespace="http://eidas.europa.eu/attributes/legalperson" schemaLocation="eIDASLegalPerson.xsd"/>
+  <xs:import namespace="http://eidas.europa.eu/attributes/naturalperson" schemaLocation="eIDASNaturalPerson.xsd"/>
+ 
+  <xs:complexType name="osoba">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="doručovací_místo" type="místa:místo" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/doručovací-místo">
+        <xs:annotation>
+          <xs:documentation>Význam: https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/doručovací-místo
+Název (cs): doručovací místo</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <!--<xs:element name="osoba_ve_vztahu_k_dokumentu" type="osoby:osoba_ve_vztahu_k_dokumentu"/>-->
+        <xs:element name="fyzická_osoba" type="osoby:fyzická_osoba"/>
+        <xs:element name="fyzická_osoba_eidas" type="eidas-np:NaturalPersonType"/>
+        <xs:element name="právnická_osoba" type="osoby:právnická_osoba"/>
+        <xs:element name="právnická_osoba_eidas" type="eidas-lp:LegalPersonType"/>
+        <xs:element name="podnikající_fyzická_osoba_zapsaná_v_or" type="osoby:podnikající_fyzická_osoba_zapsaná_v_or"/>
+        <xs:element name="podnikající_fyzická_osoba_nezapsaná_v_or" type="osoby:podnikající_fyzická_osoba_nezapsaná_v_or"/>
+      </xs:choice>  
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="osoba" type="osoby:osoba"/>
+</xs:schema>
