@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>Registr práv a povinností - oprávnění k přístupu k údajům</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="https://ofn.gov.cz/static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="https://ofn.gov.cz/static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="https://ofn.gov.cz/static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="https://ofn.gov.cz/static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="https://ofn.gov.cz/static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="https://ofn.gov.cz/static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="https://ofn.gov.cz/static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="https://ofn.gov.cz/static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="https://ofn.gov.cz/static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="https://ofn.gov.cz/static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="https://ofn.gov.cz/static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="https://ofn.gov.cz/static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="https://ofn.gov.cz/static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://ofn.gov.cz/static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="https://ofn.gov.cz/static/favicons/manifest.json">
+        <script class="remove" src="https://ofn.gov.cz/static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                                           specStatus: "REC",
+                                           thisVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2024-10-03/",
+                                           latestVersion: "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/index.html",
+                                           shortName: "Oprávnění k přístupu k údaji - DD5",
+                                           showPreviousVersion: false,
+                                           editors: [{
+                                                 name: "Šimon Trusina",
+                                                 company:    "Digitální a informační agentura",
+                                                 companyURL: "https://dia.gov.cz/"
+                                               }]
+                                         };
+        </script>
+    </head>
+    <body>
+    
+<section id="abstract" class="introductory">
+    <h2>Abstrakt</h2>
+    <p>
+        Tento dokument je otevřenou formální normou ve smyslu <a href="https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-07-01/dokument/norma/cast_1/par_3a/odst_3">§ 3a odst. 3 zákona č. 106/1999 Sb., o svobodném přístupu k informacím</a>, pro zveřejňování informací o oprávněních k přístupu k údajům z Registru práv a povinností ve smyslu <a href="https://www.e-sbirka.cz/sb/2009/111#par_51">§ 51 zákona č. 111/2009 Sb. o základních registrech</a> v podobě otevřených dat.
+        Otevřená data dle této otevřené formální normy jsou publikována ve formátu JSON-LD, se kterým lze pracovat standardními softwarovými prostředky pro práci s formátem JSON. Formát JSON-LD navíc umožňuje přímou interpretaci dat v podobě datového modelu RDF.
+    </p>
+</section>
+<section>
+    <h2>Seznam artefaktů</h2>
+    Tato sekce obsahuje odkaz na všechny soubory, které jsou součástí této dokumentace.
+    <table class="def">
+        <thead>
+            <tr><th>Artefakt</th><th>Odkaz</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>JSON schéma</td><td><a href="./oprávnění-k-přístupu-k-údajům.schema.json">./oprávnění-k-přístupu-k-údajům.schema.json</a></td></tr>
+            <tr><td>JSON-LD kontext</td><td><a href="./oprávnění-k-přístupu-k-údajům.jsonld">./oprávnění-k-přístupu-k-údajům.jsonld</a></td></tr>
+            <tr><td>PlantUML diagram</td><td><a href="./konceptuální-model.plantuml">./konceptuální-model.plantuml</a></td></tr>
+            <tr><td>Konceptuální diagram</td><td><a href="./konceptuální-model.svg">./konceptuální-model.svg</a></td></tr>
+            <tr><td>Dokumentace</td><td><a href=".">.</a></td></tr>
+        </tbody>
+    </table>
+</section>
+<section>
+<h2>Konceptuální model</h2>
+V této sekci jsou definovány veškeré koncepty, třídy a asociace, potřebné pro <i>Oprávnění k přístupu k údaji - DD5</i>.
+
+<figure><img src="./konceptuální-model.svg"><figcaption>Diagram konceptuálního modelu.</figcaption></figure>
+
+<section id="konceptuální-třída-oprávnění-k-přístupu-k-údajům">
+<h3>Oprávnění k přístupu k údajům</h3>
+<dl>
+<dt>Popis</dt>
+<dd>Oprávnění fyzické osoby čerpat při výkonu agendy údaje v základních registrech nebo údaje v agendových informačních systémech vedené v jiné agendě. První agendu nazýváme čerpající, druhou poskytující. Oprávnění není definováno pro konkrétní fyzickou osobu ale pro roli.</dd>
+<dt>Význam</dt>
+<dd>Koncept Oprávnění k přístupu k údajům je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-má-kód-oprávnění-k-přístupu-k-údajům">
+<h4>Má kód oprávnění k přístupu k údajům</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Má kód oprávnění k přístupu k údajům</dd>
+<dt>Popis</dt>
+<dd>Unikátní kód oprávnění k přístupu k údajům tvořený kódem čerpající agendy, kódem poskytující agendy a doplňujícím kódem unikátním v rámci dvojice čerpající a posyktující agendy.</dd>
+<dt>Povinnost</dt>
+<dd>povinné</dd>
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd>
+<dt>Význam</dt>
+<dd>Koncept Má kód oprávnění k přístupu k údajům je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/má-kód-oprávnění-k-přístupu-k-údajům">Má kód oprávnění k přístupu k údajům</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-realizováno-na-referenčním-rozhraní">
+<h4>Realizováno na referenčním rozhraní</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Realizováno na referenčním rozhraní</dd>
+<dt>Popis</dt>
+<dd>Příznak, zda ke sdílení údaje dochází pomocí referenčního rozhraní, jak je vymezuje zákon o základních registrech.
+Součástí referenčního rozhraní je:
+* Informační systém základních registrů (ISZR)
+* Informačním systémem sdílené služby (ISSS, označované též eGSB)</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd>
+<dt>Význam</dt>
+<dd>Koncept Realizováno na referenčním rozhraní je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/realizováno-na-referenčním-rozhraní">Realizováno na referenčním rozhraní</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-celkové-odůvodnění-přístupu-k-údajům">
+<h4>Celkové odůvodnění přístupu k údajům</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Celkové odůvodnění přístupu k údajům</dd>
+<dt>Popis</dt>
+<dd>Odůvodnění, proč OVM potřebuje ke specifikované sadě údajů přistupovat.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd>
+<dt>Význam</dt>
+<dd>Koncept Celkové odůvodnění přístupu k údajům je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/celkové-odůvodnění-přístupu-k-údajům">Celkové odůvodnění přístupu k údajům</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-čerpá-údaje-z-agendy">
+<h4>Vztah (asociace): Čerpá údaje z agendy</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Čerpá údaje z agendy</dd>
+<dt>Popis</dt>
+<dd>Propojuje oprávnění s agendou poskytující údaje. Oprávnění má přiřazenu právě jednu agendu poskytující údaje. Agenda může být poskytující agendou pro více oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>povinné</dd>
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-agenda">Agenda</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Čerpá údaje z agendy je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/čerpá-údaje-z-agendy">Čerpá údaje z agendy</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-poskytuje-údaje-agendě">
+<h4>Vztah (asociace): Poskytuje údaje agendě</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Poskytuje údaje agendě</dd>
+<dt>Popis</dt>
+<dd>Propojuje oprávnění s agendou čerpající údaje. Oprávnění má přiřazenu právě jednu agendu čerpající údaje. Agenda může být čerpající agendou pro více oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>povinné</dd>
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-agenda">Agenda</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Poskytuje údaje agendě je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/poskytuje-údaje-agendě">Poskytuje údaje agendě</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-zahrnuje-oprávnění-k-přístupu-k-údaji">
+<h4>Vztah (asociace): Zahrnuje oprávnění k přístupu k údaji</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Zahrnuje oprávnění k přístupu k údaji</dd>
+<dt>Popis</dt>
+<dd>Určuje údaj, který je roli zpřístupněn v rámci oprávnění, a úroveň přístupu k údaji v rámci oprávnění. V rámci oprávnění může být zpřístupněno více údajů. Jeden údaj může být zpřístupněn různými oprávněními.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údaji">Oprávnění k přístupu k údaji</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Zahrnuje oprávnění k přístupu k údaji je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/zahrnuje-oprávnění-k-přístupu-k-údaji">Zahrnuje oprávnění k přístupu k údaji</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-je-oprávněním-pro-roli">
+<h4>Vztah (asociace): Je oprávněním pro roli</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Je oprávněním pro roli</dd>
+<dt>Popis</dt>
+<dd>Určuje roli, pro kterou je oprávnění k přístupu k údajům definováno. Oprávnění k přístupu k údajům může být definováno pro více rolí. Jedna role může mít definováno více oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-role">Role</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Je oprávněním pro roli je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/je-oprávněním-pro-roli">Je oprávněním pro roli</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-zpřístupňuje-údaje-na-základě-ustanovení">
+<h4>Vztah (asociace): Zpřístupňuje údaje na základě ustanovení</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaje na základě ustanovení</dd>
+<dt>Popis</dt>
+<dd>Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci oprávnění k přístupu k údajům zpřístupněny.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-ustanovení-právního-předpisu">Ustanovení právního předpisu</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Zpřístupňuje údaje na základě ustanovení je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/zpřístupňuje-údaje-na-základě-ustanovení">Zpřístupňuje údaje na základě ustanovení</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-má-typ-oprávnění-přístupu-k-údajům">
+<h4>Vztah (asociace): má typ oprávnění přístupu k údajům</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>má typ oprávnění přístupu k údajům</dd>
+<dt>Popis</dt>
+<dd>Specifikuje, v jakém režimu se přistupuje k danému údaji. Jde o odkaz na číselník: Číselník typů oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-typ-oprávnění-k-přístupu-k-údajům">Typ oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept má typ oprávnění přístupu k údajům je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-typ-oprávnění-přístupu-k-údajům">má typ oprávnění přístupu k údajům</a>.</dd>
+</section>
+</section>
+<section id="konceptuální-třída-agenda">
+<h3>Agenda</h3>
+<dl>
+<dt>Popis</dt>
+<dd>Ucelená oblast působnosti orgánu veřejné moci nebo ucelená oblast působení soukromoprávního uživatele údajů.</dd>
+<dt>Význam</dt>
+<dd>Koncept Agenda je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda">Agenda</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-agenda-čerpá-údaje-z-agendy">
+<h4>Vztah (asociace): Čerpá údaje z agendy</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Čerpá údaje z agendy</dd>
+<dt>Popis</dt>
+<dd>Propojuje oprávnění s agendou poskytující údaje. Oprávnění má přiřazenu právě jednu agendu poskytující údaje. Agenda může být poskytující agendou pro více oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Čerpá údaje z agendy je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/čerpá-údaje-z-agendy">Čerpá údaje z agendy</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-agenda-poskytuje-údaje-agendě">
+<h4>Vztah (asociace): Poskytuje údaje agendě</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Poskytuje údaje agendě</dd>
+<dt>Popis</dt>
+<dd>Propojuje oprávnění s agendou čerpající údaje. Oprávnění má přiřazenu právě jednu agendu čerpající údaje. Agenda může být čerpající agendou pro více oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Poskytuje údaje agendě je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/poskytuje-údaje-agendě">Poskytuje údaje agendě</a>.</dd>
+</section>
+</section>
+<section id="konceptuální-třída-oprávnění-k-přístupu-k-údaji">
+<h3>Oprávnění k přístupu k údaji</h3>
+<dl>
+<dt>Popis</dt>
+<dd>Oprávnění k přístupu k jednomu údaji definované v rámci oprávnění role k přístupu údajům z poskytující agendy.</dd>
+<dt>Význam</dt>
+<dd>Koncept Oprávnění k přístupu k údaji je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/oprávnění-k-přístupu-k-údaji">Oprávnění k přístupu k údaji</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-má-úroveň-přístupu">
+<h4>Má úroveň přístupu</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Má úroveň přístupu</dd>
+<dt>Popis</dt>
+<dd>Úroveň, na které mohou dané role k údaji v rámci oprávnění přistupovat. R &#x3D; čtení, RH &#x3D; čtení s historií, W &#x3D; zápis.</dd>
+<dt>Povinnost</dt>
+<dd>povinné</dd>
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd>
+<dt>Význam</dt>
+<dd>Koncept Má úroveň přístupu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/má-úroveň-přístupu">Má úroveň přístupu</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-odůvodnění-přístupu-k-údaji">
+<h4>Odůvodnění přístupu k údaji</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Odůvodnění přístupu k údaji</dd>
+<dt>Popis</dt>
+<dd>Odůvodnění potřebnosti uvedeného údaje pro OVM.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd>
+<dt>Význam</dt>
+<dd>Koncept Odůvodnění přístupu k údaji je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/odůvodnění-přístupu-k-údaji">Odůvodnění přístupu k údaji</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-zahrnuje-oprávnění-k-přístupu-k-údaji">
+<h4>Vztah (asociace): Zahrnuje oprávnění k přístupu k údaji</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Zahrnuje oprávnění k přístupu k údaji</dd>
+<dt>Popis</dt>
+<dd>Určuje údaj, který je roli zpřístupněn v rámci oprávnění, a úroveň přístupu k údaji v rámci oprávnění. V rámci oprávnění může být zpřístupněno více údajů. Jeden údaj může být zpřístupněn různými oprávněními.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Zahrnuje oprávnění k přístupu k údaji je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/agendový/104/pojem/zahrnuje-oprávnění-k-přístupu-k-údaji">Zahrnuje oprávnění k přístupu k údaji</a>.</dd>
+</section>
+<section id="konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-zpřístupňuje-údaj">
+<h4>Vztah (asociace): Zpřístupňuje údaj</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaj</dd>
+<dt>Popis</dt>
+<dd>Určuje zpřístupněný údaj v rámci oprávnění přístupu k údaji.</dd>
+<dt>Povinnost</dt>
+<dd>povinné</dd>
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-údaj">Údaj</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Zpřístupňuje údaj je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/zpřístupňuje-údaj">Zpřístupňuje údaj</a>.</dd>
+</section>
+</section>
+<section id="konceptuální-třída-role">
+<h3>Role</h3>
+<dl>
+<dt>Popis</dt>
+<dd>Rolí se rozumí souhrn oprávnění fyzické osoby, která vykonává určitou činnost, k přístupu k referenčním údajům v základních registrech nebo k údajům v agendových informačních systémech. Role je definována jako vazba mezi činností a orgánem veřejné moci či soukromoprávního uživatele údajů, nebo jejich kategorie. Role pak určuje jaké činnosti mohou úřední osoby (jako fyzické osoby) daného orgánu veřejné moci, soukromoprávního uživatele údajů či jejich kategorie vykonávat. </dd>
+<dt>Význam</dt>
+<dd>Koncept Role je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/role">Role</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-role-je-oprávněním-pro-roli">
+<h4>Vztah (asociace): Je oprávněním pro roli</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Je oprávněním pro roli</dd>
+<dt>Popis</dt>
+<dd>Určuje roli, pro kterou je oprávnění k přístupu k údajům definováno. Oprávnění k přístupu k údajům může být definováno pro více rolí. Jedna role může mít definováno více oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Je oprávněním pro roli je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/je-oprávněním-pro-roli">Je oprávněním pro roli</a>.</dd>
+</section>
+</section>
+<section id="konceptuální-třída-ustanovení-právního-předpisu">
+<h3>Ustanovení právního předpisu</h3>
+<dl>
+<dt>Popis</dt>
+<dd>Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např. jeho paragraf, odstavec nebo písmeno.</dd>
+<dt>Význam</dt>
+<dd>Koncept Ustanovení právního předpisu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/ustanovení-právního-předpisu">Ustanovení právního předpisu</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-ustanovení-právního-předpisu-zpřístupňuje-údaje-na-základě-ustanovení">
+<h4>Vztah (asociace): Zpřístupňuje údaje na základě ustanovení</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaje na základě ustanovení</dd>
+<dt>Popis</dt>
+<dd>Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci oprávnění k přístupu k údajům zpřístupněny.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Zpřístupňuje údaje na základě ustanovení je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/zpřístupňuje-údaje-na-základě-ustanovení">Zpřístupňuje údaje na základě ustanovení</a>.</dd>
+</section>
+</section>
+<section id="konceptuální-třída-údaj">
+<h3>Údaj</h3>
+<dl>
+<dt>Popis</dt>
+<dd>Údaj vedený v základních registrech nebo v jiných agendových informačních systémech zpřístupněný prostřednictvím informačního systému základních registrů nebo referenčních rozhraní pro výkon agend. Nejedná se o specifikaci hodnoty konkrétního objektu či subjektu údajů, ale o specifikaci na úrovni typu údaje vedeného o objektu či subjektu údajů.</dd>
+<dt>Význam</dt>
+<dd>Koncept Údaj je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/údaj">Údaj</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-údaj-zpřístupňuje-údaj">
+<h4>Vztah (asociace): Zpřístupňuje údaj</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaj</dd>
+<dt>Popis</dt>
+<dd>Určuje zpřístupněný údaj v rámci oprávnění přístupu k údaji.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údaji">Oprávnění k přístupu k údaji</a></dd>
+<dt>Význam</dt>
+<dd>Koncept Zpřístupňuje údaj je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/zpřístupňuje-údaj">Zpřístupňuje údaj</a>.</dd>
+</section>
+</section>
+<section id="konceptuální-třída-typ-oprávnění-k-přístupu-k-údajům">
+<h3>Typ oprávnění k přístupu k údajům</h3>
+<dl>
+<dt>Význam</dt>
+<dd>Koncept Typ oprávnění k přístupu k údajům je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/typ-oprávnění-k-přístupu-k-údajům">Typ oprávnění k přístupu k údajům</a>.</dd>
+</dl>
+
+<section id="konceptuální-vlastnost-typ-oprávnění-k-přístupu-k-údajům-má-typ-oprávnění-přístupu-k-údajům">
+<h4>Vztah (asociace): má typ oprávnění přístupu k údajům</h4>
+<dl>
+<dt>Jméno</dt>
+<dd>má typ oprávnění přístupu k údajům</dd>
+<dt>Popis</dt>
+<dd>Specifikuje, v jakém režimu se přistupuje k danému údaji. Jde o odkaz na číselník: Číselník typů oprávnění.</dd>
+<dt>Povinnost</dt>
+<dd>nepovinné</dd>
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd>
+<dt>Typ</dt>
+<dd><a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a></dd>
+<dt>Význam</dt>
+<dd>Koncept má typ oprávnění přístupu k údajům je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-typ-oprávnění-přístupu-k-údajům">má typ oprávnění přístupu k údajům</a>.</dd>
+</section>
+</section>
+
+</section>
+<section>
+<h2>Specifikace struktury pro Oprávnění k přístupu k údajům</h2>
+<p>Datová struktura pro Oprávnění k přístupu k údajům. Oprávnění fyzické osoby čerpat při výkonu agendy údaje v základních registrech nebo údaje v agendových informačních systémech vedené v jiné agendě. První agendu nazýváme čerpající, druhou poskytující. Oprávnění není definováno pro konkrétní fyzickou osobu ale pro roli.</p>
+
+<section>
+<h3>Přehled JSON struktury</h3>
+<p>JSON Schéma zachycující strukturu pro <i>Oprávnění k přístupu k údajům</i> je definováno v souboru <a href="./oprávnění-k-přístupu-k-údajům.schema.json"><code>.&#x2F;oprávnění-k-přístupu-k-údajům.schema.json</code></a>. Datová sada je tvořena seznamem prvků odpovídajících datové struktuře <i>Oprávnění k přístupu k údajům</i>. Prvky jsou uvedeny v poli `položky`.</p>
+
+<ul>
+<li>
+  <a href="#json-schéma-objekt-oprávnění-k-přístupu-k-údajům">
+    Oprávnění k přístupu k údajům
+  </a>
+<ul>
+<li>
+    <code>kód</code>:
+    povinná
+    
+    (1 - 1) položka typu 
+      
+       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/řetězec">Řetězec</a> dle regulárního výrazu <code>^A[0-9]+-A[0-9]+-[0-9]+$</code>
+</li>
+<li>
+    <code>typ-oprávnění</code>:
+    
+    nepovinná
+    (0 - 1) položka typu 
+      <strong>IRI (<a href="#konceptuální-třída-typ-oprávnění-k-přístupu-k-údajům">Typ oprávnění k přístupu k údajům</a>)</strong>
+      
+</li>
+<li>
+    <code>z-agendy</code>:
+    povinná
+    
+    (1 - 1) položka typu 
+      <strong>IRI (<a href="#konceptuální-třída-agenda">Agenda</a>)</strong>
+      
+</li>
+<li>
+    <code>do-agendy</code>:
+    povinná
+    
+    (1 - 1) položka typu 
+      <strong>IRI (<a href="#konceptuální-třída-agenda">Agenda</a>)</strong>
+      
+</li>
+<li>
+    <code>realizováno-na-referenčním-rozhraní</code>:
+    
+    nepovinná
+    (0 - 1) položka typu 
+      
+       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/boolean">Booleovská hodnota - Ano či ne</a>
+</li>
+<li>
+    <code>údaje</code>:
+    
+    nepovinná
+    (0 - ∞) položka typu 
+      <strong><a href="#json-schéma-objekt-oprávnění-k-přístupu-k-údaji">Oprávnění k přístupu k údaji</a></strong>
+      
+</li>
+<li>
+    <code>role</code>:
+    
+    nepovinná
+    (0 - ∞) položka typu 
+      <strong>IRI (<a href="#konceptuální-třída-role">Role</a>)</strong>
+      
+</li>
+<li>
+    <code>ustanovení-esbírka</code>:
+    
+    nepovinná
+    (0 - ∞) položka typu 
+      <strong>IRI (<a href="#konceptuální-třída-ustanovení-právního-předpisu">Ustanovení právního předpisu</a>)</strong>
+      
+</li>
+<li>
+    <code>ustanovení-ostatní</code>:
+    
+    nepovinná
+    (0 - ∞) položka typu 
+      <strong><a href="#json-schéma-objekt-ustanovení-právního-předpisu">Ustanovení právního předpisu</a></strong>
+      
+</li>
+<li>
+    <code>celkové-odůvodnění</code>:
+    
+    nepovinná
+    (0 - 1) položka typu 
+      
+       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
+</li>
+</ul>
+</li>
+<li>
+  <a href="#json-schéma-objekt-oprávnění-k-přístupu-k-údaji">
+    Oprávnění k přístupu k údaji
+  </a>
+<ul>
+<li>
+    <code>údaj</code>:
+    povinná
+    
+    (1 - 1) položka typu 
+      <strong>IRI (<a href="#konceptuální-třída-údaj">Údaj</a>)</strong>
+      
+</li>
+<li>
+    <code>úroveň-přístupu</code>:
+    povinná
+    
+    (1 - 1) položka typu 
+      
+       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/řetězec">Řetězec</a> dle regulárního výrazu <code>^(R|W|RH)$</code>
+</li>
+<li>
+    <code>odůvodnění</code>:
+    
+    nepovinná
+    (0 - 1) položka typu 
+      
+       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
+</li>
+</ul>
+</li>
+</ul>
+
+<h3>Detailní specifikace prvků JSON struktury</h3>
+
+<section id="json-schéma-objekt-oprávnění-k-přístupu-k-údajům">
+<h4>Objekt <i>Oprávnění k přístupu k údajům</i></h4>
+<dl>
+<dt>Popis</dt>
+<dd>Oprávnění fyzické osoby čerpat při výkonu agendy údaje v základních registrech nebo údaje v agendových informačních systémech vedené v jiné agendě. První agendu nazýváme čerpající, druhou poskytující. Oprávnění není definováno pro konkrétní fyzickou osobu ale pro roli.</dd>
+<dt>Interpretace</dt>
+<dd>
+  <a href="#konceptuální-třída-oprávnění-k-přístupu-k-údajům">Oprávnění k přístupu k údajům</a>
+</dd>
+</dl>
+
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-kód">
+<h5>Vlastnost <code>kód</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`kód`</dd
+<dt>Jméno</dt>
+<dd>Má kód oprávnění k přístupu k údajům</dd
+<dt>Popis</dt>
+<dd>Unikátní kód oprávnění k přístupu k údajům tvořený kódem čerpající agendy, kódem poskytující agendy a doplňujícím kódem unikátním v rámci dvojice čerpající a posyktující agendy.</dd
+<dt>Povinnost</dt>
+<dd>povinné</dd
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd
+<dt>Typ</dt>
+
+
+<dd>
+<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/řetězec">Řetězec</a>
+</dd>
+
+
+<dt>Příklad</dt>
+<dd><div>A1046-A101-1</div></dd>
+
+<dt>Regulární výraz</dt>
+<dd><code>^A[0-9]+-A[0-9]+-[0-9]+$</code></dd>
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-má-kód-oprávnění-k-přístupu-k-údajům">Má kód oprávnění k přístupu k údajům</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-typ-oprávnění">
+<h5>Vlastnost <code>typ-oprávnění</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`typ-oprávnění`</dd
+<dt>Jméno</dt>
+<dd>má typ oprávnění přístupu k údajům</dd
+<dt>Popis</dt>
+<dd>Specifikuje, v jakém režimu se přistupuje k danému údaji. Jde o odkaz na číselník: Číselník typů oprávnění.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd
+<dt>Typ</dt>
+
+<dd>
+  IRI (<a href="#konceptuální-třída-typ-oprávnění-k-přístupu-k-údajům">Typ oprávnění k přístupu k údajům</a>)
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-má-typ-oprávnění-přístupu-k-údajům">má typ oprávnění přístupu k údajům</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-z-agendy">
+<h5>Vlastnost <code>z-agendy</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`z-agendy`</dd
+<dt>Jméno</dt>
+<dd>Čerpá údaje z agendy</dd
+<dt>Popis</dt>
+<dd>Propojuje oprávnění s agendou poskytující údaje. Oprávnění má přiřazenu právě jednu agendu poskytující údaje. Agenda může být poskytující agendou pro více oprávnění.</dd
+<dt>Povinnost</dt>
+<dd>povinné</dd
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd
+<dt>Typ</dt>
+
+<dd>
+  IRI (<a href="#konceptuální-třída-agenda">Agenda</a>)
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-čerpá-údaje-z-agendy">Čerpá údaje z agendy</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-do-agendy">
+<h5>Vlastnost <code>do-agendy</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`do-agendy`</dd
+<dt>Jméno</dt>
+<dd>Poskytuje údaje agendě</dd
+<dt>Popis</dt>
+<dd>Propojuje oprávnění s agendou čerpající údaje. Oprávnění má přiřazenu právě jednu agendu čerpající údaje. Agenda může být čerpající agendou pro více oprávnění.</dd
+<dt>Povinnost</dt>
+<dd>povinné</dd
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd
+<dt>Typ</dt>
+
+<dd>
+  IRI (<a href="#konceptuální-třída-agenda">Agenda</a>)
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-poskytuje-údaje-agendě">Poskytuje údaje agendě</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-realizováno-na-referenčním-rozhraní">
+<h5>Vlastnost <code>realizováno-na-referenčním-rozhraní</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`realizováno-na-referenčním-rozhraní`</dd
+<dt>Jméno</dt>
+<dd>Realizováno na referenčním rozhraní</dd
+<dt>Popis</dt>
+<dd>Příznak, zda ke sdílení údaje dochází pomocí referenčního rozhraní, jak je vymezuje zákon o základních registrech.
+Součástí referenčního rozhraní je:
+* Informační systém základních registrů (ISZR)
+* Informačním systémem sdílené služby (ISSS, označované též eGSB)</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd
+<dt>Typ</dt>
+
+
+<dd>
+<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/boolean">Booleovská hodnota - Ano či ne</a>
+</dd>
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-realizováno-na-referenčním-rozhraní">Realizováno na referenčním rozhraní</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-údaje">
+<h5>Vlastnost <code>údaje</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`údaje`</dd
+<dt>Jméno</dt>
+<dd>Zahrnuje oprávnění k přístupu k údaji</dd
+<dt>Popis</dt>
+<dd>Určuje údaj, který je roli zpřístupněn v rámci oprávnění, a úroveň přístupu k údaji v rámci oprávnění. V rámci oprávnění může být zpřístupněno více údajů. Jeden údaj může být zpřístupněn různými oprávněními.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd
+<dt>Typ</dt>
+
+<dd>
+  <a href="#json-schéma-objekt-oprávnění-k-přístupu-k-údaji">Oprávnění k přístupu k údaji</a>
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-zahrnuje-oprávnění-k-přístupu-k-údaji">Zahrnuje oprávnění k přístupu k údaji</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-role">
+<h5>Vlastnost <code>role</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`role`</dd
+<dt>Jméno</dt>
+<dd>Je oprávněním pro roli</dd
+<dt>Popis</dt>
+<dd>Určuje roli, pro kterou je oprávnění k přístupu k údajům definováno. Oprávnění k přístupu k údajům může být definováno pro více rolí. Jedna role může mít definováno více oprávnění.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd
+<dt>Typ</dt>
+
+<dd>
+  IRI (<a href="#konceptuální-třída-role">Role</a>)
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-je-oprávněním-pro-roli">Je oprávněním pro roli</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-ustanovení-esbírka">
+<h5>Vlastnost <code>ustanovení-esbírka</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`ustanovení-esbírka`</dd
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaje na základě ustanovení</dd
+<dt>Popis</dt>
+<dd>Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci oprávnění k přístupu k údajům zpřístupněny.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd
+<dt>Typ</dt>
+
+<dd>
+  IRI (<a href="#konceptuální-třída-ustanovení-právního-předpisu">Ustanovení právního předpisu</a>)
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-zpřístupňuje-údaje-na-základě-ustanovení">Zpřístupňuje údaje na základě ustanovení</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-ustanovení-ostatní">
+<h5>Vlastnost <code>ustanovení-ostatní</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`ustanovení-ostatní`</dd
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaje na základě ustanovení</dd
+<dt>Popis</dt>
+<dd>Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci oprávnění k přístupu k údajům zpřístupněny.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - ∞</dd
+<dt>Typ</dt>
+
+<dd>
+  <a href="&#x2F;ustanovení-právního-předpisu---ostatní&#x2F;#json-schéma-objekt-ustanovení-právního-předpisu">Ustanovení právního předpisu</a>
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-zpřístupňuje-údaje-na-základě-ustanovení">Zpřístupňuje údaje na základě ustanovení</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údajům-celkové-odůvodnění">
+<h5>Vlastnost <code>celkové-odůvodnění</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`celkové-odůvodnění`</dd
+<dt>Jméno</dt>
+<dd>Celkové odůvodnění přístupu k údajům</dd
+<dt>Popis</dt>
+<dd>Odůvodnění, proč OVM potřebuje ke specifikované sadě údajů přistupovat.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd
+<dt>Typ</dt>
+
+
+<dd>
+<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
+</dd>
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údajům-celkové-odůvodnění-přístupu-k-údajům">Celkové odůvodnění přístupu k údajům</a>
+</dd>
+</dl>
+</section>
+
+</section>
+<section id="json-schéma-objekt-oprávnění-k-přístupu-k-údaji">
+<h4>Objekt <i>Oprávnění k přístupu k údaji</i></h4>
+<dl>
+<dt>Popis</dt>
+<dd>Oprávnění k přístupu k jednomu údaji definované v rámci oprávnění role k přístupu údajům z poskytující agendy.</dd>
+<dt>Interpretace</dt>
+<dd>
+  <a href="#konceptuální-třída-oprávnění-k-přístupu-k-údaji">Oprávnění k přístupu k údaji</a>
+</dd>
+</dl>
+
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údaji-údaj">
+<h5>Vlastnost <code>údaj</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`údaj`</dd
+<dt>Jméno</dt>
+<dd>Zpřístupňuje údaj</dd
+<dt>Popis</dt>
+<dd>Určuje zpřístupněný údaj v rámci oprávnění přístupu k údaji.</dd
+<dt>Povinnost</dt>
+<dd>povinné</dd
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd
+<dt>Typ</dt>
+
+<dd>
+  IRI (<a href="#konceptuální-třída-údaj">Údaj</a>)
+</dd>
+
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-zpřístupňuje-údaj">Zpřístupňuje údaj</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údaji-úroveň-přístupu">
+<h5>Vlastnost <code>úroveň-přístupu</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`úroveň-přístupu`</dd
+<dt>Jméno</dt>
+<dd>Má úroveň přístupu</dd
+<dt>Popis</dt>
+<dd>Úroveň, na které mohou dané role k údaji v rámci oprávnění přistupovat. R &#x3D; čtení, RH &#x3D; čtení s historií, W &#x3D; zápis.</dd
+<dt>Povinnost</dt>
+<dd>povinné</dd
+<dt>Kardinalita</dt>
+<dd>1 - 1</dd
+<dt>Typ</dt>
+
+
+<dd>
+<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/řetězec">Řetězec</a>
+</dd>
+
+
+<dt>Příklad</dt>
+<dd><div>R</div></dd>
+
+<dt>Regulární výraz</dt>
+<dd><code>^(R|W|RH)$</code></dd>
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-má-úroveň-přístupu">Má úroveň přístupu</a>
+</dd>
+</dl>
+</section>
+<section id="json-schéma-vlastnost-oprávnění-k-přístupu-k-údaji-odůvodnění">
+<h5>Vlastnost <code>odůvodnění</code></h5>
+<dl>
+<dt>Klíč</dt>
+<dd>`odůvodnění`</dd
+<dt>Jméno</dt>
+<dd>Odůvodnění přístupu k údaji</dd
+<dt>Popis</dt>
+<dd>Odůvodnění potřebnosti uvedeného údaje pro OVM.</dd
+<dt>Povinnost</dt>
+<dd>nepovinné</dd
+<dt>Kardinalita</dt>
+<dd>0 - 1</dd
+<dt>Typ</dt>
+
+
+<dd>
+<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
+</dd>
+
+
+
+
+<dt>Interpretace</dt>
+<dd>
+<a href="#konceptuální-vlastnost-oprávnění-k-přístupu-k-údaji-odůvodnění-přístupu-k-údaji">Odůvodnění přístupu k údaji</a>
+</dd>
+</dl>
+</section>
+
+</section>
+
+<section id="json-schéma-objekt-ustanovení-právního-předpisu">
+<h4>Referencovaný objekt <i>Ustanovení právního předpisu</i></h4>
+<dl>
+<dt>Popis</dt>
+<dd>Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např. jeho paragraf, odstavec nebo písmeno.</dd>
+<dt>Interpretace</dt>
+<dd>
+  <a href="#konceptuální-třída-ustanovení-právního-předpisu">Ustanovení právního předpisu</a>
+</dd>
+<dt>Schéma</dt>
+<dd>
+  Schéma je definováno v  <a href="&#x2F;ustanovení-právního-předpisu---ostatní&#x2F;">Ustanovení právního předpisu - ostatní</a>.
+</dd>
+</dl>
+</section>
+</section></section>
+
+    </body>
+</html>

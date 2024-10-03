@@ -1,0 +1,36 @@
+@startuml
+set namespaceSeparator none
+class "Oprávnění k přístupu k údajům" {
+  "Má kód oprávnění k přístupu k údajům": string
+  "Realizováno na referenčním rozhraní": boolean
+  "Celkové odůvodnění přístupu k údajům": text
+}
+
+class Agenda {
+}
+
+class "Oprávnění k přístupu k údaji" {
+  "Má úroveň přístupu": string
+  "Odůvodnění přístupu k údaji": text
+}
+
+class Role {
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+class "Údaj" {
+}
+
+class "Typ oprávnění k přístupu k údajům" {
+}
+
+"Oprávnění k přístupu k údajům" -- "1..1" Agenda :  "Čerpá údaje z agendy"
+"Oprávnění k přístupu k údajům" -- "1..1" Agenda :  "Poskytuje údaje agendě"
+"Oprávnění k přístupu k údajům" -- "Oprávnění k přístupu k údaji" :  "Zahrnuje oprávnění k přístupu k údaji"
+"Oprávnění k přístupu k údajům" -- Role :  "Je oprávněním pro roli"
+"Oprávnění k přístupu k údajům" -- "Ustanovení právního předpisu" :  "Zpřístupňuje údaje na základě ustanovení"
+"Oprávnění k přístupu k údajům" -- "0..1" "Typ oprávnění k přístupu k údajům" :  "má typ oprávnění přístupu k údajům"
+"Oprávnění k přístupu k údaji" -- "1..1" "Údaj" :  "Zpřístupňuje údaj"
+@enduml
