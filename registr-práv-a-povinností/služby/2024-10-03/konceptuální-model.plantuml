@@ -1,0 +1,90 @@
+@startuml
+set namespaceSeparator none
+class "Služba veřejné správy" {
+  "Má identifikátor služby": string
+  "Má název služby": string
+  "Má popis služby": string
+}
+
+class "Povinnost sběru adresy" {
+}
+
+class "Typ služby veřejné správy" {
+}
+
+class "Informační povinnost" {
+}
+
+class "Typ subjektu" {
+}
+
+class Agenda {
+}
+
+class "Činnost" {
+}
+
+class "Místní příslušnost služby" {
+}
+
+class "Úkon služby veřejné správy" {
+  "Má identifikátor úkonu služby": string
+  "Má název úkonu služby": string
+  "Má popis úkonu služby": string
+  "Je vhodný k digitalizaci": string
+  "Je digitální": string
+  "Odůvodnění nevhodnosti digitalizace úkonu": text
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+class "Typ místní příslušnosti k subjektu" {
+}
+
+class "Orgán veřejné moci nebo kategorie" {
+}
+
+class "Typ působnosti" {
+}
+
+class "Typ vykonavatele úkonu služby veřejné správy" {
+}
+
+class "Fáze úkonu služby veřejné správy" {
+}
+
+class "Obslužný kanál" {
+  "Je realizován": boolean
+  "Je plánován od": date
+  "Je plánován do": date
+  "Dvoufaktorové ověření totožnosti při osobním jednání": boolean
+}
+
+class "Typ obslužného kanálu" {
+}
+
+class "Úroveň důvěry" {
+}
+
+"Služba veřejné správy" -- "0..1" "Povinnost sběru adresy" :  "Má povinnost sběru adresy"
+"Služba veřejné správy" -- "0..1" "Typ služby veřejné správy" :  "Má typ služby"
+"Služba veřejné správy" -- "0..1" "Informační povinnost" :  "Je relevantní pro plnění informační povinnosti"
+"Služba veřejné správy" -- "Typ subjektu" :  "Má oprávněného klienta"
+"Služba veřejné správy" -- "0..1" Agenda :  "Je poskytována v rámci agendy"
+"Služba veřejné správy" -- "Činnost" :  "Je vázána na činnost"
+"Služba veřejné správy" -- "Místní příslušnost služby" :  "Má místní příslušnost služby"
+"Služba veřejné správy" -- "Úkon služby veřejné správy" :  "Skládá se z úkonu"
+"Služba veřejné správy" -- "Ustanovení právního předpisu" :  "Je stanovena ustanovením"
+"Typ subjektu" "1..1" -- "Místní příslušnost služby" :  "Je místní příslušností služby pro typ subjektu"
+"Místní příslušnost služby" -- "1..1" "Typ místní příslušnosti k subjektu" :  "Má typ místní příslušnosti služby"
+"Místní příslušnost služby" -- "0..1" "Orgán veřejné moci nebo kategorie" :  "Má poskytovatele služby v místní příslušnosti"
+"Místní příslušnost služby" -- "0..1" "Typ působnosti" :  "Má typ působnosti"
+"Úkon služby veřejné správy" -- "0..1" "Typ vykonavatele úkonu služby veřejné správy" :  "Má typ vykonavatele úkonu"
+"Úkon služby veřejné správy" -- "Fáze úkonu služby veřejné správy" :  "Má fázi"
+"Úkon služby veřejné správy" -- "Obslužný kanál" :  "Je realizován kanálem"
+"Úkon služby veřejné správy" -- "Ustanovení právního předpisu" :  "Právo či povinnost konat úkon je stanovena ustanovením"
+"Orgán veřejné moci nebo kategorie" -- "Obslužný kanál" :  "Má poskytovatele obslužného kanálu"
+"Obslužný kanál" -- "0..1" "Typ obslužného kanálu" :  "Má typ obslužného kanálu"
+"Obslužný kanál" -- "0..1" "Úroveň důvěry" :  "Má požadovanou úroveň důvěry"
+@enduml

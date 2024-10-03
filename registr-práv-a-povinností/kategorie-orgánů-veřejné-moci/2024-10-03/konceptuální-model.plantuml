@@ -1,0 +1,34 @@
+@startuml
+set namespaceSeparator none
+class Kategorie {
+  "Má název kategorie": string
+  "Má identifikátor kategorie": string
+  "Má platnost kategorie od": string
+  "Má platnost kategorie do": string
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+class "Ústřední správní úřad" {
+}
+
+class "Orgán veřejné moci" {
+}
+
+class "Kategorie orgánů veřejné moci" {
+}
+
+class "Zařazení kategorie orgánů veřejné moci" {
+  "zařazení kategorie do": string
+  "zařazení kategorie od": string
+}
+
+"Orgán veřejné moci" <|-- "Ústřední správní úřad"
+Kategorie <|-- "Kategorie orgánů veřejné moci"
+Kategorie -- "Ustanovení právního předpisu" :  "Je vymezena ustanovením"
+Kategorie -- "1..1" "Ústřední správní úřad" :  "Ohlašuje kategorii"
+Kategorie -- "Ustanovení právního předpisu" :  "složení vymezeno ustanovením"
+"Kategorie orgánů veřejné moci" -- "Zařazení kategorie orgánů veřejné moci" :  "má podřazenou kategorii orgánů veřejné moci"
+"Kategorie orgánů veřejné moci" -- "Zařazení kategorie orgánů veřejné moci" :  "má nadřazenou kategorii orgánu veřejné moci"
+@enduml

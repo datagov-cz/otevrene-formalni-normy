@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/oprávnění-k-přístupu-k-údajům/2024-10-03/oprávnění-k-přístupu-k-údajům.schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Oprávnění k přístupu k údajům",
+        "description": "Oprávnění fyzické osoby čerpat při výkonu agendy údaje v základních registrech nebo údaje v agendových informačních systémech vedené v jiné agendě. První agendu nazýváme čerpající, druhou poskytující. Oprávnění není definováno pro konkrétní fyzickou osobu ale pro roli.",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "kód",
+          "z-agendy",
+          "do-agendy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^oprávnění-k-přístupu-k-údajům/A[0-9]+-A[0-9]+-[0-9]+$",
+            "examples": [
+              "oprávnění-k-přístupu-k-údajům/A1046-A101-1"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "oprávnění"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "oprávnění"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "kód": {
+            "title": "Má kód oprávnění k přístupu k údajům",
+            "description": "Unikátní kód oprávnění k přístupu k údajům tvořený kódem čerpající agendy, kódem poskytující agendy a doplňujícím kódem unikátním v rámci dvojice čerpající a posyktující agendy.",
+            "type": "string",
+            "pattern": "^A[0-9]+-A[0-9]+-[0-9]+$",
+            "examples": [
+              "A1046-A101-1"
+            ]
+          },
+          "typ-oprávnění": {
+            "title": "má typ oprávnění přístupu k údajům",
+            "description": "Specifikuje, v jakém režimu se přistupuje k danému údaji. Jde o odkaz na číselník: Číselník typů oprávnění.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^typ-oprávnění/[A-Z-]+",
+            "examples": [
+              "typ-oprávnění/ZO"
+            ]
+          },
+          "z-agendy": {
+            "title": "Čerpá údaje z agendy",
+            "description": "Propojuje oprávnění s agendou poskytující údaje. Oprávnění má přiřazenu právě jednu agendu poskytující údaje. Agenda může být poskytující agendou pro více oprávnění.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^agenda/A[0-9]+$",
+            "examples": [
+              "agenda/A101"
+            ]
+          },
+          "do-agendy": {
+            "title": "Poskytuje údaje agendě",
+            "description": "Propojuje oprávnění s agendou čerpající údaje. Oprávnění má přiřazenu právě jednu agendu čerpající údaje. Agenda může být čerpající agendou pro více oprávnění.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^agenda/A[0-9]+$",
+            "examples": [
+              "agenda/A101"
+            ]
+          },
+          "realizováno-na-referenčním-rozhraní": {
+            "title": "Realizováno na referenčním rozhraní",
+            "description": "Příznak, zda ke sdílení údaje dochází pomocí referenčního rozhraní, jak je vymezuje zákon o základních registrech.\nSoučástí referenčního rozhraní je:\n* Informační systém základních registrů (ISZR)\n* Informačním systémem sdílené služby (ISSS, označované též eGSB)",
+            "type": "boolean"
+          },
+          "údaje": {
+            "title": "Zahrnuje oprávnění k přístupu k údaji",
+            "description": "Určuje údaj, který je roli zpřístupněn v rámci oprávnění, a úroveň přístupu k údaji v rámci oprávnění. V rámci oprávnění může být zpřístupněno více údajů. Jeden údaj může být zpřístupněn různými oprávněními.",
+            "type": "array",
+            "items": {
+              "title": "Oprávnění k přístupu k údaji",
+              "description": "Oprávnění k přístupu k jednomu údaji definované v rámci oprávnění role k přístupu údajům z poskytující agendy.",
+              "type": "object",
+              "required": [
+                "id",
+                "type",
+                "údaj",
+                "úroveň-přístupu"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^oprávnění-k-přístupu-k-údaji/A[0-9]+-A[0-9]+-[0-9]+/[0-9]+-[0-9]+-[0-9]+$",
+                  "examples": [
+                    "oprávnění-k-přístupu-k-údaji/A1046-A101-1/101-1-1"
+                  ]
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "oprávnění-údaj"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "oprávnění-údaj"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "údaj": {
+                  "title": "Zpřístupňuje údaj",
+                  "description": "Určuje zpřístupněný údaj v rámci oprávnění přístupu k údaji.",
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^údaj/[0-9]+-[0-9]+-[0-9]+$",
+                  "examples": [
+                    "údaj/101-1-1"
+                  ]
+                },
+                "úroveň-přístupu": {
+                  "title": "Má úroveň přístupu",
+                  "description": "Úroveň, na které mohou dané role k údaji v rámci oprávnění přistupovat. R = čtení, RH = čtení s historií, W = zápis.",
+                  "type": "string",
+                  "pattern": "^(R|W|RH)$",
+                  "examples": [
+                    "R"
+                  ]
+                },
+                "odůvodnění": {
+                  "title": "Odůvodnění přístupu k údaji",
+                  "description": "Odůvodnění potřebnosti uvedeného údaje pro OVM.",
+                  "type": "object",
+                  "required": [
+
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "role": {
+            "title": "Je oprávněním pro roli",
+            "description": "Určuje roli, pro kterou je oprávnění k přístupu k údajům definováno. Oprávnění k přístupu k údajům může být definováno pro více rolí. Jedna role může mít definováno více oprávnění.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^role/A[0-9]+/CR[0-9]+/(([0-9]{8}(\\.9999)?)|(K[OU][0-9]+))$",
+              "examples": [
+                "role/A1046/CR6072/66003008"
+              ]
+            }
+          },
+          "ustanovení-esbírka": {
+            "title": "Zpřístupňuje údaje na základě ustanovení",
+            "description": "Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci oprávnění k přístupu k údajům zpřístupněny.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^/eli/(.*\\/)+.*",
+              "examples": [
+                "/eli/cz/sb/1988/62/2002-06-04/dokument/norma/cast_2/hlava_1/dil_1/oddil_1/par_3/odst_3"
+              ]
+            }
+          },
+          "ustanovení-ostatní": {
+            "title": "Zpřístupňuje údaje na základě ustanovení",
+            "description": "Určuje právní předpisu a označení jeho ustanovení, na jehož základě jsou údaje v rámci oprávnění k přístupu k údajům zpřístupněny.",
+            "type": "array",
+            "items": {
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např. jeho paragraf, odstavec nebo písmeno.",
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "ustanovení-právního-předpisu-ostatní"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "ustanovení-právního-předpisu-ostatní"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "článek": {
+                  "title": "Má článek ustanovení",
+                  "type": "string"
+                },
+                "paragraf": {
+                  "title": "Má paragraf ustanovení",
+                  "description": "Označení paragrafu ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "odstavec": {
+                  "title": "Má odstavec ustanovení",
+                  "description": "Označení odstavce ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "písmeno": {
+                  "title": "Má písmeno ustanovení",
+                  "description": "Označení písmene ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "číslo": {
+                  "title": "Má číslo právního předpisu",
+                  "description": "Číslo právního předpisu v rámci jeho roku vydání uvedeně ve Sbírce zákonů České republiky.",
+                  "type": "string"
+                },
+                "rok": {
+                  "title": "Má rok právního předpisu",
+                  "description": "Rok vydání právního předpisu ve Sbírce zákonů České republiky.\"@cs",
+                  "type": "string",
+                  "pattern": "[0-9]{4}"
+                },
+                "účinnost-znění": {
+                  "title": "Má účinnost znění právního předpisu",
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "celkové-odůvodnění": {
+            "title": "Celkové odůvodnění přístupu k údajům",
+            "description": "Odůvodnění, proč OVM potřebuje ke specifikované sadě údajů přistupovat.",
+            "type": "object",
+            "required": [
+
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

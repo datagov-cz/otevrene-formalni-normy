@@ -1,0 +1,78 @@
+@startuml
+set namespaceSeparator none
+class Agenda {
+  "Má název agendy": string
+  "Má kód agendy": string
+  "Má datum vzniku agendy": string
+  "Má datum zániku agendy": string
+  "Má platnost agendy od": string
+  "Má platnost agendy do": string
+  "Má datum poslední změny agendy": string
+  "má definovány AIS": boolean
+  "má definováno využití veřejných údajů": boolean
+  "má definovány služby VS": boolean
+  "má definovány údaje": boolean
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+class "Činnost" {
+  "Má kód činnosti": string
+  "Má název činnosti": string
+  "Má popis činnosti": string
+  "Má platnost činnosti od": string
+  "Má platnost činnosti do": string
+  "Typ výkonu činnosti": boolean
+}
+
+class "Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie" {
+}
+
+class "Orgán veřejné moci" {
+}
+
+class "Orgán veřejné moci nebo soukromoprávní uživatel údajů" {
+}
+
+class Kategorie {
+}
+
+class "Kategorie orgánů veřejné moci" {
+}
+
+class "Soukromoprávní uživatel údajů" {
+}
+
+class "Kategorie soukromoprávních uživatelů údajů" {
+}
+
+class "Stanovisko ke službám VS" {
+  "datum stanoviska ke službám": date
+  "hodnota stanoviska ke službám": string
+}
+
+class "Stanovisko k údajům" {
+  "datum stanoviska k údajům": date
+  "hodnota stanoviska k údajům": string
+}
+
+class "Průřezová činnost" {
+}
+
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů" <|-- "Orgán veřejné moci"
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie" <|-- "Orgán veřejné moci nebo soukromoprávní uživatel údajů"
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie" <|-- Kategorie
+Kategorie <|-- "Kategorie orgánů veřejné moci"
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů" <|-- "Soukromoprávní uživatel údajů"
+Kategorie <|-- "Kategorie soukromoprávních uživatelů údajů"
+Agenda -- "Ustanovení právního předpisu" :  "Je vykonávána na základě ustanovení"
+Agenda -- "Ustanovení právního předpisu" :  "Je vykonávána na základě hlavního ustanovení"
+Agenda -- "1..*" "Činnost" :  "Je vykonávána v agendě"
+Agenda -- "Orgán veřejné moci nebo soukromoprávní uživatel údajů nebo jejich kategorie" :  "Vykonává agendu"
+Agenda "0..1" -- "1..1" "Orgán veřejné moci" :  "Ohlašuje agendu"
+Agenda "1..*" -- "0..1" "Stanovisko ke službám VS" :  "má stanovisko ke službám"
+Agenda "1..*" -- "0..1" "Stanovisko k údajům" :  "má stanovisko k údajům"
+"Ustanovení právního předpisu" -- "Činnost" :  "vzniká na základě ustanovení"
+"Činnost" -- "0..1" "Průřezová činnost" :  "vzniká z průřezové činnosti"
+@enduml
