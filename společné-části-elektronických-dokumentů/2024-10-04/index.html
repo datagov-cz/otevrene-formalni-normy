@@ -24,19 +24,27 @@
         <script class="remove" src="https://ofn.gov.cz/static/js/respec-odcz.js"></script>
         <script class="remove">
             var respecConfig = {
-                                           specStatus: "WD",
-                                           shortName: "formulare-zopds-spolecne",  
-                                           thisVersion: "https://pod-test.dia.gov.cz/otevřené-formální-normy/dokumenty-z-formulářů-ZoPDS/draft/společné-specifikace/index.html",
-                                           latestVersion: "https://pod-test.dia.gov.cz/otevřené-formální-normy/dokumenty-z-formulářů-ZoPDS/draft/společné-specifikace/index.html",
-                                           shortName: "Společné části elektronických dokumentů",
-                                           showPreviousVersion: false,
-                                           editors: [{
-                                                 name: "Jakub Klímek",
-                                                 orcid: "0000-0001-7234-3051",
-                                                 company:    "Digitální a informační agentura",
-                                                 companyURL: "https://dia.gov.cz"
-                                               }],
-                                         };
+            specStatus: "REC",
+            publishDate: "2024-10-04",
+            shortName: "elektronicke-dokumenty-spolecne",  
+            thisVersion: "https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04",
+            latestVersion: "https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04",
+            shortName: "Společné části elektronických dokumentů",
+            showPreviousVersion: false,
+            editors: [{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Digitální a informační agentura",
+                  companyURL: "https://dia.gov.cz"
+                }],
+                otherLinks: [{
+                      key: "Odkazy",
+                      data: [{
+                          value: "Celá specifikace na GitHub",
+                          href: "https://github.com/datagov-cz/otevrene-formalni-normy/tree/master/společné-části-elektronických-dokumentů/2024-10-04"
+                      }]
+                  }]
+          };
         </script>
     </head>
     <body>
@@ -44,10 +52,11 @@
 <section id="abstract" class="introductory">
     <h2>Abstrakt</h2>
     <p>
-        Tento dokument byl obsahuje specifikaci společných datových struktur používaných v elektronických dokumentech.
+      Tento dokument byl obsahuje společné specifikace potřebné pro reprezentaci elektronických dokumentů, zejména místa (sídlo, bydliště) a osoby (fyzická, právnická, fyzická podnikající) včetně osob identifikovaných pomocí uzlu eIDAS.
+      Vychází ze <a href="https://www.e-sbirka.cz/eli/cz/sb/2004/499/2024-07-01">zákona č. 499/2004 Sb., o archivnictví a spisové službě a o změně některých zákonů</a>, <a href="https://www.e-sbirka.cz/eli/cz/sb/2012/259/2024-07-01">vyhlášky č. 259/2012 Sb., o podrobnostech výkonu spisové služby</a> a z <a href="https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32015R1501#d1e32-6-1">Prováděcího nařízení Komise (EU) 2015/1501 ze dne 8. září 2015 o rámci interoperability podle čl. 12 odst. 8 nařízení Evropského parlamentu a Rady (EU) č. 910/2014 o elektronické identifikaci a službách vytvářejících důvěru pro elektronické transakce na vnitřním trhu</a>.
     </p>
 </section>
-<!--<section>
+<section>
         <h2>Seznam artefaktů</h2>
         Tato sekce obsahuje odkaz na všechny soubory, které jsou součástí této dokumentace.
         <table class="def">
@@ -55,1268 +64,323 @@
                 <tr><th>Artefakt</th><th>Odkaz</th></tr>
             </thead>
             <tbody>
-                <tr><td>XML sdílené koncepty</td><td><a href="./místo/2022-07.xsd">./místo/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./místo/schema.xsd">./místo/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./místo/lifting.xslt">./místo/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./místo/lowering.xslt">./místo/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./person-in-relationship-with-a-document/2022-07.xsd">./person-in-relationship-with-a-document/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./person-in-relationship-with-a-document/schema.xsd">./person-in-relationship-with-a-document/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./person-in-relationship-with-a-document/lifting.xslt">./person-in-relationship-with-a-document/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./person-in-relationship-with-a-document/lowering.xslt">./person-in-relationship-with-a-document/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./fyzická-osoba/2022-07.xsd">./fyzická-osoba/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./fyzická-osoba/schema.xsd">./fyzická-osoba/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./fyzická-osoba/lifting.xslt">./fyzická-osoba/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./fyzická-osoba/lowering.xslt">./fyzická-osoba/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./osoba-ve-vztahu-k-dokumentu/2022-07.xsd">./osoba-ve-vztahu-k-dokumentu/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./osoba-ve-vztahu-k-dokumentu/schema.xsd">./osoba-ve-vztahu-k-dokumentu/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./osoba-ve-vztahu-k-dokumentu/lifting.xslt">./osoba-ve-vztahu-k-dokumentu/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./osoba-ve-vztahu-k-dokumentu/lowering.xslt">./osoba-ve-vztahu-k-dokumentu/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./právnická-osoba/2022-07.xsd">./právnická-osoba/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./právnická-osoba/schema.xsd">./právnická-osoba/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./právnická-osoba/lifting.xslt">./právnická-osoba/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./právnická-osoba/lowering.xslt">./právnická-osoba/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./podnikající-fyzická-osoba-zapsaná-v-or/2022-07.xsd">./podnikající-fyzická-osoba-zapsaná-v-or/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./podnikající-fyzická-osoba-zapsaná-v-or/schema.xsd">./podnikající-fyzická-osoba-zapsaná-v-or/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./podnikající-fyzická-osoba-zapsaná-v-or/lifting.xslt">./podnikající-fyzická-osoba-zapsaná-v-or/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./podnikající-fyzická-osoba-zapsaná-v-or/lowering.xslt">./podnikající-fyzická-osoba-zapsaná-v-or/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./podnikající-fyzická-osoba-nezapsaná-v-or/2022-07.xsd">./podnikající-fyzická-osoba-nezapsaná-v-or/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./podnikající-fyzická-osoba-nezapsaná-v-or/schema.xsd">./podnikající-fyzická-osoba-nezapsaná-v-or/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./podnikající-fyzická-osoba-nezapsaná-v-or/lifting.xslt">./podnikající-fyzická-osoba-nezapsaná-v-or/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./podnikající-fyzická-osoba-nezapsaná-v-or/lowering.xslt">./podnikající-fyzická-osoba-nezapsaná-v-or/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/2022-07.xsd">./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/schema.xsd">./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lifting.xslt">./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lowering.xslt">./fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lowering.xslt</a></td></tr>
-                <tr><td>XML sdílené koncepty</td><td><a href="./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/2022-07.xsd">./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/2022-07.xsd</a></td></tr>
-                <tr><td>XML schéma</td><td><a href="./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/schema.xsd">./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/schema.xsd</a></td></tr>
-                <tr><td>XSLT lifting</td><td><a href="./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lifting.xslt">./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lifting.xslt</a></td></tr>
-                <tr><td>XSLT lowering</td><td><a href="./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lowering.xslt">./právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu/lowering.xslt</a></td></tr>
-                <tr><td>PlantUML diagram</td><td><a href="./konceptuální-model.plantuml">./konceptuální-model.plantuml</a></td></tr>
-                <tr><td>Konceptuální diagram</td><td><a href="./konceptuální-model.svg">./konceptuální-model.svg</a></td></tr>
-                <tr><td>Dokumentace</td><td><a href=".">.</a></td></tr>
+                <tr><td>XML schéma Místa</td><td><a href="schémata/místa/místo.xsd">schémata/místa/místo.xsd</a></td></tr>
+                <tr><td>XML schéma Osoba (libovolná) ve vztahu k dokumentu</td><td><a href="schémata/osoby/osoba-ve-vztahu-k-dokumentu.xsd">schémata/osoby/osoba-ve-vztahu-k-dokumentu.xsd</a></td></tr>
+                <tr><td>XML schéma Fyzická osoba</td><td><a href="schémata/osoby/fyzická-osoba.xsd">schémata/osoby/fyzická-osoba.xsd</a></td></tr>
+                <tr><td>XML schéma Právnická osoba</td><td><a href="schémata/osoby/právnická-osoba.xsd">schémata/osoby/právnická-osoba.xsd</a></td></tr>
+                <tr><td>XML schéma Podnikající fyzická osoba zapsaná v OR</td><td><a href="schémata/osoby/podnikající-fyzická-osoba-zapsaná-v-or.xsd">schémata/osoby/podnikající-fyzická-osoba-zapsaná-v-or.xsd</a></td></tr>
+                <tr><td>XML schéma Podnikající fyzická osoba nezapsaná v OR</td><td><a href="schémata/osoby/podnikající-fyzická-osoba-nezapsaná-v-or.xsd">schémata/osoby/podnikající-fyzická-osoba-nezapsaná-v-or.xsd</a></td></tr>
+                <tr><td>XML schéma Fyzická osoba ve vztahu k dokumentu (fyzická osoba + doručovací místo)</td><td><a href="schémata/osoby/fyzická-osoba-ve-vztahu-k-dokumentu.xsd">schémata/osoby/fyzická-osoba-ve-vztahu-k-dokumentu.xsd</a></td></tr>
+                <tr><td>XML schéma Fyzická osoba (Natural person) dle eIDAS</td><td><a href="schémata/osoby/eIDASNaturalPerson.xsd">schémata/osoby/eIDASNaturalPerson.xsd</a></td></tr>
+                <tr><td>XML schéma Právnická osoba (Legal person) dle eIDAS</td><td><a href="schémata/osoby/eIDASLegalPerson.xsd">schémata/osoby/eIDASLegalPerson.xsd</a></td></tr>
             </tbody>
         </table>
-    </section>-->
+    </section>
+
+    <section>
+      <h3>Přehled XML struktur</h3>
+      <p>
+        Zatím jsou k dispozici XML Schémata a příklady.
+        Na detailnější dokumentaci pracujeme.
+      </p>
+  <section>
+    <h4>Osoby</h4>
+
+  <section>
+      <h5>Osoba ve vztahu k dokumentu</h5>
+      <aside class="example" title="Příklad Osoby ve vztahu k dokumentu">
+        <p>
+            <a href="příklady/osoba-ve-vztahu-k-dokumentu.xml">XML soubor</a>, <a href="schémata/osoby/osoba-ve-vztahu-k-dokumentu.xsd">XML Schema</a>
+        </p>
+<pre class="xml">
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;osoba xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+  xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/osoba-ve-vztahu-k-dokumentu.xsd"&gt;
+    &lt;doručovací_místo&gt;
+      &lt;místa:zahraniční_adresa&gt;
+        &lt;místa:text_adresy&gt;London&lt;/místa:text_adresy&gt;
+      &lt;/místa:zahraniční_adresa&gt;
+    &lt;/doručovací_místo&gt;
+    &lt;fyzická_osoba&gt;
+      &lt;jméno&gt;Jan&lt;/jméno&gt;
+      &lt;příjmení&gt;Novák&lt;/příjmení&gt;
+      &lt;datum_narození&gt;1957-08-13&lt;/datum_narození&gt;
+      &lt;trvalé_bydliště&gt;
+        &lt;místa:adresní_místo&gt;
+          &lt;místa:kód_adresního_místa&gt;123456789&lt;/místa:kód_adresního_místa&gt;
+        &lt;/místa:adresní_místo&gt;
+      &lt;/trvalé_bydliště&gt;
+      &lt;datová_schránka&gt;abcdef&lt;/datová_schránka&gt;
+    &lt;/fyzická_osoba&gt;
+  &lt;/osoba&gt;</pre>
+</aside>
+</section>
 
 <section>
-<h2>Konceptuální model</h2>
-V této sekci jsou definovány veškeré koncepty, třídy a asociace, potřebné pro <i>Společné části elektronických dokumentů</i>.
+  <h5>Fyzická osoba ve vztahu k dokumentu</h5>
+<aside class="example" title="Příklad Fyzické osoby ve vztahu k dokumentu (s doručovacím místem)">
+  <p>
+      <a href="příklady/fyzická-osoba-ve-vztahu-k-dokumentu.xml">XML soubor</a>, <a href="schémata/osoby/fyzická-osoba-ve-vztahu-k-dokumentu.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;fyzická_osoba_ve_vztahu_k_dokumentu 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" 
+xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/fyzická-osoba-ve-vztahu-k-dokumentu.xsd"&gt;
+  &lt;doručovací_místo&gt;
+    &lt;místa:zahraniční_adresa&gt;
+      &lt;místa:text_adresy&gt;Philharmoniker Str. 4, 1010 Wien, Austria&lt;/místa:text_adresy&gt;
+    &lt;/místa:zahraniční_adresa&gt;
+  &lt;/doručovací_místo&gt;
+  &lt;fyzická_osoba&gt;
+    &lt;jméno&gt;Hans&lt;/jméno&gt;
+    &lt;příjmení&gt;Zimmerman&lt;/příjmení&gt;
+    &lt;datum_narození&gt;1900-08-13&lt;/datum_narození&gt;
+    &lt;trvalé_bydliště&gt;
+      &lt;místa:adresní_místo&gt;
+        &lt;místa:kód_adresního_místa&gt;123456789&lt;/místa:kód_adresního_místa&gt;
+      &lt;/místa:adresní_místo&gt;
+    &lt;/trvalé_bydliště&gt;
+  &lt;/fyzická_osoba&gt;
+&lt;/fyzická_osoba_ve_vztahu_k_dokumentu&gt;</pre>
+</aside>
+</section>
 
-<figure><img src="./obrázky/konceptuální-model.svg"><figcaption>Diagram konceptuálního modelu.</figcaption></figure>
+<section>
+  <h5>Fyzická osoba</h5>
+<aside class="example" title="Příklad Fyzické osoby">
+  <p>
+      <a href="příklady/fyzická-osoba.xml">XML soubor</a>, <a href="schémata/osoby/fyzická-osoba.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+  &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;fyzická_osoba 
+  xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+  xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/fyzická-osoba.xsd"&gt;
+    &lt;jméno&gt;Jana&lt;/jméno&gt;
+    &lt;další_jména&gt;Filoména&lt;/další_jména&gt;
+    &lt;příjmení&gt;Novotný&lt;/příjmení&gt;
+    &lt;datum_narození&gt;2023-08-13&lt;/datum_narození&gt;
+    &lt;trvalé_bydliště&gt;
+      &lt;místa:adresní_místo&gt;
+        &lt;místa:kód_adresního_místa&gt;123456789&lt;/místa:kód_adresního_místa&gt;
+      &lt;/místa:adresní_místo&gt;
+    &lt;/trvalé_bydliště&gt;
+    &lt;datová_schránka&gt;abcdef&lt;/datová_schránka&gt;
+  &lt;/fyzická_osoba&gt;</pre>
+</aside>
+</section>
 
-<section id="konceptuální-třída-místo">
-<h3>Místo</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Objekt, který je geografický umístěn.</dd>
-<dt>Význam</dt>
-<dd>Koncept Místo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/místo">Místo</a>.</dd>
-</dl>
+<section>
+  <h5>Právnická osoba</h5>
+<aside class="example" title="Příklad Právnické osoby">
+  <p>
+      <a href="příklady/právnická-osoba.xml">XML soubor</a>, <a href="schémata/osoby/právnická-osoba.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;právnická_osoba 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/právnická-osoba.xsd"&gt;
+  &lt;obchodní_firma&gt;MojeFirma s.r.o&lt;/obchodní_firma&gt;
+  &lt;ičo&gt;00000001&lt;/ičo&gt;
+  &lt;datová_schránka&gt;abcdef&lt;/datová_schránka&gt;
+  &lt;sídlo&gt;
+    &lt;místa:adresní_místo&gt;
+      &lt;místa:kód_adresního_místa&gt;123456789&lt;/místa:kód_adresního_místa&gt;
+    &lt;/místa:adresní_místo&gt;
+  &lt;/sídlo&gt;
+&lt;/právnická_osoba&gt;</pre>
+</aside>
+</section>
 
-<section id="konceptuální-vlastnost-místo-adresa-neevidovaná-v-rúian">
-<h4>adresa neevidovaná v RÚIAN</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>adresa neevidovaná v RÚIAN</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept adresa neevidovaná v RÚIAN je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/adresa-neevidovaná-v-rúian">adresa neevidovaná v RÚIAN</a>.</dd>
+<section>
+  <h5>Podnikající fyzická osoba zapsaná v obchodním rejstříku</h5>
+<aside class="example" title="Příklad Podnikající fyzické osoby zapsané v obchodním rejstříku">
+  <p>
+      <a href="příklady/podnikající-fyzická-osoba-zapsaná-v-or.xml">XML soubor</a>, <a href="schémata/osoby/podnikající-fyzická-osoba-zapsaná-v-or.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;podnikající_fyzická_osoba_zapsaná_v_or 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/podnikající-fyzická-osoba-zapsaná-v-or.xsd"&gt;
+  &lt;obchodní_firma&gt;TvojeFirma a.s.&lt;/obchodní_firma&gt;
+  &lt;ičo&gt;00000007&lt;/ičo&gt;
+  &lt;datová_schránka&gt;abcdef&lt;/datová_schránka&gt;
+  &lt;trvalé_bydliště&gt;
+    &lt;místa:adresa_neevidovaná_v_rúian&gt;
+      &lt;místa:text_adresy&gt;Podchod metra C Florenc&lt;/místa:text_adresy&gt;
+    &lt;/místa:adresa_neevidovaná_v_rúian&gt;
+  &lt;/trvalé_bydliště&gt;
+&lt;/podnikající_fyzická_osoba_zapsaná_v_or&gt;</pre>
+</aside>
 </section>
-<section id="konceptuální-vlastnost-místo-má-adresu">
-<h4>Vztah (asociace): má adresu</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má adresu</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-adresa">adresa</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má adresu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/má-adresu">má adresu</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-místo-má-zahraniční-adresu">
-<h4>Vztah (asociace): má zahraniční adresu</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má zahraniční adresu</dd>
-<dt>Popis</dt>
-<dd>Určení zahraniční adresy objektu.</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-zahraniční-adresa">Zahraniční adresa</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má zahraniční adresu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/má-zahraniční-adresu">má zahraniční adresu</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-adresa">
-<h3>adresa</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Adresou se rozumí kombinace názvu okresu, názvu obce nebo vojenského újezdu, názvu části obce nebo v případě hlavního města Prahy názvu katastrálního území a názvu městského obvodu, čísla popisného nebo evidenčního, názvu ulice a čísla orientačního a dále zvláštních údajů pro doručování prostřednictvím poštovních služeb, která jednoznačně určuje adresní místo.</dd>
-<dt>Význam</dt>
-<dd>Koncept adresa je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/adresa">adresa</a>.</dd>
-</dl>
 
-<section id="konceptuální-vlastnost-adresa-má-adresu">
-<h4>Vztah (asociace): má adresu</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má adresu</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-místo">Místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má adresu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/má-adresu">má adresu</a>.</dd>
+<section>
+  <h5>Podnikající fyzická osoba nezapsaná v obchodním rejstříku</h5>
+<aside class="example" title="Příklad Podnikající fyzické osoby nezapsané v obchodním rejstříku">
+  <p>
+      <a href="příklady/podnikající-fyzická-osoba-nezapsaná-v-or.xml">XML soubor</a>, <a href="schémata/osoby/podnikající-fyzická-osoba-nezapsaná-v-or.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;podnikající_fyzická_osoba_nezapsaná_v_or 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista"
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/podnikající-fyzická-osoba-nezapsaná-v-or.xsd"&gt;
+  &lt;jméno&gt;Jan&lt;/jméno&gt;
+  &lt;další_jména&gt;Jaromír Hynek&lt;/další_jména&gt;
+  &lt;příjmení&gt;Novák&lt;/příjmení&gt;
+  &lt;datum_narození&gt;1957-08-13&lt;/datum_narození&gt;
+  &lt;dodatky xml:lang="cs"&gt;Klempíř&lt;/dodatky&gt;
+  &lt;datová_schránka&gt;abcdef&lt;/datová_schránka&gt;
+  &lt;trvalé_bydliště&gt;
+    &lt;místa:zahraniční_adresa&gt;
+      &lt;místa:text_adresy&gt;Philharmoniker Str. 4, 1010 Wien, Austria&lt;/místa:text_adresy&gt;
+    &lt;/místa:zahraniční_adresa&gt;
+  &lt;/trvalé_bydliště&gt;
+&lt;/podnikající_fyzická_osoba_nezapsaná_v_or&gt;</pre>
+</aside>
 </section>
-<section id="konceptuální-vlastnost-adresa-má-adresu">
-<h4>Vztah (asociace): má adresu</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má adresu</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-adresní-místo">adresní místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má adresu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-adresu">má adresu</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-zahraniční-adresa">
-<h3>Zahraniční adresa</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Zahraniční adresa textem. Adresy v zahraničí se řídí místními pravidly.</dd>
-<dt>Význam</dt>
-<dd>Koncept Zahraniční adresa je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/zahraniční-adresa">Zahraniční adresa</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-lokalizace-popisem">Lokalizace popisem</a></dd>
-</dl>
 
-<section id="konceptuální-vlastnost-zahraniční-adresa-má-zahraniční-adresu">
-<h4>Vztah (asociace): má zahraniční adresu</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má zahraniční adresu</dd>
-<dt>Popis</dt>
-<dd>Určení zahraniční adresy objektu.</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-místo">Místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má zahraniční adresu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/má-zahraniční-adresu">má zahraniční adresu</a>.</dd>
+<section>
+  <h5>Fyzická osoba dle eIDAS</h5>
+<aside class="example" title="Příklad Fyzické osoby dle eIDAS">
+  <p>
+      <a href="příklady/eIDASNaturalPerson.xml">XML soubor</a>, <a href="schémata/osoby/eIDASNaturalPerson.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;NaturalPerson 
+xmlns="http://eidas.europa.eu/attributes/naturalperson" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:eidas-np="http://eidas.europa.eu/attributes/naturalperson" 
+xsi:schemaLocation="http://eidas.europa.eu/attributes/naturalperson https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/eIDASNaturalPerson.xsd"&gt;
+  &lt;FamilyName eidas-np:LatinScript="true"&gt;Smith&lt;/FamilyName&gt;
+  &lt;FirstName eidas-np:LatinScript="true"&gt;John&lt;/FirstName&gt;
+  &lt;DateOfBirth&gt;1957-08-14&lt;/DateOfBirth&gt;
+  &lt;PersonIdentifier&gt;eidas999777888&lt;/PersonIdentifier&gt;
+  &lt;BirthName eidas-np:LatinScript="true"&gt;Smith&lt;/BirthName&gt;
+  &lt;PlaceOfBirth&gt;London&lt;/PlaceOfBirth&gt;
+  &lt;CurrentAddress&gt;Berlin&lt;/CurrentAddress&gt;
+  &lt;Gender&gt;Unspecified&lt;/Gender&gt;
+  &lt;Nationality&gt;GB&lt;/Nationality&gt;
+  &lt;CountryOfBirth&gt;AT&lt;/CountryOfBirth&gt;
+  &lt;TownOfBirth&gt;Vienna&lt;/TownOfBirth&gt;
+  &lt;CountryOfResidence&gt;GB&lt;/CountryOfResidence&gt;
+  &lt;PhoneNumber&gt;+122233344-7&lt;/PhoneNumber&gt;
+  &lt;EmailAddress&gt;joh@smith.com&lt;/EmailAddress&gt;
+&lt;/NaturalPerson&gt;</pre>
+</aside>
 </section>
-</section>
-<section id="konceptuální-třída-lokalizace-popisem">
-<h3>Lokalizace popisem</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Lokalizace popisem je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/veřejný-sektor/pojem/lokalizace-popisem">Lokalizace popisem</a>.</dd>
-</dl>
 
-<section id="konceptuální-vlastnost-lokalizace-popisem-lokalizační-popis">
-<h4>lokalizační popis</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>lokalizační popis</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept lokalizační popis je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/umístění/pojem/lokalizační-popis">lokalizační popis</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-adresní-místo">
-<h3>adresní místo</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Adresním místem se rozumí takové místo v terénu, kterému lze ve vztahu ke stavebnímu objektu jednoznačně přiřadit adresu.</dd>
-<dt>Význam</dt>
-<dd>Koncept adresní místo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/adresní-místo">adresní místo</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-adresní-místo-kód-adresního-místa">
-<h4>kód adresního místa</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>kód adresního místa</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept kód adresního místa je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/adresy/pojem/kód-adresního-místa">kód adresního místa</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-adresní-místo-má-adresu">
-<h4>Vztah (asociace): má adresu</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má adresu</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-adresa">adresa</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má adresu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-adresu">má adresu</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-adresní-místo-má-adresu-sídla-osoby">
-<h4>Vztah (asociace): Má adresu sídla osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má adresu sídla osoby</dd>
-<dt>Popis</dt>
-<dd>Adresa sídla osoby; jde-li o stavební objekt vedený v registru územní identifikace, vede se tento údaj ve formě referenční vazby (kódu adresního místa) na referenční údaj o adrese v registru územní identifikace</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-osoba">Osoba</a></dd>
-<dt>Význam</dt>
-<dd>Koncept Má adresu sídla osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-adresu-sídla-osoby">Má adresu sídla osoby</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-právnická-osoba">
-<h3>Právnická osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Právnická osoba je typ osoby, o níž se vedou v registru osob údaje.</dd>
-<dt>Význam</dt>
-<dd>Koncept Právnická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/právnická-osoba">Právnická osoba</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba">Osoba</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-právnická-osoba">Právnická osoba</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-právnická-osoba">Právnická osoba</a></dd>
-</dl>
-
-<section id="konceptuální-vlastnost-právnická-osoba-obchodní-firma">
-<h4>obchodní firma</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>obchodní firma</dd>
-<dt>Popis</dt>
-<dd>Pojmenovává osobu obchodní firmou, který je jejím oficiálním pojmenováním. Jedná se o referenční údaj.</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept obchodní firma je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/obchodní-firma">obchodní firma</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-fyzická-osoba">
-<h3>Fyzická osoba</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Fyzická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/fyzická-osoba">Fyzická osoba</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-podnikající-fyzická-osoba">
-<h3>Podnikající fyzická osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Podnikající fyzická osoba je typ osoby, o níž se vedou v registru osob údaje.</dd>
-<dt>Význam</dt>
-<dd>Koncept Podnikající fyzická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/podnikající-fyzická-osoba">Podnikající fyzická osoba</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-zapsaná-fyzická-osoba-která-je-podnikatelem">Zapsaná fyzická osoba která je podnikatelem</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-osoba">
-<h3>Osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Subjekty, o nichž se vedou v registru osob údaje (dále jen „osoba“), jsou a) právnická osoba, b) organizační složka a organizační jednotka právnické osoby, c) organizační složka státu, d) vnitřní organizační jednotka organizační složky státu, pokud je této vnitřní organizační jednotce zákonem svěřena vlastní působnost, e) podnikající fyzická osoba, f) zahraniční osoba a organizační složka zahraniční osoby, g) svěřenský fond, pokud jsou zapsány do evidence podle tohoto zákona nebo jiného právního předpisu.</dd>
-<dt>Význam</dt>
-<dd>Koncept Osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba">Osoba</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-osoba-identifikační-číslo-osoby">
-<h4>identifikační číslo osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>identifikační číslo osoby</dd>
-<dt>Popis</dt>
-<dd>Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept identifikační číslo osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby">identifikační číslo osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-osoba-má-datovou-schránku-osoby">
-<h4>Vztah (asociace): Má datovou schránku osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má datovou schránku osoby</dd>
-<dt>Popis</dt>
-<dd>Datová schránka osoby evidovaná v Registru osob.</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-datová-schránka">Datová schránka</a></dd>
-<dt>Význam</dt>
-<dd>Koncept Má datovou schránku osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby">Má datovou schránku osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-osoba-má-adresu-sídla-osoby">
-<h4>Vztah (asociace): Má adresu sídla osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má adresu sídla osoby</dd>
-<dt>Popis</dt>
-<dd>Adresa sídla osoby; jde-li o stavební objekt vedený v registru územní identifikace, vede se tento údaj ve formě referenční vazby (kódu adresního místa) na referenční údaj o adrese v registru územní identifikace</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-adresní-místo">adresní místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept Má adresu sídla osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-adresu-sídla-osoby">Má adresu sídla osoby</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-právnická-osoba">
-<h3>Právnická osoba</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Právnická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/právnická-osoba">Právnická osoba</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-právnická-osoba-číslo-pro-účely-spotřebních-daní">
-<h4>číslo pro účely spotřebních daní</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>číslo pro účely spotřebních daní</dd>
-<dt>Popis</dt>
-<dd>číslo pro účely spotřebních daní stanovené v čl. 2 bodu 12 nařízení Rady (ES) č. 389&#x2F;2012 (SEED - System for Exchange of Excise Data)</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept číslo pro účely spotřebních daní je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/číslo-pro-účely-spotřebních-daní-stanovené-v-čl.-2-bodu-12-nařízení-rady-es-č.-389-2012">číslo pro účely spotřebních daní</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-registrační-a-identifikační-číslo-hospodářských-subjektů-(eori)">
-<h4>registrační a identifikační číslo hospodářských subjektů (EORI)</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>registrační a identifikační číslo hospodářských subjektů (EORI)</dd>
-<dt>Popis</dt>
-<dd>registrační a identifikační číslo hospodářských subjektů (EORI) uvedené v prováděcím nařízení Komise (EU) č. 1352&#x2F;2013</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept registrační a identifikační číslo hospodářských subjektů (EORI) je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/registrační-a-identifikační-číslo-hospodářských-subjektů-eori-uvedené-v-prováděcím-nařízení-komise-eu-č.-1352-2013">registrační a identifikační číslo hospodářských subjektů (EORI)</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-jedinečný-identifikátor-právnické-osoby-vytvořený-odesílajícím-členským-státem">
-<h4>jedinečný identifikátor právnické osoby vytvořený odesílajícím členským státem</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>jedinečný identifikátor právnické osoby vytvořený odesílajícím členským státem</dd>
-<dt>Popis</dt>
-<dd>jedinečný identifikátor vytvořený odesílajícím členským státem v souladu s technickými specifikacemi pro účely přeshraniční identifikace a pokud možno následně neměnný</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept jedinečný identifikátor právnické osoby vytvořený odesílajícím členským státem je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/jedinečný-identifikátor-právnické-osoby">jedinečný identifikátor právnické osoby vytvořený odesílajícím členským státem</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-identifikační-kód-2009&#x2F;101&#x2F;es">
-<h4>identifikační kód 2009&#x2F;101&#x2F;ES</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>identifikační kód 2009&#x2F;101&#x2F;ES</dd>
-<dt>Popis</dt>
-<dd>identifikační kód uvedený v čl. 3 odst. 1 směrnice Evropského parlamentu a Rady 2009&#x2F;101&#x2F;ES</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept identifikační kód 2009&#x2F;101&#x2F;ES je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/identifikační-kód-uvedený-v-čl.-3-odst.-1-směrnice-evropského-parlamentu-a-rady-2009-101-es">identifikační kód 2009&#x2F;101&#x2F;ES</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-identifikační-kód-právnické-osoby">
-<h4>identifikační kód právnické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>identifikační kód právnické osoby</dd>
-<dt>Popis</dt>
-<dd>identifikační kód právnické osoby uvedený v prováděcím nařízení Komise (EU) č. 1247&#x2F;2012</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept identifikační kód právnické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/identifikační-kód-právnické-osoby-uvedený-v-prováděcím-nařízení-komise-eu-č.-1247-2012">identifikační kód právnické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-současná-adresa-právnické-osoby">
-<h4>současná adresa právnické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>současná adresa právnické osoby</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept současná adresa právnické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/současná-adresa-právnické-osoby">současná adresa právnické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-současný-oficiální-název">
-<h4>současný oficiální název</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>současný oficiální název</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept současný oficiální název je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/současný-oficiální-název">současný oficiální název</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-daňové-registrační-číslo">
-<h4>daňové registrační číslo</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>daňové registrační číslo</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept daňové registrační číslo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/daňové-registrační-číslo">daňové registrační číslo</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-právnická-osoba-identifikační-číslo-pro-účely-dph">
-<h4>identifikační číslo pro účely DPH</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>identifikační číslo pro účely DPH</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept identifikační číslo pro účely DPH je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/identifikační-číslo-pro-účely-dph">identifikační číslo pro účely DPH</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-právnická-osoba">
-<h3>Právnická osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Právnická osoba je organizovaný útvar, o kterém zákon stanoví, že má právní osobnost, nebo jehož právní osobnost zákon uzná. Právnická osoba může bez zřetele na předmět své činnosti mít práva a povinnosti, které se slučují s její právní povahou. Právnická osoba má právní osobnost od svého vzniku do svého zániku.</dd>
-<dt>Význam</dt>
-<dd>Koncept Právnická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/právnická-osoba">Právnická osoba</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-právnická-osoba-má-sídlo-právnické-osoby">
-<h4>Vztah (asociace): Má sídlo právnické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má sídlo právnické osoby</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-sídlo">Sídlo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept Má sídlo právnické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-sídlo-právnické-osoby">Má sídlo právnické osoby</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-datová-schránka">
-<h3>Datová schránka</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Datová schránka tak, jak je definována v zákoně č. 300&#x2F;2008 Sb.</dd>
-<dt>Význam</dt>
-<dd>Koncept Datová schránka je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/datová-schránka">Datová schránka</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-datová-schránka-má-identifikátor-datové-schránky">
-<h4>Má identifikátor datové schránky</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má identifikátor datové schránky</dd>
-<dt>Popis</dt>
-<dd>Jednoznačný identifikátor datové schránky.</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept Má identifikátor datové schránky je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-identifikátor-datové-schránky">Má identifikátor datové schránky</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-datová-schránka-má-datovou-schránku-osoby">
-<h4>Vztah (asociace): Má datovou schránku osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má datovou schránku osoby</dd>
-<dt>Popis</dt>
-<dd>Datová schránka osoby evidovaná v Registru osob.</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-osoba">Osoba</a></dd>
-<dt>Význam</dt>
-<dd>Koncept Má datovou schránku osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-datovou-schránku-osoby">Má datovou schránku osoby</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-sídlo">
-<h3>Sídlo</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Sídlo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/sídlo">Sídlo</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-sídlo-má-sídlo-právnické-osoby">
-<h4>Vztah (asociace): Má sídlo právnické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>Má sídlo právnické osoby</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-právnická-osoba">Právnická osoba</a></dd>
-<dt>Význam</dt>
-<dd>Koncept Má sídlo právnické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-sídlo-právnické-osoby">Má sídlo právnické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-sídlo-má-místo-sídla">
-<h4>Vztah (asociace): má místo sídla</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má místo sídla</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-místo">Místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má místo sídla je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-sídla">má místo sídla</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-místo">
-<h3>Místo</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Místo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/místo">Místo</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-místo">Místo</a></dd>
-</dl>
-
-<section id="konceptuální-vlastnost-místo-má-místo-sídla">
-<h4>Vztah (asociace): má místo sídla</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má místo sídla</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-sídlo">Sídlo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má místo sídla je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-sídla">má místo sídla</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-místo-má-místo-bydliště">
-<h4>Vztah (asociace): má místo bydliště</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má místo bydliště</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-bydliště-fyzické-osoby">Bydliště fyzické osoby</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má místo bydliště je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-bydliště">má místo bydliště</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-místo-doručovací-místo">
-<h4>Vztah (asociace): doručovací místo</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>doručovací místo</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a></dd>
-<dt>Význam</dt>
-<dd>Koncept doručovací místo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/doručovací-místo">doručovací místo</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-fyzická-osoba">
-<h3>Fyzická osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Každý člověk má vrozená, již samotným rozumem a citem poznatelná přirozená práva, a tudíž se považuje za osobu. Zákon stanoví jen meze uplatňování přirozených práv člověka a způsob jejich ochrany. Člověk má právní osobnost od narození až do smrti.</dd>
-<dt>Význam</dt>
-<dd>Koncept Fyzická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/fyzická-osoba">Fyzická osoba</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-fyzická-osoba-další-jméno-fyzické-osoby">
-<h4>další jméno fyzické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>další jméno fyzické osoby</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept další jméno fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/další-jméno-fyzické-osoby">další jméno fyzické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-jméno-fyzické-osoby">
-<h4>jméno fyzické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>jméno fyzické osoby</dd>
-<dt>Popis</dt>
-<dd>Jméno člověka je jeho osobní jméno a příjmení, popřípadě jeho další jména a rodné příjmení, která mu podle zákona náležejí. Každý člověk má právo užívat své jméno v právním styku, stejně jako právo na ochranu svého jména a na úctu k němu.</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept jméno fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/jméno-fyzické-osoby">jméno fyzické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-příjmení-fyzické-osoby">
-<h4>příjmení fyzické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>příjmení fyzické osoby</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept příjmení fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/příjmení-fyzické-osoby">příjmení fyzické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-má-bydliště-fyzické-osoby">
-<h4>Vztah (asociace): má bydliště fyzické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má bydliště fyzické osoby</dd>
-<dt>Popis</dt>
-<dd>Člověk má bydliště v místě, kde se zdržuje s úmyslem žít tam s výhradou změny okolností trvale; takový úmysl může vyplývat z jeho prohlášení nebo z okolností případu. Uvádí-li člověk jako své bydliště jiné místo než své skutečné bydliště, může se každý dovolat i jeho skutečného bydliště. Proti tomu, kdo se v dobré víře dovolá uvedeného místa, nemůže člověk namítat, že má své skutečné bydliště v jiném místě.</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-bydliště-fyzické-osoby">Bydliště fyzické osoby</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má bydliště fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-bydliště-fyzické-osoby">má bydliště fyzické osoby</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-fyzická-osoba">
-<h3>Fyzická osoba</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Fyzická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/fyzická-osoba">Fyzická osoba</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-fyzická-osoba-datum-narození">
-<h4>datum narození</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>datum narození</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept datum narození je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/datum-narození">datum narození</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-jedinečný-identifikátor-fyzické-osoby-vytvořený-odesílajícím-členským-státem">
-<h4>jedinečný identifikátor fyzické osoby vytvořený odesílajícím členským státem</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>jedinečný identifikátor fyzické osoby vytvořený odesílajícím členským státem</dd>
-<dt>Popis</dt>
-<dd>jedinečný identifikátor vytvořený odesílajícím členským státem v souladu s technickými specifikacemi pro účely přeshraniční identifikace a pokud možno následně neměnný</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept jedinečný identifikátor fyzické osoby vytvořený odesílajícím členským státem je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/jedinečný-identifikátor-fyzické-osoby">jedinečný identifikátor fyzické osoby vytvořený odesílajícím členským státem</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-současné-jméno-(jména)">
-<h4>současné jméno (jména)</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>současné jméno (jména)</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept současné jméno (jména) je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/současné-jméno-jména">současné jméno (jména)</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-současné-(současná)-příjmení">
-<h4>současné (současná) příjmení</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>současné (současná) příjmení</dd>
-<dt>Popis</dt>
-<dd>současné (současná) příjmení</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept současné (současná) příjmení je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/současné-příjmení">současné (současná) příjmení</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-současná-adresa-fyzické-osoby">
-<h4>současná adresa fyzické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>současná adresa fyzické osoby</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept současná adresa fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/současná-adresa-fyzické-osoby">současná adresa fyzické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-jméno-(jména)-a-příjmení-při-narození">
-<h4>jméno (jména) a příjmení při narození</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>jméno (jména) a příjmení při narození</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept jméno (jména) a příjmení při narození je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/jméno-jména-a-příjmení-při-narození">jméno (jména) a příjmení při narození</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-místo-narození">
-<h4>místo narození</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>místo narození</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept místo narození je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/místo-narození">místo narození</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-fyzická-osoba-pohlaví">
-<h4>pohlaví</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>pohlaví</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept pohlaví je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/eu-1501-2015-e-idas-prováděcí/pojem/pohlaví">pohlaví</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-bydliště-fyzické-osoby">
-<h3>Bydliště fyzické osoby</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Bydliště fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/bydliště-fyzické-osoby">Bydliště fyzické osoby</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-bydliště-fyzické-osoby-má-bydliště-fyzické-osoby">
-<h4>Vztah (asociace): má bydliště fyzické osoby</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má bydliště fyzické osoby</dd>
-<dt>Popis</dt>
-<dd>Člověk má bydliště v místě, kde se zdržuje s úmyslem žít tam s výhradou změny okolností trvale; takový úmysl může vyplývat z jeho prohlášení nebo z okolností případu. Uvádí-li člověk jako své bydliště jiné místo než své skutečné bydliště, může se každý dovolat i jeho skutečného bydliště. Proti tomu, kdo se v dobré víře dovolá uvedeného místa, nemůže člověk namítat, že má své skutečné bydliště v jiném místě.</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má bydliště fyzické osoby je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-bydliště-fyzické-osoby">má bydliště fyzické osoby</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-bydliště-fyzické-osoby-má-místo-bydliště">
-<h4>Vztah (asociace): má místo bydliště</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>má místo bydliště</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-místo">Místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept má místo bydliště je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/má-místo-bydliště">má místo bydliště</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-podnikatel">
-<h3>Podnikatel</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Podnikatel je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/podnikatel">Podnikatel</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-podnikatel-dodatky-charakterizující-blíže-osobu-podnikatele-nebo-obchodní-závod">
-<h4>dodatky charakterizující blíže osobu podnikatele nebo obchodní závod</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>dodatky charakterizující blíže osobu podnikatele nebo obchodní závod</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept dodatky charakterizující blíže osobu podnikatele nebo obchodní závod je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/dodatky-charakterizující-blíže-osobu-podnikatele-nebo-obchodní-závod">dodatky charakterizující blíže osobu podnikatele nebo obchodní závod</a>.</dd>
-</section>
-<section id="konceptuální-vlastnost-podnikatel-obchodní-firma">
-<h4>obchodní firma</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>obchodní firma</dd>
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Význam</dt>
-<dd>Koncept obchodní firma je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/obchodní-firma">obchodní firma</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-zapsaná-fyzická-osoba">
-<h3>Zapsaná fyzická osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Do veřejného rejstříku se zapisují zákonem stanovené údaje o právnických a fyzických osobách (dále jen „zapsaná osoba“).</dd>
-<dt>Význam</dt>
-<dd>Koncept Zapsaná fyzická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/304/2013/pojem/zapsaná-fyzická-osoba">Zapsaná fyzická osoba</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-podnikatel">Podnikatel</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-zapsaná-osoba">Zapsaná osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-fyzická-osoba">
-<h3>Fyzická osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Fyzické osoby, 1. které jsou podnikateli, mají bydliště v České republice a požádají o zápis, a 2. uvedené v § 43, které podnikají na území České republiky, a požádají o zápis  Fyzickou osobou se pro potřeby § 42 rozumí a) státní občan členského státu Evropské unie, jiného státu tvořícího Evropský hospodářský prostor nebo Švýcarské konfederace, b) rodinný příslušník osoby uvedené v písmeni a) oprávněný pobývat na území České republiky, c) státní občan třetího státu, kterému bylo v členském státě Evropské unie přiznáno právní postavení dlouhodobě pobývajícího rezidenta, d) rodinný příslušník osoby uvedené v písmeni c), kterému bylo na území České republiky vydáno povolení k dlouhodobému pobytu, a e) další fyzická osoba, které vzniklo právo podnikat podle živnostenského zákona nebo jiného zákona.</dd>
-<dt>Význam</dt>
-<dd>Koncept Fyzická osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/304/2013/pojem/fyzická-osoba">Fyzická osoba</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-zapsaná-osoba">
-<h3>Zapsaná osoba</h3>
-<dl>
-<dt>Popis</dt>
-<dd>Do veřejného rejstříku se zapisují zákonem stanovené údaje o právnických a fyzických osobách (dále jen „zapsaná osoba“).</dd>
-<dt>Význam</dt>
-<dd>Koncept Zapsaná osoba je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/304/2013/pojem/zapsaná-osoba">Zapsaná osoba</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba">Osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-zapsaná-fyzická-osoba-která-je-podnikatelem">
-<h3>Zapsaná fyzická osoba která je podnikatelem</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Zapsaná fyzická osoba která je podnikatelem je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/legislativní/sbírka/304/2013/pojem/zapsaná-fyzická-osoba-která-je-podnikatelem">Zapsaná fyzická osoba která je podnikatelem</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-zapsaná-fyzická-osoba">Zapsaná fyzická osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-osoba-ve-vztahu-k-dokumentu">
-<h3>Osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a>.</dd>
-</dl>
-
-<section id="konceptuální-vlastnost-osoba-ve-vztahu-k-dokumentu-doručovací-místo">
-<h4>Vztah (asociace): doručovací místo</h4>
-<dl>
-<dt>Jméno</dt>
-<dd>doručovací místo</dd>
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-<dd><a href="#konceptuální-třída-místo">Místo</a></dd>
-<dt>Význam</dt>
-<dd>Koncept doručovací místo je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/doručovací-místo">doručovací místo</a>.</dd>
-</section>
-</section>
-<section id="konceptuální-třída-právnická-osoba-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Právnická osoba jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Právnická osoba jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/právnická-osoba-jako-osoba-ve-vztahu-k-dokumentu">Právnická osoba jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-právnická-osoba">Právnická osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-fyzická-osoba-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Fyzická osoba jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Fyzická osoba jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/fyzická-osoba-jako-osoba-ve-vztahu-k-dokumentu">Fyzická osoba jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-podnikající-fyzická-osoba-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Podnikající fyzická osoba jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Podnikající fyzická osoba jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/podnikající-fyzická-osoba-jako-osoba-ve-vztahu-k-dokumentu">Podnikající fyzická osoba jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-podnikající-fyzická-osoba">Podnikající fyzická osoba</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-podnikající-fyzická-osoba-zapsaná-v-obchodním-rejstříku-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/podnikající-fyzická-osoba-zapsaná-v-obchodním-rejstříku-jako-osoba-ve-vztahu-k-dokumentu">Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-podnikající-fyzická-osoba-jako-osoba-ve-vztahu-k-dokumentu">Podnikající fyzická osoba jako osoba ve vztahu k dokumentu</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-podnikající-fyzická-osoba-nezapsaná-v-obchodním-rejstříku-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Podnikající fyzická osoba nezapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Podnikající fyzická osoba nezapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/podnikající-fyzická-osoba-nezapsaná-v-obchodním-rejstříku-jako-osoba-ve-vztahu-k-dokumentu">Podnikající fyzická osoba nezapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-podnikající-fyzická-osoba-jako-osoba-ve-vztahu-k-dokumentu">Podnikající fyzická osoba jako osoba ve vztahu k dokumentu</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Fyzická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Fyzická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/fyzická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu">Fyzická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-fyzická-osoba">Fyzická osoba</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a></dd>
-</dl>
-
-</section>
-<section id="konceptuální-třída-právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu">
-<h3>Právnická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</h3>
-<dl>
-<dt>Význam</dt>
-<dd>Koncept Právnická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu je definován v <a href="https://slovník.gov.cz/">sémantickém slovníku pojmů</a> jako <a href="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/právnická-osoba-identifikovaná-skrz-eidas-jako-osoba-ve-vztahu-k-dokumentu">Právnická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</a>.</dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-právnická-osoba">Právnická osoba</a></dd>
-<dt>Nadřazený typ</dt>
-<dd><a href="#konceptuální-třída-osoba-ve-vztahu-k-dokumentu">Osoba ve vztahu k dokumentu</a></dd>
-</dl>
-
+<section>
+  <h5>Právnická osoba dle eIDAS</h5>
+<aside class="example" title="Příklad Právnické osoby dle eIDAS">
+  <p>
+      <a href="příklady/eIDASLegalPerson.xml">XML soubor</a>, <a href="schémata/osoby/eIDASLegalPerson.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;LegalPerson xmlns="http://eidas.europa.eu/attributes/legalperson" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns:eidas-lp="http://eidas.europa.eu/attributes/legalperson" 
+xsi:schemaLocation="http://eidas.europa.eu/attributes/legalperson https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/eIDASLegalPerson.xsd"&gt;
+  &lt;LegalPersonIdentifier&gt;EIDAS111222333&lt;/LegalPersonIdentifier&gt;
+  &lt;LegalName eidas-lp:LatinScript="true"&gt;MyCompany Ltd.&lt;/LegalName&gt;
+  &lt;LegalAddress&gt;Philharmoniker Str. 4, 1010 Wien, Austria&lt;/LegalAddress&gt;
+  &lt;VATRegistration&gt;AT123456789&lt;/VATRegistration&gt;
+  &lt;TaxReference&gt;AT123456789&lt;/TaxReference&gt;
+  &lt;BusinessCodes&gt;AT123456789&lt;/BusinessCodes&gt;
+  &lt;LEI&gt;1234&lt;/LEI&gt;
+  &lt;EORI&gt;5678&lt;/EORI&gt;
+  &lt;SEED&gt;90123&lt;/SEED&gt;
+  &lt;SIC&gt;456&lt;/SIC&gt;
+  &lt;LegalPhoneNumber&gt;+420123456789&lt;/LegalPhoneNumber&gt;
+  &lt;LegalEmailAddress&gt;mycompany@myserver.com&lt;/LegalEmailAddress&gt;
+&lt;/LegalPerson&gt;</pre>
+</aside>
 </section>
 
 </section>
 <section>
-<h2>Specifikace struktury pro Místo</h2>
-<p>Datová struktura pro Místo. </p>
+  <h4>Místa</h4>
+
+  <section>
+    <h5>Místo identifikované ID adresního místa</h5>
+  <aside class="example" title="Příklad Místa identifikovaného ID adresního místa">
+    <p>
+        <a href="příklady/místo-adresní-místo.xml">XML soubor</a>, <a href="schémata/místa/místo.xsd">XML Schema</a>
+    </p>
+  <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;místo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/místa/místo.xsd"&gt;
+  &lt;adresní_místo&gt;
+    &lt;kód_adresního_místa&gt;123456789&lt;/kód_adresního_místa&gt;
+  &lt;/adresní_místo&gt;
+&lt;/místo&gt;</pre>
+  </aside>
+  </section>
+  
+  <section>
+    <h5>Místo identifikované adresou neevidovanou v RÚIAN</h5>
+  <aside class="example" title="Příklad Místa identifikovaného adresou neevidovanou v RÚIAN">
+    <p>
+        <a href="příklady/místo-adresa-neevidovaná-v-rúian.xml">XML soubor</a>, <a href="schémata/místa/místo.xsd">XML Schema</a>
+    </p>
+  <pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;místo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/místa/místo.xsd"&gt;
+  &lt;adresa_neevidovaná_v_rúian&gt;
+    &lt;text_adresy&gt;Podchod metra C Muzeum&lt;/text_adresy&gt;
+  &lt;/adresa_neevidovaná_v_rúian&gt;
+&lt;/místo&gt;</pre>
+  </aside>
+</section>
 
 <section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Místo</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/místa</a> (prefix: místa)</dd>
-
-<dt>Importy</dt>
-<i>Nic není importováno.</i>
-
-
-<section>
-  <h4>Element <code>místo</code></h4>
+  <h5>Místo identifikované zahraniční adresou</h5>
+<aside class="example" title="Příklad Místa identifikovaného zahraniční adresou">
+  <p>
+      <a href="příklady/místo-zahraniční-adresa.xml">XML soubor</a>, <a href="schémata/místa/místo.xsd">XML Schema</a>
+  </p>
+<pre class="xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;místo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" 
+xsi:schemaLocation="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/místa/místo.xsd"&gt;
+  &lt;zahraniční_adresa&gt;
+    &lt;text_adresy&gt;Berlin&lt;/text_adresy&gt;
+  &lt;/zahraniční_adresa&gt;
+&lt;/místo&gt;</pre>
+</aside>
 </section>
 
 </section>
-</section>
-<section>
-<h2>Specifikace struktury pro Osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby</a> (prefix: osoby)</dd>
-
-<dt>Importy</dt>
-  <dd>
-    <strong>Prefix:</strong> [object Promise]<br>
-    <strong>Namespace:</strong> [object Promise]<br>
-    <strong>Schema Location:</strong> ..&#x2F;místo&#x2F;schema.xsd
-  </dd>
-
-
-<section>
-  <h4>Element <code>osoba</code></h4>
-</section>
 
 </section>
-</section>
+    
 <section>
-<h2>Specifikace struktury pro Fyzická osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Fyzická osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Fyzická osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby</a> (prefix: osoby)</dd>
-
-<dt>Importy</dt>
-  <dd>
-    <strong>Prefix:</strong> [object Promise]<br>
-    <strong>Namespace:</strong> [object Promise]<br>
-    <strong>Schema Location:</strong> ..&#x2F;místo&#x2F;schema.xsd
-  </dd>
-
-
-<section>
-  <h4>Element <code>fo</code></h4>
-</section>
-
-</section>
-</section>
-<section>
-<h2>Specifikace struktury pro Osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby</a> (prefix: osoby)</dd>
-
-<dt>Importy</dt>
-  <dd>
-    <strong>Prefix:</strong> [object Promise]<br>
-    <strong>Namespace:</strong> [object Promise]<br>
-    <strong>Schema Location:</strong> ..&#x2F;místo&#x2F;schema.xsd
-  </dd>
-
-
-<section>
-  <h4>Element <code></code></h4>
-</section>
-
-</section>
-</section>
-<section>
-<h2>Specifikace struktury pro Právnická osoba jako osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Právnická osoba jako osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Právnická osoba jako osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby</a> (prefix: osoby)</dd>
-
-<dt>Importy</dt>
-  <dd>
-    <strong>Prefix:</strong> [object Promise]<br>
-    <strong>Namespace:</strong> [object Promise]<br>
-    <strong>Schema Location:</strong> ..&#x2F;místo&#x2F;schema.xsd
-  </dd>
-
-
-<section>
-  <h4>Element <code>po</code></h4>
-</section>
-
-</section>
-</section>
-<section>
-<h2>Specifikace struktury pro Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Podnikající fyzická osoba zapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby</a> (prefix: osoby)</dd>
-
-<dt>Importy</dt>
-  <dd>
-    <strong>Prefix:</strong> [object Promise]<br>
-    <strong>Namespace:</strong> [object Promise]<br>
-    <strong>Schema Location:</strong> ..&#x2F;místo&#x2F;schema.xsd
-  </dd>
-
-
-<section>
-  <h4>Element <code>pfo_z_or</code></h4>
-</section>
-
-</section>
-</section>
-<section>
-<h2>Specifikace struktury pro Podnikající fyzická osoba nezapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Podnikající fyzická osoba nezapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Podnikající fyzická osoba nezapsaná v obchodním rejstříku jako osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby">https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/osoby</a> (prefix: osoby)</dd>
-
-<dt>Importy</dt>
-  <dd>
-    <strong>Prefix:</strong> [object Promise]<br>
-    <strong>Namespace:</strong> [object Promise]<br>
-    <strong>Schema Location:</strong> ..&#x2F;místo&#x2F;schema.xsd
-  </dd>
-
-
-<section>
-  <h4>Element <code>pfo_nz_or</code></h4>
-</section>
-
-</section>
-</section>
-<section>
-<h2>Specifikace struktury pro Fyzická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Fyzická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Fyzická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://eidas.europa.eu/attributes/naturalperson">http://eidas.europa.eu/attributes/naturalperson</a> (prefix: eidas-np)</dd>
-
-<dt>Importy</dt>
-<i>Nic není importováno.</i>
-
-
-<section>
-  <h4>Element <code>eidas_np</code></h4>
-</section>
-
-</section>
-</section>
-<section>
-<h2>Specifikace struktury pro Právnická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</h2>
-<p>Datová struktura pro Právnická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu. </p>
-
-<section>
-<h3>Přehled XML struktury</h3>
-<p>
-  Popis XSD zachycující strukturu pro <i>Právnická osoba identifikovaná skrz eIDAS jako osoba ve vztahu k dokumentu</i> je definováno
-  v souboru <a href=""><code></code></a>.
-</p>
-
-  <dt>Namespace</dt>
-  <dd><a href="http://eidas.europa.eu/attributes/legalperson">http://eidas.europa.eu/attributes/legalperson</a> (prefix: eidas-lp)</dd>
-
-<dt>Importy</dt>
-<i>Nic není importováno.</i>
-
-
-<section>
-  <h4>Element <code>eidas_lp</code></h4>
-</section>
-
-</section>
+  <h2>Poděkování</h2>
+  <p>
+    Tato specifikace vznikla v pracovní skupině ve složení Jakub Klímek, Lenka Kováčová, Robert Piffl, Petr Tiller, Tomáš Šedivec a Jan Petr.
+  </p>
 </section>
 
     </body>
