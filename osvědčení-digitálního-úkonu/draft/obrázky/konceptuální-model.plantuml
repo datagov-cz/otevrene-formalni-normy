@@ -1,0 +1,93 @@
+@startuml
+set namespaceSeparator none
+class "Osvědčení o digitálním úkonu" {
+  "datum a čas vystavení osvědčení": dateTime
+  "datum a čas provedení digitálního úkonu": dateTime
+  "kód úspěšné autorizace digitálního úkonu": string
+  "hash podání": string
+}
+
+class Dokument {
+}
+
+class "Elektronický dokument" {
+  "počet příloh": integer
+}
+
+class "Dokument vytvořený elektronickým formulářem" {
+}
+
+class "Dokument​" {
+  "číslo jednací": string
+  "stručný obsah dokumentu": text
+  "k rukám": string
+}
+
+class "Jednoznačný identifikátor" {
+  "řetězcová podoba jednoznačného identifikátoru": string
+}
+
+class "Digitální úkon" {
+}
+
+class "Úkon služby veřejné správy" {
+  "Má identifikátor úkonu služby": string
+  "Má název úkonu služby": text
+}
+
+class "Služba veřejné správy" {
+  "Má název služby": text
+  "Má identifikátor služby": string
+}
+
+class Agenda {
+  "Má kód agendy": string
+  "Má název agendy": text
+}
+
+class "Příloha" {
+  "název přílohy": text
+  "název souboru přílohy": string
+  "hash souboru": string
+}
+
+class "Osoba ve vztahu k dokumentu" {
+}
+
+class "Způsob provedení digitálního úkonu" {
+}
+
+class "Položka číselníku" {
+  "kód položky číselníku": string
+  "plný název položky číselníku": text
+}
+
+class "Oprávnění k zastupování" {
+  "identifikátor oprávnění k zastupování": string
+}
+
+class "Fyzická osoba jako osoba ve vztahu k dokumentu" {
+}
+
+Dokument <|-- "Osvědčení o digitálním úkonu"
+"Elektronický dokument" <|-- "Osvědčení o digitálním úkonu"
+"Dokument​" <|-- Dokument
+"Dokument​" <|-- "Elektronický dokument"
+"Elektronický dokument" <|-- "Dokument vytvořený elektronickým formulářem"
+"Úkon služby veřejné správy" <|-- "Digitální úkon"
+"Položka číselníku" <|-- "Způsob provedení digitálního úkonu"
+"Osvědčení o digitálním úkonu" -- "1..1" "Dokument vytvořený elektronickým formulářem" :  "osvědčuje digitální úkon provedený podáním"
+"Osvědčení o digitálním úkonu" -- "1..1" "Digitální úkon" :  "osvědčuje digitální úkon"
+"Osvědčení o digitálním úkonu" -- "1..1" "Služba veřejné správy" :  "osvědčuje digitální úkon služby"
+"Osvědčení o digitálním úkonu" -- "1..1" Agenda :  "osvědčuje digitální úkon služby agendy"
+"Osvědčení o digitálním úkonu" -- "1..1" "Způsob provedení digitálního úkonu" :  "osvědčuje způsob provedení digitálního úkonu"
+"Elektronický dokument" -- "Příloha" :  "obsahuje přílohu"
+"Elektronický dokument" -- "1..1" "Osoba ve vztahu k dokumentu" :  "odesílatel"
+"Elektronický dokument" -- "1..1" "Osoba ve vztahu k dokumentu" :  "příjemce"
+"Dokument vytvořený elektronickým formulářem" -- "0..1" "Oprávnění k zastupování" :  "použité oprávnění k zastupování"
+"Dokument vytvořený elektronickým formulářem" -- "1..1" "Osoba ve vztahu k dokumentu" :  "uživatel služby"
+"Dokument​" -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
+"Dokument​" -- "0..1" "Dokument​" :  "je odpovědí na dokument"
+"Osoba ve vztahu k dokumentu" "1..1" -- "Oprávnění k zastupování" :  "zastoupený"
+"Oprávnění k zastupování" -- "1..1" "Fyzická osoba jako osoba ve vztahu k dokumentu" :  "zástupce"
+@enduml
