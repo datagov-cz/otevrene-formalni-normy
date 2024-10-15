@@ -27,6 +27,10 @@ class "Jednoznačný identifikátor" {
   "řetězcová podoba jednoznačného identifikátoru": string
 }
 
+class "Evidenční číslo ze samostatné evidence dokumentů" {
+  "řetězcová podoba evidenčního čísla": string
+}
+
 class "Digitální úkon" {
 }
 
@@ -69,6 +73,13 @@ class "Oprávnění k zastupování" {
 class "Fyzická osoba jako osoba ve vztahu k dokumentu" {
 }
 
+class "Evidenční číslo ze samostatné evidence dokumentů​" {
+}
+
+class Spis {
+  "Spisová značka": string
+}
+
 Dokument <|-- "Osvědčení o digitálním úkonu"
 "Elektronický dokument" <|-- "Osvědčení o digitálním úkonu"
 "Dokument​" <|-- Dokument
@@ -88,6 +99,8 @@ Dokument <|-- "Osvědčení o digitálním úkonu"
 "Dokument vytvořený elektronickým formulářem" -- "1..1" "Osoba ve vztahu k dokumentu" :  "uživatel služby"
 "Dokument​" -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
 "Dokument​" -- "0..1" "Dokument​" :  "je odpovědí na dokument"
+"Dokument​" -- "0..1" "Evidenční číslo ze samostatné evidence dokumentů​" :  "má evidenční číslo ze samostatné evidence dokumentů"
+"Dokument​" -- "0..1" Spis :  "je zařazen do spisu"
 "Osoba ve vztahu k dokumentu" "1..1" -- "Oprávnění k zastupování" :  "zastoupený"
 "Oprávnění k zastupování" -- "1..1" "Fyzická osoba jako osoba ve vztahu k dokumentu" :  "zástupce"
 @enduml
