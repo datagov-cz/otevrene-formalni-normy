@@ -46,14 +46,14 @@ class "Jednoznačný identifikátor" {
   "řetězcová podoba jednoznačného identifikátoru": string
 }
 
-class Dokument {
+class "Dokument​" {
 }
 
 class "Dokument veřejnoprávního původce" {
   "číslo jednací": string
 }
 
-class "Jednoznačný identifikátor" {
+class "Jednoznačný identifikátor​" {
 }
 
 class Spis {
@@ -64,10 +64,10 @@ class "Evidenční číslo ze samostatné evidence dokumentů" {
   "řetězcová podoba evidenčního čísla": string
 }
 
-class "Fyzická osoba jako osoba ve vztahu k dokumentu" {
+class "Osoba ve vztahu k dokumentu" {
 }
 
-class "Osoba ve vztahu k dokumentu" {
+class "Fyzická osoba jako osoba ve vztahu k dokumentu" {
 }
 
 class "Digitální úkon" {
@@ -95,13 +95,17 @@ class "Oprávnění k zastupování" {
   "identifikátor oprávnění k zastupování": string
 }
 
+class "Šablona" {
+  "kód šablony": string
+}
+
 "Elektronický dokument" <|-- "Dokument vytvořený elektronickým formulářem"
 Dokument <|-- "Elektronický dokument"
 "Položka číselníku" <|-- "Způsob povedení digitálního úkonu"
 "Digitální objekt" <|-- "Příloha"
-Dokument <|-- Dokument
-Dokument <|-- "Dokument veřejnoprávního původce"
-"Jednoznačný identifikátor" <|-- "Jednoznačný identifikátor"
+Dokument <|-- "Dokument​"
+"Dokument​" <|-- "Dokument veřejnoprávního původce"
+"Jednoznačný identifikátor" <|-- "Jednoznačný identifikátor​"
 "Úkon služby veřejné správy" <|-- "Digitální úkon"
 "Dokument vytvořený elektronickým formulářem" -- "1..1" "Informační systém veřejné správy" :  "byl vyplněn v isvs"
 "Dokument vytvořený elektronickým formulářem" -- "1..1" "Způsob povedení digitálního úkonu" :  "má způsob provedení digitálního úkonu"
@@ -117,9 +121,10 @@ Dokument <|-- "Dokument veřejnoprávního původce"
 Dokument -- "0..1" Dokument :  "je odpovědí na dokument"
 Dokument -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
 "Digitální objekt" -- "1..1" "Typ média" :  "má typ média"
-"Dokument veřejnoprávního původce" -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
+"Dokument veřejnoprávního původce" -- "1..1" "Jednoznačný identifikátor​" :  "je opatřen identifikátorem​"
 "Dokument veřejnoprávního původce" -- "0..1" Spis :  "je zařazen do spisu"
 "Dokument veřejnoprávního původce" -- "0..1" "Evidenční číslo ze samostatné evidence dokumentů" :  "má evidenční číslo ze samostatné evidence dokumentů"
-"Fyzická osoba jako osoba ve vztahu k dokumentu" "1..1" -- "Oprávnění k zastupování" :  "zástupce"
 "Osoba ve vztahu k dokumentu" "1..1" -- "Oprávnění k zastupování" :  "zastoupený"
+"Fyzická osoba jako osoba ve vztahu k dokumentu" "1..1" -- "Oprávnění k zastupování" :  "zástupce"
+"Oprávnění k zastupování" -- "0..1" "Šablona" :  "vytvořeno na základě šablony"
 @enduml

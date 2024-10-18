@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="http://dia.gov.cz/ns/dokumenty-z-formularu-ZoPDS" xmlns:formuláře="http://dia.gov.cz/ns/dokumenty-z-formularu-ZoPDS" xmlns:osoby="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="http://dia.gov.cz/ns/dokumenty-z-formularu-ZoPDS"
+  xmlns:formuláře="http://dia.gov.cz/ns/dokumenty-z-formularu-ZoPDS"
+  xmlns:osoby="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby"
+  xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
   <xs:import namespace="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/osoby" schemaLocation="https://ofn.gov.cz/společné-části-elektronických-dokumentů/2024-10-04/schémata/osoby/osoba-ve-vztahu-k-dokumentu.xsd"/>
   <xs:complexType name="langString">
@@ -9,366 +13,448 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name="dokument">
-    <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/dokument-vytvořený-elektronickým-formulářem">
-      <xs:annotation>
-        <xs:documentation>Název (cs): Dokument vytvořený elektronickým formulářem</xs:documentation>
-      </xs:annotation>
+  <xs:complexType name="dokument" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/dokument-vytvořený-elektronickým-formulářem">
+    <xs:annotation>
+      <xs:documentation xml:lang="cs">
+        Dokument vytvořený elektronickým formulářem
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
       <xs:sequence>
-        <xs:sequence>
-          <xs:element name="jid" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/řetězcová-podoba-jednoznačného-identifikátoru">
-            <xs:annotation>
-              <xs:documentation>Název (cs): řetězcová podoba jednoznačného identifikátoru
-Popis (cs): </xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-        <xs:element minOccurs="0" name="je_odpovědí_na_dokument" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/je-odpovědí-na-dokument">
+        <xs:element name="jid" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/řetězcová-podoba-jednoznačného-identifikátoru">
           <xs:annotation>
-            <xs:documentation>Název (cs): je odpovědí na dokument</xs:documentation>
-          </xs:annotation>
-          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/499/2004/pojem/dokument-veřejnoprávního-původce">
-            <xs:annotation>
-              <xs:documentation>Název (cs): Dokument veřejnoprávního původce
-Popis (cs): </xs:documentation>
-            </xs:annotation>
-            <xs:sequence>
-              <xs:sequence>
-                <xs:element name="jid" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/řetězcová-podoba-jednoznačného-identifikátoru">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): řetězcová podoba jednoznačného identifikátoru
-Popis (cs): </xs:documentation>
-                  </xs:annotation>
-                </xs:element>
-              </xs:sequence>
-              <xs:sequence minOccurs="0">
-                <xs:element name="evidenční_číslo" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/řetězcová-podoba-evidenčního-čísla">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): řetězcová podoba evidenčního čísla
-Popis (cs): </xs:documentation>
-                  </xs:annotation>
-                </xs:element>
-              </xs:sequence>
-              <xs:element minOccurs="0" name="číslo_jednací" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/má-číslo-jednací">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): číslo jednací
-Popis (cs): Číslo jednací obsahuje označení nebo zkratku označení veřejnoprávního původce, pořadové číslo zápisu dokumentu v základní evidenční pomůcce a označení určeného časového období, kterým je zpravidla kalendářní rok, popřípadě dále označení nebo zkratku označení organizační součásti veřejnoprávního původce nebo jiné znaky charakterizující skutečnosti související s dokumentem. Číslo jednací může být rovněž odvozeno ze spisové značky s uvedením pořadového čísla dokumentu ve spisu nebo čísla listu dokumentu ve spisu.</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-              <xs:sequence minOccurs="0">
-                <xs:element name="spisová_značka" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/má-spisovou-značku">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): spisová značka
-Popis (cs): </xs:documentation>
-                  </xs:annotation>
-                </xs:element>
-              </xs:sequence>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="odesílatel" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/odesílatel">
-          <xs:annotation>
-            <xs:documentation>Název (cs): odesílatel</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name="příjemce" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/příjemce">
-          <xs:annotation>
-            <xs:documentation>Název (cs): příjemce</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name="uživatel_služby" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/uživatel-služby">
-          <xs:annotation>
-            <xs:documentation>Název (cs): uživatel služby</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element minOccurs="0" name="použité_zastupování" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/použité-oprávnění-k-zastupování">
-          <xs:annotation>
-            <xs:documentation>Název (cs): použité oprávnění k zastupování</xs:documentation>
-          </xs:annotation>
-          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/oprávnění-k-zastupování">
-            <xs:annotation>
-              <xs:documentation>Název (cs): Oprávnění k zastupování
-Popis (cs): Referenčními údaji o právech a povinnostech osob jsou dále údaje o některých právech fyzických a právnických osob k zastupování jiných fyzických a právnických osob v rámci agendy orgánu veřejné moci (dále jen „oprávnění k zastupování“)</xs:documentation>
-            </xs:annotation>
-            <xs:sequence>
-              <xs:element name="okz" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikátor-oprávnění-k-zastupování">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): identifikátor oprávnění k zastupování</xs:documentation>
-                </xs:annotation>
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:sequence minOccurs="0">
-                <xs:element minOccurs="0" name="kód_šablony" sawsdl:modelReference="https://slovník.gov.cz/generický/datový-slovník-registru-zastoupení/pojem/kód-šablony">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): kód šablony</xs:documentation>
-                  </xs:annotation>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                      <xs:pattern value="[a-zA-Z]{3}-\d-\d"/>
-                    </xs:restriction>
-                  </xs:simpleType>
-                </xs:element>
-              </xs:sequence>
-              <xs:element name="zastoupený" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/zastoupený">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): zastoupený</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-              <xs:element name="zástupce" type="osoby:fyzická_osoba_ve_vztahu_k_dokumentu" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/zástupce">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): zástupce</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element minOccurs="0" name="k_rukám" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/k-rukám">
-          <xs:annotation>
-            <xs:documentation>Název (cs): k rukám</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name="vyplněn_v_isvs" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/byl-vyplněn-v-isvs">
-          <xs:annotation>
-            <xs:documentation>Název (cs): byl vyplněn v isvs</xs:documentation>
-          </xs:annotation>
-          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/informační-systém-veřejné-správy">
-            <xs:annotation>
-              <xs:documentation>Název (cs): Informační systém veřejné správy
-Popis (cs): Informačním systémem veřejné správy funkční celek nebo jeho část zabezpečující cílevědomou a systematickou informační činnost pro účely výkonu veřejné správy nebo plnění jiných funkcí státu anebo dalších veřejnoprávních korporací. Každý informační systém veřejné správy zahrnuje data, která jsou uspořádána tak, aby bylo možné jejich zpracování a zpřístupnění, provozní údaje a dále technické a programové prostředky, případně jiné nástroje umožňující výkon informačních činností</xs:documentation>
-            </xs:annotation>
-            <xs:sequence>
-              <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-isvs">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): Má identifikátor ISVS
-Popis (cs): Jednoznačná identifikace ISVS v rámci RPP.</xs:documentation>
-                </xs:annotation>
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:pattern value="\d{1,6}"/>
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/329/2020/pojem/název-isvs">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): název ISVS
-Popis (cs): Název ISVS, který používá správce ISVS.</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="způsob_provedení_úkonu" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/má-způsob-provedení-digitálního-úkonu">
-          <xs:annotation>
-            <xs:documentation>Název (cs): má způsob provedení digitálního úkonu</xs:documentation>
-          </xs:annotation>
-          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/způsob-povedení-digitálního-úkonu">
-            <xs:annotation>
-              <xs:documentation>Název (cs): Způsob povedení digitálního úkonu</xs:documentation>
-            </xs:annotation>
-            <xs:sequence>
-              <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/kód-položky-číselníku">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): kód položky číselníku
-Popis (cs): Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-              <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/plný-název-položky-číselníku">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): plný název položky číselníku
-Popis (cs): Plný (tj. úplný) název (hodnota) položky číselníku.</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element minOccurs="0" name="byl_vytvořen_formulářem" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/byl-vytvořen-formulářem">
-          <xs:annotation>
-            <xs:documentation>Název (cs): byl vytvořen formulářem</xs:documentation>
-          </xs:annotation>
-          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/elektronický-formulář">
-            <xs:annotation>
-              <xs:documentation>Název (cs): Elektronický formulář
-Popis (cs): Elektronické formuláře, které po prokázání totožnosti uživatele služby s využitím elektronické identifikace zajistí automatizované doplnění údajů nezbytných pro poskytnutí digitální služby vedených v základním registru nebo agendovém informačním systému, které jsou orgánu veřejné moci zpřístupněné pro výkon agendy, nebo využívaných orgánem veřejné moci na základě souhlasu uživatele služby.</xs:documentation>
-            </xs:annotation>
-            <xs:sequence>
-              <xs:element minOccurs="0" name="identifikátor" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/má-identifikátor-formuláře">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): má identifikátor formuláře</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-              <xs:element minOccurs="0" name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/název-formuláře">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): název formuláře</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-              <xs:element minOccurs="0" name="verze" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/verze">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): verze</xs:documentation>
-                </xs:annotation>
-              </xs:element>
-              <xs:element name="úkon" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/umožňuje-činit-úkon">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): umožňuje činit úkon</xs:documentation>
-                </xs:annotation>
-                <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/digitální-úkon">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): Digitální úkon
-Popis (cs): Digitálním úkonem je úkon vykonávaný uživatelem služby vůči orgánu veřejné moci v rámci agendy a vedený v katalogu služeb jako úkon v elektronické podobě.</xs:documentation>
-                  </xs:annotation>
-                  <xs:sequence>
-                    <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-úkonu-služby">
-                      <xs:annotation>
-                        <xs:documentation>Název (cs): Má identifikátor úkonu služby
-Popis (cs): Automaticky (stejně jako v případě služby VS) generovaný kód sloužící pro databázové zpracování údajů.</xs:documentation>
-                      </xs:annotation>
-                      <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                          <xs:pattern value="U\d{1,8}"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-název-úkonu-služby">
-                      <xs:annotation>
-                        <xs:documentation>Název (cs): Má název úkonu služby
-Popis (cs): Podobně jako u služby se jedná o srozumitelný a výstižný název úkonu, aby bylo klientovi jasné, co je účelem úkonu. Název úkonu by měl výstižně popsat konkrétní krok (např. podání žádosti, výzva k doložení/doplnění žádosti, atd.).</xs:documentation>
-                      </xs:annotation>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="služba" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/umožňuje-činit-úkon-služby">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): umožňuje činit úkon služby</xs:documentation>
-                </xs:annotation>
-                <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/služba-veřejné-správy">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): Služba veřejné správy
-Popis (cs): Služba veřejné správy představuje funkci (činnost) úřadu, která je vědomě poskytnuta konkrétním OVM konkrétnímu příjemci služby podle příslušného právního předpisu tak, že přináší příjemci vnímanou hodnotu, ať už v podobě benefitu nebo splnění zákonné povinnosti. Evidují se pouze takové služby VS, během nichž dochází k interakci mezi OVM a klientem či naopak, nikoli k interakci mezi OVM a OVM. Na službu VS lze také pohlížet jako na dosažení práva či naplnění povinnosti klienta, které nelze splnit jinak než interakcí či sérií interakcí mezi klientem a OVM. Služba se dělí podle toho, zdali je iniciována klientem nebo vykonávaná z moci úřední. Každá služba se skládá z nejméně jednoho úkonu.</xs:documentation>
-                  </xs:annotation>
-                  <xs:sequence>
-                    <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-služby">
-                      <xs:annotation>
-                        <xs:documentation>Název (cs): Má identifikátor služby
-Popis (cs): Automaticky (stejně jako v případě agendy nebo činnosti) generovaný kód sloužící pro databázové zpracování údajů.</xs:documentation>
-                      </xs:annotation>
-                      <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                          <xs:pattern value="S\d{1,6}"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-název-služby">
-                      <xs:annotation>
-                        <xs:documentation>Název (cs): Má název služby
-Popis (cs): Název by měl klientovi stručně a jasně vystihnout, o jakou službu se jedná. Důležité je, aby byl nezaměnitelný s jinou službou, ale stále velmi jednoduchý, srozumitelný a zapamatovatelný. Měřítkem je, že název služby je používaný (bude používán) v běžném hovoru lidí.</xs:documentation>
-                      </xs:annotation>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element name="agenda" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/umožňuje-činit-úkon-služby-agendy">
-                <xs:annotation>
-                  <xs:documentation>Název (cs): umožňuje činit úkon služby agendy</xs:documentation>
-                </xs:annotation>
-                <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda">
-                  <xs:annotation>
-                    <xs:documentation>Název (cs): Agenda
-Popis (cs): Ucelená oblast působnosti orgánu veřejné moci nebo ucelená oblast působení soukromoprávního uživatele údajů.</xs:documentation>
-                  </xs:annotation>
-                  <xs:sequence>
-                    <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-kód-agendy">
-                      <xs:annotation>
-                        <xs:documentation>Název (cs): Má kód agendy
-Popis (cs): Kód agendy je veřejným identifikátorem, který je jednoznačně přiřazen záznamu o agendě v číselníku agend v registru práv a povinností.</xs:documentation>
-                      </xs:annotation>
-                      <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                          <xs:pattern value="A\d{1,6}"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-agendy">
-                      <xs:annotation>
-                        <xs:documentation>Název (cs): Má název agendy
-Popis (cs): Název agendy je referenčním údajem o agendě vedený v Registru práv a povinností</xs:documentation>
-                      </xs:annotation>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element name="počet_příloh" type="xs:integer" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/počet-příloh">
-          <xs:annotation>
-            <xs:documentation>Název (cs): počet příloh</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name="přílohy">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element minOccurs="0" maxOccurs="unbounded" name="příloha" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/obsahuje-přílohu">
-                <xs:annotation>
-                  <xs:documentation>      Název (cs): obsahuje přílohu</xs:documentation>
-                </xs:annotation>
-                <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/příloha">
-                  <xs:annotation>
-                    <xs:documentation>      Název (cs): Příloha</xs:documentation>
-                  </xs:annotation>
-                  <xs:sequence>
-                    <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/název-přílohy">
-                      <xs:annotation>
-                        <xs:documentation>      Název (cs): název přílohy</xs:documentation>
-                      </xs:annotation>
-                    </xs:element>
-                    <xs:element name="název_souboru" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/název-souboru-přílohy">
-                      <xs:annotation>
-                        <xs:documentation>      Název (cs): název souboru přílohy</xs:documentation>
-                      </xs:annotation>
-                    </xs:element>
-                    <xs:element name="typ_média" sawsdl:modelReference="https://slovník.gov.cz/generický/digitální-objekty/pojem/má-typ-média">
-                      <xs:annotation>
-                        <xs:documentation>      Název (cs): má typ média
-      Popis (cs): Určuje, o jaký typ digitálního objektu se jedná ve smyslu typu digitálního média a jeho konkrétního formátu (např. datový soubor, obrázek, video, audio, apod.).</xs:documentation>
-                      </xs:annotation>
-                      <xs:simpleType>
-                        <xs:restriction base="xs:anyURI">
-                          <xs:pattern value="http://www\.iana\.org/assignments/media-types/.*"/>
-                        </xs:restriction>
-                      </xs:simpleType>      
-                    </xs:element>
-                    <xs:element name="obsah" type="xs:base64Binary" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/obsah-přílohy">
-                      <xs:annotation>
-                        <xs:documentation>      Název (cs): obsah přílohy</xs:documentation>
-                      </xs:annotation>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>      
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-        <xs:element minOccurs="0" name="věc" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/má-stručný-obsah-dokumentu">
-          <xs:annotation>
-            <xs:documentation>Název (cs): stručný obsah dokumentu
-Popis (cs): </xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name="doručit_osvědčení_do_datové_schránky" type="xs:boolean" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/doručit-osvědčení-do-datové-schránky">
-          <xs:annotation>
-            <xs:documentation>Název (cs): doručit osvědčení do datové schránky</xs:documentation>
-          </xs:annotation>
-        </xs:element>
-        <xs:element name="služba_v_přenesené_působnosti" type="xs:boolean" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/služba-v-přenesené-působnosti">
-          <xs:annotation>
-            <xs:documentation>Název (cs): služba v přenesené působnosti</xs:documentation>
+            <xs:documentation xml:lang="cs">
+              řetězcová podoba jednoznačného identifikátoru
+            </xs:documentation>
           </xs:annotation>
         </xs:element>
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+      <xs:element minOccurs="0" name="je_odpovědí_na_dokument" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/je-odpovědí-na-dokument">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            je odpovědí na dokument
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/499/2004/pojem/dokument-veřejnoprávního-původce">
+          <xs:annotation>
+            <xs:documentation xml:lang="cs">
+              Dokument veřejnoprávního původce
+            </xs:documentation>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:sequence>
+              <xs:element name="jid" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/řetězcová-podoba-jednoznačného-identifikátoru">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    řetězcová podoba jednoznačného identifikátoru
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:sequence minOccurs="0">
+              <xs:element name="evidenční_číslo" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/řetězcová-podoba-evidenčního-čísla">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    řetězcová podoba evidenčního čísla
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+            <xs:element minOccurs="0" name="číslo_jednací" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/má-číslo-jednací">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  číslo jednací - Číslo jednací obsahuje označení nebo zkratku označení veřejnoprávního původce, pořadové číslo zápisu dokumentu v základní evidenční pomůcce a označení určeného časového období, kterým je zpravidla kalendářní rok, popřípadě dále označení nebo zkratku označení organizační součásti veřejnoprávního původce nebo jiné znaky charakterizující skutečnosti související s dokumentem. Číslo jednací může být rovněž odvozeno ze spisové značky s uvedením pořadového čísla dokumentu ve spisu nebo čísla listu dokumentu ve spisu.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:sequence minOccurs="0">
+              <xs:element name="spisová_značka" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/má-spisovou-značku">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    spisová značka
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="odesílatel" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/odesílatel">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            odesílatel
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="příjemce" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/příjemce">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            příjemce
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="uživatel_služby" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/uživatel-služby">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            uživatel služby
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="použité_zastupování" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/použité-oprávnění-k-zastupování">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            použité oprávnění k zastupování
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/oprávnění-k-zastupování">
+          <xs:annotation>
+            <xs:documentation xml:lang="cs">
+              Oprávnění k zastupování - Referenčními údaji o právech a povinnostech osob jsou dále údaje o některých právech fyzických a právnických osob k zastupování jiných fyzických a právnických osob v rámci agendy orgánu veřejné moci (dále jen „oprávnění k zastupování“)
+            </xs:documentation>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:element name="okz" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikátor-oprávnění-k-zastupování">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  identifikátor oprávnění k zastupování
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:sequence minOccurs="0">
+              <xs:element minOccurs="0" name="kód_šablony" sawsdl:modelReference="https://slovník.gov.cz/generický/datový-slovník-registru-zastoupení/pojem/kód-šablony">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    kód šablony
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:pattern value="[a-zA-Z]{3}-\d-\d"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+            <xs:element name="zastoupený" type="osoby:osoba" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/zastoupený">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  zastoupený
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="zástupce" type="osoby:fyzická_osoba_ve_vztahu_k_dokumentu" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/zástupce">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  zástupce
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="k_rukám" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/k-rukám">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            k rukám
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="vyplněn_v_isvs" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/byl-vyplněn-v-isvs">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            byl vyplněn v isvs
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/informační-systém-veřejné-správy">
+          <xs:annotation>
+            <xs:documentation xml:lang="cs">
+              Informační systém veřejné správy - Informačním systémem veřejné správy funkční celek nebo jeho část zabezpečující cílevědomou a systematickou informační činnost pro účely výkonu veřejné správy nebo plnění jiných funkcí státu anebo dalších veřejnoprávních korporací. Každý informační systém veřejné správy zahrnuje data, která jsou uspořádána tak, aby bylo možné jejich zpracování a zpřístupnění, provozní údaje a dále technické a programové prostředky, případně jiné nástroje umožňující výkon informačních činností
+            </xs:documentation>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-isvs">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  Má identifikátor ISVS - Jednoznačná identifikace ISVS v rámci RPP.
+                </xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="\d{1,6}"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+            <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/329/2020/pojem/název-isvs">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  název ISVS - Název ISVS, který používá správce ISVS.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="způsob_provedení_úkonu" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/má-způsob-provedení-digitálního-úkonu">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            má způsob provedení digitálního úkonu
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/způsob-provedení-digitálního-úkonu">
+          <xs:annotation>
+            <xs:documentation xml:lang="cs">
+              Způsob provedení digitálního úkonu
+            </xs:documentation>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/kód-položky-číselníku">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  kód položky číselníku - Unikátní kód položky číselníku v rámci číselníku, do kterého položka patří.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/plný-název-položky-číselníku">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  plný název položky číselníku - Plný (tj. úplný) název (hodnota) položky číselníku.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="byl_vytvořen_formulářem" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/byl-vytvořen-formulářem">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            byl vytvořen formulářem
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/elektronický-formulář">
+          <xs:annotation>
+            <xs:documentation xml:lang="cs">
+              Elektronický formulář - Elektronické formuláře, které po prokázání totožnosti uživatele služby s využitím elektronické identifikace zajistí automatizované doplnění údajů nezbytných pro poskytnutí digitální služby vedených v základním registru nebo agendovém informačním systému, které jsou orgánu veřejné moci zpřístupněné pro výkon agendy, nebo využívaných orgánem veřejné moci na základě souhlasu uživatele služby.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="identifikátor" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/má-identifikátor-formuláře">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  má identifikátor formuláře
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/název-formuláře">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  název formuláře
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="verze" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/verze">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  verze
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="úkon" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/umožňuje-činit-úkon">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  umožňuje činit úkon
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/digitální-úkon">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    Digitální úkon - Digitálním úkonem je úkon vykonávaný uživatelem služby vůči orgánu veřejné moci v rámci agendy a vedený v katalogu služeb jako úkon v elektronické podobě.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                  <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-úkonu-služby">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                        Má identifikátor úkonu služby - Automaticky (stejně jako v případě služby VS) generovaný kód sloužící pro databázové zpracování údajů.
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="U\d{1,8}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-název-úkonu-služby">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                        Má název úkonu služby - Podobně jako u služby se jedná o srozumitelný a výstižný název úkonu, aby bylo klientovi jasné, co je účelem úkonu. Název úkonu by měl výstižně popsat konkrétní krok (např. podání žádosti, výzva k doložení/doplnění žádosti, atd.).
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="služba" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/umožňuje-činit-úkon-služby">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  umožňuje činit úkon služby
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/služba-veřejné-správy">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    Služba veřejné správy - Služba veřejné správy představuje funkci (činnost) úřadu, která je vědomě poskytnuta konkrétním OVM konkrétnímu příjemci služby podle příslušného právního předpisu tak, že přináší příjemci vnímanou hodnotu, ať už v podobě benefitu nebo splnění zákonné povinnosti. Evidují se pouze takové služby VS, během nichž dochází k interakci mezi OVM a klientem či naopak, nikoli k interakci mezi OVM a OVM. Na službu VS lze také pohlížet jako na dosažení práva či naplnění povinnosti klienta, které nelze splnit jinak než interakcí či sérií interakcí mezi klientem a OVM. Služba se dělí podle toho, zdali je iniciována klientem nebo vykonávaná z moci úřední. Každá služba se skládá z nejméně jednoho úkonu.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                  <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-služby">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                        Má identifikátor služby - Automaticky (stejně jako v případě agendy nebo činnosti) generovaný kód sloužící pro databázové zpracování údajů.
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="S\d{1,6}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-název-služby">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                        Má název služby - Název by měl klientovi stručně a jasně vystihnout, o jakou službu se jedná. Důležité je, aby byl nezaměnitelný s jinou službou, ale stále velmi jednoduchý, srozumitelný a zapamatovatelný. Měřítkem je, že název služby je používaný (bude používán) v běžném hovoru lidí.
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="agenda" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/umožňuje-činit-úkon-služby-agendy">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+                  umožňuje činit úkon služby agendy
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/agenda">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    Agenda - Ucelená oblast působnosti orgánu veřejné moci nebo ucelená oblast působení soukromoprávního uživatele údajů.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                  <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-kód-agendy">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                        Má kód agendy - Kód agendy je veřejným identifikátorem, který je jednoznačně přiřazen záznamu o agendě v číselníku agend v registru práv a povinností.
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="A\d{1,6}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-agendy">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                        Má název agendy - Název agendy je referenčním údajem o agendě vedený v Registru práv a povinností
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="počet_příloh" type="xs:integer" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/počet-příloh">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            počet příloh
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="přílohy">
+        <xs:complexType>
+          <xs:sequence>
+
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="příloha" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/obsahuje-přílohu">
+              <xs:annotation>
+                <xs:documentation xml:lang="cs">
+            obsahuje přílohu
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/příloha">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+              Příloha
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                  <xs:element name="název" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/název-přílohy">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                  název přílohy
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="název_souboru" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/název-souboru-přílohy">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                  název souboru přílohy
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                  <xs:element name="typ_média" sawsdl:modelReference="https://slovník.gov.cz/generický/digitální-objekty/pojem/má-typ-média">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                  má typ média - Určuje, o jaký typ digitálního objektu se jedná ve smyslu typu digitálního média a jeho konkrétního formátu (např. datový soubor, obrázek, video, audio, apod.).
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+                        <xs:restriction base="xs:anyURI">
+                          <xs:pattern value="http://www\.iana\.org/assignments/media-types/.*"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="obsah" type="xs:base64Binary" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-dokumenty/pojem/obsah-přílohy">
+                    <xs:annotation>
+                      <xs:documentation xml:lang="cs">
+                  obsah přílohy
+                      </xs:documentation>
+                    </xs:annotation>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="věc" type="formuláře:langString" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/259/2012/pojem/má-stručný-obsah-dokumentu">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            stručný obsah dokumentu
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="doručit_osvědčení_do_datové_schránky" type="xs:boolean" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/doručit-osvědčení-do-datové-schránky">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            doručit osvědčení do datové schránky
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="služba_v_přenesené_působnosti" type="xs:boolean" sawsdl:modelReference="https://slovník.gov.cz/generický/standard-pro-elektronické-formuláře/pojem/služba-v-přenesené-působnosti">
+        <xs:annotation>
+          <xs:documentation xml:lang="cs">
+            služba v přenesené působnosti
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="dokument" type="formuláře:dokument"/>
 </xs:schema>
