@@ -1,0 +1,34 @@
+@startuml
+set namespaceSeparator none
+class Dokument {
+  "číslo jednací": string
+  "k rukám": string
+  "stručný obsah dokumentu": text
+}
+
+class "Jednoznačný identifikátor" {
+  "řetězcová podoba jednoznačného identifikátoru": string
+}
+
+class Spis {
+  "Spisová značka": string
+}
+
+class "Evidenční číslo ze samostatné evidence dokumentů" {
+  "řetězcová podoba evidenčního čísla": string
+}
+
+class "Elektronický dokument" {
+}
+
+class "Osoba ve vztahu k dokumentu" {
+}
+
+Dokument <|-- "Elektronický dokument"
+Dokument -- "1..1" "Jednoznačný identifikátor" :  "je opatřen identifikátorem"
+Dokument -- "0..1" Spis :  "je zařazen do spisu"
+Dokument -- "0..1" "Evidenční číslo ze samostatné evidence dokumentů" :  "má evidenční číslo ze samostatné evidence dokumentů"
+Dokument -- "0..1" Dokument :  "je odpovědí na dokument"
+"Elektronický dokument" -- "1..1" "Osoba ve vztahu k dokumentu" :  "odesílatel"
+"Elektronický dokument" -- "1..1" "Osoba ve vztahu k dokumentu" :  "příjemce"
+@enduml
