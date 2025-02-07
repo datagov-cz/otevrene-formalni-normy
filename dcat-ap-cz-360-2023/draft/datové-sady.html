@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="cs">
+    <head>
+        <title>DCAT-AP-CZ: Specifikace pro vyhlášku č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy - část pro Datové sady</title>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <meta name="theme-color" content="#057fa5">
+        <meta name="msapplication-TileColor" content="#057fa5">
+        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+        <link rel="manifest" href="../../static/favicons/manifest.json">
+        <script class="remove" src="../../static/js/respec-odcz.js"></script>
+        <script class="remove">
+            var respecConfig = {
+                specStatus: "ED",
+                shortName: "dcat-ap-cz-360-2023-datové-sady",               
+                showPreviousVersion: false,
+                thisVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/datové-sady",
+                latestVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/",
+                editors: [{
+                  name: "Jakub Klímek",
+                  orcid: "0000-0001-7234-3051",
+                  company:    "Digitální a informační agentura",
+                  companyURL: "https://dia.gov.cz"
+                }],
+                inlineCSS: "true",
+                github: "https://github.com/datagov-cz/otevrene-formalni-normy/",
+                otherLinks: [{
+                    key: "Odkazy",
+                    data: [{
+                        value: "Portál o datech",
+                        href: "https://data.gov.cz"
+                    },{
+                        value: "Kontaktní e-mail",
+                        href: "mailto:otevrenadata@dia.gov.cz"
+                    }]
+                }]
+              };
+        </script>
+    </head>
+    <body>
+        <section id="abstract" class="introductory">
+            <h2>Abstrakt</h2>
+            <p>
+                Cílem tohoto dokumentu je poskytnout specifikaci pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>, který říká:
+                <cite>Údaje vedené v informačním systému jsou poskytovány podle otevřené formální normy pro rozhraní katalogů otevřených dat, kterou zveřejňuje Digitální a informační agentura způsobem umožňujícím dálkový přístup.</cite> v části pro záznamy o datových rozhraních, kdy datovým rozhraním odpovídají <a href="#třída-distribuce">Distribuce</a> datových sad.
+            </p>
+            </p>
+                Tento dokument pokrývá jednu z oblastí celkové <a href="./">DCAT-AP-CZ: Specifikace pro vyhlášku č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
+            </p>
+            
+        </section>
+
+        <section id="úvod">
+            <h2>Úvod</h2>
+            <p>
+                
+            </p>
+
+            <figure id="diagram"><img alt="Diagram datového modelu pro Datové sady" src="obrázky/dcat-ap-cz-360-2023-datové-sady.svg">
+                <figcaption>
+                    <a href="https://drive.google.com/file/d/1EmC_nUvsEeXERxL9AFqIR6pi_zLxQw3u">Diagram datového modelu</a> pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
+                    Šedě podbarvené části jsou specifikovány číselníky.
+                </figcaption>
+            </figure>
+            
+        </section>
+
+
+        <section id="položky-metadatového-záznamu">
+            <h2>Položky metadatového záznamu</h2>
+            
+            <p>
+                V této sekci jsou popsány položky metadatového záznamu relevantní pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>, které vychází ze základní <a href="../../dcat-ap-cz/">OFN DCAT-AP-CZ</a>.
+                Jedná se o standard založený na propojených datech, předpokládá se tedy znalost <a href="../../propojená-data/">Otevřené formální normy Propojená data</a>.
+            </p>
+            
+            <p>
+                DCAT-AP 3.0.0 rozlišuje čtyři základní typy entit.
+                Datovou sadu, její distribuci, datovou službu a datovou sérii.
+                Metadata datové sady ji popisují bez ohledu na konkrétní reprezentaci jejích dat.
+                Ta je popsána jako distribuce datové sady, která reprezentuje buď soubor ke stažení, nebo odkazuje na datovou službu, přes kterou jsou data k dispozici.
+                Distribucí může mít datová sada více, lišit se ale mohou pouze formátem souboru ke stažení (např. CSV či JSON) či způsobem zpřístupnění (soubor ke stažení či datová služba).
+                Obsahově by distribuce měly být ekvivalentní.
+                Datová série pak reprezentuje skupinu datových sad.
+                Jednotlivé datové sady v sérii se mohou lišit například geograficky, např. datové sady za jednotlivé obce, nebo časově, např. datové sady za jednotlivé roky.
+                Datovou sérii však mohou tvořit například i datové sady z jednoho informačního systému.
+                Datové série nemají vlastní distribuce.
+            </p>
+            
+            <section id="slovníky-prefixy">
+                <h3>Použité prefixy</h3>
+                
+                <p>
+                    V popisu položek a rozhraní budou použity následující prefixy slovníků.
+                </p>
+                
+                <ul>
+                    <li><code>dcat: http://www.w3.org/ns/dcat#</code></li>
+                    <li><code>dct: http://purl.org/dc/terms/</code></li>
+                    <li><code>foaf: http://xmlns.com/foaf/0.1/</code></li>
+                    <li><code>rdfs: http://www.w3.org/2000/01/rdf-schema#</code></li>
+                    <li><code>schema: http://schema.org/</code></li>
+                    <li><code>skos: http://www.w3.org/2004/02/skos/core#</code></li>
+                    <li><code>xsd: http://www.w3.org/2001/XMLSchema#</code></li>
+                    <li><code>vcard: http://www.w3.org/2006/vcard/ns#</code></li>
+                    <li><code>dcatap: http://data.europa.eu/r5r/</code></li>
+                    <li><code>pu: https://data.gov.cz/slovník/podmínky-užití/</code></li>
+                    <li><code>nkod: https://data.gov.cz/slovník/nkod/</code></li>
+                    <li><code>vsgov: https://slovník.gov.cz/veřejný-sektor/pojem/</code></li>
+                </ul>
+                
+                <p>
+                    Pro přehlednost zápisu budou použity ještě následující prefixy zkracující IRI vzorových entit.
+                </p>
+                
+                <ul>
+                    <li><code>sada: https://data.gov.cz/zdroj/datová-sada/1</code></li>
+                    <li><code>série: https://data.gov.cz/zdroj/datová-série/1</code></li>
+                    <li><code>katalog: https://data.gov.cz/zdroj/katalog/1</code></li>
+                    <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
+                    <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
+                    <li><code>čas: https://data.gov.cz/zdroj/datová-sada/1/časové-pokrytí</code></li>
+                    <li><code>kontakt: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
+                    <li><code>podmínky: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1/podmínky-užití</code></li>
+                    <li><code>správce: https://data.gov.cz/zdroj/katalog/kontaktní-bod</code></li>
+                </ul>
+            </section>
+
+            <section id="třída-katalog">
+                <h3>Třída: Katalog</h3>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Katalog
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Třída reprezentující datový katalog.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue">dcat:Catalog</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>katalog: a dcat:Catalog .</code>
+                    </dd>
+                </dl>
+                                
+                <section id="položky-katalog-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název datového katalogu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue.title">dct:title</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>, <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#Text">Text</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dct:title "Katalog otevřených dat Ministerstva dopravy"@cs, "Open Data Catalog of the Ministry of Transport"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+            
+                <section id="položky-katalog-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje volný text s popisem datového katalogu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue.description">dct:description</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>, <code>dct:description</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#Text">Text</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dct:description "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy."@cs, "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+            
+                <section id="položky-katalog-poskytovatel">
+                    <h4>Poskytovatel</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poskytovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytovatel datového katalogu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue.publisher">dct:publisher</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>poskytovatel</code>, <code>dct:publisher</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Pro OVM je to <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <a href="../../registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/#organ-verejne-moci">OVM z Registru práv a povinností (RPP)</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-katalog-kontaktní-bod">
+                    <h4>Kontaktní bod - jméno a email</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontaktní bod - jméno a email
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.contactpoint">dcat:contactPoint</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita podtypu <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">katalog: dcat:contactPoint správce: .
+
+správce: a vcard:Individual ;
+         vcard:fn "Jan Novák"@cs ;
+         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-katalog-domovská-stránka">
+                    <h4>Domovská stránka</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Domovská stránka
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na domovskou stránku lokálního katalogu, kam mohou chodit uživatelé.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue.homepage">foaf:homepage</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>domovská_stránka</code>, <code>foaf:homepage</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> webové stránky.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: foaf:homepage &lt;https://data.gov.cz/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-katalog-datová-sada">
+                    <h4>Vazba: Datová sada</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Datová sada
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na datové sady v katalogu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue.dataset">dcat:dataset</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>datová_sada</code>, <code>dcat:dataset</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-datová-sada">Datová sada</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>katalog: dcat:dataset sada: .</code>
+                        </dd>
+                    </dl>
+                </section>
+            
+            </section>
+
+            <section id="třída-datová-sada">
+                <h3>Třída: Datová sada</h3>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Datová sada
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Klíčová třída reprezentující poskytovanou informaci.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset">dcat:Dataset</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>sada: a dcat:Dataset .</code>
+                    </dd>
+                </dl>
+                                
+                <section id="položky-datová-sada-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.title">dct:title</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>, <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#Text">Text</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení"@cs, "Duty fulfillment inspections in the area of social security"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-popis">
+                    <h4>Popis</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje volný text s popisem datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.description">dct:description</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis</code>, <code>dct:description</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#Text">Text</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:description "Statistika kontrol plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení od roku 2009"@cs, "Social security statistics for 2009"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-poskytovatel">
+                    <h4>Poskytovatel</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Poskytovatel
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Poskytovatel datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.publisher">dct:publisher</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>poskytovatel</code>, <code>dct:publisher</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> <a href="../../registr-práv-a-povinností/orgány-veřejné-moci/2019-04-03/#organ-verejne-moci">OVM z Registru práv a povinností (RPP)</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-sada-téma">
+                    <h4>Téma</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Téma
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na kategorii či téma datové sady.
+                            Datová sada může být popsána více tématy.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.theme">dcat:theme</a>.
+                            Dle DCAT-AP 3.0.0 musí být alespoň jedno téma z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/data-theme">evropského číselníku datových témat</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>téma</code>, <code>dcat:theme</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Několik <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dcat:theme &lt;http://publications.europa.eu/resource/authority/data-theme/TRAN&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-periodicita">
+                    <h4>Periodicita aktualizace</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Periodicita aktualizace
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na frekvenci, se kterou je datová sada aktualizována.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.frequency">dct:accrualPeriodicity</a>.
+                            Dle DCAT-AP 3.0.0 jsou hodnoty z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/frequency">evropského číselníku frekvencí</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>periodicita_aktualizace</code>, <code>dct:accrualPeriodicity</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> položky z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/frequency">evropského číselníku frekvencí</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:accrualPeriodicity &lt;http://publications.europa.eu/resource/authority/frequency/MONTHLY&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-klíčová-slova">
+                    <h4>Klíčová slova</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Klíčová slova
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje klíčové slovo nebo značku popisující datovou sadu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.keyword">dcat:keyword</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>klíčové_slovo</code>, <code>dcat:keyword</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#Text">Text</a>, opakovaná vlastnost.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dcat:keyword "kontrola"@cs, "statistika"@cs, "inspection"@en, "statistics"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-sada-časové-pokrytí">
+                    <h4>Časové pokrytí</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časové pokrytí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na časový úsek pokrytý datovou sadou.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.temporalcoverage">dct:temporal</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>časové_pokrytí</code>, <code>dct:temporal</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <code>dct:PeriodOfTime</code> s vlastnostmi <code>dcat:startDate</code> a <code>dcat:endDate</code>, které mají datový typ <code>xsd:date</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">sada: dct:temporal čas: .
+
+čas: dcat:startDate "2009-01-01"^^xsd:date ;
+     dcat:endDate "2017-12-31"^^xsd:date .</pre>
+                        </dd>
+                    </dl>
+                </section>
+               
+                <section id="položky-datová-sada-kontaktní-bod">
+                    <h4>Kontaktní bod - jméno a email</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Kontaktní bod - jméno a email
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek k datové sadě.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.contactpoint">dcat:contactPoint</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Entita <a href="https://www.w3.org/TR/vcard-rdf/#d4e1819">podtypu</a> <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">sada: dcat:contactPoint kontakt: .
+
+kontakt: a vcard:Individual ;
+         vcard:fn "Jan Novák"@cs ;
+         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-dokumentace">
+                    <h4>Odkaz na dokumentaci</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na dokumentaci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na stránku nebo dokument o datové sadě.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.landingpage">foaf:page</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dokumentace</code>, <code>foaf:page</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">URL</a> webové stránky dokumentace.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: foaf:page &lt;https://data.cssz.cz/documentation/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-specifikace">
+                    <h4>Odkaz na specifikaci</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na specifikaci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na specifikaci, jíž se datová sada řídí.
+                            Takovou specifikací jsou zejména <a href="https://ofn.gov.cz">Otevřené formální normy</a>.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.conformsto">dct:conformsTo</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>specifikace</code>, <code>dct:conformsTo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL specifikace.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/turistické-cíle/2020-07-01/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-eurovoc">
+                    <h4>Klasifikace dle EuroVoc</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Klasifikace dle EuroVoc
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na kategorii či téma datové sady dle EuroVoc.
+                            Datová sada může být popsána více tématy.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.theme">dcat:theme</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>koncept_euroVoc</code>, <code>dcat:theme</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> konceptu z <a href="https://op.europa.eu/cs/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc">evropského tezauru EuroVoc</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dcat:theme &lt;http://eurovoc.europa.eu/1001&gt;, &lt;http://eurovoc.europa.eu/4050&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-týká-se-pojmu">
+                    <h4>Týká se pojmu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Pojem
+                        </dd>
+                        <dt>
+                            Týká se pojmu
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na pojmy z datových slovníků, kterých se datová sada týká.
+                            Datová sada bývá popsána více pojmy.
+                            Odpovídá vlastnosti <a href="https://slovník.gov.cz/prohlížíme/pojem?iri=https://slovník.gov.cz/veřejný-sektor/pojem/týká-se-pojmu">vsgov:týká-se-pojmu</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>týká_se_pojmu</code>, <code>vsgov:týká-se-pojmu</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Více <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> pojmů z datových slovníků dle <a href="../../slovníky/#třída-pojem">OFN Slovníky</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: vsgov:týká-se-pojmu &lt;https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič&gt;, &lt;https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič-evidovaný-v-registru-řidičů&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-časové-rozlišení">
+                    <h4>Časové rozlišení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Časové rozlišení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost určuje časové rozlišení dat v datové sadě.
+                            Jedná se o nejmenší časový rozdíl v datové sadě.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.temporalresolution">dcat:temporalResolution</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>časové_rozlišení</code>, <code>dcat:temporalResolution</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="https://www.w3.org/TR/xmlschema11-2/#duration"><code>xsd:duration</code></a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>P1D</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-sada-příslušný-právní-předpis">
+                    <h4>Příslušný právní předpis</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Příslušný právní předpis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost se používá pro indikaci příslušného právního předpisu předepisujícího vznik datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.applicablelegislation">dcatap:applicableLegislation</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> příslušného právního předpisu ve formátu <a href="https://eur-lex.europa.eu/eli-register/about.html">ELI</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <ul>
+                                <li>Pro označení HVDs: <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code></li>
+                                <li>Pro označení otevřených dat: <code>http://data.europa.eu/eli/dir/2019/1024/oj</code></li>
+                                <li>Pro označení datových sad inventárního seznamu dle DGA: <code>http://data.europa.eu/eli/reg/2022/868/oj</code></li>
+                                <li>Pro označení dynamických dat: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6</code></li>
+                                <li>Pro označení dat z veřejných registrů dle § 5a odst. 1 zákona č. 106/1999 Sb.: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1</code></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-sada-je-součástí">
+                    <h4>Vazba: Je součástí</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Je součástí
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na datovou sérii, jejíž je tato datová sada součástí.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.inseries">dcat:inSeries</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>je_součástí</code>, <code>dcat:inSeries</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> entity typu <a href="#třída-datová-série">Datové série</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná pro datové sady v datové sérii.
+                        </dd>
+                        <dt>
+                            Příklady
+                        </dt>
+                        <dd>
+                            <code>sada: dcat:inSeries &lt;https://datový.katalog.cz/zdroj/datové-sady/série1&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-sada-distribuce">
+                    <h4>Vazba: Distribuce datové sady</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Distribuce datové sady
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje z datové sady na její distribuci.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset.datasetdistribution">dcat:distribution</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>distribuce</code>, <code>dcat:distribution</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-distribuce">Distribuce datové sady</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná, pokud se nejedná o zastřešující datovou sadu datové série.
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>sada: dcat:distribution distribuce: .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-distribuce">
+                <h3>Třída: Distribuce datové sady</h3>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Distribuce datové sady
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Fyzická podoba datové sady v konkrétním formátu nebo jako konkrétní služba, nikdy obojí.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>distribuce: a dcat:Distribution.</code>
+                    </dd>
+                </dl>
+                
+
+                <section id="položky-distribuce-podmínky-užití">
+                    <h4>Specifikace podmínek užití</h4>
+                    
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Specifikace podmínek užití
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na strukturovaný popis podmínek užití této distribuce datové sady.
+                            Hodnoty se řídí <a href="https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti">návodem na stanovení podmínek užití</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>podmínky_užití</code>, <code>pu:specifikace</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <code>pu:Specifikace</code> s vlastnostmi <code>pu:autorské-dílo</code>, <code>pu:databáze-jako-autorské-dílo</code>, <code>pu:databáze-chráněná-zvláštními-právy</code> a <code>pu:osobní-údaje</code>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <pre class="turtle">distribuce: pu:specifikace podmínky: .
+
+podmínky: a pu:Specifikace ;
+          pu:autorské-dílo &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt; ;
+          pu:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
+          pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
+          pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; .</pre>
+                        </dd>
+                    </dl>
+                                        
+                </section>
+
+                <section id="položky-distribuce-přístupové-url">
+                    <h4>Přístupové URL</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Přístupové URL
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL, pomocí kterého se lze dostat k distribuci datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.accessURL">dcat:accessURL</a>.
+                            Pro účely katalogů otevřených dat v ČR je hodnota této vlastnosti buďto stejná jako <a href="#položky-distribuce-url-stažení">odkaz na stažení souboru</a> v případě distribuce reprezentující soubor ke stažení, nebo stejná jako <a href="#položky-datová-služba-přístupový-bod">přístupový bod</a> v případě distribuce reprezentující datovou službu.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>přístupové_url</code>, <code>dcat:accessURL</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Přístupové URL distribuce datové sady.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:accessURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-příslušný-právní-předpis">
+                    <h4>Příslušný právní předpis</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Příslušný právní předpis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost se používá pro indikaci příslušného právního předpisu předepisujícího vznik distribuce datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.applicablelegislation">dcatap:applicableLegislation</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> příslušného právního předpisu ve formátu <a href="https://eur-lex.europa.eu/eli-register/about.html">ELI</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <ul>
+                                <li>Pro označení HVDs: <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code></li>
+                                <li>Pro označení otevřených dat: <code>http://data.europa.eu/eli/dir/2019/1024/oj</code></li>
+                                <li>Pro označení datových sad inventárního seznamu dle DGA: <code>http://data.europa.eu/eli/reg/2022/868/oj</code></li>
+                                <li>Pro označení dynamických dat: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6</code></li>
+                                <li>Pro označení dat z veřejných registrů dle § 5a odst. 1 zákona č. 106/1999 Sb.: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1</code></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-název">
+                    <h4>Název distribuce datové sady</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název distribuce datové sady
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název distribuce.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.title">dct:title</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>, <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Text
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení v CSV."@cs, "CSV representation of inspections in the area of social security."@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-distribuce-soubor">
+                <h3>Třída: Distribuce - Soubor ke stažení</h3>
+
+                <p>
+                    Jedná se o variantu třídy <a href="#třída-distribuce">Distribuce</a> pro reprezentaci souboru ke stažení.
+                    Následující položky se používají navíc k těm společným pro všechny distribuce.
+                </p>
+
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Distribuce datové sady - Soubor ke stažení
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Fyzická podoba datové sady v konkrétním formátu.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>distribuce: a dcat:Distribution.</code>
+                    </dd>
+                </dl>
+
+                <section id="položky-distribuce-url-stažení">
+                    <h4>Odkaz na stažení souboru</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na stažení souboru
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL, které je přímým odkazem na stažitelný soubor v daném formátu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.downloadURL">dcat:downloadURL</a>. 
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>soubor_ke_stažení</code>, <code>dcat:downloadURL</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL souboru ke stažení.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:downloadURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-formát">
+                    <h4>Formát souboru ke stažení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Formát souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na typ souboru s distribucí.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.format">dct:format</a>.
+                            Dle DCAT-AP 3.0.0 jsou hodnoty z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>formát</code>, <code>dct:format</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI položky z <a href="https://op.europa.eu/cs/web/eu-vocabularies/at-dataset/-/resource/dataset/file-type">evropského číselníku typů souboru</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-media-type">
+                    <h4>Media type souboru ke stažení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Media type souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na typ média distribuce tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.mediatype">dcat:mediaType</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ_média</code>, <code>dcat:mediaType</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-schéma">
+                    <h4>Odkaz na strojově čitelné schéma souboru ke stažení</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na strojově čitelné schéma souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na ustanovené schéma, jímž se popisovaná distribuce řídí.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.linkedschemas">dct:conformsTo</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>schéma</code>, <code>dct:conformsTo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL schématu.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dct:conformsTo &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni-schema.json&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-kompresní-formát">
+                    <h4>Media type kompresního formátu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Media type použitého kompresního formátu souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na media typ kompresního formátu souboru ke stažení tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
+                            Kompresní formát určuje techniku použitou ke zmenšení velikosti jednoho souboru ke stažení.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.compressionformat">dcat:compressFormat</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ_média_komprese</code>, <code>dcat:compressFormat</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-distribuce-balíčkovací-formát">
+                    <h4>Media type balíčkovacího formátu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Media type použitého balíčkovacího formátu souboru ke stažení
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na media typ balíčkovacího formátu souboru ke stažení tak, jak je definováno v oficiálním rejstříku typů médií spravovaném IANA [[!IANA-MEDIA-TYPES]].
+                            Balíčkovací formát určuje techniku použitou k zabalení více souborů do jednoho.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.packagingformat">dcat:packageFormat</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>typ_média_balíčku</code>, <code>dcat:packageFormat</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            IRI Media type z <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">rejstříku IANA</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:packageFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+            
+            <section id="třída-distribuce-služba">
+                <h3>Třída: Distribuce - Datová služba</h3>
+
+                <p>
+                    Jedná se o variantu třídy <a href="#třída-distribuce">Distribuce</a> pro reprezentaci distribuce pomocí datové služby.
+                    Následující položky se používají navíc k těm společným pro všechny distribuce.
+                </p>
+
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Distribuce datové sady
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Fyzická podoba datové sady jako konkrétní datová služba.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>distribuce: a dcat:Distribution.</code>
+                    </dd>
+                </dl>
+
+                <section id="položky-distribuce-přístupová-služba">
+                    <h4>Vazba: Přístupová služba</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Přístupová služba
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Datová služba zpřístupňující distribuci datové sady.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution.accessservice">dcat:accessService</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>přístupová_služba</code>, <code>dcat:accessService</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="#třída-datová-služba">Datová služba</a>
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>distribuce: dcat:accessService služba: .</code>
+                        </dd>
+                    </dl>
+                </section>
+
+            </section>
+
+            <section id="třída-datová-služba">
+                <h3>Třída: Datová služba</h3>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Datová služba
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Třída reprezentující datovou službu zpřístupňující data datové sady.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService">dcat:DataService</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>služba: a dcat:DataService .</code>
+                    </dd>
+                </dl>
+                
+                <section id="položky-datová-služba-název">
+                    <h4>Název</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Název
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje název datové služby.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService.title">dct:title</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>název</code>, <code>dct:title</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            Text
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>služba: dct:title "SPARQL endpoint České správy sociálního zabezpečení"@cs, "Czech Social Security Administration SPARQL endpoint"@en .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-služba-přístupový-bod">
+                    <h4>Přístupový bod</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Přístupový bod
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL přístupového bodu datové služby.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService.endpointURL">dcat:endpointURL</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>přístupový_bod</code>, <code>dcat:endpointURL</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Povinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.cssz.cz/sparql</code>
+                        </dd>
+                    </dl>
+                </section>
+
+                <section id="položky-datová-služba-příslušný-právní-předpis">
+                    <h4>Příslušný právní předpis</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Příslušný právní předpis
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost se používá pro indikaci příslušného právního předpisu předepisujícího vznik datové služby zpřístupňující datovou sadu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService.applicablelegislation">dcatap:applicableLegislation</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> příslušného právního předpisu ve formátu <a href="https://eur-lex.europa.eu/eli-register/about.html">ELI</a>.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <ul>
+                                <li>Pro označení datové služby zpřístupňující HVDs: <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code></li>
+                                <li>Pro označení datové služby zpřístupňující otevřená data: <code>http://data.europa.eu/eli/dir/2019/1024/oj</code></li>
+                                <li>Pro označení datové služby zpřístupňující dynamická data: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6</code></li>
+                                <li>Pro označení datové služby zpřístupňující data z veřejných registrů dle § 5a odst. 1 zákona č. 106/1999 Sb.: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1</code></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-služba-specifikace">
+                    <h4>Odkaz na specifikaci</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na specifikaci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na specifikaci, jíž se datová služba řídí.
+                            Takovou specifikací je například <a href="https://www.w3.org/TR/sparql11-protocol/">SPARQL</a>.
+                            Seznam možných hodnot lze nalézt například v <a href="https://github.com/OSGeo/Cat-Interop/blob/master/LinkPropertyLookupTable.csv">seznamu udržovaném Open Source Geospatial Foundation</a>.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService.conformsto">dct:conformsTo</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>specifikace</code>, <code>dct:conformsTo</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL specifikace.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>služba: dct:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-služba-dokumentace">
+                    <h4>Odkaz na dokumentaci</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Odkaz na dokumentaci
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost odkazuje na dokumentaci dále popisující datovou službu.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/2.2.0-hvd/#DataService.documentation">foaf:page</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>dokumentace</code>, <code>foaf:page</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL dokumentace.
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>služba: foaf:page &lt;https://www.data.cz/služba/dokumentace&gt; .</code>
+                        </dd>
+                    </dl>
+                </section>
+                
+                <section id="položky-datová-služba-popis-přístupového-bodu">
+                    <h4>Popis přístupového bodu</h4>
+                    <dl>
+                        <dt>
+                            Jméno
+                        </dt>
+                        <dd>
+                            Popis přístupového bodu
+                        </dd>
+                        <dt>
+                            Popis
+                        </dt>
+                        <dd>
+                            Tato vlastnost obsahuje URL popisu přístupového bodu datové služby.
+                            Odpovídá vlastnosti <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService.endpointdescription">dcat:endpointDescription</a>.
+                        </dd>
+                        <dt>
+                            Vlastnost
+                        </dt>
+                        <dd>
+                            <code>popis_přístupového_bodu</code>, <code>dcat:endpointDescription</code>
+                        </dd>
+                        <dt>
+                            Typ
+                        </dt>
+                        <dd>
+                            URL
+                        </dd>
+                        <dt>
+                            Povinnost
+                        </dt>
+                        <dd>
+                            Nepovinná
+                        </dd>
+                        <dt>
+                            Příklad
+                        </dt>
+                        <dd>
+                            <code>https://data.cssz.cz/sparql</code>
+                        </dd>
+                    </dl>
+                    
+                </section>
+
+            </section>
+
+            <section id="třída-datová-série">
+                <h3>Třída: Datová série</h3>
+
+                <p>
+                    Datová série zastřešuje související datové sady a série.
+                    Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému).
+                    Datová série je podtřídou <a href="#třída-datová-sada">Datové sady</a>, ale nemá vlastní distribuce.
+                    <a href="https://github.com/SEMICeu/DCAT-AP/issues/249">Související DCAT-AP issue o typech datových sérií</a>.
+                </p>
+                
+                <dl>
+                    <dt>
+                        Jméno
+                    </dt>
+                    <dd>
+                        Datová série
+                    </dd>
+                    <dt>
+                        Popis
+                    </dt>
+                    <dd>
+                        Třída reprezentující datovou sérii.
+                        Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DatasetSeries">dcat:DatasetSeries</a>.
+                    </dd>
+                    <dt>
+                        Třída
+                    </dt>
+                    <dd>
+                        <code>série: a dcat:DatasetSeries .</code>
+                    </dd>
+                </dl>
+            </section>
+
+        </section>
+
+    </body>
+</html>
