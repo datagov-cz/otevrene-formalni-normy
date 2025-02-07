@@ -329,47 +329,84 @@
                         <a href="příklady/isvs.ttl">Stáhnout RDF Turtle</a>.
                     </p>
                     <pre class="turtle">
-@prefix l365-2000: &lt;https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/&gt; .
-@prefix l360-2023: &lt;https://slovník.gov.cz/legislativní/sbírka/360/2023/pojem/&gt; .
-@prefix způsoby-získání: &lt;https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/&gt; .
-@prefix způsoby-sdílení: &lt;https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/&gt; .
-@prefix typy-obsahu: &lt;https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/&gt; .
 @prefix isvs: &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/&gt; .
+@prefix l360-2023: &lt;https://slovník.gov.cz/legislativní/sbírka/360/2023/pojem/&gt; .
+@prefix l365-2000: &lt;https://slovník.gov.cz/legislativní/sbírka/365/2000/pojem/&gt; .
+@prefix způsoby-získání: &lt;https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/&gt; .
+@prefix typy-obsahu: &lt;https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/&gt; .
+@prefix způsoby-sdílení: &lt;https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/&gt; .
 
-isvs:1000 a l365-2000:informační-systém-veřejné-správy ;
-    l360-2023:má-způsob-získání-sdílených-údajů způsoby-získání:vlastní, způsoby-získání:provozní ;
-    l360-2023:má-způsob-sdílení-údajů způsoby-sdílení:poskytované-na-žádost, způsoby-sdílení:veřejně-přístupné ;
-    l360-2023:má-typ-obsahu-sdílených-údajů typy-obsahu:identifikační, typy-obsahu:evidenční ;
+isvs:7596 a l365-2000:informační-systém-veřejné-správy;
+    l360-2023:má-typ-obsahu-sdílených-údajů
+        typy-obsahu:statistické , typy-obsahu:identifikační;
+    l360-2023:má-způsob-sdílení-údajů
+        způsoby-sdílení:veřejně-přístupné;
+    l360-2023:má-způsob-získání-sdílených-údajů
+        způsoby-získání:vlastní;
     l365-2000:zahrnuje
-        &lt;https://data.gov.cz/zdroj/datové-sady/66003008/1476120151&gt;, 
-        &lt;https://data.gov.cz/zdroj/datové-sady/66003008/1471764192&gt; .
-</pre>
+        &lt;https://data.gov.cz/zdroj/datové-sady/17651921/464176b975928a3102369abead2a335e&gt; ,
+        &lt;https://data.gov.cz/zdroj/datové-sady/17651921/3eb22170cc15d37fbd9cad552b2a0526&gt; ,
+        &lt;https://data.gov.cz/zdroj/datové-sady/17651921/0bfbeafc910512d988efe02f83601bf2&gt; .
+
+isvs:1000 a l365-2000:informační-systém-veřejné-správy;
+    l360-2023:má-typ-obsahu-sdílených-údajů
+        typy-obsahu:evidenční , typy-obsahu:statistické;
+    l360-2023:má-způsob-sdílení-údajů
+        způsoby-sdílení:poskytované-na-žádost;
+    l360-2023:má-způsob-získání-sdílených-údajů
+        způsoby-získání:základních-registrů , způsoby-získání:jiných-agend;
+    l365-2000:zahrnuje
+        &lt;https://data.gov.cz/zdroj/datové-sady/66003008/1471764192&gt; ,
+        &lt;https://data.gov.cz/zdroj/datové-sady/66003008/1476120151&gt; .</pre>
                 </aside>                
                 
                 <aside class="example" title="Vzorový soubor ISVS ve formátu JSON-LD">
                     <p>
-                        <a href="příklady/isvs.jsonld">JSON-LD</a>, <a href="schémata/isvs.json">JSON schéma</a>, <a href="kontexty/isvs.jsonld">JSON-LD kontext</a>.
+                        <a href="příklady/isvs.jsonld">JSON-LD</a>, <a href="schémata/isvs.json">JSON schéma pro jeden ISVS</a>, <a href="schémata/více-isvs.json">JSON schéma pro více ISVS</a>, <a href="kontexty/isvs.jsonld">JSON-LD kontext</a>.
                     </p>
-                    <pre class="json">{
-  "@context": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/isvs.jsonld",
-  "id": "isvs:1000",
-  "typ": "Informační systém veřejné správy",
-  "způsob_získání_sdílených_údajů": [
-    "způsoby-získání:jiných-agend",
-    "způsoby-získání:základních-registrů"
-  ],
-  "způsob_sdílení_údajů": [
-    "způsoby-sdílení:poskytované-na-žádost"
-  ],
-  "typ_obsahu_sdílených_údajů": [
-    "typy-obsahu:statistické",
-    "typy-obsahu:evidenční"
-  ],
-  "zahrnuje": [
-    "https://data.gov.cz/zdroj/datové-sady/66003008/1476120151",
-    "https://data.gov.cz/zdroj/datové-sady/66003008/1471764192"
-  ]
-}</pre>
+                    <pre class="json">[
+    {
+        "@context": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/isvs.jsonld",
+        "id": "isvs:1000",
+        "typ": "Informační systém veřejné správy",
+        "způsob_získání_sdílených_údajů": [
+            "způsoby-získání:jiných-agend",
+            "způsoby-získání:základních-registrů"
+        ],
+        "způsob_sdílení_údajů": [
+            "způsoby-sdílení:poskytované-na-žádost"
+        ],
+        "typ_obsahu_sdílených_údajů": [
+            "typy-obsahu:statistické",
+            "typy-obsahu:evidenční"
+        ],
+        "zahrnuje": [
+            "https://data.gov.cz/zdroj/datové-sady/66003008/1476120151",
+            "https://data.gov.cz/zdroj/datové-sady/66003008/1471764192"
+        ]
+    },
+    {
+        "@context": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/isvs.jsonld",
+        "id": "isvs:7596",
+        "typ": "Informační systém veřejné správy",
+        "způsob_získání_sdílených_údajů": [
+            "způsoby-získání:vlastní"
+        ],
+        "způsob_sdílení_údajů": [
+            "způsoby-sdílení:veřejně-přístupné"
+        ],
+        "typ_obsahu_sdílených_údajů": [
+            "typy-obsahu:identifikační",
+            "typy-obsahu:statistické",
+            "typy-obsahu:statistické"
+        ],
+        "zahrnuje": [
+            "https://data.gov.cz/zdroj/datové-sady/17651921/0bfbeafc910512d988efe02f83601bf2",
+            "https://data.gov.cz/zdroj/datové-sady/17651921/3eb22170cc15d37fbd9cad552b2a0526",
+            "https://data.gov.cz/zdroj/datové-sady/17651921/464176b975928a3102369abead2a335e"
+        ]
+    }
+]</pre>
                 </aside>
 
             </section>            
