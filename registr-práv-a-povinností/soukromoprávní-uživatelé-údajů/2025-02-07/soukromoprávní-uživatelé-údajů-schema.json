@@ -1,0 +1,362 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/soukromoprávní-uživatelé-údajů/2025-02-07/soukromoprávní-uživatelé-údajů-schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Soukromoprávní uživatel údajů",
+        "description": "Soukromoprávním uživatelem údajů se rozumí podnikající fyzická osoba nebo právnická osoba, která není orgánem veřejné moci a je podle jiného právního předpisu oprávněna využívat údaje ze základního registru nebo z agendového informačního systému.",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "identifikátor",
+          "název",
+          "vznik"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^soukromoprávní-uživatel-údajů/[0-9]{8}\\.9999$",
+            "examples": [
+              "soukromoprávní-uživatel-údajů/12345678.9999"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "soukromoprávní-uživatel-údajů"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "soukromoprávní-uživatel-údajů"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "identifikátor": {
+            "title": "Má identifikátor soukromoprávního uživatele údajů",
+            "description": "Jednoznačný identifikátor soukromoprávního uživatele údajů. Identifikátor je referenčním údajem.",
+            "type": "string",
+            "pattern": "^[0-9]{8}\\.9999$",
+            "examples": [
+              "28195604.9999"
+            ]
+          },
+          "název": {
+            "title": "Má obchodní firmu nebo název nebo označení osoby nebo jméno nebo  popřípadně jména nebo  a příjmení soukromoprávního uživatele údajů",
+            "description": "Pojmenovává soukromprávního uživatele údajů názvem, který je oficiálním pojmenováním soukromoprávního uživatele údajů. Jedná se o referenční údaj převzatý z registru osob.",
+            "type": "object",
+            "required": [
+
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "ičo": {
+            "title": "Má identifikační číslo osoby soukromoprávního uživatele údajů",
+            "description": "Identifikační číslo osoby soukromoprávního uživatele údajů. Jedná se o refrenční údaj.",
+            "type": "string",
+            "pattern": "^[0-9]{8}$",
+            "examples": [
+              "28195604"
+            ]
+          },
+          "datové-schránky": {
+            "title": "Má datovou schránku soukromoprávního uživatele údajů",
+            "description": "Určuje datovou schránku soukromoprávního uživatele údajů. Datová schránka soukromoprávního uživatele údajů vedená v Registru práv a povinností je referenčním údajem a je převzata z registru osob. Soukromoprávní uživatel údajů může mít více datových schránek a má alespoň jednu. Jedna datová schránka patří nejvýše jednomu soukromoprávnímu uživateli údajů.",
+            "type": "array",
+            "items": {
+              "title": "Datová schránka",
+              "description": "Datová schránka tak, jak je definována v zákoně č. 300/2008 Sb.",
+              "type": "object",
+              "required": [
+                "id",
+                "type",
+                "typ-ds",
+                "identifikátor-ds"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^datová-schránka/[0-9a-z]{7}$",
+                  "examples": [
+                    "datová-schránka/0abcdef"
+                  ]
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "datová-schránka"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "datová-schránka"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "typ-ds": {
+                  "title": "Má typ datové schránky",
+                  "description": "Určuje typ datové schránky z číselníku typů datových schránek.",
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^typ-datové-schránky/[[A-Z_-]+$",
+                  "examples": [
+                    "typ-datové-schránky/OVM"
+                  ]
+                },
+                "identifikátor-ds": {
+                  "title": "Má identifikátor datové schránky",
+                  "description": "Jednoznačný identifikátor datové schránky.",
+                  "type": "string",
+                  "pattern": "^[0-9a-z]{7}$",
+                  "examples": [
+                    "0abcdef"
+                  ]
+                }
+              }
+            }
+          },
+          "ustanovení-esbírka": {
+            "title": "Je oprávněn k využívání údajů ná základě ustanovení",
+            "description": "Určuje právní předpis a označení jeho ustanovení, na jehož základě je soukromoprávní uživatel údajů oprávněn k využívání údajů ze základních registrů nebo z agendových informačních systémů.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^/eli/(.*\\/)+.*",
+              "examples": [
+                "/eli/cz/sb/1988/62/2002-06-04/dokument/norma/cast_2/hlava_1/dil_1/oddil_1/par_3/odst_3"
+              ]
+            }
+          },
+          "ustanovení-ostatní": {
+            "title": "Je oprávněn k využívání údajů ná základě ustanovení",
+            "description": "Určuje právní předpis a označení jeho ustanovení, na jehož základě je soukromoprávní uživatel údajů oprávněn k využívání údajů ze základních registrů nebo z agendových informačních systémů.",
+            "type": "array",
+            "items": {
+              "title": "Ustanovení právního předpisu",
+              "description": "Ustanovení právního předpisu je identifikovatelná součást právního předpisu, např. jeho paragraf, odstavec nebo písmeno.",
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "ustanovení-právního-předpisu-ostatní"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "ustanovení-právního-předpisu-ostatní"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "článek": {
+                  "title": "Má článek ustanovení",
+                  "type": "string"
+                },
+                "paragraf": {
+                  "title": "Má paragraf ustanovení",
+                  "description": "Označení paragrafu ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "odstavec": {
+                  "title": "Má odstavec ustanovení",
+                  "description": "Označení odstavce ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "písmeno": {
+                  "title": "Má písmeno ustanovení",
+                  "description": "Označení písmene ustanovení právního předpisu.",
+                  "type": "string"
+                },
+                "číslo": {
+                  "title": "Má číslo právního předpisu",
+                  "description": "Číslo právního předpisu v rámci jeho roku vydání uvedeně ve Sbírce zákonů České republiky.",
+                  "type": "string"
+                },
+                "rok": {
+                  "title": "Má rok právního předpisu",
+                  "description": "Rok vydání právního předpisu ve Sbírce zákonů České republiky.\"@cs",
+                  "type": "string",
+                  "pattern": "[0-9]{4}"
+                },
+                "účinnost-znění": {
+                  "title": "Má účinnost znění právního předpisu",
+                  "type": "string",
+                  "format": "date"
+                }
+              }
+            }
+          },
+          "seznam-kategorií": {
+            "title": "Má zařazený subjekt",
+            "description": "Určuje orgán veřejné moci nebo soukromoprávního uživatele údajů zařazený do kategorie.",
+            "type": "array",
+            "items": {
+              "title": "Zařazení do kategorie",
+              "description": "Zařazení orgánu veřejné moci nebo soukromoprávního uživatele údajů do kategorie",
+              "type": "object",
+              "required": [
+                "kategorie",
+                "zařazení-od"
+              ],
+              "properties": {
+                "kategorie": {
+                  "title": "Zařazuje do kategorie",
+                  "description": "Určuje kategorii, do které je orgán veřejné moci nebo soukromoprávní uživatel údajů zařazen.",
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^kategorie-spuú/KU[0-9]+$",
+                  "examples": [
+                    "kategorie-spuú/KU4"
+                  ]
+                },
+                "zařazení-od": {
+                  "title": "Má datum zařazení do kategorie",
+                  "description": "Datum, ke kterému byl nebo bude orgán veřejné moci nebo soukromoprávní uživatel údajů  do kategorie zařazen.",
+                  "type": "string",
+                  "format": "date"
+                },
+                "zařazení-do": {
+                  "title": "Má datum vyřazení z kategorie",
+                  "description": "Datum, ke kterému byl nebo bude orgán veřejné moci nebo soukromoprávní uživatel údajů z kategorie vyřazen.",
+                  "type": "string",
+                  "format": "date"
+                },
+                "přímé-zařazení": {
+                  "title": "Přímé zařazení do kategorie",
+                  "description": "Pomocný atribut určující, zda je orgán veřejné moci nebo soukromoprávní uživatel údajů zařazen do kategorie přímo nebo prostřednictvím další kategorie. Pokud je přímo členem dané kategorie, je hodnota „ano“. Pokud je členem jiné kategorie a ta je součástí dané kategorie, bude hodnota „ne“.",
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "adresa-sídla": {
+            "title": "Má adresu sídla soukromoprávního uživatele údajů",
+            "description": "Adresa sídla soukromoprávního uživatele údajů, pokud takovou adresu má. Adresa sídla je referenční údaj. Je vyjádřena referencí do Registru územní identifikace, adres a nemovitostí. Je převzata z registru osob. Jeden soukromoprávní uživatel údajů může mít nejvýše jednu adresu místa sídla.",
+            "type": "object",
+            "required": [
+              "id",
+              "kód"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]+$",
+                "examples": [
+                  "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
+                ]
+              },
+              "kód": {
+                "title": "Má kód adresního místa",
+                "description": "Referenční vazba na referenční údaj o adrese v registru územní identifikace.",
+                "type": "string",
+                "pattern": "^[0-9]+$",
+                "examples": [
+                  "22305190"
+                ]
+              }
+            }
+          },
+          "adresa-místa-podnikání": {
+            "title": "Má adresu místa podnikání soukromoprávního uživatele údajů",
+            "description": "Adresa místa podnikání soukromoprávního uživatele údajů, pokud takovou adresu má. Adresa místa podnikání je referenční údaj. Je vyjádřena referencí do Registru územní identifikace, adres a nemovitostí. Je převzata z registru osob. Jeden soukromoprávní uživatel údajů může mít nejvýše jednu adresu místa podnikání.",
+            "type": "object",
+            "required": [
+              "id",
+              "kód"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]+$",
+                "examples": [
+                  "https://linked.cuzk.cz/resource/ruian/adresni-misto/22305190"
+                ]
+              },
+              "kód": {
+                "title": "Má kód adresního místa",
+                "description": "Referenční vazba na referenční údaj o adrese v registru územní identifikace.",
+                "type": "string",
+                "pattern": "^[0-9]+$",
+                "examples": [
+                  "22305190"
+                ]
+              }
+            }
+          },
+          "vznik": {
+            "title": "Má datum vzniku soukromoprávního uživatele údajů",
+            "description": "Datum, ke kterému soukromoprávní uživatel údajů vznikl nebo byl zapsán do evidence, je-li se zápisem do evidence spojen vznik soukromoprávního uživatele údajů.",
+            "type": "string",
+            "format": "date"
+          },
+          "zánik": {
+            "title": "Má datum zániku soukromoprávního uživatele údajů",
+            "description": "Datum, ke kterému soukromoprávní uživatel údajů zanikl nebo byl vymazán z evidence, je-li s výmazem z evidence spojen zánik soukromoprávního uživatele údajů.",
+            "type": "string",
+            "format": "date"
+          },
+          "pozastavení-od": {
+            "title": "Má pozastavené působení soukromoprávního uživatele údajů od",
+            "description": "Datum, od kterého má soukromoprávní uživatel údajů pozastavené působení.",
+            "type": "string",
+            "format": "date"
+          },
+          "pozastavení-do": {
+            "title": "Má pozastavené působení soukromoprávního uživatele údajů do",
+            "description": "Datum, do kterého má soukromoprávní uživatel údajů pozastavené působení.",
+            "type": "string",
+            "format": "date"
+          },
+          "přerušení-od": {
+            "title": "Má přerušené působení soukromoprávního uživatele údajů od",
+            "description": "Datum, do kterého má soukromoprávní uživatel údajů přerušené působení.",
+            "type": "string",
+            "format": "date"
+          },
+          "přerušení-do": {
+            "title": "Má přerušené působení soukromoprávního uživatele údajů do",
+            "description": "Datum, od kterého má soukromoprávní uživatel údajů přerušené působení.",
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@startuml
+set namespaceSeparator none
+class "Soukromoprávní uživatel údajů" {
+  "Má datum vzniku soukromoprávního uživatele údajů": date
+  "Má datum zániku soukromoprávního uživatele údajů": date
+  "Má identifikační číslo osoby soukromoprávního uživatele údajů": string
+  "Má identifikátor soukromoprávního uživatele údajů": string
+  "Má obchodní firmu nebo název nebo označení osoby nebo jméno nebo  popřípadně jména nebo  a příjmení soukromoprávního uživatele údajů": text
+  "Má pozastavené působení soukromoprávního uživatele údajů do": date
+  "Má pozastavené působení soukromoprávního uživatele údajů od": date
+  "Má přerušené působení soukromoprávního uživatele údajů do": date
+  "Má přerušené působení soukromoprávního uživatele údajů od": date
+}
+
+class "Orgán veřejné moci nebo soukromoprávní uživatel údajů" {
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+class "adresní místo" {
+}
+
+class "Datová schránka" {
+}
+
+class "Zařazení do kategorie" {
+  "Přímé zařazení do kategorie": boolean
+  "Má datum zařazení do kategorie": date
+  "Má datum vyřazení z kategorie": date
+}
+
+class Kategorie {
+}
+
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů" <|-- "Soukromoprávní uživatel údajů"
+"Soukromoprávní uživatel údajů" -- "Ustanovení právního předpisu" :  "Je oprávněn k využívání údajů ná základě ustanovení"
+"Soukromoprávní uživatel údajů" -- "0..1" "adresní místo" :  "Má adresu místa podnikání soukromoprávního uživatele údajů"
+"Soukromoprávní uživatel údajů" -- "0..1" "adresní místo" :  "Má adresu sídla soukromoprávního uživatele údajů"
+"Soukromoprávní uživatel údajů" -- "Datová schránka" :  "Má datovou schránku soukromoprávního uživatele údajů"
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů" -- "Zařazení do kategorie" :  "Má zařazený subjekt"
+"Zařazení do kategorie" -- "1..1" Kategorie :  "Zařazuje do kategorie"
+@enduml

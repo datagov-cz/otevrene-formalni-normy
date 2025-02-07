@@ -1,0 +1,56 @@
+@startuml
+set namespaceSeparator none
+class "Orgán veřejné moci" {
+  "Má identifikátor orgánu veřejné moci": string
+  "Má název orgánu veřejné moci": string
+  "Je vnitřní organizační jednotkou": string
+  "Má identifikační číslo osoby orgánu veřejné moci": string
+  "Má datum zahájení výkonu působnosti orgánu veřejné moci": string
+  "Má datum ukončení výkonu působnosti orgánu veřejné moci": string
+  "Má pozastavený výkon působnosti orgánu veřejné moci od": string
+  "Má pozastavený výkon působnosti orgánu veřejné moci do": string
+  "Má přerušený výkon působnosti orgánu veřejné moci od": string
+  "Má přerušený výkon působnosti orgánu veřejné moci do": string
+}
+
+class "Orgán veřejné moci nebo soukromoprávní uživatel údajů" {
+}
+
+class "Datová schránka" {
+}
+
+class "Ustanovení právního předpisu" {
+}
+
+class "Zařazení do kategorie" {
+  "Má datum zařazení do kategorie": string
+  "Má datum vyřazení z kategorie": string
+  "Přímé zařazení do kategorie": string
+}
+
+class Kategorie {
+}
+
+class "adresní místo" {
+  "Má kód adresního místa": string
+}
+
+class "Osoba stojící v čele orgánu veřejné moci" {
+  "Má jméno a příjmení osoby stojící v čele orgánu veřejné moci": string
+}
+
+class "Pracoviště" {
+}
+
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů" <|-- "Orgán veřejné moci"
+"Orgán veřejné moci" -- "Datová schránka" :  "Má datovou schránku orgánu veřejné moci"
+"Orgán veřejné moci" -- "Ustanovení právního předpisu" :  "Vykonává působnost na základě ustanovení"
+"Orgán veřejné moci" -- "0..1" "adresní místo" :  "Má adresu místa pobytu orgánu veřejné moci"
+"Orgán veřejné moci" -- "0..1" "adresní místo" :  "Má adresu sídla orgánu veřejné moci"
+"Orgán veřejné moci" -- "Osoba stojící v čele orgánu veřejné moci" :  "Stojí v čele orgánu veřejné moci"
+"Orgán veřejné moci" -- "Pracoviště" :  "Má pracoviště vykonávající úkon"
+"Orgán veřejné moci" -- "0..1" "Orgán veřejné moci" :  "má nadřízený orgán veřejné moci"
+"Orgán veřejné moci nebo soukromoprávní uživatel údajů" -- "Zařazení do kategorie" :  "Má zařazený subjekt"
+"Zařazení do kategorie" -- "1..1" Kategorie :  "Zařazuje do kategorie"
+"adresní místo" -- "Pracoviště" :  "Má adresu pracoviště"
+@enduml
