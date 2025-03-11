@@ -1,30 +1,28 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/schémata/datová-sada.json",
-    "type": "object",
     "title": "Datová sada",
+    "description": "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.",
+    "type": "object",
     "required": [
         "@context",
-        "typ",
         "iri",
+        "typ",
         "název",
         "popis",
-        "poskytovatel",
-        "téma",
-        "periodicita_aktualizace",
         "klíčové_slovo",
-        "prvek_rúian"
+        "je_zahrnuta_v_isvs"
     ],
     "properties": {
         "@context": {
-            "oneOf": [               
+            "oneOf": [
                 {
-                    "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/dcat-ap-cz-360-2023.jsonld"
+                    "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/datová-sada.jsonld"
                 },
                 {
                     "type": "array",
                     "contains": {
-                        "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/dcat-ap-cz-360-2023.jsonld"
+                        "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/datová-sada.jsonld"
                     },
                     "items": {
                         "type": "string",
@@ -32,6 +30,11 @@
                     }
                 }
             ]
+        },
+        "iri": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^https://"
         },
         "typ": {
             "oneOf": [
@@ -49,75 +52,116 @@
                 }
             ]
         },
-        "iri": {
-            "type": "string",
-            "format": "iri",
-            "title": "Identifikátor",
-            "minLength": 8,
-            "pattern": "^https://",
-            "examples": [
-                "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
-            ]
-        },
         "název": {
-            "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+            "title": "název",
+            "description": "Název datové sady",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
         },
         "popis": {
-            "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+            "title": "popis",
+            "description": "Volný text s popisem datové sady",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
         },
         "poskytovatel": {
+            "title": "poskytovatel",
+            "description": "Poskytovatel datové sady",
             "type": "string",
             "format": "iri",
-            "title": "Poskytovatel",
+            "pattern": "^https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/[^/]+$",
             "examples": [
                 "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008"
             ]
         },
         "téma": {
+            "title": "klasifikace dle EuroVoc",
+            "description": "Kategorie či téma datové sady dle EuroVoc.",
             "type": "array",
             "items": {
                 "type": "string",
                 "format": "iri",
-                "title": "Téma",
+                "pattern": "^http://publications.europa.eu/resource/authority/data-theme/[^/]+$",
                 "examples": [
-                    "http://publications.europa.eu/resource/authority/data-theme/TRAN"
-                ]
-            },
-            "contains": {
-                "type": "string",
-                "format": "iri",
-                "title": "Téma",
-                "pattern": "^http\\://publications\\.europa\\.eu/resource/authority/data-theme/.*$",
-                "examples": [
-                    "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+                    "http://publications.europa.eu/resource/authority/data-theme/GOVE"
                 ]
             }
         },
         "periodicita_aktualizace": {
+            "title": "periodicita aktualizace",
+            "description": "Frekvence, se kterou je datová sada aktualizována.",
             "type": "string",
             "format": "iri",
-            "title": "Periodicita aktualizace",
-            "pattern": "^http\\://publications\\.europa\\.eu/resource/authority/frequency/.*$",
+            "pattern": "^http://publications\\.europa\\.eu/resource/authority/frequency/.*$",
             "examples": [
                 "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
             ]
         },
         "klíčové_slovo": {
-            "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/více-textů.json"
-        },
-        "prvek_rúian": {
-            "type": "array",
-            "items": {
-                "type": "string",
-                "format": "iri",
-                "title": "Související geografické území - prvek z RÚIAN",
-                "pattern": "^https\\://linked\\.cuzk\\.cz/resource/ruian/.*$",
-                "examples": [
-                    "https://linked.cuzk.cz/resource/ruian/stat/1"
-                ]
+            "title": "klíčové slovo",
+            "description": "Klíčové slovo nebo značka popisující zdroj.",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "required": [],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
             }
         },
+        "časové_rozlišení": {
+            "title": "časové rozlišení",
+            "description": "Časové rozlišení dat v datové sadě. Jedná se o nejmenší časový rozdíl v datové sadě.",
+            "type": "string"
+        },
         "časové_pokrytí": {
+            "title": "časové pokrytí",
+            "description": "Časový úsek pokrytý datovou sadou",
             "type": "object",
             "required": [
                 "typ"
@@ -140,42 +184,71 @@
                     ]
                 },
                 "začátek": {
+                    "title": "datum začátku",
+                    "description": "The start of the period.",
                     "type": "string",
-                    "format": "date",
-                    "title": "Datum začátku",
-                    "examples": [
-                        "2019-01-01+01:00"
-                    ]
+                    "format": "date"
                 },
                 "konec": {
+                    "title": "datum konce",
+                    "description": "Konec doby trvání.",
                     "type": "string",
-                    "format": "date",
-                    "title": "Datum konce",
-                    "examples": [
-                        "2019-01-01+01:00"
-                    ]
+                    "format": "date"
                 }
             }
         },
         "kontaktní_bod": {
+            "title": "kontaktní bod",
+            "description": "Kontaktní informace, které mohou být využity pro zasílání připomínek k datové sadě.",
             "type": "object",
             "required": [
                 "typ"
             ],
             "properties": {
                 "typ": {
-                    "type": "string",
-                    "examples": [
-                        "Organizace"
+                    "oneOf": [
+                        {
+                            "const": "Kontaktní bod"
+                        },
+                        {
+                            "type": "array",
+                            "contains": {
+                                "const": "Kontaktní bod"
+                            },
+                            "items": {
+                                "type": "string"
+                            }
+                        }
                     ]
                 },
                 "jméno": {
-                    "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+                    "title": "jméno",
+                    "description": "The formatted text corresponding to the name of the object",
+                    "type": "object",
+                    "additionalProperties": {
+                        "title": "Hodnota v jiném jazyce",
+                        "type": "string"
+                    },
+                    "required": [
+                        "cs"
+                    ],
+                    "properties": {
+                        "cs": {
+                            "title": "Hodnota v českém jazyce",
+                            "type": "string"
+                        },
+                        "en": {
+                            "title": "Hodnota v anglickém jazyce",
+                            "type": "string"
+                        }
+                    }
                 },
                 "e-mail": {
+                    "title": "email",
+                    "description": "To specify the electronic mail address for communication with the object",
                     "type": "string",
                     "format": "iri",
-                    "pattern": "^mailto\\:",
+                    "pattern": "^mailto:[^@]+@[^@]+",
                     "examples": [
                         "mailto:sekretariat.190@mdcr.cz"
                     ]
@@ -183,101 +256,160 @@
             }
         },
         "dokumentace": {
-            "type": "string",
-            "format": "iri",
-            "title": "Dokumentace",
-            "examples": [
-                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
-            ]
-        },
-        "specifikace": {
+            "title": "dokumentace",
+            "description": "A page or document about this Dataset.",
             "type": "array",
             "items": {
                 "type": "string",
                 "format": "iri",
-                "title": "Specifikace",
+                "pattern": "^https://.*",
+                "examples": [
+                    "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                ]
+            }
+        },
+        "specifikace": {
+            "title": "specifikace",
+            "description": "Specifikace, jíž se datová sada řídí.",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^https://.*",
                 "examples": [
                     "https://ofn.gov.cz/turistické-cíle/2020-07-01/"
                 ]
             }
         },
         "koncept_euroVoc": {
+            "title": "klasifikace dle EuroVoc",
+            "description": "Kategorie či téma datové sady dle EuroVoc.",
             "type": "array",
             "items": {
                 "type": "string",
                 "format": "iri",
-                "pattern": "^http\\://eurovoc\\.europa\\.eu/.*$",
-                "title": "Klasifikace dle EuroVoc",
+                "pattern": "^http://eurovoc.europa.eu/[0-9]+$",
                 "examples": [
-                    "http://eurovoc.europa.eu/1001"
+                    "http://eurovoc.europa.eu/4512"
                 ]
             }
         },
         "týká_se_pojmu": {
-            "type": "string",
-            "format": "iri",
-            "title": "Týká se pojmu",
-            "examples": [
-                "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/osoba"
-            ]
+            "title": "týká se pojmu",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "iri"
+            }
         },
         "je_zahrnuta_v_isvs": {
             "type": "string",
             "format": "iri",
-            "title": "Je zahrnuta v ISVS",
+            "pattern": "^https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/[^/]+$",
             "examples": [
-                "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/7596"
-            ]
-        },
-        "časové_rozlišení": {
-            "type": "string",
-            "title": "Časové rozlišení",
-            "examples": [
-                "P1D"
+                "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/3"
             ]
         },
         "je_součástí": {
+            "title": "je součástí",
+            "description": "A dataset series of which the dataset is part.",
             "type": "string",
-            "format": "iri",
-            "title": "Je součástí",
-            "examples": [
-                "https://lkod.mvcr.cz/zdroj/datové-série/12345"
-            ]
+            "format": "iri"
         },
         "právní_předpis": {
+            "title": "příslušný právní předpis",
+            "description": "Indikace příslušného právního předpisu předepisujícího vznik datové sady.",
             "type": "array",
             "items": {
                 "type": "string",
                 "format": "iri",
-                "example": [
+                "examples": [
                     "http://data.europa.eu/eli/reg_impl/2023/138/oj",
                     "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6"
-                ]        
+                ]
             }
         },
         "distribuce": {
+            "title": "distribuce",
+            "description": "Dostupná distribuce datové sady.",
             "type": "array",
             "items": {
-                "allOf": [
-                    {
-                        "title": "Distribuce",
+                "title": "Distribuce",
+                "description": "Konkrétní reprezentace datové sady. Datová sada může být dostupná v různých serializacích, které se mohou navzájem lišit různými způsoby, mimo jiné přirozeným jazykem, media-typem či formátem, schematickou organizací, časovým a prostorovým rozlišením, úrovní detailu či profily (které mohou specifikovat některé či všechny tyto rozdíly).",
+                "type": "object",
+                "required": [
+                    "iri",
+                    "typ",
+                    "název",
+                    "podmínky_užití",
+                    "přístupové_url",
+                    "zprostředkovává_sdílení",
+                    "způsob_získání_sdílených_údajů",
+                    "způsob_sdílení_údajů",
+                    "typ_obsahu_sdílených_údajů"
+                ],
+                "properties": {
+                    "iri": {
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "typ": {
+                        "oneOf": [
+                            {
+                                "const": "Distribuce"
+                            },
+                            {
+                                "type": "array",
+                                "contains": {
+                                    "const": "Distribuce"
+                                },
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    },
+                    "název": {
+                        "title": "název",
+                        "description": "A name given to the distribution.",
+                        "type": "object",
+                        "additionalProperties": {
+                            "title": "Hodnota v jiném jazyce",
+                            "type": "string"
+                        },
+                        "required": [],
+                        "properties": {
+                            "cs": {
+                                "title": "Hodnota v českém jazyce",
+                                "type": "string"
+                            },
+                            "en": {
+                                "title": "Hodnota v anglickém jazyce",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "podmínky_užití": {
+                        "title": "Specifikace podmínek užití",
                         "type": "object",
                         "required": [
-                            "typ",
                             "iri",
-                            "podmínky_užití",
-                            "přístupové_url"
+                            "typ"
                         ],
                         "properties": {
+                            "iri": {
+                                "type": "string",
+                                "format": "iri"
+                            },
                             "typ": {
                                 "oneOf": [
                                     {
-                                        "const": "Distribuce"
+                                        "const": "Specifikace podmínek užití"
                                     },
                                     {
                                         "type": "array",
                                         "contains": {
-                                            "const": "Distribuce"
+                                            "const": "Specifikace podmínek užití"
                                         },
                                         "items": {
                                             "type": "string"
@@ -285,288 +417,301 @@
                                     }
                                 ]
                             },
-                            "iri": {
+                            "autorské_dílo": {
+                                "title": "Autorské dílo",
                                 "type": "string",
-                                "format": "iri",
-                                "title": "Identifikátor",
-                                "minLength": 8,
-                                "pattern": "^https?://",
-                                "examples": [
-                                    "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
-                                ]
+                                "format": "iri"
                             },
-                            "podmínky_užití": {
+                            "autor": {
+                                "title": "Jména autorů díla",
                                 "type": "object",
-                                "title": "Specifikace podmínek užití",
-                                "required": [
-                                    "typ",
-                                    "autorské_dílo",
-                                    "databáze_jako_autorské_dílo",
-                                    "databáze_chráněná_zvláštními_právy",
-                                    "osobní_údaje"
-                                ],
+                                "additionalProperties": {
+                                    "title": "Hodnota v jiném jazyce",
+                                    "type": "string"
+                                },
+                                "required": [],
                                 "properties": {
-                                    "typ": {
-                                        "oneOf": [
-                                            {
-                                                "const": "Specifikace podmínek užití"
-                                            },
-                                            {
-                                                "type": "array",
-                                                "contains": {
-                                                    "const": "Specifikace podmínek užití"
-                                                },
-                                                "items": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        ]
+                                    "cs": {
+                                        "title": "Hodnota v českém jazyce",
+                                        "type": "string"
                                     },
-                                    "autorské_dílo": {
-                                        "type": "string",
-                                        "title": "Autorská práva",
-                                        "format": "iri",
-                                        "examples": [
-                                            "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
-                                            "https://creativecommons.org/licenses/by/4.0/"
-                                        ]
-                                    },
-                                    "autor": {
-                                        "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
-                                    },
-                                    "databáze_jako_autorské_dílo": {
-                                        "type": "string",
-                                        "title": "Autorskoprávní ochrana databáze jako díla",
-                                        "format": "iri",
-                                        "examples": [
-                                            "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
-                                            "https://creativecommons.org/licenses/by/4.0/"
-                                        ]
-                                    },
-                                    "autor_databáze": {
-                                        "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
-                                    },
-                                    "databáze_chráněná_zvláštními_právy": {
-                                        "type": "string",
-                                        "title": "Zvláštní práva pořizovatele databáze",
-                                        "format": "iri",
-                                        "examples": [
-                                            "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
-                                            "https://creativecommons.org/publicdomain/zero/1.0/"
-                                        ]
-                                    },
-                                    "osobní_údaje": {
-                                        "oneOf": [
-                                            {
-                                                "const": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
-                                            },
-                                            {
-                                                "const": "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
-                                            }
-                                        ]
+                                    "en": {
+                                        "title": "Hodnota v anglickém jazyce",
+                                        "type": "string"
                                     }
                                 }
                             },
-                            "přístupové_url": {
+                            "databáze_jako_autorské_dílo": {
+                                "title": "Originální databáze",
                                 "type": "string",
-                                "format": "iri",
-                                "title": "Přístupové URL",
-                                "minLength": 8,
-                                "pattern": "^https://",
-                                "examples": [
-                                    "https://portal.cisjr.cz/sparql"
+                                "format": "iri"
+                            },
+                            "autor_databáze": {
+                                "title": "Jména autorů originální databáze",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "title": "Hodnota v jiném jazyce",
+                                    "type": "string"
+                                },
+                                "required": [],
+                                "properties": {
+                                    "cs": {
+                                        "title": "Hodnota v českém jazyce",
+                                        "type": "string"
+                                    },
+                                    "en": {
+                                        "title": "Hodnota v anglickém jazyce",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "databáze_chráněná_zvláštními_právy": {
+                                "title": "Zvláštní právo pořizovatele databáze",
+                                "type": "string",
+                                "format": "iri"
+                            },
+                            "osobní_údaje": {
+                                "title": "Osobní údaje",
+                                "type": "string",
+                                "format": "iri"
+                            }
+                        }
+                    },
+                    "přístupové_url": {
+                        "title": "přístupové URL",
+                        "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "právní_předpis": {
+                        "title": "příslušný právní předpis",
+                        "description": "The legislation that mandates the creation or management of the Distribution.",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri",
+                            "examples": [
+                                "http://data.europa.eu/eli/reg_impl/2023/138/oj",
+                                "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6"
+                            ]
+                        }
+                    },
+                    "schéma": {
+                        "title": "Strojově čitelné schéma souboru ke stažení",
+                        "description": "Ustanovené schéma, jímž se popisovaná distribuce řídí.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "přístupová_služba": {
+                        "title": "přístupová služba",
+                        "description": "Umístění či přístupový bod zpřístupňující distribuci datové sady.",
+                        "type": "object",
+                        "required": [
+                            "iri",
+                            "typ",
+                            "název",
+                            "přístupový_bod"
+                        ],
+                        "properties": {
+                            "iri": {
+                                "type": "string",
+                                "format": "iri"
+                            },
+                            "typ": {
+                                "oneOf": [
+                                    {
+                                        "const": "Datová služba"
+                                    },
+                                    {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Datová služba"
+                                        },
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
                                 ]
                             },
                             "název": {
-                                "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+                                "title": "název",
+                                "description": "Název datové služby.",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "title": "Hodnota v jiném jazyce",
+                                    "type": "string"
+                                },
+                                "required": [],
+                                "properties": {
+                                    "cs": {
+                                        "title": "Hodnota v českém jazyce",
+                                        "type": "string"
+                                    },
+                                    "en": {
+                                        "title": "Hodnota v anglickém jazyce",
+                                        "type": "string"
+                                    }
+                                }
                             },
-                            "právní_předpis": {
+                            "specifikace": {
+                                "title": "specifikace",
+                                "description": "Specifikaci, jíž se datová služba řídí.",
                                 "type": "array",
                                 "items": {
                                     "type": "string",
                                     "format": "iri",
-                                    "example": [
+                                    "pattern": "^https://.*",
+                                    "examples": [
+                                        "https://ofn.gov.cz/turistické-cíle/2020-07-01/"
+                                    ]
+                                }
+                            },
+                            "dokumentace": {
+                                "title": "dokumentace",
+                                "description": "Dokumentace dále popisující datovou službu.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri",
+                                    "pattern": "^https://.*",
+                                    "examples": [
+                                        "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                                    ]
+                                }
+                            },
+                            "právní_předpis": {
+                                "title": "příslušný právní předpis",
+                                "description": "The legislation that mandates the creation or management of the Data Service.",
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri",
+                                    "examples": [
                                         "http://data.europa.eu/eli/reg_impl/2023/138/oj",
                                         "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6"
                                     ]
                                 }
+                            },
+                            "přístupový_bod": {
+                                "title": "přístupový bod služby",
+                                "description": "Kořenové umístění nebo hlavní přístupový bod služby (IRI přístupné přes Web).",
+                                "type": "string",
+                                "format": "iri"
+                            },
+                            "popis_přístupového_bodu": {
+                                "title": "popis přístupového bodu služby",
+                                "description": "Popis přístupového bodu služby včetně operací, parametrů apod.",
+                                "type": "string",
+                                "format": "iri"
                             }
                         }
                     },
-                    {
-                        "oneOf": [
-                            {
-                                "title": "Datová služba",
-                                "type": "object",
-                                "required": [
-                                    "přístupová_služba"
-                                ],
-                                "properties": {                                    
-                                    "přístupová_služba": {
-                                        "type": "object",
-                                        "required": [
-                                            "typ",
-                                            "název",
-                                            "přístupový_bod",
-                                            "iri"
-                                        ],
-                                        "properties": {
-                                            "typ": {
-                                                "oneOf": [
-                                                    {
-                                                        "const": "Datová služba"
-                                                    },
-                                                    {
-                                                        "type": "array",
-                                                        "contains": {
-                                                            "const": "Datová služba"
-                                                        },
-                                                        "items": {
-                                                            "type": "string"
-                                                        }
-                                                    }
-                                                ]
-                                            },
-                                            "iri": {
-                                                "type": "string",
-                                                "format": "iri",
-                                                "title": "Identifikátor",
-                                                "minLength": 8,
-                                                "pattern": "^https?://"
-                                            },
-                                            "název": {
-                                                "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
-                                            },
-                                            "přístupový_bod": {
-                                                "type": "string",
-                                                "format": "iri",
-                                                "title": "Přístupový bod",
-                                                "minLength": 8,
-                                                "pattern": "^https://",
-                                                "examples": [
-                                                    "http://www.iana.org/assignments/media-types/image/tiff"
-                                                ]
-                                            },
-                                            "specifikace": {
-                                                "oneOf": [
-                                                    {
-                                                        "type": "string",
-                                                        "format": "iri",
-                                                        "title": "Specifikace",
-                                                        "minLength": 8,
-                                                        "pattern": "^https://",
-                                                        "examples": [
-                                                            "https://www.w3.org/TR/sparql11-protocol/"
-                                                        ]
-                                                    },
-                                                    {
-                                                        "type": "array",
-                                                        "items": {
-                                                            "type": "string",
-                                                            "format": "iri",
-                                                            "title": "Specifikace",
-                                                            "minLength": 8,
-                                                            "pattern": "^https://",
-                                                            "examples": [
-                                                                "https://www.w3.org/TR/sparql11-protocol/"
-                                                            ]
-                                                        }
-                                                    }
-                                                ]
-                                            },
-                                            "popis_přístupového_bodu": {
-                                                "type": "string",
-                                                "format": "iri",
-                                                "title": "Popis přístupového bodu",
-                                                "minLength": 8,
-                                                "pattern": "^https://",
-                                                "examples": [
-                                                    "http://www.iana.org/assignments/media-types/image/tiff"
-                                                ]
-                                            },
-                                            "právní_předpis": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "string",
-                                                    "format": "iri",
-                                                    "example": [
-                                                        "http://data.europa.eu/eli/reg_impl/2023/138/oj",
-                                                        "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6"
-                                                    ]
-                                                }
-                                            }                    
+                    "zprostředkovává_sdílení": {
+                        "title": "zprostředkovává sdílení",
+                        "type": "object",
+                        "required": [
+                            "typ",
+                            "odpovídající_pojem",
+                            "způsob_získání_sdílených_údajů",
+                            "způsob_sdílení_údajů",
+                            "typ_obsahu_sdílených_údajů"
+                        ],
+                        "properties": {
+                            "typ": {
+                                "oneOf": [
+                                    {
+                                        "const": "Sdílení údaje"
+                                    },
+                                    {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Sdílení údaje"
+                                        },
+                                        "items": {
+                                            "type": "string"
                                         }
                                     }
-                                }
+                                ]
                             },
-                            {
-                                "title": "Soubor ke stažení",
-                                "type": "object",
-                                "required": [
-                                    "formát",
-                                    "typ_média",
-                                    "soubor_ke_stažení"
-                                ],
-                                "properties": {
-                                    "formát": {
-                                        "type": "string",
-                                        "format": "iri",
-                                        "pattern": "^http\\://publications\\.europa\\.eu/resource/authority/file-type/.*$",
-                                        "title": "Formát souboru ke stažení",
-                                        "examples": [
-                                            "http://publications.europa.eu/resource/authority/file-type/CSV"
-                                        ]
-                                    },
-                                    "typ_média": {
-                                        "type": "string",
-                                        "format": "iri",
-                                        "pattern": "^http\\://www\\.iana\\.org/assignments/media-types/.*$",
-                                        "title": "Typ média",
-                                        "examples": [
-                                            "http://www.iana.org/assignments/media-types/image/tiff"
-                                        ]
-                                    },
-                                    "schéma": {
-                                        "type": "string",
-                                        "format": "iri",
-                                        "title": "Strojově čitelné schéma souboru ke stažení",
-                                        "examples": [
-                                            "https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni-schema.json"
-                                        ]
-                                    },
-                                    "typ_média_komprese": {
-                                        "type": "string",
-                                        "format": "iri",
-                                        "pattern": "^http\\://www\\.iana\\.org/assignments/media-types/.*$",
-                                        "title": "Typ média komprese",
-                                        "examples": [
-                                            "http://www.iana.org/assignments/media-types/image/tiff"
-                                        ]
-                                    },
-                                    "typ_média_balíčku": {
-                                        "type": "string",
-                                        "format": "iri",
-                                        "pattern": "^http\\://www\\.iana\\.org/assignments/media-types/.*$",
-                                        "title": "Typ média balíčku",
-                                        "examples": [
-                                            "http://www.iana.org/assignments/media-types/image/tiff"
-                                        ]
-                                    },
-                                    "soubor_ke_stažení": {
-                                        "type": "string",
-                                        "format": "iri",
-                                        "title": "URL Souboru ke stažení",
-                                        "minLength": 8,
-                                        "pattern": "^https://",
-                                        "examples": [
-                                            "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip"
-                                        ]
-                                    }
-                                }
+                            "odpovídající_pojem": {
+                                "title": "odpovídající pojem",
+                                "type": "string",
+                                "format": "iri"
+                            },
+                            "způsob_získání_sdílených_údajů": {
+                                "title": "je získán způsobem",
+                                "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
+                                "type": "string",
+                                "format": "iri"
+                            },
+                            "způsob_sdílení_údajů": {
+                                "title": "je sdílen způsobem",
+                                "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů",
+                                "type": "string",
+                                "format": "iri"
+                            },
+                            "typ_obsahu_sdílených_údajů": {
+                                "title": "je sdílen jako",
+                                "type": "string",
+                                "format": "iri"
                             }
-                        ]
+                        }
+                    },
+                    "způsob_získání_sdílených_údajů": {
+                        "title": "má způsob získání dat sdílených rozhraním",
+                        "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri"
+                        }
+                    },
+                    "způsob_sdílení_údajů": {
+                        "title": "má způsob sdílení rozhraním",
+                        "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "typ_obsahu_sdílených_údajů": {
+                        "title": "má typ obsahu sdíleného rozhraním",
+                        "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich obsahu na údaje: a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů",
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri"
+                        }
+                    },
+                    "formát": {
+                        "title": "formát souboru ke stažení",
+                        "description": "Tato vlastnost odkazuje na typ souboru s distribucí.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "typ_média": {
+                        "title": "typ média",
+                        "description": "Typ média distribuce definovaný v IANA.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "typ_média_komprese": {
+                        "title": "formát komprese",
+                        "description": "Formát komprese souboru, ve kterém jsou data poskytována v komprimované podobě, např. ke snížení velikosti souboru ke stažení.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "typ_média_balíčku": {
+                        "title": "formát balíčku",
+                        "description": "Balíčkový formát souboru, ve kterém je jeden či více souborů seskupeno dohromady, např. aby bylo možné stáhnout sadu souvisejících souborů naráz.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "soubor_ke_stažení": {
+                        "title": "Odkaz na stažení souboru",
+                        "description": "URL, které je přímým odkazem na stažitelný soubor v daném formátu.",
+                        "type": "string",
+                        "format": "iri"
                     }
-                ]
+                }
             }
         }
     }

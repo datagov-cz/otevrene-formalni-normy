@@ -1,19 +1,27 @@
 {
-	"$schema": "https://json-schema.org/draft/2020-12/schema",
-	"$id": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/schémata/katalog.json",
-	"type": "object",
-	"title": "Katalog",
-	"required": ["@context","typ", "iri", "název", "popis", "poskytovatel", "datová_sada"],
-	"properties": {
-		"@context": {
-            "oneOf": [               
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/schémata/katalog.json",
+    "title": "Katalog",
+    "description": "Řízená kolekce metadat o datových sadách a datových službách",
+    "type": "object",
+    "required": [
+        "@context",
+        "iri",
+        "typ",
+        "název",
+        "popis",
+        "poskytovatel"
+    ],
+    "properties": {
+        "@context": {
+            "oneOf": [
                 {
-                    "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/dcat-ap-cz-360-2023.jsonld"
+                    "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/katalog.jsonld"
                 },
                 {
                     "type": "array",
                     "contains": {
-                        "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/dcat-ap-cz-360-2023.jsonld"
+                        "const": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/katalog.jsonld"
                     },
                     "items": {
                         "type": "string",
@@ -22,83 +30,155 @@
                 }
             ]
         },
-		"typ": {
-			"oneOf": [{
-				"const": "Katalog"
-				},{
-				"type": "array",
-				"contains": {
-					"const": "Katalog"
-				},
-				"items": {
-					"type": "string"
-				}
-			}]
-		},
-		"iri": {
-			"type": "string",
-			"format": "iri",
-			"title": "Identifikátor",
-			"minLength": 8,
-			"pattern": "^https?://",
-			"examples": [
-				"https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
-			]
-		},
-		"název": {
-			"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
-		},
-		"popis": {
-			"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
-		},
-		"poskytovatel": {
-			"type": "string",
-			"format": "iri",
-			"title": "Poskytovatel",
-			"examples": [
-				"https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008"
-			]
-		},
-		"kontaktní_bod": {
-			"type": "object",
-			"required": [ "typ" ],
-			"properties": {
-				"typ": {
-					"type": "string",
-					"examples": [ "Organizace" ]
-				},
-				"jméno": {
-					"$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
-				},
-				"e-mail": {
-					"type": "string",
-					"format": "iri",
-					"pattern": "^mailto\\:",
-					"examples": [
-						"mailto:sekretariat.190@mdcr.cz"
-					]
-				}
-			}
-		},
-		"domovská_stránka": {
-			"type": "string",
-			"format": "iri",
-			"title": "Domovská stránka",
-			"minLength": 8,
-			"pattern": "^https://",
-			"examples": [
-				"https://data.gov.cz/"
-			]
-		},
-		"datová_sada": {
-			"type": "array",
-			"items": {
-				"type": "string",
-				"format": "iri",
-				"minLength": 8,
-				"pattern": "^https://",					
-				"title": "Datová sada"
-			}
-		}
-	}
+        "iri": {
+            "type": "string",
+            "format": "iri"
+        },
+        "typ": {
+            "oneOf": [
+                {
+                    "const": "Katalog"
+                },
+                {
+                    "type": "array",
+                    "contains": {
+                        "const": "Katalog"
+                    },
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "název": {
+            "title": "název",
+            "description": "Tato vlastnost obsahuje název datového katalogu.",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [
+                "cs",
+                "en"
+            ],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
+        },
+        "popis": {
+            "title": "popis",
+            "description": "Tato vlastnost obsahuje volný text s popisem datového katalogu.",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [
+                "cs",
+                "en"
+            ],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
+        },
+        "poskytovatel": {
+            "title": "poskytovatel",
+            "description": "Poskytovatel datového katalogu.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/[^/]+$",
+            "examples": [
+                "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008"
+            ]
+        },
+        "kontaktní_bod": {
+            "title": "kontaktní bod",
+            "description": "Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.",
+            "type": "object",
+            "required": [
+                "typ"
+            ],
+            "properties": {
+                "typ": {
+                    "oneOf": [
+                        {
+                            "const": "Kontaktní bod"
+                        },
+                        {
+                            "type": "array",
+                            "contains": {
+                                "const": "Kontaktní bod"
+                            },
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "jméno": {
+                    "title": "jméno",
+                    "description": "The formatted text corresponding to the name of the object",
+                    "type": "object",
+                    "additionalProperties": {
+                        "title": "Hodnota v jiném jazyce",
+                        "type": "string"
+                    },
+                    "required": [
+                        "cs"
+                    ],
+                    "properties": {
+                        "cs": {
+                            "title": "Hodnota v českém jazyce",
+                            "type": "string"
+                        },
+                        "en": {
+                            "title": "Hodnota v anglickém jazyce",
+                            "type": "string"
+                        }
+                    }
+                },
+                "email": {
+                    "title": "email",
+                    "description": "To specify the electronic mail address for communication with the object",
+                    "type": "string",
+                    "format": "iri",
+                    "pattern": "^mailto:[^@]+@[^@]+",
+                    "examples": [
+                        "mailto:sekretariat.190@mdcr.cz"
+                    ]
+                }
+            }
+        },
+        "domovská_stránka": {
+            "title": "domovská stránka",
+            "description": "Tato vlastnost odkazuje na domovskou stránku lokálního katalogu, kam mohou chodit uživatelé.",
+            "type": "string",
+            "format": "iri"
+        },
+        "datová_sada": {
+            "title": "datová sada",
+            "description": "Kolekce dat, která je katalogizována v katalogu.",
+            "type": "array",
+            "items": {
+                "type": "string",
+                "format": "iri",
+                "pattern": "^https://"
+            }
+        }
+    }
 }
