@@ -340,7 +340,6 @@
                     "název",
                     "podmínky_užití",
                     "přístupové_url",
-                    "zprostředkovává_sdílení",
                     "způsob_získání_sdílených_údajů",
                     "způsob_sdílení_údajů",
                     "typ_obsahu_sdílených_údajů"
@@ -602,54 +601,58 @@
                             }
                         }
                     },
-                    "zprostředkovává_sdílení": {
+                    "sdílí_údaj": {
                         "title": "zprostředkovává sdílení",
-                        "type": "object",
-                        "required": [
-                            "typ",
-                            "odpovídající_pojem",
-                            "způsob_získání_sdílených_údajů",
-                            "způsob_sdílení_údajů",
-                            "typ_obsahu_sdílených_údajů"
-                        ],
-                        "properties": {
-                            "typ": {
-                                "oneOf": [
-                                    {
-                                        "const": "Sdílení údaje"
-                                    },
-                                    {
-                                        "type": "array",
-                                        "contains": {
+                        "type": "array",
+                        "items": {
+                            "title": "Sdílení údaje",
+                            "type": "object",
+                            "required": [
+                                "typ",
+                                "odpovídající_pojem",
+                                "způsob_získání_sdílených_údajů",
+                                "způsob_sdílení_údajů",
+                                "typ_obsahu_sdílených_údajů"
+                            ],
+                            "properties": {
+                                "typ": {
+                                    "oneOf": [
+                                        {
                                             "const": "Sdílení údaje"
                                         },
-                                        "items": {
-                                            "type": "string"
+                                        {
+                                            "type": "array",
+                                            "contains": {
+                                                "const": "Sdílení údaje"
+                                            },
+                                            "items": {
+                                                "type": "string"
+                                            }
                                         }
-                                    }
-                                ]
-                            },
-                            "odpovídající_pojem": {
-                                "title": "odpovídající pojem",
-                                "type": "string",
-                                "format": "iri"
-                            },
-                            "způsob_získání_sdílených_údajů": {
-                                "title": "je získán způsobem",
-                                "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
-                                "type": "string",
-                                "format": "iri"
-                            },
-                            "způsob_sdílení_údajů": {
-                                "title": "je sdílen způsobem",
-                                "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů",
-                                "type": "string",
-                                "format": "iri"
-                            },
-                            "typ_obsahu_sdílených_údajů": {
-                                "title": "je sdílen jako",
-                                "type": "string",
-                                "format": "iri"
+                                    ]
+                                },
+                                "odpovídající_pojem": {
+                                    "title": "odpovídající pojem",
+                                    "type": "string",
+                                    "format": "iri"
+                                },
+                                "způsob_získání_sdílených_údajů": {
+                                    "title": "je získán způsobem",
+                                    "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
+                                    "type": "string",
+                                    "format": "iri"
+                                },
+                                "způsob_sdílení_údajů": {
+                                    "title": "je sdílen způsobem",
+                                    "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů",
+                                    "type": "string",
+                                    "format": "iri"
+                                },
+                                "typ_obsahu_sdílených_údajů": {
+                                    "title": "je sdílen jako",
+                                    "type": "string",
+                                    "format": "iri"
+                                }
                             }
                         }
                     },
