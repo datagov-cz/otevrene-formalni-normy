@@ -1,5 +1,9 @@
 @startuml
 set namespaceSeparator none
+class Organizace {
+  "jméno": text
+}
+
 class Dokument {
 }
 
@@ -41,10 +45,6 @@ class "Téma EuroVoc" {
 }
 
 class Standard {
-}
-
-class "Kontaktní bod" {
-  "jméno": text
 }
 
 class "Časový interval" {
@@ -90,6 +90,7 @@ class "Formát souboru" {
 class Licence {
 }
 
+Organizace -- "0..1" "Emailová adresa" :  email
 Distribuce -- "1..*" "Způsob získání údaje" :  "má způsob získání dat sdílených rozhraním"
 Distribuce -- "1..1" "Způsob sdílení údaje" :  "má způsob sdílení rozhraním"
 Distribuce -- "1..*" "Typ obsahu údaje" :  "má typ obsahu sdíleného rozhraním"
@@ -115,15 +116,14 @@ Distribuce -- "0..1" Zdroj :  "Odkaz na stažení souboru"
 "Datová sada" -- "Téma EuroVoc" :  "klasifikace dle EuroVoc"
 "Datová sada" -- Standard :  specifikace
 "Datová sada" -- "0..1" Dokument :  dokumentace
-"Datová sada" -- "0..1" "Kontaktní bod" :  "kontaktní bod"
+"Datová sada" -- "0..1" Organizace :  "kontaktní bod"
 "Datová sada" -- "0..1" "Časový interval" :  "časové pokrytí"
 "Datová sada" -- "0..1" Frekvence :  "periodicita aktualizace"
 "Datová sada" -- "0..1" Poskytovatel :  poskytovatel
 "Datová sada" -- "0..1" "Série datových sad" :  "je součástí"
-"Kontaktní bod" -- "0..1" "Emailová adresa" :  email
 Katalog -- "Datová sada" :  "datová sada"
 Katalog -- "0..1" Dokument :  "domovská stránka"
-Katalog -- "0..1" "Kontaktní bod" :  "kontaktní bod​"
+Katalog -- "1..1" Organizace :  "kontaktní bod​"
 Katalog -- "1..1" Poskytovatel :  "poskytovatel​"
 "Datová služba" -- "0..1" Dokument :  "dokumentace​"
 "Datová služba" -- Standard :  "specifikace​"
