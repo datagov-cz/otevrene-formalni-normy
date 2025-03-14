@@ -347,18 +347,34 @@
                         "format": "iri"
                     },
                     "typ": {
-                        "oneOf": [
+                        "anyOf": [
                             {
-                                "const": "Distribuce"
+                                "const": [
+                                    "Distribuce",
+                                    "Datové rozhraní"
+                                ]
                             },
                             {
-                                "type": "array",
-                                "contains": {
-                                    "const": "Distribuce"
-                                },
-                                "items": {
-                                    "type": "string"
-                                }
+                                "allOf": [
+                                    {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Distribuce"
+                                        },
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    {
+                                        "type": "array",
+                                        "contains": {
+                                            "const": "Datové rozhraní"
+                                        },
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     },
