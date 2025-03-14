@@ -89,15 +89,15 @@
             
             <p>
                 DCAT-AP 3.0.0 rozlišuje čtyři základní typy entit.
-                Datovou sadu, její distribuci, datovou službu a datovou sérii.
+                Datovou sadu, její distribuci, datovou službu a sérii datových sad.
                 Metadata datové sady ji popisují bez ohledu na konkrétní reprezentaci jejích dat.
                 Ta je popsána jako distribuce datové sady, která reprezentuje buď soubor ke stažení, nebo odkazuje na datovou službu, přes kterou jsou data k dispozici.
                 Distribucí může mít datová sada více, lišit se ale mohou pouze formátem souboru ke stažení (např. CSV či JSON) či způsobem zpřístupnění (soubor ke stažení či datová služba).
                 Obsahově by distribuce měly být ekvivalentní.
-                Datová série pak reprezentuje skupinu datových sad.
+                Série datových sad pak reprezentuje skupinu datových sad.
                 Jednotlivé datové sady v sérii se mohou lišit například geograficky, např. datové sady za jednotlivé obce, nebo časově, např. datové sady za jednotlivé roky.
-                Datovou sérii však mohou tvořit například i datové sady z jednoho informačního systému.
-                Datové série nemají vlastní distribuce.
+                Sérii datových sad však mohou tvořit například i datové sady z jednoho informačního systému.
+                Série datových sad nemají vlastní distribuce.
             </p>
             
             <section id="slovníky-prefixy">
@@ -122,21 +122,6 @@
                     <li><code>vsgov: https://slovník.gov.cz/veřejný-sektor/pojem/</code></li>
                 </ul>
                 
-                <p>
-                    Pro přehlednost zápisu budou použity ještě následující prefixy zkracující IRI vzorových entit.
-                </p>
-                
-                <ul>
-                    <li><code>sada: https://data.gov.cz/zdroj/datová-sada/1</code></li>
-                    <li><code>série: https://data.gov.cz/zdroj/datová-série/1</code></li>
-                    <li><code>katalog: https://data.gov.cz/zdroj/katalog/1</code></li>
-                    <li><code>distribuce: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1</code></li>
-                    <li><code>služba: https://data.gov.cz/zdroj/datová-sada/1/distribuce/2/datová-služba</code></li>
-                    <li><code>čas: https://data.gov.cz/zdroj/datová-sada/1/časové-pokrytí</code></li>
-                    <li><code>kontakt: https://data.gov.cz/zdroj/datová-sada/1/kontaktní-bod</code></li>
-                    <li><code>podmínky: https://data.gov.cz/zdroj/datová-sada/1/distribuce/1/podmínky-užití</code></li>
-                    <li><code>správce: https://data.gov.cz/zdroj/katalog/kontaktní-bod</code></li>
-                </ul>
             </section>
 
             <section id="třída-katalog">
@@ -155,12 +140,6 @@
                     <dd>
                         Třída reprezentující datový katalog.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Catalogue">dcat:Catalog</a>.
-                    </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>katalog: a dcat:Catalog .</code>
                     </dd>
                 </dl>
                                 
@@ -184,7 +163,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>název</code>, <code>dct:title</code>
+                            <code>název</code>
                         </dd>
                         <dt>
                             Typ
@@ -197,12 +176,6 @@
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>katalog: dct:title "Katalog otevřených dat Ministerstva dopravy"@cs, "Open Data Catalog of the Ministry of Transport"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -227,7 +200,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>popis</code>, <code>dct:description</code>
+                            <code>popis</code>
                         </dd>
                         <dt>
                             Typ
@@ -240,12 +213,6 @@
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>katalog: dct:description "Otevřená data Ministerstva dopravy. Obsahuje datové sady o jízdních řádech a liniových vedeních veřejné dopravy."@cs, "Open data of the Ministry of Transport. It contains datasets regarding timetables of public transport."@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -270,7 +237,7 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>poskytovatel</code>, <code>dct:publisher</code>
+                            <code>poskytovatel</code>
                         </dd>
                         <dt>
                             Typ
@@ -283,12 +250,6 @@
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>katalog: dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -313,29 +274,19 @@
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                            <code>kontaktní_bod</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            Entita podtypu <code>vcard:Kind</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
+                            Entita typu <code>vcard:Organization</code> s vlastnostmi <code>vcard:fn</code> a <code>vcard:hasEmail</code>.
                         </dd>
                         <dt>
                             Povinnost
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <pre class="turtle">katalog: dcat:contactPoint správce: .
-
-správce: a vcard:Individual ;
-         vcard:fn "Jan Novák"@cs ;
-         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
                         </dd>
                     </dl>
                 </section>
@@ -360,7 +311,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>domovská_stránka</code>, <code>foaf:homepage</code>
+                            <code>domovská_stránka</code>
                         </dd>
                         <dt>
                             Typ
@@ -373,12 +324,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>katalog: foaf:homepage &lt;https://data.gov.cz/&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -403,7 +348,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>datová_sada</code>, <code>dcat:dataset</code>
+                            <code>datová_sada</code>
                         </dd>
                         <dt>
                             Typ
@@ -416,12 +361,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>katalog: dcat:dataset sada: .</code>
                         </dd>
                     </dl>
                 </section>
@@ -445,12 +384,6 @@ správce: a vcard:Individual ;
                         Klíčová třída reprezentující poskytovanou informaci.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Dataset">dcat:Dataset</a>.
                     </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>sada: a dcat:Dataset .</code>
-                    </dd>
                 </dl>
                                 
                 <section id="položky-datová-sada-název">
@@ -473,7 +406,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>název</code>, <code>dct:title</code>
+                            <code>název</code>
                         </dd>
                         <dt>
                             Typ
@@ -486,12 +419,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení"@cs, "Duty fulfillment inspections in the area of social security"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -516,7 +443,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>popis</code>, <code>dct:description</code>
+                            <code>popis</code>
                         </dd>
                         <dt>
                             Typ
@@ -529,12 +456,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dct:description "Statistika kontrol plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení od roku 2009"@cs, "Social security statistics for 2009"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -559,7 +480,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>poskytovatel</code>, <code>dct:publisher</code>
+                            <code>poskytovatel</code>
                         </dd>
                         <dt>
                             Typ
@@ -572,12 +493,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -604,25 +519,19 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>téma</code>, <code>dcat:theme</code>
+                            <code>téma</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            Několik <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a>.
+                            Několik <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a>, z nichž jedno musí být <code>http://publications.europa.eu/resource/authority/data-theme/GOVE</code>.
                         </dd>
                         <dt>
                             Povinnost
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dcat:theme &lt;http://publications.europa.eu/resource/authority/data-theme/TRAN&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -648,7 +557,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>periodicita_aktualizace</code>, <code>dct:accrualPeriodicity</code>
+                            <code>periodicita_aktualizace</code>
                         </dd>
                         <dt>
                             Typ
@@ -661,12 +570,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dct:accrualPeriodicity &lt;http://publications.europa.eu/resource/authority/frequency/MONTHLY&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -691,7 +594,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>klíčové_slovo</code>, <code>dcat:keyword</code>
+                            <code>klíčové_slovo</code>
                         </dd>
                         <dt>
                             Typ
@@ -704,12 +607,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dcat:keyword "kontrola"@cs, "statistika"@cs, "inspection"@en, "statistics"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -734,7 +631,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>časové_pokrytí</code>, <code>dct:temporal</code>
+                            <code>časové_pokrytí</code>
                         </dd>
                         <dt>
                             Typ
@@ -747,15 +644,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <pre class="turtle">sada: dct:temporal čas: .
-
-čas: dcat:startDate "2009-01-01"^^xsd:date ;
-     dcat:endDate "2017-12-31"^^xsd:date .</pre>
                         </dd>
                     </dl>
                 </section>
@@ -780,7 +668,7 @@ správce: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>kontaktní_bod</code>, <code>dcat:contactPoint</code>
+                            <code>kontaktní_bod</code>
                         </dd>
                         <dt>
                             Typ
@@ -793,16 +681,6 @@ správce: a vcard:Individual ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <pre class="turtle">sada: dcat:contactPoint kontakt: .
-
-kontakt: a vcard:Individual ;
-         vcard:fn "Jan Novák"@cs ;
-         vcard:hasEmail &lt;mailto:jan.novak@organizace.cz&gt; .</pre>
                         </dd>
                     </dl>
                 </section>
@@ -827,7 +705,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dokumentace</code>, <code>foaf:page</code>
+                            <code>dokumentace</code>
                         </dd>
                         <dt>
                             Typ
@@ -840,12 +718,6 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: foaf:page &lt;https://data.cssz.cz/documentation/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -871,7 +743,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>specifikace</code>, <code>dct:conformsTo</code>
+                            <code>specifikace</code>
                         </dd>
                         <dt>
                             Typ
@@ -884,12 +756,6 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dct:conformsTo &lt;https://ofn.gov.cz/turistické-cíle/2020-07-01/&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -915,25 +781,29 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>koncept_euroVoc</code>, <code>dcat:theme</code>
+                            <code>koncept_euroVoc</code>
                         </dd>
                         <dt>
                             Typ
                         </dt>
                         <dd>
-                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> konceptu z <a href="https://op.europa.eu/cs/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc">evropského tezauru EuroVoc</a>
+                            <a href="../../základní-datové-typy/2020-07-01/#url">IRI</a> konceptu z <a href="https://op.europa.eu/cs/web/eu-vocabularies/th-dataset/-/resource/dataset/eurovoc">evropského tezauru EuroVoc</a>.
+                            Doporučujeme použít zejména některé z následujících:
+                            <ol>
+                                <li>Informační systém - <a href="http://eurovoc.europa.eu/4359">euroVoc:4359</a></li>
+                                <li>Veřejná správa - <a href="http://eurovoc.europa.eu/77">euroVoc:77</a></li>
+                                <li>Elektronická správa (eGovernment) - <a href="http://eurovoc.europa.eu/6894">euroVoc:6894</a></li>
+                                <li>Databáze - <a href="http://eurovoc.europa.eu/4821">euroVoc:4821</a></li>
+                                <li>Kybernetická odolnost - <a href="http://eurovoc.europa.eu/17280">euroVoc:17280</a></li>
+                                <li>Evropský rámec interoperability - <a href="http://eurovoc.europa.eu/c_c10e7d2a">euroVoc:c_c10e7d2a</a></li>
+                                <li>Digitální transformace - <a href="http://eurovoc.europa.eu/c_658ff033">euroVoc:c_658ff033</a></li>
+                            </ol>
                         </dd>
                         <dt>
                             Povinnost
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dcat:theme &lt;http://eurovoc.europa.eu/1001&gt;, &lt;http://eurovoc.europa.eu/4050&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -959,7 +829,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>týká_se_pojmu</code>, <code>vsgov:týká-se-pojmu</code>
+                            <code>týká_se_pojmu</code>
                         </dd>
                         <dt>
                             Typ
@@ -972,12 +842,6 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: vsgov:týká-se-pojmu &lt;https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič&gt;, &lt;https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič-evidovaný-v-registru-řidičů&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1002,7 +866,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
+                            <code>právní_předpis</code>
                         </dd>
                         <dt>
                             Typ
@@ -1051,7 +915,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>je_součástí</code>, <code>dcat:inSeries</code>
+                            <code>je_součástí</code>
                         </dd>
                         <dt>
                             Typ
@@ -1064,12 +928,6 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná pro datové sady v datové sérii.
-                        </dd>
-                        <dt>
-                            Příklady
-                        </dt>
-                        <dd>
-                            <code>sada: dcat:inSeries &lt;https://datový.katalog.cz/zdroj/datové-sady/série1&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1094,7 +952,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>distribuce</code>, <code>dcat:distribution</code>
+                            <code>distribuce</code>
                         </dd>
                         <dt>
                             Typ
@@ -1107,12 +965,6 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná, pokud se nejedná o zastřešující datovou sadu datové série.
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>sada: dcat:distribution distribuce: .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1135,12 +987,6 @@ kontakt: a vcard:Individual ;
                     <dd>
                         Fyzická podoba datové sady v konkrétním formátu nebo jako konkrétní služba, nikdy obojí.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
-                    </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>distribuce: a dcat:Distribution.</code>
                     </dd>
                 </dl>
                 
@@ -1166,7 +1012,7 @@ kontakt: a vcard:Individual ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>podmínky_užití</code>, <code>pu:specifikace</code>
+                            <code>podmínky_užití</code>
                         </dd>
                         <dt>
                             Typ
@@ -1179,18 +1025,6 @@ kontakt: a vcard:Individual ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <pre class="turtle">distribuce: pu:specifikace podmínky: .
-
-podmínky: a pu:Specifikace ;
-          pu:autorské-dílo &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt; ;
-          pu:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
-          pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
-          pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; .</pre>
                         </dd>
                     </dl>
                                         
@@ -1217,7 +1051,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>přístupové_url</code>, <code>dcat:accessURL</code>
+                            <code>přístupové_url</code>
                         </dd>
                         <dt>
                             Typ
@@ -1230,12 +1064,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:accessURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1260,7 +1088,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
+                            <code>právní_předpis</code>
                         </dd>
                         <dt>
                             Typ
@@ -1273,18 +1101,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <ul>
-                                <li>Pro označení HVDs: <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code></li>
-                                <li>Pro označení otevřených dat: <code>http://data.europa.eu/eli/dir/2019/1024/oj</code></li>
-                                <li>Pro označení datových sad inventárního seznamu dle DGA: <code>http://data.europa.eu/eli/reg/2022/868/oj</code></li>
-                                <li>Pro označení dynamických dat: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6</code></li>
-                                <li>Pro označení dat z veřejných registrů dle § 5a odst. 1 zákona č. 106/1999 Sb.: <code>https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1</code></li>
-                            </ul>
                         </dd>
                     </dl>
                 </section>
@@ -1309,7 +1125,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>název</code>, <code>dct:title</code>
+                            <code>název</code>
                         </dd>
                         <dt>
                             Typ
@@ -1322,12 +1138,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dct:title "Kontroly plnění povinností zaměstnavatelů v oblasti sociálního zabezpečení v CSV."@cs, "CSV representation of inspections in the area of social security."@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1356,12 +1166,6 @@ podmínky: a pu:Specifikace ;
                         Fyzická podoba datové sady v konkrétním formátu.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
                     </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>distribuce: a dcat:Distribution.</code>
-                    </dd>
                 </dl>
 
                 <section id="položky-distribuce-url-stažení">
@@ -1384,7 +1188,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>soubor_ke_stažení</code>, <code>dcat:downloadURL</code>
+                            <code>soubor_ke_stažení</code>
                         </dd>
                         <dt>
                             Typ
@@ -1397,12 +1201,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:downloadURL &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni.csv&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1428,7 +1226,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>formát</code>, <code>dct:format</code>
+                            <code>formát</code>
                         </dd>
                         <dt>
                             Typ
@@ -1441,12 +1239,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dct:format &lt;http://publications.europa.eu/resource/authority/file-type/CSV&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1471,7 +1263,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>typ_média</code>, <code>dcat:mediaType</code>
+                            <code>typ_média</code>
                         </dd>
                         <dt>
                             Typ
@@ -1484,12 +1276,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:mediaType &lt;http://www.iana.org/assignments/media-types/text/csv&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1514,7 +1300,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>schéma</code>, <code>dct:conformsTo</code>
+                            <code>schéma</code>
                         </dd>
                         <dt>
                             Typ
@@ -1527,12 +1313,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dct:conformsTo &lt;https://data.cssz.cz/dump/kontroly-plneni-povinnosti-zamestnavatelu-v-oblasti-socialniho-zabezpeceni-schema.json&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1558,7 +1338,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>typ_média_komprese</code>, <code>dcat:compressFormat</code>
+                            <code>typ_média_komprese</code>
                         </dd>
                         <dt>
                             Typ
@@ -1571,12 +1351,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1602,7 +1376,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>typ_média_balíčku</code>, <code>dcat:packageFormat</code>
+                            <code>typ_média_balíčku</code>
                         </dd>
                         <dt>
                             Typ
@@ -1615,12 +1389,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:packageFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1649,12 +1417,6 @@ podmínky: a pu:Specifikace ;
                         Fyzická podoba datové sady jako konkrétní datová služba.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#Distribution">dcat:Distribution</a>.
                     </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>distribuce: a dcat:Distribution.</code>
-                    </dd>
                 </dl>
 
                 <section id="položky-distribuce-přístupová-služba">
@@ -1677,7 +1439,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>přístupová_služba</code>, <code>dcat:accessService</code>
+                            <code>přístupová_služba</code>
                         </dd>
                         <dt>
                             Typ
@@ -1690,12 +1452,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>distribuce: dcat:accessService služba: .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1719,12 +1475,6 @@ podmínky: a pu:Specifikace ;
                         Třída reprezentující datovou službu zpřístupňující data datové sady.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DataService">dcat:DataService</a>.
                     </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>služba: a dcat:DataService .</code>
-                    </dd>
                 </dl>
                 
                 <section id="položky-datová-služba-název">
@@ -1747,7 +1497,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>název</code>, <code>dct:title</code>
+                            <code>název</code>
                         </dd>
                         <dt>
                             Typ
@@ -1760,12 +1510,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>služba: dct:title "SPARQL endpoint České správy sociálního zabezpečení"@cs, "Czech Social Security Administration SPARQL endpoint"@en .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1790,7 +1534,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>přístupový_bod</code>, <code>dcat:endpointURL</code>
+                            <code>přístupový_bod</code>
                         </dd>
                         <dt>
                             Typ
@@ -1803,12 +1547,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Povinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://data.cssz.cz/sparql</code>
                         </dd>
                     </dl>
                 </section>
@@ -1833,7 +1571,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>právní_předpis</code>, <code>dcatap:applicableLegislation</code>
+                            <code>právní_předpis</code>
                         </dd>
                         <dt>
                             Typ
@@ -1883,7 +1621,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>specifikace</code>, <code>dct:conformsTo</code>
+                            <code>specifikace</code>
                         </dd>
                         <dt>
                             Typ
@@ -1896,12 +1634,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>služba: dct:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1926,7 +1658,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>dokumentace</code>, <code>foaf:page</code>
+                            <code>dokumentace</code>
                         </dd>
                         <dt>
                             Typ
@@ -1939,12 +1671,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>služba: foaf:page &lt;https://www.data.cz/služba/dokumentace&gt; .</code>
                         </dd>
                     </dl>
                 </section>
@@ -1969,7 +1695,7 @@ podmínky: a pu:Specifikace ;
                             Vlastnost
                         </dt>
                         <dd>
-                            <code>popis_přístupového_bodu</code>, <code>dcat:endpointDescription</code>
+                            <code>popis_přístupového_bodu</code>
                         </dd>
                         <dt>
                             Typ
@@ -1982,12 +1708,6 @@ podmínky: a pu:Specifikace ;
                         </dt>
                         <dd>
                             Nepovinná
-                        </dd>
-                        <dt>
-                            Příklad
-                        </dt>
-                        <dd>
-                            <code>https://data.cssz.cz/sparql</code>
                         </dd>
                     </dl>
                     
@@ -2018,12 +1738,6 @@ podmínky: a pu:Specifikace ;
                     <dd>
                         Třída reprezentující datovou sérii.
                         Odpovídá třídě <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.0/#DatasetSeries">dcat:DatasetSeries</a>.
-                    </dd>
-                    <dt>
-                        Třída
-                    </dt>
-                    <dd>
-                        <code>série: a dcat:DatasetSeries .</code>
                     </dd>
                 </dl>
             </section>
@@ -2113,7 +1827,7 @@ podmínky: a pu:Specifikace ;
 
                 <aside class="example" title="Vzorový soubor s úplným záznamem datové sady, souvisejících pojmů, datových rozhraní a jejich klasifikací a klasifikací pojmů sdílených skrz datová ve formátu JSON-LD">
                     <p>
-                        <a href="příklady/datová-sada-s-popisem.jsonld">JSON-LD</a>, , <a href="kontexty/datová-sada.jsonld">JSON-LD kontext</a>, <a href="schémata/datová-sada.jsonld">JSON schéma</a>.
+                        <a href="příklady/datová-sada-s-popisem.jsonld">JSON-LD</a>, , <a href="kontexty/datová-sada.jsonld">JSON-LD kontext</a>, <a href="schémata/datová-sada.json">JSON schéma</a>.
                     </p>
                     <pre class="json">{
     "@context": "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/kontexty/datová-sada.jsonld",
