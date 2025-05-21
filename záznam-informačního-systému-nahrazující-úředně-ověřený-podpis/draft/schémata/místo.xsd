@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" vc:minVersion="1.1" elementFormDefault="qualified" targetNamespace="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:místa="http://dia.gov.cz/ns/spolecne-casti-elektronickych-dokumentu/mista" xmlns:sawsdl="http://www.w3.org/ns/sawsdl">
+  <xs:complexType name="místo" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/89/2012/pojem/místo">
+    <xs:annotation>
+      <xs:documentation xml:lang="cs">
+        Místo
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="zahraniční_adresa" sawsdl:modelReference="https://slovník.gov.cz/generický/umístění/pojem/má-zahraniční-adresu">
+          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/generický/umístění/pojem/zahraniční-adresa">
+            <xs:annotation>
+              <xs:documentation xml:lang="cs">
+                Zahraniční adresa - Zahraniční adresa textem. Adresy v zahraničí se řídí místními pravidly.
+              </xs:documentation>
+              <xs:documentation xml:lang="en">
+                Foreign address
+              </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element name="text_adresy" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/umístění/pojem/lokalizační-popis">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    lokalizační popis
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="adresní_místo" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-adresu">
+          <xs:complexType sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/adresní-místo">
+            <xs:annotation>
+              <xs:documentation xml:lang="cs">
+                adresní místo - Adresním místem se rozumí takové místo v terénu, kterému lze ve vztahu ke stavebnímu objektu jednoznačně přiřadit adresu.
+              </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element name="kód_adresního_místa" type="xs:integer" sawsdl:modelReference="https://slovník.gov.cz/generický/adresy/pojem/kód-adresního-místa">
+                <xs:annotation>
+                  <xs:documentation xml:lang="cs">
+                    kód adresního místa
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="adresa_neevidovaná_v_rúian">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="text_adresy" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/generický/umístění/pojem/adresa-neevidovaná-v-rúian"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="místo" type="místa:místo"/>
+</xs:schema>

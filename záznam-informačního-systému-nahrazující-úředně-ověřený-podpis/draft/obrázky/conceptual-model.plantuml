@@ -1,0 +1,113 @@
+@startuml
+set namespaceSeparator none
+class "Oprávnění k zastupování" {
+  "identifikátor oprávnění k zastupování": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Fyzická osoba ve vztahu k nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" {
+  "datum narození": http://www.w3.org/2001/XMLSchema#date
+  "příjmení fyzické osoby": http://www.w3.org/2001/XMLSchema#string
+  "další jméno fyzické osoby": http://www.w3.org/2001/XMLSchema#string
+  "jméno fyzické osoby": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Úroveň záruky" {
+  "plný název položky číselníku": text
+  "kód položky číselníku": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Prostředek pro elektronickou identifikaci" {
+}
+
+class "Elektronická identifikace" {
+  "identifikátor elektronické identifikace": http://www.w3.org/2001/XMLSchema#string
+  "datum a čas elektronické identifikace": http://www.w3.org/2001/XMLSchema#dateTime
+}
+
+class "Bydliště fyzické osoby" {
+}
+
+class "Místo" {
+  "adresa neevidovaná v RÚIAN": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Orgán veřejné moci" {
+  "Má název orgánu veřejné moci": text
+  "Má identifikátor orgánu veřejné moci": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Informační systém veřejné správy" {
+  "název ISVS": text
+  "Má identifikátor ISVS": http://www.w3.org/2001/XMLSchema#string
+}
+
+class Agenda {
+  "Má název agendy": text
+  "Má kód agendy": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Služba veřejné správy" {
+  "Má název služby": text
+  "Má identifikátor služby": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Digitální úkon" {
+  "Má název úkonu služby": text
+  "Má identifikátor úkonu služby": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" {
+  "datum a čas nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu": http://www.w3.org/2001/XMLSchema#dateTime
+}
+
+class "Hashovací funkce" {
+  "plný název položky číselníku​": text
+  "kód položky číselníku​": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Otisk dokumentu" {
+  "hodnota otisku": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "Dokument nedílně spojený se Záznamem ISVS" {
+  "název souboru": http://www.w3.org/2001/XMLSchema#string
+  "název dokumentu": text
+}
+
+class "Záznam informačního systému nahrazující úředně ověřený podpis" {
+  "identifikační číslo záznamu": http://www.w3.org/2001/XMLSchema#string
+}
+
+class "adresní místo" {
+  "kód adresního místa": http://www.w3.org/2001/XMLSchema#integer
+}
+
+class adresa {
+}
+
+class "Zahraniční adresa" {
+  "lokalizační popis": http://www.w3.org/2001/XMLSchema#string
+}
+
+"Oprávnění k zastupování" -- "1..1" "Fyzická osoba ve vztahu k nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" :  "zástupce"
+"Oprávnění k zastupování" -- "1..1" "Fyzická osoba ve vztahu k nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" :  "zastoupený"
+"Fyzická osoba ve vztahu k nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" -- "0..1" "Elektronická identifikace" :  "je autentizována"
+"Fyzická osoba ve vztahu k nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" "1..*" -- "0..1" "Bydliště fyzické osoby" :  "má bydliště fyzické osoby"
+"Prostředek pro elektronickou identifikaci" -- "1..1" "Úroveň záruky" :  "má úroveň záruky"
+"Elektronická identifikace" -- "1..1" "Prostředek pro elektronickou identifikaci" :  "probíhá pomocí prostředku pro elektronickou identifikaci"
+"Bydliště fyzické osoby" -- "1..1" "Místo" :  "má místo bydliště"
+"Místo" -- "1..1" "Zahraniční adresa" :  "má zahraniční adresu"
+"Místo" -- "1..1" adresa :  "má adresu"
+"Služba veřejné správy" -- "1..1" Agenda :  "Je poskytována v rámci agendy"
+"Služba veřejné správy" "1..1" -- "Digitální úkon" :  "Skládá se z úkonu"
+"Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" -- "1..1" "Fyzická osoba ve vztahu k nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" :  "žadatel"
+"Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" -- "1..1" "Orgán veřejné moci" :  "provádí OVM"
+"Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" -- "1..1" "Informační systém veřejné správy" :  "provádí ISVS"
+"Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" -- "0..1" "Oprávnění k zastupování" :  "použité oprávnění k zastupování"
+"Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" -- "1..1" "Digitální úkon" :  "nahrazení pro účely úkonu"
+"Otisk dokumentu" -- "1..1" "Hashovací funkce" :  "použitá hashovací funkce"
+"Dokument nedílně spojený se Záznamem ISVS" "1..1" -- "1..*" "Otisk dokumentu" :  "má otisk dokumentu"
+"Záznam informačního systému nahrazující úředně ověřený podpis" "1..*" -- "1..1" "Dokument nedílně spojený se Záznamem ISVS" :  "nedílně spojen s dokumentem"
+"Záznam informačního systému nahrazující úředně ověřený podpis" "1..1" -- "1..1" "Nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu" :  "je záznamem o"
+"adresní místo" "1..1" -- adresa :  "má adresu​"
+@enduml
