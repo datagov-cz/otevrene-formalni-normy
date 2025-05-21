@@ -29,7 +29,7 @@
             </xs:documentation>
           </xs:annotation>
           <xs:sequence>
-            <xs:element name="datum_a_čas_nahrazení_podpisu" type="xs:dateTime" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/datum-a-čas-nahrazení-úředně-ověřeného-podpisu-nebo-uznávaného-elektronického-podpisu">
+            <xs:element name="datum_a_čas_nahrazení_podpisu" type="xs:dateTimeStamp" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/datum-a-čas-nahrazení-úředně-ověřeného-podpisu-nebo-uznávaného-elektronického-podpisu">
               <xs:annotation>
                 <xs:documentation xml:lang="cs">
                   datum a čas nahrazení úředně ověřeného podpisu nebo uznávaného elektronického podpisu
@@ -49,12 +49,17 @@
                   </xs:documentation>
                 </xs:annotation>
                 <xs:sequence>
-                  <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-úkonu-služby">
+                  <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-úkonu-služby">
                     <xs:annotation>
                       <xs:documentation xml:lang="cs">
                         Má identifikátor úkonu služby - Automaticky (stejně jako v případě služby VS) generovaný kód sloužící pro databázové zpracování údajů.
                       </xs:documentation>
                     </xs:annotation>
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="U\d{1,8}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
                   </xs:element>
                   <xs:element name="název" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-název-úkonu-služby">
                     <xs:annotation>
@@ -79,12 +84,17 @@
                         </xs:documentation>
                       </xs:annotation>
                       <xs:sequence>
-                        <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-služby">
+                        <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-služby">
                           <xs:annotation>
                             <xs:documentation xml:lang="cs">
                               Má identifikátor služby - Automaticky (stejně jako v případě agendy nebo činnosti) generovaný kód sloužící pro databázové zpracování údajů.
                             </xs:documentation>
                           </xs:annotation>
+                          <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                              <xs:pattern value="S\d{1,8}"/>
+                            </xs:restriction>
+                          </xs:simpleType>
                         </xs:element>
                         <xs:element name="název" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-název-služby">
                           <xs:annotation>
@@ -113,12 +123,17 @@
                               </xs:documentation>
                             </xs:annotation>
                             <xs:sequence>
-                              <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-kód-agendy">
+                              <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-kód-agendy">
                                 <xs:annotation>
                                   <xs:documentation xml:lang="cs">
                                     Má kód agendy - Kód agendy je veřejným identifikátorem, který je jednoznačně přiřazen záznamu o agendě v číselníku agend v registru práv a povinností.
                                   </xs:documentation>
                                 </xs:annotation>
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:pattern value="A\d{1,6}"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
                               </xs:element>
                               <xs:element name="název" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-název-agendy">
                                 <xs:annotation>
@@ -156,12 +171,17 @@
                   </xs:documentation>
                 </xs:annotation>
                 <xs:sequence>
-                  <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-isvs">
+                  <xs:element name="kód" sawsdl:modelReference="https://slovník.gov.cz/agendový/104/pojem/má-identifikátor-isvs">
                     <xs:annotation>
                       <xs:documentation xml:lang="cs">
                         Má identifikátor ISVS - Jednoznačná identifikace ISVS v rámci RPP.
                       </xs:documentation>
                     </xs:annotation>
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:pattern value="\d{1,6}"/>
+                      </xs:restriction>
+                    </xs:simpleType>
                   </xs:element>
                   <xs:element name="název" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/329/2020/pojem/název-isvs">
                     <xs:annotation>
@@ -279,7 +299,7 @@
                             </xs:documentation>
                           </xs:annotation>
                         </xs:element>
-                        <xs:element name="datum_a_čas" type="xs:dateTime" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/datum-a-čas-elektronické-identifikace">
+                        <xs:element name="datum_a_čas" type="xs:dateTimeStamp" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/datum-a-čas-elektronické-identifikace">
                           <xs:annotation>
                             <xs:documentation xml:lang="cs">
                               datum a čas elektronické identifikace
@@ -312,7 +332,13 @@
                                     </xs:documentation>
                                   </xs:annotation>
                                   <xs:sequence>
-                                    <xs:element name="iri" type="xs:anyURI"/>
+                                    <xs:element name="iri">
+                                      <xs:simpleType>
+                                        <xs:restriction base="xs:anyURI">
+                                          <xs:pattern value="http://eidas.europa.eu/LoA/.+"/>
+                                        </xs:restriction>
+                                      </xs:simpleType>
+                                    </xs:element>
                                     <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/kód-položky-číselníku">
                                       <xs:annotation>
                                         <xs:documentation xml:lang="cs">
@@ -473,7 +499,7 @@
                                   </xs:documentation>
                                 </xs:annotation>
                               </xs:element>
-                              <xs:element name="datum_a_čas" type="xs:dateTime" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/datum-a-čas-elektronické-identifikace">
+                              <xs:element name="datum_a_čas" type="xs:dateTimeStamp" sawsdl:modelReference="https://slovník.gov.cz/legislativní/sbírka/12/2020/pojem/datum-a-čas-elektronické-identifikace">
                                 <xs:annotation>
                                   <xs:documentation xml:lang="cs">
                                     datum a čas elektronické identifikace
@@ -506,7 +532,13 @@
                                           </xs:documentation>
                                         </xs:annotation>
                                         <xs:sequence>
-                                          <xs:element name="iri" type="xs:anyURI"/>
+                                          <xs:element name="iri">
+                                            <xs:simpleType>
+                                              <xs:restriction base="xs:anyURI">
+                                                <xs:pattern value="http://eidas.europa.eu/LoA/.+"/>
+                                              </xs:restriction>
+                                            </xs:simpleType>
+                                          </xs:element>
                                           <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/kód-položky-číselníku">
                                             <xs:annotation>
                                               <xs:documentation xml:lang="cs">
@@ -613,7 +645,13 @@
                         </xs:documentation>
                       </xs:annotation>
                       <xs:sequence>
-                        <xs:element name="iri" type="xs:anyURI"/>
+                        <xs:element name="iri">
+                          <xs:simpleType>
+                            <xs:restriction base="xs:anyURI">
+                              <xs:pattern value="https://data.dia.gov.cz/zdroj/číselníky/hashovací-funkce-pro-elegalizaci/položky/.+"/>
+                            </xs:restriction>
+                          </xs:simpleType>
+                        </xs:element>
                         <xs:element name="kód" type="xs:string" sawsdl:modelReference="https://slovník.gov.cz/datový/číselníky/pojem/kód-položky-číselníku">
                           <xs:annotation>
                             <xs:documentation xml:lang="cs">
