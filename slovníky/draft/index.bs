@@ -127,23 +127,23 @@ Příkladem je slovník s IRI `https://slovník.gov.cz/datový/turistické-cíle
 [Slovník v RDF Turtle](příklady/slovník.ttl)
 ```turtle
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix time: <http://www.w3.org/2006/time#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix čas: <https://slovník.gov.cz/generický/čas/pojem/> .
 
-<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme;
+<https://slovník.gov.cz/datový/turistické-cíle> a slovníky:slovník;
   dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
     "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
   skos:prefLabel "Slovník turistických cílů"@cs,
-    "Vocabulary of tourist points of interest"@en ;
-  dcterms:created [
-    a time:Instant;
-    time:inXSDDate "2024-01-01"^^xsd:date
+    "Vocabulary of tourist points of interest"@en;
+  slovníky:okamžik-poslední-změny [
+    a čas:časový-okamžik;
+    čas:datum-a-čas "2024-01-15T04:53:21+02:00"^^xsd:dateTimeStamp
   ];
-  dcterms:modified [
-    a time:Instant;
-    time:inXSDDateTimeStamp "2024-01-15T04:53:21+02:00"^^xsd:dateTimeStamp
+  slovníky:okamžik-vytvoření [
+    a čas:časový-okamžik;
+    čas:datum "2024-01-01"^^xsd:date
   ] .
 ```
 
@@ -254,7 +254,10 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
 {
     "@context": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld",
     "iri": "https://slovník.gov.cz/datový/turistické-cíle",
-    "typ": ["Slovník", "Tezaurus"],
+    "typ": [
+        "Slovník",
+        "Tezaurus"
+    ],
     "název": {
         "cs": "Slovník turistických cílů",
         "en": "Vocabulary of tourist points of interest"
@@ -263,10 +266,21 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
         "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
         "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
     },
+    "vytvořeno": {
+        "typ": "Časový okamžik",
+        "datum": "2024-01-01"
+    },
+    "aktualizováno": {
+        "typ": "Časový okamžik",
+        "datum_a_čas": "2024-01-15T04:53:21+02:00"
+    },
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
-            "typ": ["Pojem"],
+            "typ": [
+                "Pojem",
+                "Koncept"
+            ],
             "název": {
                 "cs": "Turistický cíl",
                 "en": "Tourist point of interest"
@@ -287,7 +301,10 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
-            "typ": ["Pojem"],
+            "typ": [
+                "Pojem",
+                "Koncept"
+            ],
             "název": {
                 "cs": "Typ turistického cíle",
                 "en": "Type of the tourist point of interest"
@@ -298,7 +315,10 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
-            "typ": ["Pojem"],
+            "typ": [
+                "Pojem",
+                "Koncept"
+            ],
             "název": {
                 "cs": "má typ turistického cíle",
                 "en": "has type of tourist point of interest"
@@ -312,7 +332,10 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
-            "typ": ["Pojem"],
+            "typ": [
+                "Pojem",
+                "Koncept"
+            ],
             "název": {
                 "cs": "kouření povoleno",
                 "en": "smoking allowed"
@@ -329,43 +352,58 @@ Příklad souvisejícího ustanovení právního předpisu je pouze příklad po
 [Tezaurus v RDF Turtle](příklady/tezaurus.ttl)
 ```turtle
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix čas: <https://slovník.gov.cz/generický/čas/pojem/> .
 
-<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme;
+<https://slovník.gov.cz/datový/turistické-cíle> a slovníky:slovník,
+    skos:ConceptScheme;
   dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
     "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
-  skos:prefLabel "Slovník turistických cílů"@cs ,
-    "Vocabulary of tourist points of interest"@en .
-
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept;
-  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
-  skos:definition "Samostatný turistický cíl."@cs,
-    "Tourist point of interest"@en;
-  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
-  skos:prefLabel "Turistický cíl"@cs,
-    "Tourist point of interest"@en ;
-  skos:broader <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo> ;
-  skos:exactMatch <https://schema.org/TouristAttraction> .
-
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept;
-  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
-  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
-  skos:prefLabel "má typ turistického cíle"@cs,
-    "has type of tourist point of interest"@en ;
-  dcterms:description "vazba propojuje turistický cíl a jeho typ"@cs .
-  
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept;
-  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
-  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
-  skos:prefLabel "Typ turistického cíle"@cs,
-    "Type of the tourist point of interest"@en .
-
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a skos:Concept;
+  skos:prefLabel "Slovník turistických cílů"@cs,
+    "Vocabulary of tourist points of interest"@en;
+  slovníky:okamžik-poslední-změny [
+    a čas:časový-okamžik;
+    čas:datum-a-čas "2024-01-15T04:53:21+02:00"^^xsd:dateTimeStamp
+  ];
+  slovníky:okamžik-vytvoření [
+    a čas:časový-okamžik;
+    čas:datum "2024-01-01"^^xsd:date
+  ] .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a slovníky:pojem,
+    skos:Concept;
   skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
   skos:prefLabel "kouření povoleno"@cs,
     "smoking allowed"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a slovníky:pojem,
+    skos:Concept;
+  dcterms:description "vazba propojuje turistický cíl a jeho typ"@cs;
+  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "má typ turistického cíle"@cs,
+    "has type of tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a slovníky:pojem,
+    skos:Concept;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
+  skos:broader <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo>;
+  skos:definition "Samostatný turistický cíl."@cs,
+    "Tourist point of interest"@en;
+  skos:exactMatch schema:TouristAttraction;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Turistický cíl"@cs,
+    "Tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a slovníky:pojem,
+    skos:Concept;
+  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Typ turistického cíle"@cs,
+    "Type of the tourist point of interest"@en .
 ```
 
 Konceptuální model {#konceptuální-model}
@@ -544,7 +582,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
-            "typ": ["Pojem", "Třída"],
+            "typ": ["Koncept", "Pojem", "Třída"],
             "název": {
                 "cs": "Turistický cíl",
                 "en": "Tourist point of interest"
@@ -563,7 +601,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
-            "typ": ["Pojem", "Třída"],
+            "typ": ["Koncept", "Pojem", "Třída"],
             "název": {
                 "cs": "Typ turistického cíle",
                 "en": "Type of the tourist point of interest"
@@ -579,7 +617,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
-            "typ": ["Pojem", "Vztah"],
+            "typ": ["Koncept", "Pojem", "Vztah"],
             "název": {
                 "cs": "má typ turistického cíle",
                 "en": "has type of tourist point of interest"
@@ -595,7 +633,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
         },
         {
             "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
-            "typ": ["Pojem", "Vlastnost"],
+            "typ": ["Koncept", "Pojem", "Vlastnost"],
             "název": {
                 "cs": "kouření povoleno",
                 "en": "smoking allowed"
@@ -613,21 +651,25 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
 ### RDF Turtle ### {#konceptuální-model-příklady-rdf-turtle}
 [Konceptuální model v RDF Turtle](příklady/konceptuální-model.ttl)
 ```turtle
-@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix l111-2009: <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
+@prefix vsgov: <https://slovník.gov.cz/veřejný-sektor/pojem/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme,
+<https://slovník.gov.cz/datový/turistické-cíle> a slovníky:slovník,
+    skos:ConceptScheme,
     owl:Ontology;
-  dct:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
+  dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
     "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
   skos:prefLabel "Slovník turistických cílů"@cs,
     "Vocabulary of tourist points of interest"@en .
 
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a skos:Concept,
+    slovníky:pojem,
     owl:DatatypeProperty;
   rdfs:domain <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl>;
   rdfs:range xsd:boolean;
@@ -637,6 +679,7 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
     "smoking allowed"@en .
 
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept,
+    slovníky:pojem,
     owl:ObjectProperty;
   rdfs:domain <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl>;
   rdfs:range <https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle>;
@@ -646,22 +689,24 @@ U vztahu `má typ turistického cíle` je ukázáno použití [nadřazeného vzt
   skos:prefLabel "má typ turistického cíle"@cs,
     "has type of tourist point of interest"@en .
 
+<https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů> a l111-2009:číselník;
+  l111-2009:má-v-nkod-zastřešující-datovou-sadu <https://data.gov.cz/zdroj/datové-sady/17651921/ff931872553062c9890157ce8615af03> .
+
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept,
+    slovníky:pojem,
     owl:Class;
   skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
   skos:prefLabel "Typ turistického cíle"@cs,
     "Type of the tourist point of interest"@en;
-  <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/má-instance-definované-číselníkem> <https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů> .
-
-<https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů> a <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník>;
-  <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu> <https://data.gov.cz/zdroj/datové-sady/17651921/ff931872553062c9890157ce8615af03> .
+  slovníky:má-instance-definované-číselníkem <https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů> .
 
 <https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept,
+    slovníky:pojem,
     owl:Class;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
   rdfs:subClassOf <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo>,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva>;
+    vsgov:objekt-práva;
   skos:definition "Samostatný turistický cíl."@cs,
     "Tourist point of interest"@en;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
@@ -715,7 +760,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Silniční vozidlo",
                 "en": "Road vehicle"
@@ -732,7 +777,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
-            "typ": ["Pojem", "Třída", "Typ subjektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ subjektu práva"],
             "název": {
                 "cs": "Vlastník vozidla",
                 "en": "Vehicle owner"
@@ -746,7 +791,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
-            "typ": ["Pojem", "Vztah"],
+            "typ": ["Koncept", "Pojem", "Vztah"],
             "název": {
                 "cs": "má vlastníka vozidla"
             },
@@ -761,7 +806,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
-            "typ": ["Pojem", "Třída"],
+            "typ": ["Koncept", "Pojem", "Třída"],
             "název": {
                 "cs": "Vlastnictví vozidla"
             },
@@ -774,7 +819,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
-            "typ": ["Pojem", "Vlastnost"],
+            "typ": ["Koncept", "Pojem", "Vlastnost", "Typ objektu práva"],
             "název": {
                 "cs": "registrační značka"
             },
@@ -786,7 +831,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
-            "typ": ["Pojem", "Třída", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Havárie silničního vozidla"
             },
@@ -796,7 +841,7 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Zničené silniční vozidlo"
             },
@@ -811,28 +856,32 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
 ### RDF Turtle ### {#rozšíření-příklady-rdf-turtle}
 [Rozšíření v RDF Turtle](příklady/rozšíření.ttl)
 ```turtle
-@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
+@prefix vsgov: <https://slovník.gov.cz/veřejný-sektor/pojem/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<https://slovník.gov.cz/legislativní/sbírka/56/2001> a skos:ConceptScheme,
+<https://slovník.gov.cz/legislativní/sbírka/56/2001> a slovníky:slovník,
+    skos:ConceptScheme,
     owl:Ontology;
-  dct:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
+  dcterms:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
   skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
-
+  
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
+    vsgov:typ-objektu-práva;
   skos:definition "Havárie silničního vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Havárie silničního vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:ObjectProperty;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo>;
   rdfs:range <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla>;
   skos:definition "má vlastníka vozidla"@cs;
@@ -840,8 +889,9 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
   skos:prefLabel "má vlastníka vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka> a skos:Concept,
+    slovníky:pojem,
     owl:DatatypeProperty,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
+    vsgov:typ-objektu-práva;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou>;
   rdfs:range xsd:string;
   skos:definition "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."@cs;
@@ -849,23 +899,26 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
   skos:prefLabel "registrační značka"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:Class;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
   skos:definition "Vlastnictví vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastnictví vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
+    vsgov:typ-objektu-práva;
   skos:definition "Zničené silniční vozidlo"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Zničené silniční vozidlo"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1>;
+    vsgov:typ-objektu-práva;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1>;
   rdfs:subClassOf <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo>;
   skos:definition "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
@@ -873,9 +926,10 @@ Jako schéma lze použít schéma [Tezauru](schémata/tezaurus.json) nebo [Konce
     "Road vehicle"@en .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-subjektu-práva>;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
+    vsgov:typ-subjektu-práva;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   skos:definition "Vlastník vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastník vozidla"@cs,
@@ -1002,7 +1056,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Silniční vozidlo",
                 "en": "Road vehicle"
@@ -1019,7 +1073,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
-            "typ": ["Pojem", "Třída", "Typ subjektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ subjektu práva"],
             "název": {
                 "cs": "Vlastník vozidla",
                 "en": "Vehicle owner"
@@ -1036,7 +1090,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
-            "typ": ["Pojem", "Vztah", "Neveřejný údaj"],
+            "typ": ["Koncept", "Pojem", "Vztah", "Neveřejný údaj"],
             "název": {
                 "cs": "má vlastníka vozidla"
             },
@@ -1055,7 +1109,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
-            "typ": ["Pojem", "Třída", "Veřejný údaj"],
+            "typ": ["Koncept", "Pojem", "Třída", "Veřejný údaj"],
             "název": {
                 "cs": "Vlastnictví vozidla"
             },
@@ -1068,7 +1122,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
-            "typ": ["Pojem", "Vlastnost", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Vlastnost", "Typ objektu práva"],
             "název": {
                 "cs": "registrační značka"
             },
@@ -1083,7 +1137,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
-            "typ": ["Pojem", "Třída", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Havárie silničního vozidla"
             },
@@ -1093,7 +1147,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
-            "typ": ["Pojem", "Třída", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
             "název": {
                 "cs": "Zničené silniční vozidlo"
             },
@@ -1108,63 +1162,79 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
 ### RDF Turtle ### {#rpp-příklady-rdf-turtle}
 [Anotace pro RPP v RDF Turtle](příklady/rpp.ttl)
 ```turtle
-@prefix dct: <http://purl.org/dc/terms/> .
+@prefix a104: <https://slovník.gov.cz/agendový/104/pojem/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix l111-2009: <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
+@prefix vsgov: <https://slovník.gov.cz/veřejný-sektor/pojem/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+
+<https://slovník.gov.cz/legislativní/sbírka/56/2001> a slovníky:slovník,
+    skos:ConceptScheme,
+    owl:Ontology;
+  dcterms:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
+  skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
+
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
+    vsgov:typ-objektu-práva;
   skos:definition "Havárie silničního vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Havárie silničního vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:ObjectProperty,
-    <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/neveřejný-údaj>;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
+    l111-2009:neveřejný-údaj;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo>;
   rdfs:range <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla>;
   skos:definition "má vlastníka vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "má vlastníka vozidla"@cs;
-  <https://slovník.gov.cz/agendový/104/pojem/je-sdílen-v-propojeném-datovém-fondu> true;
-  <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/je-vymezen-ustanovení-stanovujícím-jeho-neveřejnost> <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a> .
+  a104:je-sdílen-v-propojeném-datovém-fondu true;
+  l111-2009:je-vymezen-ustanovení-stanovujícím-jeho-neveřejnost <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a> .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka> a skos:Concept,
+    slovníky:pojem,
     owl:DatatypeProperty,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
+    vsgov:typ-objektu-práva;
   rdfs:domain <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou>;
   rdfs:range xsd:string;
   skos:definition "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "registrační značka"@cs;
-  <https://slovník.gov.cz/agendový/104/pojem/je-sdílen-v-propojeném-datovém-fondu> false;
-  <https://slovník.gov.cz/agendový/104/pojem/sdružuje-údaje-vedené-nebo-vytvářené-v-rámci-agendy> <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021>;
-  <https://slovník.gov.cz/agendový/104/pojem/údaje-jsou-v-ais> <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456> .
+  a104:je-sdílen-v-propojeném-datovém-fondu false;
+  a104:sdružuje-údaje-vedené-nebo-vytvářené-v-rámci-agendy <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021>;
+  a104:údaje-jsou-v-ais <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456> .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/veřejný-údaj>;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
+    l111-2009:veřejný-údaj;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a>;
   skos:definition "Vlastnictví vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastnictví vozidla"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
+    vsgov:typ-objektu-práva;
   skos:definition "Zničené silniční vozidlo"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Zničené silniční vozidlo"@cs .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-objektu-práva>;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1>;
+    vsgov:typ-objektu-práva;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1>;
   rdfs:subClassOf <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo>;
   skos:definition "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
@@ -1172,21 +1242,17 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
     "Road vehicle"@en .
 
 <https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla> a skos:Concept,
+    slovníky:pojem,
     owl:Class,
-    <https://slovník.gov.cz/veřejný-sektor/pojem/typ-subjektu-práva>;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
+    vsgov:typ-subjektu-práva;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   skos:definition "Vlastník vozidla"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Vlastník vozidla"@cs,
     "Vehicle owner"@en;
-  <https://slovník.gov.cz/agendový/104/pojem/je-sdílen-v-propojeném-datovém-fondu> true;
-  <https://slovník.gov.cz/agendový/104/pojem/sdružuje-údaje-vedené-nebo-vytvářené-v-rámci-agendy> <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021>;
-  <https://slovník.gov.cz/agendový/104/pojem/údaje-jsou-v-ais> <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456> .
-
-<https://slovník.gov.cz/legislativní/sbírka/56/2001> a skos:ConceptScheme,
-    owl:Ontology;
-  dct:description "Slovník slouží v rámci příkladu pro OFN Slovníky"@cs;
-  skos:prefLabel "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."@cs .
+  a104:je-sdílen-v-propojeném-datovém-fondu true;
+  a104:sdružuje-údaje-vedené-nebo-vytvářené-v-rámci-agendy <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021>;
+  a104:údaje-jsou-v-ais <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456> .
 
 ```
 
@@ -1252,7 +1318,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
     "pojmy": [
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/skupina-vozidel",
-            "typ": ["Pojem", "Typ objektu práva"],
+            "typ": ["Koncept", "Pojem", "Typ objektu práva"],
             "název": {
                 "cs": "Skupina vozidel"
             },
@@ -1268,7 +1334,7 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
         },
         {
             "iri": "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič-evidovaný-v-registru-řidičů",
-            "typ": ["Pojem", "Typ subjektu práva"],
+            "typ": ["Koncept", "Pojem", "Typ subjektu práva"],
             "název": {
                 "cs": "Řidič evidovaný v Centrálním registru řidičů"
             },
@@ -1294,45 +1360,43 @@ Pro validaci schématem je třeba použít jak schéma [Tezauru](schémata/tezau
 ### RDF Turtle ### {#360-2023-příklady-rdf-turtle}
 [Anotace pro § 23 vyhlášky 360/2023 Sb.](příklady/360-2023.ttl)
 ```turtle
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-
-@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
-@prefix vsgov: <https://slovník.gov.cz/veřejný-sektor/pojem/> .
 @prefix a104: <https://slovník.gov.cz/agendový/104/pojem/> .
-
-@prefix způsoby-sdílení: <https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
 @prefix typy-obsahu: <https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/> .
+@prefix vsgov: <https://slovník.gov.cz/veřejný-sektor/pojem/> .
+@prefix způsoby-sdílení: <https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/> .
 @prefix způsoby-získání: <https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/> .
-@prefix agendy: <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/> .
-@prefix isvs: <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/> .
 
-<https://slovník.gov.cz/legislativní/sbírka/56/2001> a skos:ConceptScheme;
-  dct:description "Slovník slouží v rámci příkladu kategorizace pojmů pro OFN Slovníky, § 23 vyhlášky 360/2023 Sb."@cs;
+<https://slovník.gov.cz/legislativní/sbírka/56/2001> a slovníky:slovník,
+    skos:ConceptScheme;
+  dcterms:description "Slovník slouží v rámci příkladu kategorizace pojmů pro OFN Slovníky, § 23 vyhlášky 360/2023 Sb."@cs;
   skos:prefLabel "Slovník agendy A1046: Agenda řidičů"@cs .
-
 <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/skupina-vozidel> a skos:Concept,
+    slovníky:pojem,
     vsgov:typ-objektu-práva;
   skos:definition "Skupina vozidel"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Skupina vozidel"@cs;
-  slovníky:má-kategorii-údaje způsoby-získání:vlastní;
   slovníky:má-typ-obsahu-údaje typy-obsahu:evidenční;
   slovníky:má-způsob-sdílení-údaje způsoby-sdílení:veřejně-přístupné,
-    způsoby-sdílení:zpřístupňované-pro-výkon-agendy .
+    způsoby-sdílení:zpřístupňované-pro-výkon-agendy;
+  slovníky:má-způsob-získání-údaje způsoby-získání:vlastní .
 
 <https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič-evidovaný-v-registru-řidičů> a skos:Concept,
+    slovníky:pojem,
     vsgov:typ-subjektu-práva;
-  dct:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a>;
   skos:definition "Řidič evidovaný v Centrálním registru řidičů"@cs;
   skos:inScheme <https://slovník.gov.cz/legislativní/sbírka/56/2001>;
   skos:prefLabel "Řidič evidovaný v Centrálním registru řidičů"@cs;
   a104:je-sdílen-v-propojeném-datovém-fondu true;
-  a104:sdružuje-údaje-vedené-nebo-vytvářené-v-rámci-agendy agendy:A1046;
-  a104:údaje-jsou-v-ais isvs:123456;
-  slovníky:má-kategorii-údaje způsoby-získání:základních-registrů;
+  a104:sdružuje-údaje-vedené-nebo-vytvářené-v-rámci-agendy <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1046>;
+  a104:údaje-jsou-v-ais <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456>;
   slovníky:má-typ-obsahu-údaje typy-obsahu:identifikační;
-  slovníky:má-způsob-sdílení-údaje způsoby-sdílení:nesdílené .
+  slovníky:má-způsob-sdílení-údaje způsoby-sdílení:nesdílené;
+  slovníky:má-způsob-získání-údaje způsoby-získání:základních-registrů .
 ```
 
 Předpřipravená metadata {#předpřipravená-metadata}

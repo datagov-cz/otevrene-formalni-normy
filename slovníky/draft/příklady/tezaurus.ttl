@@ -1,38 +1,53 @@
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <https://schema.org/> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix slovníky: <https://slovník.gov.cz/generický/datový-slovník-ofn-slovníků/pojem/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix čas: <https://slovník.gov.cz/generický/čas/pojem/> .
 
-<https://slovník.gov.cz/datový/turistické-cíle> a skos:ConceptScheme;
+<https://slovník.gov.cz/datový/turistické-cíle> a slovníky:slovník,
+    skos:ConceptScheme;
   dcterms:description "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky"@cs,
     "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"@en;
-  skos:prefLabel "Slovník turistických cílů"@cs ,
-    "Vocabulary of tourist points of interest"@en .
-
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a skos:Concept;
-  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
-  skos:definition "Samostatný turistický cíl."@cs,
-    "Tourist point of interest"@en;
-  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
-  skos:prefLabel "Turistický cíl"@cs,
-    "Tourist point of interest"@en ;
-  skos:broader <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo> ;
-  skos:exactMatch <https://schema.org/TouristAttraction> .
-
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a skos:Concept;
-  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
-  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
-  skos:prefLabel "má typ turistického cíle"@cs,
-    "has type of tourist point of interest"@en ;
-  dcterms:description "vazba propojuje turistický cíl a jeho typ"@cs .
-  
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a skos:Concept;
-  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
-  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
-  skos:prefLabel "Typ turistického cíle"@cs,
-    "Type of the tourist point of interest"@en .
-
-<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a skos:Concept;
+  skos:prefLabel "Slovník turistických cílů"@cs,
+    "Vocabulary of tourist points of interest"@en;
+  slovníky:okamžik-poslední-změny [
+    a čas:časový-okamžik;
+    čas:datum-a-čas "2024-01-15T04:53:21+02:00"^^xsd:dateTimeStamp
+  ];
+  slovníky:okamžik-vytvoření [
+    a čas:časový-okamžik;
+    čas:datum "2024-01-01"^^xsd:date
+  ] .
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno> a slovníky:pojem,
+    skos:Concept;
   skos:definition "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."@cs;
   skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
   skos:prefLabel "kouření povoleno"@cs,
     "smoking allowed"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle> a slovníky:pojem,
+    skos:Concept;
+  dcterms:description "vazba propojuje turistický cíl a jeho typ"@cs;
+  skos:definition "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "má typ turistického cíle"@cs,
+    "has type of tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl> a slovníky:pojem,
+    skos:Concept;
+  dcterms:relation <https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q>;
+  skos:broader <https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo>;
+  skos:definition "Samostatný turistický cíl."@cs,
+    "Tourist point of interest"@en;
+  skos:exactMatch schema:TouristAttraction;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Turistický cíl"@cs,
+    "Tourist point of interest"@en .
+
+<https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle> a slovníky:pojem,
+    skos:Concept;
+  skos:definition "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."@cs;
+  skos:inScheme <https://slovník.gov.cz/datový/turistické-cíle>;
+  skos:prefLabel "Typ turistického cíle"@cs,
+    "Type of the tourist point of interest"@en .
