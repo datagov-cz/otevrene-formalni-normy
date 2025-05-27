@@ -1,0 +1,108 @@
+@startuml
+set namespaceSeparator none
+class Pojem {
+  "je sdílen v propojeném datovém fondu": http://www.w3.org/2001/XMLSchema#boolean
+  definice: text
+  popis: text
+  "název": text
+}
+
+class "Slovník" {
+  "popis​": text
+  "název​": text
+}
+
+class "Časový okamžik" {
+  "je nespecifikovaný": http://www.w3.org/2001/XMLSchema#boolean
+  "datum a čas": http://www.w3.org/2001/XMLSchema#dateTimeStamp
+  datum: http://www.w3.org/2001/XMLSchema#date
+}
+
+class "Typ subjektu práva" {
+}
+
+class Agenda {
+}
+
+class "Typ objektu práva" {
+}
+
+class "Agendový informační systém" {
+}
+
+class "Způsob získání údaje" {
+}
+
+class "Typ obsahu údaje" {
+}
+
+class "Způsob sdílení údaje" {
+}
+
+class "Neveřejný údaj" {
+}
+
+class "Ustanovení" {
+}
+
+class "Veřejný údaj" {
+}
+
+class Vlastnost {
+}
+
+class "Datový typ" {
+}
+
+class "Třída" {
+}
+
+class Vztah {
+}
+
+class "Číselník" {
+}
+
+class "Datová sada v NKOD" {
+}
+
+class "Konceptuální model" {
+}
+
+class Tezaurus {
+}
+
+Pojem <|-- "Typ subjektu práva"
+Pojem <|-- "Typ objektu práva"
+Pojem <|-- "Neveřejný údaj"
+Pojem <|-- "Veřejný údaj"
+Pojem <|-- Vlastnost
+Pojem <|-- "Třída"
+Pojem <|-- Vztah
+Tezaurus <|-- "Konceptuální model"
+"Slovník" <|-- Tezaurus
+Pojem -- "0..1" "Způsob získání údaje" :  "má způsob získání údaje"
+Pojem -- "0..1" "Typ obsahu údaje" :  "má typ obsahu údaje"
+Pojem -- "Způsob sdílení údaje" :  "má způsob sdílení údaje"
+Pojem -- Pojem :  "ekvivalentní pojem"
+Pojem -- Pojem :  "nadřazený pojem"
+Pojem -- "Ustanovení" :  "definující ustanovení právního předpisu"
+Pojem -- "Ustanovení" :  "související ustanovení právního předpisu"
+Pojem -- "1..1" Tezaurus :  "je v tezauru"
+"Slovník" -- "0..1" "Časový okamžik" :  "okamžik vytvoření"
+"Slovník" -- "0..1" "Časový okamžik" :  "okamžik poslední změny"
+"Typ subjektu práva" -- "0..1" Agenda :  "sdružuje údaje vedené nebo vytvářené v rámci agendy"
+"Typ subjektu práva" -- "0..1" "Agendový informační systém" :  "údaje jsou v AIS"
+"Typ objektu práva" -- "0..1" Agenda :  "sdružuje údaje vedené nebo vytvářené v rámci agendy​"
+"Typ objektu práva" -- "0..1" "Agendový informační systém" :  "údaje jsou v AIS​"
+"Neveřejný údaj" -- "1..*" "Ustanovení" :  "je vymezen ustanovení stanovujícím jeho neveřejnost"
+Vlastnost -- Vlastnost :  "nadřazená vlastnost"
+Vlastnost -- "1..1" "Datový typ" :  "obor hodnot"
+Vlastnost -- "1..1" "Třída" :  "definiční obor"
+"Třída" -- "0..1" "Číselník" :  "má instance definované číselníkem"
+"Třída" -- "Třída" :  "nadřazená třída"
+Vztah -- "1..1" "Třída" :  "obor hodnot​"
+Vztah -- "1..1" "Třída" :  "definiční obor​"
+Vztah -- Vztah :  "nadřazený vztah"
+"Číselník" "0..1" -- "1..1" "Datová sada v NKOD" :  "má v NKOD zastřešující datovou sadu"
+@enduml
