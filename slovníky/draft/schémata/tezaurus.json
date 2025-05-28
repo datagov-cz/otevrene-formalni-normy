@@ -1,336 +1,94 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ofn.gov.cz/slovníky/draft/schémata/tezaurus.json",
-  "title": "Tezaurus",
-  "description": "Tezaurus je nejjednodušším typem slovníku.",
-  "type": "object",
-  "required": [
-    "@context",
-    "iri",
-    "typ",
-    "název"
-  ],
-  "properties": {
-    "@context": {
-      "oneOf": [
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/slovníky/draft/schémata/tezaurus.json",
+    "name": "Tezaurus",
+    "description": "Tezaurus",
+    "allOf": [
         {
-          "const": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld"
+            "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json"
         },
         {
-          "type": "array",
-          "contains": {
-            "const": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld"
-          },
-          "items": {
-            "type": "string",
-            "format": "iri"
-          }
-        }
-      ]
-    },
-    "iri": {
-      "type": "string",
-      "format": "iri"
-    },
-    "typ": {
-      "type": "array",
-      "allOf": [
-        {
-          "contains": {
-            "const": "Tezaurus"
-          }
-        },
-        {
-          "contains": {
-            "const": "Slovník"
-          }
-        }
-      ],
-      "items": {
-        "type": "string"
-      }
-    },
-    "název": {
-      "title": "název",
-      "description": "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise\n      disjoint properties.",
-      "type": "object",
-      "additionalProperties": {
-        "title": "Hodnota v jiném jazyce",
-        "type": "string"
-      },
-      "required": [
-        "cs"
-      ],
-      "properties": {
-        "cs": {
-          "title": "Hodnota v českém jazyce",
-          "type": "string"
-        },
-        "en": {
-          "title": "Hodnota v anglickém jazyce",
-          "type": "string"
-        }
-      }
-    },
-    "popis": {
-      "title": "popis",
-      "description": "An account of the resource.",
-      "type": "object",
-      "additionalProperties": {
-        "title": "Hodnota v jiném jazyce",
-        "type": "string"
-      },
-      "required": [
-        "cs"
-      ],
-      "properties": {
-        "cs": {
-          "title": "Hodnota v českém jazyce",
-          "type": "string"
-        },
-        "en": {
-          "title": "Hodnota v anglickém jazyce",
-          "type": "string"
-        }
-      }
-    },
-    "vytvořeno": {
-      "title": "okamžik vytvoření",
-      "description": "Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času. Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy datum, čas či datum a čas. Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici. Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.",
-      "type": "object",
-      "required": [
-        "typ"
-      ],
-      "properties": {
-        "iri": {
-          "type": "string",
-          "format": "iri"
-        },
-        "typ": {
-          "oneOf": [
-            {
-              "const": "Časový okamžik"
-            },
-            {
-              "type": "array",
-              "contains": {
-                "const": "Časový okamžik"
-              },
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "je_nespecifikovaný": {
-          "title": "je nespecifikovaný",
-          "description": "Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
-          "type": "boolean"
-        },
-        "datum_a_čas": {
-          "title": "datum a čas",
-          "description": "Datum a čas začátku okamžiku.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "datum": {
-          "title": "datum",
-          "description": "Datum okamžiku.",
-          "type": "string",
-          "format": "date"
-        }
-      }
-    },
-    "aktualizováno": {
-      "title": "okamžik poslední změny",
-      "description": "Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času. Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy datum, čas či datum a čas. Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici. Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.",
-      "type": "object",
-      "required": [
-        "typ"
-      ],
-      "properties": {
-        "iri": {
-          "type": "string",
-          "format": "iri"
-        },
-        "typ": {
-          "oneOf": [
-            {
-              "const": "Časový okamžik"
-            },
-            {
-              "type": "array",
-              "contains": {
-                "const": "Časový okamžik"
-              },
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "je_nespecifikovaný": {
-          "title": "je nespecifikovaný",
-          "description": "Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
-          "type": "boolean"
-        },
-        "datum_a_čas": {
-          "title": "datum a čas",
-          "description": "Datum a čas začátku okamžiku.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "datum": {
-          "title": "datum",
-          "description": "Datum okamžiku.",
-          "type": "string",
-          "format": "date"
-        }
-      }
-    },
-    "pojmy": {
-      "type": "array",
-      "items": {
-        "title": "Pojem",
-        "description": "Pojem, reprezentuje typy subjektu a objektu práva, vlastnost nebo vztah.",
-        "type": "object",
-        "required": [
-          "iri",
-          "typ",
-          "název"
-        ],
-        "properties": {
-          "iri": {
-            "type": "string",
-            "format": "iri"
-          },
-          "typ": {
-            "type": "array",
-            "allOf": [
-              {
-                "contains": {
-                  "const": "Koncept"
+            "required": [
+                "pojmy"
+            ],
+            "properties": {
+                "typ": {
+                    "type": "array",
+                    "contains": {
+                        "const": "Tezaurus"
+                    },
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "pojmy": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "iri",
+                            "typ",
+                            "název"
+                        ],
+                        "properties": {
+                            "typ": {
+                                "type": "array",
+                                "contains": {
+                                    "const": "Pojem"
+                                },
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "název": {
+                                "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json#/$defs/text-s-povinnou-češtinou"
+                            },
+                            "popis": {
+                                "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json#/$defs/text-s-povinnou-češtinou"
+                            },
+                            "definice": {
+                                "$ref": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json#/$defs/text-s-povinnou-češtinou"
+                            },
+                            "definující-ustanovení-právního-předpisu": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri",
+                                    "pattern": "^https\\:\/\/opendata\\.eselpoint\\.cz\/esel-esb\/eli\/cz\/sb\/.*$",
+                                    "examples": [
+                                        "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
+                                    ]
+                                }
+                            },
+                            "související-ustanovení-právního-předpisu": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri",
+                                    "pattern": "^https\\:\/\/opendata\\.eselpoint\\.cz\/esel-esb\/eli\/cz\/sb\/.*$",
+                                    "examples": [
+                                        "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
+                                    ]
+                                }
+                            },
+                            "nadřazený-pojem": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri"
+                                }
+                            },
+                            "ekvivalentní-pojem": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "format": "iri"
+                                }
+                            }
+                        }
+                    }
                 }
-              },
-              {
-                "contains": {
-                  "const": "Pojem"
-                }
-              }
-            ],
-            "items": {
-              "type": "string"
             }
-          },
-          "název": {
-            "title": "název",
-            "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
-            "type": "object",
-            "additionalProperties": {
-              "title": "Hodnota v jiném jazyce",
-              "type": "string"
-            },
-            "required": [
-              "cs"
-            ],
-            "properties": {
-              "cs": {
-                "title": "Hodnota v českém jazyce",
-                "type": "string"
-              },
-              "en": {
-                "title": "Hodnota v anglickém jazyce",
-                "type": "string"
-              }
-            }
-          },
-          "popis": {
-            "title": "popis",
-            "type": "object",
-            "additionalProperties": {
-              "title": "Hodnota v jiném jazyce",
-              "type": "string"
-            },
-            "required": [
-
-            ],
-            "properties": {
-              "cs": {
-                "title": "Hodnota v českém jazyce",
-                "type": "string"
-              },
-              "en": {
-                "title": "Hodnota v anglickém jazyce",
-                "type": "string"
-              }
-            }
-          },
-          "definice": {
-            "title": "definice",
-            "description": "Definice pojmu. Je unikátní v rámci definic pojmů ve slovníku.",
-            "type": "object",
-            "additionalProperties": {
-              "title": "Hodnota v jiném jazyce",
-              "type": "string"
-            },
-            "required": [
-
-            ],
-            "properties": {
-              "cs": {
-                "title": "Hodnota v českém jazyce",
-                "type": "string"
-              },
-              "en": {
-                "title": "Hodnota v anglickém jazyce",
-                "type": "string"
-              }
-            }
-          },
-          "definující-ustanovení-právního-předpisu": {
-            "title": "Definující ustanovení právního předpisu",
-            "description": "Ustanovení právního předpisu, ve kterém je pojem definován.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "iri",
-              "examples": [
-                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
-              ]
-            }
-          },
-          "související-ustanovení-právního-předpisu": {
-            "title": "související ustanovení právního předpisu",
-            "description": "Ustanovení právního předpisu, které s daným pojmem souvisí.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "iri",
-              "examples": [
-                "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
-              ]
-            }
-          },
-          "ekvivalentní-pojem": {
-            "title": "ekvivalentní pojem",
-            "description": "Významově ekvivalentní pojem. Typicky se jedná o pojem z jiného slovníku, který však má stejný význam.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "iri"
-            }
-          },
-          "nadřazený-pojem": {
-            "title": "nadřazený pojem",
-            "description": "Významově širší pojem. Může se jednat o specializaci, instanciaci, partonomii, apod.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "iri"
-            }
-          }
         }
-      }
-    }
-  }
+    ]
 }
