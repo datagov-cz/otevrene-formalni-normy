@@ -1,0 +1,435 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/dobrovolný-svazek-obcí/draft/schema.json",
+    "title": "Dobrovolný svazek obcí",
+    "description": "Svazek obcí je právnickou osobou, která vede účetnictví podle zákona o účetnictví. ",
+    "type": "object",
+    "required": [
+        "id",
+        "type",
+        "název_svazku_obcí",
+        "datum_vzniku_svazku_obcí",
+        "identifikační_číslo_svazku_obcí",
+        "předmět_činnosti_svazku_obcí",
+        "webová_stránka_svazku_obcí",
+        "má_sídlo_na_adrese",
+        "má_zdroj_výčtu_členů",
+        "webová_stránka_sbírky_listin",
+        "má_orgány",
+        "je_zapsán_v_rejstříku"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "format": "iri"
+        },
+        "type": {
+            "oneOf": [
+                {
+                    "const": "Dobrovolný svazek obcí"
+                },
+                {
+                    "type": "array",
+                    "contains": {
+                        "const": "Dobrovolný svazek obcí"
+                    },
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "název_svazku_obcí": {
+            "title": "název svazku obcí",
+            "description": "název dobrovolného svazku obcí ",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [
+                "cs"
+            ],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
+        },
+        "datum_vzniku_svazku_obcí": {
+            "title": "datum vzniku svazku obcí",
+            "description": "datum vzniku dobrovolného svazku obcí ",
+            "type": "string",
+            "format": "date"
+        },
+        "datum_zrušení_svazku_obcí": {
+            "title": "datum zrušení svazku obcí",
+            "description": "datum zrušení dobrovolného svazku obcí ",
+            "type": "string",
+            "format": "date"
+        },
+        "datum_zániku_svazku_obcí": {
+            "title": "datum zániku svazku obcí",
+            "description": "datum zániku dobrovolného svazku obcí ",
+            "type": "string",
+            "format": "date"
+        },
+        "identifikační_číslo_svazku_obcí": {
+            "title": "identifikační číslo svazku obcí",
+            "description": "IČO dobrovolného svazku obcí",
+            "type": "integer"
+        },
+        "právní_důvod_zrušení_svazku_obcí": {
+            "title": "právní důvod zrušení svazku obcí",
+            "description": "právní důvod zrušení dobrovolného svazku obcí ",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [
+                "cs"
+            ],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
+        },
+        "předmět_činnosti_svazku_obcí": {
+            "title": "předmět činnosti svazku obcí",
+            "description": "předmět činnosti dobrovolného svazku obcí ",
+            "type": "object",
+            "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+            },
+            "required": [],
+            "properties": {
+                "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                },
+                "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                }
+            }
+        },
+        "webová_stránka_svazku_obcí": {
+            "title": "webová stránka svazku obcí",
+            "description": "webová stránka dobrovolného svazku obcí ve formátu URL ",
+            "type": "string",
+            "format": "iri"
+        },
+        "má_sídlo_na_adrese": {
+            "title": "má adresu",
+            "type": "string",
+            "format": "iri"
+        },
+        "souřadnice_sídla": {
+            "title": "souřadnice",
+            "type": "string"
+        },
+        "má_zdroj_výčtu_členů": {
+            "title": "má zdroj výčtu členů",
+            "type": "string",
+            "format": "iri"
+        },
+        "webová_stránka_sbírky_listin": {
+            "title": "webová stránka sbírky listin",
+            "description": "webová stránka, kde je k dispozici uveřejněná sbírka listin",
+            "type": "string",
+            "format": "iri"
+        },
+        "identifikátor_datové_schránky": {
+            "title": "Identifikátor datové schránky",
+            "type": "string"
+        },
+        "má_orgány": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "title": "Orgán",
+                "description": "Orgán dobrovolného svazku obcí.",
+                "type": "object",
+                "required": [
+                    "způsob_jednání",
+                    "název_orgánu"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "const": "Orgán"
+                            },
+                            {
+                                "type": "array",
+                                "contains": {
+                                    "const": "Orgán"
+                                },
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    },
+                    "způsob_jednání": {
+                        "title": "způsob jednání",
+                        "description": "Text popisující, jakým způsobem orgán zastupuje svazek",
+                        "type": "string"
+                    },
+                    "název_orgánu": {
+                        "title": "název orgánu",
+                        "description": "Oficiální název orgánu svazku obcí (např. Valná hromada, Předsednictvo, Kontrolní komise)",
+                        "type": "string"
+                    },
+                    "obsahuje_funkce": {
+                        "title": "obsahuje funkce",
+                        "type": "array",
+                        "items": {
+                            "title": "Funkce orgánu",
+                            "description": "Funkce orgánu dobrovolného svazku obcí, kterou vykonává konkrétní fyzická osoba.",
+                            "type": "object",
+                            "required": [
+                                "den_vzniku_funkce",
+                                "název_funkce"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "format": "iri"
+                                },
+                                "type": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Funkce orgánu"
+                                        },
+                                        {
+                                            "type": "array",
+                                            "contains": {
+                                                "const": "Funkce orgánu"
+                                            },
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "den_vzniku_funkce": {
+                                    "title": "den vzniku funkce",
+                                    "description": "Datum vzniku funkce orgánu dobrovolného svazku obcí",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "den_zániku_funkce": {
+                                    "title": "den zániku funkce",
+                                    "description": "Datum zrušení funkce orgánu dobrovolného svazku obcí",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "název_funkce": {
+                                    "title": "název funkce",
+                                    "description": "Název funkce orgánu svazku obcí",
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "title": "Hodnota v jiném jazyce",
+                                        "type": "string"
+                                    },
+                                    "required": [],
+                                    "properties": {
+                                        "cs": {
+                                            "title": "Hodnota v českém jazyce",
+                                            "type": "string"
+                                        },
+                                        "en": {
+                                            "title": "Hodnota v anglickém jazyce",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "je_vykonávána_osobou": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Osoba vykonávající funkci orgánu",
+                                        "description": "Fyzická osoba vykonávající funkci orgánu dobrovolného svazku obcí",
+                                        "type": "object",
+                                        "required": [
+                                            "příjmení",
+                                            "jméno",
+                                            "má_bydliště_na_adrese"
+                                        ],
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "format": "iri"
+                                            },
+                                            "type": {
+                                                "oneOf": [
+                                                    {
+                                                        "const": "Osoba vykonávající funkci orgánu"
+                                                    },
+                                                    {
+                                                        "type": "array",
+                                                        "contains": {
+                                                            "const": "Osoba vykonávající funkci orgánu"
+                                                        },
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            "příjmení": {
+                                                "title": "příjmení",
+                                                "description": "Příjmení osoby vykonávající působnost orgánu",
+                                                "type": "string"
+                                            },
+                                            "jméno": {
+                                                "title": "jméno",
+                                                "description": "Křestní jméno osoby vykonávající působnost orgánu",
+                                                "type": "string"
+                                            },
+                                            "má_bydliště_na_adrese": {
+                                                "title": "má bydliště na adrese",
+                                                "type": "string",
+                                                "format": "iri"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "má_členskou_obci": {
+            "type": "array",
+            "items": {
+                "title": "Obec jako člen dobrovolného svazku obcí",
+                "type": "object",
+                "required": [
+                    "den_vzniku_členství",
+                    "název_obce",
+                    "identifikační_číslo_obce"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "type": {
+                        "oneOf": [
+                            {
+                                "const": "Obec jako člen dobrovolného svazku obcí"
+                            },
+                            {
+                                "type": "array",
+                                "contains": {
+                                    "const": "Obec jako člen dobrovolného svazku obcí"
+                                },
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        ]
+                    },
+                    "den_vzniku_členství": {
+                        "title": "den vzniku členství",
+                        "description": "Datum, kdy obec oficiálně vstoupila do daného DSO a stala se jeho členem",
+                        "type": "string"
+                    },
+                    "den_zániku_členství": {
+                        "title": "den zániku členství",
+                        "description": "Datum, kdy obec ukončila své členství ve svazku, buď na základě rozhodnutí nebo z jiného důvodu (např. zánik svazku nebo vystoupení obce)",
+                        "type": "string"
+                    },
+                    "kraj_obce": {
+                        "title": "kraj obce",
+                        "description": "Název správního regionu, do kterého členská obec spadá",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "kód_obce": {
+                        "title": "kód obce",
+                        "description": "Kód členské obce dle RÚIAN (Registr územní identifikace, adres a nemovitostí) nebo CISOB (Centrální evidence svazků obcí), který slouží k jednoznačné identifikaci obce v těchto registrech.",
+                        "type": "string",
+                        "format": "iri"
+                    },
+                    "název_obce": {
+                        "title": "název obce",
+                        "description": "Oficiální název obce, používaný pro její identifikaci v právních a administrativních dokumentech",
+                        "type": "string"
+                    },
+                    "identifikační_číslo_obce": {
+                        "title": "identifikační číslo obce",
+                        "type": "integer"
+                    },
+                    "souřadnice": {
+                        "title": "souřadnice",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "je_zapsán_v_rejstříku": {
+            "title": "je zapsán v rejstříku",
+            "description": "Rejstřík svazků obcí vedený u krajského úřadu příslušného podle sídla svazku obcí.",
+            "type": "object",
+            "required": [
+                "id",
+                "type",
+                "provozovatel_rejstříku_svazku_obcí"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "format": "iri"
+                },
+                "type": {
+                    "oneOf": [
+                        {
+                            "const": "Rejstřík svazků obcí"
+                        },
+                        {
+                            "type": "array",
+                            "contains": {
+                                "const": "Rejstřík svazků obcí"
+                            },
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    ]
+                },
+                "webová_stránka_rejstříku_svazku_obcí": {
+                    "title": "webová stránka rejstříku svazku obcí",
+                    "description": "Webová stránka rejstříku svazku obcí",
+                    "type": "string",
+                    "format": "iri"
+                },
+                "provozovatel_rejstříku_svazku_obcí": {
+                    "title": "provozovatel rejstříku svazku obcí",
+                    "description": "IRI z RÚIAN pro kraj, který provozuje daný rejstřík",
+                    "type": "string",
+                    "format": "iri"
+                }
+            }
+        }
+    }
+}
