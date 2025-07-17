@@ -1,152 +1,42 @@
 <!DOCTYPE html>
 <html lang="cs">
-    <head>
-        <title>DCAT-AP-CZ: Specifikace pro vyhlášku č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</title>
-        <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <meta name="theme-color" content="#057fa5">
-        <meta name="msapplication-TileColor" content="#057fa5">
-        <meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
-        <link rel="manifest" href="../../static/favicons/manifest.json">
-        <script class="remove" src="../../static/js/respec-odcz.js"></script>
-        <script class="remove">
-            var respecConfig = {
-                specStatus: "ED",
-                shortName: "dcat-ap-cz-360-2023",               
-                showPreviousVersion: false,
-                thisVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/draft/",
-                latestVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/",
-                editors: [{
-                  name: "Jakub Klímek",
-                  orcid: "0000-0001-7234-3051",
-                  company:    "Digitální a informační agentura",
-                  companyURL: "https://dia.gov.cz"
-                }],
-                inlineCSS: "true",
-                github: "https://github.com/datagov-cz/otevrene-formalni-normy/",
-                otherLinks: [{
-                    key: "Odkazy",
-                    data: [{
-                        value: "Portál o datech",
-                        href: "https://data.gov.cz"
-                    },{
-                        value: "Kontaktní e-mail",
-                        href: "mailto:otevrenadata@dia.gov.cz"
-                    }]
-                }]
-              };
-        </script>
-    </head>
-    <body>
-        <section id="abstract" class="introductory">
-            <h2>Abstrakt</h2>
-            <p>
-                Cílem tohoto dokumentu je poskytnout specifikaci pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>, který říká:
-                <cite>Údaje vedené v informačním systému jsou poskytovány podle otevřené formální normy pro rozhraní katalogů otevřených dat, kterou zveřejňuje Digitální a informační agentura způsobem umožňujícím dálkový přístup.</cite>
-                Předpokladem pro naplnění tohoto požadavku je tvorba datových slovníků dle <a href="../../slovníky/">OFN Slovníky</a>, které obsahují pojmy klasifikované kategoriemi dle <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_6/par_23">§ 23 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
-                Pak lze tyto pojmy použít pro anotaci datových sad a datových rozhraní.
-                Jedná se o specifikaci založenou na propojených datech, předpokládá se tedy znalost <a href="../../propojená-data/">Otevřené formální normy Propojená data</a> a serializace JSON-LD 1.1 [[json-ld11]].
-            </p>
-            <p>
-                Specifikace obsahuje celkem 3 oblasti, ve kterých rozšiřuje obecný metadatový model <a href="../../dcat-ap-cz/">DCAT-AP-CZ</a>.
-            </p>
-            <ol>
-                <li><a href="datové-sady">Anotace datových sad použitými pojmy</a> ze slovníků dle <a href="../../slovníky/">OFN Slovníky</a></li>
-                <li><a href="datová-rozhraní">Klasifikace datových rozhraní</a> jako celku kategoriemi dle <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_6/par_23">§ 23 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a></li>
-                <li><a href="údaje-v-rozhraních">Anotace datových rozhraní</a> kategoriemi dle <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_6/par_23">§ 23 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a> pro jednotlivé sdílené údaje odpovídající pojmům z datových slovníků dle <a href="../../slovníky/">OFN Slovníky</a></li>
-            </ol>
-            <p>
-                Specifikace definuje následující technické artefakty:
-            </p>
-            <ol>
-                <li>
-                    Katalog - obsahuje metadata katalogu a odkazy na záznamy datových sad
-                    <ul>
-                        <li><a href="schémata/katalog.json">JSON Schéma Katalogu datových sad sdílených datovým rozhraním</a></li>
-                        <li><a href="kontexty/katalog.jsonld">JSON-LD kontext Katalogu datových sad sdílených datovým rozhraním</a></li>
-                        <li><a href="příklady/katalog.jsonld">Příklad Katalogu datových sad sdílených datovým rozhraním</a></li>        
-                    </ul>
-                </li>
-                <li>
-                    Datová sada sdílená datovým rozhraním
-                    <ul>
-                        <li><a href="schémata/datová-sada.json">JSON Schéma Datové sady sdílené datovým rozhraním</a></li>
-                        <li><a href="kontexty/datová-sada.jsonld">JSON-LD kontext Datové sady sdílené datovým rozhraním</a></li>
-                        <li><a href="příklady/datová-sada-s-popisem.jsonld">Příklad Datové sady sdílené datovým rozhraním</a></li>        
-                    </ul>
-                </li>
-            </ol>
-            
-        </section>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="theme-color" content="#057fa5">
+		<meta name="msapplication-TileColor" content="#057fa5">
+		<meta name="msapplication-TileImage" content="../../static/favicons/ms-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="57x57" href="../../static/favicons/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="../../static/favicons/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="../../static/favicons/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="../../static/favicons/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="../../static/favicons/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="../../static/favicons/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="../../static/favicons/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="../../static/favicons/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../../static/favicons/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="../../static/favicons/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="../../static/favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="../../static/favicons/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../../static/favicons/favicon-16x16.png">
+		<link rel="manifest" href="../../static/favicons/manifest.json">
 
-        <section id="úvod">
-            <h2>Přehledový diagram</h2>
-            <p>
-                
-            </p>
+		<title>Přesměrování</title>
 
-            <figure id="diagram"><img alt="Diagram datového modelu pro DCAT-AP-CZ: Specifikace pro vyhlášku č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy" src="obrázky/dcat-ap-cz-360-2023.svg">
-                <figcaption>
-                    <a href="https://drive.google.com/file/d/1x_ODpQMe2RtlaZj2Q5tzutM-s786GbxW">Diagram datového modelu</a> pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
-                    Šedě podbarvené části jsou specifikovány číselníky.
-                </figcaption>
-            </figure>
-            
-        </section>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		<link rel="stylesheet" href="../static/css/od.css">
+		
 
-        <section id="datové-sady">
-            <h2>Anotace datových sad použitými pojmy</h2>
-            <p>
-                <figure id="diagram"><img alt="Diagram datového modelu pro Datové sady" src="obrázky/dcat-ap-cz-360-2023-datové-sady.svg">
-                    <figcaption>
-                        <a href="https://drive.google.com/file/d/1EmC_nUvsEeXERxL9AFqIR6pi_zLxQw3u">Diagram datového modelu</a> pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
-                        Šedě podbarvené části jsou specifikovány číselníky.
-                    </figcaption>
-                </figure>
-                Detailně popsáno v dokumentu <a href="datové-sady">Anotace datových sad použitými pojmy</a> ze slovníků dle <a href="../../slovníky/">OFN Slovníky</a>.
-            </p>
+		<meta http-equiv="refresh" content="0; url=cs">
+		
+	</head>
 
-        </section>
+	<body>
+        <div class="container">
+            <h1>Přesměrování&hellip;</h1>
+            <p><a href="cs">Pokud nejste přesměrováni, klikněte zde.</a></p>
+        </div>
+		<script type="application/javascript">location="cs"+window.location.hash</script>
 
-        <section id="datová-rozhraní">
-            <h2>Klasifikace datových rozhraní</h2>
-            <figure id="diagram"><img alt="Diagram datového modelu pro klasifikaci datových rozhraní" src="obrázky/dcat-ap-cz-360-2023-datová-rozhraní.svg">
-                <figcaption>
-                    <a href="https://drive.google.com/file/d/1x_ODpQMe2RtlaZj2Q5tzutM-s786GbxW">Diagram datového modelu</a> pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
-                    Šedě podbarvené části jsou specifikovány číselníky.
-                </figcaption>
-            </figure>
-            <p>
-                Detailně popsáno v dokumentu <a href="datová-rozhraní">Klasifikace datových rozhraní</a> jako celku kategoriemi dle <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_6/par_23">§ 23 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>
-            </p>
-
-        </section>
-
-        <section id="údaje-v-rozhraních">
-            <h2>Anotace datových rozhraní</h2>
-            <p>
-                <figure id="diagram"><img alt="Diagram datového modelu pro anotaci údajů v datových rozhraních" src="obrázky/dcat-ap-cz-360-2023-údaje-v-rozhraních.svg">
-                    <figcaption>
-                        <a href="https://drive.google.com/file/d/1emAP4xpcHwwcR2heSnlN-VCSzJmETIOB/view?usp=sharing">Diagram datového modelu</a> pro naplnění <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_7/par_24/odst_2">§ 24 odst. 2 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a>.
-                        Šedě podbarvené části jsou specifikovány číselníky.
-                    </figcaption>
-                </figure>    
-                Detailně popsáno v dokumentu <a href="údaje-v-rozhraních">Anotace datových rozhraní</a> kategoriemi dle <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_6/par_23">§ 23 vyhlášky č. 360/2023 Sb., o dlouhodobém řízení informačních systémů veřejné správy</a> pro jednotlivé sdílené údaje odpovídající pojmům z datových slovníků dle <a href="../../slovníky/">OFN Slovníky</a>
-            </p>
-        </section>
-
-    </body>
+	</body>
 </html>
