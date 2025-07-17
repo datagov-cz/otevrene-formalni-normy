@@ -589,7 +589,7 @@
   Detailní celková specifikace je pak v dalších částech dokumentu.
 </p>
 
-<section>
+<section id="slovník">
   <h3>Slovník</h3>
   <p>
     Nejprve je třeba popsat samotný slovník. Je třeba pro něj zvolit vhodné a perzistentní IRI, nazvat ho a popsat ho.
@@ -630,7 +630,7 @@
 }</pre></aside>
 </section>
 
-<section>
+<section id="tezaurus">
   <h3>Tezaurus</h3>
   <p>
     Nejjednodušším typem slovníku je tezaurus obsahující pojmy, které se v datech vyskytují.
@@ -747,7 +747,7 @@
 
 </section>
 
-<section>
+<section id="konceptuální-model">
   <h3>Konceptuální model</h3>
   <p>
     Na této úrovni rozlišujeme pojmy, které reprezentují
@@ -756,30 +756,454 @@
       <li>vztahy mezi dvěma subjekty či objekty práva,</li>
       <li>vlastnosti subjektů a objektů práva.</li>
     </ul>
-
   </p>
+
+  <a href="./is13y.svg">
+    <figure>
+      <img src="./is13y.svg">
+      <figcaption>Konceptuální model</figcaption>
+    </figure>
+  </a>
+
+  <p>
+    Příkladem je slovník s IRI <code>https://slovník.gov.cz/datový/turistické-cíle</code> obsahující pojmy.
+    Dále každému pojmu přiděluje jeho typ z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost.
+    V závislosti na typu pojmu je pak daný pojem dále popsán.
+    U vztahu <code>má typ turistického cíle</code> je ukázáno použití <a href="#Vztah.nadřazenýVztah">nadřazeného vztahu</a>.
+  </p>
+
+  <aside class="example" title="Konceptuální model v JSON-LD">
+                    <p>
+                        <a href="../příklady/konceptuální-model.jsonld">JSON-LD</a>, <a href="../kompletní/kontext.jsonld">JSON-LD kontext</a>, <a href="../konceptuální-model/schéma.json">JSON Schéma</a>
+                    </p>
+                    <pre class="json">
+{
+  "@context": "https://ofn.gov.cz/slovníky/draft2/kompletní/kontext.jsonld",
+  "iri": "https://slovník.gov.cz/datový/turistické-cíle",
+  "typ": ["Slovník", "Tezaurus", "Konceptuální model"],
+  "název": {
+      "cs": "Slovník turistických cílů",
+      "en": "Vocabulary of tourist points of interest"
+  },
+  "popis": {
+      "cs": "Slovník turistických cílů slouží v rámci příkladu pro OFN Slovníky",
+      "en": "Vocabulary of tourist points of interest serves as an example in the formal open standard for vocabularies"
+  },
+  "pojmy": [
+      {
+          "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+          "typ": ["Koncept", "Pojem", "Třída"],
+          "název": {
+              "cs": "Turistický cíl",
+              "en": "Tourist point of interest"
+          },
+          "definice": {
+              "cs": "Samostatný turistický cíl.",
+              "en": "Tourist point of interest"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1992/114/2024-01-01/dokument/norma/cast_1/par_3/odst_1/pism_q"
+          ],
+          "nadřazená-třída": [
+              "https://slovník.gov.cz/generický/veřejná-místa/pojem/veřejné-místo",
+              "https://slovník.gov.cz/veřejný-sektor/pojem/objekt-práva"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+          "typ": ["Koncept", "Pojem", "Třída"],
+          "název": {
+              "cs": "Typ turistického cíle",
+              "en": "Type of the tourist point of interest"
+          },
+          "definice": {
+              "cs": "Typ turistického cíle (např. přírodní nebo kulturní) reprezentovaný jako položka číselníku typů turistických cílů."
+          },
+          "instance-definovány-číselníkem": {
+              "iri": "https://data.mvcr.gov.cz/zdroj/číselníky/typy-turistických-cílů",
+              "typ": "Číselník",
+              "datová-sada-v-nkod": "https://data.gov.cz/zdroj/datové-sady/17651921/ff931872553062c9890157ce8615af03"
+          }
+      },
+      {
+          "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/má-typ-turistického-cíle",
+          "typ": ["Koncept", "Pojem", "Vztah"],
+          "název": {
+              "cs": "má typ turistického cíle",
+              "en": "has type of tourist point of interest"
+          },
+          "definice": {
+              "cs": "Určuje, zda se jedná o přírodní nebo kulturní turistický cíl."
+          },
+          "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+          "obor-hodnot": "https://slovník.gov.cz/datový/turistické-cíle/pojem/typ-turistického-cíle",
+          "nadřazený-vztah": [
+              "https://slovník.gov.cz/datový/číselníky/pojem/má-přiřazenu-položku-číselníku"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/datový/turistické-cíle/pojem/kouření-povoleno",
+          "typ": ["Koncept", "Pojem", "Vlastnost"],
+          "název": {
+              "cs": "kouření povoleno",
+              "en": "smoking allowed"
+          },
+          "definice": {
+              "cs": "Určuje, zda je možné v turistickém cíli kouření tabákových výrobků."
+          },
+          "definiční-obor": "https://slovník.gov.cz/datový/turistické-cíle/pojem/turistický-cíl",
+          "obor-hodnot": "xsd:boolean"
+      }
+  ]
+}</pre></aside>
+
 </section>
 
-<section>
+<section id="rozšíření">
   <h3>Rozšířená specifikace typů</h3>
   <p>
+    Na této úrovni rozlišujeme Typ subjektu práva a Typ objektu práva.
+    Případné budoucí verze mohou toto rozlišení dále prohlubovat přidáváním dalších typů.
+    Toto rozšíření lze aplikovat jak na <a href="#tezaurus">Tezaurus</a>, tak na <a href="#konceptuální-model">Konceptuální model</a>.
   </p>
+
+  <a href="./abi2vl.svg">
+    <figure>
+      <img src="./abi2vl.svg">
+      <figcaption>Rozšířená specifikace typů</figcaption>
+    </figure>
+  </a>
+
+  <p>
+    Příkladem je slovník <em>Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb.</em> s IRI <code>https://slovník.gov.cz/legislativní/sbírka/56/2001</code>.
+    Tak jako v základním modelu obsahuje pojmy a jejich typy z hlediska modelu, tj. zda se jedná o třídu, vztah či vlastnost a v závislosti na typu pojmu je pak daný pojem dále popsán.
+    Navíc však u tříd specifikujeme, zda se jedná o Typ subjektu práva nebo Typ objektu práva.
+  </p>
+
+<aside class="example" title="Rozšíření v JSON-LD">
+                    <p>
+                        <a href="../příklady/rozšíření.jsonld">JSON-LD</a>, <a href="../kompletní/kontext.jsonld">JSON-LD kontext</a>, <a href="../rozšíření/schéma.json">JSON Schéma</a>
+                    </p>
+                    <pre class="json">
+{
+  "@context": "https://ofn.gov.cz/slovníky/draft2/kompletní/kontext.jsonld",
+  "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
+  "typ": ["Slovník", "Tezaurus", "Konceptuální model"],
+  "název": {
+      "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
+  },
+  "popis": {
+      "cs": "Slovník slouží v rámci příkladu pro OFN Slovníky"
+  },
+  "pojmy": [
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
+          "název": {
+              "cs": "Silniční vozidlo",
+              "en": "Road vehicle"
+          },
+          "definice": {
+              "cs": "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1"
+          ],
+          "nadřazená-třída": [
+              "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ subjektu práva"],
+          "název": {
+              "cs": "Vlastník vozidla",
+              "en": "Vehicle owner"
+          },
+          "definice": {
+              "cs": "Vlastník vozidla"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
+          "typ": ["Koncept", "Pojem", "Vztah"],
+          "název": {
+              "cs": "má vlastníka vozidla"
+          },
+          "definice": {
+              "cs": "má vlastníka vozidla"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+          ],
+          "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+          "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla"
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
+          "typ": ["Koncept", "Pojem", "Třída"],
+          "název": {
+              "cs": "Vlastnictví vozidla"
+          },
+          "definice": {
+              "cs": "Vlastnictví vozidla"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
+          "typ": ["Koncept", "Pojem", "Vlastnost", "Typ objektu práva"],
+          "název": {
+              "cs": "registrační značka"
+          },
+          "definice": {
+              "cs": "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."
+          },
+          "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou",
+          "obor-hodnot": "xsd:string"
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
+          "název": {
+              "cs": "Havárie silničního vozidla"
+          },
+          "definice": {
+              "cs": "Havárie silničního vozidla"
+          }
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
+          "název": {
+              "cs": "Zničené silniční vozidlo"
+          },
+          "definice": {
+              "cs": "Zničené silniční vozidlo"
+          }
+      }
+  ]
+}</pre></aside>
 </section>
 
-<section>
+<section id="rpp">
   <h3>Anotace pro registr práv a povinností</h3>
   <p>
+    Pokud popisujeme subjekty a objekty práva pro jejich následnou reprezentaci v Registru práv a povinností (RPP), je třeba je popsat detailněji.
+    Vyžaduje použití rozlišení na Typ subjektů práva a Typ objektů práva z <a href="#rozšíření">Rozšířené specifikace typů</a>.
   </p>
+
+  <a href="./afvuvi.svg">
+    <figure>
+      <img src="./afvuvi.svg">
+      <figcaption>Anotace pro registr práv a povinností</figcaption>
+    </figure>
+  </a>
+
+  <p class="issue">
+MaNe: Do description bychom ale měli vysvětlit, co to znamená, když někdo označí celou třídu jako sdílenou přes PPDF. To znamená, že se sdílí všechny vztahy a vlastnosti, které mají třídu jako domain asi? A může si pak pro třídu označenou jako sdílenou označit konkrétní vlastnost jako nesdílenou (tj. nastavit false?)
+  </p>
+
+<aside class="example" title="Anoteace pro RPP v JSON-LD">
+                    <p>
+                        <a href="../příklady/rpp.jsonld">JSON-LD</a>, <a href="../kompletní/kontext.jsonld">JSON-LD kontext</a>, <a href="../rpp/schéma.json">JSON Schéma</a>
+                    </p>
+                    <pre class="json">
+{
+  "@context": "https://ofn.gov.cz/slovníky/draft2/kompletní/kontext.jsonld",
+  "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
+  "typ": ["Slovník", "Tezaurus", "Konceptuální model"],
+  "název": {
+      "cs": "Slovník zákona č. 56/2001 Sb. o podmínkách provozu vozidel na pozemních komunikacích a o změně zákona č. 168/1999 Sb., o pojištění odpovědnosti za škodu způsobenou provozem vozidla a o změně některých souvisejících zákonů (zákon o pojištění odpovědnosti z provozu vozidla), ve znění zákona č. 307/1999 Sb."
+  },
+  "popis": {
+      "cs": "Slovník slouží v rámci příkladu pro OFN Slovníky"
+  },
+  "pojmy": [
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
+          "název": {
+              "cs": "Silniční vozidlo",
+              "en": "Road vehicle"
+          },
+          "definice": {
+              "cs": "Silniční vozidlo je motorové nebo nemotorové vozidlo, které je vyrobené za účelem provozu na pozemních komunikacích pro přepravu osob, zvířat nebo věcí."
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_1/par_2/odst_1"
+          ],
+          "nadřazená-třída": [
+              "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/vozidlo"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ subjektu práva"],
+          "název": {
+              "cs": "Vlastník vozidla",
+              "en": "Vehicle owner"
+          },
+          "definice": {
+              "cs": "Vlastník vozidla"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+          ],
+          "je-sdílen-v-ppdf": true,
+          "agendový-informační-systém": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456",
+          "agenda": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021"
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/má-vlastníka-vozidla",
+          "typ": ["Koncept", "Pojem", "Vztah", "Neveřejný údaj"],
+          "název": {
+              "cs": "má vlastníka vozidla"
+          },
+          "definice": {
+              "cs": "má vlastníka vozidla"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+          ],
+          "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/silniční-vozidlo",
+          "obor-hodnot": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastník-vozidla",
+          "je-sdílen-v-ppdf": true,
+          "ustanovení-dokládající-neveřejnost-údaje": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/vlastnictví-vozidla",
+          "typ": ["Koncept", "Pojem", "Třída", "Veřejný údaj"],
+          "název": {
+              "cs": "Vlastnictví vozidla"
+          },
+          "definice": {
+              "cs": "Vlastnictví vozidla"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_2/pism_a"
+          ]
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/registrační-značka",
+          "typ": ["Koncept", "Pojem", "Vlastnost", "Typ objektu práva"],
+          "název": {
+              "cs": "registrační značka"
+          },
+          "definice": {
+              "cs": "Registrační značkou je státní poznávací značka přidělená silničnímu vozidlu. Registrační značka je tvořena kombinací velkých písmen latinské abecedy a arabských číslic."
+          },
+          "definiční-obor": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/tabulka-s-přidělenou-registrační-značkou",
+          "obor-hodnot": "xsd:string",
+          "je-sdílen-v-ppdf": false,
+          "agendový-informační-systém": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456",
+          "agenda": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1021"
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/havárie-silničního-vozidla",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
+          "název": {
+              "cs": "Havárie silničního vozidla"
+          },
+          "definice": {
+              "cs": "Havárie silničního vozidla"
+          }
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001/pojem/zničené-silniční-vozidlo",
+          "typ": ["Koncept", "Pojem", "Třída", "Typ objektu práva"],
+          "název": {
+              "cs": "Zničené silniční vozidlo"
+          },
+          "definice": {
+              "cs": "Zničené silniční vozidlo"
+          }
+      }
+  ]
+}</pre></aside>
 </section>
 
-<section>
+<section id="360-2023">
   <h3>Anotace pro § 23 vyhlášky 360/2023 Sb.</h3>
   <p>
+    Pokud popisujeme údaje pro jejich kategorizaci dle <a href="https://www.e-sbirka.cz/eli/cz/sb/2023/360/2024-07-01/dokument/norma/cast_2/hlava_6/par_23">§ 23 vyhlášky 360/2023 Sb.</a>, je třeba je popsat detailněji.
   </p>
+
+  <a href="./cn8es.svg">
+    <figure>
+      <img src="./cn8es.svg">
+      <figcaption>Anotace pro § 23 vyhlášky 360/2023 Sb.</figcaption>
+    </figure>
+  </a>
+
+
+<aside class="example" title="Anotace pro § 23 vyhlášky 360/2023 Sb. v JSON-LD">
+                    <p>
+                        <a href="../příklady/360-2023.jsonld">JSON-LD</a>, <a href="../kompletní/kontext.jsonld">JSON-LD kontext</a>, <a href="../360-2023/schéma.json">JSON Schéma</a>
+                    </p>
+                    <pre class="json">
+{
+  "@context": "https://ofn.gov.cz/slovníky/draft2/kompletní/kontext.jsonld",
+  "iri": "https://slovník.gov.cz/legislativní/sbírka/56/2001",
+  "typ": ["Slovník", "Tezaurus"],
+  "název": {
+      "cs": "Slovník agendy A1046: Agenda řidičů"
+  },
+  "popis": {
+      "cs": "Slovník slouží v rámci příkladu kategorizace pojmů pro OFN Slovníky, § 23 vyhlášky 360/2023 Sb."
+  },
+  "pojmy": [
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/skupina-vozidel",
+          "typ": ["Koncept", "Pojem", "Typ objektu práva"],
+          "název": {
+              "cs": "Skupina vozidel"
+          },
+          "definice": {
+              "cs": "Skupina vozidel"
+          },
+          "způsob-získání-údaje": "způsoby-získání:vlastní",
+          "způsoby-sdílení-údaje": [
+              "způsoby-sdílení:veřejně-přístupné",
+              "způsoby-sdílení:zpřístupňované-pro-výkon-agendy"
+          ],
+          "typ-obsahu-údaje": "typy-obsahu:evidenční"
+      },
+      {
+          "iri": "https://slovník.gov.cz/legislativní/sbírka/361/2000/pojem/řidič-evidovaný-v-registru-řidičů",
+          "typ": ["Koncept", "Pojem", "Typ subjektu práva"],
+          "název": {
+              "cs": "Řidič evidovaný v Centrálním registru řidičů"
+          },
+          "definice": {
+              "cs": "Řidič evidovaný v Centrálním registru řidičů"
+          },
+          "související-ustanovení-právního-předpisu": [
+              "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/2001/56/2024-01-01/dokument/norma/cast_2/par_4/odst_1/pism_a"
+          ],
+          "je-sdílen-v-ppdf": true,
+          "agendový-informační-systém": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/isvs/123456",
+          "agenda": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/agenda/A1046",
+          "způsob-získání-údaje": "způsoby-získání:základních-registrů",
+          "způsoby-sdílení-údaje": [
+              "způsoby-sdílení:nesdílené"
+          ],
+          "typ-obsahu-údaje": "typy-obsahu:identifikační"
+      }
+  ]
+}</pre></aside>
+
 </section>
 
 </section>
-    <section>
+<!--    <section>
       <h2>Overview</h2>
 
         <a href="./acd41201-348b-4b2e-990e-b64f62a0febc.svg">
@@ -824,115 +1248,12 @@
             <figcaption></figcaption>
           </figure>
         </a>
-    </section>
+    </section>-->
 
       <section>
         <h2>Main class profiles</h2>
 
-          <section id="Číselník">
-            <h4>Číselník (@cs)</h4>
-          
-            <table class="def">
-              <tr>
-                <td>Profiled class IRI(s)</td>
-                <td>
-                    
-                    <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník</a>
-                </td>
-              </tr>
-              <tr>
-                <td>IRI</td>
-                <td><a href="https://ofn.gov.cz/slovníky#Číselník">https://ofn.gov.cz/slovníky#Číselník</a></td>
-              </tr>
-              <tr>
-                <td>Label</td>
-                <td>Číselník (@cs)</td>
-              </tr>
-              <tr>
-                <td>Definition</td>
-                <td>Číselník. Jeho identifikátorem (IRI) je IRI číselníku dle OFN Číselníky. (@cs)</td>
-              </tr>
-          
-                <tr>
-                  <td>Profiles</td>
-                  <td>
-                    <ul style="list-style-type: none; padding-left: 0; margin: 0;">
-                          <li>
-                                  class
-                
-                <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník">Číselník (@cs)</a> (<a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník</a>)
-                  <br />Definition: <i></i>
-          
-                          </li>
-                    </ul>
-                  </td>
-                </tr>
-          
-            </table>
-          
-              <p>Backwards associations</p>
-              <ul>
-                  <li>from domain <a href="#Třída"></a> → <a href="#Třída.máInstanceDefinovanéČíselníkem"></a></li>
-              </ul>
-          
-              <section id="Číselník.máVNkodZastřešujícíDatovouSadu">
-                <h4>má v NKOD zastřešující datovou sadu (@cs)</h4>
-              
-                <table class="def">
-                  <tr>
-                    <td>Profiled relationship IRI(s)</td>
-                    <td>
-                        
-                        <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>IRI</td>
-                    <td><a href="https://ofn.gov.cz/slovníky#Číselník.máVNkodZastřešujícíDatovouSadu">https://ofn.gov.cz/slovníky#Číselník.máVNkodZastřešujícíDatovouSadu</a></td>
-                  </tr>
-                  <tr>
-                    <td>Label</td>
-                    <td>má v NKOD zastřešující datovou sadu (@cs)</td>
-                  </tr>
-                  <tr>
-                    <td>Domain</td>
-                    <td>
-                      <a href="#Číselník">Číselník (@cs)</a>
-              
-                          [0..1]
-              
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Range</td>
-                    <td>
-                      <a href="#DatováSadaNKOD">Dataset</a>
-              
-                          [1..1]
-              
-                  </td>
-                  </tr>
-              
-              
-              
-                    <tr>
-                      <td>Profiles</td>
-                      <td>
-                        <ul style="list-style-type: none; padding-left: 0; margin: 0;">
-                              <li>
-                                      property
-                    
-                    <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu">má v NKOD zastřešující datovou sadu (@cs)</a> (<a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu</a>)
-                      <br />Definition: <i></i>
-              
-                              </li>
-                        </ul>
-                      </td>
-                    </tr>
-              
-                </table>
-              </section>
-          </section>          <section id="Třída">
+          <section id="Třída">
             <h4>Class</h4>
           
             <table class="def">
@@ -2219,53 +2540,6 @@
               </ul>
           
           
-          </section>          <section id="DatovýTyp">
-            <h4>Datatype</h4>
-          
-            <table class="def">
-              <tr>
-                <td>Profiled class IRI(s)</td>
-                <td>
-                    
-                    <a href="http://www.w3.org/2000/01/rdf-schema#Datatype">rdfs:Datatype</a>
-                </td>
-              </tr>
-              <tr>
-                <td>IRI</td>
-                <td><a href="https://ofn.gov.cz/slovníky#DatovýTyp">https://ofn.gov.cz/slovníky#DatovýTyp</a></td>
-              </tr>
-              <tr>
-                <td>Label</td>
-                <td>Datatype</td>
-              </tr>
-              <tr>
-                <td>Definition</td>
-                <td>The class of RDF datatypes.</td>
-              </tr>
-          
-                <tr>
-                  <td>Profiles</td>
-                  <td>
-                    <ul style="list-style-type: none; padding-left: 0; margin: 0;">
-                          <li>
-                                  class
-                
-                <a href="http://www.w3.org/2000/01/rdf-schema#Datatype">Datatype</a> (<a href="http://www.w3.org/2000/01/rdf-schema#Datatype">rdfs:Datatype</a>)
-                  <br />Definition: <i>The class of RDF datatypes.</i>
-          
-                          </li>
-                    </ul>
-                  </td>
-                </tr>
-          
-            </table>
-          
-              <p>Backwards associations</p>
-              <ul>
-                  <li>from domain <a href="#Vlastnost"></a> → <a href="#Vlastnost.oborHodnot"></a></li>
-              </ul>
-          
-          
           </section>          <section id="Vlastnost">
             <h4>DatatypeProperty</h4>
           
@@ -2912,6 +3186,109 @@
               </ul>
           
           
+          </section>          <section id="Číselník">
+            <h4>Číselník (@cs)</h4>
+          
+            <table class="def">
+              <tr>
+                <td>Profiled class IRI(s)</td>
+                <td>
+                    
+                    <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník</a>
+                </td>
+              </tr>
+              <tr>
+                <td>IRI</td>
+                <td><a href="https://ofn.gov.cz/slovníky#Číselník">https://ofn.gov.cz/slovníky#Číselník</a></td>
+              </tr>
+              <tr>
+                <td>Label</td>
+                <td>Číselník (@cs)</td>
+              </tr>
+              <tr>
+                <td>Definition</td>
+                <td>Číselník. Jeho identifikátorem (IRI) je IRI číselníku dle OFN Číselníky. (@cs)</td>
+              </tr>
+          
+                <tr>
+                  <td>Profiles</td>
+                  <td>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0;">
+                          <li>
+                                  class
+                
+                <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník">Číselník (@cs)</a> (<a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/číselník</a>)
+                  <br />Definition: <i></i>
+          
+                          </li>
+                    </ul>
+                  </td>
+                </tr>
+          
+            </table>
+          
+              <p>Backwards associations</p>
+              <ul>
+                  <li>from domain <a href="#Třída"></a> → <a href="#Třída.máInstanceDefinovanéČíselníkem"></a></li>
+              </ul>
+          
+              <section id="Číselník.máVNkodZastřešujícíDatovouSadu">
+                <h4>má v NKOD zastřešující datovou sadu (@cs)</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>Profiled relationship IRI(s)</td>
+                    <td>
+                        
+                        <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/slovníky#Číselník.máVNkodZastřešujícíDatovouSadu">https://ofn.gov.cz/slovníky#Číselník.máVNkodZastřešujícíDatovouSadu</a></td>
+                  </tr>
+                  <tr>
+                    <td>Label</td>
+                    <td>má v NKOD zastřešující datovou sadu (@cs)</td>
+                  </tr>
+                  <tr>
+                    <td>Domain</td>
+                    <td>
+                      <a href="#Číselník">Číselník (@cs)</a>
+              
+                          [0..1]
+              
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Range</td>
+                    <td>
+                      <a href="#DatováSadaNKOD">Dataset</a>
+              
+                          [1..1]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Profiles</td>
+                      <td>
+                        <ul style="list-style-type: none; padding-left: 0; margin: 0;">
+                              <li>
+                                      property
+                    
+                    <a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu">má v NKOD zastřešující datovou sadu (@cs)</a> (<a href="https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu">https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-v-nkod-zastřešující-datovou-sadu</a>)
+                      <br />Definition: <i></i>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                </table>
+              </section>
           </section>          <section id="DatováSadaNKOD">
             <h4>Dataset</h4>
           
@@ -2956,6 +3333,53 @@
               <p>Backwards associations</p>
               <ul>
                   <li>from domain <a href="#Číselník"></a> → <a href="#Číselník.máVNkodZastřešujícíDatovouSadu"></a></li>
+              </ul>
+          
+          
+          </section>          <section id="DatovýTyp">
+            <h4>Datatype</h4>
+          
+            <table class="def">
+              <tr>
+                <td>Profiled class IRI(s)</td>
+                <td>
+                    
+                    <a href="http://www.w3.org/2000/01/rdf-schema#Datatype">rdfs:Datatype</a>
+                </td>
+              </tr>
+              <tr>
+                <td>IRI</td>
+                <td><a href="https://ofn.gov.cz/slovníky#DatovýTyp">https://ofn.gov.cz/slovníky#DatovýTyp</a></td>
+              </tr>
+              <tr>
+                <td>Label</td>
+                <td>Datatype</td>
+              </tr>
+              <tr>
+                <td>Definition</td>
+                <td>The class of RDF datatypes.</td>
+              </tr>
+          
+                <tr>
+                  <td>Profiles</td>
+                  <td>
+                    <ul style="list-style-type: none; padding-left: 0; margin: 0;">
+                          <li>
+                                  class
+                
+                <a href="http://www.w3.org/2000/01/rdf-schema#Datatype">Datatype</a> (<a href="http://www.w3.org/2000/01/rdf-schema#Datatype">rdfs:Datatype</a>)
+                  <br />Definition: <i>The class of RDF datatypes.</i>
+          
+                          </li>
+                    </ul>
+                  </td>
+                </tr>
+          
+            </table>
+          
+              <p>Backwards associations</p>
+              <ul>
+                  <li>from domain <a href="#Vlastnost"></a> → <a href="#Vlastnost.oborHodnot"></a></li>
               </ul>
           
           
@@ -14928,5 +15352,21 @@
             <tr><td>Documentation</td><td><a href="">#</a></td></tr>
         </tbody>
       </table>
-    </section>  </body>
+    </section>
+    <section id="předpřipravená-metadata">
+    
+    <h2>Předpřipravená metadata</h2>
+    
+    <p>
+      Tato sekce obsahuje odkaz na <a href="../metadata/slovník.jsonld">vzorový metadatový záznam datové sady</a> použitelný pro  <a href="https://data.gov.cz/formulář/registrace-datové-sady">registraci datové sady</a> do 
+      <a href="https://data.gov.cz">Národního katalogu otevřených dat</a>.
+      <a href="https://data.gov.cz/formulář/registrace-datové-sady?file=https%3A%2F%2Fofn.gov.cz%2Fslovníky%2Fdraft2%2Fmetadata%2Fslovník.jsonld">Registrace pomocí tohoto předpřipraveného záznamu</a> umožní vyhledávat podobné datové sady publikované dle této otevřené formální normy.
+    </p>
+    
+    </section>
+    <section id="poděkování">
+      <h2>Poděkování</h2>
+      <p>
+        Na tvorbě této OFN se podíleli: Alice Binderová, Petr Křemen, Martin Nečaský
+      </p>  </body>
 </html>
