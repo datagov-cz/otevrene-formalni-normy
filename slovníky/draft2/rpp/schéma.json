@@ -1,0 +1,667 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/slovníky/draft2/rpp/schéma.json",
+  "title": "Tezaurus",
+  "description": "Tezaurus je nejjednodušším typem slovníku.",
+  "type": "object",
+  "required": [
+    "@context",
+    "iri",
+    "typ",
+    "název"
+  ],
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/slovníky/draft2/kompletní/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/slovníky/draft2/kompletní/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
+    "iri": {
+      "type": "string",
+      "format": "iri"
+    },
+    "typ": {
+      "type": "array",
+      "allOf": [
+        {
+          "contains": {
+            "const": "Tezaurus"
+          }
+        },
+        {
+          "contains": {
+            "const": "Slovník"
+          }
+        }
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "název": {
+      "title": "název",
+      "description": "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise\n      disjoint properties.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "required": [
+        "cs"
+      ],
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "popis": {
+      "title": "popis",
+      "description": "An account of the resource.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "required": [
+        "cs"
+      ],
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "vytvořeno": {
+      "title": "okamžik vytvoření",
+      "description": "Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času. Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy datum, čas či datum a čas. Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici. Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "typ"
+      ],
+      "properties": {
+        "iri": {
+          "type": "string",
+          "format": "iri"
+        },
+        "typ": {
+          "oneOf": [
+            {
+              "const": "Časový okamžik"
+            },
+            {
+              "type": "array",
+              "contains": {
+                "const": "Časový okamžik"
+              },
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "je_nespecifikovaný": {
+          "title": "je nespecifikovaný",
+          "description": "Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
+          "type": "boolean"
+        },
+        "datum_a_čas": {
+          "title": "datum a čas",
+          "description": "Datum a čas začátku okamžiku.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "datum": {
+          "title": "datum",
+          "description": "Datum okamžiku.",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "aktualizováno": {
+      "title": "okamžik poslední změny",
+      "description": "Pro reprezentaci časových okamžiků lze použít datum, čas a nebo kombinací data a času. Pokud je jasné, který datový typ je v daném místě vhodný, použije se konkrétní datový typ, tedy datum, čas či datum a čas. Často ale při tvorbě OFN není předem známo, jaká úroveň detailu bude pro určení okamžiku k dispozici. Aby se zabránilo různým reprezentacím této situace v různých OFN, je specifikována třída Časový okamžik.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "typ"
+      ],
+      "properties": {
+        "iri": {
+          "type": "string",
+          "format": "iri"
+        },
+        "typ": {
+          "oneOf": [
+            {
+              "const": "Časový okamžik"
+            },
+            {
+              "type": "array",
+              "contains": {
+                "const": "Časový okamžik"
+              },
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "je_nespecifikovaný": {
+          "title": "je nespecifikovaný",
+          "description": "Nespecifikovaný časový okamžik, u kterého se ví, že jeho hodnota je neznámá. Jedná se o pro interoperabilitu výrazně lepší variantu, než si neznámou hodnotou uměle stanovit na 3333-03-03 či 9999-09-09 apod. nebo hodnotu vynechat.",
+          "type": "boolean"
+        },
+        "datum_a_čas": {
+          "title": "datum a čas",
+          "description": "Datum a čas začátku okamžiku.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "datum": {
+          "title": "datum",
+          "description": "Datum okamžiku.",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "pojmy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "title": "Veřejný údaj",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "Veřejný údaj"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Koncept"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Pojem"
+                    }
+                  }
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "popis": {
+                "title": "popis",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "definice": {
+                "title": "definice",
+                "description": "Definice pojmu. Je unikátní v rámci definic pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "je-sdílen-v-ppdf": {
+                "title": "je sdílen v propojeném datovém fondu",
+                "type": "boolean"
+              }
+            }
+          },
+          {
+            "title": "Neveřejný údaj",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název",
+              "ustanovení-dokládající-neveřejnost-údaje"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "Neveřejný údaj"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Koncept"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Pojem"
+                    }
+                  }
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "popis": {
+                "title": "popis",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "definice": {
+                "title": "definice",
+                "description": "Definice pojmu. Je unikátní v rámci definic pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "je-sdílen-v-ppdf": {
+                "title": "je sdílen v propojeném datovém fondu",
+                "type": "boolean"
+              },
+              "ustanovení-dokládající-neveřejnost-údaje": {
+                "title": "je vymezen ustanovení stanovujícím jeho neveřejnost",
+                "description": "U neveřejného údaje je třeba odkázat na ustanovení, ze kterého jeho neveřejnost vyplývá.",
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "format": "iri",
+                  "examples": [
+                    "https://opendata.eselpoint.cz/esel-esb/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_3"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "title": "Typ objektu práva",
+            "description": "Typ jehož instance jsou podtřídami Objektu práva.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "Koncept"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Typ objektu práva"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Pojem"
+                    }
+                  }
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "popis": {
+                "title": "popis",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "definice": {
+                "title": "definice",
+                "description": "Definice pojmu. Je unikátní v rámci definic pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "je-sdílen-v-ppdf": {
+                "title": "je sdílen v propojeném datovém fondu",
+                "type": "boolean"
+              },
+              "agendový-informační-systém": {
+                "title": "údaje jsou v AIS",
+                "type": "string",
+                "format": "iri"
+              },
+              "agenda": {
+                "title": "sdružuje údaje vedené nebo vytvářené v rámci agendy",
+                "description": "Přiřazuje subjektu nebo objektu údajů agendu v níž jsou údaje sdružené v subjektu nebo objektu údajů vedeny nebo vytvářeny. Subjekt nebo objekt údajů je veden nebo vytvářen v právě jedné agendě. V jedné agendě může být vedeno nebo vytvářeno více různých subjektů nebo objektů údajů.",
+                "type": "string",
+                "format": "iri"
+              }
+            }
+          },
+          {
+            "title": "Typ subjektu práva",
+            "description": "Typ jehož instance jsou podtřídami Subjektu práva.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "allOf": [
+                  {
+                    "contains": {
+                      "const": "Koncept"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Typ subjektu práva"
+                    }
+                  },
+                  {
+                    "contains": {
+                      "const": "Pojem"
+                    }
+                  }
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "popis": {
+                "title": "popis",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "definice": {
+                "title": "definice",
+                "description": "Definice pojmu. Je unikátní v rámci definic pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "je-sdílen-v-ppdf": {
+                "title": "je sdílen v propojeném datovém fondu",
+                "type": "boolean"
+              },
+              "agendový-informační-systém": {
+                "title": "údaje jsou v AIS",
+                "type": "string",
+                "format": "iri"
+              },
+              "agenda": {
+                "title": "sdružuje údaje vedené nebo vytvářené v rámci agendy",
+                "description": "Přiřazuje subjektu nebo objektu údajů agendu v níž jsou údaje sdružené v subjektu nebo objektu údajů vedeny nebo vytvářeny. Subjekt nebo objekt údajů je veden nebo vytvářen v právě jedné agendě. V jedné agendě může být vedeno nebo vytvářeno více různých subjektů nebo objektů údajů.",
+                "type": "string",
+                "format": "iri"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
