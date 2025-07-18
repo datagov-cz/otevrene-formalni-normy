@@ -1,0 +1,51 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://ofn.gov.cz/slovníky/draft/schémata/slovník.json",
+    "$defs": {
+        "text-s-povinnou-češtinou": {
+            "allOf": [
+                {
+                    "$ref": "https://ofn.gov.cz/základní-datové-typy/2020-07-01/schémata/text.json"
+                },
+                {
+                    "required": ["cs"]
+                }
+            ]
+        }
+    },
+    "name": "Slovník",
+    "description": "Slovník",
+    "required": [
+        "@context",
+        "iri",
+        "typ",
+        "název"
+    ],
+    "allOf": [
+        {
+            "$ref": "https://ofn.gov.cz/věc/2020-07-01/schémata/věc.json"
+        },
+        {
+            "properties": {
+                "@context": {
+                    "const": "https://ofn.gov.cz/slovníky/draft/kontexty/slovníky.jsonld"
+                },
+                "typ": {
+                    "type": "array",
+                    "contains": {
+                        "const": "Slovník"
+                    },
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "název": {
+                    "$ref": "#/$defs/text-s-povinnou-češtinou"
+                },
+                "popis": {
+                    "$ref": "#/$defs/text-s-povinnou-češtinou"
+                }
+            }
+        }
+    ]
+}
