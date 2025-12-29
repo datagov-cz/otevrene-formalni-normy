@@ -15,7 +15,7 @@
         "prof:ResourceDescriptor"
       ],
       "hasArtifact": ".",
-      "hasRole": "role:Guidance",
+      "hasRole": "role:specification",
       "format": "filetype:HTML",
       "inSpecificationOf": [
         {
@@ -31,15 +31,17 @@
           "isProfileOf": [
             {
               "@id": "https://mff-uk.github.io/specifications/dcat-ap#",
-              "hasArtifact": [
-                "https://mff-uk.github.io/specifications/dcat-ap/"
-              ]
+              "title": {},
+              "hasResource": {
+                "hasArtifact": "https://mff-uk.github.io/specifications/dcat-ap/"
+              }
             },
             {
               "@id": "https://data.gov.cz/slovník/podmínky-užití/",
-              "hasArtifact": [
-                "https://ofn.gov.cz/dcat-ap-cz-podmínky-užití/2025-08-12/"
-              ]
+              "title": {},
+              "hasResource": {
+                "hasArtifact": "https://ofn.gov.cz/dcat-ap-cz-podmínky-užití/2025-08-12/"
+              }
             }
           ],
           "hasResource": [
@@ -50,12 +52,23 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./dsv.ttl",
-              "hasRole": "role:Specification",
+              "hasRole": "role:constraints",
               "format": "filetype:RDF_TURTLE",
               "conformsTo": [
-                "dsv:ApplicationProfileSpecificationDocument",
-                "prof:Profile"
+                "prof:Profile",
+                "dsv:ApplicationProfile"
               ]
+            },
+            {
+              "@id": "https://ofn.gov.cz/dcat-ap-cz/#shacl",
+              "@type": [
+                "adms:AssetDistribution",
+                "prof:ResourceDescriptor"
+              ],
+              "hasArtifact": "./shacl.ttl",
+              "hasRole": "role:constraints",
+              "format": "filetype:RDF_TURTLE",
+              "conformsTo": "https://www.w3.org/TR/shacl/"
             },
             {
               "@id": "https://ofn.gov.cz/dcat-ap-cz/#a9aad48a-7018-43ea-975b-55bd8137e36d",
@@ -64,7 +77,18 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./a9aad48a-7018-43ea-975b-55bd8137e36d.svg",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:guidance",
+              "format": "filetype:SVG",
+              "conformsTo": "https://www.w3.org/TR/SVG/"
+            },
+            {
+              "@id": "https://ofn.gov.cz/dcat-ap-cz/#au2t3",
+              "@type": [
+                "adms:AssetDistribution",
+                "prof:ResourceDescriptor"
+              ],
+              "hasArtifact": "./au2t3.svg",
+              "hasRole": "role:guidance",
               "format": "filetype:SVG",
               "conformsTo": "https://www.w3.org/TR/SVG/"
             },
@@ -76,7 +100,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": ".",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:specification",
               "format": "filetype:HTML"
             }
           ]
@@ -141,8 +165,13 @@
                 },
                 "hasResource": {
                   "@id": "prof:hasResource",
-                  "@type": "@id",
-                  "@container": "@set"
+                  "@container": "@set",
+                  "@context": {
+                    "hasArtifact": {
+                      "@id": "prof:hasArtifact",
+                      "@type": "@id"
+                    }
+                  }
                 }
               }
             },
@@ -321,6 +350,12 @@
           <figure>
             <img src="./a9aad48a-7018-43ea-975b-55bd8137e36d.svg" alt="View for DCAT-AP-CZ" />
             <figcaption>View for DCAT-AP-CZ</figcaption>
+          </figure>
+        </a>
+        <a href="./au2t3.svg">
+          <figure>
+            <img src="./au2t3.svg" alt="" />
+            <figcaption></figcaption>
           </figure>
         </a>
     </section>
@@ -765,7 +800,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>A page or document about this Dataset. (@en)</td>
+                    <td>Stránka či dokument o datové sadě</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -837,7 +872,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>A dataset series of which the dataset is part. (@en)</td>
+                    <td>Série datových sad, jíž je datová sada součástí.</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -1340,7 +1375,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>Frekvence, se kterou je datová sada aktualizována. (@en)</td>
+                    <td>Frekvence, se kterou je datová sada aktualizována.</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -1746,7 +1781,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>The geographical area covered by the dataset. (@en)</td>
+                    <td>Území pokryté datovou sadou.</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -1841,7 +1876,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>The geographical area covered by the dataset. (@en)</td>
+                    <td>Území pokryté datovou sadou, vyjádřené pomocí prvku RÚIAN</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -5009,101 +5044,6 @@
                   </ul>
           
                           </li>
-                        <li>
-                                  specializuje
-                
-                profil
-                <a href="#DatováSada">Datová sada</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#DatováSada">dcat-ap-cz:DatováSada</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                
-                profil
-                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Datová sada</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset">dcat-ap:Dataset</a>)
-                  <br />Definice: <i>Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                
-                profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset">Datová sada</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset">dcat-dap:Dataset</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Dataset">Datová sada</a> (<a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a>)
-                  <br />Definice: <i>Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  specializuje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
-                  <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                      <li>
-                                  specializuje
-                
-                profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Resource">Katalogizovaný zdroj</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource">dcat-dap:CatalogedResource</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
-                  <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                      <li>
-                                  specializuje
-                
-                profil
-                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#CataloguedResource">Katalogizovaný zdroj</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#CataloguedResource">dcat-ap:CataloguedResource</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                
-                profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Resource">Katalogizovaný zdroj</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource">dcat-dap:CatalogedResource</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
-                  <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                        </li>
                     </ul>
                   </td>
                 </tr>
@@ -5117,9 +5057,1234 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.jeSoučástí"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.jeSoučástí"></a></li>
               </ul>
           
-          
+              <section id="SérieDatovýchSad.časovéPokrytí">
+                <h4>časové pokrytí</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/temporal">dcterms:temporal</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.časovéPokrytí">dcat-ap-cz:SérieDatovýchSad.časovéPokrytí</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>časové pokrytí</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Časový úsek pokrytý sérií datových sad</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#ČasovýInterval">Časový interval</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.temporalcoverage">temporal coverage (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.temporalCoverage">dcat-ap:DatasetSeries.temporalCoverage</a>)
+                      <br />Definice: <i>A temporal period that the Dataset Series covers.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:dataset_temporal">temporal coverage (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset.temporalCoverage">dcat-dap:Dataset.temporalCoverage</a>)
+                      <br />Definice: <i>The temporal period that the dataset covers.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/temporal">Temporal Coverage (@en)</a> (<a href="http://purl.org/dc/terms/temporal">dcterms:temporal</a>)
+                      <br />Definice: <i>Temporal characteristics of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/coverage">Coverage (@en)</a> (<a href="http://purl.org/dc/terms/coverage">dcterms:coverage</a>)
+                      <br />Definice: <i>The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>When temporal coverage is a dimension in the dataset series then the temporal coverage of each dataset in the collection should be part of the temporal coverage. In that case, an open ended value is recommended, e.g. after 2012. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.dokumentace">
+                <h4>dokumentace</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://xmlns.com/foaf/0.1/page">foaf:page</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.dokumentace">dcat-ap-cz:SérieDatovýchSad.dokumentace</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>dokumentace</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Stránka či dokument o sérii datových sad</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#Dokument">Dokument</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.documentation">documentation (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset.documentation">dcat-ap:Dataset.documentation</a>)
+                      <br />Definice: <i>A page or document about this Dataset.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://xmlns.com/foaf/0.1/page">page (@en)</a> (<a href="http://xmlns.com/foaf/0.1/page">foaf:page</a>)
+                      <br />Definice: <i>A page or document about this thing.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                </table>
+              </section>    <section id="SérieDatovýchSad.jeSoučástí">
+                <h4>je součástí</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://www.w3.org/ns/dcat#inSeries">dcat:inSeries</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.jeSoučástí">dcat-ap-cz:SérieDatovýchSad.jeSoučástí</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>je součástí</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Série datových sad, jíž je tato série datových sad součástí.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.inseries">in series (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset.inSeries">dcat-ap:Dataset.inSeries</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:dataset_in_series">in series (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset.inSeries">dcat-dap:Dataset.inSeries</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://www.w3.org/ns/dcat#inSeries">in series (@en)</a> (<a href="http://www.w3.org/ns/dcat#inSeries">dcat:inSeries</a>)
+                      <br />Definice: <i>A dataset series of which the dataset is part.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/isPartOf">Is Part Of (@en)</a> (<a href="http://purl.org/dc/terms/isPartOf">dcterms:isPartOf</a>)
+                      <br />Definice: <i>A related resource in which the described resource is physically or logically included.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/relation">Relation (@en)</a> (<a href="http://purl.org/dc/terms/relation">dcterms:relation</a>)
+                      <br />Definice: <i>A related resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                </table>
+              </section>    <section id="SérieDatovýchSad.klasifikaceDleEurovoc">
+                <h4>klasifikace dle EuroVoc</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.klasifikaceDleEurovoc">dcat-ap-cz:SérieDatovýchSad.klasifikaceDleEurovoc</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>klasifikace dle EuroVoc</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Kategorie či téma série datových sad dle EuroVoc.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#TémaEuroVoc">Téma EuroVoc</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.theme">téma</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset.theme">dcat-ap:Dataset.theme</a>)
+                      <br />Definice: <i>Hlavní téma zdroje. Zdroj může mít více témat.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_theme">téma</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.theme-category">dcat-dap:CatalogedResource.theme-category</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://www.w3.org/ns/dcat#theme">téma</a> (<a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a>)
+                      <br />Definice: <i>Hlavní téma zdroje. Zdroj může mít více témat.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/subject">Subject (@en)</a> (<a href="http://purl.org/dc/terms/subject">dcterms:subject</a>)
+                      <br />Definice: <i>A topic of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>A Dataset may be associated with multiple themes. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.klíčovéSlovo">
+                <h4>klíčové slovo</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://www.w3.org/ns/dcat#keyword">dcat:keyword</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.klíčovéSlovo">dcat-ap-cz:SérieDatovýchSad.klíčovéSlovo</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>klíčové slovo</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Klíčové slovo nebo značka popisující zdroj.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString">rdf:langString</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.keyword">klíčové slovo</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset.keyword">dcat-ap:Dataset.keyword</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_keyword">klíčové slovo</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.keyword">dcat-dap:CatalogedResource.keyword</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://www.w3.org/ns/dcat#keyword">klíčové slovo</a> (<a href="http://www.w3.org/ns/dcat#keyword">dcat:keyword</a>)
+                      <br />Definice: <i>Klíčové slovo nebo značka popisující zdroj.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                </table>
+              </section>    <section id="SérieDatovýchSad.kontaktníBod">
+                <h4>kontaktní bod</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.kontaktníBod">dcat-ap-cz:SérieDatovýchSad.kontaktníBod</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>kontaktní bod</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Kontaktní informace, které mohou být využity pro zasílání připomínek k sérii datových sad.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#KontaktníBod">Kontaktní bod</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.contactpoint">kontaktní bod</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.contactPoint">dcat-ap:DatasetSeries.contactPoint</a>)
+                      <br />Definice: <i>Relevantní kontaktní informace pro katalogizovaný zdroj. Doporučuje se použít slovník VCard.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_contact_point">kontaktní bod</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.contactPoint">dcat-dap:CatalogedResource.contactPoint</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://www.w3.org/ns/dcat#contactPoint">kontaktní bod</a> (<a href="http://www.w3.org/ns/dcat#contactPoint">dcat:contactPoint</a>)
+                      <br />Definice: <i>Relevantní kontaktní informace pro katalogizovaný zdroj. Doporučuje se použít slovník VCard.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                </table>
+              </section>    <section id="SérieDatovýchSad.název">
+                <h4>název</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/title">dcterms:title</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.název">dcat-ap-cz:SérieDatovýchSad.název</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>název</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Název série datových sad</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="https://ofn.gov.cz/základní-datové-typy/2020-07-01/#text">Text</a>
+              
+                          [1..1]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.title">title (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.title">dcat-ap:DatasetSeries.title</a>)
+                      <br />Definice: <i>A name given to the Dataset Series.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_title">title (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.title">dcat-dap:CatalogedResource.title</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/title">Title (@en)</a> (<a href="http://purl.org/dc/terms/title">dcterms:title</a>)
+                      <br />Definice: <i>A name given to the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>This property can be repeated for parallel language versions of the name. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.periodicitaAktualizace">
+                <h4>periodicita aktualizace</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/accrualPeriodicity">dcterms:accrualPeriodicity</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.periodicitaAktualizace">dcat-ap-cz:SérieDatovýchSad.periodicitaAktualizace</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>periodicita aktualizace</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Frekvence, se kterou je série datových sad aktualizována.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#Frekvence">Frekvence</a>
+              
+                          [0..1]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.frequency">frequency (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.frequency">dcat-ap:DatasetSeries.frequency</a>)
+                      <br />Definice: <i>The frequency at which the Dataset Series is updated.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:dataset_frequency">frequency (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset.frequency">dcat-dap:Dataset.frequency</a>)
+                      <br />Definice: <i>The frequency at which a dataset is published.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/accrualPeriodicity">Accrual Periodicity (@en)</a> (<a href="http://purl.org/dc/terms/accrualPeriodicity">dcterms:accrualPeriodicity</a>)
+                      <br />Definice: <i>The frequency with which items are added to a collection.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>The frequency of a dataset series is not equal to the frequency of the dataset in the collection. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.popis">
+                <h4>popis</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/description">dcterms:description</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.popis">dcat-ap-cz:SérieDatovýchSad.popis</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>popis</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Volný text s popisem série datových sad</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString">rdf:langString</a>
+              
+                          [1..1]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.description">description (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.description">dcat-ap:DatasetSeries.description</a>)
+                      <br />Definice: <i>A free-text account of the Dataset Series.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_description">description (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.description">dcat-dap:CatalogedResource.description</a>)
+                      <br />Definice: <i>A free-text account of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/description">Description (@en)</a> (<a href="http://purl.org/dc/terms/description">dcterms:description</a>)
+                      <br />Definice: <i>An account of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>This property can be repeated for parallel language versions. It is recommended to provide an indication about the dimensions the Dataset Series evolves. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.poskytovatel">
+                <h4>poskytovatel</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/publisher">dcterms:publisher</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.poskytovatel">dcat-ap-cz:SérieDatovýchSad.poskytovatel</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>poskytovatel</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Poskytovatel série datových sad zajišťující její soudržnost.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#Poskytovatel">Poskytovatel</a>
+              
+                          [0..1]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.publisher">publisher (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.publisher">dcat-ap:DatasetSeries.publisher</a>)
+                      <br />Definice: <i>An entity (organisation) responsible for ensuring the coherency of the Dataset Series.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_publisher">publisher (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.publisher">dcat-dap:CatalogedResource.publisher</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/publisher">Publisher (@en)</a> (<a href="http://purl.org/dc/terms/publisher">dcterms:publisher</a>)
+                      <br />Definice: <i>An entity responsible for making the resource available.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>The publisher of the dataset series may not be the publisher of all datasets.  E.g. a digital archive could take over the publishing of older datasets in the series.  (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.příslušnýPrávníPředpis">
+                <h4>příslušný právní předpis</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://data.europa.eu/r5r/applicableLegislation">dcatap:applicableLegislation</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.příslušnýPrávníPředpis">dcat-ap-cz:SérieDatovýchSad.příslušnýPrávníPředpis</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>příslušný právní předpis</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Indikace příslušného právního předpisu předepisujícího vznik série datových sad.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#PrávníPředpis">Právní předpis</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.applicablelegislation">applicable legislation (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.applicableLegislation">dcat-ap:DatasetSeries.applicableLegislation</a>)
+                      <br />Definice: <i>The legislation that mandates the creation or management of the Dataset Series.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://data.europa.eu/r5r/applicableLegislation">applicable legislation (@en)</a> (<a href="http://data.europa.eu/r5r/applicableLegislation">dcatap:applicableLegislation</a>)
+                      <br />Definice: <i>the legislation that is applicable to this resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                </table>
+              </section>    <section id="SérieDatovýchSad.souvisejícíGeografickéÚzemí">
+                <h4>související geografické území</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/spatial">dcterms:spatial</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.souvisejícíGeografickéÚzemí">dcat-ap-cz:SérieDatovýchSad.souvisejícíGeografickéÚzemí</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>související geografické území</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Geografické území pokryté sérií datových sad.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#GeografickéÚzemí">Geografické území</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries.geographicalcoverage">geographical coverage (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries.geographicalCoverage">dcat-ap:DatasetSeries.geographicalCoverage</a>)
+                      <br />Definice: <i>A geographic region that is covered by the Dataset Series.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:dataset_spatial">spatial/geographical coverage (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset.spatial-geographicalCoverage">dcat-dap:Dataset.spatial-geographicalCoverage</a>)
+                      <br />Definice: <i>The geographical area covered by the dataset.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/spatial">Spatial Coverage (@en)</a> (<a href="http://purl.org/dc/terms/spatial">dcterms:spatial</a>)
+                      <br />Definice: <i>Spatial characteristics of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/coverage">Coverage (@en)</a> (<a href="http://purl.org/dc/terms/coverage">dcterms:coverage</a>)
+                      <br />Definice: <i>The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>When spatial coverage is a dimension in the dataset series then the spatial coverage of each dataset in the collection should be part of the spatial coverage. In that case, an open ended value is recommended, e.g. EU or a broad bounding box covering the expected values. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.souvisejícíGeografickéÚzemí-PrvekZRúian">
+                <h4>související geografické území - prvek z RÚIAN</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://purl.org/dc/terms/spatial">dcterms:spatial</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.souvisejícíGeografickéÚzemí-PrvekZRúian">dcat-ap-cz:SérieDatovýchSad.souvisejícíGeografickéÚzemí-PrvekZRúian</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>související geografické území - prvek z RÚIAN</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Území pokryté datovou sadou, vyjádřené pomocí prvku RÚIAN</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#PrvekRÚIAN">Prvek z RÚIAN</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.geographicalcoverage">geographical coverage (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset.geographicalCoverage">dcat-ap:Dataset.geographicalCoverage</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:dataset_spatial">spatial/geographical coverage (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset.spatial-geographicalCoverage">dcat-dap:Dataset.spatial-geographicalCoverage</a>)
+                      <br />Definice: <i>The geographical area covered by the dataset.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/spatial">Spatial Coverage (@en)</a> (<a href="http://purl.org/dc/terms/spatial">dcterms:spatial</a>)
+                      <br />Definice: <i>Spatial characteristics of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/coverage">Coverage (@en)</a> (<a href="http://purl.org/dc/terms/coverage">dcterms:coverage</a>)
+                      <br />Definice: <i>The spatial or temporal topic of the resource, spatial applicability of the resource, or jurisdiction under which the resource is relevant.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>The spatial coverage of a dataset may be encoded as an instance of dcterms:Location, or may be indicated using an IRI reference (link) to a resource describing a location. It is recommended that links are to entries in a well maintained gazetteer such as Geonames. (@en)</td>
+                  </tr>
+                </table>
+              </section>    <section id="SérieDatovýchSad.téma">
+                <h4>téma</h4>
+              
+                <table class="def">
+                  <tr>
+                    <td>IRI profilovaných vztahů</td>
+                    <td>
+                        
+                        <a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>IRI</td>
+                    <td><a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad.téma">dcat-ap-cz:SérieDatovýchSad.téma</a></td>
+                  </tr>
+                  <tr>
+                    <td>Název</td>
+                    <td>téma</td>
+                  </tr>
+                  <tr>
+                    <td>Definice</td>
+                    <td>Hlavní téma zdroje. Zdroj může mít více témat.</td>
+                  </tr>
+                  <tr>
+                    <td>Definiční obor</td>
+                    <td>
+                      <a href="#SérieDatovýchSad">Série datových sad</a>
+              
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Obor hodnot</td>
+                    <td>
+                      <a href="#DatovéTéma">Datové téma</a>
+              
+                          [0..*]
+              
+                  </td>
+                  </tr>
+              
+              
+              
+                    <tr>
+                      <td>Hierarchie</td>
+                      <td>
+                        <ul style="list-style-type: disclosure-closed; padding-left: 0; margin: 0;">
+                              <li>
+                                        profiluje
+                    
+                    profil
+                    <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset.theme">téma</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset.theme">dcat-ap:Dataset.theme</a>)
+                      <br />Definice: <i>Hlavní téma zdroje. Zdroj může mít více témat.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    
+                    profil
+                    <a href="https://www.w3.org/TR/vocab-dcat-3/#Property:resource_theme">téma</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource.theme-category">dcat-dap:CatalogedResource.theme-category</a>)
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      profiluje
+                    vlastnost
+                    
+                    <a href="http://www.w3.org/ns/dcat#theme">téma</a> (<a href="http://www.w3.org/ns/dcat#theme">dcat:theme</a>)
+                      <br />Definice: <i>Hlavní téma zdroje. Zdroj může mít více témat.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                          <li>
+                                      specializuje
+                    vlastnost
+                    
+                    <a href="http://purl.org/dc/terms/subject">Subject (@en)</a> (<a href="http://purl.org/dc/terms/subject">dcterms:subject</a>)
+                      <br />Definice: <i>A topic of the resource.</i>
+                      <ul style="list-style-type: disclosure-closed;">
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                          </li>
+                      </ul>
+              
+                              </li>
+                        </ul>
+                      </td>
+                    </tr>
+              
+                  <tr>
+                    <td>Popis použití v profilu</td>
+                    <td>A Dataset may be associated with multiple themes. (@en)</td>
+                  </tr>
+                </table>
+              </section>
           </section>          <section id="SpecifikacePodmínekUžití">
             <h4>Specifikace podmínek užití</h4>
           
@@ -5645,6 +6810,7 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.časovéPokrytí"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.časovéPokrytí"></a></li>
               </ul>
           
               <section id="ČasovýInterval.datumKonce">
@@ -5850,6 +7016,7 @@
                 
                 profil
                 <a href="#Koncept">Koncept</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#Koncept">dcat-ap-cz:Koncept</a>)
+                  <br />Definice: <i>Pojem; myšlenková jednotka</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -5887,6 +7054,7 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.téma"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.téma"></a></li>
               </ul>
           
           
@@ -5948,6 +7116,7 @@
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.dokumentace"></a></li>
                   <li>z domény <a href="#DatováSlužba"></a> → <a href="#DatováSlužba.dokumentace"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.dokumentace"></a></li>
                   <li>z domény <a href="#Katalog"></a> → <a href="#Katalog.domovskáStránka"></a></li>
               </ul>
           
@@ -6173,6 +7342,7 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.periodicitaAktualizace"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.periodicitaAktualizace"></a></li>
               </ul>
           
           
@@ -6255,6 +7425,7 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.souvisejícíGeografickéÚzemí"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.souvisejícíGeografickéÚzemí"></a></li>
               </ul>
           
           
@@ -6386,6 +7557,7 @@
                 
                 profil
                 <a href="#Koncept">Koncept</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#Koncept">dcat-ap-cz:Koncept</a>)
+                  <br />Definice: <i>Pojem; myšlenková jednotka</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -6448,7 +7620,7 @@
               </tr>
               <tr>
                 <td>Definice</td>
-                <td>An idea or notion; a unit of thought. (@en)</td>
+                <td>Pojem; myšlenková jednotka</td>
               </tr>
           
                 <tr>
@@ -6479,6 +7651,10 @@
                   </td>
                 </tr>
           
+              <tr>
+                <td>Popis použití v profilu</td>
+                <td>In DCAT-AP, a Concept is used to denote codes within a codelist. In section 10. Controlled Vocabularies the expectations are elaborated in more detail. (@en)</td>
+              </tr>
             </table>
           
           
@@ -6551,6 +7727,7 @@
                   <li>z domény <a href="#Katalog"></a> → <a href="#Katalog.kontaktníBod"></a></li>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.kontaktníBod"></a></li>
                   <li>z domény <a href="#DatováSlužba"></a> → <a href="#DatováSlužba.kontaktníBod"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.kontaktníBod"></a></li>
               </ul>
           
               <section id="KontaktníBod.email">
@@ -6905,6 +8082,7 @@
               <ul>
                   <li>z domény <a href="#Katalog"></a> → <a href="#Katalog.poskytovatel"></a></li>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.poskytovatel"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.poskytovatel"></a></li>
               </ul>
           
           
@@ -6997,6 +8175,7 @@
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.příslušnýPrávníPředpis"></a></li>
                   <li>z domény <a href="#Distribuce"></a> → <a href="#Distribuce.příslušnýPrávníPředpis"></a></li>
                   <li>z domény <a href="#DatováSlužba"></a> → <a href="#DatováSlužba.příslušnýPrávníPředpis"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.příslušnýPrávníPředpis"></a></li>
               </ul>
           
           
@@ -7079,6 +8258,7 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.souvisejícíGeografickéÚzemí-PrvekZRúian"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.souvisejícíGeografickéÚzemí-PrvekZRúian"></a></li>
               </ul>
           
           
@@ -7185,6 +8365,7 @@
                 
                 profil
                 <a href="#Koncept">Koncept</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#Koncept">dcat-ap-cz:Koncept</a>)
+                  <br />Definice: <i>Pojem; myšlenková jednotka</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -7222,6 +8403,7 @@
               <p>Zpětné asociace</p>
               <ul>
                   <li>z domény <a href="#DatováSada"></a> → <a href="#DatováSada.klasifikaceDleEurovoc"></a></li>
+                  <li>z domény <a href="#SérieDatovýchSad"></a> → <a href="#SérieDatovýchSad.klasifikaceDleEurovoc"></a></li>
               </ul>
           
           
@@ -7422,6 +8604,10 @@
             <tr>
               <td>Aplikační profil</td>
               <td><a href="./dsv.ttl">./dsv.ttl</a></td>
+            </tr>
+            <tr>
+              <td>SHACL validační pravidla</td>
+              <td><a href="./shacl.ttl">./shacl.ttl</a></td>
             </tr>
             <tr><td>Dokumentace</td><td><a href="">#</a></td></tr>
         </tbody>
