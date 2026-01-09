@@ -15,7 +15,7 @@
         "prof:ResourceDescriptor"
       ],
       "hasArtifact": ".",
-      "hasRole": "role:Guidance",
+      "hasRole": "role:specification",
       "format": "filetype:HTML",
       "inSpecificationOf": [
         {
@@ -31,9 +31,10 @@
           "isProfileOf": [
             {
               "@id": "https://ofn.gov.cz/dcat-ap-cz#",
-              "hasArtifact": [
-                "https://ofn.gov.cz/dcat-ap-cz/draft/"
-              ]
+              "title": {},
+              "hasResource": {
+                "hasArtifact": "https://ofn.gov.cz/dcat-ap-cz/"
+              }
             }
           ],
           "hasResource": [
@@ -44,11 +45,11 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./dsv.ttl",
-              "hasRole": "role:Specification",
+              "hasRole": "role:constraints",
               "format": "filetype:RDF_TURTLE",
               "conformsTo": [
-                "dsv:ApplicationProfileSpecificationDocument",
-                "prof:Profile"
+                "prof:Profile",
+                "dsv:ApplicationProfile"
               ]
             },
             {
@@ -58,7 +59,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./hvxg5.svg",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:guidance",
               "format": "filetype:SVG",
               "conformsTo": "https://www.w3.org/TR/SVG/"
             },
@@ -69,7 +70,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./ih19v.svg",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:guidance",
               "format": "filetype:SVG",
               "conformsTo": "https://www.w3.org/TR/SVG/"
             },
@@ -80,7 +81,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./sp64j.svg",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:guidance",
               "format": "filetype:SVG",
               "conformsTo": "https://www.w3.org/TR/SVG/"
             },
@@ -91,7 +92,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./7wzve.svg",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:guidance",
               "format": "filetype:SVG",
               "conformsTo": "https://www.w3.org/TR/SVG/"
             },
@@ -102,7 +103,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": "./jg9lf.svg",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:guidance",
               "format": "filetype:SVG",
               "conformsTo": "https://www.w3.org/TR/SVG/"
             },
@@ -114,7 +115,7 @@
                 "prof:ResourceDescriptor"
               ],
               "hasArtifact": ".",
-              "hasRole": "role:Guidance",
+              "hasRole": "role:specification",
               "format": "filetype:HTML"
             },
             {
@@ -125,7 +126,7 @@
               ],
               "hasArtifact": "https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/datová-sada/schéma.json",
               "hasRole": "role:schema",
-              "format": "https://json-schema.org/draft/2020-12/schema",
+              "format": "filetype:JSON",
               "conformsTo": "https://json-schema.org/draft/2020-12/schema"
             },
             {
@@ -136,7 +137,7 @@
               ],
               "hasArtifact": "https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/datová-sada/kontext.jsonld",
               "hasRole": "role:schema",
-              "format": "http://www.w3.org/ns/json-ld",
+              "format": "filetype:JSON_LD",
               "conformsTo": "http://www.w3.org/ns/json-ld"
             },
             {
@@ -147,7 +148,7 @@
               ],
               "hasArtifact": "https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/katalog/schéma.json",
               "hasRole": "role:schema",
-              "format": "https://json-schema.org/draft/2020-12/schema",
+              "format": "filetype:JSON",
               "conformsTo": "https://json-schema.org/draft/2020-12/schema"
             },
             {
@@ -158,7 +159,7 @@
               ],
               "hasArtifact": "https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/katalog/kontext.jsonld",
               "hasRole": "role:schema",
-              "format": "http://www.w3.org/ns/json-ld",
+              "format": "filetype:JSON_LD",
               "conformsTo": "http://www.w3.org/ns/json-ld"
             }
           ]
@@ -223,8 +224,13 @@
                 },
                 "hasResource": {
                   "@id": "prof:hasResource",
-                  "@type": "@id",
-                  "@container": "@set"
+                  "@container": "@set",
+                  "@context": {
+                    "hasArtifact": {
+                      "@id": "prof:hasArtifact",
+                      "@type": "@id"
+                    }
+                  }
                 }
               }
             },
@@ -266,7 +272,8 @@
       var respecConfig = {
         specStatus: "REC",
         publishDate: "2025-08-12",
-        shortName: "dcat-ap-cz-360-2023",               
+        shortName: "dcat-ap-cz-360-2023",
+        historyURI: null,
         showPreviousVersion: false,
         thisVersion: "https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/",
         maxTocLevel: 3,
@@ -1320,7 +1327,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>A page or document about this Dataset. (@en)</td>
+                    <td>Stránka či dokument o datové sadě</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -1351,6 +1358,7 @@
                     
                     profil
                     <a href="https://ofn.gov.cz/dcat-ap-cz/#DatováSada.dokumentace">dokumentace</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#DatováSada.dokumentace">dcat-ap-cz:DatováSada.dokumentace</a>)
+                      <br />Definice: <i>Stránka či dokument o datové sadě</i>
                       <ul style="list-style-type: disclosure-closed;">
                           <li>
                                       profiluje
@@ -1401,7 +1409,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>A dataset series of which the dataset is part. (@en)</td>
+                    <td>Série datových sad, jíž je datová sada součástí.</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -1432,6 +1440,7 @@
                     
                     profil
                     <a href="https://ofn.gov.cz/dcat-ap-cz/#DatováSada.jeSoučástí">je součástí</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#DatováSada.jeSoučástí">dcat-ap-cz:DatováSada.jeSoučástí</a>)
+                      <br />Definice: <i>Série datových sad, jíž je datová sada součástí.</i>
                       <ul style="list-style-type: disclosure-closed;">
                           <li>
                                       profiluje
@@ -1890,7 +1899,7 @@
                   </tr>
                   <tr>
                     <td>Definice</td>
-                    <td>Frekvence, se kterou je datová sada aktualizována. (@en)</td>
+                    <td>Frekvence, se kterou je datová sada aktualizována.</td>
                   </tr>
                   <tr>
                     <td>Definiční obor</td>
@@ -2540,13 +2549,13 @@
                                   profiluje
                 
                 profil
-                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService">Data service (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DataService">dcat-ap:DataService</a>)
+                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DataService">Data Service (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DataService">dcat-ap:DataService</a>)
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
                 
                 profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Data_Service">Data service (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#DataService">dcat-dap:DataService</a>)
+                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Data_Service">Data Service (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#DataService">dcat-dap:DataService</a>)
                   <br />Definice: <i>Umístění či přístupový bod poskytující operace související s hledáním, přistupem k, či výkonem funkcí na datech či souvisejících zdrojích.</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
@@ -4138,6 +4147,7 @@
                     
                     profil
                     <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution.accessservice">služba pro přístup k datům</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Distribution.accessService">dcat-ap:Distribution.accessService</a>)
+                      <br />Definice: <i>Umístění či přístupový bod zpřístupňující distribuci datové sady.</i>
                       <ul style="list-style-type: disclosure-closed;">
                           <li>
                                       profiluje
@@ -4812,6 +4822,7 @@
                     
                     profil
                     <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Distribution.linkedschemas">linked schemas (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Distribution.linkedSchemas">dcat-ap:Distribution.linkedSchemas</a>)
+                      <br />Definice: <i>An established schema to which the described Distribution conforms.</i>
                       <ul style="list-style-type: disclosure-closed;">
                           <li>
                                       profiluje
@@ -7243,6 +7254,7 @@
                 
                 profil
                 <a href="https://ofn.gov.cz/dcat-ap-cz/#Koncept">Koncept</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#Koncept">dcat-ap-cz:Koncept</a>)
+                  <br />Definice: <i>Pojem; myšlenková jednotka</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -7256,7 +7268,6 @@
                 třídu
                 
                 <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept (@en)</a> (<a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>)
-                  <br />Definice: <i>An idea or notion; a unit of thought.</i>
                   <ul style="list-style-type: disclosure-closed;">
                   </ul>
           
@@ -7615,7 +7626,7 @@
               </tr>
               <tr>
                 <td>Definice</td>
-                <td>An idea or notion; a unit of thought. (@en)</td>
+                <td>Pojem; myšlenková jednotka</td>
               </tr>
           
                 <tr>
@@ -7627,6 +7638,7 @@
                 
                 profil
                 <a href="https://ofn.gov.cz/dcat-ap-cz/#Koncept">Koncept</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#Koncept">dcat-ap-cz:Koncept</a>)
+                  <br />Definice: <i>Pojem; myšlenková jednotka</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -7640,7 +7652,6 @@
                 třídu
                 
                 <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept (@en)</a> (<a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>)
-                  <br />Definice: <i>An idea or notion; a unit of thought.</i>
                   <ul style="list-style-type: disclosure-closed;">
                   </ul>
           
@@ -8048,7 +8059,7 @@
               </tr>
               <tr>
                 <td>Definice</td>
-                <td>Série datových sad zastřešuje související datové sady a série. Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému). Datová série je podtřídou Datové sady, ale nemá vlastní distribuce.</td>
+                <td>Série datových sad zastřešuje související datové sady a jiné série. Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému).</td>
               </tr>
           
                 <tr>
@@ -8060,19 +8071,19 @@
                 
                 profil
                 <a href="https://ofn.gov.cz/dcat-ap-cz/#SérieDatovýchSad">Série datových sad</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#SérieDatovýchSad">dcat-ap-cz:SérieDatovýchSad</a>)
-                  <br />Definice: <i>Série datových sad zastřešuje související datové sady a série. Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému). Datová série je podtřídou Datové sady, ale nemá vlastní distribuce.</i>
+                  <br />Definice: <i>Série datových sad zastřešuje související datové sady a jiné série. Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému).</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
                 
                 profil
-                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries">Dataset series (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries">dcat-ap:DatasetSeries</a>)
+                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#DatasetSeries">Dataset Series (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#DatasetSeries">dcat-ap:DatasetSeries</a>)
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
                 
                 profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series">Dataset series (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#DatasetSeries">dcat-dap:DatasetSeries</a>)
+                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset_Series">Dataset Series (@en)</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#DatasetSeries">dcat-dap:DatasetSeries</a>)
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -8174,101 +8185,6 @@
                 <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
                   <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
                   <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                      <li>
-                                  specializuje
-                
-                profil
-                <a href="https://ofn.gov.cz/dcat-ap-cz/#DatováSada">Datová sada</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#DatováSada">dcat-ap-cz:DatováSada</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                
-                profil
-                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#Dataset">Datová sada</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#Dataset">dcat-ap:Dataset</a>)
-                  <br />Definice: <i>Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                
-                profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Dataset">Datová sada</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#Dataset">dcat-dap:Dataset</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Dataset">Datová sada</a> (<a href="http://www.w3.org/ns/dcat#Dataset">dcat:Dataset</a>)
-                  <br />Definice: <i>Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  specializuje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
-                  <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                      <li>
-                                  specializuje
-                
-                profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Resource">Katalogizovaný zdroj</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource">dcat-dap:CatalogedResource</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
-                  <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                  </ul>
-          
-                      </li>
-                      <li>
-                                  specializuje
-                
-                profil
-                <a href="https://semiceu.github.io/DCAT-AP/releases/3.0.1/#CataloguedResource">Katalogizovaný zdroj</a> (<a href="https://mff-uk.github.io/specifications/dcat-ap#CataloguedResource">dcat-ap:CataloguedResource</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                
-                profil
-                <a href="https://www.w3.org/TR/vocab-dcat-3/#Class:Resource">Katalogizovaný zdroj</a> (<a href="https://mff-uk.github.io/specifications/dcat-dap#CatalogedResource">dcat-dap:CatalogedResource</a>)
-                  <ul style="list-style-type: disclosure-closed;">
-                      <li>
-                                  profiluje
-                třídu
-                
-                <a href="http://www.w3.org/ns/dcat#Resource">Katalogizovaný zdroj</a> (<a href="http://www.w3.org/ns/dcat#Resource">dcat:Resource</a>)
-                  <br />Definice: <i>Zdroj publikovaný či řízený jediným činitelem.</i>
-                  <ul style="list-style-type: disclosure-closed;">
-                  </ul>
-          
-                      </li>
                   </ul>
           
                       </li>
@@ -8534,6 +8450,7 @@
                 
                 profil
                 <a href="https://ofn.gov.cz/dcat-ap-cz/#Koncept">Koncept</a> (<a href="https://ofn.gov.cz/dcat-ap-cz#Koncept">dcat-ap-cz:Koncept</a>)
+                  <br />Definice: <i>Pojem; myšlenková jednotka</i>
                   <ul style="list-style-type: disclosure-closed;">
                       <li>
                                   profiluje
@@ -8547,7 +8464,6 @@
                 třídu
                 
                 <a href="http://www.w3.org/2004/02/skos/core#Concept">Concept (@en)</a> (<a href="http://www.w3.org/2004/02/skos/core#Concept">skos:Concept</a>)
-                  <br />Definice: <i>An idea or notion; a unit of thought.</i>
                   <ul style="list-style-type: disclosure-closed;">
                   </ul>
           
@@ -8762,2453 +8678,7 @@
       </h2>
       <p>Datová struktura pro Datová sada. Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</p>
 
-      <section>
-<h3>Přehled JSON struktury</h3>
-<p>JSON Schéma zachycující strukturu pro <i>Datová sada</i> je definováno v souboru <a href="../datová-sada/schéma.json"><code>../datová-sada/schéma.json</code></a>. Datová sada je tvořena jediným prvkem odpovídající datové struktuře <i>Datová sada</i>.</p>
-
-<ul>
-
-<li>
-  <a href="#json-object--datová-sada--datová-sada">
-    Datová sada
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#DatováSada">Datová sada</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>název</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>popis</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>poskytovatel</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Poskytovatel">Poskytovatel</a>)</strong>
-      
-</li>
-<li>
-    <code>téma</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong>IRI (<a href="#DatovéTéma">Datové téma</a>)</strong>
-      
-</li>
-<li>
-    <code>periodicita_aktualizace</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Frekvence">Frekvence</a>)</strong>
-      
-</li>
-<li>
-    <code>klíčové_slovo</code>:
-    povinná
-    (1 - ∞) položka typu 
-      
-       <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString">Řetězec anotovaný jazykem</a>
-</li>
-<li>
-    <code>časové_pokrytí</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong><a href="#json-object--datová-sada--časový-interval">Časový interval</a></strong>
-      
-</li>
-<li>
-    <code>kontaktní_bod</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong><a href="#json-object--datová-sada--organizace">Organizace</a></strong>
-      
-</li>
-<li>
-    <code>dokumentace</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Dokument">Dokument</a>)</strong>
-      
-</li>
-<li>
-    <code>specifikace</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong>IRI (<a href="#Standard">Standard</a>)</strong>
-      
-</li>
-<li>
-    <code>koncept_euroVoc</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong>IRI (<a href="#TémaEuroVoc">Téma EuroVoc</a>)</strong>
-      
-</li>
-<li>
-    <code>týká_se_pojmu</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong>IRI (<a href="#Pojem">Pojem</a>)</strong>
-      
-</li>
-<li>
-    <code>je_zahrnuta_v_isvs</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#InformačníSystémVeřejnéSprávy">Informační systém veřejné správy</a>)</strong>
-      
-</li>
-<li>
-    <code>je_součástí</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#SérieDatovýchSad">Série datových sad</a>)</strong>
-      
-</li>
-<li>
-    <code>právní_předpis</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#PrávníPředpis">Právní předpis</a>)</strong>
-      
-</li>
-<li>
-    <code>distribuce</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong><a href="#json-object--datová-sada--distribuce---soubor-ke-stažení">Distribuce - Soubor ke stažení</a></strong>
-      
-
-      <strong><a href="#json-object--datová-sada--distribuce---datová-služba">Distribuce - Datová služba</a></strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--časový-interval">
-    Časový interval
-  </a>
-<ul>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>začátek</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      
-       <a href="http://www.w3.org/2001/XMLSchema#date">http://www.w3.org/2001/XMLSchema#date</a>
-</li>
-<li>
-    <code>konec</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      
-       <a href="http://www.w3.org/2001/XMLSchema#date">http://www.w3.org/2001/XMLSchema#date</a>
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--organizace">
-    Organizace
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Organizace">Organizace</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>jméno</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>e-mail</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Email">Emailová adresa</a>)</strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--distribuce---soubor-ke-stažení">
-    Distribuce - Soubor ke stažení
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#DistribuceSoubor">Distribuce - Soubor ke stažení</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>název</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>přístupové_url</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>právní_předpis</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#PrávníPředpis">Právní předpis</a>)</strong>
-      
-</li>
-<li>
-    <code>podmínky_užití</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong><a href="#json-object--datová-sada--specifikace-podmínek-užití">Specifikace podmínek užití</a></strong>
-      
-</li>
-<li>
-    <code>sdílí_údaj</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong><a href="#json-object--datová-sada--sdílení-údaje">Sdílení údaje</a></strong>
-      
-</li>
-<li>
-    <code>způsob_získání_sdílených_údajů</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#ZpůsobZískáníÚdaje">Způsob získání údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>způsob_sdílení_údajů</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#ZpůsobSdíleníÚdaje">Způsob sdílení údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>typ_obsahu_sdílených_údajů</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#TypObsahuÚdaje">Typ obsahu údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>soubor_ke_stažení</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>formát</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#FormátSouboru">Formát souboru</a>)</strong>
-      
-</li>
-<li>
-    <code>typ_média</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#TypMédia">Typ média</a>)</strong>
-      
-</li>
-<li>
-    <code>schéma</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>typ_média_komprese</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#TypMédia">Typ média</a>)</strong>
-      
-</li>
-<li>
-    <code>typ_média_balíčku</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#TypMédia">Typ média</a>)</strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--distribuce---datová-služba">
-    Distribuce - Datová služba
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#DistribuceDatováSlužba">Distribuce - Datová služba</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>název</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>přístupové_url</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>právní_předpis</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#PrávníPředpis">Právní předpis</a>)</strong>
-      
-</li>
-<li>
-    <code>podmínky_užití</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong><a href="#json-object--datová-sada--specifikace-podmínek-užití">Specifikace podmínek užití</a></strong>
-      
-</li>
-<li>
-    <code>sdílí_údaj</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong><a href="#json-object--datová-sada--sdílení-údaje">Sdílení údaje</a></strong>
-      
-</li>
-<li>
-    <code>způsob_získání_sdílených_údajů</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#ZpůsobZískáníÚdaje">Způsob získání údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>způsob_sdílení_údajů</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#ZpůsobSdíleníÚdaje">Způsob sdílení údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>typ_obsahu_sdílených_údajů</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#TypObsahuÚdaje">Typ obsahu údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>přístupová_služba</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong><a href="#json-object--datová-sada--datová-služba">Datová služba</a></strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--specifikace-podmínek-užití">
-    Specifikace podmínek užití
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#SpecifikacePodmínekUžití">Specifikace podmínek užití</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>autorské_dílo</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Licence">Licence</a>)</strong>
-      
-</li>
-<li>
-    <code>autor</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>databáze_jako_autorské_dílo</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Licence">Licence</a>)</strong>
-      
-</li>
-<li>
-    <code>autor_databáze</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>databáze_chráněná_zvláštními_právy</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Licence">Licence</a>)</strong>
-      
-</li>
-<li>
-    <code>osobní_údaje</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Licence">Licence</a>)</strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--sdílení-údaje">
-    Sdílení údaje
-  </a>
-<ul>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>odpovídající_pojem</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Pojem">Pojem</a>)</strong>
-      
-</li>
-<li>
-    <code>způsob_získání_sdílených_údajů</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#ZpůsobZískáníÚdaje">Způsob získání údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>způsob_sdílení_údajů</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#ZpůsobSdíleníÚdaje">Způsob sdílení údaje</a>)</strong>
-      
-</li>
-<li>
-    <code>typ_obsahu_sdílených_údajů</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#TypObsahuÚdaje">Typ obsahu údaje</a>)</strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--datová-sada--datová-služba">
-    Datová služba
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#DatováSlužba">Datová služba</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>název</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>přístupový_bod</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>popis_přístupového_bodu</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>specifikace</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong>IRI (<a href="#Standard">Standard</a>)</strong>
-      
-</li>
-<li>
-    <code>dokumentace</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Dokument">Dokument</a>)</strong>
-      
-</li>
-<li>
-    <code>právní_předpis</code>:
-    povinná
-    (1 - ∞) položka typu 
-      <strong>IRI (<a href="#PrávníPředpis">Právní předpis</a>)</strong>
-      
-</li>
-</ul>
-</li>
-
-</ul>
-
-
-<section id="json-object--datová-sada--datová-sada">
-<h3>Objekt <i>Datová sada</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</dd>
-
-<dt>Regulární výraz</dt>
-<dd><code>^https://.*$</code></dd>
-<dt>Interpretace</dt>
-<dd>
-  <a href="#DatováSada">Datová sada</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--datová-sada-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#DatováSada">Datová sada</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-název">
-<h5>Vlastnost <code>název</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`název`</dd>
-
-  <dt>Jméno</dt>
-  <dd>název</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Název datové sady</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.název">název</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-popis">
-<h5>Vlastnost <code>popis</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`popis`</dd>
-
-  <dt>Jméno</dt>
-  <dd>popis</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Volný text s popisem datové sady</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.popis">popis</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-poskytovatel">
-<h5>Vlastnost <code>poskytovatel</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`poskytovatel`</dd>
-
-  <dt>Jméno</dt>
-  <dd>poskytovatel</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Poskytovatel datové sady</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Poskytovatel">Poskytovatel</a>)
-    S regulárním výrazem <code>^https://rpp-opendata\.egon\.gov\.cz/odrpp/zdroj/orgán-veřejné-moci/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.poskytovatel">poskytovatel</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-téma">
-<h5>Vlastnost <code>téma</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`téma`</dd>
-
-  <dt>Jméno</dt>
-  <dd>klasifikace dle EuroVoc</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Kategorie či téma datové sady dle EuroVoc.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#DatovéTéma">Datové téma</a>)
-    S regulárním výrazem <code>^http://publications\.europa\.eu/resource/authority/data-theme/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.klasifikaceDleEurovoc">klasifikace dle EuroVoc</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-periodicita_aktualizace">
-<h5>Vlastnost <code>periodicita_aktualizace</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`periodicita_aktualizace`</dd>
-
-  <dt>Jméno</dt>
-  <dd>periodicita aktualizace</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Frekvence, se kterou je datová sada aktualizována.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Frekvence">Frekvence</a>)
-    S regulárním výrazem <code>^http://publications\.europa\.eu/resource/authority/frequency/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.periodicitaAktualizace">periodicita aktualizace</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-klíčové_slovo">
-<h5>Vlastnost <code>klíčové_slovo</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`klíčové_slovo`</dd>
-
-  <dt>Jméno</dt>
-  <dd>klíčové slovo</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Klíčové slovo nebo značka popisující zdroj.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString">Řetězec anotovaný jazykem</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.klíčovéSlovo">klíčové slovo</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-časové_pokrytí">
-<h5>Vlastnost <code>časové_pokrytí</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`časové_pokrytí`</dd>
-
-  <dt>Jméno</dt>
-  <dd>časové pokrytí</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Časový úsek pokrytý datovou sadou</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--časový-interval">Časový interval</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.časovéPokrytí">časové pokrytí</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-kontaktní_bod">
-<h5>Vlastnost <code>kontaktní_bod</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`kontaktní_bod`</dd>
-
-  <dt>Jméno</dt>
-  <dd>kontaktní bod</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Kontaktní informace, které mohou být využity pro zasílání připomínek k datové sadě.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--organizace">Organizace</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.kontaktníBod">kontaktní bod</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-dokumentace">
-<h5>Vlastnost <code>dokumentace</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`dokumentace`</dd>
-
-  <dt>Jméno</dt>
-  <dd>dokumentace</dd>
-
-
-  <dt>Popis</dt>
-  <dd>A page or document about this Dataset.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Dokument">Dokument</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.dokumentace">dokumentace</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-specifikace">
-<h5>Vlastnost <code>specifikace</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`specifikace`</dd>
-
-  <dt>Jméno</dt>
-  <dd>specifikace</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Specifikace, jíž se datová sada řídí.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Standard">Standard</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.specifikace">specifikace</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-koncept_eurovoc">
-<h5>Vlastnost <code>koncept_euroVoc</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`koncept_euroVoc`</dd>
-
-  <dt>Jméno</dt>
-  <dd>klasifikace dle EuroVoc</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Kategorie či téma datové sady dle EuroVoc.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TémaEuroVoc">Téma EuroVoc</a>)
-    S regulárním výrazem <code>^http://eurovoc\.europa\.eu/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.klasifikaceDleEurovoc">klasifikace dle EuroVoc</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-týká_se_pojmu">
-<h5>Vlastnost <code>týká_se_pojmu</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`týká_se_pojmu`</dd>
-
-  <dt>Jméno</dt>
-  <dd>týká se pojmu</dd>
-
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Pojem">Pojem</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.týkáSePojmu">týká se pojmu</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-je_zahrnuta_v_isvs">
-<h5>Vlastnost <code>je_zahrnuta_v_isvs</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`je_zahrnuta_v_isvs`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#InformačníSystémVeřejnéSprávy">Informační systém veřejné správy</a>)
-    S regulárním výrazem <code>^https://rpp-opendata\.egon\.gov\.cz/odrpp/zdroj/isvs/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#InformačníSystémVeřejnéSprávy.zahrnuje"></a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-je_součástí">
-<h5>Vlastnost <code>je_součástí</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`je_součástí`</dd>
-
-  <dt>Jméno</dt>
-  <dd>je součástí</dd>
-
-
-  <dt>Popis</dt>
-  <dd>A dataset series of which the dataset is part.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#SérieDatovýchSad">Série datových sad</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.jeSoučástí">je součástí</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-právní_předpis">
-<h5>Vlastnost <code>právní_předpis</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`právní_předpis`</dd>
-
-  <dt>Jméno</dt>
-  <dd>příslušný právní předpis</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Indikace příslušného právního předpisu předepisujícího vznik datové sady.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#PrávníPředpis">Právní předpis</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.příslušnýPrávníPředpis">příslušný právní předpis</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-sada-distribuce">
-<h5>Vlastnost <code>distribuce</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`distribuce`</dd>
-
-  <dt>Jméno</dt>
-  <dd>distribuce</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Dostupná distribuce datové sady.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--distribuce---soubor-ke-stažení">Distribuce - Soubor ke stažení</a>
-</dd>
-
-
-
-
-<dd>
-  <a href="#json-object--datová-sada--distribuce---datová-služba">Distribuce - Datová služba</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSada.distribuce">distribuce</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--datová-sada--časový-interval">
-<h3>Objekt <i>Časový interval</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>Časový interval definovaný svým začátkem a koncem.</dd>
-
-<dt>Interpretace</dt>
-<dd>
-  <a href="#ČasovýInterval">Časový interval</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--časový-interval-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--časový-interval-začátek">
-<h5>Vlastnost <code>začátek</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`začátek`</dd>
-
-  <dt>Jméno</dt>
-  <dd>datum začátku</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Začátek doby trvání.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="http://www.w3.org/2001/XMLSchema#date">http://www.w3.org/2001/XMLSchema#date</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#ČasovýInterval.datumZačátku">datum začátku</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--časový-interval-konec">
-<h5>Vlastnost <code>konec</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`konec`</dd>
-
-  <dt>Jméno</dt>
-  <dd>datum konce</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Konec doby trvání.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="http://www.w3.org/2001/XMLSchema#date">http://www.w3.org/2001/XMLSchema#date</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#ČasovýInterval.datumKonce">datum konce</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--datová-sada--organizace">
-<h3>Objekt <i>Organizace</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>An object representing an organization.  An organization is a single entity, and might represent a business or government, a department or division within a business or government, a club, an association, or the like.
-</dd>
-
-<dt>Interpretace</dt>
-<dd>
-  <a href="#Organizace">Organizace</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--organizace-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Organizace">Organizace</a>)
-</dd>
-
-
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--organizace-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--organizace-jméno">
-<h5>Vlastnost <code>jméno</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`jméno`</dd>
-
-  <dt>Jméno</dt>
-  <dd>jméno</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Jméno objektu jako formátovaný text.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#KontaktníBod.jméno">jméno</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--organizace-e-mail">
-<h5>Vlastnost <code>e-mail</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`e-mail`</dd>
-
-  <dt>Jméno</dt>
-  <dd>email</dd>
-
-
-  <dt>Popis</dt>
-  <dd>E-mailová adresa pro komunikaci.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Email">Emailová adresa</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#KontaktníBod.email">email</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--datová-sada--distribuce---soubor-ke-stažení">
-<h3>Objekt <i>Distribuce - Soubor ke stažení</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>Konkrétní reprezentace datové sady jako souboru ke stažení.</dd>
-
-<dt>Regulární výraz</dt>
-<dd><code>^https://.*$</code></dd>
-<dt>Interpretace</dt>
-<dd>
-  <a href="#DistribuceSoubor">Distribuce - Soubor ke stažení</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#DistribuceSoubor">Distribuce - Soubor ke stažení</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-název">
-<h5>Vlastnost <code>název</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`název`</dd>
-
-  <dt>Jméno</dt>
-  <dd>název</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Název distribuce datové sady</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.název">název</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-přístupové_url">
-<h5>Vlastnost <code>přístupové_url</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`přístupové_url`</dd>
-
-  <dt>Jméno</dt>
-  <dd>přístupové URL</dd>
-
-
-  <dt>Popis</dt>
-  <dd>URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.přístupovéUrl">přístupové URL</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-právní_předpis">
-<h5>Vlastnost <code>právní_předpis</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`právní_předpis`</dd>
-
-  <dt>Jméno</dt>
-  <dd>příslušný právní předpis</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Indikace příslušného právního předpisu předepisujícího vznik distribuce.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#PrávníPředpis">Právní předpis</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.příslušnýPrávníPředpis">příslušný právní předpis</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-podmínky_užití">
-<h5>Vlastnost <code>podmínky_užití</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`podmínky_užití`</dd>
-
-  <dt>Jméno</dt>
-  <dd>Specifikace podmínek užití</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--specifikace-podmínek-užití">Specifikace podmínek užití</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.specifikacePodmínekUžití">Specifikace podmínek užití</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-sdílí_údaj">
-<h5>Vlastnost <code>sdílí_údaj</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`sdílí_údaj`</dd>
-
-  <dt>Jméno</dt>
-  <dd>zprostředkovává sdílení</dd>
-
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--sdílení-údaje">Sdílení údaje</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.zprostředkováváSdílení">zprostředkovává sdílení</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-způsob_získání_sdílených_údajů">
-<h5>Vlastnost <code>způsob_získání_sdílených_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`způsob_získání_sdílených_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>má způsob získání dat sdílených rozhraním</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#ZpůsobZískáníÚdaje">Způsob získání údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.máZpůsobZískáníDatSdílenýchRozhraním">má způsob získání dat sdílených rozhraním</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-způsob_sdílení_údajů">
-<h5>Vlastnost <code>způsob_sdílení_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`způsob_sdílení_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>má způsob sdílení rozhraním</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#ZpůsobSdíleníÚdaje">Způsob sdílení údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.máZpůsobSdíleníRozhraním">má způsob sdílení rozhraním</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-typ_obsahu_sdílených_údajů">
-<h5>Vlastnost <code>typ_obsahu_sdílených_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ_obsahu_sdílených_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>má typ obsahu sdíleného rozhraním</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TypObsahuÚdaje">Typ obsahu údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.máTypObsahuSdílenéhoRozhraním">má typ obsahu sdíleného rozhraním</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-soubor_ke_stažení">
-<h5>Vlastnost <code>soubor_ke_stažení</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`soubor_ke_stažení`</dd>
-
-  <dt>Jméno</dt>
-  <dd>odkaz na stažení souboru</dd>
-
-
-  <dt>Popis</dt>
-  <dd>URL, které je přímým odkazem na stažitelný soubor v daném formátu.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-SouborKeStažení.odkazNaStaženíSouboru">odkaz na stažení souboru</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-formát">
-<h5>Vlastnost <code>formát</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`formát`</dd>
-
-  <dt>Jméno</dt>
-  <dd>formát souboru ke stažení</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Tato vlastnost odkazuje na typ souboru s distribucí.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#FormátSouboru">Formát souboru</a>)
-    S regulárním výrazem <code>^http://publications\.europa\.eu/resource/authority/file-type/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-SouborKeStažení.formátSouboruKeStažení">formát souboru ke stažení</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-typ_média">
-<h5>Vlastnost <code>typ_média</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ_média`</dd>
-
-  <dt>Jméno</dt>
-  <dd>typ média</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Typ média distribuce definovaný v IANA.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TypMédia">Typ média</a>)
-    S regulárním výrazem <code>^http://www\.iana\.org/assignments/media-types/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-SouborKeStažení.typMédia">typ média</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-schéma">
-<h5>Vlastnost <code>schéma</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`schéma`</dd>
-
-  <dt>Jméno</dt>
-  <dd>strojově čitelné schéma souboru ke stažení</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Ustanovené schéma, jímž se popisovaná distribuce řídí.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-SouborKeStažení.strojověČitelnéSchémaSouboruKeStažení">strojově čitelné schéma souboru ke stažení</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-typ_média_komprese">
-<h5>Vlastnost <code>typ_média_komprese</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ_média_komprese`</dd>
-
-  <dt>Jméno</dt>
-  <dd>formát komprese</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Formát komprese souboru, ve kterém jsou data poskytována v komprimované podobě, např. ke snížení velikosti souboru ke stažení.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TypMédia">Typ média</a>)
-    S regulárním výrazem <code>^http://www\.iana\.org/assignments/media-types/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-SouborKeStažení.formátKomprese">formát komprese</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-typ_média_balíčku">
-<h5>Vlastnost <code>typ_média_balíčku</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ_média_balíčku`</dd>
-
-  <dt>Jméno</dt>
-  <dd>formát balíčku</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Balíčkový formát souboru, ve kterém je jeden či více souborů seskupeno dohromady, např. aby bylo možné stáhnout sadu souvisejících souborů naráz.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TypMédia">Typ média</a>)
-    S regulárním výrazem <code>^http://www\.iana\.org/assignments/media-types/.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-SouborKeStažení.formátBalíčku">formát balíčku</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--datová-sada--distribuce---datová-služba">
-<h3>Objekt <i>Distribuce - Datová služba</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>Konkrétní reprezentace datové sady datovou službou.</dd>
-
-<dt>Regulární výraz</dt>
-<dd><code>^https://.*$</code></dd>
-<dt>Interpretace</dt>
-<dd>
-  <a href="#DistribuceDatováSlužba">Distribuce - Datová služba</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--distribuce---datová-služba-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#DistribuceDatováSlužba">Distribuce - Datová služba</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---datová-služba-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-název">
-<h5>Vlastnost <code>název</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`název`</dd>
-
-  <dt>Jméno</dt>
-  <dd>název</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Název distribuce datové sady</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.název">název</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-přístupové_url">
-<h5>Vlastnost <code>přístupové_url</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`přístupové_url`</dd>
-
-  <dt>Jméno</dt>
-  <dd>přístupové URL</dd>
-
-
-  <dt>Popis</dt>
-  <dd>URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.přístupovéUrl">přístupové URL</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-právní_předpis">
-<h5>Vlastnost <code>právní_předpis</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`právní_předpis`</dd>
-
-  <dt>Jméno</dt>
-  <dd>příslušný právní předpis</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Indikace příslušného právního předpisu předepisujícího vznik distribuce.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#PrávníPředpis">Právní předpis</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.příslušnýPrávníPředpis">příslušný právní předpis</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-podmínky_užití">
-<h5>Vlastnost <code>podmínky_užití</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`podmínky_užití`</dd>
-
-  <dt>Jméno</dt>
-  <dd>Specifikace podmínek užití</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--specifikace-podmínek-užití">Specifikace podmínek užití</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.specifikacePodmínekUžití">Specifikace podmínek užití</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-sdílí_údaj">
-<h5>Vlastnost <code>sdílí_údaj</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`sdílí_údaj`</dd>
-
-  <dt>Jméno</dt>
-  <dd>zprostředkovává sdílení</dd>
-
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--sdílení-údaje">Sdílení údaje</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.zprostředkováváSdílení">zprostředkovává sdílení</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-způsob_získání_sdílených_údajů">
-<h5>Vlastnost <code>způsob_získání_sdílených_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`způsob_získání_sdílených_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>má způsob získání dat sdílených rozhraním</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#ZpůsobZískáníÚdaje">Způsob získání údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.máZpůsobZískáníDatSdílenýchRozhraním">má způsob získání dat sdílených rozhraním</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-způsob_sdílení_údajů">
-<h5>Vlastnost <code>způsob_sdílení_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`způsob_sdílení_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>má způsob sdílení rozhraním</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#ZpůsobSdíleníÚdaje">Způsob sdílení údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.máZpůsobSdíleníRozhraním">má způsob sdílení rozhraním</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---soubor-ke-stažení-typ_obsahu_sdílených_údajů">
-<h5>Vlastnost <code>typ_obsahu_sdílených_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ_obsahu_sdílených_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>má typ obsahu sdíleného rozhraním</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TypObsahuÚdaje">Typ obsahu údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce.máTypObsahuSdílenéhoRozhraním">má typ obsahu sdíleného rozhraním</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--distribuce---datová-služba-přístupová_služba">
-<h5>Vlastnost <code>přístupová_služba</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`přístupová_služba`</dd>
-
-  <dt>Jméno</dt>
-  <dd>přístupová služba</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Umístění či přístupový bod zpřístupňující distribuci datové sady.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--datová-sada--datová-služba">Datová služba</a>
-</dd>
+      <section id="json-schema--datová-sada">
 
 
 
@@ -11217,770 +8687,3403 @@
 
 
 
-<dt>Interpretace</dt>
-<dd>
-<a href="#Distribuce-DatováSlužba.přístupováSlužba">přístupová služba</a>
-</dd>
-</dl>
-</section>
 
-</section>
 
-<section id="json-object--datová-sada--specifikace-podmínek-užití">
-<h3>Objekt <i>Specifikace podmínek užití</i></h3>
-<dl>
 
-<dt>Popis</dt>
-<dd>Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.</dd>
 
-<dt>Interpretace</dt>
-<dd>
-  <a href="#SpecifikacePodmínekUžití">Specifikace podmínek užití</a>
-</dd>
-</dl>
+  <h1>
+      JSON struktura pro    Datová sada
+  </h1>
 
-<section id="json-property--datová-sada--specifikace-podmínek-užití-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
+    <dl>
+      <dt>IRI</dt>
+      <dd><code>https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/datová-sada/schéma.json</code></dd>
+      <dt>Definováno v</dt>
+      <dd><code><a href="../datová-sada/schéma.json">../datová-sada/schéma.json</a></code></dd>
+        <dt>Verze použitého jazyka</dt>
+        <dd><a href="https://json-schema.org/specification-links.html#2020-12-release" target="_blank">2020-12</a> (metaschema IRI: <code>https://json-schema.org/draft/2020-12/schema</code>)</dd>
+    </dl>
 
+    <h2>Kořen</h2>
+    Kořenem JSON schématu je
+        <a href="#json-object--datová-sada--datová-sada"></a>
 
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
 
-<dd>
-  IRI (<a href="#SpecifikacePodmínekUžití">Specifikace podmínek užití</a>)
-</dd>
+    <section id="json-object--datová-sada--datová-sada">
+      <h2>
+        Objekt <i>Datová sada</i>
+      </h2>
 
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.</td>
+          </tr>
 
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#DatováSada">Datová sada</a></td>
+          </tr>
+      </table>
 
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>@context</code>:
+          povinná
+          položka typu
 
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/datová-sada/kontext.jsonld&quot;</code>
 
+  
+  
+  
+  
+  
+  
+  
 
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-autorské_dílo">
-<h5>Vlastnost <code>autorské_dílo</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`autorské_dílo`</dd>
-
-  <dt>Jméno</dt>
-  <dd>autorské dílo</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Většina případů poskytovaných dat nebude spadat pod definici autorského díla dle § 2 autorského zákona (121/2000 Sb.), nebude se na ně proto vztahovat autorskoprávní ochrana a nebude proto pro ně potřeba jakékoli licence. „Prostá data“ nejsou chráněna právy duševního vlastnictví. Ve výjimečných případech se však může stát, že databáze bude obsahovat autorskoprávně chráněná díla. Příkladem dat obsahujících autorskoprávně chráněná díla by mohl být seznam příspěvků literární soutěže pořádané radnicí, který by byl uveřejněný včetně plnotextového znění přihlášených soutěžních děl.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Licence">Licence</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SpecifikacePodmínekUžití.autorskéDílo">autorské dílo</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-autor">
-<h5>Vlastnost <code>autor</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`autor`</dd>
-
-  <dt>Jméno</dt>
-  <dd>jména autorů díla</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Jména autorů díla pro použití s licencí CC BY 4.0</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SpecifikacePodmínekUžití.jménaAutorůDíla">jména autorů díla</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-databáze_jako_autorské_dílo">
-<h5>Vlastnost <code>databáze_jako_autorské_dílo</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`databáze_jako_autorské_dílo`</dd>
-
-  <dt>Jméno</dt>
-  <dd>originální databáze</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Tato ochrana je založena § 2 odst. 2 a 5 Autorského zákona a chráněny jsou takové databáze, které jsou „způsobem výběru nebo uspořádáním obsahu autorovým vlastním duševním výtvorem“. Chráněna je tady originální struktura, systém řazení údajů a podobně, tedy kostra, do které se samotné údaje vkládají. Takové databázi se říká „originální databáze“. Příkladem originální databáze může být obchodní rejstřík, který je však zároveň úředním dílem.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Licence">Licence</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SpecifikacePodmínekUžití.originálníDatabáze">originální databáze</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-autor_databáze">
-<h5>Vlastnost <code>autor_databáze</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`autor_databáze`</dd>
-
-  <dt>Jméno</dt>
-  <dd>jména autorů originální databáze</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Jména autorů originální databáze pro použití s licencí CC BY 4.0</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SpecifikacePodmínekUžití.jménaAutorůOriginálníDatabáze">jména autorů originální databáze</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-databáze_chráněná_zvláštními_právy">
-<h5>Vlastnost <code>databáze_chráněná_zvláštními_právy</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`databáze_chráněná_zvláštními_právy`</dd>
-
-  <dt>Jméno</dt>
-  <dd>zvláštní právo pořizovatele databáze</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Tato ochrana je založena § 88 a následujícími Autorského zákona. Zvláštní databázová práva chrání investice vynaložené při zřízení databáze, ověření uvedených dat, nebo jejich publikaci. Práva vznikají, pokud pořízení, ověření nebo předvedení obsahu databáze představuje kvalitativně nebo kvantitativně podstatný vklad. Držitelem práv je pořizovatel databáze, což je osoba, která na svou odpovědnost pořídí databázi, nebo pro kterou tak z jejího podnětu učiní jiná osoba. Zvláštních databázových práv se dá plně vzdát, na rozdíl od autorských práv. Příkladem databáze chráněné zvláštními právy pořizovatele databáze je databáze právních předpisů.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Licence">Licence</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SpecifikacePodmínekUžití.zvláštníPrávoPořizovateleDatabáze">zvláštní právo pořizovatele databáze</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--specifikace-podmínek-užití-osobní_údaje">
-<h5>Vlastnost <code>osobní_údaje</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`osobní_údaje`</dd>
-
-  <dt>Jméno</dt>
-  <dd>osobní údaje</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Pokud data obsahují osobní údaje, je třeba o této skutečnosti informovat příjemce dat. Předpřipravené dokumenty mají IRI https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/ a https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Licence">Licence</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SpecifikacePodmínekUžití.osobníÚdaje">osobní údaje</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--datová-sada--sdílení-údaje">
-<h3>Objekt <i>Sdílení údaje</i></h3>
-<dl>
-
-<dt>Interpretace</dt>
-<dd>
-  <a href="#SdíleníÚdaje">Sdílení údaje</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--sdílení-údaje-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--sdílení-údaje-odpovídající_pojem">
-<h5>Vlastnost <code>odpovídající_pojem</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`odpovídající_pojem`</dd>
-
-  <dt>Jméno</dt>
-  <dd>odpovídající pojem</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Pojem">Pojem</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SdíleníÚdaje.odpovídajícíPojem">odpovídající pojem</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--sdílení-údaje-způsob_získání_sdílených_údajů">
-<h5>Vlastnost <code>způsob_získání_sdílených_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`způsob_získání_sdílených_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>je získán způsobem</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#ZpůsobZískáníÚdaje">Způsob získání údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SdíleníÚdaje.jeZískánZpůsobem">je získán způsobem</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--sdílení-údaje-způsob_sdílení_údajů">
-<h5>Vlastnost <code>způsob_sdílení_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`způsob_sdílení_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>je sdílen způsobem</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#ZpůsobSdíleníÚdaje">Způsob sdílení údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SdíleníÚdaje.jeSdílenZpůsobem">je sdílen způsobem</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--sdílení-údaje-typ_obsahu_sdílených_údajů">
-<h5>Vlastnost <code>typ_obsahu_sdílených_údajů</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ_obsahu_sdílených_údajů`</dd>
-
-  <dt>Jméno</dt>
-  <dd>je sdílen jako</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#TypObsahuÚdaje">Typ obsahu údaje</a>)
-    S regulárním výrazem <code>^https://data\.dia\.gov\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#SdíleníÚdaje.jeSdílenJako">je sdílen jako</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--datová-sada--datová-služba">
-<h3>Objekt <i>Datová služba</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>Umístění či přístupový bod poskytující operace související s hledáním, přistupem k, či výkonem funkcí na datech či souvisejících zdrojích.</dd>
-
-<dt>Regulární výraz</dt>
-<dd><code>^https://.*$</code></dd>
-<dt>Interpretace</dt>
-<dd>
-  <a href="#DatováSlužba">Datová služba</a>
-</dd>
-</dl>
-
-<section id="json-property--datová-sada--datová-služba-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#DatováSlužba">Datová služba</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-název">
-<h5>Vlastnost <code>název</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`název`</dd>
-
-  <dt>Jméno</dt>
-  <dd>název</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Název datové služby.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSlužba.název">název</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-přístupový_bod">
-<h5>Vlastnost <code>přístupový_bod</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`přístupový_bod`</dd>
-
-  <dt>Jméno</dt>
-  <dd>přístupový bod služby</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Kořenové umístění nebo hlavní přístupový bod služby (IRI přístupné přes Web).</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSlužba.přístupovýBodSlužby">přístupový bod služby</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-popis_přístupového_bodu">
-<h5>Vlastnost <code>popis_přístupového_bodu</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`popis_přístupového_bodu`</dd>
-
-  <dt>Jméno</dt>
-  <dd>popis přístupového bodu služby</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Popis přístupového bodu služby včetně operací, parametrů apod.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSlužba.popisPřístupovéhoBoduSlužby">popis přístupového bodu služby</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-specifikace">
-<h5>Vlastnost <code>specifikace</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`specifikace`</dd>
-
-  <dt>Jméno</dt>
-  <dd>specifikace</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Specifikaci, jíž se datová služba řídí.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Standard">Standard</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSlužba.specifikace">specifikace</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-dokumentace">
-<h5>Vlastnost <code>dokumentace</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`dokumentace`</dd>
-
-  <dt>Jméno</dt>
-  <dd>dokumentace</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Dokumentace dále popisující datovou službu.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Dokument">Dokument</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSlužba.dokumentace">dokumentace</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--datová-sada--datová-služba-právní_předpis">
-<h5>Vlastnost <code>právní_předpis</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`právní_předpis`</dd>
-
-  <dt>Jméno</dt>
-  <dd>příslušný právní předpis</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Indikace příslušného právního předpisu předepisujícího vznik datové služby.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#PrávníPředpis">Právní předpis</a>)
-</dd>
-
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
 
 
+  
+  
+  
+  
+  
 
 
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/datová-sada/kontext.jsonld&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
 
 
+  
+  
+  
+  
+  
 
-<dt>Interpretace</dt>
-<dd>
-<a href="#DatováSlužba.příslušnýPrávníPředpis">příslušný právní předpis</a>
-</dd>
-</dl>
-</section>
 
-</section>
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
 
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>název</code>:
+            (<a href="#DatováSada.název" label="Název datové sady">název</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
 
 
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>popis</code>:
+            (<a href="#DatováSada.popis" label="Volný text s popisem datové sady">popis</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>poskytovatel</code>:
+            (<a href="#DatováSada.poskytovatel" label="Poskytovatel datové sady">poskytovatel</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^ovm:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>téma</code>:
+            (<a href="#DatováSada.klasifikaceDleEurovoc" label="Kategorie či téma datové sady dle EuroVoc.">klasifikace dle EuroVoc</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^témata:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>periodicita_aktualizace</code>:
+            (<a href="#DatováSada.periodicitaAktualizace" label="Frekvence, se kterou je datová sada aktualizována.">periodicita aktualizace</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^frekvence:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>klíčové_slovo</code>:
+            (<a href="#DatováSada.klíčovéSlovo" label="Klíčové slovo nebo značka popisující zdroj.">klíčové slovo</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>časové_pokrytí</code>:
+            (<a href="#DatováSada.časovéPokrytí" label="Časový úsek pokrytý datovou sadou">časové pokrytí</a>)
+          nepovinná
+          položka typu
+
+              <a href="#json-object--datová-sada--časový-interval"></a>
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>kontaktní_bod</code>:
+            (<a href="#DatováSada.kontaktníBod" label="Kontaktní informace, které mohou být využity pro zasílání připomínek k datové sadě.">kontaktní bod</a>)
+          nepovinná
+          položka typu
+
+              <a href="#json-object--datová-sada--organizace"></a>
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>dokumentace</code>:
+            (<a href="#DatováSada.dokumentace" label="Stránka či dokument o datové sadě">dokumentace</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>specifikace</code>:
+            (<a href="#DatováSada.specifikace" label="Specifikace, jíž se datová sada řídí.">specifikace</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>koncept_euroVoc</code>:
+            (<a href="#DatováSada.klasifikaceDleEurovoc" label="Kategorie či téma datové sady dle EuroVoc.">klasifikace dle EuroVoc</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^euroVoc:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>týká_se_pojmu</code>:
+            (<a href="#DatováSada.týkáSePojmu" label="">týká se pojmu</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>je_zahrnuta_v_isvs</code>:
+            (<a href="#InformačníSystémVeřejnéSprávy.zahrnuje" label=""></a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^isvs:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>je_součástí</code>:
+            (<a href="#DatováSada.jeSoučástí" label="Série datových sad, jíž je datová sada součástí.">je součástí</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>právní_předpis</code>:
+            (<a href="#DatováSada.příslušnýPrávníPředpis" label="Indikace příslušného právního předpisu předepisujícího vznik datové sady.">příslušný právní předpis</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>distribuce</code>:
+            (<a href="#DatováSada.distribuce" label="Dostupná distribuce datové sady.">distribuce</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+  
+  
+  
+  
+  
+    
+    alespoň jedno z následujících (<code>anyOf</code>):
+    <ul>
+        <li>    <a href="#json-object--datová-sada--distribuce---soubor-ke-stažení"></a>
+</li>
+        <li>    <a href="#json-object--datová-sada--distribuce---datová-služba"></a>
+</li>
+    </ul>
+
+
+
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--distribuce---datová-služba">
+      <h2>
+        Objekt <i>Distribuce - Datová služba</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Konkrétní reprezentace datové sady datovou službou.</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#DistribuceDatováSlužba">Distribuce - Datová služba</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>název</code>:
+            (<a href="#Distribuce.název" label="Název distribuce datové sady">název</a>)
+          nepovinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>přístupové_url</code>:
+            (<a href="#Distribuce.přístupovéUrl" label="URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.">přístupové URL</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>právní_předpis</code>:
+            (<a href="#Distribuce.příslušnýPrávníPředpis" label="Indikace příslušného právního předpisu předepisujícího vznik distribuce.">příslušný právní předpis</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>podmínky_užití</code>:
+            (<a href="#Distribuce.specifikacePodmínekUžití" label="Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.">Specifikace podmínek užití</a>)
+          povinná
+          položka typu
+
+              <a href="#json-object--datová-sada--specifikace-podmínek-užití"></a>
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>sdílí_údaj</code>:
+            (<a href="#Distribuce.zprostředkováváSdílení" label="">zprostředkovává sdílení</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu     <a href="#json-object--datová-sada--sdílení-údaje"></a>
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_získání_sdílených_údajů</code>:
+            (<a href="#Distribuce.máZpůsobZískáníDatSdílenýchRozhraním" label="Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy">má způsob získání dat sdílených rozhraním</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-získání:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_sdílení_údajů</code>:
+            (<a href="#Distribuce.máZpůsobSdíleníRozhraním" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů">má způsob sdílení rozhraním</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-sdílení:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_obsahu_sdílených_údajů</code>:
+            (<a href="#Distribuce.máTypObsahuSdílenéhoRozhraním" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva">má typ obsahu sdíleného rozhraním</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^typy-obsahu:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>přístupová_služba</code>:
+            (<a href="#Distribuce-DatováSlužba.přístupováSlužba" label="Umístění či přístupový bod zpřístupňující distribuci datové sady.">přístupová služba</a>)
+          povinná
+          položka typu
+
+              <a href="#json-object--datová-sada--datová-služba"></a>
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--datová-služba">
+      <h2>
+        Objekt <i>Datová služba</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Umístění či přístupový bod poskytující operace související s hledáním, přistupem k, či výkonem funkcí na datech či souvisejících zdrojích.</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#DatováSlužba">Datová služba</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Datová služba&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Datová služba&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>název</code>:
+            (<a href="#DatováSlužba.název" label="Název datové služby.">název</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>přístupový_bod</code>:
+            (<a href="#DatováSlužba.přístupovýBodSlužby" label="Kořenové umístění nebo hlavní přístupový bod služby (IRI přístupné přes Web).">přístupový bod služby</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>popis_přístupového_bodu</code>:
+            (<a href="#DatováSlužba.popisPřístupovéhoBoduSlužby" label="Popis přístupového bodu služby včetně operací, parametrů apod.">popis přístupového bodu služby</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>specifikace</code>:
+            (<a href="#DatováSlužba.specifikace" label="Specifikaci, jíž se datová služba řídí.">specifikace</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>dokumentace</code>:
+            (<a href="#DatováSlužba.dokumentace" label="Dokumentace dále popisující datovou službu.">dokumentace</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>právní_předpis</code>:
+            (<a href="#DatováSlužba.příslušnýPrávníPředpis" label="Indikace příslušného právního předpisu předepisujícího vznik datové služby.">příslušný právní předpis</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--sdílení-údaje">
+      <h2>
+        Objekt <i>Sdílení údaje</i>
+      </h2>
+
+      <table class="def">
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#SdíleníÚdaje">Sdílení údaje</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Sdílení údaje&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Sdílení údaje&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>odpovídající_pojem</code>:
+            (<a href="#SdíleníÚdaje.odpovídajícíPojem" label="">odpovídající pojem</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_získání_sdílených_údajů</code>:
+            (<a href="#SdíleníÚdaje.jeZískánZpůsobem" label="Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy">je získán způsobem</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-získání:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_sdílení_údajů</code>:
+            (<a href="#SdíleníÚdaje.jeSdílenZpůsobem" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů">je sdílen způsobem</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-sdílení:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_obsahu_sdílených_údajů</code>:
+            (<a href="#SdíleníÚdaje.jeSdílenJako" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva">je sdílen jako</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^typy-obsahu:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--specifikace-podmínek-užití">
+      <h2>
+        Objekt <i>Specifikace podmínek užití</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#SpecifikacePodmínekUžití">Specifikace podmínek užití</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Specifikace podmínek užití&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Specifikace podmínek užití&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>autorské_dílo</code>:
+            (<a href="#SpecifikacePodmínekUžití.autorskéDílo" label="Většina případů poskytovaných dat nebude spadat pod definici autorského díla dle § 2 autorského zákona (121/2000 Sb.), nebude se na ně proto vztahovat autorskoprávní ochrana a nebude proto pro ně potřeba jakékoli licence. „Prostá data“ nejsou chráněna právy duševního vlastnictví. Ve výjimečných případech se však může stát, že databáze bude obsahovat autorskoprávně chráněná díla. Příkladem dat obsahujících autorskoprávně chráněná díla by mohl být seznam příspěvků literární soutěže pořádané radnicí, který by byl uveřejněný včetně plnotextového znění přihlášených soutěžních děl.">autorské dílo</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>autor</code>:
+            (<a href="#SpecifikacePodmínekUžití.jménaAutorůDíla" label="Jména autorů díla pro použití s licencí CC BY 4.0">jména autorů díla</a>)
+          nepovinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>databáze_jako_autorské_dílo</code>:
+            (<a href="#SpecifikacePodmínekUžití.originálníDatabáze" label="Tato ochrana je založena § 2 odst. 2 a 5 Autorského zákona a chráněny jsou takové databáze, které jsou „způsobem výběru nebo uspořádáním obsahu autorovým vlastním duševním výtvorem“. Chráněna je tady originální struktura, systém řazení údajů a podobně, tedy kostra, do které se samotné údaje vkládají. Takové databázi se říká „originální databáze“. Příkladem originální databáze může být obchodní rejstřík, který je však zároveň úředním dílem.">originální databáze</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>autor_databáze</code>:
+            (<a href="#SpecifikacePodmínekUžití.jménaAutorůOriginálníDatabáze" label="Jména autorů originální databáze pro použití s licencí CC BY 4.0">jména autorů originální databáze</a>)
+          nepovinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>databáze_chráněná_zvláštními_právy</code>:
+            (<a href="#SpecifikacePodmínekUžití.zvláštníPrávoPořizovateleDatabáze" label="Tato ochrana je založena § 88 a následujícími Autorského zákona. Zvláštní databázová práva chrání investice vynaložené při zřízení databáze, ověření uvedených dat, nebo jejich publikaci. Práva vznikají, pokud pořízení, ověření nebo předvedení obsahu databáze představuje kvalitativně nebo kvantitativně podstatný vklad. Držitelem práv je pořizovatel databáze, což je osoba, která na svou odpovědnost pořídí databázi, nebo pro kterou tak z jejího podnětu učiní jiná osoba. Zvláštních databázových práv se dá plně vzdát, na rozdíl od autorských práv. Příkladem databáze chráněné zvláštními právy pořizovatele databáze je databáze právních předpisů.">zvláštní právo pořizovatele databáze</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>osobní_údaje</code>:
+            (<a href="#SpecifikacePodmínekUžití.osobníÚdaje" label="Pokud data obsahují osobní údaje, je třeba o této skutečnosti informovat příjemce dat. Předpřipravené dokumenty mají IRI https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/ a https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/.">osobní údaje</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--distribuce---soubor-ke-stažení">
+      <h2>
+        Objekt <i>Distribuce - Soubor ke stažení</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Konkrétní reprezentace datové sady jako souboru ke stažení.</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#DistribuceSoubor">Distribuce - Soubor ke stažení</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>název</code>:
+            (<a href="#Distribuce.název" label="Název distribuce datové sady">název</a>)
+          nepovinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>přístupové_url</code>:
+            (<a href="#Distribuce.přístupovéUrl" label="URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.">přístupové URL</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>právní_předpis</code>:
+            (<a href="#Distribuce.příslušnýPrávníPředpis" label="Indikace příslušného právního předpisu předepisujícího vznik distribuce.">příslušný právní předpis</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>podmínky_užití</code>:
+            (<a href="#Distribuce.specifikacePodmínekUžití" label="Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.">Specifikace podmínek užití</a>)
+          povinná
+          položka typu
+
+              <a href="#json-object--datová-sada--specifikace-podmínek-užití"></a>
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>sdílí_údaj</code>:
+            (<a href="#Distribuce.zprostředkováváSdílení" label="">zprostředkovává sdílení</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu     <a href="#json-object--datová-sada--sdílení-údaje"></a>
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_získání_sdílených_údajů</code>:
+            (<a href="#Distribuce.máZpůsobZískáníDatSdílenýchRozhraním" label="Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy">má způsob získání dat sdílených rozhraním</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-získání:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_sdílení_údajů</code>:
+            (<a href="#Distribuce.máZpůsobSdíleníRozhraním" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů">má způsob sdílení rozhraním</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-sdílení:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_obsahu_sdílených_údajů</code>:
+            (<a href="#Distribuce.máTypObsahuSdílenéhoRozhraním" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva">má typ obsahu sdíleného rozhraním</a>)
+          povinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^typy-obsahu:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>soubor_ke_stažení</code>:
+            (<a href="#Distribuce-SouborKeStažení.odkazNaStaženíSouboru" label="URL, které je přímým odkazem na stažitelný soubor v daném formátu.">odkaz na stažení souboru</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>formát</code>:
+            (<a href="#Distribuce-SouborKeStažení.formátSouboruKeStažení" label="Tato vlastnost odkazuje na typ souboru s distribucí.">formát souboru ke stažení</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^formáty:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_média</code>:
+            (<a href="#Distribuce-SouborKeStažení.typMédia" label="Typ média distribuce definovaný v IANA.">typ média</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^mediaTypes:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>schéma</code>:
+            (<a href="#Distribuce-SouborKeStažení.strojověČitelnéSchémaSouboruKeStažení" label="Ustanovené schéma, jímž se popisovaná distribuce řídí.">strojově čitelné schéma souboru ke stažení</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_média_komprese</code>:
+            (<a href="#Distribuce-SouborKeStažení.formátKomprese" label="Formát komprese souboru, ve kterém jsou data poskytována v komprimované podobě, např. ke snížení velikosti souboru ke stažení.">formát komprese</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^mediaTypes:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_média_balíčku</code>:
+            (<a href="#Distribuce-SouborKeStažení.formátBalíčku" label="Balíčkový formát souboru, ve kterém je jeden či více souborů seskupeno dohromady, např. aby bylo možné stáhnout sadu souvisejících souborů naráz.">formát balíčku</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^mediaTypes:.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--sdílení-údaje">
+      <h2>
+        Objekt <i>Sdílení údaje</i>
+      </h2>
+
+      <table class="def">
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#SdíleníÚdaje">Sdílení údaje</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Sdílení údaje&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Sdílení údaje&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>odpovídající_pojem</code>:
+            (<a href="#SdíleníÚdaje.odpovídajícíPojem" label="">odpovídající pojem</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_získání_sdílených_údajů</code>:
+            (<a href="#SdíleníÚdaje.jeZískánZpůsobem" label="Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy">je získán způsobem</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-získání:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>způsob_sdílení_údajů</code>:
+            (<a href="#SdíleníÚdaje.jeSdílenZpůsobem" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů">je sdílen způsobem</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^způsoby-sdílení:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ_obsahu_sdílených_údajů</code>:
+            (<a href="#SdíleníÚdaje.jeSdílenJako" label="Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva">je sdílen jako</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  (dle regulárního výrazu: <code>^typy-obsahu:[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--specifikace-podmínek-užití">
+      <h2>
+        Objekt <i>Specifikace podmínek užití</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#SpecifikacePodmínekUžití">Specifikace podmínek užití</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Specifikace podmínek užití&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Specifikace podmínek užití&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>autorské_dílo</code>:
+            (<a href="#SpecifikacePodmínekUžití.autorskéDílo" label="Většina případů poskytovaných dat nebude spadat pod definici autorského díla dle § 2 autorského zákona (121/2000 Sb.), nebude se na ně proto vztahovat autorskoprávní ochrana a nebude proto pro ně potřeba jakékoli licence. „Prostá data“ nejsou chráněna právy duševního vlastnictví. Ve výjimečných případech se však může stát, že databáze bude obsahovat autorskoprávně chráněná díla. Příkladem dat obsahujících autorskoprávně chráněná díla by mohl být seznam příspěvků literární soutěže pořádané radnicí, který by byl uveřejněný včetně plnotextového znění přihlášených soutěžních děl.">autorské dílo</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>autor</code>:
+            (<a href="#SpecifikacePodmínekUžití.jménaAutorůDíla" label="Jména autorů díla pro použití s licencí CC BY 4.0">jména autorů díla</a>)
+          nepovinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>databáze_jako_autorské_dílo</code>:
+            (<a href="#SpecifikacePodmínekUžití.originálníDatabáze" label="Tato ochrana je založena § 2 odst. 2 a 5 Autorského zákona a chráněny jsou takové databáze, které jsou „způsobem výběru nebo uspořádáním obsahu autorovým vlastním duševním výtvorem“. Chráněna je tady originální struktura, systém řazení údajů a podobně, tedy kostra, do které se samotné údaje vkládají. Takové databázi se říká „originální databáze“. Příkladem originální databáze může být obchodní rejstřík, který je však zároveň úředním dílem.">originální databáze</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>autor_databáze</code>:
+            (<a href="#SpecifikacePodmínekUžití.jménaAutorůOriginálníDatabáze" label="Jména autorů originální databáze pro použití s licencí CC BY 4.0">jména autorů originální databáze</a>)
+          nepovinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>databáze_chráněná_zvláštními_právy</code>:
+            (<a href="#SpecifikacePodmínekUžití.zvláštníPrávoPořizovateleDatabáze" label="Tato ochrana je založena § 88 a následujícími Autorského zákona. Zvláštní databázová práva chrání investice vynaložené při zřízení databáze, ověření uvedených dat, nebo jejich publikaci. Práva vznikají, pokud pořízení, ověření nebo předvedení obsahu databáze představuje kvalitativně nebo kvantitativně podstatný vklad. Držitelem práv je pořizovatel databáze, což je osoba, která na svou odpovědnost pořídí databázi, nebo pro kterou tak z jejího podnětu učiní jiná osoba. Zvláštních databázových práv se dá plně vzdát, na rozdíl od autorských práv. Příkladem databáze chráněné zvláštními právy pořizovatele databáze je databáze právních předpisů.">zvláštní právo pořizovatele databáze</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>osobní_údaje</code>:
+            (<a href="#SpecifikacePodmínekUžití.osobníÚdaje" label="Pokud data obsahují osobní údaje, je třeba o této skutečnosti informovat příjemce dat. Předpřipravené dokumenty mají IRI https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/ a https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/.">osobní údaje</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--organizace">
+      <h2>
+        Objekt <i>Organizace</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>An object representing an organization.  An organization is a single entity, and might represent a business or government, a department or division within a business or government, a club, an association, or the like.
+</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#Organizace">Organizace</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Organizace&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Organizace&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>jméno</code>:
+            (<a href="#KontaktníBod.jméno" label="Jméno objektu jako formátovaný text.">jméno</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>e-mail</code>:
+            (<a href="#KontaktníBod.email" label="E-mailová adresa pro komunikaci.">email</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--datová-sada--časový-interval">
+      <h2>
+        Objekt <i>Časový interval</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Časový interval definovaný svým začátkem a koncem.</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#ČasovýInterval">Časový interval</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Časový interval&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Časový interval&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
+</li>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>začátek</code>:
+            (<a href="#ČasovýInterval.datumZačátku" label="Začátek doby trvání.">datum začátku</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>date</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>konec</code>:
+            (<a href="#ČasovýInterval.datumKonce" label="Konec doby trvání.">datum konce</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>date</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
 </section>
       </section>
       <section>
@@ -11990,541 +12093,695 @@
       </h2>
       <p>Datová struktura pro Katalog. Řízená kolekce metadat o datových sadách a datových službách</p>
 
-      <section>
-<h3>Přehled JSON struktury</h3>
-<p>JSON Schéma zachycující strukturu pro <i>Katalog</i> je definováno v souboru <a href="../katalog/schéma.json"><code>../katalog/schéma.json</code></a>. Datová sada je tvořena jediným prvkem odpovídající datové struktuře <i>Katalog</i>.</p>
+      <section id="json-schema--katalog">
 
-<ul>
 
-<li>
-  <a href="#json-object--katalog--katalog">
-    Katalog
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Katalog">Katalog</a>)</strong>
-      
+
+
+
+
+
+
+
+
+
+
+  <h1>
+      JSON struktura pro    Katalog
+  </h1>
+
+    <dl>
+      <dt>IRI</dt>
+      <dd><code>https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/katalog/schéma.json</code></dd>
+      <dt>Definováno v</dt>
+      <dd><code><a href="../katalog/schéma.json">../katalog/schéma.json</a></code></dd>
+        <dt>Verze použitého jazyka</dt>
+        <dd><a href="https://json-schema.org/specification-links.html#2020-12-release" target="_blank">2020-12</a> (metaschema IRI: <code>https://json-schema.org/draft/2020-12/schema</code>)</dd>
+    </dl>
+
+    <h2>Kořen</h2>
+    Kořenem JSON schématu je
+        <a href="#json-object--katalog--katalog"></a>
+
+
+    <section id="json-object--katalog--katalog">
+      <h2>
+        Objekt <i>Katalog</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>Řízená kolekce metadat o datových sadách a datových službách</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#Katalog">Katalog</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>@context</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/katalog/kontext.jsonld&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
 </li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;https://ofn.gov.cz/dcat-ap-cz-360-2023/2025-08-12/katalog/kontext.jsonld&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
 </li>
-<li>
-    <code>název</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Katalog&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
 </li>
-<li>
-    <code>popis</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Katalog&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
 </li>
-<li>
-    <code>poskytovatel</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Poskytovatel">Poskytovatel</a>)</strong>
-      
+    </ul>
+
+
+
+
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>název</code>:
+            (<a href="#Katalog.název" label="Tato vlastnost obsahuje název datového katalogu.">název</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>popis</code>:
+            (<a href="#Katalog.popis" label="Tato vlastnost obsahuje volný text s popisem datového katalogu.">popis</a>)
+          povinná
+          položka typu
+
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>poskytovatel</code>:
+            (<a href="#Katalog.poskytovatel" label="Poskytovatel datového katalogu.">poskytovatel</a>)
+          povinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://rpp-opendata\.egon\.gov\.cz/odrpp/zdroj/orgán-veřejné-moci/[^/]+$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>kontaktní_bod</code>:
+            (<a href="#Katalog.kontaktníBod" label="Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.">kontaktní bod</a>)
+          povinná
+          položka typu
+
+              <a href="#json-object--katalog--organizace"></a>
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>domovská_stránka</code>:
+            (<a href="#Katalog.domovskáStránka" label="Tato vlastnost odkazuje na domovskou stránku lokálního katalogu, kam mohou chodit uživatelé.">domovská stránka</a>)
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>datová_sada</code>:
+            (<a href="#Katalog.datováSada" label="Kolekce dat, která je katalogizována v katalogu.">datová sada</a>)
+          nepovinná
+          položka typu
+
+                
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  (dle regulárního výrazu: <code>^https://.*$</code>)
+
+
+  
+  
+  
+  
+  
+
+
+    
+  
+  
+  
+  
+  
+  
+  
+
+
+        </li>
+    </ul>
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+
+    </section>
+    <section id="json-object--katalog--organizace">
+      <h2>
+        Objekt <i>Organizace</i>
+      </h2>
+
+      <table class="def">
+          <tr>
+            <th>Popis</th>
+            <td>An object representing an organization.  An organization is a single entity, and might represent a business or government, a department or division within a business or government, a club, an association, or the like.
+</td>
+          </tr>
+
+          <tr>
+            <th>Interpretace</th>
+            <td><a href="#Organizace">Organizace</a></td>
+          </tr>
+      </table>
+
+          <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>iri</code>:
+          nepovinná
+          položka typu
+
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
+
+
+  
+  
+  
+  
+  
+
+
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>typ</code>:
+          povinná
+          položka typu
+
+                
+  
+  
+  
+  
+  
+  
+  
+        právě jedno z následujících (<code>oneOf</code>):
+    <ul>
+        <li>      
+    konstantní hodnota
+    <code>&quot;Organizace&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
 </li>
-<li>
-    <code>kontaktní_bod</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong><a href="#json-object--katalog--organizace">Organizace</a></strong>
-      
+        <li>      
+  
+      pole hodnot <code>{0..*}</code> typu       
+  
+  
+    řetězec
+  
+  
+
+
+  
+  
+  
+  
+  
+
+
+    , které musí obsahovat alespoň jednu položku typu       
+    konstantní hodnota
+    <code>&quot;Organizace&quot;</code>
+
+  
+  
+  
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+
 </li>
-<li>
-    <code>domovská_stránka</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Zdroj">Zdroj</a>)</strong>
-      
-</li>
-<li>
-    <code>datová_sada</code>:
-    nepovinná
-    (0 - ∞) položka typu 
-      <strong>IRI (<a href="#DatováSada">Datová sada</a>)</strong>
-      
-</li>
-</ul>
-</li>
-
-<li>
-  <a href="#json-object--katalog--organizace">
-    Organizace
-  </a>
-<ul>
-<li>
-    <code>iri</code>:
-    nepovinná
-    (0 - 1) položka typu 
-      <strong>IRI (<a href="#Organizace">Organizace</a>)</strong>
-      
-</li>
-<li>
-    <code>typ</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-      
-</li>
-<li>
-    <code>jméno</code>:
-    povinná
-    (1 - 1) položka typu 
-      
-       <a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</li>
-<li>
-    <code>e-mail</code>:
-    povinná
-    (1 - 1) položka typu 
-      <strong>IRI (<a href="#Email">Emailová adresa</a>)</strong>
-      
-</li>
-</ul>
-</li>
+    </ul>
 
-</ul>
 
 
-<section id="json-object--katalog--katalog">
-<h3>Objekt <i>Katalog</i></h3>
-<dl>
 
-<dt>Popis</dt>
-<dd>Řízená kolekce metadat o datových sadách a datových službách</dd>
 
-<dt>Interpretace</dt>
-<dd>
-  <a href="#Katalog">Katalog</a>
-</dd>
-</dl>
 
-<section id="json-property--katalog--katalog-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>jméno</code>:
+            (<a href="#KontaktníBod.jméno" label="Jméno objektu jako formátovaný text.">jméno</a>)
+          povinná
+          položka typu
 
+                  <strong>
+    objekt
+  </strong>
+    s vlastnostmi (<code>properties</code>):
+    <ul>
+        <li style="list-style-type: disclosure-closed;">
+          <code>cs</code>:
+          povinná
+          položka typu
 
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
+                
+  
+  
+    řetězec
+  
+  
 
-<dd>
-  IRI (<a href="#Katalog">Katalog</a>)
-</dd>
 
+  
+  
+  
+  
+  
 
 
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>en</code>:
+          nepovinná
+          položka typu
 
+                
+  
+  
+    řetězec
+  
+  
 
 
+  
+  
+  
+  
+  
 
 
-</dl>
-</section>
-<section id="json-property--katalog--katalog-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
+        </li>
+    </ul>
+  
 
 
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
 
+  
+  
+  
+  
+  
+  
+  
+  
 
 
-<dd>Viz JSON Schéma.</dd>
+        </li>
+        <li style="list-style-type: disclosure-closed;">
+          <code>e-mail</code>:
+            (<a href="#KontaktníBod.email" label="E-mailová adresa pro komunikaci.">email</a>)
+          povinná
+          položka typu
 
+                
+  
+  
+    řetězec
+  (formát: <code>iri</code>)
+  
 
 
+  
+  
+  
+  
+  
 
 
+        </li>
+    </ul>
+  
 
-</dl>
-</section>
-<section id="json-property--katalog--katalog-název">
-<h5>Vlastnost <code>název</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`název`</dd>
 
-  <dt>Jméno</dt>
-  <dd>název</dd>
 
+  
+  
+  
+  
+  
+  
+  
+  
 
-  <dt>Popis</dt>
-  <dd>Tato vlastnost obsahuje název datového katalogu.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Katalog.název">název</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--katalog--katalog-popis">
-<h5>Vlastnost <code>popis</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`popis`</dd>
-
-  <dt>Jméno</dt>
-  <dd>popis</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Tato vlastnost obsahuje volný text s popisem datového katalogu.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Katalog.popis">popis</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--katalog--katalog-poskytovatel">
-<h5>Vlastnost <code>poskytovatel</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`poskytovatel`</dd>
-
-  <dt>Jméno</dt>
-  <dd>poskytovatel</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Poskytovatel datového katalogu.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Poskytovatel">Poskytovatel</a>)
-    S regulárním výrazem <code>^https://rpp-opendata\.egon\.gov\.cz/odrpp/zdroj/orgán-veřejné-moci/[^/]+$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Katalog.poskytovatel">poskytovatel</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--katalog--katalog-kontaktní_bod">
-<h5>Vlastnost <code>kontaktní_bod</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`kontaktní_bod`</dd>
-
-  <dt>Jméno</dt>
-  <dd>kontaktní bod</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Tato vlastnost obsahuje kontaktní informace, které mohou být využity pro zasílání připomínek ke katalogu.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  <a href="#json-object--katalog--organizace">Organizace</a>
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Katalog.kontaktníBod">kontaktní bod</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--katalog--katalog-domovská_stránka">
-<h5>Vlastnost <code>domovská_stránka</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`domovská_stránka`</dd>
-
-  <dt>Jméno</dt>
-  <dd>domovská stránka</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Tato vlastnost odkazuje na domovskou stránku lokálního katalogu, kam mohou chodit uživatelé.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Zdroj">Zdroj</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Katalog.domovskáStránka">domovská stránka</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--katalog--katalog-datová_sada">
-<h5>Vlastnost <code>datová_sada</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`datová_sada`</dd>
-
-  <dt>Jméno</dt>
-  <dd>datová sada</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Kolekce dat, která je katalogizována v katalogu.</dd>
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - ∞</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#DatováSada">Datová sada</a>)
-    S regulárním výrazem <code>^https://.*$</code>.
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#Katalog.datováSada">datová sada</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-<section id="json-object--katalog--organizace">
-<h3>Objekt <i>Organizace</i></h3>
-<dl>
-
-<dt>Popis</dt>
-<dd>An object representing an organization.  An organization is a single entity, and might represent a business or government, a department or division within a business or government, a club, an association, or the like.
-</dd>
-
-<dt>Interpretace</dt>
-<dd>
-  <a href="#Organizace">Organizace</a>
-</dd>
-</dl>
-
-<section id="json-property--katalog--organizace-iri">
-<h5>Vlastnost <code>iri</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`iri`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>nepovinné</dd>
-<dt>Kardinalita</dt>
-<dd>0 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Organizace">Organizace</a>)
-</dd>
-
-
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--katalog--organizace-typ">
-<h5>Vlastnost <code>typ</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`typ`</dd>
-
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-
-<dd>Viz JSON Schéma.</dd>
-
-
-
-
-
-
-</dl>
-</section>
-<section id="json-property--katalog--organizace-jméno">
-<h5>Vlastnost <code>jméno</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`jméno`</dd>
-
-  <dt>Jméno</dt>
-  <dd>jméno</dd>
-
-
-  <dt>Popis</dt>
-  <dd>Jméno objektu jako formátovaný text.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-
-<dd>
-<a href="https://ofn.gov.cz/zdroj/základní-datové-typy/2020-07-01/text">Text</a>
-</dd>
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#KontaktníBod.jméno">jméno</a>
-</dd>
-</dl>
-</section>
-<section id="json-property--katalog--organizace-e-mail">
-<h5>Vlastnost <code>e-mail</code></h5>
-<dl>
-<dt>Klíč</dt>
-<dd>`e-mail`</dd>
-
-  <dt>Jméno</dt>
-  <dd>email</dd>
-
-
-  <dt>Popis</dt>
-  <dd>E-mailová adresa pro komunikaci.</dd>
-
-<dt>Povinnost</dt>
-<dd>povinné</dd>
-<dt>Kardinalita</dt>
-<dd>1 - 1</dd>
-<dt>Typ</dt>
-
-<dd>
-  IRI (<a href="#Email">Emailová adresa</a>)
-</dd>
-
-
-
-
-
-
-
-
-<dt>Interpretace</dt>
-<dd>
-<a href="#KontaktníBod.email">email</a>
-</dd>
-</dl>
-</section>
-
-</section>
-
-
-
+    </section>
 </section>
       </section>
 
@@ -12562,6 +12819,10 @@
             <tr>
               <td>Aplikační profil</td>
               <td><a href="./dsv.ttl">./dsv.ttl</a></td>
+            </tr>
+            <tr>
+              <td>SHACL validační pravidla</td>
+              <td><a href="./shacl.ttl">./shacl.ttl</a></td>
             </tr>
             <tr><td>JSON schéma</td><td><a href="../datová-sada/schéma.json">../datová-sada/schéma.json</a></td></tr>
             <tr><td>JSON-LD kontext</td><td><a href="../datová-sada/kontext.jsonld">../datová-sada/kontext.jsonld</a></td></tr>
