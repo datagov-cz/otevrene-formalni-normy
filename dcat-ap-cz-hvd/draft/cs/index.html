@@ -6975,96 +6975,414 @@
             Příklady obsahují i příslušná JSON schémata pro validaci souborů ve variantě JSON-LD.
         </p>
             
-        <section id="příklady-datová-sada">
-            <h4>Soubor datové sady</h4>
-            
+        <section id="hvds-dcat-ap-dokumenty-datová-sada-hvd">
+        <h3>Soubor datové sady HVD</h3>
+        
+        <p>
+            Na URL specifikovaných v souboru katalogu pak NKOD očekává soubory v RDF serializaci <a href="../../propojená-data/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/#serializace-JSON-LD">JSON-LD</a> obsahující kompletní metadatový záznam datové sady, včetně distribucí.
+            Pro HVD je třeba specifikovat nejen že na datovou sadu se vztahuje <a href="https://eur-lex.europa.eu/eli/reg_impl/2023/138/oj?locale=cs#">prováděcí nařízení HVD</a>, ale i na které její distribuce a datové služby, jelikož to nemusí být na všechny.
+            V každém případě je to indikováno pomocí hodnoty <code>dcatap:applicableLegislation</code> (RDF Turtle) či <code>právní_předpis</code> (JSON-LD) s hodnotou <code>http://data.europa.eu/eli/reg_impl/2023/138/oj</code>.
+        </p>
+        
+        <aside class="example" title="Vzorový soubor s metadaty datové sady HVD v RDF Turtle">
             <p>
-                Na URL specifikovaných v souboru katalogu pak NKD očekává soubory v RDF serializaci <a href="../../propojená-data/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/#serializace-JSON-LD">JSON-LD</a> obsahující kompletní metadatový záznam datové sady, včetně distribucí.
+                <a href="příklady/datová-sada-hvd.ttl">Stáhnout RDF Turtle</a>.
+                Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
             </p>
-            
-            <aside class="example" title="Vzorový soubor s metadaty datové sady v RDF Turtle">
-                <p>
-                    <a href="../příklady/datová-sada.ttl">Stáhnout RDF Turtle</a>.
-                    Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
-                </p>
-                <pre class="turtle">
+            <pre class="turtle">
+    @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+    @prefix dct: &lt;http://purl.org/dc/terms/&gt; .
+    @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+    @prefix vcard2006: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
+    @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+    
+    @prefix filetype: &lt;http://publications.europa.eu/resource/authority/file-type/&gt; .
+    @prefix application: &lt;http://www.iana.org/assignments/media-types/application/&gt; .
+    @prefix freq: &lt;http://publications.europa.eu/resource/authority/frequency/&gt; .
+    @prefix theme: &lt;http://publications.europa.eu/resource/authority/data-theme/&gt; .
+    @prefix continent: &lt;http://publications.europa.eu/resource/authority/continent/&gt; .
+    @prefix ruian_ST: &lt;https://linked.cuzk.cz/resource/ruian/stat/&gt; .
+    @prefix euroVoc: &lt;http://eurovoc.europa.eu/&gt; .
+    @prefix dcatap: &lt;http://data.europa.eu/r5r/&gt; .
+    @prefix nkod: &lt;https://data.gov.cz/slovník/nkod/&gt; .
+    
+    @prefix pu: &lt;https://data.gov.cz/slovník/podmínky-užití/&gt; .
+    
+    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld&gt; a dcat:Dataset ;
+        dct:title "Jízdní řády veřejné linkové dopravy"@cs, "Public transport timetables"@en;
+        dct:description "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu."@cs ;
+        dct:description "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."@en ;
+        dct:publisher &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008&gt; ;
+        dcat:theme theme:TRAN ;
+        dct:accrualPeriodicity freq:WEEKLY_3 ;
+        dcat:keyword "autobusy"@cs, "jízdní řády"@cs, "veřejná linková doprava"@cs, "timetable"@en, "bus"@en, "public transport"@en ;
+        dct:spatial ruian_ST:1, continent:EUROPE ;
+        dct:temporal [
+            a dct:PeriodOfTime ;
+            dcat:startDate "2009-01-01"^^xsd:date ;
+            dcat:endDate "2017-12-31"^^xsd:date
+        ] ;
+        dcat:contactPoint [
+            a vcard2006:Organization ;
+            vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
+            vcard2006:hasEmail "sekretariat.190@mdcr.cz"
+        ] ;
+        foaf:page &lt;https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy&gt; ;
+        dct:conformsTo &lt;https://ofn.gov.cz/jízdní-řády/2020-05-01/&gt; ;
+        dcat:theme euroVoc:4512 ;
+        dcat:spatialResolutionInMeters 12.0 ;
+        dcat:temporalResolution "P1D"^^xsd:duration ;
+        dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;, &lt;http://data.europa.eu/eli/reg_impl/2023/138/oj&gt; ;
+        dcatap:hvdCategory &lt;http://data.europa.eu/bna/c_1e787364&gt; ;
+        dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv&gt; ;
+        dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql&gt; .
+    
+    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv&gt; a dcat:Distribution ;
+        pu:specifikace [ a pu:Specifikace ;
+                        pu:autorské-dílo &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;
+                        pu:autor "Ministerstvo dopravy, Odbor veřejné dopravy"@cs ;
+                        pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
+                        pu:databáze-jako-autorské-dílo &lt;https://creativecommons.org/licenses/by/4.0/&gt; ;
+                        pu:autor-databáze "Ministerstvo dopravy, Odbor veřejné dopravy"@cs ;
+                        pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; ] ;
+        dcat:accessURL &lt;https://portal.cisjr.cz/pub/draha/mestske/JDF.zip&gt; ;
+        dcat:downloadURL &lt;https://portal.cisjr.cz/pub/draha/mestske/JDF.zip&gt; ;
+        dct:format filetype:ZIP ;
+        dct:conformsTo &lt;https://portal.cisjr.cz/schemata/json-schema.json&gt; ;
+        dcat:mediaType application:json ;
+        dcat:compressFormat application:zip ;
+        dcat:packageFormat application:zip ;
+        dct:title "JSON distribuce v ZIP soubrou"@cs, "JSON distribution in ZIP file"@en .
+    
+    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql&gt; a dcat:Distribution ;
+        pu:specifikace [ a pu:Specifikace ;
+                        pu:autorské-dílo &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt; ;
+                        pu:databáze-chráněná-zvláštními-právy &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt; ;
+                        pu:databáze-jako-autorské-dílo &lt;https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/&gt; ;
+                        pu:osobní-údaje &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt; ] ;
+        dcat:accessURL &lt;https://portal.cisjr.cz/sparql&gt; ;
+        dcatap:applicableLegislation &lt;http://data.europa.eu/eli/reg_impl/2023/138/oj&gt; ;
+        dct:title "SPARQL endpoint pro jízdní řády"@cs, "SPARQL endpoint for timetables"@en ;
+        dcat:accessService &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql&gt; .
+    
+    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql&gt; a dcat:DataService ;
+        dct:title "SPARQL endpoint pro jízdní řády"@cs, "SPARQL endpoint for timetables"@en ;
+        dcatap:hvdCategory &lt;http://data.europa.eu/bna/c_1e787364&gt; ;
+        foaf:page &lt;https://www.data.cz/služba/dokumentace&gt; ;
+        dcat:contactPoint [
+            a vcard2006:Organization ;
+            vcard2006:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs, "Ministry of Transport"@en ;
+            vcard2006:hasEmail "sekretariat.190@mdcr.cz"
+        ] ;
+        dcat:endpointURL &lt;https://portal.cisjr.cz/sparql&gt; ;
+        dcat:endpointDescription &lt;https://portal.cisjr.cz/sparql&gt; ;
+        dcatap:applicableLegislation &lt;http://data.europa.eu/eli/reg_impl/2023/138/oj&gt; ;
+        dct:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt; .</pre>
+                        </aside>
+        
+                        <aside class="example" title="Vzorový soubor s metadaty datové sady HVD v JSON-LD">
+                            <p>
+                                <a href="příklady/datová-sada-hvd.jsonld">JSON-LD</a>, <a href="schémata/datová-sada-hvd.json">JSON schéma</a>, <a href="kontexty/rozhraní-katalogů-otevřených-dat.jsonld">JSON-LD kontext</a>.
+                                Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
+                            </p>
+                            <pre class="json">
+    {
+    	"@context": "https://ofn.gov.cz/dcat-ap-cz-rozhraní-katalogů-otevřených-dat/2024-05-28/kontexty/rozhraní-katalogů-otevřených-dat.jsonld",
+    	"iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
+    	"typ": "Datová sada",
+    	"název": {
+    		"cs": "Jízdní řády veřejné linkové dopravy",
+    		"en": "Public transport timetables"
+    	},
+    	"popis": {
+    		"cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu.",
+    		"en": "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."
+    	},
+    	"poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
+    	"téma": [
+    		"http://publications.europa.eu/resource/authority/data-theme/TRAN"
+    	],
+    	"periodicita_aktualizace": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3",
+    	"klíčové_slovo": {
+    		"cs": [
+    			"jízdní řády",
+    			"veřejná linková doprava",
+    			"autobus"
+    		],
+    		"en": [
+    			"timetable",
+    			"public transport",
+    			"bus"
+    		]
+    	},
+    	"geografické_území": [
+    		"http://publications.europa.eu/resource/authority/continent/EUROPE"
+    	],
+    	"prvek_rúian": [
+    		"https://linked.cuzk.cz/resource/ruian/stat/1"
+    	],
+    	"časové_pokrytí": {
+    		"typ": "Časový interval",
+    		"začátek": "2009-01-01",
+    		"konec": "2017-12-31"
+    	},
+    	"kontaktní_bod": {
+    		"typ": "Organizace",
+    		"jméno": {
+    			"cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+    			"en": "Ministry of Transport"
+    		},
+    		"e-mail": "mailto:sekretariat.190@mdcr.cz"
+    	},
+    	"dokumentace": "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy",
+    	"specifikace": [
+    		"https://ofn.gov.cz/jízdní-řády/2020-05-01/"
+    	],
+    	"koncept_euroVoc": [
+    		"http://eurovoc.europa.eu/4512"
+    	],
+    	"prostorové_rozlišení_v_metrech": "12.0",
+    	"časové_rozlišení": "P1D",
+    	"kategorie_hvd": [
+    		"http://data.europa.eu/bna/c_1e787364"
+    	],
+    	"právní_předpis": [
+    		"http://data.europa.eu/eli/dir/2019/1024/oj",
+    		"http://data.europa.eu/eli/reg_impl/2023/138/oj"
+    	],
+    	"distribuce": [{
+    			"iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv",
+    			"typ": "Distribuce",
+    			"podmínky_užití": {
+    				"typ": "Specifikace podmínek užití",
+    				"autorské_dílo": "https://creativecommons.org/licenses/by/4.0/",
+    				"autor": {
+    					"cs": "Ministerstvo dopravy, Odbor veřejné dopravy"
+    				},
+    				"databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+    				"databáze_jako_autorské_dílo": "https://creativecommons.org/licenses/by/4.0/",
+    				"autor_databáze": {
+    					"cs": "Ministerstvo dopravy, Odbor veřejné dopravy"
+    				},
+    				"osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
+    			},
+    			"přístupové_url": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
+    			"soubor_ke_stažení": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
+    			"formát": "http://publications.europa.eu/resource/authority/file-type/ZIP",
+    			"typ_média": "http://www.iana.org/assignments/media-types/application/json",
+    			"schéma": "https://portal.cisjr.cz/schemata/json-schema.json",
+    			"typ_média_komprese": "http://www.iana.org/assignments/media-types/application/zip",
+    			"typ_média_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
+    			"název": {
+    				"en": "JSON distribution in ZIP file",
+    				"cs": "JSON distribuce v ZIP soubrou"
+    			}
+    		},
+    		{
+    			"iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql",
+    			"typ": "Distribuce",
+    			"podmínky_užití": {
+    				"typ": "Specifikace podmínek užití",
+    				"autorské_dílo": "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+    				"databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+    				"databáze_jako_autorské_dílo": "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+    				"osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
+    			},
+    			"přístupové_url": "https://portal.cisjr.cz/sparql",
+    			"název": {
+    				"en": "SPARQL endpoint for timetables",
+    				"cs": "SPARQL endpoint pro jízdní řády"
+    			},
+    			"právní_předpis": [
+    				"http://data.europa.eu/eli/reg_impl/2023/138/oj"
+    			],
+    			"přístupová_služba": {
+    				"iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql",
+    				"typ": "Datová služba",
+    				"název": {
+    					"cs": "SPARQL endpoint pro jízdní řády",
+    					"en": "SPARQL endpoint for timetables"
+    				},
+    				"specifikace": [
+    					"https://www.w3.org/TR/sparql11-protocol/"
+    				],
+    				"dokumentace": [
+    					"https://www.data.cz/služba/dokumentace"
+    				],
+    				"kategorie_hvd": [
+    					"http://data.europa.eu/bna/c_1e787364"
+    				],
+    				"kontaktní_bod": {
+    					"typ": "Organizace",
+    					"jméno": {
+    						"cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+    						"en": "Ministry of Transport"
+    					},
+    					"e-mail": "mailto:sekretariat.190@mdcr.cz"
+    				},			
+    				"právní_předpis": [
+    					"http://data.europa.eu/eli/reg_impl/2023/138/oj"
+    				],		
+    				"přístupový_bod": "https://portal.cisjr.cz/sparql",
+    				"popis_přístupového_bodu": "https://portal.cisjr.cz/sparql"
+    			}
+    		}
+    	]
+    }</pre>
+                        </aside>
+        
+        </section>
+          <section id="příklady-série-datových-sad">
+          <h4>Soubor série datových sad a datové sady v sérii</h4>
+          
+          <p>
+              Na URL specifikovaných v souboru katalogu pak NKD očekává soubory v RDF serializaci <a href="../../propojená-data/#serializace-RDF-Turtle">Turtle</a> či <a href="../../propojená-data/#serializace-JSON-LD">JSON-LD</a> obsahující kompletní metadatový záznam datové sady nebo série datových sad.
+              Datová sada v sérii ukazuje na URL série datových sad pomocí <code>dcat:inSeries</code> (RDF Turtle) či <code>je_součástí</code> (JSON-LD).
+          </p>
+          
+          <aside class="example" title="Vzorový soubor s metadaty série datových sad v RDF Turtle">
+              <p>
+                  <a href="../příklady/série-datových-sad.ttl">Stáhnout RDF Turtle</a>.
+                  Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/série-datových-sad/rozpočet</code>.
+              </p>
+              <pre class="turtle">
     @prefix continent: &lt;http://publications.europa.eu/resource/authority/continent/&gt; .
     @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
     @prefix dcatap: &lt;http://data.europa.eu/r5r/&gt; .
     @prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
     @prefix eurovoc: &lt;http://eurovoc.europa.eu/&gt; .
-    @prefix file-type: &lt;http://publications.europa.eu/resource/authority/file-type/&gt; .
     @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
     @prefix frequency: &lt;http://publications.europa.eu/resource/authority/frequency/&gt; .
     @prefix ovm: &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/&gt; .
     @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
     @prefix themes: &lt;http://publications.europa.eu/resource/authority/data-theme/&gt; .
     @prefix vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
-    @prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; .
     
-    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld&gt; a dcat:Dataset;
-      dcterms:title "Jízdní řády veřejné linkové dopravy"@cs,
-        "Public transport timetables"@en;
+    &lt;https://data.gov.cz/lkod/mdcr/datové-série/rozpočet&gt; a dcat:DatasetSeries;
+      dcterms:title "Rozpočet Ministerstva dopravy"@cs,
+        "Budget of the Ministry of Transport"@en;
       dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;;
       dcterms:accrualPeriodicity frequency:WEEKLY_3;
-      dcterms:conformsTo &lt;https://ofn.gov.cz/jízdní-řády/2020-05-01/&gt;;
-      dcterms:description "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu."@cs,
-        "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."@en;
+      dcterms:description [];
       dcterms:publisher ovm:66003008;
       dcterms:spatial continent:EUROPE,
         &lt;https://linked.cuzk.cz/resource/ruian/stat/1&gt;;
-      dcterms:temporal [
-        a dcterms:PeriodOfTime;
-        dcat:endDate "2017-12-31"^^xsd:date;
-        dcat:startDate "2009-01-01"^^xsd:date
-      ];
       dcat:contactPoint [
         a vcard:Organization;
         vcard:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs,
           "Ministry of Transport"@en;
         vcard:hasEmail &lt;mailto:sekretariat.190@mdcr.cz&gt;
       ];
-      dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv&gt;,
-        &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql&gt;;
-      dcat:keyword "jízdní řády"@cs,
-        "veřejná linková doprava"@cs,
-        "autobus"@cs,
-        "timetable"@en,
-        "public transport"@en,
-        "bus"@en;
-      dcat:spatialResolutionInMeters 12.0;
-      dcat:temporalResolution "P1D"^^xsd:duration;
+      dcat:keyword "rozpočet"@cs,
+        "budget"@en;
       dcat:theme themes:TRAN,
         eurovoc:4512;
-      foaf:page &lt;https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy&gt; .
+      foaf:page &lt;https://www.mdcr.cz/rozpočet&gt; .</pre>
+        </aside>
     
-    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv&gt; a dcat:Distribution;
-      dcterms:title "JSON distribution in ZIP file"@en,
-        "JSON distribuce v ZIP soubrou"@cs;
+        <aside class="example" title="Vzorový soubor s metadaty série datových sad v JSON-LD">
+            <p>
+                <a href="../příklady/série-datových-sad.jsonld">JSON-LD</a>, <a href="../série-datových-sad/schéma.json">JSON schéma</a>, <a href="../série-datových-sad/kontext.jsonld">JSON-LD kontext</a>.
+                Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/série-datových-sad/rozpočet</code>.
+            </p>
+            <pre class="json">
+    {
+    	"@context": "https://ofn.gov.cz/dcat-ap-cz-otevřená-data/draft/série-datových-sad/kontext.jsonld",
+    	"iri": "https://data.gov.cz/lkod/mdcr/datové-série/rozpočet",
+    	"typ": "Série datových sad",
+    	"název": {
+    		"cs": "Rozpočet Ministerstva dopravy",
+    		"en": "Budget of the Ministry of Transport"
+    	},
+    	"popis": {
+    		"cs": "Rozpočet Ministerstva dopravy",
+    		"en": "Budget of the Ministry of Transport"
+    	},
+    	"poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
+    	"téma": [
+    		"http://publications.europa.eu/resource/authority/data-theme/TRAN"
+    	],
+    	"periodicita_aktualizace": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3",
+    	"klíčové_slovo": {
+    		"cs": [
+    			"rozpočet"
+    		],
+    		"en": [
+    			"budget"
+    		]
+    	},
+    	"geografické_území": [
+    		"http://publications.europa.eu/resource/authority/continent/EUROPE"
+    	],
+    	"prvek_rúian": [
+    		"https://linked.cuzk.cz/resource/ruian/stat/1"
+    	],
+    	"kontaktní_bod": {
+    		"typ": "Organizace",
+    		"jméno": {
+    			"cs": "Ministerstvo dopravy, Odbor veřejné dopravy",
+    			"en": "Ministry of Transport"
+    		},
+    		"e-mail": "mailto:sekretariat.190@mdcr.cz"
+    	},
+    	"dokumentace": "https://www.mdcr.cz/rozpočet",
+    	"koncept_euroVoc": [
+    		"http://eurovoc.europa.eu/4512"
+    	],
+    	"právní_předpis": [
+    		"http://data.europa.eu/eli/dir/2019/1024/oj"
+    	]
+    }</pre>
+        </aside>
+    
+        <aside class="example" title="Vzorový soubor s metadaty datové sady v sérii datových sad v RDF Turtle">
+            <p>
+                <a href="../příklady/datová-sada-v-sérii.ttl">Stáhnout RDF Turtle</a>.
+                Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019</code>.
+            </p>
+            <pre class="turtle">
+    @prefix continent: &lt;http://publications.europa.eu/resource/authority/continent/&gt; .
+    @prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt; .
+    @prefix dcatap: &lt;http://data.europa.eu/r5r/&gt; .
+    @prefix dcterms: &lt;http://purl.org/dc/terms/&gt; .
+    @prefix eurovoc: &lt;http://eurovoc.europa.eu/&gt; .
+    @prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+    @prefix frequency: &lt;http://publications.europa.eu/resource/authority/frequency/&gt; .
+    @prefix ovm: &lt;https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/&gt; .
+    @prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+    @prefix themes: &lt;http://publications.europa.eu/resource/authority/data-theme/&gt; .
+    @prefix vcard: &lt;http://www.w3.org/2006/vcard/ns#&gt; .
+    
+    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019&gt; a dcat:Dataset;
+      dcterms:title "Rozpočet Ministerstva dopravy 2019"@cs,
+        "Budget of the Ministry of Transport 2019"@en;
       dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;;
-      dcterms:conformsTo &lt;https://portal.cisjr.cz/schemata/json-schema.json&gt;;
-      dcterms:format file-type:ZIP;
-      dcat:accessURL &lt;https://portal.cisjr.cz/pub/draha/mestske/JDF.zip&gt;;
-      dcat:compressFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt;;
-      dcat:downloadURL &lt;https://portal.cisjr.cz/pub/draha/mestske/JDF.zip&gt;;
-      dcat:mediaType &lt;http://www.iana.org/assignments/media-types/application/json&gt;;
-      dcat:packageFormat &lt;http://www.iana.org/assignments/media-types/application/zip&gt;;
-      &lt;https://data.gov.cz/slovník/podmínky-užití/specifikace&gt; [
-        a &lt;https://data.gov.cz/slovník/podmínky-užití/Specifikace&gt;;
-        &lt;https://data.gov.cz/slovník/podmínky-užití/autor&gt; "Ministerstvo dopravy, Odbor veřejné dopravy"@cs;
-        &lt;https://data.gov.cz/slovník/podmínky-užití/autor-databáze&gt; "Ministerstvo dopravy, Odbor veřejné dopravy"@cs;
-        &lt;https://data.gov.cz/slovník/podmínky-užití/autorské-dílo&gt; &lt;https://creativecommons.org/licenses/by/4.0/&gt;;
-        &lt;https://data.gov.cz/slovník/podmínky-užití/databáze-chráněná-zvláštními-právy&gt; &lt;https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/&gt;;
-        &lt;https://data.gov.cz/slovník/podmínky-užití/databáze-jako-autorské-dílo&gt; &lt;https://creativecommons.org/licenses/by/4.0/&gt;;
-        &lt;https://data.gov.cz/slovník/podmínky-užití/osobní-údaje&gt; &lt;https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/&gt;
-      ] .
+      dcterms:accrualPeriodicity frequency:WEEKLY_3;
+      dcterms:description "Rozpočet Ministerstva dopravy 2019"@cs,
+        "Budget of the Ministry of Transport 2019"@en;
+      dcterms:publisher ovm:66003008;
+      dcterms:spatial continent:EUROPE,
+        &lt;https://linked.cuzk.cz/resource/ruian/stat/1&gt;;
+      dcat:contactPoint [
+        a vcard:Organization;
+        vcard:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs,
+          "Ministry of Transport"@en;
+        vcard:hasEmail &lt;mailto:sekretariat.190@mdcr.cz&gt;
+      ];
+      dcat:distribution &lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/distribuce/sparql&gt;;
+      dcat:inSeries &lt;https://data.gov.cz/lkod/mdcr/datové-série/rozpočet&gt;;
+      dcat:keyword "rozpočet"@cs,
+        "budget"@en;
+      dcat:theme themes:TRAN,
+        eurovoc:4512;
+      foaf:page &lt;https://www.mdcr.cz/rozpočet&gt; .
     
-    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql&gt; a dcat:Distribution;
-      dcterms:title "SPARQL endpoint for timetables"@en,
-        "SPARQL endpoint pro jízdní řády"@cs;
+    &lt;https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/distribuce/sparql&gt; a dcat:Distribution;
+      dcterms:title "SPARQL endpoint for budget"@en,
+        "SPARQL endpoint pro rozpočty"@cs;
       dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;;
       dcat:accessService &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql&gt;;
-      dcat:accessURL &lt;https://portal.cisjr.cz/sparql&gt;;
+      dcat:accessURL &lt;https://rozpočty.cz/sparql&gt;;
       &lt;https://data.gov.cz/slovník/podmínky-užití/specifikace&gt; [
         a &lt;https://data.gov.cz/slovník/podmínky-užití/Specifikace&gt;;
         &lt;https://data.gov.cz/slovník/podmínky-užití/autorské-dílo&gt; &lt;https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/&gt;;
@@ -7074,47 +7392,44 @@
       ] .
     
     &lt;https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql&gt; a dcat:DataService;
-      dcterms:title "SPARQL endpoint pro jízdní řády"@cs,
-        "SPARQL endpoint for timetables"@en;
+      dcterms:title "SPARQL endpoint pro rozpočty"@cs,
+        "SPARQL endpoint for budget"@en;
       dcatap:applicableLegislation &lt;http://data.europa.eu/eli/dir/2019/1024/oj&gt;;
       dcterms:conformsTo &lt;https://www.w3.org/TR/sparql11-protocol/&gt;;
-      dcat:endpointDescription &lt;https://portal.cisjr.cz/sparql&gt;;
-      dcat:endpointURL &lt;https://portal.cisjr.cz/sparql&gt; .</pre>
-          </aside>
+      dcat:endpointDescription &lt;https://rozpočty.cz/sparql&gt;;
+      dcat:endpointURL &lt;https://rozpočty.cz/sparql&gt; .</pre>
+    </aside>
     
-          <aside class="example" title="Vzorový soubor s metadaty datové sady v JSON-LD">
-              <p>
-                  <a href="../příklady/datová-sada.jsonld">JSON-LD</a>, <a href="../datová-sada/schéma.json">JSON schéma</a>, <a href="../datová-sada/kontext.jsonld">JSON-LD kontext</a>.
-                  Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/vld</code>.
-              </p>
-              <pre class="json">
+    <aside class="example" title="Vzorový soubor s metadaty datové sady v datové sérii v JSON-LD">
+        <p>
+            <a href="../příklady/datová-sada-v-sérii.jsonld">JSON-LD</a>, <a href="../datová-sada/schéma.json">JSON schéma</a>, <a href="../datová-sada/kontext.jsonld">JSON-LD kontext</a>.
+            Umístěno na URL <code>https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019</code>.
+        </p>
+        <pre class="json">
     {
         "@context": "https://ofn.gov.cz/dcat-ap-cz-otevřená-data/draft/datová-sada/kontext.jsonld",
-        "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld",
+        "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019",
         "typ": "Datová sada",
         "název": {
-            "cs": "Jízdní řády veřejné linkové dopravy",
-            "en": "Public transport timetables"
+            "cs": "Rozpočet Ministerstva dopravy 2019",
+            "en": "Budget of the Ministry of Transport 2019"
         },
         "popis": {
-            "cs": "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu.",
-            "en": "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."
+            "cs": "Rozpočet Ministerstva dopravy 2019",
+            "en": "Budget of the Ministry of Transport 2019"
         },
         "poskytovatel": "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008",
+        "je_součástí": "https://data.gov.cz/lkod/mdcr/datové-série/rozpočet",
         "téma": [
             "http://publications.europa.eu/resource/authority/data-theme/TRAN"
         ],
         "periodicita_aktualizace": "http://publications.europa.eu/resource/authority/frequency/WEEKLY_3",
         "klíčové_slovo": {
             "cs": [
-                "jízdní řády",
-                "veřejná linková doprava",
-                "autobus"
+                "rozpočet"
             ],
             "en": [
-                "timetable",
-                "public transport",
-                "bus"
+                "budget"
             ]
         },
         "geografické_území": [
@@ -7123,11 +7438,6 @@
         "prvek_rúian": [
             "https://linked.cuzk.cz/resource/ruian/stat/1"
         ],
-        "časové_pokrytí": {
-            "typ": "Časový interval",
-            "začátek": "2009-01-01",
-            "konec": "2017-12-31"
-        },
         "kontaktní_bod": {
             "typ": "Organizace",
             "jméno": {
@@ -7136,57 +7446,17 @@
             },
             "e-mail": "mailto:sekretariat.190@mdcr.cz"
         },
-        "dokumentace": "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy",
-        "specifikace": [
-            "https://ofn.gov.cz/jízdní-řády/2020-05-01/"
-        ],
+        "dokumentace": "https://www.mdcr.cz/rozpočet",
         "koncept_euroVoc": [
             "http://eurovoc.europa.eu/4512"
         ],
-        "prostorové_rozlišení_v_metrech": "12.0",
-        "časové_rozlišení": "P1D",
         "právní_předpis": [
             "http://data.europa.eu/eli/dir/2019/1024/oj"
         ],
-        "vstupní_stránka": "https://lkod.mdcr.cz/jízdní-řády",
         "distribuce": [
             {
-                "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv",
+                "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/rozpočet/2019/distribuce/sparql",
                 "typ": "Distribuce",
-                "podmínky_užití": {
-                    "typ": "Specifikace podmínek užití",
-                    "autorské_dílo": "https://creativecommons.org/licenses/by/4.0/",
-                    "autor": {
-                        "cs": "Ministerstvo dopravy, Odbor veřejné dopravy"
-                    },
-                    "databáze_chráněná_zvláštními_právy": "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
-                    "databáze_jako_autorské_dílo": "https://creativecommons.org/licenses/by/4.0/",
-                    "autor_databáze": {
-                        "cs": "Ministerstvo dopravy, Odbor veřejné dopravy"
-                    },
-                    "osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
-                },
-                "přístupové_url": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
-                "soubor_ke_stažení": "https://portal.cisjr.cz/pub/draha/mestske/JDF.zip",
-                "formát": "http://publications.europa.eu/resource/authority/file-type/ZIP",
-                "typ_média": "http://www.iana.org/assignments/media-types/application/json",
-                "schéma": "https://portal.cisjr.cz/schemata/json-schema.json",
-                "typ_média_komprese": "http://www.iana.org/assignments/media-types/application/zip",
-                "typ_média_balíčku": "http://www.iana.org/assignments/media-types/application/zip",
-                "právní_předpis": [
-                    "http://data.europa.eu/eli/dir/2019/1024/oj"
-                ],
-                "název": {
-                    "en": "JSON distribution in ZIP file",
-                    "cs": "JSON distribuce v ZIP soubrou"
-                }
-            },
-            {
-                "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql",
-                "typ": "Distribuce",
-                "právní_předpis": [
-                    "http://data.europa.eu/eli/dir/2019/1024/oj"
-                ],
                 "podmínky_užití": {
                     "typ": "Specifikace podmínek užití",
                     "autorské_dílo": "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
@@ -7194,23 +7464,26 @@
                     "databáze_jako_autorské_dílo": "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
                     "osobní_údaje": "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/"
                 },
-                "přístupové_url": "https://portal.cisjr.cz/sparql",
+                "přístupové_url": "https://rozpočty.cz/sparql",
                 "název": {
-                    "en": "SPARQL endpoint for timetables",
-                    "cs": "SPARQL endpoint pro jízdní řády"
+                    "en": "SPARQL endpoint for budget",
+                    "cs": "SPARQL endpoint pro rozpočty"
                 },
+                "právní_předpis": [
+                    "http://data.europa.eu/eli/dir/2019/1024/oj"
+                ],
                 "přístupová_služba": {
                     "iri": "https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql",
                     "typ": "Datová služba",
                     "název": {
-                        "cs": "SPARQL endpoint pro jízdní řády",
-                        "en": "SPARQL endpoint for timetables"
+                        "cs": "SPARQL endpoint pro rozpočty",
+                        "en": "SPARQL endpoint for budget"
                     },
                     "specifikace": [
                         "https://www.w3.org/TR/sparql11-protocol/"
                     ],
-                    "přístupový_bod": "https://portal.cisjr.cz/sparql",
-                    "popis_přístupového_bodu": "https://portal.cisjr.cz/sparql",
+                    "přístupový_bod": "https://rozpočty.cz/sparql",
+                    "popis_přístupového_bodu": "https://rozpočty.cz/sparql",
                     "právní_předpis": [
                         "http://data.europa.eu/eli/dir/2019/1024/oj"
                     ]
@@ -7218,7 +7491,7 @@
             }
         ]
     }</pre>
-          </aside>
+        </aside>
     
       </section>
     
