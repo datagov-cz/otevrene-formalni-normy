@@ -5,6 +5,7 @@
   "description": "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.",
   "type": "object",
   "required": [
+    "@context",
     "iri",
     "typ",
     "název",
@@ -15,6 +16,23 @@
     "distribuce"
   ],
   "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft//datová-sada/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft//datová-sada/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
     "iri": {
       "type": "string",
       "format": "iri"
@@ -128,13 +146,21 @@
               "title": "email",
               "description": "E-mailová adresa pro komunikaci.",
               "type": "string",
-              "format": "iri"
+              "format": "iri",
+              "pattern": "^mailto:[^@]+@[^@]+",
+              "examples": [
+                "mailto:jan.novak@organizace.cz"
+              ]
             },
             "kontaktní_stránka": {
               "title": "kontaktní stránka",
               "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
               "type": "string",
-              "format": "iri"
+              "format": "iri",
+              "pattern": "^https://.*$",
+              "examples": [
+                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+              ]
             }
           }
         },
@@ -189,13 +215,21 @@
               "title": "email",
               "description": "E-mailová adresa pro komunikaci.",
               "type": "string",
-              "format": "iri"
+              "format": "iri",
+              "pattern": "^mailto:[^@]+@[^@]+",
+              "examples": [
+                "mailto:jan.novak@organizace.cz"
+              ]
             },
             "kontaktní_stránka": {
               "title": "kontaktní stránka",
               "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
               "type": "string",
-              "format": "iri"
+              "format": "iri",
+              "pattern": "^https://.*$",
+              "examples": [
+                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+              ]
             }
           }
         }
@@ -207,7 +241,11 @@
       "type": "array",
       "items": {
         "type": "string",
-        "format": "iri"
+        "format": "iri",
+        "pattern": "^https://.*$",
+        "examples": [
+          "https://ofn.gov.cz/turistické-cíle/2020-07-01/"
+        ]
       }
     },
     "kategorie_hvd": {
@@ -217,7 +255,12 @@
       "minItems": 1,
       "items": {
         "type": "string",
-        "format": "iri"
+        "format": "iri",
+        "pattern": "^http://data\\.europa\\.eu/bna/.*$",
+        "examples": [
+          "http://data.europa.eu/bna/c_1e787364",
+          "http://data.europa.eu/bna/c_25f43866"
+        ]
       }
     },
     "právní_předpis": {
@@ -230,7 +273,14 @@
       },
       "items": {
         "type": "string",
-        "format": "iri"
+        "format": "iri",
+        "pattern": "^http",
+        "examples": [
+          "http://data.europa.eu/eli/dir/2019/1024/oj",
+          "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6",
+          "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1",
+          "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+        ]
       }
     },
     "distribuce": {
@@ -277,7 +327,11 @@
                 "title": "přístupové URL",
                 "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
                 "type": "string",
-                "format": "iri"
+                "format": "iri",
+                "pattern": "^https://.*$",
+                "examples": [
+                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
               },
               "podmínky_užití": {
                 "title": "Specifikace podmínek užití",
@@ -311,13 +365,23 @@
                     "title": "je méně restriktivní než",
                     "description": "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
+                    "examples": [
+                      "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0",
+                      "http://publications.europa.eu/resource/authority/licence/CC0"
+                    ]
                   },
                   "přesně_odpovídá": {
                     "title": "přesně odpovídá",
                     "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
+                    "examples": [
+                      "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0",
+                      "http://publications.europa.eu/resource/authority/licence/CC0"
+                    ]
                   }
                 }
               },
@@ -331,20 +395,35 @@
                 },
                 "items": {
                   "type": "string",
-                  "format": "iri"
+                  "format": "iri",
+                  "pattern": "^http",
+                  "examples": [
+                    "http://data.europa.eu/eli/dir/2019/1024/oj",
+                    "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6",
+                    "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1",
+                    "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                  ]
                 }
               },
               "soubor_ke_stažení": {
                 "title": "odkaz na stažení souboru",
                 "description": "URL, které je přímým odkazem na stažitelný soubor v daném formátu.",
                 "type": "string",
-                "format": "iri"
+                "format": "iri",
+                "pattern": "^https://.*$",
+                "examples": [
+                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
               },
               "schéma": {
                 "title": "strojově čitelné schéma souboru ke stažení",
                 "description": "Ustanovené schéma, jímž se popisovaná distribuce řídí.",
                 "type": "string",
-                "format": "iri"
+                "format": "iri",
+                "pattern": "^https://.*$",
+                "examples": [
+                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
               }
             }
           },
@@ -385,7 +464,11 @@
                 "title": "přístupové URL",
                 "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
                 "type": "string",
-                "format": "iri"
+                "format": "iri",
+                "pattern": "^https://.*$",
+                "examples": [
+                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
               },
               "podmínky_užití": {
                 "title": "Specifikace podmínek užití",
@@ -419,13 +502,23 @@
                     "title": "je méně restriktivní než",
                     "description": "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
+                    "examples": [
+                      "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0",
+                      "http://publications.europa.eu/resource/authority/licence/CC0"
+                    ]
                   },
                   "přesně_odpovídá": {
                     "title": "přesně odpovídá",
                     "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
+                    "examples": [
+                      "http://publications.europa.eu/resource/authority/licence/CC_BY_4_0",
+                      "http://publications.europa.eu/resource/authority/licence/CC0"
+                    ]
                   }
                 }
               },
@@ -439,7 +532,14 @@
                 },
                 "items": {
                   "type": "string",
-                  "format": "iri"
+                  "format": "iri",
+                  "pattern": "^http",
+                  "examples": [
+                    "http://data.europa.eu/eli/dir/2019/1024/oj",
+                    "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6",
+                    "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1",
+                    "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                  ]
                 }
               },
               "přístupová_služba": {
@@ -484,26 +584,43 @@
                     "minItems": 1,
                     "items": {
                       "type": "string",
-                      "format": "iri"
+                      "format": "iri",
+                      "pattern": "^http://data\\.europa\\.eu/bna/.*$",
+                      "examples": [
+                        "http://data.europa.eu/bna/c_1e787364",
+                        "http://data.europa.eu/bna/c_25f43866"
+                      ]
                     }
                   },
                   "přístupový_bod": {
                     "title": "přístupový bod služby",
                     "description": "Kořenové umístění nebo hlavní přístupový bod služby (IRI přístupné přes Web).",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^https://.*$",
+                    "examples": [
+                      "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                    ]
                   },
                   "popis_přístupového_bodu": {
                     "title": "popis přístupového bodu služby",
                     "description": "Popis přístupového bodu služby včetně operací, parametrů apod.",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^https://.*$",
+                    "examples": [
+                      "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                    ]
                   },
                   "dokumentace": {
                     "title": "dokumentace",
                     "description": "Dokumentace dále popisující datovou službu.",
                     "type": "string",
-                    "format": "iri"
+                    "format": "iri",
+                    "pattern": "^https://.*$",
+                    "examples": [
+                      "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                    ]
                   },
                   "právní_předpis": {
                     "title": "příslušný právní předpis",
@@ -515,7 +632,14 @@
                     },
                     "items": {
                       "type": "string",
-                      "format": "iri"
+                      "format": "iri",
+                      "pattern": "^http",
+                      "examples": [
+                        "http://data.europa.eu/eli/dir/2019/1024/oj",
+                        "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_3a/odst_6",
+                        "https://www.e-sbirka.cz/eli/cz/sb/1999/106/2024-01-01/dokument/norma/cast_1/par_5a/odst_1",
+                        "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                      ]
                     }
                   },
                   "kontaktní_bod": {
@@ -573,13 +697,21 @@
                             "title": "kontaktní stránka",
                             "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
                             "type": "string",
-                            "format": "iri"
+                            "format": "iri",
+                            "pattern": "^https://.*$",
+                            "examples": [
+                              "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                            ]
                           },
                           "e-mail": {
                             "title": "email",
                             "description": "E-mailová adresa pro komunikaci.",
                             "type": "string",
-                            "format": "iri"
+                            "format": "iri",
+                            "pattern": "^mailto:[^@]+@[^@]+",
+                            "examples": [
+                              "mailto:jan.novak@organizace.cz"
+                            ]
                           }
                         }
                       },
@@ -634,13 +766,21 @@
                             "title": "kontaktní stránka",
                             "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
                             "type": "string",
-                            "format": "iri"
+                            "format": "iri",
+                            "pattern": "^https://.*$",
+                            "examples": [
+                              "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                            ]
                           },
                           "e-mail": {
                             "title": "email",
                             "description": "E-mailová adresa pro komunikaci.",
                             "type": "string",
-                            "format": "iri"
+                            "format": "iri",
+                            "pattern": "^mailto:[^@]+@[^@]+",
+                            "examples": [
+                              "mailto:jan.novak@organizace.cz"
+                            ]
                           }
                         }
                       }
