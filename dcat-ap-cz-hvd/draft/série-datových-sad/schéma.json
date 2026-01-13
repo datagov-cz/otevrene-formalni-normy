@@ -1,6 +1,227 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft/série-datových-sad/schéma.json",
-  "type": "string",
-  "format": "iri"
+  "$id": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft//série-datových-sad/schéma.json",
+  "title": "Série datových sad",
+  "description": "Série datových sad zastřešuje související datové sady a jiné série. Souvislost může být časová (rozpočet v letech), prostorová (seznamy ulic v obcích) či tématická (datové sady z jednoho systému).",
+  "type": "object",
+  "required": [
+    "iri",
+    "typ",
+    "název",
+    "popis",
+    "kontaktní_bod",
+    "kategorie_hvd",
+    "právní_předpis"
+  ],
+  "properties": {
+    "iri": {
+      "type": "string",
+      "format": "iri"
+    },
+    "typ": {
+      "oneOf": [
+        {
+          "const": "Série datových sad"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "Série datových sad"
+          },
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "název": {
+      "title": "název",
+      "description": "Název série datových sad",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "popis": {
+      "title": "popis",
+      "description": "Volný text s popisem série datových sad",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "kontaktní_bod": {
+      "title": "kontaktní bod",
+      "description": "Kontaktní informace, které mohou být využity pro zasílání připomínek k sérii datových sad.",
+      "anyOf": [
+        {
+          "title": "Organizace",
+          "description": "Organizace, právnická osoba nebo její část.",
+          "type": "object",
+          "required": [
+            "typ"
+          ],
+          "properties": {
+            "iri": {
+              "type": "string",
+              "format": "iri"
+            },
+            "typ": {
+              "oneOf": [
+                {
+                  "const": "Organizace"
+                },
+                {
+                  "type": "array",
+                  "contains": {
+                    "const": "Organizace"
+                  },
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            "jméno": {
+              "title": "jméno",
+              "description": "Jméno objektu jako formátovaný text.",
+              "type": "object",
+              "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+              },
+              "properties": {
+                "cs": {
+                  "title": "Hodnota v českém jazyce",
+                  "type": "string"
+                },
+                "en": {
+                  "title": "Hodnota v anglickém jazyce",
+                  "type": "string"
+                }
+              }
+            },
+            "kontaktní_stránka": {
+              "title": "kontaktní stránka",
+              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+              "type": "string",
+              "format": "iri"
+            },
+            "e-mail": {
+              "title": "email",
+              "description": "E-mailová adresa pro komunikaci.",
+              "type": "string",
+              "format": "iri"
+            }
+          }
+        },
+        {
+          "title": "Jednotlivec",
+          "description": "Jednotlivá fyzická osoba.",
+          "type": "object",
+          "required": [
+            "typ"
+          ],
+          "properties": {
+            "iri": {
+              "type": "string",
+              "format": "iri"
+            },
+            "typ": {
+              "oneOf": [
+                {
+                  "const": "Jednotlivec"
+                },
+                {
+                  "type": "array",
+                  "contains": {
+                    "const": "Jednotlivec"
+                  },
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            "jméno": {
+              "title": "jméno",
+              "description": "Jméno objektu jako formátovaný text.",
+              "type": "object",
+              "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+              },
+              "properties": {
+                "cs": {
+                  "title": "Hodnota v českém jazyce",
+                  "type": "string"
+                },
+                "en": {
+                  "title": "Hodnota v anglickém jazyce",
+                  "type": "string"
+                }
+              }
+            },
+            "kontaktní_stránka": {
+              "title": "kontaktní stránka",
+              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+              "type": "string",
+              "format": "iri"
+            },
+            "e-mail": {
+              "title": "email",
+              "description": "E-mailová adresa pro komunikaci.",
+              "type": "string",
+              "format": "iri"
+            }
+          }
+        }
+      ]
+    },
+    "kategorie_hvd": {
+      "title": "kategorie HVD",
+      "description": "The HVD category to which this Dataset Series belongs.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri"
+      }
+    },
+    "právní_předpis": {
+      "title": "příslušný právní předpis",
+      "description": "Indikace příslušného právního předpisu předepisujícího vznik série datových sad.",
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+      },
+      "items": {
+        "type": "string",
+        "format": "iri"
+      }
+    }
+  }
 }

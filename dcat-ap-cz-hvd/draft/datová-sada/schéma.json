@@ -1,6 +1,657 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft/datová-sada/schéma.json",
-  "type": "string",
-  "format": "iri"
+  "title": "Datová sada",
+  "description": "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.",
+  "type": "object",
+  "required": [
+    "iri",
+    "typ",
+    "název",
+    "popis",
+    "kontaktní_bod",
+    "kategorie_hvd",
+    "právní_předpis",
+    "distribuce"
+  ],
+  "properties": {
+    "iri": {
+      "type": "string",
+      "format": "iri"
+    },
+    "typ": {
+      "oneOf": [
+        {
+          "const": "Datová sada"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "Datová sada"
+          },
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "název": {
+      "title": "název",
+      "description": "Název datové sady",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "popis": {
+      "title": "popis",
+      "description": "Volný text s popisem datové sady",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "kontaktní_bod": {
+      "title": "kontaktní bod",
+      "description": "Kontaktní informace, které mohou být využity pro zasílání připomínek k datové sadě.",
+      "anyOf": [
+        {
+          "title": "Organizace",
+          "description": "Organizace, právnická osoba nebo její část.",
+          "type": "object",
+          "required": [
+            "typ"
+          ],
+          "properties": {
+            "iri": {
+              "type": "string",
+              "format": "iri"
+            },
+            "typ": {
+              "oneOf": [
+                {
+                  "const": "Organizace"
+                },
+                {
+                  "type": "array",
+                  "contains": {
+                    "const": "Organizace"
+                  },
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            "jméno": {
+              "title": "jméno",
+              "description": "Jméno objektu jako formátovaný text.",
+              "type": "object",
+              "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+              },
+              "properties": {
+                "cs": {
+                  "title": "Hodnota v českém jazyce",
+                  "type": "string"
+                },
+                "en": {
+                  "title": "Hodnota v anglickém jazyce",
+                  "type": "string"
+                }
+              }
+            },
+            "e-mail": {
+              "title": "email",
+              "description": "E-mailová adresa pro komunikaci.",
+              "type": "string",
+              "format": "iri"
+            },
+            "kontaktní_stránka": {
+              "title": "kontaktní stránka",
+              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+              "type": "string",
+              "format": "iri"
+            }
+          }
+        },
+        {
+          "title": "Jednotlivec",
+          "description": "Jednotlivá fyzická osoba.",
+          "type": "object",
+          "required": [
+            "typ"
+          ],
+          "properties": {
+            "iri": {
+              "type": "string",
+              "format": "iri"
+            },
+            "typ": {
+              "oneOf": [
+                {
+                  "const": "Jednotlivec"
+                },
+                {
+                  "type": "array",
+                  "contains": {
+                    "const": "Jednotlivec"
+                  },
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              ]
+            },
+            "jméno": {
+              "title": "jméno",
+              "description": "Jméno objektu jako formátovaný text.",
+              "type": "object",
+              "additionalProperties": {
+                "title": "Hodnota v jiném jazyce",
+                "type": "string"
+              },
+              "properties": {
+                "cs": {
+                  "title": "Hodnota v českém jazyce",
+                  "type": "string"
+                },
+                "en": {
+                  "title": "Hodnota v anglickém jazyce",
+                  "type": "string"
+                }
+              }
+            },
+            "e-mail": {
+              "title": "email",
+              "description": "E-mailová adresa pro komunikaci.",
+              "type": "string",
+              "format": "iri"
+            },
+            "kontaktní_stránka": {
+              "title": "kontaktní stránka",
+              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+              "type": "string",
+              "format": "iri"
+            }
+          }
+        }
+      ]
+    },
+    "specifikace": {
+      "title": "specifikace",
+      "description": "Specifikace, jíž se datová sada řídí.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "iri"
+      }
+    },
+    "kategorie_hvd": {
+      "title": "kategorie HVD",
+      "description": "Kategorie HVD do které datová sada patří.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri"
+      }
+    },
+    "právní_předpis": {
+      "title": "příslušný právní předpis",
+      "description": "Indikace příslušného právního předpisu předepisujícího vznik datové sady.",
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+      },
+      "items": {
+        "type": "string",
+        "format": "iri"
+      }
+    },
+    "distribuce": {
+      "title": "distribuce",
+      "description": "Dostupná distribuce datové sady.",
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "anyOf": [
+          {
+            "title": "Distribuce - Soubor ke stažení",
+            "description": "Konkrétní reprezentace datové sady jako souboru ke stažení.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "přístupové_url",
+              "podmínky_užití",
+              "právní_předpis",
+              "soubor_ke_stažení"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "oneOf": [
+                  {
+                    "const": "Distribuce"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Distribuce"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "přístupové_url": {
+                "title": "přístupové URL",
+                "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
+                "type": "string",
+                "format": "iri"
+              },
+              "podmínky_užití": {
+                "title": "Specifikace podmínek užití",
+                "description": "Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.",
+                "type": "object",
+                "required": [
+                  "typ"
+                ],
+                "properties": {
+                  "iri": {
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "typ": {
+                    "oneOf": [
+                      {
+                        "const": "Specifikace podmínek užití"
+                      },
+                      {
+                        "type": "array",
+                        "contains": {
+                          "const": "Specifikace podmínek užití"
+                        },
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "je_méně_restriktivní_než": {
+                    "title": "je méně restriktivní než",
+                    "description": "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.",
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "přesně_odpovídá": {
+                    "title": "přesně odpovídá",
+                    "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
+                    "type": "string",
+                    "format": "iri"
+                  }
+                }
+              },
+              "právní_předpis": {
+                "title": "příslušný právní předpis",
+                "description": "Indikace příslušného právního předpisu předepisujícího vznik distribuce.",
+                "type": "array",
+                "minItems": 1,
+                "contains": {
+                  "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                },
+                "items": {
+                  "type": "string",
+                  "format": "iri"
+                }
+              },
+              "soubor_ke_stažení": {
+                "title": "odkaz na stažení souboru",
+                "description": "URL, které je přímým odkazem na stažitelný soubor v daném formátu.",
+                "type": "string",
+                "format": "iri"
+              },
+              "schéma": {
+                "title": "strojově čitelné schéma souboru ke stažení",
+                "description": "Ustanovené schéma, jímž se popisovaná distribuce řídí.",
+                "type": "string",
+                "format": "iri"
+              }
+            }
+          },
+          {
+            "title": "Distribuce - Datová služba",
+            "description": "Konkrétní reprezentace datové sady datovou službou.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "přístupové_url",
+              "podmínky_užití",
+              "právní_předpis",
+              "přístupová_služba"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "oneOf": [
+                  {
+                    "const": "Distribuce"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Distribuce"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "přístupové_url": {
+                "title": "přístupové URL",
+                "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
+                "type": "string",
+                "format": "iri"
+              },
+              "podmínky_užití": {
+                "title": "Specifikace podmínek užití",
+                "description": "Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.",
+                "type": "object",
+                "required": [
+                  "typ"
+                ],
+                "properties": {
+                  "iri": {
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "typ": {
+                    "oneOf": [
+                      {
+                        "const": "Specifikace podmínek užití"
+                      },
+                      {
+                        "type": "array",
+                        "contains": {
+                          "const": "Specifikace podmínek užití"
+                        },
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "je_méně_restriktivní_než": {
+                    "title": "je méně restriktivní než",
+                    "description": "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.",
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "přesně_odpovídá": {
+                    "title": "přesně odpovídá",
+                    "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
+                    "type": "string",
+                    "format": "iri"
+                  }
+                }
+              },
+              "právní_předpis": {
+                "title": "příslušný právní předpis",
+                "description": "Indikace příslušného právního předpisu předepisujícího vznik distribuce.",
+                "type": "array",
+                "minItems": 1,
+                "contains": {
+                  "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                },
+                "items": {
+                  "type": "string",
+                  "format": "iri"
+                }
+              },
+              "přístupová_služba": {
+                "title": "přístupová služba",
+                "description": "Umístění či přístupový bod zpřístupňující distribuci datové sady.",
+                "type": "object",
+                "required": [
+                  "iri",
+                  "typ",
+                  "kategorie_hvd",
+                  "přístupový_bod",
+                  "popis_přístupového_bodu",
+                  "dokumentace",
+                  "právní_předpis",
+                  "kontaktní_bod"
+                ],
+                "properties": {
+                  "iri": {
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "typ": {
+                    "oneOf": [
+                      {
+                        "const": "Datová služba"
+                      },
+                      {
+                        "type": "array",
+                        "contains": {
+                          "const": "Datová služba"
+                        },
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "kategorie_hvd": {
+                    "title": "kategorie HVD",
+                    "description": "The HVD category to which this Data Service belongs.",
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "format": "iri"
+                    }
+                  },
+                  "přístupový_bod": {
+                    "title": "přístupový bod služby",
+                    "description": "Kořenové umístění nebo hlavní přístupový bod služby (IRI přístupné přes Web).",
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "popis_přístupového_bodu": {
+                    "title": "popis přístupového bodu služby",
+                    "description": "Popis přístupového bodu služby včetně operací, parametrů apod.",
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "dokumentace": {
+                    "title": "dokumentace",
+                    "description": "Dokumentace dále popisující datovou službu.",
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "právní_předpis": {
+                    "title": "příslušný právní předpis",
+                    "description": "Indikace příslušného právního předpisu předepisujícího vznik datové služby.",
+                    "type": "array",
+                    "minItems": 1,
+                    "contains": {
+                      "const": "http://data.europa.eu/eli/reg_impl/2023/138/oj"
+                    },
+                    "items": {
+                      "type": "string",
+                      "format": "iri"
+                    }
+                  },
+                  "kontaktní_bod": {
+                    "title": "kontaktní bod",
+                    "description": "Relevantní kontaktní informace pro katalogizovaný zdroj. Doporučuje se použít slovník VCard.",
+                    "anyOf": [
+                      {
+                        "title": "Organizace",
+                        "description": "Organizace, právnická osoba nebo její část.",
+                        "type": "object",
+                        "required": [
+                          "typ"
+                        ],
+                        "properties": {
+                          "iri": {
+                            "type": "string",
+                            "format": "iri"
+                          },
+                          "typ": {
+                            "oneOf": [
+                              {
+                                "const": "Organizace"
+                              },
+                              {
+                                "type": "array",
+                                "contains": {
+                                  "const": "Organizace"
+                                },
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          },
+                          "jméno": {
+                            "title": "jméno",
+                            "description": "Jméno objektu jako formátovaný text.",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Hodnota v jiném jazyce",
+                              "type": "string"
+                            },
+                            "properties": {
+                              "cs": {
+                                "title": "Hodnota v českém jazyce",
+                                "type": "string"
+                              },
+                              "en": {
+                                "title": "Hodnota v anglickém jazyce",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "kontaktní_stránka": {
+                            "title": "kontaktní stránka",
+                            "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+                            "type": "string",
+                            "format": "iri"
+                          },
+                          "e-mail": {
+                            "title": "email",
+                            "description": "E-mailová adresa pro komunikaci.",
+                            "type": "string",
+                            "format": "iri"
+                          }
+                        }
+                      },
+                      {
+                        "title": "Jednotlivec",
+                        "description": "Jednotlivá fyzická osoba.",
+                        "type": "object",
+                        "required": [
+                          "typ"
+                        ],
+                        "properties": {
+                          "iri": {
+                            "type": "string",
+                            "format": "iri"
+                          },
+                          "typ": {
+                            "oneOf": [
+                              {
+                                "const": "Jednotlivec"
+                              },
+                              {
+                                "type": "array",
+                                "contains": {
+                                  "const": "Jednotlivec"
+                                },
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            ]
+                          },
+                          "jméno": {
+                            "title": "jméno",
+                            "description": "Jméno objektu jako formátovaný text.",
+                            "type": "object",
+                            "additionalProperties": {
+                              "title": "Hodnota v jiném jazyce",
+                              "type": "string"
+                            },
+                            "properties": {
+                              "cs": {
+                                "title": "Hodnota v českém jazyce",
+                                "type": "string"
+                              },
+                              "en": {
+                                "title": "Hodnota v anglickém jazyce",
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "kontaktní_stránka": {
+                            "title": "kontaktní stránka",
+                            "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+                            "type": "string",
+                            "format": "iri"
+                          },
+                          "e-mail": {
+                            "title": "email",
+                            "description": "E-mailová adresa pro komunikaci.",
+                            "type": "string",
+                            "format": "iri"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
 }
