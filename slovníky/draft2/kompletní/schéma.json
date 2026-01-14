@@ -39,18 +39,30 @@
       },
       "allOf": [
         {
+          "type": "array",
           "contains": {
             "const": "Tezaurus"
+          },
+          "items": {
+            "type": "string"
           }
         },
         {
+          "type": "array",
           "contains": {
             "const": "Konceptuální model"
+          },
+          "items": {
+            "type": "string"
           }
         },
         {
+          "type": "array",
           "contains": {
             "const": "Slovník"
+          },
+          "items": {
+            "type": "string"
           }
         }
       ]
@@ -201,7 +213,7 @@
         "anyOf": [
           {
             "title": "Pojem",
-            "description": "Pojem, reprezentuje typy subjektu a objektu práva, vlastnost nebo vztah.",
+            "description": "Pojem, který reprezentuje typ subjektu práva, typ objektu práva, vlastnost nebo vztah.",
             "type": "object",
             "required": [
               "iri",
@@ -215,21 +227,29 @@
               },
               "typ": {
                 "type": "array",
+                "items": {
+                  "type": "string"
+                },
                 "allOf": [
                   {
+                    "type": "array",
                     "contains": {
                       "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
                     }
                   },
                   {
+                    "type": "array",
                     "contains": {
                       "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
                     }
                   }
-                ],
-                "items": {
-                  "type": "string"
-                }
+                ]
               },
               "název": {
                 "title": "název",
@@ -518,25 +538,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -545,13 +563,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               }
@@ -573,26 +590,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Typ objektu práva"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Typ objektu práva"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -881,25 +910,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -908,13 +935,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               },
@@ -947,26 +973,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Typ subjektu práva"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Typ subjektu práva"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -1255,25 +1293,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -1282,13 +1318,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               },
@@ -1321,26 +1356,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Neveřejný údaj"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Neveřejný údaj"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -1629,25 +1676,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -1656,13 +1701,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               },
@@ -1696,26 +1740,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Veřejný údaj"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Veřejný údaj"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -2004,25 +2060,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -2031,13 +2085,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               }
@@ -2061,26 +2114,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Vlastnost"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Vlastnost"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -2369,25 +2434,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -2396,13 +2459,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               },
@@ -2447,26 +2509,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Vztah"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Vztah"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -2755,25 +2829,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -2782,13 +2854,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               },
@@ -2831,26 +2902,38 @@
               },
               "typ": {
                 "type": "array",
-                "allOf": [
-                  {
-                    "contains": {
-                      "const": "Koncept"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Třída"
-                    }
-                  },
-                  {
-                    "contains": {
-                      "const": "Pojem"
-                    }
-                  }
-                ],
                 "items": {
                   "type": "string"
-                }
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Třída"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
               },
               "název": {
                 "title": "název",
@@ -3139,25 +3222,23 @@
                 "title": "má způsob získání údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-získání-údajů/položky/[^/]+$",
+                "pattern": "^způsoby-získání:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/základních-registrů",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/jiných-agend",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/vlastní",
-                  "https://data.dia.gov.cz/zdroj/číselníky/způsoby-získání-údajů/položky/provozní"
+                  "způsoby-získání:základních-registrů",
+                  "způsoby-získání:jiných-agend",
+                  "způsoby-získání:vlastní",
+                  "způsoby-získání:provozní"
                 ]
               },
               "typ-obsahu-údaje": {
                 "title": "má typ obsahu údaje",
                 "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
                 "type": "string",
-                "format": "iri",
-                "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/typy-obsahu-údajů/položky/[^/]+$",
+                "pattern": "^typy-obsahu:[^/]+$",
                 "examples": [
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/identifikační",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/evidenční",
-                  "https://data.dia.gov.cz/zdroj/číselníky/typy-obsahu-údajů/položky/statistické"
+                  "typy-obsahu:identifikační",
+                  "typy-obsahu:evidenční",
+                  "typy-obsahu:statistické"
                 ]
               },
               "způsoby-sdílení-údaje": {
@@ -3166,13 +3247,12 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "format": "iri",
-                  "pattern": "^https://data\\.dia\\.gov\\.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/[^/]+$",
+                  "pattern": "^způsoby-sdílení:[^/]+$",
                   "examples": [
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/veřejně-přístupné",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/poskytované-na-žádost",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/zpřístupňované-pro-výkon-agendy",
-                    "https://data.dia.gov.cz/zdroj/číselníky/způsoby-sdílení-údajů/položky/nesdílené"
+                    "způsoby-sdílení:veřejně-přístupné",
+                    "způsoby-sdílení:poskytované-na-žádost",
+                    "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                    "způsoby-sdílení:nesdílené"
                   ]
                 }
               },
