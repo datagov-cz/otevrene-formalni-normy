@@ -10,8 +10,13 @@
     "typ",
     "název",
     "popis",
-    "kontaktní_bod",
+    "poskytovatel",
+    "téma",
     "kategorie_hvd",
+    "periodicita_aktualizace",
+    "klíčové_slovo",
+    "prvek_rúian",
+    "kontaktní_bod",
     "právní_předpis"
   ],
   "properties": {
@@ -90,6 +95,168 @@
         }
       }
     },
+    "poskytovatel": {
+      "title": "poskytovatel",
+      "description": "Poskytovatel série datových sad zajišťující její soudržnost.",
+      "type": "string",
+      "format": "iri",
+      "examples": [
+        "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008"
+      ]
+    },
+    "je_součástí": {
+      "title": "je součástí",
+      "description": "Série datových sad, jíž je tato série datových sad součástí.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "iri"
+      }
+    },
+    "téma": {
+      "title": "klasifikace dle EuroVoc",
+      "description": "Kategorie či téma série datových sad dle EuroVoc.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "pattern": "^http://publications\\.europa\\.eu/resource/authority/data-theme/.*$",
+        "examples": [
+          "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+        ]
+      }
+    },
+    "kategorie_hvd": {
+      "title": "kategorie HVD",
+      "description": "Kategorie HVD do které série datových sad patří.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "pattern": "^http://data\\.europa\\.eu/bna/.*$",
+        "examples": [
+          "http://data.europa.eu/bna/c_1e787364",
+          "http://data.europa.eu/bna/c_25f43866"
+        ]
+      }
+    },
+    "periodicita_aktualizace": {
+      "title": "periodicita aktualizace",
+      "description": "Frekvence, se kterou je série datových sad aktualizována.",
+      "type": "string",
+      "format": "iri",
+      "pattern": "^http://publications\\.europa\\.eu/resource/authority/frequency/.*$",
+      "examples": [
+        "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+      ]
+    },
+    "klíčové_slovo": {
+      "title": "klíčové slovo",
+      "description": "Klíčové slovo nebo značka popisující zdroj.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "geografické_území": {
+      "title": "související geografické území - prvek z RÚIAN",
+      "description": "Území pokryté datovou sadou, vyjádřené pomocí prvku RÚIAN",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "examples": [
+          "http://publications.europa.eu/resource/authority/continent/EUROPE",
+          "https://sws.geonames.org/6290257/"
+        ]
+      }
+    },
+    "prvek_rúian": {
+      "title": "související geografické území - prvek z RÚIAN",
+      "description": "Území pokryté datovou sadou, vyjádřené pomocí prvku RÚIAN",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "pattern": "^https://linked.cuzk.cz/resource/ruian/.*$",
+        "examples": [
+          "https://linked.cuzk.cz/resource/ruian/stat/1",
+          "https://linked.cuzk.cz/resource/ruian/vusc/108",
+          "https://linked.cuzk.cz/resource/ruian/obec/502235"
+        ]
+      }
+    },
+    "časové_pokrytí": {
+      "title": "časové pokrytí",
+      "description": "Časový úsek pokrytý sérií datových sad",
+      "type": "array",
+      "items": {
+        "title": "Časový interval",
+        "description": "Časový interval definovaný svým začátkem a koncem.",
+        "type": "object",
+        "required": [
+          "iri",
+          "typ"
+        ],
+        "properties": {
+          "iri": {
+            "type": "string",
+            "format": "iri"
+          },
+          "typ": {
+            "oneOf": [
+              {
+                "const": "Časový interval"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "Časový interval"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "začátek": {
+            "title": "datum začátku",
+            "description": "Začátek doby trvání.",
+            "type": "string",
+            "format": "date"
+          },
+          "konec": {
+            "title": "datum konce",
+            "description": "Konec doby trvání.",
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
     "kontaktní_bod": {
       "title": "kontaktní bod",
       "description": "Kontaktní informace, které mohou být využity pro zasílání připomínek k sérii datových sad.",
@@ -141,24 +308,24 @@
                 }
               }
             },
-            "kontaktní_stránka": {
-              "title": "kontaktní stránka",
-              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
-              "type": "string",
-              "format": "iri",
-              "pattern": "^https://.*$",
-              "examples": [
-                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
-              ]
-            },
             "e-mail": {
               "title": "email",
-              "description": "E-mailová adresa pro komunikaci.",
+              "description": "E-mailová adresa, na které lze navázat kontakt.",
               "type": "string",
               "format": "iri",
               "pattern": "^mailto:[^@]+@[^@]+",
               "examples": [
                 "mailto:jan.novak@organizace.cz"
+              ]
+            },
+            "kontaktní_stránka": {
+              "title": "kontaktní stránka",
+              "description": "Webová stránka, která buďto přímo umožňuje navázat kontakt, nebo obsahuje informace o tom, jak navázat kontakt.",
+              "type": "string",
+              "format": "iri",
+              "pattern": "^https://.*$",
+              "examples": [
+                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
               ]
             }
           }
@@ -210,42 +377,50 @@
                 }
               }
             },
-            "kontaktní_stránka": {
-              "title": "kontaktní stránka",
-              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
-              "type": "string",
-              "format": "iri",
-              "pattern": "^https://.*$",
-              "examples": [
-                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
-              ]
-            },
             "e-mail": {
               "title": "email",
-              "description": "E-mailová adresa pro komunikaci.",
+              "description": "E-mailová adresa, na které lze navázat kontakt.",
               "type": "string",
               "format": "iri",
               "pattern": "^mailto:[^@]+@[^@]+",
               "examples": [
                 "mailto:jan.novak@organizace.cz"
               ]
+            },
+            "kontaktní_stránka": {
+              "title": "kontaktní stránka",
+              "description": "Webová stránka, která buďto přímo umožňuje navázat kontakt, nebo obsahuje informace o tom, jak navázat kontakt.",
+              "type": "string",
+              "format": "iri",
+              "pattern": "^https://.*$",
+              "examples": [
+                "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+              ]
             }
           }
         }
       ]
     },
-    "kategorie_hvd": {
-      "title": "kategorie HVD",
-      "description": "The HVD category to which this Dataset Series belongs.",
+    "dokumentace": {
+      "title": "dokumentace",
+      "description": "Stránka či dokument o sérii datových sad",
+      "type": "string",
+      "format": "iri",
+      "pattern": "^https://.*$",
+      "examples": [
+        "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+      ]
+    },
+    "koncept_euroVoc": {
+      "title": "klasifikace dle EuroVoc",
+      "description": "Kategorie či téma série datových sad dle EuroVoc.",
       "type": "array",
-      "minItems": 1,
       "items": {
         "type": "string",
         "format": "iri",
-        "pattern": "^http://data\\.europa\\.eu/bna/.*$",
+        "pattern": "^http://eurovoc\\.europa\\.eu/.*$",
         "examples": [
-          "http://data.europa.eu/bna/c_1e787364",
-          "http://data.europa.eu/bna/c_25f43866"
+          "http://eurovoc.europa.eu/1001"
         ]
       }
     },
@@ -268,6 +443,16 @@
           "http://data.europa.eu/eli/reg_impl/2023/138/oj"
         ]
       }
+    },
+    "vstupní_stránka": {
+      "title": "vstupní stránka",
+      "description": "Webová stránka, na kterou lze pro získání přístupu ke sérii datových sad přistoupit webovým prohlížečem.",
+      "type": "string",
+      "format": "iri",
+      "pattern": "^https://.*$",
+      "examples": [
+        "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+      ]
     }
   }
 }

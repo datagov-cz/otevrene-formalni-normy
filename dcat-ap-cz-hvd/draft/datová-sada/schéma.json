@@ -5,34 +5,20 @@
   "description": "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.",
   "type": "object",
   "required": [
-    "@context",
     "iri",
     "typ",
     "název",
     "popis",
-    "kontaktní_bod",
+    "poskytovatel",
+    "téma",
+    "periodicita_aktualizace",
+    "klíčové_slovo",
+    "prvek_rúian",
     "kategorie_hvd",
     "právní_předpis",
     "distribuce"
   ],
   "properties": {
-    "@context": {
-      "oneOf": [
-        {
-          "const": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft/datová-sada/kontext.jsonld"
-        },
-        {
-          "type": "array",
-          "contains": {
-            "const": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft/datová-sada/kontext.jsonld"
-          },
-          "items": {
-            "type": "string",
-            "format": "iri"
-          }
-        }
-      ]
-    },
     "iri": {
       "type": "string",
       "format": "iri"
@@ -91,6 +77,144 @@
         }
       }
     },
+    "poskytovatel": {
+      "title": "poskytovatel",
+      "description": "Poskytovatel datové sady",
+      "type": "string",
+      "format": "iri",
+      "examples": [
+        "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/66003008"
+      ]
+    },
+    "je_součástí": {
+      "title": "je součástí",
+      "description": "Série datových sad, jíž je datová sada součástí.",
+      "type": "string",
+      "format": "iri"
+    },
+    "téma": {
+      "title": "klasifikace dle EuroVoc",
+      "description": "Kategorie či téma datové sady dle EuroVoc.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "pattern": "^http://publications\\.europa\\.eu/resource/authority/data-theme/.*$",
+        "examples": [
+          "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+        ]
+      }
+    },
+    "periodicita_aktualizace": {
+      "title": "periodicita aktualizace",
+      "description": "Frekvence, se kterou je datová sada aktualizována.",
+      "type": "string",
+      "format": "iri",
+      "pattern": "^http://publications\\.europa\\.eu/resource/authority/frequency/.*$",
+      "examples": [
+        "http://publications.europa.eu/resource/authority/frequency/MONTHLY"
+      ]
+    },
+    "klíčové_slovo": {
+      "title": "klíčové slovo",
+      "description": "Klíčové slovo nebo značka popisující zdroj.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "geografické_území": {
+      "title": "související geografické území",
+      "description": "Území pokryté datovou sadou.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "examples": [
+          "http://publications.europa.eu/resource/authority/continent/EUROPE",
+          "https://sws.geonames.org/6290257/"
+        ]
+      }
+    },
+    "prvek_rúian": {
+      "title": "související geografické území",
+      "description": "Území pokryté datovou sadou.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "pattern": "^https://linked.cuzk.cz/resource/ruian/.*$",
+        "examples": [
+          "https://linked.cuzk.cz/resource/ruian/stat/1",
+          "https://linked.cuzk.cz/resource/ruian/vusc/108",
+          "https://linked.cuzk.cz/resource/ruian/obec/502235"
+        ]
+      }
+    },
+    "časové_pokrytí": {
+      "title": "časové pokrytí",
+      "description": "Časový úsek pokrytý datovou sadou",
+      "type": "object",
+      "required": [
+        "typ"
+      ],
+      "properties": {
+        "iri": {
+          "type": "string",
+          "format": "iri"
+        },
+        "typ": {
+          "oneOf": [
+            {
+              "const": "Časový interval"
+            },
+            {
+              "type": "array",
+              "contains": {
+                "const": "Časový interval"
+              },
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "začátek": {
+          "title": "datum začátku",
+          "description": "Začátek doby trvání.",
+          "type": "string",
+          "format": "date"
+        },
+        "konec": {
+          "title": "datum konce",
+          "description": "Konec doby trvání.",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
     "kontaktní_bod": {
       "title": "kontaktní bod",
       "description": "Kontaktní informace, které mohou být využity pro zasílání připomínek k datové sadě.",
@@ -144,7 +268,7 @@
             },
             "e-mail": {
               "title": "email",
-              "description": "E-mailová adresa pro komunikaci.",
+              "description": "E-mailová adresa, na které lze navázat kontakt.",
               "type": "string",
               "format": "iri",
               "pattern": "^mailto:[^@]+@[^@]+",
@@ -154,7 +278,7 @@
             },
             "kontaktní_stránka": {
               "title": "kontaktní stránka",
-              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+              "description": "Webová stránka, která buďto přímo umožňuje navázat kontakt, nebo obsahuje informace o tom, jak navázat kontakt.",
               "type": "string",
               "format": "iri",
               "pattern": "^https://.*$",
@@ -213,7 +337,7 @@
             },
             "e-mail": {
               "title": "email",
-              "description": "E-mailová adresa pro komunikaci.",
+              "description": "E-mailová adresa, na které lze navázat kontakt.",
               "type": "string",
               "format": "iri",
               "pattern": "^mailto:[^@]+@[^@]+",
@@ -223,7 +347,7 @@
             },
             "kontaktní_stránka": {
               "title": "kontaktní stránka",
-              "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
+              "description": "Webová stránka, která buďto přímo umožňuje navázat kontakt, nebo obsahuje informace o tom, jak navázat kontakt.",
               "type": "string",
               "format": "iri",
               "pattern": "^https://.*$",
@@ -233,6 +357,16 @@
             }
           }
         }
+      ]
+    },
+    "dokumentace": {
+      "title": "dokumentace",
+      "description": "Stránka či dokument o datové sadě",
+      "type": "string",
+      "format": "iri",
+      "pattern": "^https://.*$",
+      "examples": [
+        "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
       ]
     },
     "specifikace": {
@@ -247,6 +381,30 @@
           "https://ofn.gov.cz/turistické-cíle/2020-07-01/"
         ]
       }
+    },
+    "koncept_euroVoc": {
+      "title": "klasifikace dle EuroVoc",
+      "description": "Kategorie či téma datové sady dle EuroVoc.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "iri",
+        "pattern": "^http://eurovoc\\.europa\\.eu/.*$",
+        "examples": [
+          "http://eurovoc.europa.eu/1001"
+        ]
+      }
+    },
+    "prostorové_rozlišení_v_metrech": {
+      "title": "prostorové rozlišení v metrech",
+      "description": "Prostorové rozlišení dat v datové sadě v metrech. Jedná se o nejmenší prostorový rozdíl v datové sadě.",
+      "type": "string",
+      "pattern": "^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$"
+    },
+    "časové_rozlišení": {
+      "title": "časové rozlišení",
+      "description": "Časové rozlišení dat v datové sadě. Jedná se o nejmenší časový rozdíl v datové sadě.",
+      "type": "string"
     },
     "kategorie_hvd": {
       "title": "kategorie HVD",
@@ -297,10 +455,11 @@
             "required": [
               "iri",
               "typ",
-              "přístupové_url",
               "podmínky_užití",
+              "přístupové_url",
               "právní_předpis",
-              "soubor_ke_stažení"
+              "soubor_ke_stažení",
+              "typ_média"
             ],
             "properties": {
               "iri": {
@@ -323,22 +482,16 @@
                   }
                 ]
               },
-              "přístupové_url": {
-                "title": "přístupové URL",
-                "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
-                "type": "string",
-                "format": "iri",
-                "pattern": "^https://.*$",
-                "examples": [
-                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
-                ]
-              },
               "podmínky_užití": {
                 "title": "Specifikace podmínek užití",
                 "description": "Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.",
                 "type": "object",
                 "required": [
-                  "typ"
+                  "typ",
+                  "autorské_dílo",
+                  "databáze_jako_autorské_dílo",
+                  "databáze_chráněná_zvláštními_právy",
+                  "osobní_údaje"
                 ],
                 "properties": {
                   "iri": {
@@ -361,9 +514,107 @@
                       }
                     ]
                   },
-                  "je_méně_restriktivní_než": {
-                    "title": "je méně restriktivní než",
-                    "description": "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.",
+                  "autorské_dílo": {
+                    "title": "autorské dílo",
+                    "description": "Většina případů poskytovaných dat nebude spadat pod definici autorského díla dle § 2 autorského zákona (121/2000 Sb.), nebude se na ně proto vztahovat autorskoprávní ochrana a nebude proto pro ně potřeba jakékoli licence. „Prostá data“ nejsou chráněna právy duševního vlastnictví. Ve výjimečných případech se však může stát, že databáze bude obsahovat autorskoprávně chráněná díla. Příkladem dat obsahujících autorskoprávně chráněná díla by mohl být seznam příspěvků literární soutěže pořádané radnicí, který by byl uveřejněný včetně plnotextového znění přihlášených soutěžních děl.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "autor": {
+                    "title": "jména autorů díla",
+                    "description": "Jména autorů díla pro použití s licencí CC BY 4.0",
+                    "type": "object",
+                    "additionalProperties": {
+                      "title": "Hodnota v jiném jazyce",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "cs": {
+                        "title": "Hodnota v českém jazyce",
+                        "type": "string"
+                      },
+                      "en": {
+                        "title": "Hodnota v anglickém jazyce",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "databáze_jako_autorské_dílo": {
+                    "title": "originální databáze",
+                    "description": "Tato ochrana je založena § 2 odst. 2 a 5 Autorského zákona a chráněny jsou takové databáze, které jsou „způsobem výběru nebo uspořádáním obsahu autorovým vlastním duševním výtvorem“. Chráněna je tady originální struktura, systém řazení údajů a podobně, tedy kostra, do které se samotné údaje vkládají. Takové databázi se říká „originální databáze“. Příkladem originální databáze může být obchodní rejstřík, který je však zároveň úředním dílem.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "autor_databáze": {
+                    "title": "jména autorů originální databáze",
+                    "description": "Jména autorů originální databáze pro použití s licencí CC BY 4.0",
+                    "type": "object",
+                    "additionalProperties": {
+                      "title": "Hodnota v jiném jazyce",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "cs": {
+                        "title": "Hodnota v českém jazyce",
+                        "type": "string"
+                      },
+                      "en": {
+                        "title": "Hodnota v anglickém jazyce",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "databáze_chráněná_zvláštními_právy": {
+                    "title": "zvláštní právo pořizovatele databáze",
+                    "description": "Tato ochrana je založena § 88 a následujícími Autorského zákona. Zvláštní databázová práva chrání investice vynaložené při zřízení databáze, ověření uvedených dat, nebo jejich publikaci. Práva vznikají, pokud pořízení, ověření nebo předvedení obsahu databáze představuje kvalitativně nebo kvantitativně podstatný vklad. Držitelem práv je pořizovatel databáze, což je osoba, která na svou odpovědnost pořídí databázi, nebo pro kterou tak z jejího podnětu učiní jiná osoba. Zvláštních databázových práv se dá plně vzdát, na rozdíl od autorských práv. Příkladem databáze chráněné zvláštními právy pořizovatele databáze je databáze právních předpisů.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "osobní_údaje": {
+                    "title": "osobní údaje",
+                    "description": "Pokud data obsahují osobní údaje, je třeba o této skutečnosti informovat příjemce dat. Předpřipravené dokumenty mají IRI https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/ a https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "méně_restriktivní_licence": {
+                    "title": "méně restriktivní licence",
+                    "description": "Evropská licence, která je méně restriktivní, než podmínky užití.",
                     "type": "string",
                     "format": "iri",
                     "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
@@ -374,7 +625,7 @@
                   },
                   "přesně_odpovídá": {
                     "title": "přesně odpovídá",
-                    "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
+                    "description": "Evropská licence, jíž podmínky užití přesně odpovídají.",
                     "type": "string",
                     "format": "iri",
                     "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
@@ -384,6 +635,16 @@
                     ]
                   }
                 }
+              },
+              "přístupové_url": {
+                "title": "přístupové URL",
+                "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^https://.*$",
+                "examples": [
+                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
               },
               "právní_předpis": {
                 "title": "příslušný právní předpis",
@@ -405,6 +666,25 @@
                   ]
                 }
               },
+              "název": {
+                "title": "název",
+                "description": "Název distribuce datové sady",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
               "soubor_ke_stažení": {
                 "title": "odkaz na stažení souboru",
                 "description": "URL, které je přímým odkazem na stažitelný soubor v daném formátu.",
@@ -413,6 +693,26 @@
                 "pattern": "^https://.*$",
                 "examples": [
                   "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
+              },
+              "formát": {
+                "title": "formát souboru ke stažení",
+                "description": "Tato vlastnost odkazuje na typ souboru s distribucí.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^http://publications\\.europa\\.eu/resource/authority/file-type/.*$",
+                "examples": [
+                  "http://publications.europa.eu/resource/authority/file-type/CSV"
+                ]
+              },
+              "typ_média": {
+                "title": "typ média",
+                "description": "Typ média distribuce definovaný v IANA.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^http://www\\.iana\\.org/assignments/media-types/.*$",
+                "examples": [
+                  "http://www.iana.org/assignments/media-types/image/tiff"
                 ]
               },
               "schéma": {
@@ -424,6 +724,26 @@
                 "examples": [
                   "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
                 ]
+              },
+              "typ_média_komprese": {
+                "title": "formát komprese",
+                "description": "Formát komprese souboru, ve kterém jsou data poskytována v komprimované podobě, např. ke snížení velikosti souboru ke stažení.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^http://www\\.iana\\.org/assignments/media-types/.*$",
+                "examples": [
+                  "http://www.iana.org/assignments/media-types/image/tiff"
+                ]
+              },
+              "typ_média_balíčku": {
+                "title": "formát balíčku",
+                "description": "Balíčkový formát souboru, ve kterém je jeden či více souborů seskupeno dohromady, např. aby bylo možné stáhnout sadu souvisejících souborů naráz.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^http://www\\.iana\\.org/assignments/media-types/.*$",
+                "examples": [
+                  "http://www.iana.org/assignments/media-types/image/tiff"
+                ]
               }
             }
           },
@@ -434,8 +754,8 @@
             "required": [
               "iri",
               "typ",
-              "přístupové_url",
               "podmínky_užití",
+              "přístupové_url",
               "právní_předpis",
               "přístupová_služba"
             ],
@@ -460,22 +780,16 @@
                   }
                 ]
               },
-              "přístupové_url": {
-                "title": "přístupové URL",
-                "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
-                "type": "string",
-                "format": "iri",
-                "pattern": "^https://.*$",
-                "examples": [
-                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
-                ]
-              },
               "podmínky_užití": {
                 "title": "Specifikace podmínek užití",
                 "description": "Specifikace podmínek užití dle https://opendata.gov.cz/cinnost:stanoveni-podminek-uziti.",
                 "type": "object",
                 "required": [
-                  "typ"
+                  "typ",
+                  "autorské_dílo",
+                  "databáze_jako_autorské_dílo",
+                  "databáze_chráněná_zvláštními_právy",
+                  "osobní_údaje"
                 ],
                 "properties": {
                   "iri": {
@@ -498,9 +812,107 @@
                       }
                     ]
                   },
-                  "je_méně_restriktivní_než": {
-                    "title": "je méně restriktivní než",
-                    "description": "skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.",
+                  "autorské_dílo": {
+                    "title": "autorské dílo",
+                    "description": "Většina případů poskytovaných dat nebude spadat pod definici autorského díla dle § 2 autorského zákona (121/2000 Sb.), nebude se na ně proto vztahovat autorskoprávní ochrana a nebude proto pro ně potřeba jakékoli licence. „Prostá data“ nejsou chráněna právy duševního vlastnictví. Ve výjimečných případech se však může stát, že databáze bude obsahovat autorskoprávně chráněná díla. Příkladem dat obsahujících autorskoprávně chráněná díla by mohl být seznam příspěvků literární soutěže pořádané radnicí, který by byl uveřejněný včetně plnotextového znění přihlášených soutěžních děl.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "autor": {
+                    "title": "jména autorů díla",
+                    "description": "Jména autorů díla pro použití s licencí CC BY 4.0",
+                    "type": "object",
+                    "additionalProperties": {
+                      "title": "Hodnota v jiném jazyce",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "cs": {
+                        "title": "Hodnota v českém jazyce",
+                        "type": "string"
+                      },
+                      "en": {
+                        "title": "Hodnota v anglickém jazyce",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "databáze_jako_autorské_dílo": {
+                    "title": "originální databáze",
+                    "description": "Tato ochrana je založena § 2 odst. 2 a 5 Autorského zákona a chráněny jsou takové databáze, které jsou „způsobem výběru nebo uspořádáním obsahu autorovým vlastním duševním výtvorem“. Chráněna je tady originální struktura, systém řazení údajů a podobně, tedy kostra, do které se samotné údaje vkládají. Takové databázi se říká „originální databáze“. Příkladem originální databáze může být obchodní rejstřík, který je však zároveň úředním dílem.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "autor_databáze": {
+                    "title": "jména autorů originální databáze",
+                    "description": "Jména autorů originální databáze pro použití s licencí CC BY 4.0",
+                    "type": "object",
+                    "additionalProperties": {
+                      "title": "Hodnota v jiném jazyce",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "cs": {
+                        "title": "Hodnota v českém jazyce",
+                        "type": "string"
+                      },
+                      "en": {
+                        "title": "Hodnota v anglickém jazyce",
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "databáze_chráněná_zvláštními_právy": {
+                    "title": "zvláštní právo pořizovatele databáze",
+                    "description": "Tato ochrana je založena § 88 a následujícími Autorského zákona. Zvláštní databázová práva chrání investice vynaložené při zřízení databáze, ověření uvedených dat, nebo jejich publikaci. Práva vznikají, pokud pořízení, ověření nebo předvedení obsahu databáze představuje kvalitativně nebo kvantitativně podstatný vklad. Držitelem práv je pořizovatel databáze, což je osoba, která na svou odpovědnost pořídí databázi, nebo pro kterou tak z jejího podnětu učiní jiná osoba. Zvláštních databázových práv se dá plně vzdát, na rozdíl od autorských práv. Příkladem databáze chráněné zvláštními právy pořizovatele databáze je databáze právních předpisů.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "osobní_údaje": {
+                    "title": "osobní údaje",
+                    "description": "Pokud data obsahují osobní údaje, je třeba o této skutečnosti informovat příjemce dat. Předpřipravené dokumenty mají IRI https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/ a https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/.",
+                    "type": "string",
+                    "format": "iri",
+                    "examples": [
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/",
+                      "https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/",
+                      "https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/",
+                      "https://creativecommons.org/licenses/by/4.0/",
+                      "https://creativecommons.org/publicdomain/zero/1.0/",
+                      "https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/",
+                      "https://data.gov.cz/podmínky-užití/obsahuje-osobní-údaje/"
+                    ]
+                  },
+                  "méně_restriktivní_licence": {
+                    "title": "méně restriktivní licence",
+                    "description": "Evropská licence, která je méně restriktivní, než podmínky užití.",
                     "type": "string",
                     "format": "iri",
                     "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
@@ -511,7 +923,7 @@
                   },
                   "přesně_odpovídá": {
                     "title": "přesně odpovídá",
-                    "description": "skos:exactMatch is disjoint with each of the properties skos:broadMatch and skos:relatedMatch.",
+                    "description": "Evropská licence, jíž podmínky užití přesně odpovídají.",
                     "type": "string",
                     "format": "iri",
                     "pattern": "^http://publications\\.europa\\.eu/resource/authority/licence/.*$",
@@ -521,6 +933,16 @@
                     ]
                   }
                 }
+              },
+              "přístupové_url": {
+                "title": "přístupové URL",
+                "description": "URL zdroje, přes které je přístupná distribuce datové sady. Příkladem může být vstupní stránka, RSS kanál či SPARQL endpoint. Použijte ve všech případech kromě URL souboru ke stažení, pro které je lepší použít dcat:downloadURL.",
+                "type": "string",
+                "format": "iri",
+                "pattern": "^https://.*$",
+                "examples": [
+                  "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
+                ]
               },
               "právní_předpis": {
                 "title": "příslušný právní předpis",
@@ -542,6 +964,25 @@
                   ]
                 }
               },
+              "název": {
+                "title": "název",
+                "description": "Název distribuce datové sady",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
               "přístupová_služba": {
                 "title": "přístupová služba",
                 "description": "Umístění či přístupový bod zpřístupňující distribuci datové sady.",
@@ -550,6 +991,7 @@
                   "iri",
                   "typ",
                   "kategorie_hvd",
+                  "název",
                   "přístupový_bod",
                   "popis_přístupového_bodu",
                   "dokumentace",
@@ -579,7 +1021,7 @@
                   },
                   "kategorie_hvd": {
                     "title": "kategorie HVD",
-                    "description": "The HVD category to which this Data Service belongs.",
+                    "description": "Kategorie HVD do které datová služba patří.",
                     "type": "array",
                     "minItems": 1,
                     "items": {
@@ -590,6 +1032,25 @@
                         "http://data.europa.eu/bna/c_1e787364",
                         "http://data.europa.eu/bna/c_25f43866"
                       ]
+                    }
+                  },
+                  "název": {
+                    "title": "název",
+                    "description": "Název datové služby.",
+                    "type": "object",
+                    "additionalProperties": {
+                      "title": "Hodnota v jiném jazyce",
+                      "type": "string"
+                    },
+                    "properties": {
+                      "cs": {
+                        "title": "Hodnota v českém jazyce",
+                        "type": "string"
+                      },
+                      "en": {
+                        "title": "Hodnota v anglickém jazyce",
+                        "type": "string"
+                      }
                     }
                   },
                   "přístupový_bod": {
@@ -609,12 +1070,25 @@
                     "format": "iri",
                     "pattern": "^https://.*$",
                     "examples": [
-                      "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+                      "https://www.trebic.cz/zdroj/aktualita/2020/dopadení-lupiče-na-francouzské-ulici"
                     ]
+                  },
+                  "specifikace": {
+                    "title": "specifikace",
+                    "description": "Specifikaci, jíž se datová služba řídí.",
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "iri",
+                      "pattern": "^https://.*$",
+                      "examples": [
+                        "https://ofn.gov.cz/turistické-cíle/2020-07-01/"
+                      ]
+                    }
                   },
                   "dokumentace": {
                     "title": "dokumentace",
-                    "description": "Dokumentace dále popisující datovou službu.",
+                    "description": "A page that provides additional information about the Data Service.",
                     "type": "string",
                     "format": "iri",
                     "pattern": "^https://.*$",
@@ -693,24 +1167,24 @@
                               }
                             }
                           },
-                          "kontaktní_stránka": {
-                            "title": "kontaktní stránka",
-                            "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
-                            "type": "string",
-                            "format": "iri",
-                            "pattern": "^https://.*$",
-                            "examples": [
-                              "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
-                            ]
-                          },
                           "e-mail": {
                             "title": "email",
-                            "description": "E-mailová adresa pro komunikaci.",
+                            "description": "E-mailová adresa, na které lze navázat kontakt.",
                             "type": "string",
                             "format": "iri",
                             "pattern": "^mailto:[^@]+@[^@]+",
                             "examples": [
                               "mailto:jan.novak@organizace.cz"
+                            ]
+                          },
+                          "kontaktní_stránka": {
+                            "title": "kontaktní stránka",
+                            "description": "Webová stránka, která buďto přímo umožňuje navázat kontakt, nebo obsahuje informace o tom, jak navázat kontakt.",
+                            "type": "string",
+                            "format": "iri",
+                            "pattern": "^https://.*$",
+                            "examples": [
+                              "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
                             ]
                           }
                         }
@@ -762,24 +1236,24 @@
                               }
                             }
                           },
-                          "kontaktní_stránka": {
-                            "title": "kontaktní stránka",
-                            "description": "A webpage that either allows to make contact (i.e. a webform) or the information contains how to get into contact. ",
-                            "type": "string",
-                            "format": "iri",
-                            "pattern": "^https://.*$",
-                            "examples": [
-                              "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
-                            ]
-                          },
                           "e-mail": {
                             "title": "email",
-                            "description": "E-mailová adresa pro komunikaci.",
+                            "description": "E-mailová adresa, na které lze navázat kontakt.",
                             "type": "string",
                             "format": "iri",
                             "pattern": "^mailto:[^@]+@[^@]+",
                             "examples": [
                               "mailto:jan.novak@organizace.cz"
+                            ]
+                          },
+                          "kontaktní_stránka": {
+                            "title": "kontaktní stránka",
+                            "description": "Webová stránka, která buďto přímo umožňuje navázat kontakt, nebo obsahuje informace o tom, jak navázat kontakt.",
+                            "type": "string",
+                            "format": "iri",
+                            "pattern": "^https://.*$",
+                            "examples": [
+                              "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
                             ]
                           }
                         }
@@ -792,6 +1266,16 @@
           }
         ]
       }
+    },
+    "vstupní_stránka": {
+      "title": "vstupní stránka",
+      "description": "Webová stránka, na kterou lze pro získání přístupu k datové sadě, jejím distribucím a/nebo dalším informacím přistoupit webovým prohlížečem.",
+      "type": "string",
+      "format": "iri",
+      "pattern": "^https://.*$",
+      "examples": [
+        "https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy"
+      ]
     }
   }
 }
