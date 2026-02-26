@@ -1,0 +1,104 @@
+@prefix continent: <http://publications.europa.eu/resource/authority/continent/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcatap: <http://data.europa.eu/r5r/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix eurovoc: <http://eurovoc.europa.eu/> .
+@prefix file-type: <http://publications.europa.eu/resource/authority/file-type/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix frequency: <http://publications.europa.eu/resource/authority/frequency/> .
+@prefix ovm: <https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix themes: <http://publications.europa.eu/resource/authority/data-theme/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://data.gov.cz/lkod/mdcr/datové-sady/vld> a dcat:Dataset;
+  dcterms:title "Jízdní řády veřejné linkové dopravy (HVD)"@cs,
+    "Public transport timetables (HVD)"@en;
+  dcatap:applicableLegislation <http://data.europa.eu/eli/dir/2019/1024/oj>,
+    <http://data.europa.eu/eli/reg_impl/2023/138/oj>;
+  dcatap:hvdCategory <http://data.europa.eu/bna/c_1e787364>;
+  dcterms:accrualPeriodicity frequency:WEEKLY_3;
+  dcterms:conformsTo <https://ofn.gov.cz/jízdní-řády/2020-05-01/>;
+  dcterms:description "Obsahem datové sady jsou schválené a aktuálně platné jízdní řády veřejné linkové dopravy postoupené do Celostátního informačního systému o jízdních řádech ve strojově zpracovatelném formátu."@cs,
+    "This dataset contains approved timetables and timetables in effect for public transport entered into the state-wide timetable information system."@en;
+  dcterms:publisher ovm:66003008;
+  dcterms:spatial continent:EUROPE,
+    <https://linked.cuzk.cz/resource/ruian/stat/1>;
+  dcterms:temporal [
+    a dcterms:PeriodOfTime;
+    dcat:endDate "2017-12-31"^^xsd:date;
+    dcat:startDate "2009-01-01"^^xsd:date
+  ];
+  dcat:contactPoint [
+    a vcard:Organization;
+    vcard:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs,
+      "Ministry of Transport"@en;
+    vcard:hasEmail <mailto:sekretariat.190@mdcr.cz>
+  ];
+  dcat:distribution <https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv>,
+    <https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql>;
+  dcat:keyword "jízdní řády"@cs,
+    "veřejná linková doprava"@cs,
+    "autobus"@cs,
+    "timetable"@en,
+    "public transport"@en,
+    "bus"@en;
+  dcat:spatialResolutionInMeters 12.0;
+  dcat:temporalResolution "P1D"^^xsd:duration;
+  dcat:theme themes:TRAN,
+    eurovoc:4512;
+  foaf:page <https://www.mdcr.cz/Dokumenty/Verejna-doprava/Jizdni-rady,-kalendare-pro-jizdni-rady,-metodi-(1)/Jizdni-rady-verejne-dopravy> .
+
+<https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/csv> a dcat:Distribution;
+  dcterms:title "JSON distribution in ZIP file - not HVD"@en,
+    "JSON distribuce v ZIP soubrou - toto není HVD distribuce"@cs;
+  dcatap:applicableLegislation <http://data.europa.eu/eli/dir/2019/1024/oj>;
+  dcterms:conformsTo <https://portal.cisjr.cz/schemata/json-schema.json>;
+  dcterms:format file-type:ZIP;
+  dcat:accessURL <https://portal.cisjr.cz/pub/draha/mestske/JDF.zip>;
+  dcat:compressFormat <http://www.iana.org/assignments/media-types/application/zip>;
+  dcat:downloadURL <https://portal.cisjr.cz/pub/draha/mestske/JDF.zip>;
+  dcat:mediaType <http://www.iana.org/assignments/media-types/application/json>;
+  dcat:packageFormat <http://www.iana.org/assignments/media-types/application/zip>;
+  <https://data.gov.cz/slovník/podmínky-užití/specifikace> [
+    a <https://data.gov.cz/slovník/podmínky-užití/Specifikace>;
+    <https://data.gov.cz/slovník/podmínky-užití/autor> "Ministerstvo dopravy, Odbor veřejné dopravy"@cs;
+    <https://data.gov.cz/slovník/podmínky-užití/autor-databáze> "Ministerstvo dopravy, Odbor veřejné dopravy"@cs;
+    <https://data.gov.cz/slovník/podmínky-užití/autorské-dílo> <https://creativecommons.org/licenses/by/4.0/>;
+    <https://data.gov.cz/slovník/podmínky-užití/databáze-chráněná-zvláštními-právy> <https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/>;
+    <https://data.gov.cz/slovník/podmínky-užití/databáze-jako-autorské-dílo> <https://creativecommons.org/licenses/by/4.0/>;
+    <https://data.gov.cz/slovník/podmínky-užití/osobní-údaje> <https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/>
+  ] .
+
+<https://data.gov.cz/lkod/mdcr/datové-sady/vld/distribuce/sparql> a dcat:Distribution;
+  dcterms:title "SPARQL endpoint for timetables - HVD"@en,
+    "SPARQL endpoint pro jízdní řády - HVD"@cs;
+  dcatap:applicableLegislation <http://data.europa.eu/eli/dir/2019/1024/oj>,
+    <http://data.europa.eu/eli/reg_impl/2023/138/oj>;
+  dcat:accessService <https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql>;
+  dcat:accessURL <https://portal.cisjr.cz/sparql>;
+  <https://data.gov.cz/slovník/podmínky-užití/specifikace> [
+    a <https://data.gov.cz/slovník/podmínky-užití/Specifikace>;
+    <https://data.gov.cz/slovník/podmínky-užití/autorské-dílo> <https://data.gov.cz/podmínky-užití/neobsahuje-autorská-díla/>;
+    <https://data.gov.cz/slovník/podmínky-užití/databáze-chráněná-zvláštními-právy> <https://data.gov.cz/podmínky-užití/není-chráněna-zvláštním-právem-pořizovatele-databáze/>;
+    <https://data.gov.cz/slovník/podmínky-užití/databáze-jako-autorské-dílo> <https://data.gov.cz/podmínky-užití/není-autorskoprávně-chráněnou-databází/>;
+    <https://data.gov.cz/slovník/podmínky-užití/osobní-údaje> <https://data.gov.cz/podmínky-užití/neobsahuje-osobní-údaje/>
+  ] .
+
+<https://data.gov.cz/lkod/mdcr/datové-sady/vld/služba/sparql> a dcat:DataService;
+  dcterms:title "SPARQL endpoint pro jízdní řády - HVD"@cs,
+    "SPARQL endpoint for timetables - HVD"@en;
+  dcatap:applicableLegislation <http://data.europa.eu/eli/dir/2019/1024/oj>,
+    <http://data.europa.eu/eli/reg_impl/2023/138/oj>;
+  dcatap:hvdCategory <http://data.europa.eu/bna/c_1e787364>;
+  dcterms:conformsTo <https://www.w3.org/TR/sparql11-protocol/>;
+  dcat:contactPoint [
+    a vcard:Organization;
+    vcard:fn "Ministerstvo dopravy, Odbor veřejné dopravy"@cs,
+      "Ministry of Transport"@en;
+    vcard:hasEmail <mailto:sekretariat.190@mdcr.cz>
+  ];
+  dcat:endpointDescription <https://portal.cisjr.cz/sparql>;
+  dcat:endpointURL <https://portal.cisjr.cz/sparql>;
+  foaf:page <https://www.data.cz/služba/dokumentace> .
