@@ -1,0 +1,415 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/slovníky/2026-02-26/konceptuální-model/schéma.json",
+  "title": "Konceptuální model",
+  "description": "Na této úrovni rozlišujeme pojmy, které reprezentují\n- třídy reprezentující typy subjektů a objektů práva,\n- vztahy mezi dvěma subjekty či objekty práva,\n- vlastnosti subjektů a objektů práva.",
+  "type": "object",
+  "required": [
+    "@context",
+    "iri",
+    "typ",
+    "název"
+  ],
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/slovníky/2026-02-26/kompletní/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/slovníky/2026-02-26/kompletní/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
+    "iri": {
+      "type": "string",
+      "format": "iri"
+    },
+    "typ": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "allOf": [
+        {
+          "type": "array",
+          "contains": {
+            "const": "Tezaurus"
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "Konceptuální model"
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "Slovník"
+          },
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "název": {
+      "title": "název",
+      "description": "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise\n      disjoint properties.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "required": [
+        "cs"
+      ],
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "pojmy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "title": "Třída",
+            "description": "Pojem reprezentující typ subjektu nebo objektu práva. Třída pak může mít instance - konkrétní subjekty či objekty práva.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Třída"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "nadřazená-třída": {
+                "title": "nadřazená třída",
+                "description": "Významově širší třída. Platí, že každá instance třídy je také instancí nadřazené třídy. Tj. každá instance třídy Hrad je také instancí třídy Turistický cíl.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "iri"
+                }
+              },
+              "instance-definovány-číselníkem": {
+                "title": "má instance definované číselníkem",
+                "description": "Číselník, jehož položky jsou instancemi třídy.",
+                "type": "object",
+                "required": [
+                  "iri",
+                  "typ",
+                  "datová-sada-v-nkod"
+                ],
+                "properties": {
+                  "iri": {
+                    "type": "string",
+                    "format": "iri"
+                  },
+                  "typ": {
+                    "oneOf": [
+                      {
+                        "const": "Číselník"
+                      },
+                      {
+                        "type": "array",
+                        "contains": {
+                          "const": "Číselník"
+                        },
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  },
+                  "datová-sada-v-nkod": {
+                    "title": "má v NKOD zastřešující datovou sadu",
+                    "type": "string",
+                    "format": "iri",
+                    "pattern": "^https://data\\.gov\\.cz/zdroj/datové-sady/.*$",
+                    "examples": [
+                      "https://data.gov.cz/zdroj/datové-sady/17651921/90c4bd4e002d2ae5df50fa615aa0d98c"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Vztah",
+            "description": "Pojem reprezentující vztah, kterým mohou být propojeny instance dvou tříd, nebo dvě instance stejné třídy.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název",
+              "obor-hodnot",
+              "definiční-obor"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Vztah"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "obor-hodnot": {
+                "title": "obor hodnot",
+                "description": "Obor hodnot vztahu. Určuje třídu, jejíž instance mohou být tímto vztahem přiřazovány instancím jiné třídy - definičního oboru.",
+                "type": "string",
+                "format": "iri"
+              },
+              "definiční-obor": {
+                "title": "definiční obor",
+                "description": "Definiční obor vztahu. Určuje třídu, jejímž instancím mohou být tímto vztahem přiřazovány instance jiné třídy - oboru hodnot.",
+                "type": "string",
+                "format": "iri"
+              },
+              "nadřazený-vztah": {
+                "title": "nadřazený vztah",
+                "description": "Významově širší vztah. Pokud jsou dvě instance tříd propojeny vztahem, pak jsou propojeny i nadřazeným vztahem. Tj. pokud hradu přiřadíme správce pomocí vztahu správce hradu, pak je tento správce hradu přiřazen i nadřazeným vztahem správce turistického cíle.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "iri"
+                }
+              }
+            }
+          },
+          {
+            "title": "Vlastnost",
+            "description": "Pojem reprezenutjící vlastnost, kterou může mít instance nějaké třídy.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název",
+              "obor-hodnot",
+              "definiční-obor"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Vlastnost"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              },
+              "obor-hodnot": {
+                "title": "obor hodnot",
+                "description": "Obor hodnot vlastnosti. Určuje datový typ specifikující, jakých hodnot může nabývat nějaká vlastnost.",
+                "type": "string",
+                "format": "iri"
+              },
+              "definiční-obor": {
+                "title": "definiční obor",
+                "description": "Definiční obor vlastnosti. Určuje třídu, jejíž instance mají danou vlastnost.",
+                "type": "string",
+                "format": "iri"
+              },
+              "nadřazená-vlastnost": {
+                "title": "nadřazená vlastnost",
+                "description": "Významově širší vlastnost. Pokud je vlastností přiřazena hodnota nějaké instanci třídy, pak je tato hodnota té samé instanci přiřazena i nadřazenou vlastností. Tj. každý název hradu lze zároveň inteprentovat jako název turistického cíle.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "iri"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

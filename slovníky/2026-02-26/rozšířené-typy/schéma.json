@@ -1,0 +1,301 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/slovníky/2026-02-26/rozšířené-typy/schéma.json",
+  "title": "Tezaurus",
+  "description": "Tezaurus je nejjednodušším typem slovníku.",
+  "type": "object",
+  "required": [
+    "@context",
+    "iri",
+    "typ",
+    "název"
+  ],
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/slovníky/2026-02-26/kompletní/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/slovníky/2026-02-26/kompletní/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
+    "iri": {
+      "type": "string",
+      "format": "iri"
+    },
+    "typ": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "allOf": [
+        {
+          "type": "array",
+          "contains": {
+            "const": "Tezaurus"
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "Slovník"
+          },
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "název": {
+      "title": "název",
+      "description": "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise\n      disjoint properties.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "required": [
+        "cs"
+      ],
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "pojmy": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "title": "Typ objektu práva",
+            "description": "Typ jehož instance jsou podtřídami Objektu práva.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Typ objektu práva"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Typ subjektu práva",
+            "description": "Typ jehož instance jsou podtřídami Subjektu práva.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Typ subjektu práva"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "title": "Pojem",
+            "description": "Pojem, který reprezentuje typ subjektu práva, typ objektu práva, vlastnost nebo vztah.",
+            "type": "object",
+            "required": [
+              "iri",
+              "typ",
+              "název"
+            ],
+            "properties": {
+              "iri": {
+                "type": "string",
+                "format": "iri"
+              },
+              "typ": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "allOf": [
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Koncept"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "Pojem"
+                    },
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                ]
+              },
+              "název": {
+                "title": "název",
+                "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+                "type": "object",
+                "additionalProperties": {
+                  "title": "Hodnota v jiném jazyce",
+                  "type": "string"
+                },
+                "required": [
+                  "cs"
+                ],
+                "properties": {
+                  "cs": {
+                    "title": "Hodnota v českém jazyce",
+                    "type": "string"
+                  },
+                  "en": {
+                    "title": "Hodnota v anglickém jazyce",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

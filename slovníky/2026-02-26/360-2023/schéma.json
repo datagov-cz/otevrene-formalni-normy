@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/slovníky/2026-02-26/360-2023/schéma.json",
+  "title": "Tezaurus",
+  "description": "Tezaurus je nejjednodušším typem slovníku.",
+  "type": "object",
+  "required": [
+    "@context",
+    "iri",
+    "typ",
+    "název"
+  ],
+  "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/slovníky/2026-02-26/kompletní/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/slovníky/2026-02-26/kompletní/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
+    "iri": {
+      "type": "string",
+      "format": "iri"
+    },
+    "typ": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "allOf": [
+        {
+          "type": "array",
+          "contains": {
+            "const": "Tezaurus"
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "Slovník"
+          },
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "název": {
+      "title": "název",
+      "description": "skos:prefLabel, skos:altLabel and skos:hiddenLabel are pairwise\n      disjoint properties.",
+      "type": "object",
+      "additionalProperties": {
+        "title": "Hodnota v jiném jazyce",
+        "type": "string"
+      },
+      "required": [
+        "cs"
+      ],
+      "properties": {
+        "cs": {
+          "title": "Hodnota v českém jazyce",
+          "type": "string"
+        },
+        "en": {
+          "title": "Hodnota v anglickém jazyce",
+          "type": "string"
+        }
+      }
+    },
+    "pojmy": {
+      "type": "array",
+      "items": {
+        "title": "Pojem",
+        "description": "Pojem, který reprezentuje typ subjektu práva, typ objektu práva, vlastnost nebo vztah.",
+        "type": "object",
+        "required": [
+          "iri",
+          "typ",
+          "název",
+          "způsob-získání-údaje",
+          "typ-obsahu-údaje",
+          "způsoby-sdílení-údaje"
+        ],
+        "properties": {
+          "iri": {
+            "type": "string",
+            "format": "iri"
+          },
+          "typ": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "allOf": [
+              {
+                "type": "array",
+                "contains": {
+                  "const": "Koncept"
+                },
+                "items": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "Pojem"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "název": {
+            "title": "název",
+            "description": "Název pojmu. Je unikátní v rámci názvů pojmů ve slovníku.",
+            "type": "object",
+            "additionalProperties": {
+              "title": "Hodnota v jiném jazyce",
+              "type": "string"
+            },
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "způsob-získání-údaje": {
+            "title": "má způsob získání údaje",
+            "description": "Orgán veřejné správy strukturuje data vedená v informačním systému na údaje následujících kategorií: a) základních registrů: údaje čerpané pro výkon agendy ze základních registrů b) jiných agend: údaje získávané pro výkon agendy od jiných úřadů c) vlastní: údaje vznikající při výkonu agendy, které mají evidenční charakter, tedy vztahují se k objektu nebo subjektu práva za účelem výkonu veřejné správy d) provozní: údaje vznikající při výkonu agendy, které nemají evidenční charakter a nevznikají za účelem výkonu veřejné správy",
+            "type": "string",
+            "pattern": "^způsoby-získání:[^/]+$",
+            "examples": [
+              "způsoby-získání:základních-registrů",
+              "způsoby-získání:jiných-agend",
+              "způsoby-získání:vlastní",
+              "způsoby-získání:provozní"
+            ]
+          },
+          "typ-obsahu-údaje": {
+            "title": "má typ obsahu údaje",
+            "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle jejich obsahu na údaje:  a) identifikační: údaje, které, které samostatně nebo ve skupině identifikují konkrétní subjekt práva  b) evidenční: údaje, které neidentifikují konkrétní subjekt práva, ale váží se k subjektu nebo objektu práva v rámci agendy a evidence, která se v ní vede  c) statistické: údaje, které seskupují a formou anonymizace či pseudonymizace zamezují vazbě konkrétní subjekt práva",
+            "type": "string",
+            "pattern": "^typy-obsahu:[^/]+$",
+            "examples": [
+              "typy-obsahu:identifikační",
+              "typy-obsahu:evidenční",
+              "typy-obsahu:statistické"
+            ]
+          },
+          "způsoby-sdílení-údaje": {
+            "title": "má způsob sdílení údaje",
+            "description": "Orgán veřejné správy strukturuje data vedená v informačním systému podle způsobu jejich sdílení na údaje:  a) veřejně přístupné: údaje publikované veřejně ve formě otevřených dat či jakkoliv jinak b) poskytované na žádost: údaje poskytované na žádost subjektu práva nebo na základě zákona o svobodném přístupu k informacím c) zpřístupňované pro výkon agendy: údaje sdílené jiným agendám, které mají oprávněný zájem je využívat pro výkon své působnosti d) nesdílené: údaje, které nejsou sdílené žádným z předchozích způsobů",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^způsoby-sdílení:[^/]+$",
+              "examples": [
+                "způsoby-sdílení:veřejně-přístupné",
+                "způsoby-sdílení:poskytované-na-žádost",
+                "způsoby-sdílení:zpřístupňované-pro-výkon-agendy",
+                "způsoby-sdílení:nesdílené"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
