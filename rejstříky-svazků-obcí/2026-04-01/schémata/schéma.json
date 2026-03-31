@@ -334,52 +334,46 @@
                               "title": "má bydliště fyzické osoby",
                               "description": "Člověk má bydliště v místě, kde se zdržuje s úmyslem žít tam s výhradou změny okolností trvale; takový úmysl může vyplývat z jeho prohlášení nebo z okolností případu. Uvádí-li člověk jako své bydliště jiné místo než své skutečné bydliště, může se každý dovolat i jeho skutečného bydliště. Proti tomu, kdo se v dobré víře dovolá uvedeného místa, nemůže člověk namítat, že má své skutečné bydliště v jiném místě.",
                               "type": "object",
-                              "anyOf": [
+                              "oneOf": [
                                 {
-                                  "type": "object"
+                                  "type": "object",
+                                  "required": [
+                                    "adresa_neevidovaná_v_rúian"
+                                  ],
+                                  "properties": {
+                                    "adresa_neevidovaná_v_rúian": {
+                                      "title": "Řetězec",
+                                      "type": "string"
+                                    }
+                                  }
                                 },
                                 {
                                   "type": "object",
-                                  "oneOf": [
-                                    {
-                                      "type": "object",
-                                      "required": [
-                                        "adresa_neevidovaná_v_rúian"
-                                      ],
-                                      "properties": {
-                                        "adresa_neevidovaná_v_rúian": {
-                                          "title": "Řetězec",
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    {
-                                      "type": "object",
-                                      "required": [
-                                        "zahraniční_adresa"
-                                      ],
-                                      "properties": {
-                                        "zahraniční_adresa": {
-                                          "title": "lokalizační popis",
-                                          "type": "string"
-                                        }
-                                      }
-                                    },
-                                    {
-                                      "type": "object",
-                                      "required": [
-                                        "adresní_místo"
-                                      ],
-                                      "properties": {
-                                        "adresní_místo": {
-                                          "title": "má kód adresního místa",
-                                          "type": "string",
-                                          "format": "iri",
-                                          "pattern": "^https://linked.cuzk.gov.cz/resource/ruian/adresni-misto/[0-9]+$"
-                                        }
-                                      }
+                                  "required": [
+                                    "zahraniční_adresa"
+                                  ],
+                                  "properties": {
+                                    "zahraniční_adresa": {
+                                      "title": "lokalizační popis",
+                                      "type": "string"
                                     }
-                                  ]
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "required": [
+                                    "adresní_místo"
+                                  ],
+                                  "properties": {
+                                    "adresní_místo": {
+                                      "type": "string",
+                                      "format": "iri",
+                                      "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]+$",
+                                      "examples": [
+                                        "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+                                      ]
+                                    }
+                                  }
                                 }
                               ]
                             }
@@ -440,7 +434,10 @@
               "iri": {
                 "type": "string",
                 "format": "iri",
-                "pattern": "^https://linked.cuzk.gov.cz/resource/ruian/obec/[0-9]+$"
+                "pattern": "^https://linked.cuzk.cz/resource/ruian/obec/[0-9]+$",
+                "examples": [
+                  "https://linked.cuzk.cz/resource/ruian/obec/502235"
+                ]
               },
               "typ": {
                 "oneOf": [
@@ -508,10 +505,12 @@
             ],
             "properties": {
               "adresní_místo_sídla": {
-                "title": "kód adresního místa",
                 "type": "string",
                 "format": "iri",
-                "pattern": "^https://linked.cuzk.gov.cz/resource/ruian/adresni-misto/[0-9]+$"
+                "pattern": "^https://linked.cuzk.cz/resource/ruian/adresni-misto/[0-9]+$",
+                "examples": [
+                  "https://linked.cuzk.cz/resource/ruian/adresni-misto/16135661"
+                ]
               }
             }
           }
@@ -551,7 +550,7 @@
           "title": "spravuje vyšší územní samosprávní prvek",
           "type": "string",
           "format": "iri",
-          "pattern": "^https://linked.cuzk.gov.cz/resource/ruian/vusc/[0-9]+$"
+          "pattern": "^https://linked.cuzk.cz/resource/ruian/vusc/[0-9]+$"
         },
         "ičo": {
           "title": "identifikační číslo osoby",
