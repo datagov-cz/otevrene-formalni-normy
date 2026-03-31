@@ -422,65 +422,86 @@
             }
           },
           "má_členskou_obec": {
-            "title": "Obec jako člen dobrovolného svazku obcí",
-            "type": "object",
-            "required": [
-              "iri",
-              "název",
-              "ičo",
-              "den_vzniku_členství"
-            ],
-            "properties": {
-              "iri": {
-                "type": "string",
-                "format": "iri",
-                "pattern": "^https://linked.cuzk.cz/resource/ruian/obec/[0-9]+$",
-                "examples": [
-                  "https://linked.cuzk.cz/resource/ruian/obec/502235"
-                ]
-              },
-              "typ": {
-                "oneOf": [
-                  {
-                    "const": "Obec jako člen dobrovolného svazku obcí"
-                  },
-                  {
-                    "type": "array",
-                    "contains": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "title": "Obec jako člen dobrovolného svazku obcí",
+              "type": "object",
+              "required": [
+                "iri",
+                "název",
+                "ičo",
+                "den_vzniku_členství"
+              ],
+              "properties": {
+                "iri": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^https://linked.cuzk.cz/resource/ruian/obec/[0-9]+$",
+                  "examples": [
+                    "https://linked.cuzk.cz/resource/ruian/obec/502235"
+                  ]
+                },
+                "typ": {
+                  "oneOf": [
+                    {
                       "const": "Obec jako člen dobrovolného svazku obcí"
                     },
-                    "items": {
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "Obec jako člen dobrovolného svazku obcí"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "název": {
+                  "title": "název obce",
+                  "type": "object",
+                  "additionalProperties": {
+                    "title": "Hodnota v jiném jazyce",
+                    "type": "string"
+                  },
+                  "required": [
+                    "cs"
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
                       "type": "string"
                     }
                   }
-                ]
-              },
-              "název": {
-                "title": "název obce",
-                "type": "string"
-              },
-              "má_nadřazený_kraj": {
-                "title": "má nadřazený kraj 1960",
-                "type": "string",
-                "format": "iri"
-              },
-              "ičo": {
-                "title": "identifikační číslo osoby",
-                "description": "Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.",
-                "type": "string",
-                "pattern": "[0-9]{8}"
-              },
-              "den_vzniku_členství": {
-                "title": "den vzniku členství",
-                "description": "Datum, kdy obec oficiálně vstoupila do daného DSO a stala se jeho členem",
-                "type": "string",
-                "format": "date"
-              },
-              "den_zániku_členství": {
-                "title": "den zániku členství",
-                "description": "Datum, kdy obec ukončila své členství ve svazku, buď na základě rozhodnutí nebo z jiného důvodu (např. zánik svazku nebo vystoupení obce)",
-                "type": "string",
-                "format": "date"
+                },
+                "má_nadřazený_kraj": {
+                  "title": "má nadřazený kraj 1960",
+                  "type": "string",
+                  "format": "iri"
+                },
+                "ičo": {
+                  "title": "identifikační číslo osoby",
+                  "description": "Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.",
+                  "type": "string",
+                  "pattern": "[0-9]{8}"
+                },
+                "den_vzniku_členství": {
+                  "title": "den vzniku členství",
+                  "description": "Datum, kdy obec oficiálně vstoupila do daného DSO a stala se jeho členem",
+                  "type": "string",
+                  "format": "date"
+                },
+                "den_zániku_členství": {
+                  "title": "den zániku členství",
+                  "description": "Datum, kdy obec ukončila své členství ve svazku, buď na základě rozhodnutí nebo z jiného důvodu (např. zánik svazku nebo vystoupení obce)",
+                  "type": "string",
+                  "format": "date"
+                }
               }
             }
           }
