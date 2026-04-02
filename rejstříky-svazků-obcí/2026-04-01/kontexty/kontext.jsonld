@@ -2,6 +2,7 @@
   "@context": {
     "@version": 1.1,
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "zdroje-výčtu-členů": "https://data.dia.gov.cz/zdroj/číselníky/zdroje-výčtu-členů/položky/",
     "iri": "@id",
     "typ": "@type",
     "Rejstřík svazků obcí": {
@@ -10,6 +11,25 @@
         "web": {
           "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/webová-stránka-rejstříku-svazku-obcí",
           "@type": "xsd:anyURI"
+        },
+        "je_veden_krajským_úřadem": {
+          "@reverse": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/vede-rejstřík-svazků-obcí",
+          "@type": "@id",
+          "@context": {
+            "Krajský úřad": {
+              "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/krajský-úřad",
+              "@context": {
+                "spravuje_vyšší_územní_samosprávní_prvek": {
+                  "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/spravuje-vyšší-územní-samosprávní-prvek",
+                  "@type": "@id"
+                },
+                "ičo": {
+                  "@id": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby",
+                  "@type": "xsd:string"
+                }
+              }
+            }
+          }
         },
         "eviduje_svazky_obcí": {
           "@reverse": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/je-zapsán-v-rejstříku",
@@ -143,54 +163,45 @@
                   "@type": "@id",
                   "@container": "@set"
                 },
-                "má_členskou_obec": {
+                "má_člena": {
                   "@reverse": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/je-členem-dobrovolného-svazku-obcí",
                   "@container": "@set",
                   "@context": {
-                    "název": {
-                      "@id": "https://slovník.gov.cz/datový/vfr-1.8.0/pojem/název-obce",
-                      "@container": "@language"
-                    },
-                    "má_nadřazený_kraj": {
-                      "@id": "https://slovník.gov.cz/datový/vfr-1.8.0/pojem/má-nadřazený-kraj-1960",
-                      "@type": "@id"
-                    },
-                    "ičo": {
-                      "@id": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby",
-                      "@type": "xsd:string"
+                    "den_zániku_členství": {
+                      "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/den-zániku-členství",
+                      "@type": "xsd:date"
                     },
                     "den_vzniku_členství": {
                       "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/den-vzniku-členství",
                       "@type": "xsd:date"
                     },
-                    "den_zániku_členství": {
-                      "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/den-zániku-členství",
-                      "@type": "xsd:date"
+                    "ičo": {
+                      "@id": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby",
+                      "@type": "xsd:string"
                     },
-                    "Obec jako člen dobrovolného svazku obcí": {
-                      "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/obec-jako-člen-dobrovolného-svazku-obcí",
+                    "spravuje_obec": {
+                      "@reverse": "https://slovník.gov.cz/legislativní/sbírka/128/2000/pojem/má-území-obce",
+                      "@type": "@id",
+                      "@context": {
+                        "název_obce": {
+                          "@id": "https://slovník.gov.cz/legislativní/sbírka/128/2000/pojem/název-obce",
+                          "@type": "xsd:string"
+                        },
+                        "Obec": {
+                          "@id": "https://slovník.gov.cz/legislativní/sbírka/128/2000/pojem/obec",
+                          "@context": {}
+                        }
+                      }
+                    },
+                    "leží_na_území_vyššího_územního_samosprávního_celku": {
+                      "@reverse": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/má-území-vyššího-územního-samosprávního-celku",
+                      "@type": "@id"
+                    },
+                    "Obecní úřad jako člen dobrovolného svazku obcí": {
+                      "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/obecní-úřad-jako-člen-dobrovolného-svazku-obcí",
                       "@context": {}
                     }
                   }
-                }
-              }
-            }
-          }
-        },
-        "je_veden_krajským_úřadem": {
-          "@reverse": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/vede-rejstřík-svazků-obcí",
-          "@type": "@id",
-          "@context": {
-            "Krajský úřad": {
-              "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/krajský-úřad",
-              "@context": {
-                "spravuje_vyšší_územní_samosprávní_prvek": {
-                  "@id": "https://slovník.gov.cz/generický/rejstřík-svazků-obcí/pojem/spravuje-vyšší-územní-samosprávní-prvek",
-                  "@type": "@id"
-                },
-                "ičo": {
-                  "@id": "https://slovník.gov.cz/legislativní/sbírka/111/2009/pojem/identifikační-číslo-osoby",
-                  "@type": "xsd:string"
                 }
               }
             }

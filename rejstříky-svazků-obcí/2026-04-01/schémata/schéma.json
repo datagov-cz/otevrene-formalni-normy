@@ -53,6 +53,52 @@
       "type": "string",
       "format": "iri"
     },
+    "je_veden_krajským_úřadem": {
+      "title": "Krajský úřad",
+      "description": "Krajský úřad je orgán, jež se podílí na správě obce. ",
+      "type": "object",
+      "required": [
+        "typ",
+        "ičo"
+      ],
+      "properties": {
+        "iri": {
+          "type": "string",
+          "format": "iri"
+        },
+        "typ": {
+          "oneOf": [
+            {
+              "const": "Krajský úřad"
+            },
+            {
+              "type": "array",
+              "contains": {
+                "const": "Krajský úřad"
+              },
+              "items": {
+                "type": "string"
+              }
+            }
+          ]
+        },
+        "spravuje_vyšší_územní_samosprávní_prvek": {
+          "title": "spravuje vyšší územní samosprávní prvek",
+          "type": "string",
+          "format": "iri",
+          "pattern": "^https://linked.cuzk.cz/resource/ruian/vusc/[0-9]+$",
+          "examples": [
+            "https://linked.cuzk.cz/resource/ruian/vusc/141"
+          ]
+        },
+        "ičo": {
+          "title": "identifikační číslo osoby",
+          "description": "Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.",
+          "type": "string",
+          "pattern": "[0-9]{8}"
+        }
+      }
+    },
     "eviduje_svazky_obcí": {
       "type": "array",
       "items": {
@@ -67,7 +113,7 @@
           "datum_vzniku",
           "předmět_činnosti",
           "zdroj_výčtu_členů",
-          "má_členskou_obec"
+          "má_člena"
         ],
         "properties": {
           "iri": {
@@ -104,6 +150,9 @@
               "title": "Hodnota v jiném jazyce",
               "type": "string"
             },
+            "required": [
+              "cs"
+            ],
             "properties": {
               "cs": {
                 "title": "Hodnota v českém jazyce",
@@ -417,40 +466,40 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "format": "iri",
-              "pattern": "^https://data.dia.gov.cz/zdroj/číselníky/zdroje-výčtu-členů/položky/.+$"
+              "pattern": "^zdroje-výčtu-členů:.+$"
             }
           },
-          "má_členskou_obec": {
+          "má_člena": {
             "type": "array",
             "minItems": 1,
             "items": {
-              "title": "Obec jako člen dobrovolného svazku obcí",
+              "title": "Obecní úřad jako člen dobrovolného svazku obcí",
+              "description": "Obecní úřad, jehož obce je členem dobrovolného svazku obcí.",
               "type": "object",
               "required": [
-                "iri",
-                "název",
+                "den_vzniku_členství",
                 "ičo",
-                "den_vzniku_členství"
+                "spravuje_obec",
+                "leží_na_území_vyššího_územního_samosprávního_celku"
               ],
               "properties": {
                 "iri": {
                   "type": "string",
                   "format": "iri",
-                  "pattern": "^https://linked.cuzk.cz/resource/ruian/obec/[0-9]+$",
+                  "pattern": "^https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/.+$",
                   "examples": [
-                    "https://linked.cuzk.cz/resource/ruian/obec/502235"
+                    "https://rpp-opendata.egon.gov.cz/odrpp/zdroj/orgán-veřejné-moci/23876450"
                   ]
                 },
                 "typ": {
                   "oneOf": [
                     {
-                      "const": "Obec jako člen dobrovolného svazku obcí"
+                      "const": "Obecní úřad jako člen dobrovolného svazku obcí"
                     },
                     {
                       "type": "array",
                       "contains": {
-                        "const": "Obec jako člen dobrovolného svazku obcí"
+                        "const": "Obecní úřad jako člen dobrovolného svazku obcí"
                       },
                       "items": {
                         "type": "string"
@@ -458,37 +507,11 @@
                     }
                   ]
                 },
-                "název": {
-                  "title": "název obce",
-                  "type": "object",
-                  "additionalProperties": {
-                    "title": "Hodnota v jiném jazyce",
-                    "type": "string"
-                  },
-                  "required": [
-                    "cs"
-                  ],
-                  "properties": {
-                    "cs": {
-                      "title": "Hodnota v českém jazyce",
-                      "type": "string"
-                    },
-                    "en": {
-                      "title": "Hodnota v anglickém jazyce",
-                      "type": "string"
-                    }
-                  }
-                },
-                "má_nadřazený_kraj": {
-                  "title": "má nadřazený kraj 1960",
+                "den_zániku_členství": {
+                  "title": "den zániku členství",
+                  "description": "Datum, kdy obec ukončila své členství ve svazku, buď na základě rozhodnutí nebo z jiného důvodu (např. zánik svazku nebo vystoupení obce)",
                   "type": "string",
-                  "format": "iri"
-                },
-                "ičo": {
-                  "title": "identifikační číslo osoby",
-                  "description": "Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.",
-                  "type": "string",
-                  "pattern": "[0-9]{8}"
+                  "format": "date"
                 },
                 "den_vzniku_členství": {
                   "title": "den vzniku členství",
@@ -496,11 +519,58 @@
                   "type": "string",
                   "format": "date"
                 },
-                "den_zániku_členství": {
-                  "title": "den zániku členství",
-                  "description": "Datum, kdy obec ukončila své členství ve svazku, buď na základě rozhodnutí nebo z jiného důvodu (např. zánik svazku nebo vystoupení obce)",
+                "ičo": {
+                  "title": "identifikační číslo osoby",
+                  "description": "Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.",
                   "type": "string",
-                  "format": "date"
+                  "pattern": "[0-9]{8}"
+                },
+                "spravuje_obec": {
+                  "title": "Obec",
+                  "description": "Obec je základním územním samosprávným společenstvím občanů; tvoří územní celek, který je vymezen hranicí území obce.",
+                  "type": "object",
+                  "required": [
+                    "iri",
+                    "název_obce"
+                  ],
+                  "properties": {
+                    "iri": {
+                      "type": "string",
+                      "format": "iri",
+                      "pattern": "^https://linked.cuzk.cz/resource/ruian/obec/[0-9]+$",
+                      "examples": [
+                        "https://linked.cuzk.cz/resource/ruian/obec/540048"
+                      ]
+                    },
+                    "typ": {
+                      "oneOf": [
+                        {
+                          "const": "Obec"
+                        },
+                        {
+                          "type": "array",
+                          "contains": {
+                            "const": "Obec"
+                          },
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ]
+                    },
+                    "název_obce": {
+                      "title": "název obce",
+                      "type": "string"
+                    }
+                  }
+                },
+                "leží_na_území_vyššího_územního_samosprávního_celku": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^https://linked.cuzk.cz/resource/ruian/vusc/[0-9]+$",
+                  "examples": [
+                    "https://linked.cuzk.cz/resource/ruian/vusc/141"
+                  ]
                 }
               }
             }
@@ -536,49 +606,6 @@
             }
           }
         ]
-      }
-    },
-    "je_veden_krajským_úřadem": {
-      "title": "Krajský úřad",
-      "description": "Krajský úřad je orgán, jež se podílí na správě obce. ",
-      "type": "object",
-      "required": [
-        "typ",
-        "ičo"
-      ],
-      "properties": {
-        "iri": {
-          "type": "string",
-          "format": "iri"
-        },
-        "typ": {
-          "oneOf": [
-            {
-              "const": "Krajský úřad"
-            },
-            {
-              "type": "array",
-              "contains": {
-                "const": "Krajský úřad"
-              },
-              "items": {
-                "type": "string"
-              }
-            }
-          ]
-        },
-        "spravuje_vyšší_územní_samosprávní_prvek": {
-          "title": "spravuje vyšší územní samosprávní prvek",
-          "type": "string",
-          "format": "iri",
-          "pattern": "^https://linked.cuzk.cz/resource/ruian/vusc/[0-9]+$"
-        },
-        "ičo": {
-          "title": "identifikační číslo osoby",
-          "description": "Identifikační číslo osoby je jednoznačné číslo, jehož přidělení je spojeno s registrací nebo evidencí osoby.",
-          "type": "string",
-          "pattern": "[0-9]{8}"
-        }
       }
     }
   }
