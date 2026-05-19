@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/identifikátor-specifického-omezení/identifikator-specifickeho-omezeni_schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Identifikátor specifického omezení",
+        "description": "1 až N specifických omezení (identifikátorů).",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "kód-identifikátoru-specifického-omezení",
+          "název-identifikátoru-specifického-omezení"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^identifikátor-specifického-omezení/SOI-[0-9]+$",
+            "examples": [
+              "identifikátor-specifického-omezení/SOI-12"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "identifikátor-specifického-omezení"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "identifikátor-specifického-omezení"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "kód-identifikátoru-specifického-omezení": {
+            "title": "kód identifikátoru specifického omezení",
+            "description": "Kód specifického omezení.",
+            "type": "string",
+            "pattern": "^SOI-[0-9]+$",
+            "examples": [
+              "SOI-12"
+            ]
+          },
+          "název-identifikátoru-specifického-omezení": {
+            "title": "název identifikátoru specifického omezení",
+            "description": "Textové označení specifického omezení.",
+            "type": "object",
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "popis-identifikátoru-specifického-omezení": {
+            "title": "popis identifikátoru specifického omezení",
+            "description": "Slovní popis specifického omezení",
+            "type": "object",
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

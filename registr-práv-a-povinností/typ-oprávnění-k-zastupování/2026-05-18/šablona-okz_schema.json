@@ -1,0 +1,608 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/šablona-okz/šablona-okz_schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Šablona",
+        "description": "Šablona oprávnění k zastupování",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "název-šablony",
+          "platnost-šablony-od",
+          "postupitelnost-oprávnění",
+          "prezidiální-postupitelnost",
+          "stav-šablony",
+          "typ-oprávnění-k-zastupování",
+          "zastupovaného-lze-definovat-násobně",
+          "zastupujícího-lze-definovat-násobně",
+          "kód-šablony",
+          "gestor-šablony"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^šablona-okz/SOZ-[0-9]+-[0-9]+-v[0-9]+$",
+            "examples": [
+              "šablona-okz/SOZ-2-10-v1"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "šablona-okz"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "šablona-okz"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "datum-schválení-šablony": {
+            "title": "datum schválení šablony",
+            "description": "Datum schválení",
+            "type": "string",
+            "format": "date"
+          },
+          "datum-zneplatnění-šablony": {
+            "title": "datum zneplatnění šablony",
+            "description": "Datum zneplatnění",
+            "type": "string",
+            "format": "date"
+          },
+          "oprávnění-zastupování-zřetězitelné": {
+            "title": "je oprávnění zastupování zřetězitelné",
+            "description": "Logická hodnota značící jestli je oprávnění k zastupování zřetězitelné",
+            "type": "boolean"
+          },
+          "lokální-omezení": {
+            "title": "lokální omezení",
+            "description": "Logická hodnota lokálního omezení",
+            "type": "boolean"
+          },
+          "lze-definovat-volné-omezení": {
+            "title": "lze definovat volné omezení",
+            "description": "Seznam volných omezení",
+            "type": "boolean"
+          },
+          "název-šablony": {
+            "title": "název šablony",
+            "description": "Název šablony",
+            "type": "object",
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "platnost-šablony-do": {
+            "title": "Platnost šablony do",
+            "description": "Platnost šablony do",
+            "type": "string",
+            "format": "date"
+          },
+          "platnost-šablony-od": {
+            "title": "Platnost šablony od",
+            "description": " Platnost šablony od",
+            "type": "string",
+            "format": "date"
+          },
+          "popis-šablony": {
+            "title": "popis šablony",
+            "description": "Popis šablony",
+            "type": "object",
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "postupitelnost-oprávnění": {
+            "title": "postupitelnost oprávnění",
+            "description": "Informace o  tom, zda oprávnění k zastupování sestaveno podle příslušné šablony může být postoupeno či ne. ",
+            "type": "boolean"
+          },
+          "prezidiální-postupitelnost": {
+            "title": "prezidiální postupitelnost",
+            "description": "Informace o tom, zda podle příslušné šablony lze sestavit oprávnění k zastupování s definicí prezidiálního postoupení.",
+            "type": "boolean"
+          },
+          "stav-šablony": {
+            "title": "stav šablony",
+            "description": "Stav šablony",
+            "type": "string",
+            "pattern": "^stav-šablony/[A-Z-_]+$",
+            "examples": [
+              "stav-šablony/NEPLATNE"
+            ]
+          },
+          "typ-oprávnění-k-zastupování": {
+            "title": "typ oprávnění k zastupování",
+            "description": " Typ oprávnění k zastupování",
+            "type": "string",
+            "pattern": "^typ-okz/[A-Z_-]+$",
+            "examples": [
+              "typ-okz/IMPL_ZZ"
+            ]
+          },
+          "zastupovaného-lze-definovat-násobně": {
+            "title": "zastupovaného lze definovat násobně",
+            "description": "Logická hodnota jestli je možné zastupovaného definovat násobně",
+            "type": "boolean"
+          },
+          "zastupujícího-lze-definovat-násobně": {
+            "title": "zastupujícího lze definovat násobně",
+            "description": "Logická hodnota jestli je možné zastupujícího definovat násobně",
+            "type": "boolean"
+          },
+          "kód-šablony": {
+            "title": "kód šablony",
+            "description": "Kód šablony",
+            "type": "string",
+            "pattern": "^SOZ-[0-9]+-[0-9]+-v[0-9]+$",
+            "examples": [
+              "SOZ-2-10-v1"
+            ]
+          },
+          "role-zastupujícího": {
+            "title": "role zastupujícího",
+            "description": "Informace v jaké „roli“ vystupuje zastupující v oprávnění k zastupování sestaveném podle této šablony ",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^role-zastupování/[A-Z0-9-_]+$",
+              "examples": [
+                "role-zastupování/RE-22"
+              ]
+            }
+          },
+          "objekt-šablony": {
+            "title": "obsahuje informace o objektu šablony",
+            "type": "array",
+            "items": {
+              "title": "Objekt šablony",
+              "description": "Předpis omezení na objekt oprávnění",
+              "type": "object",
+              "required": [
+                "id",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^objekt-šablony/O-[0-9]+$",
+                  "examples": [
+                    "objekt-šablony/O-21"
+                  ]
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "objekt-šablony"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "objekt-šablony"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "lze-definovat-objekt-násobně": {
+                  "title": "lze definovat objekt násobně",
+                  "description": "informace o tom, zda lze objekt oprávnění v oprávnění k zastupování sestaveném podle příslušné šablony definovat (zadat) násobně (X různých konkrétních objektů oprávnění, každý z definovaných objektů oprávnění musí mýt unikátní seznam identifikátorů).",
+                  "type": "boolean"
+                },
+                "lze-omezení-objektu-definovat-uživatelem": {
+                  "title": "lze omezení objektu definovat uživatelem",
+                  "description": "informace o tom, zda musí nebo může uživatel definovat při sestavování oprávnění  k zastupování podle dané šablonu objekt oprávnění (v případě že je objekt oprávnění v šabloně definován).",
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "omezení-šablony": {
+            "title": "obsahuje omezení šablony",
+            "description": "Informace o rozsahu omezení oprávnění k zastupování z pohledu služeb VS, pro které je fyzická nebo právnická osoba oprávněna k zastupování. Jedná se o výčet přípustných kombinaci agenda, služba, úkon a OVM pro které lze oprávnění k zastupování využít. ",
+            "type": "array",
+            "items": {
+              "title": "Omezení šablony",
+              "description": "Informace o rozsahu omezení oprávnění k zastupování z pohledu služeb VS, pro které je fyzická nebo právnická osoba oprávněna k zastupování. Jedná se o výčet přípustných kombinaci agenda, služba, úkon a OVM pro které lze oprávnění k zastupování využít. ",
+              "type": "object",
+              "required": [
+                "id",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^omezení-šablony/[0-9]+$",
+                  "examples": [
+                    "omezení-šablony/23"
+                  ]
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "omezení-šablony"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "omezení-šablony"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "popis-omezení-šablony": {
+                  "title": "popis omezení šablony",
+                  "description": "Popis omezení šablony",
+                  "type": "object",
+                  "required": [
+                    "cs"
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
+                      "type": "string"
+                    }
+                  }
+                },
+                "zobrazit-jen-popis": {
+                  "title": "zobrazit jen popis",
+                  "description": "Logická hodnota určuje, zda se uživateli zobrazuje celý seznam omezení, nebo jen popis omezení",
+                  "type": "boolean"
+                },
+                "lze-uvést-ovm": {
+                  "title": "uživatel může uvést OVM",
+                  "description": "Logická hodnota jestli uživatel při sestavování oprávnění může uvést konkrétní OVM, pro které dané oprávnění platí.",
+                  "type": "boolean"
+                },
+                "upřesňuje-omezení-šablony": {
+                  "title": "upřesňuje omezení šablony",
+                  "type": "array",
+                  "items": {
+                    "title": "Skupina omezení šablony",
+                    "description": "1 až N skupin služeb VS pomocí kterých lze omezit sestavené oprávnění k zastupování.",
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "type",
+                      "název-skupiny-omezení"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "iri",
+                        "pattern": "^skupina-omezení-šablony/[0-9]+$",
+                        "examples": [
+                          "skupina-omezení-šablony/45"
+                        ]
+                      },
+                      "type": {
+                        "oneOf": [
+                          {
+                            "const": "skupina-omezení-šablony"
+                          },
+                          {
+                            "type": "array",
+                            "contains": {
+                              "const": "skupina-omezení-šablony"
+                            },
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        ]
+                      },
+                      "lze-skupina-omezení-volit-uživatelem": {
+                        "title": "lze skupina omezení volit uživatelem",
+                        "description": "informace o tom, zda služby VS definované  v dané skupině jsou uvedeny vždy, nebo má uživatel při sestavování oprávnění možnost volby, zda je chce či nechce uvést.",
+                        "type": "string",
+                        "pattern": "^volba-omezení-uživatelem/[A-Z-_]+$",
+                        "examples": [
+                          "volba-omezení-uživatelem/PRI_SESTAVENI"
+                        ]
+                      },
+                      "název-skupiny-omezení": {
+                        "title": "název skupiny omezení",
+                        "description": "Název skupiny omezení je textové označení skupiny omezení.",
+                        "type": "object",
+                        "required": [
+                          "cs"
+                        ],
+                        "properties": {
+                          "cs": {
+                            "title": "Hodnota v českém jazyce",
+                            "type": "string"
+                          },
+                          "en": {
+                            "title": "Hodnota v anglickém jazyce",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "popis-skupiny-omezení-šablony": {
+                        "title": "popis skupiny omezení šablony",
+                        "description": "Slovní popis skupiny služeb VS definující omezení na služby VS.",
+                        "type": "object",
+                        "required": [
+                          "cs"
+                        ],
+                        "properties": {
+                          "cs": {
+                            "title": "Hodnota v českém jazyce",
+                            "type": "string"
+                          },
+                          "en": {
+                            "title": "Hodnota v anglickém jazyce",
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "zobrazit-jen-popis-skupiny-omezení": {
+                        "title": "zobrazit jen popis skupiny omezení",
+                        "description": "Informace o tom, zda se má uživateli zobrazit jen popis skupiny omezení na služby nebo i detailní informace definované ve skupině omezení.",
+                        "type": "boolean"
+                      },
+                      "kombinace-skupiny-omezení": {
+                        "title": "obsahuje kombinace skupiny omezení",
+                        "type": "array",
+                        "items": {
+                          "title": "Kombinace skupiny omezení",
+                          "type": "object",
+                          "required": [
+                            "agenda-na-kterou-je-oprávnění-omezeno"
+                          ],
+                          "properties": {
+                            "agenda-na-kterou-je-oprávnění-omezeno": {
+                              "title": "vymezuje agendu, na které je oprávnění omezeno",
+                              "description": "Předpis omezení na agendy",
+                              "type": "string",
+                              "format": "iri",
+                              "pattern": "^agenda/A[0-9]+$",
+                              "examples": [
+                                "agenda/A101"
+                              ]
+                            },
+                            "ovm-u-kterého-lze-oprávnění-použít": {
+                              "title": "vymezuje OVM, u kterého lze oprávnění použít",
+                              "type": "string",
+                              "format": "iri",
+                              "pattern": "^orgán-veřejné-moci/[0-9]{8}$",
+                              "examples": [
+                                "orgán-veřejné-moci/00007064"
+                              ]
+                            },
+                            "služba-na-kterou-je-oprávnění-omezeno": {
+                              "title": "vymezuje služby na které je oprávnění omezeno",
+                              "description": "Předpis omezení na služby",
+                              "type": "string",
+                              "format": "iri",
+                              "pattern": "^služba/S[0-9]+$",
+                              "examples": [
+                                "služba/S980"
+                              ]
+                            },
+                            "úkon-na-který-je-oprávnění-omezeno": {
+                              "title": "vymezuje úkony, na které je oprávnění omezeno",
+                              "description": "Předpis omezení na úkony",
+                              "type": "string",
+                              "format": "iri",
+                              "pattern": "^úkon/U[0-9]+",
+                              "examples": [
+                                "úkon/U1290"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "specifické-omezení": {
+            "title": "obsahuje specifické omezení",
+            "description": "Předpis specifických omezení",
+            "type": "array",
+            "items": {
+              "title": "Specifické omezení",
+              "description": "Pokud je z pohledu omezení oprávnění definovat omezení, které nelze vymezit výčtem služeb VS a úkonů na které se oprávnění k zastupování vztahuje je možné definovat tzv. „Specifická omezení“.",
+              "type": "object",
+              "required": [
+                "id",
+                "type",
+                "název-specifického-omezení"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^specifické-omezení/[0-9]+$",
+                  "examples": [
+                    "specifické-omezení/67"
+                  ]
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "specifické-omezení"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "specifické-omezení"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "specifické-omezení-volitelné-uživatelem": {
+                  "title": "je specifické omezení volitelné uživatelem",
+                  "description": "informace o tom, zde je skupina specifických omezení uvedeno vždy, nebo má uživatel při sestavování oprávnění k zastupování možnost volby, zda je chce či nechce uvést.",
+                  "type": "string",
+                  "pattern": "^volba-omezení-uživatelem/[A-Z-_]+$",
+                  "examples": [
+                    "volba-omezení-uživatelem/PRI_SESTAVENI"
+                  ]
+                },
+                "název-specifického-omezení": {
+                  "title": "název specifického omezení",
+                  "description": "Název skupiny specifického omezení je textové označení skupiny specifického omezení.",
+                  "type": "object",
+                  "required": [
+                    "cs"
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
+                      "type": "string"
+                    }
+                  }
+                },
+                "popis-specifického-omezení": {
+                  "title": "popis specifického omezení",
+                  "description": "Slovní popis skupiny specifického omezení.",
+                  "type": "object",
+                  "required": [
+                    "cs"
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
+                      "type": "string"
+                    }
+                  }
+                },
+                "zobrazit-jen-popis-specifického-omezení": {
+                  "title": "zobrazit jen popis specifického omezení",
+                  "description": "Informace o tom, zda se má uživateli zobrazit jen popis skupiny specifických omezení nebo i detailní informace definované o jednotlivých specifických omezeních (identifikátorech).",
+                  "type": "boolean"
+                },
+                "identifikátory-specifického-omezení": {
+                  "title": "má vydefinované identifikátory specifického omezení",
+                  "description": "Seznam Identifikátorů omezení",
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "iri",
+                    "pattern": "^identifikátor-specifického-omezení/SOI-[0-9]+$",
+                    "examples": [
+                      "identifikátor-specifického-omezení/SOI-12"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "role-zastoupeného": {
+            "title": "role zastoupeného",
+            "description": "Informace v jaké „roli“ vystupuje zastupovaný v oprávnění k zastupování sestaveném podle této šablony ",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "iri",
+              "pattern": "^role-zastupování/[A-Z0-9-_]+$",
+              "examples": [
+                "role-zastupování/RE-22"
+              ]
+            }
+          },
+          "šablonu-lze-využít-v-různých-systémech": {
+            "title": "šablonu lze využít v různých systémech",
+            "description": "Informace o tom, kde lze podle příslušné šablony sestavit oprávnění k zastupování",
+            "type": "array",
+            "items": {
+              "title": "Šablonu lze využít",
+              "description": "Informace o tom, kde lze podle příslušné šablony sestavit oprávnění k zastupování a to zapsat do AIS REZA",
+              "type": "object",
+              "required": [
+                "typ-systému"
+              ],
+              "properties": {
+                "typ-systému": {
+                  "title": "systém, kde lze šablonu využít",
+                  "description": "Prostředí, kde lze podle příslušné šablony sestavit OKZ a zapsat ho do AIS REZA.",
+                  "type": "string",
+                  "pattern": "^typ-sytému/[A-Za-z_-]+$",
+                  "examples": [
+                    "typ-sytému/CzP"
+                  ]
+                },
+                "url-portálu": {
+                  "title": "URL, kde lze šablonu využít",
+                  "description": "URL portálu, na kterém lze spustit průvodce sestavení OKZ dle příslušné šablony.",
+                  "type": "string",
+                  "format": "iri"
+                }
+              }
+            }
+          },
+          "gestor-šablony": {
+            "title": "je gestorem šablony",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^orgán-veřejné-moci/[0-9]{8}$",
+            "examples": [
+              "orgán-veřejné-moci/00007064"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

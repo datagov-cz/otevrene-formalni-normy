@@ -1,0 +1,90 @@
+@startuml
+set namespaceSeparator none
+class "Šablona" {
+  "datum schválení šablony": date
+  "datum zneplatnění šablony": date
+  "je oprávnění zastupování zřetězitelné": boolean
+  "lokální omezení": boolean
+  "lze definovat volné omezení": string
+  "název šablony": text
+  "Platnost šablony do": date
+  "Platnost šablony od": date
+  "popis šablony": text
+  "postupitelnost oprávnění": boolean
+  "prezidiální postupitelnost": boolean
+  "stav šablony": string
+  "typ oprávnění k zastupování": string
+  "zastupovaného lze definovat násobně": boolean
+  "zastupujícího lze definovat násobně": boolean
+  "kód šablony": string
+}
+
+class "Role účastníků při zastupování" {
+}
+
+class "Objekt šablony" {
+  "lze definovat objekt násobně": boolean
+  "lze omezení objektu definovat uživatelem": boolean
+}
+
+class "Omezení šablony" {
+  "popis omezení šablony": text
+  "zobrazit jen popis": boolean
+  "uživatel může uvést OVM": boolean
+}
+
+class "Specifické omezení" {
+  "je specifické omezení volitelné uživatelem": string
+  "název specifického omezení": text
+  "popis specifického omezení": text
+  "zobrazit jen popis specifického omezení": boolean
+}
+
+class "Šablonu lze využít" {
+  "systém, kde lze šablonu využít": string
+  "URL, kde lze šablonu využít": url
+}
+
+class "Orgán veřejné moci nebo soukromoprávní uživatel údajů" {
+}
+
+class "Skupina omezení šablony" {
+  "lze skupina omezení volit uživatelem": string
+  "název skupiny omezení": text
+  "popis skupiny omezení šablony": text
+  "zobrazit jen popis skupiny omezení": boolean
+}
+
+class Agenda {
+}
+
+class "Orgán veřejné moci" {
+}
+
+class "Služba veřejné správy" {
+}
+
+class "Úkon služby veřejné správy" {
+}
+
+class "Identifikátor specifického omezení" {
+}
+
+class "Kombinace skupiny omezení" {
+}
+
+"Šablona" -- "Role účastníků při zastupování" :  "role zastupujícího"
+"Šablona" -- "Objekt šablony" :  "obsahuje informace o objektu šablony"
+"Šablona" -- "Omezení šablony" :  "obsahuje omezení šablony"
+"Šablona" -- "Specifické omezení" :  "obsahuje specifické omezení"
+"Šablona" -- "Role účastníků při zastupování" :  "role zastoupeného"
+"Šablona" -- "Šablonu lze využít" :  "šablonu lze využít v různých systémech"
+"Šablona" -- "1..1" "Orgán veřejné moci nebo soukromoprávní uživatel údajů" :  "je gestorem šablony"
+"Omezení šablony" -- "Skupina omezení šablony" :  "upřesňuje omezení šablony"
+"Specifické omezení" -- "Identifikátor specifického omezení" :  "má vydefinované identifikátory specifického omezení"
+"Skupina omezení šablony" -- "1..1" Agenda :  "vymezuje agendu, na které je oprávnění omezeno"
+"Skupina omezení šablony" -- "0..1" "Orgán veřejné moci" :  "vymezuje OVM, u kterého lze oprávnění použít"
+"Skupina omezení šablony" -- "0..1" "Služba veřejné správy" :  "vymezuje služby na které je oprávnění omezeno"
+"Skupina omezení šablony" -- "0..1" "Úkon služby veřejné správy" :  "vymezuje úkony, na které je oprávnění omezeno"
+"Skupina omezení šablony" -- "Kombinace skupiny omezení" :  "obsahuje kombinace skupiny omezení"
+@enduml

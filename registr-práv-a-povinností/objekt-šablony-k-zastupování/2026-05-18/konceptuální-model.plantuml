@@ -1,0 +1,35 @@
+@startuml
+set namespaceSeparator none
+class "Objekt šablony" {
+  "kód objektu šablony": string
+  "název objektu šablony": text
+  "popis objektu šablony": text
+  "služba ověření existence objektu": url
+  "služba poskytnutá seznamu objektu": url
+}
+
+class "Identifikátor objektu šablony" {
+  "datový typ identifikátoru objektu šablony": string
+  "je identifikátor objektu šablony volitelný uživatelem": boolean
+  "kód identifikátoru šablony": string
+  "název identifikátoru objektu šablony": text
+  "popis identifikátoru šablony": text
+}
+
+class "Objekt nebo subjekt údajů" {
+}
+
+class "Vlastnost datového typu" {
+  "hodnota vlastnosti datového typu": string
+  "název vlastnosti datového typu": string
+}
+
+class "Údaj" {
+}
+
+"Objekt šablony" -- "Identifikátor objektu šablony" :  "má vydefinované identifikátory objektu šablony"
+"Objekt šablony" -- "0..1" "Objekt nebo subjekt údajů" :  "odpovídá objektu nebo subjektu údajů"
+"Identifikátor objektu šablony" -- "Vlastnost datového typu" :  "má vlastnost datového typu"
+"Identifikátor objektu šablony" -- "Údaj" :  "je součástí identifikátoru objektu šablony"
+"Identifikátor objektu šablony" -- "0..1" "Údaj" :  "odpovídá údaji vedenému agendou"
+@enduml

@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ofn.gov.cz/registr-práv-a-povinností/objekt-šablony/objekt-šablony_schema.json",
+  "type": "object",
+  "required": [
+    "položky"
+  ],
+  "properties": {
+    "položky": {
+      "type": "array",
+      "items": {
+        "title": "Objekt šablony",
+        "description": "Předpis omezení na objekt oprávnění",
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "kód-objektu-šablony",
+          "název-objektu-šablony"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "iri",
+            "pattern": "^objekt-šablony/O-[0-9]+$",
+            "examples": [
+              "objekt-šablony/O-21"
+            ]
+          },
+          "type": {
+            "oneOf": [
+              {
+                "const": "objekt-šablony"
+              },
+              {
+                "type": "array",
+                "contains": {
+                  "const": "objekt-šablony"
+                },
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          },
+          "kód-objektu-šablony": {
+            "title": "kód objektu šablony",
+            "description": "Kód objektu oprávnění je jednoznačná identifikace objektu oprávnění v REZA",
+            "type": "string",
+            "pattern": "^O-[0-9]+$",
+            "examples": [
+              "O-21"
+            ]
+          },
+          "název-objektu-šablony": {
+            "title": "název objektu šablony",
+            "description": "Název objektu oprávnění je textové označení objektu oprávnění",
+            "type": "object",
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "popis-objektu-šablony": {
+            "title": "popis objektu šablony",
+            "description": "Slovní popis objektu oprávnění (definici, způsob jeho využití při omezení oprávnění,…). ",
+            "type": "object",
+            "required": [
+              "cs"
+            ],
+            "properties": {
+              "cs": {
+                "title": "Hodnota v českém jazyce",
+                "type": "string"
+              },
+              "en": {
+                "title": "Hodnota v anglickém jazyce",
+                "type": "string"
+              }
+            }
+          },
+          "služba-ověření-existence-objektu": {
+            "title": "služba ověření existence objektu",
+            "description": "URL adresa služby, která umožní ověřit existenci příslušného objektu oprávnění.  ",
+            "type": "string",
+            "format": "iri"
+          },
+          "služba-poskytnutá-seznamu-objektu": {
+            "title": "služba poskytnutá seznamu objektu",
+            "description": "URL adresa služby, která poskytne seznam objektu oprávnění, které lze použít v sestavovaném oprávnění k zastupování.",
+            "type": "string",
+            "format": "iri"
+          },
+          "identifikátor-objektu-šablony": {
+            "title": "má vydefinované identifikátory objektu šablony",
+            "description": "Seznam identifikátorů, pomocí kterých lze objekt oprávnění identifikovat.  Objekt oprávnění může mít 1 až M identifikátorů o struktuře",
+            "type": "array",
+            "items": {
+              "title": "Identifikátor objektu šablony",
+              "description": "Datový objekt identifikátoru šablony",
+              "type": "object",
+              "required": [
+                "id",
+                "type",
+                "kód-identifikátoru-šablony",
+                "název-identifikátoru-objektu-šablony"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^identifikátor-objektu-šablony/OI-[0-9]+$",
+                  "examples": [
+                    "identifikátor-objektu-šablony/OI-3"
+                  ]
+                },
+                "type": {
+                  "oneOf": [
+                    {
+                      "const": "identifikátor-objektu-šablony"
+                    },
+                    {
+                      "type": "array",
+                      "contains": {
+                        "const": "identifikátor-objektu-šablony"
+                      },
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "datový-typ-identifikátoru-objektu-šablony": {
+                  "title": "datový typ identifikátoru objektu šablony",
+                  "description": "Zadaná hodnota u identifikátoru musí odpovídat uvedenému typu.",
+                  "type": "string",
+                  "pattern": "^datový-typ/xs:[a-zA-Z]+$",
+                  "examples": [
+                    "datový-typ/xs:date"
+                  ]
+                },
+                "je-identifikátor-objektu-šablony-volitelný-uživatelem": {
+                  "title": "je identifikátor objektu šablony volitelný uživatelem",
+                  "description": "Pokud obsahuje hodnotu „true“ může ale nemusí uživatel definovat hodnotu u daného identifikátoru. Pokud obsahuje hodnotu „false“ musí uživatel definovat hodnotu u daného identifikátoru. Má-li objekt oprávnění definováno výce identifikátorů a všechny mají VolitelneUzivatelem = „true“ musí uživatel zadat hodnotu alespoň u jednoho.",
+                  "type": "boolean"
+                },
+                "kód-identifikátoru-šablony": {
+                  "title": "kód identifikátoru šablony",
+                  "description": "Kód objektu šablony",
+                  "type": "string",
+                  "pattern": "^OI-[0-9]+$",
+                  "examples": [
+                    "OI-3"
+                  ]
+                },
+                "název-identifikátoru-objektu-šablony": {
+                  "title": "název identifikátoru objektu šablony",
+                  "description": "Název identifikátoru objektu šablony",
+                  "type": "object",
+                  "required": [
+                    "cs"
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
+                      "type": "string"
+                    }
+                  }
+                },
+                "popis-identifikátoru-šablony": {
+                  "title": "popis identifikátoru šablony",
+                  "type": "object",
+                  "required": [
+                    "cs"
+                  ],
+                  "properties": {
+                    "cs": {
+                      "title": "Hodnota v českém jazyce",
+                      "type": "string"
+                    },
+                    "en": {
+                      "title": "Hodnota v anglickém jazyce",
+                      "type": "string"
+                    }
+                  }
+                },
+                "vlastnost-datového-typu": {
+                  "title": "má vlastnost datového typu",
+                  "type": "array",
+                  "items": {
+                    "title": "Vlastnost datového typu",
+                    "description": "Ke každému datovému typu lze definovat 0 až N „vlastnosti datového typu“ (např max. délka, regulární výraz omezující obsah)  a jeho hodnotu",
+                    "type": "object",
+                    "required": [
+
+                    ],
+                    "properties": {
+                      "hodnota-vlastnosti-datového-typu": {
+                        "title": "hodnota vlastnosti datového typu",
+                        "description": "např. 150",
+                        "type": "string",
+                        "examples": [
+                          "40"
+                        ]
+                      },
+                      "název-vlastnosti-datového-typu": {
+                        "title": "název vlastnosti datového typu",
+                        "description": "Např. minimální délka",
+                        "type": "string",
+                        "pattern": "^vlastnost/[a-zA-Z-_]+$",
+                        "examples": [
+                          "vlastnost/minLength"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "odpovídá-údaji-vedenému-agendou": {
+                  "title": "odpovídá údaji vedenému agendou",
+                  "description": "Identifikátor objektu šablony odpovídá údaji, který je veden agendou.",
+                  "type": "string",
+                  "format": "iri",
+                  "pattern": "^údaj/[0-9]+-[0-9]+-[0-9]+$",
+                  "examples": [
+                    "údaj/115-1-1"
+                  ]
+                }
+              }
+            }
+          },
+          "objekt-subjekt": {
+            "title": "odpovídá objektu nebo subjektu údajů",
+            "description": "Kód objektu/subjektu v RPP z kterého je odvozen objekt oprávnění.",
+            "type": "string",
+            "format": "iri",
+            "pattern": "^objekt-subjekt/[0-9]+-[0-9]+$",
+            "examples": [
+              "objekt-subjekt/103-12"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
