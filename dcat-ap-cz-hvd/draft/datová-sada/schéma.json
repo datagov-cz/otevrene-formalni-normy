@@ -5,6 +5,7 @@
   "description": "Kolekce dat poskytovaná či řízená jedním zdrojem, která je k dispozici pro přístup či stažení v jednom či více formátech.",
   "type": "object",
   "required": [
+    "@context",
     "iri",
     "typ",
     "název",
@@ -19,6 +20,23 @@
     "distribuce"
   ],
   "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft/datová-sada/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/dcat-ap-cz-hvd/draft/datová-sada/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
     "iri": {
       "type": "string",
       "format": "iri"
