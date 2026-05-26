@@ -5,6 +5,7 @@
   "description": "Řízená kolekce metadat o datových sadách a datových službách",
   "type": "object",
   "required": [
+    "@context",
     "iri",
     "typ",
     "název",
@@ -13,6 +14,23 @@
     "poskytovatel"
   ],
   "properties": {
+    "@context": {
+      "oneOf": [
+        {
+          "const": "https://ofn.gov.cz/dcat-ap-cz-rozhraní-katalogů-dat/draft/katalog/kontext.jsonld"
+        },
+        {
+          "type": "array",
+          "contains": {
+            "const": "https://ofn.gov.cz/dcat-ap-cz-rozhraní-katalogů-dat/draft/katalog/kontext.jsonld"
+          },
+          "items": {
+            "type": "string",
+            "format": "iri"
+          }
+        }
+      ]
+    },
     "iri": {
       "type": "string",
       "format": "iri"
